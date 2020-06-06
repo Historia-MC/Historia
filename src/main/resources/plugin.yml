@@ -1,0 +1,11 @@
+main: dev.boooiil.historia.Main
+name: Historia
+description: Something simple, I guess!
+api-version: 1.15
+author: boooiil
+load: STARTUP
+version: 0.6
+depend: [WorldGuard, Towny]
+
+commands:
+  ignite:

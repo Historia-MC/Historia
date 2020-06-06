@@ -1,23 +1,24 @@
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+target/Historia-1.15.2-R0.1-SNAPSHOT.jar
+target/classes/plugin.yml
+target/classes/dev/boooiil/historia/InventoryClick.class
+target/classes/dev/boooiil/historia/Main.class
+target/classes/dev/boooiil/historia/PlayerBucketInteract.class
+target/classes/dev/boooiil/historia/PlayerConsumeItem.class
+target/classes/dev/boooiil/historia/PlayerDeath.class
+target/classes/dev/boooiil/historia/PlayerEntityInteract.class
+target/classes/dev/boooiil/historia/PlayerInteract.class
+target/classes/dev/boooiil/historia/PlayerItemHeld.class
+target/classes/dev/boooiil/historia/ProjectileHit.class
+target/classes/dev/boooiil/historia/ProjectileLaunch.class
+target/classes/dev/boooiil/historia/commands/Heal.class
+target/classes/dev/boooiil/historia/commands/Help.class
+target/classes/dev/boooiil/historia/commands/Ignite.class
+target/classes/dev/boooiil/historia/commands/Item.class
+target/classes/dev/boooiil/historia/commands/Launch.class
+target/classes/dev/boooiil/historia/expiry/ExpiryHandler.class
+target/classes/dev/boooiil/historia/towny/TownyHandler.class
+target/classes/dev/boooiil/historia/worldguard/WorldGuardHandler.class
+target/maven-archiver/pom.properties
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+historia-development.code-workspace
