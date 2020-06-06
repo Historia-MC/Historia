@@ -10,4 +10,4 @@ depend: [WorldGuard, Towny]
 commands:
   ignite:
   message:
-    aliases: [emsg, msg, message, emessage, mail, email, tell, etell, whisper, ewhisper, w, r, er, ereply]
+    aliases: [emsg, msg, message, emessage, tell, etell, whisper, ewhisper, w, r, er, ereply]
