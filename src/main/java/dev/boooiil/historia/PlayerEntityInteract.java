@@ -65,9 +65,11 @@ public class PlayerEntityInteract implements Listener{
                         Short calculatedDurability = (short) ( shears.getDurability() + 10);
     
                         if (calculatedDurability >= (int) shears.getType().getMaxDurability()) {
+                            player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
                             player.getInventory().setItemInMainHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
                         } else {
                             shears.setDurability(calculatedDurability);
+                            player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
                         }
                         
                     }
