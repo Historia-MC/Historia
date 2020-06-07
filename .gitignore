@@ -1,3 +1,6 @@
 target/
 historia-development.code-workspace
 .settings/
+.classpath
+.project
+.factorypath
