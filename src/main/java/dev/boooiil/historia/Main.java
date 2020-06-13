@@ -29,6 +29,10 @@ public class Main extends JavaPlugin {
         //Disabled due to command not being part of chat event.
         //this.getServer().getPluginManager().registerEvents(new AsyncPlayerChat(), this);
 
+        //jobs events (dont currently work)
+        //this.getServer().getPluginManager().registerEvent(new JobsEvent(), this);
+
+
         this.getServer().getPluginManager().registerEvents(new PlayerBucketInteract(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerConsumeItem(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
