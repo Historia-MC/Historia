@@ -28,7 +28,7 @@
     <repository>
 	    <id>jitpack.io</id>
 	    <url>https://jitpack.io</url>
-	  </repository>
+    </repository>
 
   </repositories>
 
@@ -52,6 +52,19 @@
 	    <groupId>com.github.TownyAdvanced</groupId>
 	    <artifactId>Towny</artifactId>
 	    <version>0.96.1.11</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.github.MilkBowl</groupId>
+      <artifactId>VaultAPI</artifactId>
+      <version>1.7</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+	    <groupId>com.github.Zrips</groupId>
+	    <artifactId>Jobs</artifactId>
+	    <version>master-daf56cd235-1</version>
 	  </dependency>
 
   </dependencies>
