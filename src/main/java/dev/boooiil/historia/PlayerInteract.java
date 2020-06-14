@@ -11,6 +11,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import dev.boooiil.historia.jobs.CheckJob;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
@@ -22,6 +23,8 @@ public class PlayerInteract implements Listener {
         if (!event.hasBlock()) return;
         if (!WorldGuardHandler.getPermissions(event.getPlayer(), event.getClickedBlock().getLocation())) return;
         if (!TownyHandler.getPermissions(event.getPlayer(), event.getClickedBlock().getLocation(), event.getClickedBlock().getType())) return;
+
+        boolean hasjob = CheckJob.hasJob(event.getPlayer(), "Farmer");
 
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
