@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+@Deprecated
 public class ExpiryHandler {
 
     public static void initiateExpiry(Player player, ItemStack item, Integer inventorySlot) {
@@ -49,6 +50,7 @@ public class ExpiryHandler {
         meta.setLore(Arrays.asList("Spoiled")); modifyItem.setItemMeta(meta); modifyItem.setAmount(amount); return modifyItem;
 
     }
+    
     public boolean checkIfExpired(String loreLines) {
 
             String[] compare = loreLines.replace("Expiry: ", "").split("-");
