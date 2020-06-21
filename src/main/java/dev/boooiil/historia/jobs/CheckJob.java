@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class CheckJob {
 
     public static boolean hasJob(Player player, String jobSearch) {
-        //Jobs stuff
+        
         if (Jobs.getJob(jobSearch) instanceof Job) {
 
             if (Jobs.getPlayerManager().getJobsPlayer(player).isInJob(Jobs.getJob(jobSearch))) return true;

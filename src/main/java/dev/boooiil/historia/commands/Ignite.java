@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 
 public class Ignite implements CommandExecutor {
 
+    //This can be done more efficiently
+    //I'll get to it later - boooiil
+    
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("ignite")) {
            if (sender instanceof Player) {

@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 
 public class Heal implements CommandExecutor {
 
+    //Unused, just here for examples.
+    //Ignore anything listed.
+    
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("heal")) {
             if (sender instanceof Player) {
