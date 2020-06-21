@@ -1,12 +1,12 @@
 package dev.boooiil.historia;
 
-import org.bukkit.entity.Player;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import dev.boooiil.historia.expiry.ExpiryHandler;
+import dev.boooiil.historia.expiry.ExpiryManager;
 
 public class InventoryClick implements Listener {
 
@@ -18,9 +18,7 @@ public class InventoryClick implements Listener {
         if (action.equals(InventoryAction.UNKNOWN)) { System.out.println("Action was unknown."); return; };
         if (action.equals(InventoryAction.DROP_ALL_CURSOR)) { System.out.println("Dropped all through cursor."); return; };
 
-        event.setCurrentItem(ExpiryHandler.setExpiry(event.getCurrentItem(), event.getCurrentItem().getAmount()));
-
-        ExpiryHandler.initiateExpiry((Player) event.getWhoClicked(), event.getCurrentItem(), event.getSlot());
+        ExpiryManager.initiate(event.getCurrentItem(), (HumanEntity) event.getWhoClicked(), event.getSlot());
         
     }
 }
