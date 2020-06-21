@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 
-import dev.boooiil.historia.expiry.ExpiryHandler;
+import dev.boooiil.historia.expiry.ExpiryManager;
 
 public class PlayerItemHeld implements Listener {
 
@@ -19,8 +19,8 @@ public class PlayerItemHeld implements Listener {
         Integer newItemSlot = event.getNewSlot();
         Integer oldItemSlot = event.getPreviousSlot();
 
-        if (previousItem != null) ExpiryHandler.initiateExpiry(player, previousItem, oldItemSlot);
-        if (newItem != null) ExpiryHandler.initiateExpiry(player, newItem, newItemSlot);
+        if (previousItem != null) ExpiryManager.initiate(previousItem, player, oldItemSlot);
+        if (newItem != null) ExpiryManager.initiate(newItem, player, newItemSlot);
 
     }
 }
