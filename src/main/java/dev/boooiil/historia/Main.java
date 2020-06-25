@@ -36,7 +36,6 @@ public class Main extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerConsumeItem(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerEntityInteract(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
 
         //Disabled due to expiry not being finished.
