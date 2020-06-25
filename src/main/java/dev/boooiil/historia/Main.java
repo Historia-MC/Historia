@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
         //this.getServer().getPluginManager().registerEvent(new JobsEvent(), this);
 
 
-        this.getServer().getPluginManager().registerEvents(new PlayerBucketInteract(), this);
+        this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerConsumeItem(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeath(), this);
         this.getServer().getPluginManager().registerEvents(new PlayerEntityInteract(), this);
@@ -41,9 +41,6 @@ public class Main extends JavaPlugin {
 
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
-
-        this.getServer().getPluginManager().registerEvents(new ProjectileLaunch(), this);
-        this.getServer().getPluginManager().registerEvents(new ProjectileHit(), this);
         this.saveConfig(); getLogger().info("Plugin enabled.");
     }
 
