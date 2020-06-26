@@ -32,14 +32,14 @@ public class ExpiryManager {
     ItemStack foundItem;
     Player player;
     int inventorySlot;
-    boolean hasInventorySlot;
+    //boolean hasInventorySlot;
     boolean expired;
     String expiryLore;
     ItemMeta newExpiryMeta;
 
     //These values will stay until the plugin gets unloaded0.
 
-    public void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
+    public void initiate(ItemStack itemStack, HumanEntity humanEntity) {
 
         
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
@@ -51,6 +51,8 @@ public class ExpiryManager {
         else { System.out.println("[Historia] Expected Player but got " + humanEntity.getName() + " which is of type " + humanEntity.getEntityId()); return; }
 
         //If an item wasn't provided, we check using an inventory slot.
+
+        /*
         if (foundItem == null && inventorySlot >= 0) {
 
             //Sets that we're using an inventory slot.
@@ -65,6 +67,7 @@ public class ExpiryManager {
             }
 
         }
+        */
 
         //If we don't have an item (happens if the item wasn't edible)
         //If we don't have a player (happens if the entity was an NPC)
@@ -86,8 +89,7 @@ public class ExpiryManager {
         //If we don't have the slot, apply the lore to the item stack that currently exists.
         System.out.println("[START]\nFound Item: " + foundItem + "\nInventory Slot: " + inventorySlot + "\nItem Stack: " + itemStack + "\nPlayer: " + player + "\nExpired: " + expired + "\nExpiry Lore: " + expiryLore + "\nNew Meta: " + newExpiryMeta + "\n[END]");
 
-        if (hasInventorySlot) player.getInventory().getItem(inventorySlot).setItemMeta(newExpiryMeta);
-        else foundItem.setItemMeta(newExpiryMeta);
+        foundItem.setItemMeta(newExpiryMeta);
 
     }
 

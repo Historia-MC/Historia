@@ -1,5 +1,7 @@
 package dev.boooiil.historia;
 
+import com.gamingmesh.jobs.commands.list.exp;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
@@ -42,15 +44,15 @@ public class HistoriaEvents implements Listener {
 
         if (event.getPlayer().getInventory().getItem(event.getNewSlot()) != null) {
             ExpiryManager manager = new ExpiryManager();
-            manager.initiate(event.getPlayer().getInventory().getItem(event.getNewSlot()), event.getPlayer(), event.getNewSlot());
+            manager.initiate(event.getPlayer().getInventory().getItem(event.getNewSlot()), event.getPlayer());
         } 
 
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-
-        //ExpiryManager.initiate(event.getCurrentItem(), event.getWhoClicked(), event.getSlot());
+        ExpiryManager manager = new ExpiryManager();
+        manager.initiate(event.getCurrentItem(), event.getWhoClicked());
         
     }
 
@@ -86,6 +88,6 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onPickup(PlayerPickupItemEvent event) {
         ExpiryManager manager = new ExpiryManager();
-        manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getPlayer(), -1);
+        manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getPlayer());
     }
 }
