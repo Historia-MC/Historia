@@ -2,6 +2,7 @@ package dev.boooiil.historia;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
@@ -83,5 +85,11 @@ public class HistoriaEvents implements Listener {
         
         DeathNotify.deathAlert(event.getEntity(), event.getDeathMessage());
         
+    }
+    
+    @EventHandler
+    public void onPickup(PlayerPickupItemEvent event) {
+        ExpiryManager manager = new ExpiryManager();
+        manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getPlayer(), -1);
     }
 }
