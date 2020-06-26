@@ -51,7 +51,7 @@ public class ExpiryManager {
         else { System.out.println("[Historia] Expected Player but got " + humanEntity.getName() + " which is of type " + humanEntity.getEntityId()); return; }
 
         //If an item wasn't provided, we check using an inventory slot.
-        if (foundItem == null) {
+        if (foundItem == null && inventorySlot >= 0) {
 
             //Sets that we're using an inventory slot.
             hasInventorySlot = true;
