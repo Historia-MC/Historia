@@ -43,7 +43,7 @@ public class ExpiryManager {
 
         
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
-        if (itemStack != null && itemStack.getType().isEdible()) { foundItem = itemStack; }
+        if (itemStack != null && itemStack.getType().isEdible() && !itemStack.getItemMeta().hasLore()) { foundItem = itemStack; }
         
         //NPCs count as human entities, it is more sane to check this way in case NPCs fire off an event.
         //We are checking if the human entity is an actual player.
