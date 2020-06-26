@@ -59,7 +59,9 @@ public class ExpiryManager {
             ItemStack inventoryItem = player.getInventory().getItem(inventorySlot);
 
             //Get the item in the slot, if edible.
-            if (inventoryItem.getType().isEdible() && inventoryItem.getType() != Material.AIR) foundItem = inventoryItem;
+            if (inventoryItem.getType() != Material.AIR) {
+                if (inventoryItem.getType().isEdible()) foundItem = inventoryItem;
+            }
 
         }
 
