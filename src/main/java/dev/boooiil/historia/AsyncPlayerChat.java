@@ -22,7 +22,8 @@ public class AsyncPlayerChat implements Listener {
                 System.out.println("User does not have permission.");
 
                 event.getPlayer().sendMessage("§7[§9Historia§7] Please use /letter <message> and /post <user>!");
-
+                
+                //I made some changes.
             }
         }
     }
