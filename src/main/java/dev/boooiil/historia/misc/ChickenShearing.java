@@ -10,10 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class ChickenShearing {
     
-    public static void shearChicken(Player player, Entity entity) {
+    public static void shearChicken(Player player, Entity chicken) {
 
         if (player.getInventory().getItemInMainHand().getType().equals(Material.SHEARS)) {
-    
+            
+            Entity entity = (Entity) chicken;
             Ageable chickenAge = (Ageable) entity;
 
             if (chickenAge.getAge() < 0) return;
