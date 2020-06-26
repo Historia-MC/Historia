@@ -41,7 +41,7 @@ public class ExpiryManager {
 
     public void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
 
-        System.out.println(foundItem + "\n" + inventorySlot + "\n" + itemStack + "\n" + player + "\n" + expired + "\n" + expiryLore + "\n" + newExpiryMeta);
+        
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
         if (itemStack != null && itemStack.getType().isEdible()) { foundItem = itemStack; }
         
@@ -60,7 +60,7 @@ public class ExpiryManager {
             ItemStack inventoryItem = player.getInventory().getItem(inventorySlot);
 
             //Get the item in the slot, if edible.
-            if (inventoryItem != null) {
+            if (inventoryItem != null && !inventoryItem.getItemMeta().hasLore()) {
                 if (inventoryItem.getType().isEdible()) foundItem = inventoryItem;
             }
 
@@ -84,6 +84,8 @@ public class ExpiryManager {
         //At this point we have the new lore to be applied.
         //If we are using an inventory slot, apply it here.
         //If we don't have the slot, apply the lore to the item stack that currently exists.
+        System.out.println("[START]\nFound Item: " + foundItem + "\nInventory Slot: " + inventorySlot + "\nItem Stack: " + itemStack + "\nPlayer: " + player + "\nExpired: " + expired + "\nExpiry Lore: " + expiryLore + "\nNew Meta: " + newExpiryMeta + "\n[END]");
+
         if (hasInventorySlot) player.getInventory().getItem(inventorySlot).setItemMeta(newExpiryMeta);
         else foundItem.setItemMeta(newExpiryMeta);
 
