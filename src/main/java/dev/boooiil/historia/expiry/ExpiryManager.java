@@ -198,7 +198,7 @@ public class ExpiryManager {
                     }
                 } return false;
             }
-        } else {setExpiry(item);} return false;
+        } else { item.setItemMeta(setExpiry(item)); } return false;
 
 
 
