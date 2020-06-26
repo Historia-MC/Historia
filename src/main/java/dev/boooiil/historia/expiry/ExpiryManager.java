@@ -7,6 +7,8 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class ExpiryManager {
 
@@ -34,7 +36,7 @@ public class ExpiryManager {
     static boolean expired;
     static String expiryLore;
     static ItemMeta newExpiryMeta;
-    
+
     public static void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
 
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
@@ -121,6 +123,73 @@ public class ExpiryManager {
             else if (month < (date.get(Calendar.MONTH) + 1)) return expired = true;
             else if (month == (date.get(Calendar.MONTH) + 1) && day < date.get(Calendar.DATE)) return expired = true;
             else return expired = false;
+
+    }
+
+    public static boolean handleExpiredFood(ItemStack item, Player player) {
+
+        if (item.getItemMeta().hasLore()) {
+            for (String lore :item.getItemMeta().getLore()) {
+
+                if (lore.contains("Expiry: ") || lore.contains("expiry")) {
+
+                    for (String word : lore.split(" ")) {
+
+                        if (word.contains("-")) {
+                            String[] compare = word.split("-");
+
+                            Calendar date = Calendar.getInstance();
+
+                            int year = 0; int month = 0; int day = 0;
+
+                            if (lore.contains("Expiry: ")) {
+                                month = (int) Integer.parseInt(compare[0]);
+                                day = (int) Integer.parseInt(compare[1]);
+                                year = (int) Integer.parseInt(compare[2]);
+                            }
+                            else if (lore.contains("expiry ")) {
+                                year = (int) Integer.parseInt(compare[0]);
+                                month = (int) Integer.parseInt(compare[1]);
+                                day = (int) Integer.parseInt(compare[2]);
+                            } else return false;
+
+                            if (year < date.get(Calendar.YEAR)) {
+
+                                PotionEffect posion = new PotionEffect(PotionEffectType.POISON, 120, 1);
+                                PotionEffect hunger = new PotionEffect(PotionEffectType.HUNGER, 600, 2);
+                                
+
+                                player.sendMessage("§7[§9Historia§7] §cThat food was bad!");
+                                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                                posion.apply(player); hunger.apply(player); return true;
+                                
+                            } 
+                            else if (month < (date.get(Calendar.MONTH) + 1)) {
+
+                                PotionEffect posion = new PotionEffect(PotionEffectType.POISON, 120, 1);
+                                PotionEffect hunger = new PotionEffect(PotionEffectType.HUNGER, 600, 2);
+                                
+
+                                player.sendMessage("§7[§9Historia§7] §cThat food was bad!");
+                                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                                posion.apply(player); hunger.apply(player); return true;
+                            }
+                            else if (month == (date.get(Calendar.MONTH) + 1) && day < date.get(Calendar.DATE)) {
+
+                                PotionEffect posion = new PotionEffect(PotionEffectType.POISON, 120, 1);
+                                PotionEffect hunger = new PotionEffect(PotionEffectType.HUNGER, 600, 2);
+                                
+
+                                player.sendMessage("§7[§9Historia§7] §cThat food was bad!");
+                                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                                posion.apply(player); hunger.apply(player); return true;
+                            } else return false;
+                            
+                        } return false;
+                    }
+                } return false;
+            }
+        } return false;
 
     }
 }
