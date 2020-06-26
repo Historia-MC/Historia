@@ -3,6 +3,7 @@ package dev.boooiil.historia.expiry;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -39,6 +40,7 @@ public class ExpiryManager {
 
     public static void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
 
+        System.out.println(foundItem + " " + inventorySlot + " " + itemStack);
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
         if (itemStack != null && itemStack.getType().isEdible()) { foundItem = itemStack; }
         
@@ -57,7 +59,7 @@ public class ExpiryManager {
             ItemStack inventoryItem = player.getInventory().getItem(inventorySlot);
 
             //Get the item in the slot, if edible.
-            if (inventoryItem.getType().isEdible()) foundItem = inventoryItem;
+            if (inventoryItem.getType().isEdible() && inventoryItem.getType() != Material.AIR) foundItem = inventoryItem;
 
         }
 
