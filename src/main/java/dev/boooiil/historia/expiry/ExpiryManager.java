@@ -31,8 +31,6 @@ public class ExpiryManager {
     
     ItemStack foundItem;
     Player player;
-    int inventorySlot;
-    //boolean hasInventorySlot;
     boolean expired;
     String expiryLore;
     ItemMeta newExpiryMeta;
@@ -40,7 +38,6 @@ public class ExpiryManager {
     //These values will stay until the plugin gets unloaded0.
 
     public void initiate(ItemStack itemStack, HumanEntity humanEntity) {
-
         
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
         if (itemStack != null && itemStack.getType().isEdible() && !itemStack.getItemMeta().hasLore()) { foundItem = itemStack; }
@@ -49,25 +46,6 @@ public class ExpiryManager {
         //We are checking if the human entity is an actual player.
         if (humanEntity instanceof Player) { player = (Player) humanEntity; }
         else { System.out.println("[Historia] Expected Player but got " + humanEntity.getName() + " which is of type " + humanEntity.getEntityId()); return; }
-
-        //If an item wasn't provided, we check using an inventory slot.
-
-        /*
-        if (foundItem == null && inventorySlot >= 0) {
-
-            //Sets that we're using an inventory slot.
-            hasInventorySlot = true;
-
-            //Get the inventory of the player.
-            ItemStack inventoryItem = player.getInventory().getItem(inventorySlot);
-
-            //Get the item in the slot, if edible.
-            if (inventoryItem != null && !inventoryItem.getItemMeta().hasLore()) {
-                if (inventoryItem.getType().isEdible()) foundItem = inventoryItem;
-            }
-
-        }
-        */
 
         //If we don't have an item (happens if the item wasn't edible)
         //If we don't have a player (happens if the entity was an NPC)
@@ -87,7 +65,7 @@ public class ExpiryManager {
         //At this point we have the new lore to be applied.
         //If we are using an inventory slot, apply it here.
         //If we don't have the slot, apply the lore to the item stack that currently exists.
-        System.out.println("[START]\nFound Item: " + foundItem + "\nInventory Slot: " + inventorySlot + "\nItem Stack: " + itemStack + "\nPlayer: " + player + "\nExpired: " + expired + "\nExpiry Lore: " + expiryLore + "\nNew Meta: " + newExpiryMeta + "\n[END]");
+        //System.out.println("[START]\nFound Item: " + foundItem + "\nInventory Slot: " + "\nItem Stack: " + itemStack + "\nPlayer: " + player + "\nExpired: " + expired + "\nExpiry Lore: " + expiryLore + "\nNew Meta: " + newExpiryMeta + "\n[END]");
 
         foundItem.setItemMeta(newExpiryMeta);
 
