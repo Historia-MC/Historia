@@ -40,10 +40,6 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onPlayerItemHeldSwitch(PlayerItemHeldEvent event) {
 
-        if (event.getPlayer().getInventory().getItem(event.getPreviousSlot()) != null) {
-            ExpiryManager manager = new ExpiryManager();
-            manager.initiate(event.getPlayer().getInventory().getItem(event.getPreviousSlot()), event.getPlayer(), event.getPreviousSlot());
-        }
         if (event.getPlayer().getInventory().getItem(event.getNewSlot()) != null) {
             ExpiryManager manager = new ExpiryManager();
             manager.initiate(event.getPlayer().getInventory().getItem(event.getNewSlot()), event.getPlayer(), event.getNewSlot());
