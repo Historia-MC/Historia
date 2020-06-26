@@ -28,7 +28,7 @@ public class PlayerInteract implements Listener {
         //Change to check for the specific block, not a specific job. IE: If the player's job gets paid for breaking grass
         boolean hasJob = CheckJob.hasJob(event.getPlayer(), "Farmer");
         
-        if (hasJob) DoJobsPayment.payout(event.getPlayer(), "Farmer");
+        //if (hasJob) DoJobsPayment.payout(event.getPlayer(), "Farmer");
 
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
