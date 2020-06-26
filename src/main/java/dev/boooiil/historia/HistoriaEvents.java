@@ -50,7 +50,7 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
 
-        ExpiryManager.initiate(event.getCurrentItem(), event.getWhoClicked(), event.getSlot());
+        //ExpiryManager.initiate(event.getCurrentItem(), event.getWhoClicked(), event.getSlot());
         
     }
 
