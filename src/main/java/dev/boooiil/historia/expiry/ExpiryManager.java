@@ -3,7 +3,6 @@ package dev.boooiil.historia.expiry;
 import java.util.Arrays;
 import java.util.Calendar;
 
-import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,17 +29,19 @@ public class ExpiryManager {
         add the amount of days to a month and expect a correct result.
     */
     
-    static ItemStack foundItem;
-    static Player player;
-    static int inventorySlot;
-    static boolean hasInventorySlot;
-    static boolean expired;
-    static String expiryLore;
-    static ItemMeta newExpiryMeta;
+    ItemStack foundItem;
+    Player player;
+    int inventorySlot;
+    boolean hasInventorySlot;
+    boolean expired;
+    String expiryLore;
+    ItemMeta newExpiryMeta;
 
-    public static void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
+    //These values will stay until the plugin gets unloaded0.
 
-        System.out.println(foundItem + " " + inventorySlot + " " + itemStack);
+    public void initiate(ItemStack itemStack, HumanEntity humanEntity, int inventorySlot) {
+
+        System.out.println(foundItem + "\n" + inventorySlot + "\n" + itemStack + "\n" + player + "\n" + expired + "\n" + expiryLore + "\n" + newExpiryMeta);
         //We have to check if we were provided an item and if the item is edible, since we are dealing with food.
         if (itemStack != null && itemStack.getType().isEdible()) { foundItem = itemStack; }
         
@@ -88,7 +89,7 @@ public class ExpiryManager {
 
     }
 
-    private static ItemMeta setExpiry(ItemStack item) {
+    private ItemMeta setExpiry(ItemStack item) {
 
         Calendar date = Calendar.getInstance();
         ItemMeta meta = item.getItemMeta();
@@ -99,7 +100,7 @@ public class ExpiryManager {
 
     }
 
-    private static ItemMeta setExpired(ItemStack item) {
+    private ItemMeta setExpired(ItemStack item) {
 
         ItemMeta meta = item.getItemMeta();
         
@@ -109,7 +110,7 @@ public class ExpiryManager {
 
     }
     
-    private static boolean checkIfExpired(ItemStack itemStack) {
+    private boolean checkIfExpired(ItemStack itemStack) {
 
         for (String line : itemStack.getItemMeta().getLore()) { if (line.contains("Expiry: ")) expiryLore = line; };
 
@@ -130,7 +131,7 @@ public class ExpiryManager {
 
     }
 
-    public static boolean handleExpiredFood(ItemStack item, Player player) {
+    public boolean handleExpiredFood(ItemStack item, Player player) {
 
         if (item.getItemMeta().hasLore()) {
             for (String lore :item.getItemMeta().getLore()) {
