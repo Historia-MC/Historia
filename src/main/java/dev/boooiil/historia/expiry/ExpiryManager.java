@@ -189,7 +189,9 @@ public class ExpiryManager {
                     }
                 } return false;
             }
-        } return false;
+        } else {setExpiry(item);} return false;
+
+
 
     }
 }
