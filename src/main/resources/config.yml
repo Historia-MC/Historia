@@ -41,6 +41,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.10
             sweepingEdge: true
     Archer:
@@ -52,6 +53,7 @@ classes:
             speed: 0.3
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             quickCharge: true
             igniteOil: true
@@ -64,6 +66,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             extractBones: true
             extractOil: true
@@ -76,6 +79,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             extraOreChance: true
             efficiencyPickaxe: true
@@ -89,6 +93,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             highTierArmor: true
             applyUnbreaking: true
@@ -118,6 +123,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             extractOil: true
             craftGunpowder: true
@@ -131,6 +137,7 @@ classes:
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.05
             chanceNoConsumeBlock: true
             featherfall: true
@@ -138,13 +145,29 @@ classes:
     Lumberjack:
         stats:
             health: 26
-            baseFood: 24
+            baseFood: 18
             exhaustion: 0
             saturation: 0
             speed: 0.2
         extra:
             nametag: true
+            harvestChance: 0.2
             beheadChance: 0.08
             chanceExtraWood: true
             efficiencyAxe: true
+    Farmer:
+        stats:
+            health: 20
+            baseFood: 20
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            harvestChance: 0.6
+            beheadChance: 0.10
+            doubleHarvestChance: 0.05
+            breakBeehive: true
+            breakGrass: true
+            instantGrowChance: 0.3
 
