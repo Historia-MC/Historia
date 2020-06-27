@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.EquipmentSlot;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
@@ -59,8 +60,8 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onBoatInteract(PlayerInteractEntityEvent event) {
 
-        if (event.getRightClicked().getType() == EntityType.BOAT) BoatNotify.boatNotify(event.getHand(), event.getPlayer(), event.getRightClicked());
-        if (event.getRightClicked().getType() == EntityType.CHICKEN) ChickenShearing.shearChicken(event.getPlayer(), event.getRightClicked());
+        if (event.getRightClicked().getType() == EntityType.BOAT && event.getHand().equals(EquipmentSlot.HAND)) BoatNotify.boatNotify(event.getHand(), event.getPlayer(), event.getRightClicked());
+        if (event.getRightClicked().getType() == EntityType.CHICKEN && event.getHand().equals(EquipmentSlot.HAND)) ChickenShearing.shearChicken(event.getPlayer(), event.getRightClicked());
         
     }
 

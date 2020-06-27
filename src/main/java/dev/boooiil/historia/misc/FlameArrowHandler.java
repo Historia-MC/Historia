@@ -35,7 +35,7 @@ public class FlameArrowHandler {
                         arrow = (Arrow) projectile;
                         arrow.setFireTicks(1000);
     
-                        Short calculatedDurability = (short) ( itemInOffHand.getDurability() + 1);
+                        Short calculatedDurability = (short) ( itemInOffHand.getDurability() + 2);
     
                         if (calculatedDurability >= 64) {
                             player.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
