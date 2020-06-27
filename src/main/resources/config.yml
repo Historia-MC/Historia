@@ -30,3 +30,121 @@ foods:
 effects:
     - POISON: 1
     - CONFUSION: 1
+
+classes:
+    Warrior:
+        stats:
+            health: 26
+            baseFood: 16
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.10
+            sweepingEdge: true
+    Archer:
+        stats:
+            health: 18
+            baseFood: 26
+            exhaustion: 0
+            saturation: 0
+            speed: 0.3
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            quickCharge: true
+            igniteOil: true
+    Fisherman:
+        stats:
+            health: 18
+            baseFood: 30
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            extractBones: true
+            extractOil: true
+    Miner:
+        stats:
+            health: 22
+            baseFood: 26
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            extraOreChance: true
+            efficiencyPickaxe: true
+            specialItems: true
+    Blacksmith:
+        stats:
+            health: 24
+            baseFood: 26
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            highTierArmor: true
+            applyUnbreaking: true
+            craftSaddle: true
+            chanceAnvilNoDamage: true
+    Hunter:
+        stats:
+            health: 16
+            baseFood: 24
+            exhaustion: 0
+            saturation: 0
+            speed: 0.4
+        extra:
+            nametag: false
+            beheadChance: 0.07
+            bonesFromAnimals: true
+            tameAnimals: true
+            extraWool: true
+            extraFeathers: true
+            craftSaddle: true
+    Apothecary:
+        stats:
+            health: 20
+            baseFood: 22
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            extractOil: true
+            craftGunpowder: true
+            knowledgeBook: true
+    Architect:
+        stats:
+            health: 20
+            baseFood: 28
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.05
+            chanceNoConsumeBlock: true
+            featherfall: true
+            incomeMultiplier: 1.2
+    Lumberjack:
+        stats:
+            health: 26
+            baseFood: 24
+            exhaustion: 0
+            saturation: 0
+            speed: 0.2
+        extra:
+            nametag: true
+            beheadChance: 0.08
+            chanceExtraWood: true
+            efficiencyAxe: true
+
