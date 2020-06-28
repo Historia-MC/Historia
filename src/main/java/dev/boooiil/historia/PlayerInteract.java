@@ -3,9 +3,7 @@ package dev.boooiil.historia;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.Ageable;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -13,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.jobs.CheckJob;
 import dev.boooiil.historia.jobs.DoJobsPayment;
+import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
 public class PlayerInteract implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
 
         if (!event.hasBlock()) return;
@@ -32,184 +30,23 @@ public class PlayerInteract implements Listener {
 
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
-            int failChance = (int) (Math.random() * 25) + 1;
-            int plantChance = (int) (Math.random() * 30) + 1;
-            int plantAmount = (int) (Math.random() * 2) + 1;
+            Player player = event.getPlayer();
+            Block block = event.getClickedBlock();
+            Material blockMaterial = block.getType();
+            Material handMaterial = player.getInventory().getItemInMainHand().getType();
 
-            Block clickedBlock = event.getClickedBlock();
-            Material blockMaterial = clickedBlock.getType();
-            Material handMaterial = event.getPlayer().getInventory().getItemInMainHand().getType();
+                if (blockMaterial.equals(Material.GRASS_BLOCK) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.DIRT, null, null, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.FERN) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.POTATO, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.LARGE_FERN) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.POTATO, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.GRASS) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.CARROT, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.TALL_GRASS) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.CARROT, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.DIRT) && handMaterial.equals(Material.WHEAT_SEEDS)) ReplaceBlocks.doReplacement(player, block, Material.GRASS_BLOCK, Material.DIRT, null, 15, 2, 2, 0, 0, true, Sound.BLOCK_GRASS_BREAK, null, null);
 
-            if (blockMaterial.equals(Material.GRASS_BLOCK) && handMaterial.equals(Material.AIR)) {
+                if (blockMaterial.equals(Material.WHEAT)) ReplaceBlocks.doReplacement(player, block, Material.WHEAT, null, null, 0, 1, 0, 0, 7, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.CARROTS)) ReplaceBlocks.doReplacement(player, block, Material.CARROTS, null, null, 0, 1, 0, 0, 7, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.POTATOES)) ReplaceBlocks.doReplacement(player, block, Material.POTATOES, null, null, 0, 1, 0, 0, 7, false, Sound.BLOCK_GRASS_BREAK, null, null);
+                if (blockMaterial.equals(Material.BEETROOTS)) ReplaceBlocks.doReplacement(player, block, Material.BEETROOTS, null, null, 0, 1, 0, 0, 3, false, Sound.BLOCK_GRASS_BREAK, null, null);
 
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.DIRT);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to dig out grass!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                if (plantChance == 15) {
-                    ItemStack item = new ItemStack(Material.WHEAT_SEEDS);
-                    item.setAmount(plantAmount);
-
-                    event.getPlayer().getWorld().dropItemNaturally(clickedBlock.getLocation(), item);
-                    event.getPlayer().giveExp(2);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.setType(Material.DIRT);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You dug out some grass!");
-
-                }
-            }
-            if (handMaterial.equals(Material.WHEAT_SEEDS) && blockMaterial.equals(Material.DIRT)) {
-
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.DIRT);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to place grass!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                event.getPlayer().getInventory().getItemInMainHand()
-                        .setAmount(event.getPlayer().getInventory().getItemInMainHand().getAmount() - 1);
-                event.getPlayer().giveExp(2);
-                event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                clickedBlock.setType(Material.GRASS_BLOCK);
-                event.getPlayer().sendMessage("§7[§9Historia§7] You planted some grass!");
-
-            }
-
-            if (blockMaterial.equals(Material.FERN) && handMaterial.equals(Material.AIR)) {
-
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to dig out potatoes!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                if (plantChance == 15) {
-                    ItemStack item = new ItemStack(Material.POTATO);
-                    item.setAmount(plantAmount);
-
-                    event.getPlayer().getWorld().dropItemNaturally(clickedBlock.getLocation(), item);
-                    event.getPlayer().giveExp(2);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You dug out some potatoes!");
-
-                }
-            }
-            if (blockMaterial.equals(Material.LARGE_FERN) && handMaterial.equals(Material.AIR)) {
-
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to dig out potatoes!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                if (plantChance == 15) {
-                    ItemStack item = new ItemStack(Material.POTATO);
-                    item.setAmount(plantAmount);
-
-                    event.getPlayer().giveExp(2);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    event.getPlayer().getWorld().dropItemNaturally(clickedBlock.getLocation(), item);
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You dug out some potatoes!");
-
-                }
-            }
-            if (blockMaterial.equals(Material.GRASS) && handMaterial.equals(Material.AIR)) {
-
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to dig out carrots!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                if (plantChance == 15) {
-
-                    ItemStack item = new ItemStack(Material.CARROT);
-                    item.setAmount(plantAmount);
-
-                    event.getPlayer().giveExp(2);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    event.getPlayer().getWorld().dropItemNaturally(clickedBlock.getLocation(), item);
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You dug out some carrots!");
-
-                }
-            }
-            if (blockMaterial.equals(Material.TALL_GRASS) && handMaterial.equals(Material.AIR)) {
-
-                if (failChance == 10) {
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You failed to dig out carrots!");
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    return;
-                }
-
-                if (plantChance == 15) {
-                    ItemStack item = new ItemStack(Material.CARROT);
-                    item.setAmount(plantAmount);
-
-                    event.getPlayer().giveExp(2);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    event.getPlayer().getWorld().dropItemNaturally(clickedBlock.getLocation(), item);
-                    clickedBlock.setType(Material.AIR);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] You dug out some carrots!");
-
-                }
-            }
-
-
-            if (blockMaterial.equals(Material.WHEAT)) {
-
-                if (((Ageable) clickedBlock.getBlockData()).getAge() == 7) {
-
-                    event.getPlayer().giveExp(1);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.breakNaturally();
-                    clickedBlock.setType(Material.WHEAT);
-                }
-
-            }
-            if (blockMaterial.equals(Material.CARROTS)) {
-
-                if (((Ageable) clickedBlock.getBlockData()).getAge() == 7) {
-
-                    event.getPlayer().giveExp(1);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.breakNaturally();
-                    clickedBlock.setType(Material.CARROTS);
-                }
-
-            }
-            if (blockMaterial.equals(Material.POTATOES)) {
-
-                if (((Ageable) clickedBlock.getBlockData()).getAge() == 7) {
-
-                    event.getPlayer().giveExp(1);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.breakNaturally();
-                    clickedBlock.setType(Material.POTATOES);
-                }
-
-            }
-            if (blockMaterial.equals(Material.BEETROOTS)) {
-
-                if (((Ageable) clickedBlock.getBlockData()).getAge() == 3) {
-
-                    event.getPlayer().giveExp(1);
-                    event.getPlayer().playSound(clickedBlock.getLocation(), Sound.BLOCK_GRASS_BREAK, 15, 1);
-                    clickedBlock.breakNaturally();
-                    clickedBlock.setType(Material.BEETROOTS);
-                }
-
-            }
         }
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 
