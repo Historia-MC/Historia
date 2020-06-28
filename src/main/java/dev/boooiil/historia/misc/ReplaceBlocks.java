@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class ReplaceBlocks {
 
-    public static void doReplacement(Player player, Block brokenBlock, Material successBlock, Material failBlock, Material giveItem, Integer failChance, Integer experienceAmount, Integer itemAmount, Integer doubleChance, Integer blockAge, boolean reduceItem, Sound breakSound, String successMessage, String failMessage) {
+    public static void doReplacement(Player player, Block brokenBlock, Material successBlock, Material failBlock, Material giveItem, int failChance, int experienceAmount, int itemAmount, int doubleChance, int blockAge, boolean reduceItem, Sound breakSound, String successMessage, String failMessage) {
 
         //Return if we don't get certain values.
         if (player == null) return;
