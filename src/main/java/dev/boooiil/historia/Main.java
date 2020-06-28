@@ -32,9 +32,7 @@ public class Main extends JavaPlugin {
         //jobs events (dont currently work)
         //this.getServer().getPluginManager().registerEvent(new JobsEvent(), this);
 
-
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerInteract(), this);
 
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
