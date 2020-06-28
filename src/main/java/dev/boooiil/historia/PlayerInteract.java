@@ -7,10 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.jobs.CheckJob;
-import dev.boooiil.historia.jobs.DoJobsPayment;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
@@ -25,8 +23,6 @@ public class PlayerInteract implements Listener {
 
         //Change to check for the specific block, not a specific job. IE: If the player's job gets paid for breaking grass
         boolean hasJob = CheckJob.hasJob(event.getPlayer(), "Farmer");
-        
-        //if (hasJob) DoJobsPayment.payout(event.getPlayer(), "Farmer");
 
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
