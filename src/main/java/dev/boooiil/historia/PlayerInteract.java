@@ -28,12 +28,12 @@ public class PlayerInteract implements Listener {
         
         //if (hasJob) DoJobsPayment.payout(event.getPlayer(), "Farmer");
 
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+        Player player = event.getPlayer();
+        Block block = event.getClickedBlock();
+        Material blockMaterial = block.getType();
+        Material handMaterial = player.getInventory().getItemInMainHand().getType();
 
-            Player player = event.getPlayer();
-            Block block = event.getClickedBlock();
-            Material blockMaterial = block.getType();
-            Material handMaterial = player.getInventory().getItemInMainHand().getType();
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
                 if (blockMaterial.equals(Material.GRASS_BLOCK) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.DIRT, null, null, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
                 if (blockMaterial.equals(Material.FERN) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.POTATO, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
@@ -50,38 +50,9 @@ public class PlayerInteract implements Listener {
         }
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 
-            Block clickedBlock = event.getClickedBlock();
-            Material blockMaterial = clickedBlock.getType();
-
-            if (blockMaterial.toString().contains("SAPLING")) {
-
-                int fail = (int) (Math.random() * 4) + 1;
-                int amount = (int) (Math.random() * 3) + 1;
-                if (fail == 1) {
-
-                    ItemStack item = new ItemStack(Material.STICK);
-                    item.setAmount(amount);
-                    event.getClickedBlock().setType(Material.AIR);
-                    event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), item);
-                    event.getPlayer().sendMessage("§7[§9Historia§7] This sapling is unusable!");
-
-                }
-            }
-            if (blockMaterial.equals(Material.DEAD_BUSH)) {
-
-                int fail = (int) (Math.random() * 4) + 1;
-                int amount = (int) (Math.random() * 3) + 1;
-
-                if (fail != 1) {
-
-                    ItemStack item = new ItemStack(Material.STICK);
-
-                    item.setAmount(amount);
-                    event.getClickedBlock().setType(Material.AIR); event.getPlayer().giveExp(2);
-                    event.getPlayer().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), item);
-
-                }
-            }
+            if (blockMaterial.toString().contains("SAPLING")) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.STICK, 4, 0, 4, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+            if (blockMaterial.equals(Material.DEAD_BUSH)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.STICK, 4, 2, 3, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
+            
         }
     }
 }
