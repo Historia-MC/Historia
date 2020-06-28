@@ -1,7 +1,5 @@
 package dev.boooiil.historia;
 
-import com.gamingmesh.jobs.commands.list.exp;
-
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
@@ -16,10 +14,12 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
+import dev.boooiil.historia.classes.ClassManager;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
@@ -90,5 +90,11 @@ public class HistoriaEvents implements Listener {
     public void onPickup(PlayerPickupItemEvent event) {
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getPlayer());
+    }
+
+    @EventHandler
+    public void onRespawn(PlayerRespawnEvent event) {
+        ClassManager manager = new ClassManager();
+        manager.initiate(event.getPlayer());
     }
 }
