@@ -12,6 +12,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
@@ -28,6 +29,7 @@ public class FlameArrowHandler {
                 Player player = (Player) projectile.getShooter();
                 ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                 ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
+                Damageable item = (Damageable) itemInOffHand;
                 
                 if (itemInMainHand.getType() == Material.BOW && itemInOffHand.getType() == Material.FLINT_AND_STEEL) {
                     if (!itemInMainHand.getEnchantments().containsKey(Enchantment.ARROW_INFINITE)) {
@@ -35,12 +37,12 @@ public class FlameArrowHandler {
                         arrow = (Arrow) projectile;
                         arrow.setFireTicks(1000);
     
-                        Short calculatedDurability = (short) ( itemInOffHand.getDurability() + 2);
+                        Short calculatedDurability = (short) ( item.getDamage() + 2);
     
                         if (calculatedDurability >= 64) {
                             player.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
                         } else {
-                            itemInOffHand.setDurability(calculatedDurability);
+                            item.setDamage(calculatedDurability);
                         }
                         
                     }

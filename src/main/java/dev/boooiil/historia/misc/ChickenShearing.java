@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 public class ChickenShearing {
     
@@ -28,13 +29,18 @@ public class ChickenShearing {
                 player.giveExp(2);
 
                 ItemStack shears = player.getInventory().getItemInMainHand();
-                Short calculatedDurability = (short) ( shears.getDurability() + 10);
+                Damageable item = (Damageable) shears;
+                
+                Short calculatedDurability = (short) ( item.getDamage() + 10);
 
                 if (calculatedDurability >= (int) shears.getType().getMaxDurability()) {
+
                     player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
                     player.getInventory().setItemInMainHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
+                    
                 } else {
-                    shears.setDurability(calculatedDurability);
+
+                    item.setDamage(calculatedDurability);
                     player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
                 }
                 
