@@ -1,7 +1,7 @@
 package dev.boooiil.historia.jobs;
 
 import com.gamingmesh.jobs.Jobs;
-import com.gamingmesh.jobs.container.ActionInfo;
+//import com.gamingmesh.jobs.container.ActionInfo;
 import com.gamingmesh.jobs.container.ActionType;
 import com.gamingmesh.jobs.container.Job;
 import com.gamingmesh.jobs.container.JobInfo;
@@ -17,9 +17,11 @@ public class DoJobsPayment {
 
         Economy economy = Bukkit.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
 
+        if (economy != null) {}
+
         Job job = Jobs.getJob(jobName);
 
-        ActionInfo actionInfo = null;
+        //ActionInfo actionInfo = null;
 
         int count = 0;
 
