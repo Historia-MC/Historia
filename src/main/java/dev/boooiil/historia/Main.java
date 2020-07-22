@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Message;
+import dev.boooiil.historia.crafting.RecipeLoader;
 
 public class Main extends JavaPlugin {
 
@@ -22,7 +23,6 @@ public class Main extends JavaPlugin {
 
         this.getCommand("Ignite").setExecutor(new Ignite());
         this.getCommand("Message").setExecutor(new Message());
-
         //Disabled due to complication.
         //this.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
 
@@ -37,6 +37,8 @@ public class Main extends JavaPlugin {
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
         this.saveConfig(); getLogger().info("Plugin enabled.");
+
+        RecipeLoader.load(this);
     }
 
     @Override
