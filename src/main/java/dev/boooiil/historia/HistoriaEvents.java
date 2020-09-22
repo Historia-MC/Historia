@@ -27,7 +27,6 @@ import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
 import dev.boooiil.historia.classes.ClassManager;
 import dev.boooiil.historia.expiry.ExpiryManager;
-import dev.boooiil.historia.jobs.CheckJob;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
 import dev.boooiil.historia.misc.PreventLavaPickup;
@@ -123,9 +122,6 @@ public class HistoriaEvents implements Listener {
         if (!TownyHandler.getPermissions(event.getPlayer(), event.getClickedBlock().getLocation(), event.getClickedBlock().getType())) return;
 
         //Change to check for the specific block, not a specific job. IE: If the player's job gets paid for breaking grass
-        boolean hasJob = CheckJob.hasJob(event.getPlayer(), "Farmer");
-        if (hasJob) System.out.println("Player has job.");
-
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
         Material blockMaterial = block.getType();
