@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
         this.saveConfig(); getLogger().info("Plugin enabled.");
 
-        RecipeLoader.load(this);
+        //RecipeLoader.load(this);
     }
 
     @Override
