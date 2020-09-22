@@ -4,7 +4,7 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.15.2-R0.1-SNAPSHOT</version>
+  <version>1.16.2-R0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.15.2-R0.1-SNAPSHOT</version>
+      <version>1.16.2-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 
@@ -51,7 +51,7 @@
     <dependency>
 	    <groupId>com.github.TownyAdvanced</groupId>
 	    <artifactId>Towny</artifactId>
-	    <version>0.96.1.11</version>
+	    <version>0.96.2.0</version>
     </dependency>
     
     <dependency>
@@ -60,12 +60,6 @@
       <version>1.7</version>
       <scope>provided</scope>
     </dependency>
-
-    <dependency>
-	    <groupId>com.github.Zrips</groupId>
-	    <artifactId>Jobs</artifactId>
-	    <version>master-daf56cd235-1</version>
-	  </dependency>
 
   </dependencies>
   <build>
