@@ -29,7 +29,7 @@ public class ChickenShearing {
                 player.giveExp(2);
 
                 ItemStack shears = player.getInventory().getItemInMainHand();
-                Damageable item = (Damageable) shears;
+                Damageable item = (Damageable) shears.getItemMeta();
                 
                 Short calculatedDurability = (short) ( item.getDamage() + 10);
 

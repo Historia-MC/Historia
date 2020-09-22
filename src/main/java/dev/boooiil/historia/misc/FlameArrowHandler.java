@@ -29,7 +29,7 @@ public class FlameArrowHandler {
                 Player player = (Player) projectile.getShooter();
                 ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                 ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-                Damageable item = (Damageable) itemInOffHand;
+                Damageable item = (Damageable) itemInOffHand.getItemMeta();
                 
                 if (itemInMainHand.getType() == Material.BOW && itemInOffHand.getType() == Material.FLINT_AND_STEEL) {
                     if (!itemInMainHand.getEnchantments().containsKey(Enchantment.ARROW_INFINITE)) {
