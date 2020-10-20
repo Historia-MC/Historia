@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ChickenShearing {
     
@@ -29,20 +30,31 @@ public class ChickenShearing {
                 player.giveExp(2);
 
                 ItemStack shears = player.getInventory().getItemInMainHand();
-                Damageable item = (Damageable) shears.getItemMeta();
+                // Damageable item = (Damageable) shears.getItemMeta();
+                ItemMeta item = shears.getItemMeta();
                 
-                Short calculatedDurability = (short) ( item.getDamage() + 10);
+                if (item instanceof Damageable){
+                            
+                    // Get damageable out of the item meta
+                    Damageable damageable = ((Damageable) item);
 
-                if (calculatedDurability >= (int) shears.getType().getMaxDurability()) {
+                    Short calculatedDurability = (short) ( damageable.getDamage() + 10);
 
-                    player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
-                    player.getInventory().setItemInMainHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
-                    
-                } else {
+                    if (calculatedDurability >= (int) shears.getType().getMaxDurability()) {
+    
+                        player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
+                        player.getInventory().setItemInMainHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
+                        
+                    } else {
+    
+                        damageable.setDamage(calculatedDurability);
+                        player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
+                    }
 
-                    item.setDamage(calculatedDurability);
-                    player.playSound(player.getLocation(), Sound.ENTITY_SHEEP_SHEAR, 15, 1);
+                    shears.setItemMeta(item);
                 }
+
+                
                 
             }
         }

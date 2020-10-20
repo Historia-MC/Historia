@@ -13,6 +13,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+// Add the Inventory Item Meta
+import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
@@ -29,7 +31,12 @@ public class FlameArrowHandler {
                 Player player = (Player) projectile.getShooter();
                 ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
                 ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-                Damageable item = (Damageable) itemInOffHand.getItemMeta();
+                // OLD WAY (doesn't work)
+                // Damageable item = (Damageable) itemInOffHand.getItemMeta();
+
+                // NEW WAY
+                // Get item meta
+                ItemMeta item = itemInOffHand.getItemMeta();
                 
                 if (itemInMainHand.getType() == Material.BOW && itemInOffHand.getType() == Material.FLINT_AND_STEEL) {
                     if (!itemInMainHand.getEnchantments().containsKey(Enchantment.ARROW_INFINITE)) {
@@ -37,13 +44,29 @@ public class FlameArrowHandler {
                         arrow = (Arrow) projectile;
                         arrow.setFireTicks(1000);
     
-                        Short calculatedDurability = (short) ( item.getDamage() + 2);
-    
-                        if (calculatedDurability >= 64) {
-                            player.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
-                        } else {
-                            item.setDamage(calculatedDurability);
+                        // Check if item is instanceof Damageable
+                        if (item instanceof Damageable){
+                            
+                            // Get damageable out of the item meta
+                            Damageable damageable = ((Damageable) item);
+                            
+                            // Add 2 to durability
+                            int calculatedDurability = (int) ( damageable.getDamage() + 2);
+
+                            // Break if over 64
+                            if (calculatedDurability >= 64) {
+                                player.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
+                            // Otherwise set damage
+                            } else {
+                                damageable.setDamage(calculatedDurability);
+                                System.out.println((item.getClass().getSimpleName()) + " and ");
+                            }
+
+                            // Set item meta
+                            itemInOffHand.setItemMeta(item);
                         }
+
+                        
                         
                     }
                 }
