@@ -37,37 +37,33 @@ public class FlameArrowHandler {
                 // NEW WAY
                 // Get item meta
                 ItemMeta item = itemInOffHand.getItemMeta();
-                
-                if (itemInMainHand.getType() == Material.BOW && itemInOffHand.getType() == Material.FLINT_AND_STEEL) {
-                    if (!itemInMainHand.getEnchantments().containsKey(Enchantment.ARROW_INFINITE)) {
-    
-                        arrow = (Arrow) projectile;
-                        arrow.setFireTicks(1000);
-    
-                        // Check if item is instanceof Damageable
-                        if (item instanceof Damageable){
-                            
-                            // Get damageable out of the item meta
-                            Damageable damageable = ((Damageable) item);
-                            
-                            // Add 2 to durability
-                            int calculatedDurability = (int) ( damageable.getDamage() + 2);
 
-                            // Break if over 64
-                            if (calculatedDurability >= 64) {
-                                player.getInventory().setItemInOffHand(new ItemStack(Material.AIR)); player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
+                if (itemInMainHand.getType() == Material.BOW && itemInOffHand.getType() == Material.FLINT_AND_STEEL
+                        && !itemInMainHand.getEnchantments().containsKey(Enchantment.ARROW_INFINITE)) {
+
+                    arrow = (Arrow) projectile;
+                    arrow.setFireTicks(1000);
+
+                    // Check if item is instanceof Damageable
+                    if (item instanceof Damageable) {
+
+                        // Get damageable out of the item meta
+                        Damageable damageable = ((Damageable) item);
+
+                        // Add 2 to durability
+                        int calculatedDurability = damageable.getDamage() + 2;
+
+                        // Break if over 64
+                        if (calculatedDurability >= 64) {
+                            player.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+                            player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
                             // Otherwise set damage
-                            } else {
-                                damageable.setDamage(calculatedDurability);
-                                System.out.println((item.getClass().getSimpleName()) + " and ");
-                            }
-
-                            // Set item meta
-                            itemInOffHand.setItemMeta(item);
+                        } else {
+                            damageable.setDamage(calculatedDurability);
                         }
 
-                        
-                        
+                        // Set item meta
+                        itemInOffHand.setItemMeta(item);
                     }
                 }
             }
@@ -76,35 +72,48 @@ public class FlameArrowHandler {
 
     public static void onBlockHit(Projectile projectile, Block block) {
 
-        //If the block that was hit isn't on the world "world", we return.
-        if (block.getWorld() != Bukkit.getWorld("world")) return;
+        // If the block that was hit isn't on the world "world", we return.
+        if (block.getWorld() != Bukkit.getWorld("world"))
+            return;
 
-        //If the entity is an arrow we assign it to the variable "arrow".
-        if (projectile.getType() == EntityType.ARROW) { arrow = (Arrow) projectile; }
-        else return;
+        // If the entity is an arrow we assign it to the variable "arrow".
+        if (projectile.getType() == EntityType.ARROW) {
+            arrow = (Arrow) projectile;
+        } else
+            return;
 
-        //If the shooter of the projectile is a human entity, we assign it to "humanEntity".
-        if (projectile.getShooter() instanceof HumanEntity) { humanEntity = (HumanEntity) projectile.getShooter(); }
-        else return;
+        // If the shooter of the projectile is a human entity, we assign it to
+        // "humanEntity".
+        if (projectile.getShooter() instanceof HumanEntity) {
+            humanEntity = (HumanEntity) projectile.getShooter();
+        } else
+            return;
 
-        //If the block that was hit is in a worldguard region and they don't have permissions, return.
-        if (!WorldGuardHandler.getPermissions((Player) humanEntity, block.getLocation())) return;
+        // If the block that was hit is in a worldguard region and they don't have
+        // permissions, return.
+        if (!WorldGuardHandler.getPermissions((Player) humanEntity, block.getLocation()))
+            return;
 
-        //If the flame arrow is stil on fire when it hits the ground.
+        // If the flame arrow is stil on fire when it hits the ground.
         if (arrow.getFireTicks() > 0) {
 
-            //Check what block is above the block that was hit and assign it to "fireBlock".
+            // Check what block is above the block that was hit and assign it to
+            // "fireBlock".
             Block fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY() + 1, block.getZ());
 
-            //If the block is AIR we change it to FIRE.
-            //Else, if the block above the one that was hit is flamable, we check to see if we can ignite it.
-            if (fireBlock.isEmpty()) fireBlock.setType(Material.FIRE);
+            // If the block is AIR we change it to FIRE.
+            // Else, if the block above the one that was hit is flamable, we check to see if
+            // we can ignite it.
+            if (fireBlock.isEmpty())
+                fireBlock.setType(Material.FIRE);
             else if (fireBlock.getType().isFlammable()) {
 
-                Block secondFirebBlock = Bukkit.getWorld("world").getBlockAt(fireBlock.getX(), fireBlock.getY() + 1, fireBlock.getZ());
+                Block secondFirebBlock = Bukkit.getWorld("world").getBlockAt(fireBlock.getX(), fireBlock.getY() + 1,
+                        fireBlock.getZ());
 
-                if (secondFirebBlock.isEmpty()) secondFirebBlock.setType(Material.FIRE);
-            }   
+                if (secondFirebBlock.isEmpty())
+                    secondFirebBlock.setType(Material.FIRE);
+            }
         }
     }
 
