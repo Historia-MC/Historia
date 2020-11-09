@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
 
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
-        this.saveConfig(); getLogger().info("Plugin enabled.");
+        this.saveDefaultConfig(); getLogger().info("Plugin enabled.");
 
         //RecipeLoader.load(this);
     }
