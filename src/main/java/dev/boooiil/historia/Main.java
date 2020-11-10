@@ -1,5 +1,8 @@
 package dev.boooiil.historia;
 
+import java.io.File;
+
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.Ignite;
@@ -7,6 +10,20 @@ import dev.boooiil.historia.commands.Message;
 import dev.boooiil.historia.crafting.RecipeLoader;
 
 public class Main extends JavaPlugin {
+
+    /**
+     * 
+     * Server starts => Config loaded => passed to respective handler => other classes can access the object
+     * 
+     * Config section (class, expiry, etc) passed to respective handler that parses that infromation into an accessable object.
+     * 
+     * Player logs in and is applied stats based on the configuration stored.
+     * 
+     * Player respawns and is applied stats based on the configuration stored.
+     * 
+     */
+
+    private FileConfiguration config = this.getConfig();
 
     @Override
     public void onLoad() {
@@ -17,26 +34,17 @@ public class Main extends JavaPlugin {
     public void onEnable() {
 
         //Disabled due to being beginner commands and not having a use.
-        //this.getCommand("Launch").setExecutor(new Launch());
-        //this.getCommand("Help").setExecutor(new Help());
-        //this.getCommand("Heal").setExecutor(new Heal());
-
         this.getCommand("Ignite").setExecutor(new Ignite());
         this.getCommand("Message").setExecutor(new Message());
-        //Disabled due to complication.
-        //this.getServer().getPluginManager().registerEvents(new InventoryClick(), this);
-
-        //Disabled due to command not being part of chat event.
-        //this.getServer().getPluginManager().registerEvents(new AsyncPlayerChat(), this);
-
-        //jobs events (dont currently work)
-        //this.getServer().getPluginManager().registerEvent(new JobsEvent(), this);
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
 
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
-        this.saveDefaultConfig(); getLogger().info("Plugin enabled.");
+
+        if (!created()) {
+            this.saveDefaultConfig(); getLogger().info("Plugin enabled.");
+        }
 
         //RecipeLoader.load(this);
     }
@@ -45,5 +53,17 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         getLogger().info("Plugin disabled.");
     }
+
+    private boolean created() {
+
+        //Create an association for the file, "config.yml"
+        File configFile = new File(getDataFolder(), "config.yml");
+
+        //Return if the file exists.
+        return configFile.exists();
+
+    }
+
+
 
 }
