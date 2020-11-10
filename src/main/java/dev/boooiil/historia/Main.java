@@ -23,8 +23,6 @@ public class Main extends JavaPlugin {
      * 
      */
 
-    private FileConfiguration config = this.getConfig();
-
     @Override
     public void onLoad() {
         getLogger().info("Plugin has loaded.");
@@ -43,8 +41,10 @@ public class Main extends JavaPlugin {
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
 
         if (!created()) {
-            this.saveDefaultConfig(); getLogger().info("Plugin enabled.");
+            this.saveDefaultConfig();
         }
+
+        getLogger().info("Plugin enabled.");
 
         //RecipeLoader.load(this);
     }
@@ -62,6 +62,10 @@ public class Main extends JavaPlugin {
         //Return if the file exists.
         return configFile.exists();
 
+    }
+
+    public FileConfiguration config() {
+        return this.getConfig();
     }
 
 
