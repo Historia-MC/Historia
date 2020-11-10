@@ -1,7 +1,7 @@
 main: dev.boooiil.historia.Main
 name: Historia
 description: Something simple, I guess!
-api-version: 1.15
+api-version: 1.16
 author: boooiil
 load: STARTUP
 version: 0.6
