@@ -1,37 +1,39 @@
-not-listed: 6
-foods:
-    - BEEF: 4
-    - COOKED_BEEF: 7
-    - RABBIT_STEW: 5
-    - BREAD: 7
-    - APPLE: 12
-    - COD: 3
-    - SALMON: 3
-    - TROPICAL_FISH: 3
-    - COOKED_COD: 5
-    - COOKED_SALMON: 5
-    - MUSHROOM_STEW: 5
-    - MELON_SLICE: 
-    - CHICKEN: 3
-    - COOKED_CHICKEN: 5
-    - CARROT: 25
-    - POTATO: 40
-    - BAKED_POTATO: 5
-    - PUMPKIN_PIE: 3
-    - RABBIT: 3
-    - COOKED_RABBIT: 5
-    - MUTTON: 3
-    - COOKED_MUTTON: 3
-    - BEETROOT: 14
-    - BEETROOT_SOUP: 3
-    - SWEET_BERRIES: 12
-    - COOKIE: 16
 
-effects:
-    - POISON: 1
-    - CONFUSION: 1
+foods:
+    not-listed: 6
+    list:
+        - BEEF: 4
+        - COOKED_BEEF: 7
+        - RABBIT_STEW: 5
+        - BREAD: 7
+        - APPLE: 12
+        - COD: 3
+        - SALMON: 3
+        - TROPICAL_FISH: 3
+        - COOKED_COD: 5
+        - COOKED_SALMON: 5
+        - MUSHROOM_STEW: 5
+        - MELON_SLICE: 
+        - CHICKEN: 3
+        - COOKED_CHICKEN: 5
+        - CARROT: 25
+        - POTATO: 40
+        - BAKED_POTATO: 5
+        - PUMPKIN_PIE: 3
+        - RABBIT: 3
+        - COOKED_RABBIT: 5
+        - MUTTON: 3
+        - COOKED_MUTTON: 3
+        - BEETROOT: 14
+        - BEETROOT_SOUP: 3
+        - SWEET_BERRIES: 12
+        - COOKIE: 16
+    effects:
+        - POISON: 1
+        - CONFUSION: 1
 
 classes:
+    list: [Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer]
     Warrior:
         stats:
             health: 26
