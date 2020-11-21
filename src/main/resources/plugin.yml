@@ -11,3 +11,4 @@ commands:
   ignite:
   message:
     aliases: [emsg, msg, message, emessage, tell, etell, whisper, ewhisper, w, r, er, ereply]
+  debugitems:
