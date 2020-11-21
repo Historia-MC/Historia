@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -32,6 +33,7 @@ import dev.boooiil.historia.misc.FlameArrowHandler;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutter;
+import dev.boooiil.historia.tools.DamageManager;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
@@ -151,5 +153,11 @@ public class HistoriaEvents implements Listener {
         }
     }
 
+    @EventHandler
+    public void onPlayerHit(EntityDamageEvent event) {
+        DamageManager manager = new DamageManager();
+        manager.initiate(event);
+
+    }
     
 }
