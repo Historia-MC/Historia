@@ -1,7 +1,6 @@
 package dev.boooiil.historia;
 
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,8 +24,8 @@ public class Config {
     // Weapon / Armor information
     public String weaponName = null;
     public String armorName = null;
-    public Integer weaponDamage = 0;
-    public Integer armorValue = 0;
+    public Double weaponDamage = 0.0;
+    public Double armorValue = 0.0;
 
     // Known Lists
     private List<String> classes = cfg.getStringList("classes.list");
@@ -68,7 +67,7 @@ public class Config {
             root = "weapons.";
 
             weaponName = query;
-            weaponDamage = cfg.getInt(root + query + ".damage");
+            weaponDamage = cfg.getDouble(root + query + ".damage");
 
         }
 
@@ -77,9 +76,11 @@ public class Config {
             root = "armor.";
 
             armorName = query;
-            armorValue = cfg.getInt(root + query + ".armor");
+            armorValue = cfg.getDouble(root + query + ".armor");
 
         } else empty = true;
+
+        
 
     }
 
