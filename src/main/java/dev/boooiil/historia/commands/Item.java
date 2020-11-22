@@ -20,36 +20,76 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Item implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
         if (label.equalsIgnoreCase("item")) {
+
             if (sender instanceof Player) {
+
                 Player player = (Player) sender;
+
                 if (player.hasPermission("historia.item")) {
+
                     if (args[0] == "" || args[0] == player.getDisplayName()) {
+
                         if (args[1] == "") {
+
                             // give undefined item
                             if (player.getInventory().firstEmpty() == -1) {
 
-                                Location location = player.getLocation(); World world = player.getWorld();
+                                Location location = player.getLocation(); 
+                                
+                                World world = player.getWorld();
 
                                 world.dropItemNaturally(location, getItem(""));
+
                                 player.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
 
                                 return true;
 
                             }
+
                             player.getInventory().addItem(getItem(""));
                             player.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
 
                             return true;
 
                         } else {
+
                             // give other item
+
                             try {
-                                String item = "" + Material.matchMaterial(args[1].toUpperCase());
+
+                                //String item = "" + Material.matchMaterial(args[1].toUpperCase());
+
+                                ItemStack sword = new ItemStack(Material.IRON_SWORD);
+                                ItemStack helmet = new ItemStack(Material.IRON_HELMET);
+                                ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+                                ItemStack boots = new ItemStack(Material.IRON_BOOTS);
+                                ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
+
+                                sword.getItemMeta().setLocalizedName("Placeholder_Sword");
+                                helmet.getItemMeta().setLocalizedName("Placeholder_Helmet");
+                                chestplate.getItemMeta().setLocalizedName("Placeholder_Chestplate");
+                                leggings.getItemMeta().setLocalizedName("Placeholder_Leggings");
+                                boots.getItemMeta().setLocalizedName("Placeholder_Boots");
+
+                                Location location = player.getLocation();
+                                World world = player.getWorld();
+
+                                world.dropItemNaturally(location, sword);
+                                world.dropItemNaturally(location, helmet);
+                                world.dropItemNaturally(location, chestplate);
+                                world.dropItemNaturally(location, leggings);
+                                world.dropItemNaturally(location, boots);
+
+                                return true;
+
+                                /*
 
                                 if (player.getInventory().firstEmpty() == -1) {
 
-                                    Location location = player.getLocation(); World world = player.getWorld();
+                                    //Location location = player.getLocation(); 
+                                    //World world = player.getWorld();
 
                                     world.dropItemNaturally(location, getItem(item));
                                     player.sendMessage(
@@ -57,21 +97,29 @@ public class Item implements CommandExecutor {
                                     return true;
 
                                 }
+
                                 player.getInventory().addItem(getItem(item));
                                 player.sendMessage(ChatColor.GOLD + "You have been given " + item + " from the gods.");
 
                                 return true;
 
+                                */
+
                             } catch (Exception e) {
                                 player.sendMessage(ChatColor.RED + "That material does not exist.");
                                 return true;
                             }
+
                         }
+
                     } else {
+
                         try {
+
                             Player obtainedPlayer = Bukkit.getPlayerExact(args[0]);
 
                             if (args[1] == "") {
+
                                 // give undefined item
                                 if (obtainedPlayer.getInventory().firstEmpty() == -1) {
 
@@ -89,6 +137,7 @@ public class Item implements CommandExecutor {
                                 return true;
 
                             } else {
+
                                 // give other item
                                 try {
                                     String item = "" + Material.matchMaterial(args[1].toUpperCase());
