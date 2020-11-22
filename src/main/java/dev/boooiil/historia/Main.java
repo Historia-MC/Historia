@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mozilla.javascript.ast.Name;
 
 import dev.boooiil.historia.commands.Ignite;
+import dev.boooiil.historia.commands.Item;
 import dev.boooiil.historia.commands.Message;
 import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.crafting.RecipeLoader;
@@ -36,6 +37,7 @@ public class Main extends JavaPlugin {
         //Disabled due to being beginner commands and not having a use.
         this.getCommand("Ignite").setExecutor(new Ignite());
         this.getCommand("Message").setExecutor(new Message());
+        this.getCommand("Item").setExecutor(new Item());
         this.getCommand("DebugItems").setExecutor(new DebugItems());
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
