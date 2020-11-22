@@ -173,3 +173,20 @@ classes:
             breakGrass: true
             instantGrowChance: 0.3
 
+weapons:
+
+    list: [Placeholder_Sword]
+    Placeholder_Sword:
+        - damage: 10.0
+
+armor:
+    
+    list: ["Placeholder_Helmet", "Placeholder_Chestplate", "Placeholder_Leggings", "Placeholder_Boots"]
+    Placeholder_Helmet: 
+        - armor: 10.0
+    Placeholder_Chestplate: 
+        - armor: 10.0
+    Placeholder_Leggings: 
+        - armor: 10.0
+    Placeholder_Boots: 
+        - armor: 10.0
