@@ -27,156 +27,58 @@ public class Item implements CommandExecutor {
 
                 Player player = (Player) sender;
 
-                if (player.hasPermission("historia.item")) {
+                ItemStack sword = new ItemStack(Material.IRON_SWORD);
+                ItemStack helmet = new ItemStack(Material.IRON_HELMET);
+                ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+                ItemStack boots = new ItemStack(Material.IRON_BOOTS);
+                ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
 
-                    if (args[0] == "" || args[0] == player.getDisplayName()) {
+                ItemMeta swordMeta = sword.getItemMeta();
 
-                        if (args[1] == "") {
+                swordMeta.setLocalizedName("Placeholder_Sword");
+                sword.setItemMeta(swordMeta);
 
-                            // give undefined item
-                            if (player.getInventory().firstEmpty() == -1) {
+                ItemMeta helmetMeta = helmet.getItemMeta();
 
-                                Location location = player.getLocation(); 
-                                
-                                World world = player.getWorld();
+                helmetMeta.setLocalizedName("Placeholder_Helmet");
+                helmet.setItemMeta(helmetMeta);
 
-                                world.dropItemNaturally(location, getItem(""));
+                ItemMeta chestplateMeta = chestplate.getItemMeta();
 
-                                player.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
+                chestplateMeta.setLocalizedName("Placeholder_Chestplate");
+                chestplate.setItemMeta(chestplateMeta);
 
-                                return true;
+                ItemMeta bootsMeta = boots.getItemMeta();
 
-                            }
+                bootsMeta.setLocalizedName("Placeholder_Boots");
+                boots.setItemMeta(bootsMeta);
 
-                            player.getInventory().addItem(getItem(""));
-                            player.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
+                ItemMeta leggingsMeta = leggings.getItemMeta();
 
-                            return true;
+                leggingsMeta.setLocalizedName("Placeholder_Leggings");
+                leggings.setItemMeta(leggingsMeta);
+                
+                //helmet.getItemMeta().setLocalizedName("Placeholder_Helmet");
+                //chestplate.getItemMeta().setLocalizedName("Placeholder_Chestplate");
+                //leggings.getItemMeta().setLocalizedName("Placeholder_Leggings");
+                //boots.getItemMeta().setLocalizedName("Placeholder_Boots");
 
-                        } else {
+                player.sendMessage(sword.toString());
 
-                            // give other item
+                sword.setItemMeta(sword.getItemMeta());
 
-                            try {
+                Location location = player.getLocation();
+                World world = player.getWorld();
 
-                                //String item = "" + Material.matchMaterial(args[1].toUpperCase());
+                world.dropItemNaturally(location, sword);
+                world.dropItemNaturally(location, helmet);
+                world.dropItemNaturally(location, chestplate);
+                world.dropItemNaturally(location, leggings);
+                world.dropItemNaturally(location, boots);
 
-                                ItemStack sword = new ItemStack(Material.IRON_SWORD);
-                                ItemStack helmet = new ItemStack(Material.IRON_HELMET);
-                                ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-                                ItemStack boots = new ItemStack(Material.IRON_BOOTS);
-                                ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
-
-                                sword.getItemMeta().setLocalizedName("Placeholder_Sword");
-                                helmet.getItemMeta().setLocalizedName("Placeholder_Helmet");
-                                chestplate.getItemMeta().setLocalizedName("Placeholder_Chestplate");
-                                leggings.getItemMeta().setLocalizedName("Placeholder_Leggings");
-                                boots.getItemMeta().setLocalizedName("Placeholder_Boots");
-
-                                Location location = player.getLocation();
-                                World world = player.getWorld();
-
-                                world.dropItemNaturally(location, sword);
-                                world.dropItemNaturally(location, helmet);
-                                world.dropItemNaturally(location, chestplate);
-                                world.dropItemNaturally(location, leggings);
-                                world.dropItemNaturally(location, boots);
-
-                                return true;
-
-                                /*
-
-                                if (player.getInventory().firstEmpty() == -1) {
-
-                                    //Location location = player.getLocation(); 
-                                    //World world = player.getWorld();
-
-                                    world.dropItemNaturally(location, getItem(item));
-                                    player.sendMessage(
-                                            ChatColor.GOLD + "You have been given " + item + " from the gods.");
-                                    return true;
-
-                                }
-
-                                player.getInventory().addItem(getItem(item));
-                                player.sendMessage(ChatColor.GOLD + "You have been given " + item + " from the gods.");
-
-                                return true;
-
-                                */
-
-                            } catch (Exception e) {
-                                player.sendMessage(ChatColor.RED + "That material does not exist.");
-                                return true;
-                            }
-
-                        }
-
-                    } else {
-
-                        try {
-
-                            Player obtainedPlayer = Bukkit.getPlayerExact(args[0]);
-
-                            if (args[1] == "") {
-
-                                // give undefined item
-                                if (obtainedPlayer.getInventory().firstEmpty() == -1) {
-
-                                    Location location = obtainedPlayer.getLocation(); World world = obtainedPlayer.getWorld();
-
-                                    world.dropItemNaturally(location, getItem(""));
-                                    obtainedPlayer.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
-
-                                    return true;
-
-                                }
-                                obtainedPlayer.getInventory().addItem(getItem(""));
-                                obtainedPlayer.sendMessage(ChatColor.GOLD + "You have been given boots from the gods.");
-
-                                return true;
-
-                            } else {
-
-                                // give other item
-                                try {
-                                    String item = "" + Material.matchMaterial(args[1].toUpperCase());
-
-                                    if (obtainedPlayer.getInventory().firstEmpty() == -1) {
-
-                                        Location location = obtainedPlayer.getLocation(); World world = obtainedPlayer.getWorld();
-
-                                        world.dropItemNaturally(location, getItem(item));
-                                        obtainedPlayer.sendMessage(ChatColor.GOLD + "You have been given " + item + " from the gods.");
-
-                                        return true;
-
-                                    }
-                                    obtainedPlayer.getInventory().addItem(getItem(item));
-                                    obtainedPlayer.sendMessage(ChatColor.GOLD + "You have been given " + item + " from the gods.");
-
-                                    return true;
-
-                                } catch (Exception e) {
-                                    player.sendMessage(ChatColor.RED + "That material does not exist.");
-                                    return true;
-                                }
-                            }
-
-                        } catch (Exception e) {
-                            player.sendMessage(ChatColor.RED + "That player could not be found.");
-                            return true;
-                        }
-                    }
-                } else {
-                    sender.sendMessage(ChatColor.RED + "You do not have permission for this command.");
-                    return true;
-                }
-            } else {
-                if (args.length == 0)
-                    sender.sendMessage(ChatColor.RED + "You must specify a player and item.");
-                // check if user exists
                 return true;
+
+               
             }
         }
         return false;
