@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.Config;
+
 public class DebugItems implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
             if (sender instanceof Player) {
@@ -78,7 +80,23 @@ public class DebugItems implements CommandExecutor {
                         //send player's chestplate display name and localized name
                         // etc
                     }
+                    if (args[0].equalsIgnoreCase("config")) {
+                        Config weapon = new Config("Placeholder_Sword"); 
+                        Config helmet = new Config("Placeholder_Helmet");
+                        Config chestplate = new Config("Placeholder_Chestplate");
+                        Config leggings = new Config("Placeholder_Leggings");
+                        Config boots = new Config("Placeholder_Boots");
+
+
+                        sender.sendMessage("Weapon: " + weapon.toString());
+                        sender.sendMessage("Helmet: " + helmet.toString());
+                        sender.sendMessage("Chestplate: " + chestplate.toString());
+                        sender.sendMessage("Leggings: " + leggings.toString());
+                        sender.sendMessage("Boots: " + boots.toString());
+                    
+                    }
                 }
+
             }
         return false;
     }
