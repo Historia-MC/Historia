@@ -55,14 +55,14 @@ public class DamageManager {
         }
 
         // Cancel vanilla damage event.
-        damageEvent.setCancelled(true);
+        //damageEvent.setCancelled(true);
 
-        if (baseAttack || sweepAttack || arrowAttack) calculateDamage(defender, attacker);
+        if (baseAttack || sweepAttack || arrowAttack) damageEvent.setDamage(calculateDamage(defender, attacker));
         else Bukkit.getLogger().warning("ENTITY DAMAGE WAS NOT CAUSED BY REGISTERED ATTACKS. ACTUAL DAMAGE CAUSE: " + cause);
 
     }
 
-    private void calculateDamage(Entity defender, Entity attacker) {
+    private double calculateDamage(Entity defender, Entity attacker) {
 
         //Apply entities to living entities
 
@@ -132,8 +132,8 @@ public class DamageManager {
 
         Bukkit.getLogger().info(log);
 
-        defenderLiving.damage(finalDamage);
-
+        //defenderLiving.damage(finalDamage);
+        return finalDamage;
     }
 
     private Config getConfigType(String query) {
