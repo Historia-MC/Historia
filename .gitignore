@@ -5,4 +5,5 @@ historia-development.code-workspace
 .project
 .factorypath
 Maven/
+.vscode/
 historia.code-workspace
