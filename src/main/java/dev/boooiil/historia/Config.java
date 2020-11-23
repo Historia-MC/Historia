@@ -29,8 +29,8 @@ public class Config {
 
     // Known Lists
     private List<String> classes = cfg.getStringList("classes.list");
-    private List<String> armor = cfg.getStringList("weapons.list");
-    private List<String> weapons = cfg.getStringList("armor.list");
+    private List<String> armor = cfg.getStringList("armor.list");
+    private List<String> weapons = cfg.getStringList("weapons.list");
 
     // Unknown Lists
     private List<?> skills;
