@@ -175,9 +175,9 @@ classes:
 
 weapons:
 
-    list: [Placeholder_Sword]
+    list: ["Placeholder_Sword"]
     Placeholder_Sword:
-        - damage: 10.0
+        damage: 10.0
 
 armor:
     
