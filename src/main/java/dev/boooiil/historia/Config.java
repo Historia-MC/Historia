@@ -80,7 +80,23 @@ public class Config {
 
         } else empty = true;
 
+        //CONFIG DEBUGGING
+        System.out.println("Class Name: " + className);
+        System.out.println("Class Health: " + health);
+        System.out.println("Class Base Food: " + baseFood);
+        System.out.println("Class Exhaustion: " + exhaustion);
+        System.out.println("Class Saturation: " + saturation);
+        System.out.println("Class Speed: " + speed);
         
+        System.out.println("Weapon Name: " + weaponName);
+        System.out.println("Weapon Damage: " + weaponDamage);
+        
+        System.out.println("Armor Name: " + armorName);
+        System.out.println("Armor Value: " + armorValue);
+
+        System.out.println("Classes List: " + classes);
+        System.out.println("Weapons List: " + weapons);
+        System.out.println("Armors List: " + armor);
 
     }
 

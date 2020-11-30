@@ -57,8 +57,12 @@ public class DamageManager {
         // Cancel vanilla damage event.
         //damageEvent.setCancelled(true);
 
+        Bukkit.getLogger().info("Base Damage: " + damageEvent.getDamage());
+
         if (baseAttack || sweepAttack || arrowAttack) damageEvent.setDamage(calculateDamage(defender, attacker));
         else Bukkit.getLogger().warning("ENTITY DAMAGE WAS NOT CAUSED BY REGISTERED ATTACKS. ACTUAL DAMAGE CAUSE: " + cause);
+
+        Bukkit.getLogger().info("Final Damage: " + damageEvent.getFinalDamage());
 
     }
 
@@ -124,7 +128,7 @@ public class DamageManager {
 
         }
 
-        else return;
+        else return baseDamage;
         
         String log = "Final Damage: " + finalDamage + " Helmet Armor: " + defenderHelmetArmor + " Chestplate Armor: "
                 + defenderChestplateArmor + " Leggings Armor: " + defenderLeggingsArmor + " Boots Armor: "
