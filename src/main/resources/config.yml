@@ -183,10 +183,10 @@ armor:
     
     list: ["Placeholder_Helmet", "Placeholder_Chestplate", "Placeholder_Leggings", "Placeholder_Boots"]
     Placeholder_Helmet: 
-        - armor: 10.0
+        armor: 10.0
     Placeholder_Chestplate: 
-        - armor: 10.0
+        armor: 10.0
     Placeholder_Leggings: 
-        - armor: 10.0
+        armor: 10.0
     Placeholder_Boots: 
-        - armor: 10.0
+        armor: 10.0
