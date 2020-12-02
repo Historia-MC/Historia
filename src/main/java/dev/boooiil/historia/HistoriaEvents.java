@@ -176,7 +176,7 @@ public class HistoriaEvents implements Listener {
 
         Material material = block.getType();
 
-        if (material == Material.COAL_BLOCK) {
+        if (material == Material.COAL_BLOCK && TownyHandler.getPermissions(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
 
             OreDrops.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
 
