@@ -1,12 +1,11 @@
 package dev.boooiil.historia.misc;
 
-import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
@@ -23,6 +22,29 @@ public class OreDrops {
      * If we try to pass Integer, String, Boolean, Etc. to initiate() it will return an error.
      * 
      */
+
+     //int and Integer
+
+    public static void doOreDrop(Player player, Block block, Material material, String itemName, Integer amount) {
+
+        //if (class != "miner") return; 
+        
+        ItemStack droppedItem = new ItemStack(material, amount);
+
+        ItemMeta droppedMeta = droppedItem.getItemMeta();
+
+        droppedMeta.setLocalizedName(itemName);
+
+        droppedMeta.setDisplayName(itemName);
+
+        droppedItem.setItemMeta(droppedMeta);
+
+        Location brokeBlock = block.getLocation();
+
+        brokeBlock.getWorld().dropItemNaturally(brokeBlock, droppedItem);
+
+    } 
+    
 
 
 

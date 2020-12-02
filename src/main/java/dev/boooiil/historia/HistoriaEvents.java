@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -30,6 +31,7 @@ import dev.boooiil.historia.classes.ClassManager;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
+import dev.boooiil.historia.misc.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutter;
@@ -160,4 +162,29 @@ public class HistoriaEvents implements Listener {
 
     }
     
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+
+        //Type     Variable       New OreDrops object containing doOreDrop method.
+        //OreDrops oreDrops = new OreDrops(); https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Block.html
+
+
+        //String string = string;
+        //returns null;
+
+        Block block = event.getBlock();
+
+        Material material = block.getType();
+
+        if (material == Material.COAL_BLOCK) {
+
+            OreDrops.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
+
+        }
+
+
+
+
+    }
+
 }
