@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mozilla.javascript.ast.Name;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
