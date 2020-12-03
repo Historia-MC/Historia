@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 public class Config {
 
@@ -27,10 +28,26 @@ public class Config {
     public Double weaponDamage = 0.0;
     public Double armorValue = 0.0;
 
+    public String database;
+    public String username;
+    public String password;
+    public String ip;
+    public Integer port;
+
+    public ItemStack oreItem;
+    public String smeltInto;
+    public Integer oreTime;
+    public Integer oreLoss;
+    public Integer smeltTimes;
+
+    public ItemStack blockItem;
+
     // Known Lists
     private List<String> classes = cfg.getStringList("classes.list");
     private List<String> armor = cfg.getStringList("armor.list");
     private List<String> weapons = cfg.getStringList("weapons.list");
+    private List<String> ores = cfg.getStringList("items.ores.list");
+    private List<String> blocks = cfg.getStringList("items.blocks.list");
 
     // Unknown Lists
     private List<?> skills;
@@ -52,6 +69,14 @@ public class Config {
             exhaustion = cfg.getInt(root + className + ".stats.exhaustion");
             saturation = cfg.getInt(root + className + ".stats.saturation");
             speed = cfg.getInt(root + className + ".stats.speed");
+        }
+
+        else if (query.equals("MySQL")) {
+            database = cfg.getString("MySQL.database");
+            username = cfg.getString("MySQL.user");
+            password = cfg.getString("MySQL.password");
+            ip = cfg.getString("MySQL.ip");
+            port = cfg.getInt("MySQL.port");
         }
 
         else if (query.equals("foods")) {
@@ -78,8 +103,30 @@ public class Config {
             armorName = query;
             armorValue = cfg.getDouble(root + query + ".armor");
 
-        } else empty = true;
+        } 
 
+        else if (ores.contains(query)) {
+
+            root = "items.ores";
+
+            oreItem = cfg.getItemStack(root + query + "item");
+
+            smeltInto = cfg.getString(root + query + ".smelt_into");
+            oreTime = cfg.getInt(root + query + ".time");
+            oreLoss = cfg.getInt(root + query + ".loss");
+            smeltTimes = cfg.getInt(root + query + ".smelt_times");
+
+        }
+        else if (blocks.contains(query)) {
+
+            root = "items.blocks";
+
+            blockItem = cfg.getItemStack(root + query + "item");
+
+        }
+
+
+        else empty = true;
         //CONFIG DEBUGGING
         System.out.println("Class Name: " + className);
         System.out.println("Class Health: " + health);
