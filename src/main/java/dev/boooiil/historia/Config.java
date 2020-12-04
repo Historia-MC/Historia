@@ -15,18 +15,20 @@ public class Config {
     public boolean empty = false;
 
     // Class information
-    public String className = null;
-    public Integer health = 0;
-    public Integer baseFood = 0;
-    public Integer exhaustion = 0;
-    public Integer saturation = 0;
-    public Integer speed = 0;
+    public String className;
+    public Integer health;
+    public Integer baseFood;
+    public Integer exhaustion;
+    public Integer saturation;
+    public Integer speed;
 
     // Weapon / Armor information
-    public String weaponName = null;
-    public String armorName = null;
-    public Double weaponDamage = 0.0;
-    public Double armorValue = 0.0;
+    public ItemStack armorItem;
+    public ItemStack weaponItem;
+    public String weaponName;
+    public String armorName;
+    public Double weaponDamage;
+    public Double armorValue;
 
     public String database;
     public String username;
@@ -102,6 +104,7 @@ public class Config {
 
             armorName = query;
             armorValue = cfg.getDouble(root + query + ".armor");
+            armorItem = cfg.getItemStack(root + query + ".item");
 
         } 
 
@@ -109,7 +112,7 @@ public class Config {
 
             root = "items.ores";
 
-            oreItem = cfg.getItemStack(root + query + "item");
+            oreItem = cfg.getItemStack(root + query + ".item");
 
             smeltInto = cfg.getString(root + query + ".smelt_into");
             oreTime = cfg.getInt(root + query + ".time");
@@ -117,17 +120,21 @@ public class Config {
             smeltTimes = cfg.getInt(root + query + ".smelt_times");
 
         }
+        
         else if (blocks.contains(query)) {
 
             root = "items.blocks";
 
-            blockItem = cfg.getItemStack(root + query + "item");
+            blockItem = cfg.getItemStack(root + query + ".item");
 
         }
 
-
         else empty = true;
+        
         //CONFIG DEBUGGING
+
+        System.out.println("Query: " + query);
+
         System.out.println("Class Name: " + className);
         System.out.println("Class Health: " + health);
         System.out.println("Class Base Food: " + baseFood);
@@ -144,6 +151,9 @@ public class Config {
         System.out.println("Classes List: " + classes);
         System.out.println("Weapons List: " + weapons);
         System.out.println("Armors List: " + armor);
+
+        System.out.println("Blocks List: " + blocks);
+        System.out.println("Ores List: " + ores);
 
     }
 
