@@ -14,6 +14,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.mysql.UserData;
 
 public class DebugItems implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -94,6 +95,12 @@ public class DebugItems implements CommandExecutor {
                         sender.sendMessage("Leggings: " + leggings.toString());
                         sender.sendMessage("Boots: " + boots.toString());
                     
+                    }
+                    if (args[0].equalsIgnoreCase("player")) {
+
+                        UserData data = new UserData((Player) sender);
+
+                        sender.sendMessage(data.getClassName());
                     }
                 }
 
