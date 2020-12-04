@@ -6,18 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
+
 import dev.boooiil.historia.Config;
 
 public class MySQL {
 
     private Connection connection;
 
+    private static Config sql = new Config("MySQL");
+
     //Assign variables that we will use to connect to the database.
-    static final String DATABASE = new Config("MySQL").database;
-    static final String USERNAME = new Config("MySQL").username;
-    static final String PASSWORD = new Config("MySQL").password;
-    static final String IP = new Config("MySQL").ip;
-    static final Integer PORT = new Config("MySQL").port;
+    static final String DATABASE = sql.database;
+    static final String USERNAME = sql.username;
+    static final String PASSWORD = sql.password;
+    static final String IP = sql.ip;
+    static final Integer PORT = sql.port;
 
     //Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jbdc:mysql://" + IP + ":" + PORT + "/" + DATABASE;
