@@ -1,6 +1,7 @@
 package dev.boooiil.historia;
 
 import java.io.File;
+import java.sql.SQLException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +11,7 @@ import dev.boooiil.historia.commands.Item;
 import dev.boooiil.historia.commands.Message;
 import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.crafting.RecipeLoader;
+import dev.boooiil.historia.mysql.MySQL;
 
 public class Main extends JavaPlugin {
 
@@ -44,13 +46,23 @@ public class Main extends JavaPlugin {
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
 
-        if (!created()) {
-            this.saveDefaultConfig();
-        }
+        
+        //Save / Load the config in the Historia plugins folder.
+        setConfig();
 
         getLogger().info("Plugin enabled.");
 
         RecipeLoader.load(this);
+
+        try {
+
+            MySQL sql = new MySQL();
+            sql.intitate();
+
+        } 
+        catch (SQLException e) { e.printStackTrace(); }
+        finally { getLogger().info("MySQL Configured and Running."); }
+
     }
 
     @Override
@@ -58,20 +70,20 @@ public class Main extends JavaPlugin {
         getLogger().info("Plugin disabled.");
     }
 
-    private boolean created() {
+    private void setConfig() {
 
         //Create an association for the file, "config.yml"
         File configFile = new File(getDataFolder(), "config.yml");
 
-        //Return if the file exists.
-        return configFile.exists();
+        //If the file doesn't exist, save it to the current directory.
+        if (!configFile.exists()) { this.saveConfig(); } 
 
+        //Else, laod the config from file.
+        else {
+
+            try { this.getConfig().load(configFile); } 
+            catch (Exception e) { e.printStackTrace(); }
+
+        }
     }
-
-    public FileConfiguration config() {
-        return this.getConfig();
-    }
-
-
-
 }
