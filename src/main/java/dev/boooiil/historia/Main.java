@@ -76,10 +76,19 @@ public class Main extends JavaPlugin {
         File configFile = new File(getDataFolder(), "config.yml");
 
         //If the file doesn't exist, save it to the current directory.
-        if (!configFile.exists()) { this.saveConfig(); } 
+        if (!configFile.exists()) { 
+            
+            getLogger().info("Saving Config.");
+
+            try { this.getConfig().save("./plugins/Historia/config.yml"); }
+            catch (Exception e) { e.printStackTrace(); }
+        
+        } 
 
         //Else, laod the config from file.
         else {
+
+            getLogger().info("Loading Config.");
 
             try { this.getConfig().load(configFile); } 
             catch (Exception e) { e.printStackTrace(); }
