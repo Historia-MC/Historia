@@ -57,11 +57,10 @@ public class Main extends JavaPlugin {
         try {
 
             MySQL sql = new MySQL();
-            sql.intitate();
 
-        } 
-        catch (SQLException e) { e.printStackTrace(); }
-        finally { getLogger().info("MySQL Configured and Running."); }
+            sql.initiate();
+
+        } catch (Exception e) { getLogger().info("Failed to load MySQL"); e.printStackTrace(); }
 
     }
 
