@@ -148,6 +148,11 @@ public class Config {
         System.out.println("Armor Name: " + armorName);
         System.out.println("Armor Value: " + armorValue);
 
+        System.out.println("SQL Username: " + username);
+        System.out.println("SQL Database: " + database);
+        System.out.println("SQL IP: " + ip);
+        System.out.println("SQL Port: " + port);
+
         System.out.println("Classes List: " + classes);
         System.out.println("Weapons List: " + weapons);
         System.out.println("Armors List: " + armor);
