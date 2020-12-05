@@ -39,9 +39,8 @@ MySQL:
     ip: ip/url
     port: port
 
-
 classes:
-    list: [Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer]
+    list: ["Warrior", "Archer", "Fisherman", "Miner", "Blacksmith", "Hunter", "Apothecary", "Architect", "Lumberjack", "Farmer"]
     Warrior:
         stats:
             health: 26
@@ -189,27 +188,24 @@ weapons:
 
 armor:
     
-    list: ["Placeholder_Helmet", "Placeholder_Chestplate", "Placeholder_Leggings", "Placeholder_Boots"]
+    list: [ "Placeholder_Helmet", "Placeholder_Chestplate", "Placeholder_Leggings", "Placeholder_Boots" ]
 
     Placeholder_Helmet:
     
         item:
             ==: org.bukkit.inventory.ItemStack
-            type: IRON_INGOT
+            type: IRON_HELMET
             amount: 1
             meta:
                 ==: ItemMeta
-                meta-type: IRON_INGOT
-                display-name: Low Quality Iron
-                loc-name: LOW_IRON
-                lore: [ This ingot is of a lower quality. ]
-                attribute-modifiers:
-                    GENERIC_ARMOR:
-                    - ==: org.bukkit.attribute.AttributeModifier
-                        amount: 10
-                        name: GENERIC_ARMOR
+                meta-type: UNSPECIFIC
+                display-name: Placeholder Helmet
+                loc-name: Placeholder_Helmet
+                lore: [ This is the placeholder helmet. ]
 
-        armor: 10.0
+        attributes:
+            GENERIC_ARMOR: 10
+
         crafting: [ IRON_INGOT, IRON_INGOT, IRON_INGOT, IRON_INGOT, AIR, IRON_INGOT, AIR, AIR, AIR ]
     Placeholder_Chestplate: 
         armor: 10.0
@@ -220,7 +216,7 @@ armor:
 
 items:
     ores:
-        ore_list: [ LOW_IRON, MEDIUM_IRON, HIGH_IRON, LOW_BRONZE, MEDIUM_BRONZE, HIGH_BRONZE, LOW_SHEEP_LEATHER, MEDIUM_SHEEP_LEATHER, HIGH_SHEEP_LEATHER ]
+        list: [ LOW_IRON, MEDIUM_IRON, HIGH_IRON, LOW_BRONZE, MEDIUM_BRONZE, HIGH_BRONZE, LOW_SHEEP_LEATHER, MEDIUM_SHEEP_LEATHER, HIGH_SHEEP_LEATHER ]
 
         LOW_IRON:
 
@@ -230,7 +226,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Iron
                     loc-name: LOW_IRON
                     lore: [ This ingot is of a lower quality. ]
@@ -248,7 +244,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: Medium Quality Iron
                     loc-name: MEDIUM_IRON
                     lore: [ This ingot is of a medium quality. ]
@@ -266,7 +262,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: High Quality Iron
                     loc-name: HIGH_IRON
                     lore: [ This ingot is of a high quality. ]
@@ -279,7 +275,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Bronze
                     loc-name: LOW_BRONZE
                     lore: [ This ingot is of a lower quality. ]
@@ -297,7 +293,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: Medium Quality Bronze
                     loc-name: MEDIUM_BRONZE
                     lore: [ This ingot is of a medium quality. ]
@@ -315,7 +311,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_INGOT
+                    meta-type: UNSPECIFIC
                     display-name: High Quality Bronze
                     loc-name: HIGH_BRONZE
                     lore: [ This ingot is of a high quality. ]
@@ -328,7 +324,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: LEATHER
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Sheep Leather
                     loc-name: LOW_SHEEP_LEATHER
                     lore: [ This leather is of a lower quality. ]
@@ -346,7 +342,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: LEATHER
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Cow Leather
                     loc-name: LOW_COW_LEATHER
                     lore: [ This leather is of a lower quality. ]
@@ -364,7 +360,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: LEATHER
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Pig Leather
                     loc-name: LOW_PIG_LEATHER
                     lore: [ This leather is of a lower quality. ]
@@ -382,7 +378,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: LEATHER
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Horse Leather
                     loc-name: LOW_HORSE_LEATHER
                     lore: [ This leather is of a lower quality. ]
@@ -392,12 +388,8 @@ items:
             loss: 15
             smelt_times: 1
 
-
-
-
-
     blocks:
-        block_list: [ LOW_IRON_CHUNK, MEDIUM_IRON_CHUNK, HIGH_IRON_CHUNK, LOW_BRONZE_CHUNK, MEDIUM_BRONZE_CHUNK, HIGH_BRONZE_CHUNK ]
+        list: [ LOW_IRON_CHUNK, MEDIUM_IRON_CHUNK, HIGH_IRON_CHUNK, LOW_BRONZE_CHUNK, MEDIUM_BRONZE_CHUNK, HIGH_BRONZE_CHUNK ]
 
         LOW_IRON_CHUNK:
 
@@ -407,7 +399,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Iron Chunk
                     loc-name: LOW_IRON_CHUNK
                     lore: [ This ore is of a lower quality. ]
@@ -420,7 +412,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: Medium Quality Iron Chunk
                     loc-name: MEDIUM_IRON_CHUNK
                     lore: [ This ore is of a medium quality. ]
@@ -433,7 +425,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: High Quality Iron Chunk
                     loc-name: HIGH_IRON_CHUNK
                     lore: [ This ore is of a high quality. ]
@@ -446,7 +438,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: Low Quality Bronze Chunk
                     loc-name: LOW_BRONZE_CHUNK
                     lore: [ This ore is of a lower quality. ]
@@ -459,7 +451,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: Medium Quality Bronze Chunk
                     loc-name: MEDIUM_BRONZE_CHUNK
                     lore: [ This ore is of a medium quality. ]
@@ -472,7 +464,7 @@ items:
                 amount: 1
                 meta:
                     ==: ItemMeta
-                    meta-type: IRON_ORE
+                    meta-type: UNSPECIFIC
                     display-name: High Quality Bronze Chunk
                     loc-name: HIGH_BRONZE_CHUNK
                     lore: [ This ore is of a high quality. ]
