@@ -2,6 +2,8 @@ package dev.boooiil.historia;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
@@ -24,6 +26,8 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
@@ -133,6 +137,8 @@ public class HistoriaEvents implements Listener {
 
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 
+            //Use a switch satatemnet here.
+
             if (blockMaterial.equals(Material.GRASS_BLOCK) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.DIRT, null, null, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
             if (blockMaterial.equals(Material.FERN) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.POTATO, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
             if (blockMaterial.equals(Material.LARGE_FERN) && handMaterial.equals(Material.AIR)) ReplaceBlocks.doReplacement(player, block, Material.AIR, null, Material.POTATO, 15, 2, 2, 0, 0, false, Sound.BLOCK_GRASS_BREAK, null, null);
@@ -179,6 +185,29 @@ public class HistoriaEvents implements Listener {
         if (material == Material.COAL_BLOCK && TownyHandler.getPermissions(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
 
             OreDrops.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
+
+        }
+
+        if (material == Material.IRON_ORE) {
+
+            ItemStack item = new ItemStack(Material.IRON_HELMET);
+
+            ItemMeta meta = item.getItemMeta(); 
+            
+            AttributeModifier modifier = new AttributeModifier("generic.armor", (double) 10,AttributeModifier.Operation.ADD_NUMBER);
+
+            meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
+
+            item.setItemMeta(meta);
+
+            System.out.println("Serialization: " + item.serialize());
+            
+
+            //Config blockConfig = new Config("LOW_IRON_CHUNK");
+            //Config armorConfig = new Config("Placeholder_Helmet");
+
+            //event.getPlayer().getLocation().getWorld().dropItemNaturally(event.getPlayer().getLocation(), blockConfig.blockItem);
+            event.getPlayer().getLocation().getWorld().dropItemNaturally(event.getPlayer().getLocation(), item);
 
         }
 
