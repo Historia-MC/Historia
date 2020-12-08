@@ -2,7 +2,6 @@ package dev.boooiil.historia.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,9 +10,7 @@ import dev.boooiil.historia.Config;
 
 public class MySQL {
 
-    private Connection connection;
-    
-    private Statement statement;
+    //private Connection connection;
 
     private static Config sql = new Config("MySQL");
 
@@ -27,47 +24,46 @@ public class MySQL {
     //Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
-    public void initiate() throws Exception {
+    public void initiate() throws SQLException {
 
         //Issue the statement that we will use to create the table if it does not exist.
-        String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int(100), Experience int(10000))";
+        String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, PRIMARY KEY (UUID))";
 
-        //Connect to the database and assign that connection to "connection".
-        connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 
-        statement = connection.createStatement();
-        statement.executeQuery(createTable);
+            //Connect to the database and assign that connection to "connection".
+            
+            Statement statement = connection.createStatement();
+            statement.execute(createTable);
 
-        //Close out of the connection with the database.
-        connection.close();
-
-        //}
+        }
     }
 
     public void doStatement(String string) throws SQLException {
 
-        try (PreparedStatement statement = connection.prepareStatement(string)) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            statement.executeQuery();
-
-            connection.close();
+            //Connect to the database and assign that connection to "connection".
+            
+            Statement statement = connection.createStatement();
+            statement.execute(string);
 
         }
     }
 
     public ResultSet getStatement(String string) throws SQLException {
 
-        try (PreparedStatement statement = connection.prepareStatement(string)) {
-            
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+
             ResultSet results;
 
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-            results = statement.executeQuery();
-            connection.close();    
-
-            return results; 
+            //Connect to the database and assign that connection to "connection".
             
+            Statement statement = connection.createStatement();
+            results = statement.executeQuery(string);
+            
+            return results;
+
         }
     }
 }
