@@ -33,11 +33,11 @@ foods:
         - CONFUSION: 1
 
 MySQL:
-    user: user
-    password: password
-    database: database
-    ip: ip/url
-    port: port
+    user: User
+    password: Titaniumsilky26
+    database: world
+    ip: "192.168.0.12"
+    port: 3306
 
 classes:
     list: ["Warrior", "Archer", "Fisherman", "Miner", "Blacksmith", "Hunter", "Apothecary", "Architect", "Lumberjack", "Farmer"]
