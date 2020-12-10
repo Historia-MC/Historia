@@ -46,8 +46,8 @@ public class Config {
 
     // Known Lists
     private List<String> classes = cfg.getStringList("classes.list");
-    private List<String> armor = cfg.getStringList("armor.list");
-    private List<String> weapons = cfg.getStringList("weapons.list");
+    public List<String> armor = cfg.getStringList("armor.list");
+    public List<String> weapons = cfg.getStringList("weapons.list");
     private List<String> ores = cfg.getStringList("items.ores.list");
     private List<String> blocks = cfg.getStringList("items.blocks.list");
 
