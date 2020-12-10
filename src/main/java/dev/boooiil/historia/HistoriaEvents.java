@@ -1,5 +1,7 @@
 package dev.boooiil.historia;
 
+import java.util.Date;
+
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -23,7 +25,9 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -39,6 +43,7 @@ import dev.boooiil.historia.misc.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutter;
+import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.DamageManager;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
@@ -216,4 +221,35 @@ public class HistoriaEvents implements Listener {
 
     }
 
+    @EventHandler
+    public void onPlayerLogin(PlayerJoinEvent event) { 
+
+        Date date = new Date();
+
+        UserData playerData = new UserData(event.getPlayer());
+
+        playerData.setLogin(event.getPlayer().getUniqueId(), date.getTime());
+
+        System.out.println("Login: " + playerData.getClassName());
+        System.out.println("Login: " + playerData.getDisplayName());
+        System.out.println("Login: " + playerData.getLogin());
+        System.out.println("Login: " + playerData.getLogout());
+
+    }
+
+    @EventHandler
+    public void onPlayerLogout(PlayerQuitEvent event) {
+
+        Date date = new Date();
+
+        UserData playerData = new UserData(event.getPlayer());
+
+        playerData.setLogout(event.getPlayer().getUniqueId(), date.getTime());
+
+        System.out.println("Logout: " + playerData.getClassName());
+        System.out.println("Logout: " + playerData.getDisplayName());
+        System.out.println("Logout: " + playerData.getLogin());
+        System.out.println("Logout: " + playerData.getLogout());
+
+    }
 }
