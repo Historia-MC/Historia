@@ -25,6 +25,7 @@ public class Config {
     // Weapon / Armor information
     public ItemStack armorItem;
     public ItemStack weaponItem;
+    
     public String weaponName;
     public String armorName;
     public Double weaponDamage;
@@ -95,6 +96,7 @@ public class Config {
 
             weaponName = query;
             weaponDamage = cfg.getDouble(root + query + ".damage");
+            weaponItem = cfg.getItemStack(root + query + ".item");
 
         }
 
