@@ -2,7 +2,11 @@ package dev.boooiil.historia.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
+
+import javax.annotation.CheckForNull;
 
 import org.bukkit.entity.Player;
 
@@ -27,38 +31,44 @@ public class UserData {
     String className;
     Integer classLevel;
     Integer classExperience;
+    Long lastLogin;
+    Long lastLogout;
 
     public UserData(Player player) {
 
         try {
 
-            ResultSet result;
+            Map<String, String> result;
 
             //Issue a statement that will return all values related to this user's uuid.
-            result = sql.getStatement("SELECT * FROM historia WHERE UUID = ('" + player.getUniqueId() + "')");
+            result = sql.getStatement("SELECT * FROM historia WHERE UUID = '" + player.getUniqueId() + "'");
+
+            System.out.println(result.toString());
+
+            Date date = new Date();
 
             //If there is no data stored for that UUID
-            if (!result.next()) {
 
-                //Set the player's information if they are classless.
-                uuid = player.getUniqueId();
-                displayName = player.getName();
-                className = "None";
-                classLevel = 0;
-                classExperience = 0;
+            if (result.containsKey("UUID")) {
+
+                System.out.println(result.toString());
+
+                uuid = UUID.fromString(result.get("UUID"));
+                displayName = result.get("Username");
+                className = result.get("Class");
+                classLevel = Integer.parseInt(result.get("Level"));
+                classExperience = Integer.parseInt(result.get("Experience"));
+                lastLogin = Long.parseLong(result.get("Login"));
+                lastLogout = Long.parseLong(result.get("Logout"));
 
             } else {
 
-                //Else we iterate through.
-                while (result.next()) {
+                uuid = player.getUniqueId();
+                displayName = player.getName();
+                lastLogin = date.getTime();
 
-                    uuid = UUID.fromString(result.getString("UUID"));
-                    displayName = result.getString("Username");
-                    className = result.getString("Class");
-                    classLevel = result.getInt("Level");
-                    classExperience = result.getInt("Expereince");
-    
-                }
+                createUser();
+
             }
 
         } catch (SQLException e) { e.printStackTrace(); }
@@ -68,6 +78,20 @@ public class UserData {
         System.out.println("Class Name: " + className);
         System.out.println("Class Level: " + classLevel);
         System.out.println("Class Experience: " + classExperience);
+        System.out.println("Player Login: " + lastLogin);
+        System.out.println("Player Logout: " + lastLogout);
+
+    }
+
+    public void createUser() {
+
+        try {
+
+            sql.doStatement("INSERT INTO historia VALUES ('" + uuid + "', '" + displayName + "', 'None', 0, 0, " + lastLogin + ", 0)");
+
+        } catch (SQLException e) { e.printStackTrace(); }
+        
+
 
     }
 
@@ -77,7 +101,7 @@ public class UserData {
 
             displayName = name;
 
-            sql.doStatement("UPDATE historia SET Username = ('" + displayName + "') WHERE UUID = ('" + uuid + "')");
+            sql.doStatement("UPDATE historia SET Username = '" + displayName + "' WHERE UUID = '" + uuid + "'");
 
         } catch (SQLException e) { e.printStackTrace(); }
 
@@ -90,7 +114,7 @@ public class UserData {
 
             className = name;
 
-            sql.doStatement("UPDATE historia SET Class = ('" + className + "') WHERE UUID = ('" + uuid + "')");
+            sql.doStatement("UPDATE historia SET Class = '" + className + "', Level = 0, Experience = 0 WHERE UUID = '" + uuid + "'");
 
         } catch (SQLException e) { e.printStackTrace(); }
 
@@ -102,7 +126,31 @@ public class UserData {
 
             classLevel = level;
 
-            sql.doStatement("UPDATE historia SET Username = ('" + classLevel + "') WHERE UUID = ('" + uuid + "')");
+            sql.doStatement("UPDATE historia SET Username = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
+
+        } catch (SQLException e) { e.printStackTrace(); }
+
+    }
+
+    public void setLogin(UUID uuid, Long login) {
+
+        try {
+
+            lastLogin = login;
+
+            sql.doStatement("UPDATE historia SET Login = '" + login + "' WHERE UUID = '" + uuid + "'");
+
+        } catch (SQLException e) { e.printStackTrace(); }
+
+    }
+
+    public void setLogout(UUID uuid, Long logout) {
+
+        try {
+
+            lastLogout = logout;
+
+            sql.doStatement("UPDATE historia SET Logout = '" + logout + "' WHERE UUID = '" + uuid + "'");
 
         } catch (SQLException e) { e.printStackTrace(); }
 
@@ -126,4 +174,15 @@ public class UserData {
 
     }
 
+    public Long getLogin() {
+
+        return lastLogin;
+
+    }
+
+    public Long getLogout() {
+
+        return lastLogout;
+
+    }
 }
