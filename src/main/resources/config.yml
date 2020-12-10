@@ -183,7 +183,18 @@ classes:
 weapons:
 
     list: ["Placeholder_Sword"]
+
     Placeholder_Sword:
+        item:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_SWORD
+            amount: 1
+            meta:
+                ==: ItemMeta
+                meta-type: UNSPECIFIC
+                display-name: Placeholder Sword
+                loc-name: Placeholder_Sword
+                lore: [ This is the placeholder sword. ]
         damage: 10.0
 
 armor:
@@ -207,11 +218,47 @@ armor:
             GENERIC_ARMOR: 10
 
         crafting: [ IRON_INGOT, IRON_INGOT, IRON_INGOT, IRON_INGOT, AIR, IRON_INGOT, AIR, AIR, AIR ]
+
     Placeholder_Chestplate: 
+
+        item:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_CHESTPLATE
+            amount: 1
+            meta:
+                ==: ItemMeta
+                meta-type: UNSPECIFIC
+                display-name: Placeholder Chestplate
+                loc-name: Placeholder_Chestplate
+                lore: [ This is the placeholder Chestplate. ]
         armor: 10.0
-    Placeholder_Leggings: 
+
+    Placeholder_Leggings:
+
+        item:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_LEGGINGS
+            amount: 1
+            meta:
+                ==: ItemMeta
+                meta-type: UNSPECIFIC
+                display-name: Placeholder Leggings
+                loc-name: Placeholder_Leggings
+                lore: [ This is the placeholder Leggings. ]
         armor: 10.0
-    Placeholder_Boots: 
+
+    Placeholder_Boots:
+
+        item:
+            ==: org.bukkit.inventory.ItemStack
+            type: IRON_BOOTS
+            amount: 1
+            meta:
+                ==: ItemMeta
+                meta-type: UNSPECIFIC
+                display-name: Placeholder Boots
+                loc-name: Placeholder_Boots
+                lore: [ This is the placeholder Boots. ]
         armor: 10.0
 
 items:
