@@ -199,7 +199,7 @@ public class HistoriaEvents implements Listener {
 
             ItemMeta meta = item.getItemMeta(); 
             
-            AttributeModifier modifier = new AttributeModifier("generic.armor", (double) 10,AttributeModifier.Operation.ADD_NUMBER);
+            AttributeModifier modifier = new AttributeModifier("generic.armor", (double) 10, AttributeModifier.Operation.ADD_NUMBER);
 
             meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
 
@@ -229,6 +229,7 @@ public class HistoriaEvents implements Listener {
         UserData playerData = new UserData(event.getPlayer());
 
         playerData.setLogin(event.getPlayer().getUniqueId(), date.getTime());
+        event.getPlayer().setFoodLevel(1);
 
         System.out.println("Login: " + playerData.getClassName());
         System.out.println("Login: " + playerData.getDisplayName());
