@@ -196,6 +196,8 @@ weapons:
                 loc-name: Placeholder_Sword
                 lore: [ This is the placeholder sword. ]
         damage: 10.0
+        knockback: 2.0
+        sweeping: 3.0
 
 armor:
     
