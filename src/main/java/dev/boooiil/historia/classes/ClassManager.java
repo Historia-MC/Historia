@@ -15,6 +15,7 @@ public class ClassManager {
         player.setWalkSpeed((float) 0.2);
         //player.getScoreboard().registerNewTeam("test").setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
         player.getScoreboard().getTeam("test").addEntry(player.getDisplayName());
+        player.setFoodLevel(3);
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             player.showPlayer(Bukkit.getPluginManager().getPlugin("Historia"), online);
