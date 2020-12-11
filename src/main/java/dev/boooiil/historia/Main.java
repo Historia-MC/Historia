@@ -1,9 +1,6 @@
 package dev.boooiil.historia;
 
 import java.io.File;
-import java.sql.SQLException;
-
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.Ignite;
@@ -90,6 +87,7 @@ public class Main extends JavaPlugin {
             getLogger().info("Loading Config.");
 
             try { this.getConfig().load(configFile); } 
+            
             catch (Exception e) { e.printStackTrace(); }
 
         }
