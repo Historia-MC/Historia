@@ -2,11 +2,16 @@ package dev.boooiil.historia.mysql;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
+
+import dev.boooiil.historia.Config;
 
 public class UserData {
 
@@ -25,10 +30,18 @@ public class UserData {
 
     //Assign accessable variables.
     UUID uuid;
+
     String displayName;
+
     String className;
     Integer classLevel;
     Integer classExperience;
+    Integer classBaseSaturationDrain;
+    Double classHealth;
+    Float classSpeed;
+
+    PlayerInventory userInventory;
+
     Long lastLogin;
     Long lastLogout;
 
@@ -45,8 +58,9 @@ public class UserData {
 
             Date date = new Date();
 
-            //If there is no data stored for that UUID
+            userInventory = player.getInventory();
 
+            //If there is no data stored for that UUID
             if (result.containsKey("UUID")) {
 
                 System.out.println(result.toString());
@@ -151,6 +165,74 @@ public class UserData {
             sql.doStatement("UPDATE historia SET Logout = '" + logout + "' WHERE UUID = '" + uuid + "'");
 
         } catch (SQLException e) { e.printStackTrace(); }
+
+    }
+
+    public Double getArmorValue() {
+
+        ItemStack[] playerArmor = userInventory.getArmorContents();
+
+        ItemStack helmet = playerArmor[0] != null ? playerArmor[0] : new ItemStack(Material.AIR);
+        ItemStack chestplate = playerArmor[1] != null ? playerArmor[1] : new ItemStack(Material.AIR);
+        ItemStack leggings = playerArmor[2] != null ? playerArmor[2] : new ItemStack(Material.AIR);
+        ItemStack boots = playerArmor[3] != null ? playerArmor[3] : new ItemStack(Material.AIR);
+
+        Config cHelmet = new Config(helmet.getItemMeta().getLocalizedName());
+        Config cChestplate = new Config(chestplate.getItemMeta().getLocalizedName());
+        Config cLeggings = new Config(leggings.getItemMeta().getLocalizedName());
+        Config cBoots = new Config(boots.getItemMeta().getLocalizedName());
+
+        return cHelmet.armorValue + cChestplate.armorValue + cLeggings.armorValue + cBoots.armorValue;
+
+    }
+
+    public Map<String, Double> getMainHandWeaponStats() {
+
+        ItemStack mainHand = userInventory.getItemInMainHand();
+
+        Map<String, Double> weapon = new HashMap<>();
+
+        Config cMainHand = new Config(mainHand.getItemMeta().getLocalizedName());
+
+        weapon.put("Damage", cMainHand.weaponDamage);
+        weapon.put("Knockback", cMainHand.weaponKnockback);
+        weapon.put("SweepingEdge", cMainHand.weaponSweeping);
+
+        return weapon;
+
+    }
+
+    public Map<String, Double> getOffHandWeaponStats() {
+
+        ItemStack offHand = userInventory.getItemInOffHand() != null ? userInventory.getItemInOffHand() : new ItemStack(Material.AIR);
+
+        Map<String, Double> weapon = new HashMap<>();
+
+        Config cOffHand = new Config(offHand.getItemMeta().getLocalizedName());
+
+        weapon.put("Damage", cOffHand.weaponDamage);
+        weapon.put("Knockback", cOffHand.weaponKnockback);
+        weapon.put("SweepingEdge", cOffHand.weaponSweeping);
+
+        return weapon;
+
+    }
+
+    public Double getHealth() {
+
+        return classHealth;
+
+    }
+
+    public Float getSpeed() {
+
+        return classSpeed;
+
+    }
+
+    public Integer getSaturationDrain() {
+
+        return classBaseSaturationDrain;
 
     }
 
