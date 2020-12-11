@@ -3,6 +3,7 @@ package dev.boooiil.historia;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,13 +24,15 @@ public class Config {
     public Integer speed;
 
     // Weapon / Armor information
-    public ItemStack armorItem;
-    public ItemStack weaponItem;
-    
+    public ItemStack armorItem = new ItemStack(Material.AIR);
+    public ItemStack weaponItem = new ItemStack(Material.AIR);
+
     public String weaponName;
     public String armorName;
-    public Double weaponDamage;
-    public Double armorValue;
+    public Double weaponDamage = 0.0;
+    public Double armorValue = 0.0;
+    public Double weaponKnockback = 0.0;
+    public Double weaponSweeping = 0.0;
 
     public String database;
     public String username;
