@@ -10,7 +10,6 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownBlock;
-import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -60,16 +59,12 @@ public class UserData {
             //Issue a statement that will return all values related to this user's uuid.
             result = sql.getStatement("SELECT * FROM historia WHERE UUID = '" + player.getUniqueId() + "'");
 
-            System.out.println(result.toString());
-
             Date date = new Date();
 
             userInventory = player.getInventory();
 
             //If there is no data stored for that UUID
             if (result.containsKey("UUID")) {
-
-                System.out.println(result.toString());
 
                 uuid = UUID.fromString(result.get("UUID"));
                 displayName = result.get("Username");
@@ -91,6 +86,8 @@ public class UserData {
 
         } catch (SQLException e) { e.printStackTrace(); }
 
+        /* DEBUGGING
+
         System.out.println("UUID: " + uuid);
         System.out.println("Player Name: " + displayName);
         System.out.println("Class Name: " + className);
@@ -98,6 +95,8 @@ public class UserData {
         System.out.println("Class Experience: " + classExperience);
         System.out.println("Player Login: " + lastLogin);
         System.out.println("Player Logout: " + lastLogout);
+
+        */
 
     }
 
@@ -210,7 +209,7 @@ public class UserData {
 
     public Map<String, Double> getOffHandWeaponStats() {
 
-        ItemStack offHand = userInventory.getItemInOffHand() != null ? userInventory.getItemInOffHand() : new ItemStack(Material.AIR);
+        ItemStack offHand = userInventory.getItemInOffHand();
 
         Map<String, Double> weapon = new HashMap<>();
 
@@ -245,6 +244,12 @@ public class UserData {
     public Integer getLevel() {
 
         return classLevel;
+
+    }
+
+    public Integer getExperience() {
+
+        return classExperience;
 
     }
 
