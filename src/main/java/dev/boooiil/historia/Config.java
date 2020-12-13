@@ -1,11 +1,16 @@
 package dev.boooiil.historia;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Config {
 
@@ -48,6 +53,9 @@ public class Config {
 
     public ItemStack blockItem;
 
+    public int expiryDate;
+    public Map<String, PotionEffect> effects = new HashMap<>();
+
     // Known Lists
     public List<String> classes = cfg.getStringList("classes.list");
     public List<String> armor = cfg.getStringList("armor.list");
@@ -57,13 +65,10 @@ public class Config {
 
     // Unknown Lists
     private List<?> skills;
-    private List<?> foods;
-    private List<?> effects;
+    private List<String> foods = cfg.getStringList("foods.list");
 
     // Class constructor
     public Config(String query) {
-
-        System.out.println("Armor Root List:" + cfg.getStringList("armor"));
 
         // If a class name was provided.
         if (classes.contains(query)) {
@@ -87,11 +92,12 @@ public class Config {
             port = cfg.getInt("MySQL.port");
         }
 
-        else if (query.equals("foods")) {
+        else if (foods.contains(query)) {
 
-            foods = cfg.getList("foods.list");
+            expiryDate = cfg.getInt("foods." + query);
 
-            effects = cfg.getList("foods.effects");
+            effects.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
+            effects.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
 
         }
 
@@ -138,7 +144,6 @@ public class Config {
 
         else empty = true;
 
-        
         /* CONFIG DEBUGGING
 
         System.out.println("Query: " + query);
@@ -171,5 +176,4 @@ public class Config {
         */
 
     }
-
 }
