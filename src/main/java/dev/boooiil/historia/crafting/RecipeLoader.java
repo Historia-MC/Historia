@@ -1,98 +1,192 @@
 package dev.boooiil.historia.crafting;
 
+// import java.security.KeyStore.Entry.Attribute;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 //import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlot;
+//import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import dev.boooiil.historia.Config;
+//import net.java.truecommons.key.macosx.keychain.Keychain.AttributeClass;
+
 public class RecipeLoader {
 
     public static void load(Plugin plugin) {
 
-        // NamespacedKey craftingKey = new NamespacedKey(plugin, "test_item");
+        // ~~~ Iterate through weapon.List and armor.List in config ~~~
 
-        // ItemStack item = new ItemStack(Material.IRON_SWORD);
+        Config weaponConfig = new Config("");
+        Config armorConfig = new Config("");
+        Map<String, ItemStack> items = new HashMap<>();
+        
+        Bukkit.getLogger().info("~~~ Weapons ~~~");
 
-        // TEST ITEM
-        /*
-        // item.getItemMeta().setDisplayName("Test Iron Sword");
-        // item.getItemMeta().setLore(Arrays.asList("This was something", "This was also
-        // something"));
+        int i = 0;
 
-        ShapedRecipe testRecipe = new ShapedRecipe(craftingKey, item);
+        for (String weapon : weaponConfig.weapons) {
+            Config found = new Config(weapon);
+            items.put(weapon, found.weaponItem);
 
-        testRecipe.shape(" E ", " E ", " S ");
+            // Bukkit.getLogger().info("~Armor Name: " + armor);
 
-        // Set what the letters represent.
-        // E = Emerald, S = Stick
-        testRecipe.setIngredient('E', Material.EMERALD);
-        testRecipe.setIngredient('S', Material.STICK);
+            ItemStack item = new ItemStack(found.weaponItem);
 
-        Bukkit.addRecipe(testRecipe);
-        */
+            ItemMeta meta = item.getItemMeta();
 
-        // ~~~ Nerfed Axe ~~~
+            // We will initialise the next variable after changing the properties of the sword
+            // This sets the name of the item.
+            // Instead of the § symbol, you can use ChatColor.<color>
+            meta.setDisplayName("§a" + meta.getDisplayName());
+            meta.setLocalizedName(meta.getLocalizedName());
 
-        // Our custom variable which we will be changing around.
-        ItemStack item = new ItemStack(Material.IRON_AXE);
+            // Set item damage
+            AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", 100, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
+            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
 
-        // The meta of the diamond sword where we can change the name, and properties of the item.
-        ItemMeta meta = item.getItemMeta();
+             // Set the meta of the sword to the edited meta.
+            item.setItemMeta(meta);
 
-        // We will initialise the next variable after changing the properties of the sword
-        // This sets the name of the item.
-        // Instead of the § symbol, you can use ChatColor.<color>
-        meta.setDisplayName("§aNerfed Axe");
-        meta.setLocalizedName("Nerfed_Axe");
+            // create a NamespacedKey for your recipe
+            NamespacedKey craftingKey = new NamespacedKey(plugin, meta.getLocalizedName().toLowerCase());
 
-        // Set the meta of the sword to the edited meta.
-        item.setItemMeta(meta);
+            // Create our custom recipe variable
+            ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
 
-        // create a NamespacedKey for your recipe
-        NamespacedKey craftingKey = new NamespacedKey(plugin, "nerfed_axe");
+            // RECIPES: 
+            // How they work:
+            // recipe.shape("XXX", "XXX", "XXX");
+            // Where Each "X" is a space on the crafting bench
 
-        // Create our custom recipe variable
-        ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
+            // IMPORTNAT!
+            // Weapon values by ID:
+            // 0 = placeholder sword
+            if (i == 0)
+            {
+                recipe.shape(" I ", " I ", " S ");
+            }
+            if (i == 1)
+            {
 
-        // Debug
-        /*
-        String shape = recipe.getShape().toString();
-        Bukkit.getLogger().info(shape);
-        */
+            }
+            if (i == 2)
+            {
 
-        // RECIPES: 
-        // How they work:
-        // recipe.shape("XXX", "XXX", "XXX");
-        // Where Each "X" is a space on the crafting bench
+            }
+            if (i == 3)
+            {
 
-        // Here we will set the places. E and S can represent anything, and the letters can be anything. Beware; this is case sensitive.
-        recipe.shape("II ", "IS ", " S ");
+            }
 
-        // Debug
-        /*
-        shape = recipe.getShape().toString();
-        Bukkit.getLogger().info(shape);
-        */
+            
 
-        // Set what the letters represent.
-        // I = Iron Ingot, S = Stick
-        recipe.setIngredient('I', Material.IRON_INGOT);
-        recipe.setIngredient('S', Material.STICK);
+            // Set what the letters represent.
+            // I = Iron Ingot, S = Stick
+            recipe.setIngredient('I', Material.IRON_INGOT);
+            recipe.setIngredient('S', Material.STICK);
+            // recipe.setIngredient('S', Material.STICK);
 
-        // Finally, add the recipe to the bukkit recipes
-        Bukkit.addRecipe(recipe);
+            // Finally, add the recipe to the bukkit recipes
+            Bukkit.addRecipe(recipe);
 
-        // DEBUG
-        String fullName = "Display Name: " + meta.getDisplayName() + "\n Localized Name " + meta.getLocalizedName();
+            //Bukkit.getLogger().info("~~~WE DID IT!~~~");
 
-        Bukkit.getLogger().info(fullName);
+
+            i++;
+        }
+
+        // ~~~ ARMOR ~~~
+        Bukkit.getLogger().info("~~~ Armor ~~~");
+
+        // For testing purposes only
+        i = 0;
+
+        for (String armor : armorConfig.armor) {
+
+            Config found = new Config(armor);
+            items.put(armor, found.weaponItem);
+
+            // Bukkit.getLogger().info("~Armor Name: " + armor);
+
+            ItemStack item = new ItemStack(found.armorItem);
+
+            ItemMeta meta = item.getItemMeta();
+
+            // We will initialise the next variable after changing the properties of the sword
+            // This sets the name of the item.
+            // Instead of the § symbol, you can use ChatColor.<color>
+            meta.setDisplayName("§a" + meta.getDisplayName());
+            meta.setLocalizedName(meta.getLocalizedName());
+
+             // Set the meta of the sword to the edited meta.
+            item.setItemMeta(meta);
+
+            // create a NamespacedKey for your recipe
+            NamespacedKey craftingKey = new NamespacedKey(plugin, meta.getLocalizedName().toLowerCase());
+
+            // Create our custom recipe variable
+            ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
+
+            // RECIPES: 
+            // How they work:
+            // recipe.shape("XXX", "XXX", "XXX");
+            // Where Each "X" is a space on the crafting bench
+
+            // IMPORTNAT!
+            // Armor values by ID:
+            // 0 = placeholder helmet
+            // 1 = placeholder chest
+            // 2 = placeholder leggings
+            // 3 = placeholder boots
+            if (i == 0)
+            {
+                recipe.shape("III", "I I", "   ");
+            }
+            if (i == 1)
+            {
+                recipe.shape("I I", "III", "III");
+            }
+            if (i == 2)
+            {
+                recipe.shape("III", "I I", "I I");
+            }
+            if (i == 3)
+            {
+                recipe.shape("   ", "I I", "I I");
+            }
+
+            // Here we will set the places. E and S can represent anything, and the letters can be anything. Beware; this is case sensitive.
+            // recipe.shape("III", "I I", "   ");
+
+            // Set what the letters represent.
+            // I = Iron Ingot, S = Stick
+            recipe.setIngredient('I', Material.IRON_INGOT);
+            // recipe.setIngredient('S', Material.STICK);
+
+            // Finally, add the recipe to the bukkit recipes
+            Bukkit.addRecipe(recipe);
+
+            //Bukkit.getLogger().info("~~~WE DID IT!~~~");
+
+
+            i++;
+        }
+
+        Bukkit.getLogger().info("~~~");
+
 
     }
 
