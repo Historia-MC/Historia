@@ -6,6 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownBlock;
+import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
+
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -263,6 +269,60 @@ public class UserData {
     public Long getLogout() {
 
         return lastLogout;
+
+    }
+
+    public String getTown() {
+
+        try {
+
+            Resident resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+
+            if (resident.hasTown()) return resident.getTown().getName();
+            else return "None";
+
+        } catch (Exception e) { return "None"; }
+
+    }
+
+    public Map<String, Integer> getTownLocation() {
+
+        Map<String, Integer> map = new HashMap<>();
+
+        try {
+
+            Resident resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+            
+
+            if (resident.hasTown()) {
+
+                Town town = resident.getTown();
+                TownBlock townBlock = town.getHomeBlock();
+
+                map.put("X", townBlock.getX());
+                map.put("Z", townBlock.getZ());
+
+                return map;
+
+            }
+            else {
+
+                map.put("X", 0);
+                map.put("Z", 0);
+
+                return map;
+                
+            }
+
+
+        } catch (Exception e) {
+
+            map.put("X", 0);
+            map.put("Z", 0);
+
+            return map;
+
+        }
 
     }
 }
