@@ -36,11 +36,18 @@ MySQL:
     user: User
     password: Titaniumsilky26
     database: world
-    ip: "192.168.0.12"
+    ip: boooiil.sytes.net
     port: 3306
 
 classes:
-    list: ["Warrior", "Archer", "Fisherman", "Miner", "Blacksmith", "Hunter", "Apothecary", "Architect", "Lumberjack", "Farmer"]
+    list: [None, Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer]
+    None:
+        stats:
+            health: 14
+            baseFood: 10
+            exhaustion: 0
+            saturation: 0
+            speed: 0.08
     Warrior:
         stats:
             health: 26

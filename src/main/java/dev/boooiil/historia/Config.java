@@ -17,11 +17,11 @@ public class Config {
 
     // Class information
     public String className;
-    public Integer health;
-    public Integer baseFood;
-    public Integer exhaustion;
-    public Integer saturation;
-    public Integer speed;
+    public double health;
+    public int baseFood;
+    public int exhaustion;
+    public int saturation;
+    public double speed;
 
     // Weapon / Armor information
     public ItemStack armorItem = new ItemStack(Material.AIR);
@@ -29,27 +29,27 @@ public class Config {
 
     public String weaponName;
     public String armorName;
-    public Double weaponDamage = 0.0;
-    public Double armorValue = 0.0;
-    public Double weaponKnockback = 0.0;
-    public Double weaponSweeping = 0.0;
+    public double weaponDamage = 0.0;
+    public double armorValue = 0.0;
+    public double weaponKnockback = 0.0;
+    public double weaponSweeping = 0.0;
 
     public String database;
     public String username;
     public String password;
     public String ip;
-    public Integer port;
+    public int port;
 
     public ItemStack oreItem;
     public String smeltInto;
-    public Integer oreTime;
-    public Integer oreLoss;
-    public Integer smeltTimes;
+    public int oreTime;
+    public int oreLoss;
+    public int smeltTimes;
 
     public ItemStack blockItem;
 
     // Known Lists
-    private List<String> classes = cfg.getStringList("classes.list");
+    public List<String> classes = cfg.getStringList("classes.list");
     public List<String> armor = cfg.getStringList("armor.list");
     public List<String> weapons = cfg.getStringList("weapons.list");
     private List<String> ores = cfg.getStringList("items.ores.list");
@@ -63,6 +63,8 @@ public class Config {
     // Class constructor
     public Config(String query) {
 
+        System.out.println("Armor Root List:" + cfg.getStringList("armor"));
+
         // If a class name was provided.
         if (classes.contains(query)) {
 
@@ -70,11 +72,11 @@ public class Config {
 
             // Assign variables based on that class name.
             className = query;
-            health = cfg.getInt(root + className + ".stats.health");
+            health = cfg.getDouble(root + className + ".stats.health");
             baseFood = cfg.getInt(root + className + ".stats.baseFood");
             exhaustion = cfg.getInt(root + className + ".stats.exhaustion");
             saturation = cfg.getInt(root + className + ".stats.saturation");
-            speed = cfg.getInt(root + className + ".stats.speed");
+            speed = cfg.getDouble(root + className + ".stats.speed");
         }
 
         else if (query.equals("MySQL")) {
@@ -135,8 +137,9 @@ public class Config {
         }
 
         else empty = true;
+
         
-        //CONFIG DEBUGGING
+        /* CONFIG DEBUGGING
 
         System.out.println("Query: " + query);
 
@@ -164,6 +167,8 @@ public class Config {
 
         System.out.println("Blocks List: " + blocks);
         System.out.println("Ores List: " + ores);
+
+        */
 
     }
 

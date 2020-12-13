@@ -228,6 +228,10 @@ public class HistoriaEvents implements Listener {
 
         UserData playerData = new UserData(event.getPlayer());
 
+        ClassManager manager = new ClassManager();
+
+        manager.initiate(event.getPlayer());
+
         playerData.setLogin(event.getPlayer().getUniqueId(), date.getTime());
         event.getPlayer().setFoodLevel(1);
 

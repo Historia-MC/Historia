@@ -1,17 +1,12 @@
 package dev.boooiil.historia.commands;
 
-import com.sk89q.worldedit.event.platform.PlayerInputEvent;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.Config;
 import dev.boooiil.historia.mysql.UserData;
@@ -101,6 +96,37 @@ public class DebugItems implements CommandExecutor {
                         UserData data = new UserData((Player) sender);
 
                         sender.sendMessage(data.getClassName());
+                    }
+                    if (args[0].equalsIgnoreCase("class")) {
+
+                        Player player = (Player) sender;
+                        Config config = new Config("");
+                        UserData user = new UserData(player);
+
+                        if (args[1].equalsIgnoreCase("add")) {
+
+                            if (config.classes.contains(args[2])) {
+                                
+                                user.setClass(player.getUniqueId(), args[2]);
+
+                            } else sender.sendMessage("That class was not in the list of classes.");
+
+                        }
+                        else if (args[1].equalsIgnoreCase("remove")) {
+
+                            user.setClass(player.getUniqueId(), "None");
+
+                        }
+                        else if (args[1].equalsIgnoreCase("stats")) {
+
+                            sender.sendMessage("Name:" + user.getClassName());
+                            sender.sendMessage("Armor:" + user.getArmorValue());
+                            sender.sendMessage("Experience:" + user.getExperience());
+                            sender.sendMessage("Level:" + user.getLevel());
+                            sender.sendMessage("Health:" + user.getHealth());
+
+                        } else sender.sendMessage("Must be format /debugitems class add <class>, /debugitems class remove <class>, /debugitems class stats");
+
                     }
                 }
 
