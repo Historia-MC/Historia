@@ -7,10 +7,13 @@ import java.util.Map;
 import java.util.UUID;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownBlock;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -45,14 +48,21 @@ public class UserData {
     double classHealth;
     float classSpeed;
 
-    PlayerInventory userInventory;
-
     long lastLogin;
     long lastLogout;
+
+    Resident resident;
+    Town town;
+
+    PlayerInventory userInventory;
 
     public UserData(Player player) {
 
         try {
+
+            resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+            if (resident.hasTown()) town = resident.getTown();
+
 
             Map<String, String> result;
 
@@ -84,7 +94,9 @@ public class UserData {
 
             }
 
-        } catch (SQLException e) { e.printStackTrace(); }
+        } 
+        catch (SQLException e) { e.printStackTrace(); }
+        catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
 
         /* DEBUGGING
 
@@ -281,57 +293,62 @@ public class UserData {
 
     }
 
-    public String getTown() {
+    public boolean hasTown() {
 
-        try {
+        return resident.hasTown();
 
-            Resident resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+    }
 
-            if (resident.hasTown()) return resident.getTown().getName();
-            else return "None";
+    public String getTownName() {
 
-        } catch (Exception e) { return "None"; }
+        if (hasTown()) {
+
+            return town.getName();
+
+        } else return "None";
+
+    }
+
+    public Town getTown() {
+
+        if (hasTown()) return town;
+        else return null;
 
     }
 
     public Map<String, Integer> getTownLocation() {
 
         Map<String, Integer> map = new HashMap<>();
-
-        try {
-
-            Resident resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
             
+        if (hasTown()) {
 
-            if (resident.hasTown()) {
+            try {
 
-                Town town = resident.getTown();
                 TownBlock townBlock = town.getHomeBlock();
 
                 map.put("X", townBlock.getX());
                 map.put("Z", townBlock.getZ());
 
-                return map;
+            } 
+            catch (TownyException e) { 
 
+                e.printStackTrace(); 
+
+                map.put("X", 0); 
+                map.put("Y", 0); 
+            
             }
-            else {
+        }
 
-                map.put("X", 0);
-                map.put("Z", 0);
-
-                return map;
-                
-            }
-
-
-        } catch (Exception e) {
+        else {
 
             map.put("X", 0);
             map.put("Z", 0);
-
-            return map;
-
+                
         }
+
+        return map;
+
 
     }
 }
