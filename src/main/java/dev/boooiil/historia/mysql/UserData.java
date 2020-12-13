@@ -39,16 +39,16 @@ public class UserData {
     String displayName;
 
     String className;
-    Integer classLevel;
-    Integer classExperience;
-    Integer classBaseSaturationDrain;
-    Double classHealth;
-    Float classSpeed;
+    int classLevel;
+    int classExperience;
+    int classBaseSaturationDrain;
+    double classHealth;
+    float classSpeed;
 
     PlayerInventory userInventory;
 
-    Long lastLogin;
-    Long lastLogout;
+    long lastLogin;
+    long lastLogout;
 
     public UserData(Player player) {
 
@@ -137,7 +137,7 @@ public class UserData {
 
     }
 
-    public void setLevel(UUID uuid, Integer level) {
+    public void setLevel(UUID uuid, int level) {
 
         try {
 
@@ -223,31 +223,35 @@ public class UserData {
 
     }
 
-    public Double getHealth() {
+    public double getHealth() {
 
-        return classHealth;
+        Config config = new Config(className);
 
-    }
-
-    public Float getSpeed() {
-
-        return classSpeed;
+        return config.health;
 
     }
 
-    public Integer getSaturationDrain() {
+    public float getSpeed() {
+
+        Config config = new Config(className);
+
+        return (float) config.speed;
+
+    }
+
+    public int getSaturationDrain() {
 
         return classBaseSaturationDrain;
 
     }
 
-    public Integer getLevel() {
+    public int getLevel() {
 
         return classLevel;
 
     }
 
-    public Integer getExperience() {
+    public int getExperience() {
 
         return classExperience;
 
@@ -265,13 +269,13 @@ public class UserData {
 
     }
 
-    public Long getLogin() {
+    public long getLogin() {
 
         return lastLogin;
 
     }
 
-    public Long getLogout() {
+    public long getLogout() {
 
         return lastLogout;
 
