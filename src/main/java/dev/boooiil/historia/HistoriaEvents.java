@@ -168,8 +168,8 @@ public class HistoriaEvents implements Listener {
 
     @EventHandler
     public void onPlayerHit(EntityDamageEvent event) {
-        DamageManager manager = new DamageManager();
-        manager.initiate(event);
+        //DamageManager manager = new DamageManager();
+        //manager.initiate(event);
 
     }
     
