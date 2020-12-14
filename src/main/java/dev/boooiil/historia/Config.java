@@ -1,5 +1,6 @@
 package dev.boooiil.historia;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,172 +9,247 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Config {
 
-    // Gets the plugins config file.
-    private FileConfiguration cfg = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
-    private String root;
+    //Get the current configuration file for the plugin.
+    private FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
 
-    public boolean empty = false;
+    //Load lists.
+    final List<String> armorList = configuration.getStringList("armors.list");
+    final List<String> blockList = configuration.getStringList("blocks.list");
+    final List<String> classList = configuration.getStringList("classes.list");
+    final List<String> foodList = configuration.getStringList("foods.list");
+    final List<String> oreList = configuration.getStringList("ores.list");
+    final List<String> weaponList = configuration.getStringList("weapons.list");
 
-    // Class information
-    public String className;
-    public double health;
-    public int baseFood;
-    public int exhaustion;
-    public int saturation;
-    public double speed;
+    private Map<String, Object> armorMap = new HashMap<>();
+    private Map<String, Double> classMap = new HashMap<>();
+    private Map<String, Object> foodMap = new HashMap<>();
+    private Map<String, String> mySQLMap = new HashMap<>();
+    private Map<String, Object> oreMap = new HashMap<>();
+    private Map<String, Object> weaponMap = new HashMap<>();
 
-    // Weapon / Armor information
-    public ItemStack armorItem = new ItemStack(Material.AIR);
-    public ItemStack weaponItem = new ItemStack(Material.AIR);
+    public List<String> getArmorList() {
 
-    public String weaponName;
-    public String armorName;
-    public double weaponDamage = 0.0;
-    public double armorValue = 0.0;
-    public double weaponKnockback = 0.0;
-    public double weaponSweeping = 0.0;
+        return armorList;
 
-    public String database;
-    public String username;
-    public String password;
-    public String ip;
-    public int port;
+    }
 
-    public ItemStack oreItem;
-    public String smeltInto;
-    public int oreTime;
-    public int oreLoss;
-    public int smeltTimes;
+    public List<String> getBlockList() {
 
-    public ItemStack blockItem;
+        return blockList;
+        
+    }
 
-    public int expiryDate;
-    public Map<String, PotionEffect> effects = new HashMap<>();
+    public List<String> getClassList() {
 
-    // Known Lists
-    public List<String> classes = cfg.getStringList("classes.list");
-    public List<String> armor = cfg.getStringList("armor.list");
-    public List<String> weapons = cfg.getStringList("weapons.list");
-    private List<String> ores = cfg.getStringList("items.ores.list");
-    private List<String> blocks = cfg.getStringList("items.blocks.list");
+        return classList;
+        
+    }
 
-    // Unknown Lists
-    private List<?> skills;
-    private List<String> foods = cfg.getStringList("foods.list");
+    public List<String> getFoodList() {
 
-    // Class constructor
-    public Config(String query) {
+        return foodList;
+        
+    }
 
-        // If a class name was provided.
-        if (classes.contains(query)) {
+    public List<String> getOreList() {
 
-            root = "classes.";
+        return oreList;
+        
+    }
 
-            // Assign variables based on that class name.
-            className = query;
-            health = cfg.getDouble(root + className + ".stats.health");
-            baseFood = cfg.getInt(root + className + ".stats.baseFood");
-            exhaustion = cfg.getInt(root + className + ".stats.exhaustion");
-            saturation = cfg.getInt(root + className + ".stats.saturation");
-            speed = cfg.getDouble(root + className + ".stats.speed");
+    public List<String> getWeaponList() {
+
+        return weaponList;
+        
+    }
+
+    public boolean validClass(String className) {
+
+        return classList.contains(className);
+
+    }
+
+    public boolean validFood(String foodName) {
+
+        return foodList.contains(foodName);
+
+    }
+
+    public boolean validWeapon(String weaponName) {
+
+        return weaponList.contains(weaponName);
+
+    }
+
+    public boolean validArmor(String armorName) {
+
+        return armorList.contains(armorName);
+
+    }
+
+    public boolean validOre(String oreName) {
+
+        return oreList.contains(oreName);
+
+    }
+
+    public boolean validBlock(String blockName) {
+
+        return blockList.contains(blockName);
+
+    }
+
+    public Map<String, Double> getClassInfo(String className) {
+
+        if (validClass(className)) {
+
+            String root = "classes." + className + ".stats";
+
+            classMap.put("HEALTH", configuration.getDouble(root + ".health"));
+            classMap.put("SPEED", configuration.getDouble(root + ".speed"));
+
+        } else {
+
+            classMap.put("HEALTH", configuration.getDouble("classes.None.stats.health"));
+            classMap.put("SPEED", configuration.getDouble("classes.None.stats.speed"));
+
         }
 
-        else if (query.equals("MySQL")) {
-            database = cfg.getString("MySQL.database");
-            username = cfg.getString("MySQL.user");
-            password = cfg.getString("MySQL.password");
-            ip = cfg.getString("MySQL.ip");
-            port = cfg.getInt("MySQL.port");
-        }
+        return classMap;
 
-        else if (foods.contains(query)) {
+    }
 
-            expiryDate = cfg.getInt("foods." + query);
+    public Map<String, Object> getFoodInfo(String foodName) {
 
-            effects.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
-            effects.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
+        if (validFood(foodName)) {
 
-        }
+            String root = "foods." + foodName;
 
-        else if (weapons.contains(query)) {
+            foodMap.put("EXPIRY", configuration.getInt(root));
+            foodMap.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
+            foodMap.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
 
-            root = "weapons.";
+        } else {
 
-            weaponName = query;
-            weaponDamage = cfg.getDouble(root + query + ".damage");
-            weaponItem = cfg.getItemStack(root + query + ".item");
+            foodMap.put("EXPIRY", configuration.getInt("foods.not-listed"));
+            foodMap.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
+            foodMap.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
 
         }
 
-        else if (armor.contains(query)) {
+        return foodMap;
 
-            root = "armor.";
+    }
 
-            armorName = query;
-            armorValue = cfg.getDouble(root + query + ".armor");
-            armorItem = cfg.getItemStack(root + query + ".item");
+    public Map<String, Object> getWeaponInfo(String weaponName) {
 
-        } 
+        if (validWeapon(weaponName)) {
 
-        else if (ores.contains(query)) {
+            String root = "weapons." + weaponName;
 
-            root = "items.ores";
+            weaponMap.put("DAMAGE", configuration.getDouble(root + ".damage"));
+            weaponMap.put("KNOCKBACK", configuration.getDouble(root + ".knockback"));
+            weaponMap.put("SWEEPING", configuration.getDouble(root + ".sweeping"));
+            weaponMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            weaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
+            weaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
 
-            oreItem = cfg.getItemStack(root + query + ".item");
+        } else {
 
-            smeltInto = cfg.getString(root + query + ".smelt_into");
-            oreTime = cfg.getInt(root + query + ".time");
-            oreLoss = cfg.getInt(root + query + ".loss");
-            smeltTimes = cfg.getInt(root + query + ".smelt_times");
+            weaponMap.put("DAMAGE", 1);
+            weaponMap.put("KNOCKBACK", 0);
+            weaponMap.put("SWEEPING", 0);
+            weaponMap.put("ITEM", new ItemStack(Material.AIR));
+            weaponMap.put("SHAPE", Arrays.asList(""));
+            weaponMap.put("RECIPE", Arrays.asList(""));
 
         }
         
-        else if (blocks.contains(query)) {
+        return weaponMap;
 
-            root = "items.blocks";
+    }
 
-            blockItem = cfg.getItemStack(root + query + ".item");
+    public Map<String, Object> getArmorInfo(String armorName) {
+
+        if (validArmor(armorName)) {
+
+            String root = "armor." + armorName;
+
+            armorMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
+            armorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
+            armorMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+
+        } else {
+
+            armorMap.put("ITEM", new ItemStack(Material.AIR));
+            armorMap.put("ARMOR", 0);
+            armorMap.put("SHAPE", Arrays.asList(""));
+            armorMap.put("RECIPE", Arrays.asList(""));
 
         }
 
-        else empty = true;
+        return armorMap;
 
-        /* CONFIG DEBUGGING
+    }
 
-        System.out.println("Query: " + query);
+    public Map<String, Object> getOreInfo(String oreName) {
 
-        System.out.println("Class Name: " + className);
-        System.out.println("Class Health: " + health);
-        System.out.println("Class Base Food: " + baseFood);
-        System.out.println("Class Exhaustion: " + exhaustion);
-        System.out.println("Class Saturation: " + saturation);
-        System.out.println("Class Speed: " + speed);
-        
-        System.out.println("Weapon Name: " + weaponName);
-        System.out.println("Weapon Damage: " + weaponDamage);
-        
-        System.out.println("Armor Name: " + armorName);
-        System.out.println("Armor Value: " + armorValue);
+        if (validOre(oreName)) {
 
-        System.out.println("SQL Username: " + username);
-        System.out.println("SQL Database: " + database);
-        System.out.println("SQL IP: " + ip);
-        System.out.println("SQL Port: " + port);
+            String root = "items.ores." + oreName;
 
-        System.out.println("Classes List: " + classes);
-        System.out.println("Weapons List: " + weapons);
-        System.out.println("Armors List: " + armor);
+            oreMap.put("PROGRESSION", configuration.getString(root + ".smelt_into"));
+            oreMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            oreMap.put("SMELT_TIME", configuration.getInt(root + ".time"));
+            oreMap.put("SMELT_AMOUNT", configuration.getInt(root + ".smelt_times"));
+            oreMap.put("LOSS", configuration.getInt(root + ".loss"));
 
-        System.out.println("Blocks List: " + blocks);
-        System.out.println("Ores List: " + ores);
+        } else {
 
-        */
+            oreMap.put("PROGRESSION", null);
+            oreMap.put("ITEM", new ItemStack(Material.AIR));
+            oreMap.put("SMELT_TIME", 0);
+            oreMap.put("SMELT_AMOUNT", 0);
+            oreMap.put("LOSS", 1);
 
+        }
+
+        return oreMap;
+
+    }
+
+    public Map<String, String> getMySQLInfo() {
+
+        String root = "MySQL";
+
+        mySQLMap.put("USER", configuration.getString(root + ".user"));
+        mySQLMap.put("PASSWORD", configuration.getString(root + ".password"));
+        mySQLMap.put("DATABASE", configuration.getString(root + ".database"));
+        mySQLMap.put("IP", configuration.getString(root + ".ip"));
+        mySQLMap.put("PORT", configuration.getString(root + ".port"));
+
+        return mySQLMap;
+
+    }
+
+    public ItemStack getBlockInfo(String blockName) {
+
+        if (validBlock(blockName)) {
+
+            String root = "items.blocks." + blockName;
+
+            return configuration.getItemStack(root + ".item");
+
+        } else {
+
+            return new ItemStack(Material.AIR);
+
+        }
     }
 }

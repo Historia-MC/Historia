@@ -123,8 +123,10 @@ public class HistoriaEvents implements Listener {
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
+
         ClassManager manager = new ClassManager();
         manager.initiate(event.getPlayer());
+
     }
 
     @EventHandler
@@ -233,7 +235,6 @@ public class HistoriaEvents implements Listener {
         manager.initiate(event.getPlayer());
 
         playerData.setLogin(event.getPlayer().getUniqueId(), date.getTime());
-        event.getPlayer().setFoodLevel(1);
 
         System.out.println("Login: " + playerData.getClassName());
         System.out.println("Login: " + playerData.getDisplayName());

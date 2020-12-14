@@ -1,5 +1,7 @@
 package dev.boooiil.historia.commands;
 
+import java.util.Map;
+
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -77,11 +79,14 @@ public class DebugItems implements CommandExecutor {
                         // etc
                     }
                     if (args[0].equalsIgnoreCase("config")) {
-                        Config weapon = new Config("Placeholder_Sword"); 
-                        Config helmet = new Config("Placeholder_Helmet");
-                        Config chestplate = new Config("Placeholder_Chestplate");
-                        Config leggings = new Config("Placeholder_Leggings");
-                        Config boots = new Config("Placeholder_Boots");
+
+                        Config config = new Config();
+
+                        Map<String, Object> weapon = config.getWeaponInfo("Placeholder_Sword"); 
+                        Map<String, Object> helmet = config.getArmorInfo("Placeholder_Helmet");
+                        Map<String, Object> chestplate = config.getArmorInfo("Placeholder_Chestplate");
+                        Map<String, Object> leggings = config.getArmorInfo("Placeholder_Leggings");
+                        Map<String, Object> boots = config.getArmorInfo("Placeholder_Boots");
 
 
                         sender.sendMessage("Weapon: " + weapon.toString());
@@ -91,6 +96,7 @@ public class DebugItems implements CommandExecutor {
                         sender.sendMessage("Boots: " + boots.toString());
                     
                     }
+
                     if (args[0].equalsIgnoreCase("player")) {
 
                         UserData data = new UserData((Player) sender);
@@ -100,12 +106,12 @@ public class DebugItems implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("class")) {
 
                         Player player = (Player) sender;
-                        Config config = new Config("");
+                        Config config = new Config();
                         UserData user = new UserData(player);
 
                         if (args[1].equalsIgnoreCase("add")) {
 
-                            if (config.classes.contains(args[2])) {
+                            if (config.validClass(args[2])) {
                                 
                                 user.setClass(player.getUniqueId(), args[2]);
 

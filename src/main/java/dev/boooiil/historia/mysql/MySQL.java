@@ -14,14 +14,16 @@ public class MySQL {
 
     // private Connection connection;
 
-    private static Config sql = new Config("MySQL");
+    private static Config config = new Config();
+
+    private static Map<String, String> sql = config.getMySQLInfo();
 
     // Assign variables that we will use to connect to the database.
-    static final String DATABASE = sql.database;
-    static final String USERNAME = sql.username;
-    static final String PASSWORD = sql.password;
-    static final String IP = sql.ip;
-    static final Integer PORT = sql.port;
+    private static final String DATABASE = sql.get("DATABASE");
+    private static final String USERNAME = sql.get("USER");
+    private static final String PASSWORD = sql.get("PASSWORD");
+    private static final String IP = sql.get("IP");
+    private static final String PORT = sql.get("PORT");
 
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE

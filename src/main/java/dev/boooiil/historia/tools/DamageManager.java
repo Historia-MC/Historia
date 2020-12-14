@@ -1,7 +1,5 @@
 package dev.boooiil.historia.tools;
 
-import com.sk89q.worldedit.antlr.ExpressionParser.AssignmentOperatorContext;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -73,9 +71,6 @@ public class DamageManager {
         LivingEntity defenderLiving = (LivingEntity) defender;
         LivingEntity attackerLiving = (LivingEntity) attacker;
 
-        Config defenderClass;
-        Config attackerClass;
-
         EntityEquipment defenderInventory = defenderLiving.getEquipment();
         EntityEquipment attackerInventory = attackerLiving.getEquipment();
 
@@ -91,10 +86,10 @@ public class DamageManager {
         Bukkit.getLogger().info(defenderLeggings.toString());
         Bukkit.getLogger().info(defenderBoots.toString());
 
-        Double defenderHelmetArmor = defenderHelmet.getType() != Material.AIR ? getConfigType(defenderHelmet.getItemMeta().getLocalizedName()).armorValue : 0.0;
-        Double defenderChestplateArmor = defenderChestplate.getType() != Material.AIR ? getConfigType(defenderChestplate.getItemMeta().getLocalizedName()).armorValue : 0.0;
-        Double defenderLeggingsArmor = defenderLeggings.getType() != Material.AIR ? getConfigType(defenderLeggings.getItemMeta().getLocalizedName()).armorValue : 0.0;
-        Double defenderBootsArmor = defenderBoots.getType() != Material.AIR ? getConfigType(defenderBoots.getItemMeta().getLocalizedName()).armorValue : 0.0;
+        Double defenderHelmetArmor = defenderHelmet.getType() != Material.AIR ? getArmorValue(defenderHelmet.getItemMeta().getLocalizedName()) : 0.0;
+        Double defenderChestplateArmor = defenderChestplate.getType() != Material.AIR ? getArmorValue(defenderChestplate.getItemMeta().getLocalizedName()) : 0.0;
+        Double defenderLeggingsArmor = defenderLeggings.getType() != Material.AIR ? getArmorValue(defenderLeggings.getItemMeta().getLocalizedName()) : 0.0;
+        Double defenderBootsArmor = defenderBoots.getType() != Material.AIR ? getArmorValue(defenderBoots.getItemMeta().getLocalizedName()) : 0.0;
 
         ItemStack attackerWeapon;
 
@@ -103,7 +98,7 @@ public class DamageManager {
 
         Bukkit.getLogger().info(attackerWeapon.toString());
 
-        Double attackerWeaponDamage = attackerWeapon.getType() != Material.AIR ? getConfigType(attackerWeapon.getItemMeta().getLocalizedName()).weaponDamage : baseDamage;
+        Double attackerWeaponDamage = attackerWeapon.getType() != Material.AIR ? getWeaponDamage(attackerWeapon.getItemMeta().getLocalizedName()) : baseDamage;
         Double totalArmor = defenderHelmetArmor + defenderChestplateArmor + defenderLeggingsArmor + defenderBootsArmor;
         Double finalDamage;
 
@@ -140,10 +135,20 @@ public class DamageManager {
         return finalDamage;
     }
 
-    private Config getConfigType(String query) {
+    private double getArmorValue(String armorName) {
 
-        return new Config(query);
+        Config config = new Config();
 
+        return (double) config.getArmorInfo(armorName).get("ARMOR");
+
+    }
+
+    private double getWeaponDamage(String weaponName) {
+        
+        Config config = new Config();
+
+        return (double) config.getWeaponInfo(weaponName).get("DAMAGE");
+    
     }
 
 }

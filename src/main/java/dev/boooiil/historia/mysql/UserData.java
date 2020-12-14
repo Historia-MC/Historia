@@ -47,6 +47,8 @@ public class UserData {
     int classBaseSaturationDrain;
     double classHealth;
     float classSpeed;
+    
+    Config config = new Config();
 
     long lastLogin;
     long lastLogout;
@@ -58,12 +60,13 @@ public class UserData {
 
     public UserData(Player player) {
 
+        //try {
+        //    resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+        //    if (resident.hasTown()) town = resident.getTown();
+        //}
+        //catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
+        
         try {
-
-            resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
-            if (resident.hasTown()) town = resident.getTown();
-
-
             Map<String, String> result;
 
             //Issue a statement that will return all values related to this user's uuid.
@@ -96,7 +99,7 @@ public class UserData {
 
         } 
         catch (SQLException e) { e.printStackTrace(); }
-        catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
+        
 
         /* DEBUGGING
 
@@ -194,12 +197,17 @@ public class UserData {
         ItemStack leggings = playerArmor[2] != null ? playerArmor[2] : new ItemStack(Material.AIR);
         ItemStack boots = playerArmor[3] != null ? playerArmor[3] : new ItemStack(Material.AIR);
 
-        Config cHelmet = new Config(helmet.getItemMeta().getLocalizedName());
-        Config cChestplate = new Config(chestplate.getItemMeta().getLocalizedName());
-        Config cLeggings = new Config(leggings.getItemMeta().getLocalizedName());
-        Config cBoots = new Config(boots.getItemMeta().getLocalizedName());
+        Map<String, Object> helmetMap = config.getArmorInfo(helmet.getItemMeta().getLocalizedName());
+        Map<String, Object> chestplateMap = config.getArmorInfo(chestplate.getItemMeta().getLocalizedName());
+        Map<String, Object> leggingsMap = config.getArmorInfo(leggings.getItemMeta().getLocalizedName());
+        Map<String, Object> bootMap = config.getArmorInfo(boots.getItemMeta().getLocalizedName());
 
-        return cHelmet.armorValue + cChestplate.armorValue + cLeggings.armorValue + cBoots.armorValue;
+        double helmetArmor = (double) helmetMap.get("ARMOR");
+        double chestplateArmor = (double) chestplateMap.get("ARMOR");
+        double leggingsArmor = (double) leggingsMap.get("ARMOR");
+        double bootsArmor = (double) bootMap.get("ARMOR");
+
+        return helmetArmor + chestplateArmor + leggingsArmor + bootsArmor;
 
     }
 
@@ -209,11 +217,11 @@ public class UserData {
 
         Map<String, Double> weapon = new HashMap<>();
 
-        Config cMainHand = new Config(mainHand.getItemMeta().getLocalizedName());
+        Map<String, Object> weaponMap = config.getWeaponInfo(mainHand.getItemMeta().getLocalizedName());
 
-        weapon.put("Damage", cMainHand.weaponDamage);
-        weapon.put("Knockback", cMainHand.weaponKnockback);
-        weapon.put("SweepingEdge", cMainHand.weaponSweeping);
+        weapon.put("Damage", (Double) weaponMap.get("DAMAGE"));
+        weapon.put("Knockback", (Double) weaponMap.get("KNOCKBACK"));
+        weapon.put("SweepingEdge", (Double) weaponMap.get("SWEEPING"));
 
         return weapon;
 
@@ -225,11 +233,11 @@ public class UserData {
 
         Map<String, Double> weapon = new HashMap<>();
 
-        Config cOffHand = new Config(offHand.getItemMeta().getLocalizedName());
+        Map<String, Object> weaponMap = config.getWeaponInfo(offHand.getItemMeta().getLocalizedName());
 
-        weapon.put("Damage", cOffHand.weaponDamage);
-        weapon.put("Knockback", cOffHand.weaponKnockback);
-        weapon.put("SweepingEdge", cOffHand.weaponSweeping);
+        weapon.put("Damage", (Double) weaponMap.get("DAMAGE"));
+        weapon.put("Knockback", (Double) weaponMap.get("KNOCKBACK"));
+        weapon.put("SweepingEdge", (Double) weaponMap.get("SWEEPING"));
 
         return weapon;
 
@@ -237,17 +245,13 @@ public class UserData {
 
     public double getHealth() {
 
-        Config config = new Config(className);
-
-        return config.health;
+        return config.getClassInfo(className).get("HEALTH");
 
     }
 
     public float getSpeed() {
 
-        Config config = new Config(className);
-
-        return (float) config.speed;
+        return Float.parseFloat(config.getClassInfo(className).get("SPEED").toString());
 
     }
 
@@ -293,9 +297,11 @@ public class UserData {
 
     }
 
+    /*
+
     public boolean hasTown() {
 
-        return resident.hasTown();
+        return resident != null ? resident.hasTown() : false;
 
     }
 
@@ -351,4 +357,6 @@ public class UserData {
 
 
     }
+
+    */
 }

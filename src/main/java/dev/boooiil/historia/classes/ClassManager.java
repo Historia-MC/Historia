@@ -11,17 +11,9 @@ public class ClassManager {
         //do check for player stats
         UserData user = new UserData(player);
 
-        if (!user.getClassName().equals("None")) {
-
-            player.setHealthScale(user.getHealth());
-            player.setWalkSpeed(user.getSpeed());
+        player.setHealthScale(user.getHealth());
+        player.setWalkSpeed(user.getSpeed());
             
-        } else {
-
-            player.setHealthScale(11.0);
-            player.setWalkSpeed((float) 0.1);
-
-        }
     }
 
 }
