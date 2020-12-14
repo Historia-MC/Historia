@@ -46,7 +46,7 @@ classes:
             baseFood: 10
             exhaustion: 0
             saturation: 0
-            speed: 0.08
+            speed: 0.1
     Warrior:
         stats:
             health: 26
@@ -188,7 +188,7 @@ classes:
 
 weapons:
 
-    list: ["Placeholder_Sword"]
+    list: [ Placeholder_Sword ]
 
     Placeholder_Sword:
         item:
@@ -204,6 +204,7 @@ weapons:
         damage: 10.0
         knockback: 2.0
         sweeping: 3.0
+        recipe: []
 
 armor:
     
@@ -221,11 +222,10 @@ armor:
                 display-name: Placeholder Helmet
                 loc-name: Placeholder_Helmet
                 lore: [ This is the placeholder helmet. ]
+        armor: 10.0
 
-        attributes:
-            GENERIC_ARMOR: 10
-
-        crafting: [ IRON_INGOT, IRON_INGOT, IRON_INGOT, IRON_INGOT, AIR, IRON_INGOT, AIR, AIR, AIR ]
+        recipe-shape: []
+        recipe-items: [ IRON_INGOT, IRON_INGOT, IRON_INGOT, IRON_INGOT, AIR, IRON_INGOT, AIR, AIR, AIR ]
 
     Placeholder_Chestplate: 
 
