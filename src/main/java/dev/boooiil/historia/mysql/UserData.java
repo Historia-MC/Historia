@@ -35,6 +35,7 @@ public class UserData {
      */
    
     MySQL sql = new MySQL();
+    Config config = new Config();
 
     //Assign accessable variables.
     UUID uuid;
@@ -47,8 +48,6 @@ public class UserData {
     int classBaseSaturationDrain;
     double classHealth;
     float classSpeed;
-    
-    Config config = new Config();
 
     long lastLogin;
     long lastLogout;
