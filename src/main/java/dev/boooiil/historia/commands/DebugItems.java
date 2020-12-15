@@ -33,29 +33,6 @@ public class DebugItems implements CommandExecutor {
                         ItemStack mainHand = playerInventory.getItemInMainHand();
                         ItemStack offHand = playerInventory.getItemInOffHand();
 
-                        //ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
-                        //ItemStack itemInOffHand = player.getInventory().getItemInOffHand();
-                        //ItemStack itemHelmet = player.getInventory().getHelmet();
-                        //ItemStack itemChestPlate = player.getInventory().getChestplate();
-                        //ItemStack itemLeggings = player.getInventory().getLeggings();
-                        //ItemStack itemBoots = player.getInventory().getBoots();
-
-                        //ItemMeta itemInMainHandMeta = itemInMainHand.getItemMeta();
-                        /*
-                        ItemMeta itemInOffHandMeta = itemInOffHand.getItemMeta();
-                        ItemMeta itemHelmetMeta = itemHelmet.getItemMeta();
-                        ItemMeta itemChestPlateMeta = itemChestPlate.getItemMeta();
-                        ItemMeta itemLeggingsMeta = itemLeggings.getItemMeta();
-                        ItemMeta itemBootsMeta = itemBoots.getItemMeta();
-                        */
-
-                        // ItemMeta meta = item.getItemMeta()
-
-                        // DO NOT TRY IF THERE IS AIR IN YOUR HAND!
-                        // !
-                        // !
-                        // !
-
                         //Send armors.
                         if (helmet.getType() != Material.AIR) player.sendMessage("Helmet: " + helmet.getType() + " " + helmet.getItemMeta().getDisplayName() + " " + helmet.getItemMeta().getLocalizedName());
                         if (chestplate.getType() != Material.AIR) player.sendMessage("Chestplate: " + chestplate.getType() + " " + chestplate.getItemMeta().getDisplayName() + " " + chestplate.getItemMeta().getLocalizedName());
