@@ -42,7 +42,8 @@ import dev.boooiil.historia.misc.FlameArrowHandler;
 import dev.boooiil.historia.misc.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
-import dev.boooiil.historia.misc.StoneCutter;
+import dev.boooiil.historia.misc.StoneCutterItem;
+//import dev.boooiil.historia.misc.StoneCutter;
 import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.DamageManager;
 import dev.boooiil.historia.towny.TownyHandler;
@@ -139,6 +140,8 @@ public class HistoriaEvents implements Listener {
         //Change to check for the specific block, not a specific job. IE: If the player's job gets paid for breaking grass
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
+        ItemStack handItem = player.getInventory().getItemInMainHand();
+        ItemStack offhandItem = player.getInventory().getItemInOffHand();
         Material blockMaterial = block.getType();
         Material handMaterial = player.getInventory().getItemInMainHand().getType();
 
@@ -158,7 +161,14 @@ public class HistoriaEvents implements Listener {
             if (blockMaterial.equals(Material.POTATOES)) ReplaceBlocks.doReplacement(player, block, Material.POTATOES, null, null, 0, 1, 0, 0, 7, false, Sound.BLOCK_GRASS_BREAK, null, null);
             if (blockMaterial.equals(Material.BEETROOTS)) ReplaceBlocks.doReplacement(player, block, Material.BEETROOTS, null, null, 0, 1, 0, 0, 3, false, Sound.BLOCK_GRASS_BREAK, null, null);
 
-            if (blockMaterial.equals(Material.STONECUTTER) && handMaterial.toString().contains("SWORD")) { StoneCutter.onRightClick(player.getInventory().getItemInMainHand()); event.setCancelled(true); }
+            if (blockMaterial.equals(Material.STONECUTTER) && handMaterial.toString().contains("SWORD")) { 
+                
+                StoneCutterItem sci = new StoneCutterItem(player, handItem);
+
+                if (sci.incrementSharpness()) player.sendMessage("Your weapon has been enhanced.");
+                else player.sendMessage("You were not able to enhance that weapon.");
+            
+            }
         }
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 

@@ -1,5 +1,6 @@
 package dev.boooiil.historia.misc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -8,47 +9,32 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.mysql.UserData;
 
 public class StoneCutterItem {
+
+    Player player;
 
     ItemStack item;
     ItemMeta itemMeta;
     
     Config config = new Config();
 
-    Integer loreIndex;
-    List<String> newLore;
     List<String> numList = Arrays.asList("0", "I", "II", "III", "IV", "V");
 
-    public StoneCutterItem(ItemStack weapon) {
+    public StoneCutterItem(Player p, ItemStack i) {
 
-        item = weapon;
-        itemMeta = weapon.getItemMeta();
+        player = p;
 
-    }
-
-    public boolean isConfiguredWeapon() {
-
-        return config.validWeapon(itemMeta.getLocalizedName());
-
-    }
-
-    public boolean hasSharpness() {
-
-        boolean match = false;
-
-        for (String lore : itemMeta.getLore()) {
-
-            if (lore.contains("Sharpness:")) match = true;
-
-        }
-
-        return match;
+        item = i;
+        itemMeta = i.getItemMeta();
 
     }
 
@@ -56,10 +42,9 @@ public class StoneCutterItem {
 
         if (hasSharpness()) {
 
-            Map<Enchantment, Integer> enchantments = itemMeta.getEnchants();
             Map<String, Integer> uses = getSharpnessUse();
 
-            String sharpnessLevel = numList.get(enchantments.get(Enchantment.DAMAGE_ALL));
+            String sharpnessLevel = numList.get(getSharpnessLevel());
 
             Integer used = uses.get("USES");
             Integer total = uses.get("TOTAL");
@@ -81,36 +66,14 @@ public class StoneCutterItem {
                     //Set the new sharpness line.
                     String line = "Sharpness " + sharpnessLevel + ": " + used + "/" + total;
 
-                    //Iterate through the current item's lore so that we can insert the new lore line.
-                    for (String lore : itemMeta.getLore()) {
-                    
-                        //Check if the line contains sharpness.
-                        boolean sharp = lore.contains("Sharpness");
-
-                        //Apply the sharpness line where the old sharpness line was.
-                        if (sharp) {
-                        
-                            newLore.add(line);
-                        
-                        }
-
-                        //Apply the non-sharpness line to our list.
-                        else {
-                        
-                            newLore.add(lore);
-                    
-                        }
-
-                    }
-
                     //Set the new lore for the item.
-                    itemMeta.setLore(newLore);
+                    itemMeta.setLore(getLoreWithSharpness(line));
 
                     //Remove the old sharpness enchant.
                     itemMeta.removeEnchant(Enchantment.DAMAGE_ALL);
 
                     //Set our new sharpness enchant.
-                    itemMeta.addEnchant(Enchantment.DAMAGE_ALL, enchantments.get(Enchantment.DAMAGE_ALL) - 1, false);
+                    itemMeta.addEnchant(Enchantment.DAMAGE_ALL, getSharpnessLevel() - 1, false);
 
                     //Apply the new meta to the item.
                     item.setItemMeta(itemMeta);
@@ -122,19 +85,8 @@ public class StoneCutterItem {
                 //Else we remove the sharpness from the item.
                 else {
 
-                    //Iterate throug the current item's lore and apply the lines to our new list.
-                    for (String lore : itemMeta.getLore()) {
-
-                        //Check if the line contains sharpness.
-                        boolean sharp = lore.contains("Sharpness");
-
-                        //If the line doesn't contain sharpness, add it to the list.
-                        if (!sharp) newLore.add(lore);
-
-                    }
-
                     //Add our new lore to the item.
-                    itemMeta.setLore(newLore);
+                    itemMeta.setLore(getLoreWithoutSharpness());
 
                     //Remove the sharpness enchant from the item.
                     itemMeta.removeEnchant(Enchantment.DAMAGE_ALL);
@@ -156,30 +108,9 @@ public class StoneCutterItem {
 
                 //Set the new sharpness line.
                 String line = "Sharpness " + sharpnessLevel + ": " + used + "/" + total;
-
-                //Iterate through the current item's lore so that we can apply the new sharpness line.
-                for (String lore : itemMeta.getLore()) {
-
-                    //Check if the line contains sharpness.
-                    boolean sharp = lore.contains("Sharpness");
-
-                    //If the line contains sharpness, add our new sharpness line ot the list.
-                    if (sharp) {
-                        
-                        newLore.add(line);
-                        
-                    }
-
-                    //Else, add the non-sharpness line to our list.
-                    else {
-                        
-                        newLore.add(lore);
-                    
-                    }
-                }
                 
                 //Set the new lore to our item meta.
-                itemMeta.setLore(newLore);
+                itemMeta.setLore(getLoreWithSharpness(line));
 
                 //Apply the new item meta to the item.
                 item.setItemMeta(itemMeta);
@@ -188,7 +119,74 @@ public class StoneCutterItem {
 
             }
 
-        } else { Bukkit.getLogger().warning("TRIED TO DECREMENT SHARPNESS FROM NON-SHARPENED ITEM."); return false; }
+        } 
+        else { Bukkit.getLogger().warning("TRIED TO DECREMENT SHARPNESS FROM NON-SHARPENED ITEM."); return false; }
+    
+    }
+
+    public boolean incrementSharpness() {
+
+        if (getSharpnessLevel() < 4 && (hasClassSkill() || hasOverrideStatus()) && isConfiguredWeapon()) {
+
+            Map<String, Integer> uses = getSharpnessUse();
+
+            String sharpnessLevel = numList.get(getSharpnessLevel());
+
+            Integer total = uses.get("TOTAL") + 10;
+
+            String line = "Sharpness " + sharpnessLevel + ":" + total + "/" + total;
+
+            itemMeta.setLore(getLoreWithSharpness(line));
+
+            item.setItemMeta(itemMeta);
+
+            return true;
+
+        } 
+        else { return false; }
+    
+    }
+
+    private boolean isConfiguredWeapon() {
+
+        return config.validWeapon(itemMeta.getLocalizedName());
+
+    }
+
+    private boolean hasSharpness() {
+
+        boolean match = false;
+
+        for (String lore : itemMeta.getLore()) {
+
+            if (lore.contains("Sharpness:")) match = true;
+
+        }
+
+        return match;
+
+    }
+    
+    private boolean hasClassSkill() {
+
+        UserData user = new UserData(player);
+
+        return user.getClassName().equals("Blacksmith");
+
+    }
+
+    private boolean hasOverrideStatus() {
+
+        if (player.getGameMode().equals(GameMode.CREATIVE)) return true;
+        if (player.hasPermission("historia.override")) return true;
+
+        return player.isOp();
+    }
+    
+    private int getSharpnessLevel() {
+
+        return itemMeta.getEnchantLevel(Enchantment.DAMAGE_ALL);
+
     }
 
     private Map<String, Integer> getSharpnessUse() {
@@ -205,7 +203,6 @@ public class StoneCutterItem {
 
             if (sharp) {
 
-                loreIndex = itemMeta.getLore().indexOf(lore);
                 loreLine = lore;
 
             }
@@ -220,6 +217,56 @@ public class StoneCutterItem {
 
     }
 
+    private List<String> getLoreWithoutSharpness() {
+        
+        List<String> list = new ArrayList<>();
+
+        //Iterate throug the current item's lore and apply the lines to our new list.
+        for (String lore : itemMeta.getLore()) {
+
+            //Check if the line contains sharpness.
+            boolean sharp = lore.contains("Sharpness");
+
+            //If the line doesn't contain sharpness, add it to the list.
+            if (!sharp) list.add(lore);
+
+        }
+
+        return list;
+
+    }
+
+    private List<String> getLoreWithSharpness(String line) {
+
+        List<String> list = new ArrayList<>();
+
+        //Iterate through the current item's lore so that we can insert the new lore line.
+        for (String lore : itemMeta.getLore()) {
+                    
+            //Check if the line contains sharpness.
+            boolean sharp = lore.contains("Sharpness");
+
+            //Apply the sharpness line where the old sharpness line was.
+            if (sharp) {
+    
+                list.add(line);
+    
+            }
+
+            //Apply the non-sharpness line to our list.
+            else {
+    
+                list.add(lore);
+
+            }
+
+        }
+
+        return list;
+
+    }
+
+    @Deprecated
     public static void onRightClick(ItemStack item) {
 
         if (item.containsEnchantment(Enchantment.DAMAGE_ALL)) {
