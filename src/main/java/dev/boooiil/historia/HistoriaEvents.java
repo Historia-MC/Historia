@@ -167,6 +167,8 @@ public class HistoriaEvents implements Listener {
 
                 if (sci.incrementSharpness()) player.sendMessage("Your weapon has been enhanced.");
                 else player.sendMessage("You were not able to enhance that weapon.");
+
+                event.setCancelled(true);
             
             }
         }
