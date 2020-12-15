@@ -41,71 +41,101 @@ MySQL:
 classes:
     list: [ None, Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer ]
     None:
+
         stats:
-            health: 14
+            baseHealth: 14
             baseFood: 10
-            exhaustion: 0
-            saturation: 0
-            speed: 0.1
+            baseSpeed: 0.1
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
     Warrior:
+
         stats:
-            health: 26
+            baseHealth: 26
             baseFood: 16
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
-        extra:
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
+        skills:
             nametag: true
             harvestChance: 0.2
             beheadChance: 0.10
             sweepingEdge: true
+
     Archer:
+
         stats:
-            health: 18
+            baseHealth: 18
             baseFood: 26
-            exhaustion: 0
-            saturation: 0
-            speed: 0.3
+            baseSpeed: 0.3
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
             nametag: true
             harvestChance: 0.2
             beheadChance: 0.05
             quickCharge: true
             igniteOil: true
+    
     Fisherman:
+
         stats:
-            health: 18
+            baseHealth: 18
             baseFood: 30
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
             nametag: true
             harvestChance: 0.2
             beheadChance: 0.05
             extractBones: true
             extractOil: true
+
     Miner:
+
         stats:
-            health: 22
+
+            baseHealth: 22
             baseFood: 26
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
+
             nametag: true
             harvestChance: 0.2
             beheadChance: 0.05
             extraOreChance: true
             efficiencyPickaxe: true
             specialItems: true
+
     Blacksmith:
+
         stats:
-            health: 24
+            baseHealth: 24
             baseFood: 26
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
             nametag: true
             harvestChance: 0.2
@@ -114,13 +144,17 @@ classes:
             applyUnbreaking: true
             craftSaddle: true
             chanceAnvilNoDamage: true
+
     Hunter:
+
         stats:
-            health: 16
+            baseHealth: 16
             baseFood: 24
-            exhaustion: 0
-            saturation: 0
-            speed: 0.4
+            baseSpeed: 0.4
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
         extra:
             nametag: false
             beheadChance: 0.07
@@ -129,13 +163,17 @@ classes:
             extraWool: true
             extraFeathers: true
             craftSaddle: true
+
     Apothecary:
+
         stats:
-            health: 20
+            baseHealth: 20
             baseFood: 22
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
         extra:
             nametag: true
             harvestChance: 0.2
@@ -143,13 +181,18 @@ classes:
             extractOil: true
             craftGunpowder: true
             knowledgeBook: true
+
     Architect:
+
         stats:
-            health: 20
+            baseHealth: 20
             baseFood: 28
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
             nametag: true
             harvestChance: 0.2
@@ -157,26 +200,37 @@ classes:
             chanceNoConsumeBlock: true
             featherfall: true
             incomeMultiplier: 1.2
+
     Lumberjack:
+
         stats:
-            health: 26
+            baseHealth: 26
             baseFood: 18
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+
         extra:
+
             nametag: true
             harvestChance: 0.2
             beheadChance: 0.08
             chanceExtraWood: true
             efficiencyAxe: true
+
     Farmer:
+
         stats:
-            health: 20
+            baseHealth: 20
             baseFood: 20
-            exhaustion: 0
-            saturation: 0
-            speed: 0.2
+            baseSpeed: 0.2
+            baseEvasion: 0.03
+            baseSwordProficiency: 1.0
+            baseBowProficiency: 0.5
+            baseCrossbowProficiency: 0.5
+            
         extra:
             nametag: true
             harvestChance: 0.6
