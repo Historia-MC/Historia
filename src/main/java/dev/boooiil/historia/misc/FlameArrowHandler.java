@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -11,6 +12,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 // Add the Inventory Item Meta
@@ -19,6 +21,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
 public class FlameArrowHandler {
+
+    
 
     static HumanEntity humanEntity;
     static Arrow arrow;
@@ -70,50 +74,82 @@ public class FlameArrowHandler {
         }
     }
 
-    public static void onBlockHit(Projectile projectile, Block block) {
+    public static void onBlockHit(ProjectileHitEvent event) {
 
-        // If the block that was hit isn't on the world "world", we return.
-        if (block.getWorld() != Bukkit.getWorld("world"))
-            return;
 
-        // If the entity is an arrow we assign it to the variable "arrow".
-        if (projectile.getType() == EntityType.ARROW) {
+    /*
+        GET SIDE OF BLOCK (will be north, south, east, west, top, bottom)
+        GET IF BLOCK IS IGNITABLE
+
+        IF (BLOCK IGNITABLE)
+            IF (TOP) APPLY FIRE TO TOP OF BLOCK (Y+1)
+            IF (BOTTOM) APPLY FIRE TO BOTTOM OF BLOCK (Y-1)
+            ELSE 
+                CALCULATE X Y Z BASED ON SIDE
+                SET FIRE TO SIDE OF BLOCK
+
+        ELSE
+            IF (BLOCK HIT ON TOP) APPLY FIRE TO TOP OF BLOCK
+            ELSE
+                CALCULATE SIDE X Y Z
+                CHECK IF BLOCK UNDER NEW COORDINATE (Y-1)
+                IF (BLOCK EXISTS) SET FIRE TO SIDE OF BLOCK
+    */
+        Arrow arrow;
+        Projectile projectile = event.getEntity();
+        Block block = event.getHitBlock();
+        BlockFace blockFace = event.getHitBlockFace();
+        Block fireBlock;
+        
+        if (projectile instanceof Arrow){
+
             arrow = (Arrow) projectile;
-        } else
-            return;
 
-        // If the shooter of the projectile is a human entity, we assign it to
-        // "humanEntity".
-        if (projectile.getShooter() instanceof HumanEntity) {
-            humanEntity = (HumanEntity) projectile.getShooter();
-        } else
-            return;
+            if (arrow.getFireTicks() > 0){
 
-        // If the block that was hit is in a worldguard region and they don't have
-        // permissions, return.
-        if (!WorldGuardHandler.getPermissions((Player) humanEntity, block.getLocation()))
-            return;
+                //boolean ignitable = block.getType().isFlammable();
 
-        // If the flame arrow is stil on fire when it hits the ground.
-        if (arrow.getFireTicks() > 0) {
+                //if (ignitable){
 
-            // Check what block is above the block that was hit and assign it to
-            // "fireBlock".
-            Block fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY() + 1, block.getZ());
+                    if (blockFace == BlockFace.DOWN) {
 
-            // If the block is AIR we change it to FIRE.
-            // Else, if the block above the one that was hit is flamable, we check to see if
-            // we can ignite it.
-            if (fireBlock.isEmpty())
-                fireBlock.setType(Material.FIRE);
-            else if (fireBlock.getType().isFlammable()) {
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY() - 1, block.getZ());
 
-                Block secondFirebBlock = Bukkit.getWorld("world").getBlockAt(fireBlock.getX(), fireBlock.getY() + 1,
-                        fireBlock.getZ());
+                    }
+                    else if (blockFace == BlockFace.UP) {
 
-                if (secondFirebBlock.isEmpty())
-                    secondFirebBlock.setType(Material.FIRE);
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY() + 1, block.getZ());
+
+                    }
+                    else if (blockFace == BlockFace.NORTH) {
+
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY(), block.getZ() - 1);
+
+                    }
+                    else if (blockFace == BlockFace.SOUTH) {
+
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), block.getY(), block.getZ() + 1);
+
+                    }
+                    else if (blockFace == BlockFace.EAST) {
+
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX() + 1, block.getY(), block.getZ());
+                        
+                    }
+                    else if (blockFace == BlockFace.WEST) {
+
+                        fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX() - 1, block.getY(), block.getZ());
+
+                    }
+                    else fireBlock = Bukkit.getWorld("world").getBlockAt(block.getX(), 0, block.getZ());
+
+
+                    if (fireBlock.isEmpty()) fireBlock.setType(Material.FIRE);
+
+                //}
+
             }
+
         }
     }
 

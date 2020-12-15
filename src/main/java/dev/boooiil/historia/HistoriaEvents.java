@@ -59,7 +59,7 @@ public class HistoriaEvents implements Listener {
     public void onArrowInBlock(ProjectileHitEvent event) {
         
         //If the arrow didn't hit an entity
-        if (event.getHitEntity() == null) FlameArrowHandler.onBlockHit(event.getEntity(), event.getHitBlock());
+        if (event.getHitEntity() == null) FlameArrowHandler.onBlockHit(event);
 
     }
 
