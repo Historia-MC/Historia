@@ -27,7 +27,7 @@ public class StoneCutterItem {
     
     Config config = new Config();
 
-    List<String> numList = Arrays.asList("0", "I", "II", "III", "IV", "V");
+    List<String> numList = Arrays.asList("I", "II", "III", "IV", "V");
 
     public StoneCutterItem(Player p, ItemStack i) {
 
@@ -134,15 +134,16 @@ public class StoneCutterItem {
 
             Integer total = uses.get("TOTAL") + 10;
 
-            String line = "Sharpness " + sharpnessLevel + ":" + total + "/" + total;
+            String line = "Sharpness " + sharpnessLevel + ": " + total + "/" + total;
 
             itemMeta.setLore(getLoreWithSharpness(line));
+            itemMeta.addEnchant(Enchantment.DAMAGE_ALL, getSharpnessLevel(), false);
 
             item.setItemMeta(itemMeta);
 
             return true;
 
-        } 
+        }
         else { return false; }
     
     }
@@ -157,12 +158,15 @@ public class StoneCutterItem {
 
         boolean match = false;
 
-        for (String lore : itemMeta.getLore()) {
+        if (itemMeta.hasLore()) {
 
-            if (lore.contains("Sharpness:")) match = true;
+            for (String lore : itemMeta.getLore()) {
+
+                if (lore.contains("Sharpness:")) match = true;
+    
+            }
 
         }
-
         return match;
 
     }
@@ -191,28 +195,41 @@ public class StoneCutterItem {
 
     private Map<String, Integer> getSharpnessUse() {
 
-        String loreLine = "";
-
-        Matcher loreLineMatch;
+        
 
         Map<String, Integer> uses = new HashMap<>();
 
-        for (String lore : itemMeta.getLore()) {
+        if (hasSharpness()) {
 
-            boolean sharp = lore.contains("Sharpness");
+            String loreLine = "";
 
-            if (sharp) {
+            Matcher loreLineMatch;
 
-                loreLine = lore;
+            for (String lore : itemMeta.getLore()) {
 
+                boolean sharp = lore.contains("Sharpness");
+    
+                if (sharp) {
+    
+                    loreLine = lore;
+    
+                }
             }
+
+            loreLineMatch = Pattern.compile("([0-9]|[0-9][0-9])(.*)([0-9][0-9])").matcher(loreLine);
+
+            uses.put("USES", Integer.getInteger(loreLineMatch.group(1)));
+            uses.put("TOTAL", Integer.getInteger(loreLineMatch.group(3)));
+
         }
 
-        loreLineMatch = Pattern.compile("([0-9]|[0-9][0-9])(.*)([0-9][0-9])").matcher(loreLine);
+        else {
 
-        uses.put("USES", Integer.getInteger(loreLineMatch.group(1)));
-        uses.put("TOTAL", Integer.getInteger(loreLineMatch.group(3)));
+            uses.put("USES", 0);
+            uses.put("TOTAL", 0);
 
+        }
+    
         return uses;
 
     }
@@ -240,28 +257,33 @@ public class StoneCutterItem {
 
         List<String> list = new ArrayList<>();
 
-        //Iterate through the current item's lore so that we can insert the new lore line.
-        for (String lore : itemMeta.getLore()) {
+        if (itemMeta.hasLore()) {
+            //Iterate through the current item's lore so that we can insert the new lore line.
+            for (String lore : itemMeta.getLore()) {
                     
-            //Check if the line contains sharpness.
-            boolean sharp = lore.contains("Sharpness");
+                //Check if the line contains sharpness.
+                boolean sharp = lore.contains("Sharpness");
 
-            //Apply the sharpness line where the old sharpness line was.
-            if (sharp) {
+                //Apply the sharpness line where the old sharpness line was.
+                if (sharp) {
     
-                list.add(line);
+                    list.add(line);
     
-            }
+                }
 
-            //Apply the non-sharpness line to our list.
-            else {
+                //Apply the non-sharpness line to our list.
+                else {
     
-                list.add(lore);
+                    list.add(lore);
+
+                }
 
             }
 
         }
 
+        else list.add(line);
+        
         return list;
 
     }
