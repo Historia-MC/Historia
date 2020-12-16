@@ -15,7 +15,6 @@ public class MySQL {
     // private Connection connection;
 
     private static Config config = new Config();
-    private Driver driver = new oracle.jdbc.OracleDriver();
 
     private static Map<String, String> sql = config.getMySQLInfo();
 
@@ -36,9 +35,8 @@ public class MySQL {
         // exist.
         String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, Login bigint, Logout bigint, PRIMARY KEY (UUID))";
 
-        try (Connection connection = DriverManager.getDriver(driver)) {
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 
-            connection.getConnection(URL, USERNAME, PASSWORD);
             // Connect to the database and assign that connection to "connection".
 
             Statement statement = connection.createStatement();
