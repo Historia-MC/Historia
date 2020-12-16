@@ -169,8 +169,8 @@ public class HistoriaEvents implements Listener {
                 
                 StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
-                if (sci.incrementSharpness()) player.sendMessage("Your weapon has been enhanced.");
-                else player.sendMessage("You were not able to enhance that weapon.");
+                if (sci.incrementSharpness()) player.sendMessage("§7[§9Historia§7] Your weapon has been enhanced.");
+                else player.sendMessage("§7[§9Historia§7] You were not able to enhance that weapon.");
 
                 event.setCancelled(true);
             
@@ -185,7 +185,18 @@ public class HistoriaEvents implements Listener {
     }
 
     @EventHandler
-    public void onPlayerHit(EntityDamageEvent event) {
+    public void onPlayerHit(EntityDamageByEntityEvent event) {
+
+        if (event.getDamager() instanceof Player) {
+
+            Player player = (Player) event.getDamager();
+            ItemStack handItem = player.getInventory().getItemInMainHand();
+
+            StoneCutterItem sci = new StoneCutterItem(player, handItem);
+
+            if (handItem.getType().toString().contains("SWORD")) sci.decrementSharpness();
+
+        }
         //DamageManager manager = new DamageManager();
         //manager.initiate(event);
 
