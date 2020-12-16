@@ -102,19 +102,33 @@ public class StoneCutterItem {
             // Else, decrement the use total by one.
             else {
 
-                // Decrement the use total.
-                used = used - 1;
+                if (total == 30) {
 
-                // Set the new sharpness line.
-                String line = "Sharpness " + sharpnessLevel + ": " + used + "/" + total;
+                    itemMeta.setLore(getLoreWithoutSharpness());
 
-                // Set the new lore to our item meta.
-                itemMeta.setLore(getLoreWithSharpness(line));
+                    item.setItemMeta(itemMeta);
 
-                // Apply the new item meta to the item.
-                item.setItemMeta(itemMeta);
+                    return true;
 
-                return true;
+                } else {
+
+                    // Decrement the use total.
+                    used = used - 1;
+
+                    // Set the new sharpness line.
+                    String line = "Sharpness " + sharpnessLevel + ": " + used + "/" + total;
+
+                    // Set the new lore to our item meta.
+                    itemMeta.setLore(getLoreWithSharpness(line));
+
+                    // Apply the new item meta to the item.
+                    item.setItemMeta(itemMeta);
+
+                    return true;
+
+                }
+
+                
 
             }
 
