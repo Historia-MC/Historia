@@ -3,6 +3,7 @@ package dev.boooiil.historia.tools;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,9 +13,6 @@ import org.bukkit.entity.Item;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class LootSpawnManager {
-    void initiate() {
-
-    }
     
     public void SpawnFishingLoot(PlayerFishEvent fishEvent){
 
@@ -35,19 +33,33 @@ public class LootSpawnManager {
         ItemMeta meta = itemStack.getItemMeta();
 
         // Debug Print
-        Bukkit.getLogger().info("Item material: " + itemStack.getType());
+        // Bukkit.getLogger().info("Item material: " + itemStack.getType());
 
-        // Create item lore string list
-        List<String> itemLore = new ArrayList<String>();
+        // If the type is equal to a cookable fish...
+        // Either cod or salmon...
+        // Add a weight to it
+        if (itemStack.getType() == Material.COD || itemStack.getType() == Material.SALMON){
+            // Create item lore string list
+            List<String> itemLore = new ArrayList<String>();
 
-        // Add the string to the lore
-        itemLore.add("10" + " lbs");
+            // Get a new instane of random
+            Random random = new Random();
 
-        // Set the lore
-        meta.setLore(itemLore);
+            // Create a random int from 0-29 and add 1 so we never get 0
+            // it never reaches 30 unless we add 1!
+            Integer lbs = random.nextInt(30) + 1;
 
-        // Set item Meta
-        itemStack.setItemMeta(meta);
+            // Add the string to the lore
+            itemLore.add(lbs.toString() + " lbs");
+
+            // Set the lore
+            meta.setLore(itemLore);
+
+            // Set item Meta
+            itemStack.setItemMeta(meta);
+        }
+        
+        
 
     }
 

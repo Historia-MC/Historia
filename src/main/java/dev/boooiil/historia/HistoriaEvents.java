@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -47,6 +48,7 @@ import dev.boooiil.historia.misc.StoneCutterItem;
 //import dev.boooiil.historia.misc.StoneCutter;
 import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.DamageManager;
+import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
@@ -240,6 +242,15 @@ public class HistoriaEvents implements Listener {
         LootSpawnManager lootSpawnManager = new LootSpawnManager();
 
         lootSpawnManager.SpawnFishingLoot(fishEvent);
+
+    }
+
+    @EventHandler
+    public void onFurnaceEvent(FurnaceSmeltEvent furnaceSmeltEvent){
+
+        FurnaceManager furnaceManager = new FurnaceManager();
+
+        furnaceManager.FishSmelting(furnaceSmeltEvent);
 
     }
 
