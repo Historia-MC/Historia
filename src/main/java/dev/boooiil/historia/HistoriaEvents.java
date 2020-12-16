@@ -29,6 +29,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -46,6 +47,7 @@ import dev.boooiil.historia.misc.StoneCutterItem;
 //import dev.boooiil.historia.misc.StoneCutter;
 import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.DamageManager;
+import dev.boooiil.historia.tools.LootSpawnManager;
 import dev.boooiil.historia.towny.TownyHandler;
 import dev.boooiil.historia.worldguard.WorldGuardHandler;
 
@@ -230,8 +232,14 @@ public class HistoriaEvents implements Listener {
 
         }
 
+    }
 
+    @EventHandler
+    public void onPlayerFishEvent(PlayerFishEvent fishEvent) {
 
+        LootSpawnManager lootSpawnManager = new LootSpawnManager();
+
+        lootSpawnManager.SpawnFishingLoot(fishEvent);
 
     }
 
