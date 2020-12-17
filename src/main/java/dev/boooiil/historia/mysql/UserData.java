@@ -48,6 +48,10 @@ public class UserData {
     int classBaseSaturationDrain;
     double classHealth;
     float classSpeed;
+    double classEvasion;
+    double classWeaponProficiency;
+    double classBowProficiency;
+    double classCrossbowProficiency;
 
     long lastLogin;
     long lastLogout;
@@ -91,6 +95,10 @@ public class UserData {
                 uuid = player.getUniqueId();
                 displayName = player.getName();
                 lastLogin = date.getTime();
+                className = "None";
+                classLevel = 0;
+                classExperience = 0;
+                lastLogin = new Date().getTime();
 
                 createUser();
 
@@ -269,6 +277,30 @@ public class UserData {
     public int getExperience() {
 
         return classExperience;
+
+    }
+
+    public double getEvasion() {
+
+        return config.getClassInfo(className).get("EVASION");
+
+    }
+
+    public double getWeaponProficiency() {
+
+        return config.getClassInfo(className).get("WEAPON_PROFICIENCY");
+
+    }
+
+    public double getBowProficiency() {
+
+        return config.getClassInfo(className).get("BOW_PROFICIENCY");
+
+    }
+
+    public double getCrossbowProficiency() {
+
+        return config.getClassInfo(className).get("CROSSBOW_PROFICIENCY");
 
     }
 

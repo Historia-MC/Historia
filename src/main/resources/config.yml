@@ -35,7 +35,7 @@ MySQL:
     user: User
     password: Titaniumsilky26
     database: world
-    ip: boooiil.sytes.net
+    ip: 192.168.0.12
     port: 3306
 
 classes:
@@ -58,7 +58,7 @@ classes:
             baseFood: 16
             baseSpeed: 0.2
             baseEvasion: 0.03
-            baseSwordProficiency: 1.0
+            baseWeaponProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
 

@@ -113,7 +113,7 @@ public class Config {
             classMap.put("HEALTH", configuration.getDouble(root + ".baseHealth"));
             classMap.put("SPEED", configuration.getDouble(root + ".baseSpeed"));
             classMap.put("EVASION", configuration.getDouble(root + ".baseEvasion"));
-            classMap.put("SWORD_PROFICIENCY", configuration.getDouble(root + ".baseSwordProficiency"));
+            classMap.put("WEAPON_PROFICIENCY", configuration.getDouble(root + ".baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble(root + ".baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble(root + ".baseCrossbowProficiency"));
 
@@ -122,7 +122,7 @@ public class Config {
             classMap.put("HEALTH", configuration.getDouble("classes.None.stats.health"));
             classMap.put("SPEED", configuration.getDouble("classes.None.stats.speed"));
             classMap.put("EVASION", configuration.getDouble("classes.None.stats.baseEvasion"));
-            classMap.put("SWORD_PROFICIENCY", configuration.getDouble("classes.None.stats.baseSwordProficiency"));
+            classMap.put("WEAPON_PROFICIENCY", configuration.getDouble("classes.None.stats.baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseCrossbowProficiency"));
 
