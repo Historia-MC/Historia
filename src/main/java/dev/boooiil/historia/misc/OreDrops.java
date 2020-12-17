@@ -1,9 +1,15 @@
 package dev.boooiil.historia.misc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -45,13 +51,8 @@ public class OreDrops {
 
     } 
     
-
-
-
-
-
     
-    public static void initiate(BlockBreakEvent event) {
+    public static void initiate_legacy(BlockBreakEvent event) {
 
         Block block = event.getBlock();
 
@@ -163,6 +164,114 @@ public class OreDrops {
 
         }
 
-
     }
+
+    // William's Initiate func
+    public static void initiate(BlockBreakEvent event){
+        
+        // Return statements to prevent any errors
+        if (!(event instanceof BlockBreakEvent)) return;
+
+        Block block = event.getBlock();
+
+        // If the block is iron ore...
+        // meaning it is either bronze or iron of varying qualities
+        if (block.getType() == Material.IRON_ORE){
+
+            // GETTING PICKAXE DAMAGE AND OTHER EVENTS
+
+            Player player = event.getPlayer(); 
+            
+            PlayerInventory inventory = player.getInventory();
+
+            ItemStack mainHand = inventory.getItemInMainHand();
+
+            ItemMeta mainHandMeta = mainHand.getItemMeta();
+
+            if (mainHandMeta instanceof Damageable) { //Sees if item in mainhand is damageable
+
+                Damageable mainHandDamageable = (Damageable) mainHandMeta; //Converts itemMeta into damageable
+
+                int mainHandDamage = mainHandDamageable.getDamage() + 1; //Gets current damage for item and adds 1
+
+                if (mainHandDamage >= mainHand.getType().getMaxDurability()) {
+
+                    inventory.setItemInMainHand(new ItemStack(Material.AIR));
+
+                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
+
+                } else {
+
+                    mainHandDamageable.setDamage(mainHandDamage);
+
+                }
+
+                // Debug Statements
+                Bukkit.getLogger().info("Destroying IRon Ore!");
+                Bukkit.getLogger().info("Dropped Item " + block.getDrops());
+
+                // Get random
+                Random random = new Random();
+
+                // For each item in the drops (in case we have FORTUNE)...
+                // Set the item lore to a random value (a type of bronze or iron of varying quality)
+                for (ItemStack item : block.getDrops()){
+
+                    // Get rid of currentItem
+                    event.getBlock().setType(Material.AIR);
+                    Item newItem = event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.IRON_ORE));
+
+                    ItemStack itemStack = newItem.getItemStack();
+
+                    // Get the item Meta
+                    ItemMeta meta = itemStack.getItemMeta();
+
+                    // Random id for lore
+                    // RANGE(0 to #-1)
+                    Integer itemId = random.nextInt(2);
+
+                    Bukkit.getLogger().info("Item ID: " + itemId.toString());
+
+                    // ItemLore list
+                    List<String> itemLore = new ArrayList<String>();
+
+                    // Localized name
+                    String locName = "";
+                    String displayName = "";
+
+                    // Switch statement to see what lore is added
+                    switch (itemId){
+                        case 0:
+                            itemLore.add("Low Quality Bronze");
+                            displayName = "Low Quality Bronze Chunk";
+                            locName = "LOW_BRONZE_CHUNK";
+                            break;
+                        case 1:
+                            itemLore.add("Med Quality Bronze");
+                            displayName = "Med Quality Bronze Chunk";
+                            locName = "MED_BRONZE_CHUNK";
+                            break;
+                        default:
+                            Bukkit.getLogger().info("ERROR! Default Should not run! (OreDrops.java)");
+                            break;
+                    }
+
+                    meta.setLore(itemLore);
+                    meta.setLocalizedName(locName);
+                    meta.setDisplayName(displayName);
+
+                    itemStack.setItemMeta(meta);
+
+                    Bukkit.getLogger().info("ITEM DISPLAY NAME: " + item.getItemMeta().getDisplayName());
+
+                }
+
+            }
+
+
+        }
+    }
+
+
+
 }
