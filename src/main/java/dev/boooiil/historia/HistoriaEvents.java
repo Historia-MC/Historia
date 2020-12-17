@@ -15,7 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -28,7 +28,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -46,9 +45,7 @@ import dev.boooiil.historia.misc.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
-//import dev.boooiil.historia.misc.StoneCutter;
 import dev.boooiil.historia.mysql.UserData;
-import dev.boooiil.historia.tools.DamageManager;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
 import dev.boooiil.historia.towny.TownyHandler;
@@ -116,9 +113,13 @@ public class HistoriaEvents implements Listener {
     }
     
     @EventHandler
-    public void onPickup(PlayerPickupItemEvent event) {
-        ExpiryManager manager = new ExpiryManager();
-        manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getPlayer());
+    public void onPickup(EntityPickupItemEvent event) {
+
+        if (event.getEntity() instanceof HumanEntity) {
+
+            ExpiryManager manager = new ExpiryManager();
+            manager.initiate(event.getItem().getItemStack(), (HumanEntity) event.getEntity());
+        }
     }
 
     @EventHandler
