@@ -27,14 +27,14 @@ public class FurnaceManager {
         ItemMeta meta = item.getItemMeta();
         
         // pounds set to 1 by default
-        int lbs = 1;
+        String catchType = "";
 
         // For each value in meta lore
         for (String lore : meta.getLore()) {
-            // Replace " lbs" with ""
-            // then parse the int to get the weight
-            String lbsStr = Pattern.compile(" lbs").matcher(lore).replaceAll("");
-            lbs = Integer.parseInt(lbsStr);
+            // Replace " catch" with ""
+            // then get the string to get the weight
+            String catchStr = Pattern.compile(" catch").matcher(lore).replaceAll("");
+            catchType = catchStr;
         }
 
         // Fish amount equal to 1 by default
@@ -42,8 +42,19 @@ public class FurnaceManager {
 
         // If the pounds is greater than 5
         // set amount to the floor of pounds divided by 5
-        if (lbs > 5){
-            amount = (int)Math.floor((double)(lbs / 5));
+        switch (catchType){
+            case("Small"):
+                amount = 1;
+                break;
+            case("Medium"):
+                amount = 2;
+                break;
+            case("Large"):
+                amount = 3;
+                break;
+            case("Legendary"):
+                amount = 5;
+                break;
         }
 
         // Debug statement

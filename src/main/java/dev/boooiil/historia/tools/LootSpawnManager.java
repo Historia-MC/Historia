@@ -42,15 +42,34 @@ public class LootSpawnManager {
             // Create item lore string list
             List<String> itemLore = new ArrayList<String>();
 
-            // Get a new instane of random
+            // Get a new instance of random
             Random random = new Random();
 
+            // OLD WAY (pounds)
+            /*
             // Create a random int from 0-29 and add 1 so we never get 0
             // it never reaches 30 unless we add 1!
             Integer lbs = random.nextInt(30) + 1;
 
             // Add the string to the lore
             itemLore.add(lbs.toString() + " lbs");
+            */
+
+            // New way (fish description)
+            Integer randomInteger = random.nextInt(100) + 1;
+
+            if (randomInteger > 97){
+                itemLore.add("Legendary" + " catch");
+            }
+            else if (randomInteger < 97 && randomInteger > 90){
+                itemLore.add("Large" + " catch");
+            }
+            else if (randomInteger < 90 && randomInteger > 75){
+                itemLore.add("Medium" + " catch");
+            }
+            else{
+                itemLore.add("Small" + " catch");
+            }
 
             // Set the lore
             meta.setLore(itemLore);
