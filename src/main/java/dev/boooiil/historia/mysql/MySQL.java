@@ -26,8 +26,7 @@ public class MySQL {
     private static final String PORT = sql.get("PORT");
 
     // Create a URL that we will use to connect to the MySQL database.
-    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
-            + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
 
     public void initiate() throws SQLException {
 
