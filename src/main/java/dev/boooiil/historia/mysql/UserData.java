@@ -63,11 +63,11 @@ public class UserData {
 
     public UserData(Player player) {
 
-        //try {
-        //    resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
-        //    if (resident.hasTown()) town = resident.getTown();
-        //}
-        //catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
+        try {
+            resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+            if (resident.hasTown()) town = resident.getTown();
+        }
+        catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
         
         try {
             Map<String, String> result;
@@ -328,8 +328,6 @@ public class UserData {
 
     }
 
-    /*
-
     public boolean hasTown() {
 
         return resident != null ? resident.hasTown() : false;
@@ -388,6 +386,5 @@ public class UserData {
 
 
     }
-
-    */
+    
 }
