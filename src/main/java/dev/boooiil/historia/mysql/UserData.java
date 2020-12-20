@@ -377,7 +377,7 @@ public class UserData {
 
         else {
 
-            return new Location(world, 0, 0, 0)
+            return new Location(world, 0, 0, 0);
                 
         }
 
