@@ -284,6 +284,9 @@ public class HistoriaEvents implements Listener {
         System.out.println("Login: " + playerData.getDisplayName());
         System.out.println("Login: " + playerData.getLogin());
         System.out.println("Login: " + playerData.getLogout());
+        System.out.println("Login: " + playerData.getHomeBlockLocation());
+        System.out.println("Login: " + playerData.getSpawnBlockLocation());
+        System.out.println("Login: " + playerData.getTownName());
 
     }
 
