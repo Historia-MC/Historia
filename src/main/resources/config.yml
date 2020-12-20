@@ -34,7 +34,7 @@ foods:
 MySQL:
     user: User
     password: Titaniumsilky26
-    database: world
+    database: historia-dev
     ip: 192.168.0.12
     port: 3306
 
