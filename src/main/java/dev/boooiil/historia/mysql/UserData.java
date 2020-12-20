@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -14,7 +14,9 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownBlock;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -64,7 +66,7 @@ public class UserData {
     public UserData(Player player) {
 
         try {
-            resident = TownyUniverse.getInstance().getDataSource().getResident(displayName);
+            resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
             if (resident.hasTown()) town = resident.getTown();
         }
         catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
@@ -351,9 +353,9 @@ public class UserData {
 
     }
 
-    public Map<String, Integer> getTownLocation() {
+    public Location getHomeBlockLocation() {
 
-        Map<String, Integer> map = new HashMap<>();
+        World world = Bukkit.getWorld("world");
             
         if (hasTown()) {
 
@@ -361,30 +363,50 @@ public class UserData {
 
                 TownBlock townBlock = town.getHomeBlock();
 
-                map.put("X", townBlock.getX());
-                map.put("Z", townBlock.getZ());
+                return new Location(world, townBlock.getX(), 64, townBlock.getZ());
 
             } 
             catch (TownyException e) { 
 
                 e.printStackTrace(); 
 
-                map.put("X", 0); 
-                map.put("Y", 0); 
+                return new Location(world, 0, 0, 0);
             
             }
         }
 
         else {
 
-            map.put("X", 0);
-            map.put("Z", 0);
+            return new Location(world, 0, 0, 0)
                 
         }
 
-        return map;
-
-
     }
     
+    public Location getSpawnBlockLocation() {
+
+        World world = Bukkit.getWorld("world");
+
+        if (hasTown()) {
+
+            try {
+
+                return town.getSpawn();
+
+            } 
+            
+            catch (TownyException e) {
+
+                return new Location(world, 0, 0, 0);
+
+            }
+            
+
+        } else {
+
+            return new Location(world, 0, 0, 0);
+
+        }
+
+    }
 }
