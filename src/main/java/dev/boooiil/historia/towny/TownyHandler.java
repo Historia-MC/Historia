@@ -12,6 +12,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class TownyHandler {
+
+    private TownyHandler() { throw new IllegalStateException("Static utility class."); }
     
     public static boolean getPermissionByMaterial(Player player, Location location, Material material) {
 
