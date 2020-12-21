@@ -12,8 +12,6 @@ import dev.boooiil.historia.Config;
 
 public class MySQL {
 
-    // private Connection connection;
-
     private static Config config = new Config();
 
     private static Map<String, String> sql = config.getMySQLInfo();
