@@ -1,12 +1,6 @@
 package dev.boooiil.historia.crafting;
 
-// import java.security.KeyStore.Entry.Attribute;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-
-//import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,14 +8,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
-//import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import dev.boooiil.historia.Config;
-//import net.java.truecommons.key.macosx.keychain.Keychain.AttributeClass;
 
 public class RecipeLoader {
 
@@ -29,27 +21,15 @@ public class RecipeLoader {
 
         // ~~~ Iterate through weapon.List and armor.List in config ~~~
 
-        // ----- OLD CONFIG ----- 
-        //Config weaponConfig = new Config("");
-        //Config armorConfig = new Config("");
-
         Config config = new Config();
 
         //You don't technically need this
-        //Map<String, ItemStack> items = new HashMap<>();
         
         Bukkit.getLogger().info("~~~ Weapons ~~~");
 
         int i = 0;
 
-        // ----- OLD CONFIG ----- 
-        //for (String weapon : weaponConfig.weapons) {
-        //    Config found = new Config(weapon);
-
         for (String weapon : config.getWeaponList()) {
-
-            //You don't technically need this
-            //items.put(weapon, (ItemStack) config.getWeaponInfo(weapon));
 
             Bukkit.getLogger().info("~Armor Name: " + weapon);
             Bukkit.getLogger().info(config.getWeaponInfo(weapon).toString());
@@ -125,19 +105,7 @@ public class RecipeLoader {
         // For testing purposes only
         i = 0;
 
-        // ----- OLD CONFIG -----
-        //for (String armor : armorConfig.armor) {
-
         for (String armor : config.getArmorList()) {
-
-            // ----- OLD CONFIG -----
-            //Config found = new Config(armor);
-            //items.put(armor, found.weaponItem);
-
-            // Bukkit.getLogger().info("~Armor Name: " + armor);
-
-            //armorItem is its own ItemStack. You do not need to create a new item stack for that item.
-            //ItemStack item = (new ItemStack(found.armorItem));
 
             ItemStack item = (ItemStack) config.getArmorInfo(armor).get("ITEM");
 
