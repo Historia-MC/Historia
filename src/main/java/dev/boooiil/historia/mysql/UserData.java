@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.towny.TownyHandler;
 
 public class UserData {
 
@@ -58,20 +59,16 @@ public class UserData {
     long lastLogin;
     long lastLogout;
 
-    Resident resident;
-    Town town;
+    Player user;
 
     PlayerInventory userInventory;
 
     public UserData(Player player) {
-
-        try {
-            resident = TownyAPI.getInstance().getDataSource().getResident(player.getName());
-            if (resident.hasTown()) town = resident.getTown();
-        }
-        catch (NotRegisteredException e) { e.printStackTrace(); Bukkit.getServer().getLogger().warning("USER " + player.getDisplayName() + " COULD NOT BE FOUND IN TOWNY DATABASE OR NO TOWN FOUND."); }
         
         try {
+
+            user = player;
+
             Map<String, String> result;
 
             //Issue a statement that will return all values related to this user's uuid.
@@ -258,6 +255,12 @@ public class UserData {
 
     }
 
+    public double getHealthOnLevelUp() {
+
+        return getHealth();
+
+    }
+
     public float getSpeed() {
 
         return Float.parseFloat(config.getClassInfo(className).get("SPEED").toString());
@@ -282,15 +285,43 @@ public class UserData {
 
     }
 
+    public int getMaxExperience() {
+
+        return getExperience();
+
+    }
+
     public double getEvasion() {
 
         return config.getClassInfo(className).get("EVASION");
 
     }
 
+    public double getEvasionOnLevelUp() {
+
+        //Will calcuate the user's evasion based on:
+
+        //Users next level
+
+        return getEvasion();
+
+    }
+
     public double getWeaponProficiency() {
 
         return config.getClassInfo(className).get("WEAPON_PROFICIENCY");
+
+    }
+
+    public boolean willHit() {
+
+        //Will calculate whether or not the user will hit based on:
+
+        //Users proficiency with the weapon
+        //Users weapon weight
+        //Defenders evasion rating
+        
+        return false;
 
     }
 
@@ -303,6 +334,18 @@ public class UserData {
     public double getCrossbowProficiency() {
 
         return config.getClassInfo(className).get("CROSSBOW_PROFICIENCY");
+
+    }
+
+    public double getWeightCapacity() {
+
+        return 0.0;
+
+    }
+
+    public double getWeightCapacityOnLevelUp() {
+
+        return getWeightCapacity();
 
     }
 
@@ -330,83 +373,44 @@ public class UserData {
 
     }
 
-    public boolean hasTown() {
+    public Town getTown() {
 
-        return resident != null ? resident.hasTown() : false;
+        return TownyHandler.getTown(user.getName());
 
     }
 
     public String getTownName() {
 
-        if (hasTown()) {
-
-            return town.getName();
-
-        } else return "None";
-
-    }
-
-    public Town getTown() {
-
-        if (hasTown()) return town;
-        else return null;
+        return TownyHandler.getTownName(user.getName());
 
     }
 
     public Location getHomeBlockLocation() {
 
-        World world = Bukkit.getWorld("world");
-            
-        if (hasTown()) {
+        if (TownyHandler.hasHomeBlock(user.getName())) {
 
-            try {
+            TownBlock townBlock = TownyHandler.getHomeBlock(user.getName());
 
-                TownBlock townBlock = town.getHomeBlock();
+            return new Location(Bukkit.getWorld("world"), townBlock.getX(), 64, townBlock.getZ());
 
-                return new Location(world, townBlock.getX(), 64, townBlock.getZ());
+        } else {
 
-            } 
-            catch (TownyException e) { 
+            return new Location(Bukkit.getWorld("world"), 0, 0, 0);
 
-                e.printStackTrace(); 
-
-                return new Location(world, 0, 0, 0);
-            
-            }
-        }
-
-        else {
-
-            return new Location(world, 0, 0, 0);
-                
         }
 
     }
     
     public Location getSpawnBlockLocation() {
 
-        World world = Bukkit.getWorld("world");
+        if (TownyHandler.hasSpawnBlock(user.getName())) {
 
-        if (hasTown()) {
-
-            try {
-
-                return town.getSpawn();
-
-            } 
-            
-            catch (TownyException e) {
-
-                return new Location(world, 0, 0, 0);
-
-            }
-            
+            return TownyHandler.getSpawn(user.getName());
 
         } else {
 
-            return new Location(world, 0, 0, 0);
+            return new Location(Bukkit.getWorld("world"), 0, 0, 0);
 
         }
-
     }
 }
