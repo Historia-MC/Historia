@@ -3,6 +3,7 @@ package dev.boooiil.historia.crafting;
 // import java.security.KeyStore.Entry.Attribute;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -25,7 +26,72 @@ import dev.boooiil.historia.Config;
 
 public class RecipeLoader {
 
-    public static void load(Plugin plugin) {
+    public static void load(Plugin plugin){
+
+        // Create new config
+        Config config = new Config();
+
+        // For each weapon in the config weapon list
+        for (String weapon : config.getWeaponList()) {
+
+            // Get the item stack of the weapon
+            ItemStack item = (ItemStack) config.getWeaponInfo(weapon).get("ITEM");
+
+            // Get the item meta
+            ItemMeta meta = item.getItemMeta();
+
+            // The display name shows the name of the weapon
+            // While the localized name is used to determine the weapon type in code
+            meta.setDisplayName("§a" + meta.getDisplayName());
+            meta.setLocalizedName(meta.getLocalizedName());
+
+            // Set item damage (set to 100 for testing purposes)
+            AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", 100, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
+            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
+
+            // Set the meta of the sword to the edited meta.
+            item.setItemMeta(meta);
+
+            // create a NamespacedKey for your recipe
+            NamespacedKey craftingKey = new NamespacedKey(plugin, meta.getLocalizedName().toLowerCase());
+
+            // Create our custom recipe variable
+            ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
+
+            // RECIPES: 
+            // How they work:
+            // recipe.shape("XXX", "XXX", "XXX");
+            // Where Each "X" is a space on the crafting bench
+
+            // Get the shape (through Config.java)
+            List<String> shape = (List<String>) config.getWeaponInfo(weapon).get("SHAPE");
+
+            // Set recipe shape (through Config.java)
+            recipe.shape(shape.get(0), shape.get(1), shape.get(2));
+
+            // Get recipe ingredients and keys (through Config.java)
+            List<String> keys = (List<String>) config.getWeaponInfo(weapon).get("KEYS");
+            List<String> items = (List<String>) config.getWeaponInfo(weapon).get("RECIPE");
+
+            int i = 0;
+
+            for (String key : keys){
+                Material material = Material.getMaterial(items.get(i));
+                recipe.setIngredient(key.charAt(0), material);
+                i++;
+            }
+
+            // recipe.setIngredient('I', Material.IRON_INGOT);
+            // recipe.setIngredient('S', Material.STICK);
+
+            // Finally, add the recipe to the bukkit recipes
+            Bukkit.addRecipe(recipe);
+
+        }
+
+    }
+
+    public static void loadLegacy(Plugin plugin) {
 
         // ~~~ Iterate through weapon.List and armor.List in config ~~~
 

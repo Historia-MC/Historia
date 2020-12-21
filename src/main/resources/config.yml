@@ -35,7 +35,7 @@ MySQL:
     user: User
     password: Titaniumsilky26
     database: historia-dev
-    ip: 192.168.0.12
+    ip: boooiil.sytes.net
     port: 3306
 
 classes:
@@ -258,7 +258,9 @@ weapons:
         damage: 10.0
         knockback: 2.0
         sweeping: 3.0
-        recipe: []
+        recipe-items: ["IRON_INGOT", "STICK"]
+        recipe-keys: ['I', 'S']
+        recipe-shape: [" I ", " I ", " S "]
 
 armor:
     

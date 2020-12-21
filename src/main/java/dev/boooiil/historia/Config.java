@@ -166,6 +166,7 @@ public class Config {
             weaponMap.put("ITEM", configuration.getItemStack(root + ".item"));
             weaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
             weaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+            weaponMap.put("KEYS", configuration.getStringList(root + ".recipe-keys"));
 
         } else {
 
@@ -175,6 +176,7 @@ public class Config {
             weaponMap.put("ITEM", new ItemStack(Material.AIR));
             weaponMap.put("SHAPE", Arrays.asList(""));
             weaponMap.put("RECIPE", Arrays.asList(""));
+            weaponMap.put("KEYS", Arrays.asList(""));
 
         }
         
