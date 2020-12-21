@@ -141,7 +141,7 @@ public class HistoriaEvents implements Listener {
 
         if (!event.hasBlock()) return;
         if (!WorldGuardHandler.getPermissions(event.getPlayer(), event.getClickedBlock().getLocation())) return;
-        if (!TownyHandler.getPermissions(event.getPlayer(), event.getClickedBlock().getLocation(), event.getClickedBlock().getType())) return;
+        if (!TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getClickedBlock().getLocation(), event.getClickedBlock().getType())) return;
 
         //Change to check for the specific block, not a specific job. IE: If the player's job gets paid for breaking grass
         Player player = event.getPlayer();
@@ -218,7 +218,7 @@ public class HistoriaEvents implements Listener {
 
         Material material = block.getType();
 
-        if (material == Material.COAL_BLOCK && TownyHandler.getPermissions(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
+        if (material == Material.COAL_BLOCK && TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
 
             OreDrops.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
 
