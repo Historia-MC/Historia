@@ -25,20 +25,18 @@ public class UserData {
     /**
      * THIS CLASS WILL LIKELY BE CONVERTED INTO A HANDLER FOR ALL PLAYER INFORMATION
      * 
-     * THIS WILL HANDLE IN THE FUTURE:
-     *      PLAYER HEALTH
-     *      PLAYER SPEED
-     *      PLAYER SATURATION
-     *      PLAYER CLASS
-     *      
+     * THIS WILL HANDLE IN THE FUTURE: PLAYER HEALTH PLAYER SPEED PLAYER SATURATION
+     * PLAYER CLASS
+     * 
      */
-   
+
     MySQL sql = new MySQL();
     Config config = new Config();
 
-    //Assign accessable variables.
+    // Assign accessable variables.
     UUID uuid;
 
+    String storedName;
     String playerName;
     PlayerInventory playerInventory;
 
@@ -56,137 +54,92 @@ public class UserData {
     long lastLogin;
     long lastLogout;
 
-
     public UserData(Object player) {
-        
-        try {
 
-            if (player instanceof Player) {
+        if (player instanceof Player) {
 
-                Player user = (Player) player;
+            Player user = (Player) player;
 
-                playerName = user.getName();
-                playerInventory = user.getInventory();
+            playerName = user.getName();
+            playerInventory = user.getInventory();
 
-                uuid = user.getUniqueId();
+            uuid = user.getUniqueId();
 
-            }
+        }
 
-            else if (player instanceof OfflinePlayer) {
+        else if (player instanceof OfflinePlayer) {
 
-                OfflinePlayer user = (OfflinePlayer) player;
+            OfflinePlayer user = (OfflinePlayer) player;
 
-                playerName = user.getName();
+            playerName = user.getName();
 
-                uuid = user.getUniqueId();
-                
-            } 
-            
-            else { throw new  ClassCastException("Can not cast type " + Object.class.getName() + " to Player or OfflinePlayer"); }
+            uuid = user.getUniqueId();
 
-            Map<String, String> result;
+        }
 
-            //Issue a statement that will return all values related to this user's uuid.
-            result = sql.getStatement("SELECT * FROM historia WHERE UUID = '" + uuid + "'");
+        else {
+            throw new ClassCastException("Can not cast type " + Object.class.getName() + " to Player or OfflinePlayer");
+        }
 
-            Date date = new Date();
+        // Issue a statement that will return all values related to this user's uuid.
+        Map<String, String> result = MySQL.getUser(uuid);
 
-            //If there is no data stored for that UUID
-            if (result.containsKey("UUID")) {
+        if (result == null) {
 
-                uuid = UUID.fromString(result.get("UUID"));
-                className = result.get("Class");
-                classLevel = Integer.parseInt(result.get("Level"));
-                classExperience = Integer.parseInt(result.get("Experience"));
-                lastLogin = Long.parseLong(result.get("Login"));
-                lastLogout = Long.parseLong(result.get("Logout"));
+            Bukkit.getLogger().warning("Could not load info for user " + playerName + " with UUID " + uuid);
+            return;
 
-            } else {
+        }
 
-                lastLogin = date.getTime();
-                className = "None";
-                classLevel = 0;
-                classExperience = 0;
-                lastLogin = new Date().getTime();
+        // If there is no data stored for that UUID
+        if (result.containsKey("UUID")) {
 
-                createUser();
+            uuid = UUID.fromString(result.get("UUID"));
+            storedName = result.get("Username");
+            className = result.get("Class");
+            classLevel = Integer.parseInt(result.get("Level"));
+            classExperience = Integer.parseInt(result.get("Experience"));
+            lastLogin = Long.parseLong(result.get("Login"));
+            lastLogout = Long.parseLong(result.get("Logout"));
 
-            }
+        } else {
 
-        } 
-        catch (SQLException e) { e.printStackTrace(); }
+            className = "None";
+            classLevel = 1;
+            classExperience = 0;
+            lastLogin = new Date().getTime();
+
+            MySQL.createUser(uuid, playerName);
+
+        }
     }
 
-    public void createUser() {
+    public void setName() {
 
-        try {
-
-            sql.doStatement("INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 0, 0, " + lastLogin + ", 0)");
-
-        } catch (SQLException e) { e.printStackTrace(); }
-        
-
+        MySQL.setUsername(uuid, playerName);
 
     }
 
-    public void setName(UUID uuid, String name) {
+    public void setClass(String className) {
 
-        try {
-
-            playerName = name;
-
-            sql.doStatement("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
-
-        } catch (SQLException e) { e.printStackTrace(); }
-
+        MySQL.setClass(uuid, className);
 
     }
 
-    public void setClass(UUID uuid, String name) {
+    public void setLevel(int level) {
 
-        try {
+        MySQL.setClassLevel(uuid, level);
+    }
 
-            className = name;
+    public void setLogin() {
 
-            sql.doStatement("UPDATE historia SET Class = '" + className + "', Level = 0, Experience = 0 WHERE UUID = '" + uuid + "'");
-
-        } catch (SQLException e) { e.printStackTrace(); }
+        MySQL.setLogin(uuid);
 
     }
 
-    public void setLevel(UUID uuid, int level) {
+    public void setLogout() {
 
-        try {
-
-            classLevel = level;
-
-            sql.doStatement("UPDATE historia SET Username = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
-
-        } catch (SQLException e) { e.printStackTrace(); }
-
-    }
-
-    public void setLogin(UUID uuid, Long login) {
-
-        try {
-
-            lastLogin = login;
-
-            sql.doStatement("UPDATE historia SET Login = '" + login + "' WHERE UUID = '" + uuid + "'");
-
-        } catch (SQLException e) { e.printStackTrace(); }
-
-    }
-
-    public void setLogout(UUID uuid, Long logout) {
-
-        try {
-
-            lastLogout = logout;
-
-            sql.doStatement("UPDATE historia SET Logout = '" + logout + "' WHERE UUID = '" + uuid + "'");
-
-        } catch (SQLException e) { e.printStackTrace(); }
+        MySQL.setLogout(uuid);
 
     }
 
@@ -247,13 +200,22 @@ public class UserData {
 
     public double getHealth() {
 
-        return config.getClassInfo(className).get("HEALTH");
+        double baseHealth = config.getClassInfo(className).get("HEALTH");
+        double maxHealth = config.getClassInfo(className).get("MAX_HEALTH");
+
+        classHealth = (baseHealth + ((maxHealth - baseHealth) / 100)) * getLevel();
+
+        return classHealth;
 
     }
 
     public double getHealthOnLevelUp() {
 
-        return getHealth();
+        double baseHealth = config.getClassInfo(className).get("HEALTH");
+        double maxHealth = config.getClassInfo(className).get("MAX_HEALTH");
+        int nextLevel = getLevel() + 1;
+
+        return (baseHealth + ((maxHealth - baseHealth) / 100)) * nextLevel;
 
     }
 
@@ -283,7 +245,7 @@ public class UserData {
 
     public int getMaxExperience() {
 
-        return getExperience();
+        return (int) Math.pow(getLevel(), 1.68);
 
     }
 
@@ -295,9 +257,9 @@ public class UserData {
 
     public double getEvasionOnLevelUp() {
 
-        //Will calcuate the user's evasion based on:
+        // Will calcuate the user's evasion based on:
 
-        //Users next level
+        // Users next level
 
         return getEvasion();
 
@@ -311,12 +273,12 @@ public class UserData {
 
     public boolean willHit() {
 
-        //Will calculate whether or not the user will hit based on:
+        // Will calculate whether or not the user will hit based on:
 
-        //Users proficiency with the weapon
-        //Users weapon weight
-        //Defenders evasion rating
-        
+        // Users proficiency with the weapon
+        // Users weapon weight
+        // Defenders evasion rating
+
         return false;
 
     }
@@ -335,7 +297,7 @@ public class UserData {
 
     public double getWeightCapacity() {
 
-        return 0.0;
+        return 40.0;
 
     }
 
@@ -396,7 +358,7 @@ public class UserData {
         }
 
     }
-    
+
     public Location getSpawnBlockLocation() {
 
         if (TownyHandler.hasSpawnBlock(playerName)) {
