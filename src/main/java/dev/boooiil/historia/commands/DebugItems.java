@@ -43,13 +43,6 @@ public class DebugItems implements CommandExecutor {
                         if (mainHand.getType() != Material.AIR) player.sendMessage("Main Hand: " + mainHand.getType() + " " + mainHand.getItemMeta().getDisplayName() + " " + mainHand.getItemMeta().getLocalizedName());
                         if (offHand.getType() != Material.AIR) player.sendMessage("Off Hand: " + offHand.getType() + " " + offHand.getItemMeta().getDisplayName() + " " + offHand.getItemMeta().getLocalizedName());
 
-
-                        //String messageToSend = (itemInMainHandMeta.getDisplayName() + " : " + itemInMainHandMeta.getLocalizedName());
-
-                        // Bukkit.getServer().broadcastMessage(messageToSend); //send player's helmet display name and localized name
-                        
-                        //player.sendMessage(messageToSend); 
-
                         return true;
 
                         //send player's chestplate display name and localized name
@@ -90,14 +83,14 @@ public class DebugItems implements CommandExecutor {
 
                             if (config.validClass(args[2])) {
                                 
-                                user.setClass(player.getUniqueId(), args[2]);
+                                user.setClass(args[2]);
 
                             } else sender.sendMessage("That class was not in the list of classes.");
 
                         }
                         else if (args[1].equalsIgnoreCase("remove")) {
 
-                            user.setClass(player.getUniqueId(), "None");
+                            user.setClass("None");
 
                         }
                         else if (args[1].equalsIgnoreCase("stats")) {
