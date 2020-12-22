@@ -44,6 +44,7 @@ classes:
 
         stats:
             baseHealth: 14
+            maxHealth: 30
             baseFood: 10
             baseSpeed: 0.1
             baseEvasion: 0.03
@@ -55,6 +56,7 @@ classes:
 
         stats:
             baseHealth: 26
+            maxHealth: 40
             baseFood: 16
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -72,6 +74,7 @@ classes:
 
         stats:
             baseHealth: 18
+            maxHealth: 36
             baseFood: 26
             baseSpeed: 0.3
             baseEvasion: 0.03
@@ -90,6 +93,7 @@ classes:
 
         stats:
             baseHealth: 18
+            maxHealth: 36
             baseFood: 30
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -109,6 +113,7 @@ classes:
         stats:
 
             baseHealth: 22
+            maxHealth: 38
             baseFood: 26
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -129,6 +134,7 @@ classes:
 
         stats:
             baseHealth: 24
+            maxHealth: 39
             baseFood: 26
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -149,6 +155,7 @@ classes:
 
         stats:
             baseHealth: 16
+            maxHealth: 34
             baseFood: 24
             baseSpeed: 0.4
             baseEvasion: 0.03
@@ -168,6 +175,7 @@ classes:
 
         stats:
             baseHealth: 20
+            maxHealth: 35
             baseFood: 22
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -186,6 +194,7 @@ classes:
 
         stats:
             baseHealth: 20
+            maxHealth: 35
             baseFood: 28
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -205,6 +214,7 @@ classes:
 
         stats:
             baseHealth: 26
+            maxHealth: 40
             baseFood: 18
             baseSpeed: 0.2
             baseEvasion: 0.03
@@ -224,6 +234,7 @@ classes:
 
         stats:
             baseHealth: 20
+            maxHealth: 35
             baseFood: 20
             baseSpeed: 0.2
             baseEvasion: 0.03

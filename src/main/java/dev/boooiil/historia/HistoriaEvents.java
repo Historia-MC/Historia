@@ -45,6 +45,7 @@ import dev.boooiil.historia.misc.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
+import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
@@ -278,7 +279,7 @@ public class HistoriaEvents implements Listener {
 
         manager.initiate(event.getPlayer());
 
-        playerData.setLogin(event.getPlayer().getUniqueId(), date.getTime());
+        MySQL.setLogin(event.getPlayer().getUniqueId());
 
         System.out.println("Login: " + playerData.getClassName());
         System.out.println("Login: " + playerData.getDisplayName());
@@ -297,7 +298,7 @@ public class HistoriaEvents implements Listener {
 
         UserData playerData = new UserData(event.getPlayer());
 
-        playerData.setLogout(event.getPlayer().getUniqueId(), date.getTime());
+        MySQL.setLogout(event.getPlayer().getUniqueId());
 
         System.out.println("Logout: " + playerData.getClassName());
         System.out.println("Logout: " + playerData.getDisplayName());

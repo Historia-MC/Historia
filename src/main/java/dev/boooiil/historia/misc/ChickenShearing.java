@@ -24,13 +24,20 @@ public class ChickenShearing {
                 entity.remove();
 
                 Ageable newChicken = (Ageable) player.getWorld().spawnEntity(entity.getLocation(), EntityType.CHICKEN);
-                ItemStack feathers = new ItemStack(Material.FEATHER); feathers.setAmount((int) (Math.random() * 3) + 1);
+                ItemStack feathers = new ItemStack(Material.FEATHER); 
+
+                feathers.setAmount((int) (Math.random() * 3) + 1);
                 
-                newChicken.setBaby(); player.getWorld().dropItemNaturally(entity.getLocation(), feathers);
+                newChicken.setBaby(); 
+
+                player.getWorld().dropItemNaturally(entity.getLocation(), feathers);
+
                 player.giveExp(2);
 
                 ItemStack shears = player.getInventory().getItemInMainHand();
+
                 // Damageable item = (Damageable) shears.getItemMeta();
+                
                 ItemMeta item = shears.getItemMeta();
                 
                 if (item instanceof Damageable){

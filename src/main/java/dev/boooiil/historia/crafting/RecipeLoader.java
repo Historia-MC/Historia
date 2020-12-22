@@ -1,10 +1,14 @@
 package dev.boooiil.historia.crafting;
 
+<<<<<<< HEAD
 // import java.security.KeyStore.Entry.Attribute;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import java.util.List;
+>>>>>>> 28fd3b7474f0ae217d411a328fef250bf9bc17c0
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -21,6 +25,8 @@ import org.bukkit.plugin.Plugin;
 import dev.boooiil.historia.Config;
 
 public class RecipeLoader {
+
+    private RecipeLoader() { throw new IllegalStateException("Static utility class."); }
 
     public static void load(Plugin plugin){
 

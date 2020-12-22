@@ -111,6 +111,7 @@ public class Config {
             String root = "classes." + className + ".stats";
 
             classMap.put("HEALTH", configuration.getDouble(root + ".baseHealth"));
+            classMap.put("MAX_HEALTH", configuration.getDouble(root + ".maxHealth"));
             classMap.put("SPEED", configuration.getDouble(root + ".baseSpeed"));
             classMap.put("EVASION", configuration.getDouble(root + ".baseEvasion"));
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble(root + ".baseWeaponProficiency"));
@@ -120,6 +121,7 @@ public class Config {
         } else {
 
             classMap.put("HEALTH", configuration.getDouble("classes.None.stats.health"));
+            classMap.put("MAX_HEALTH", configuration.getDouble("classes.None.stats.health"));
             classMap.put("SPEED", configuration.getDouble("classes.None.stats.speed"));
             classMap.put("EVASION", configuration.getDouble("classes.None.stats.baseEvasion"));
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble("classes.None.stats.baseWeaponProficiency"));
