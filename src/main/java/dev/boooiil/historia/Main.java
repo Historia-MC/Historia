@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
 
             MySQL sql = new MySQL();
 
-            sql.initiate();
+            sql.createTable();
 
             getLogger().info("Loaded MySQL");
 
