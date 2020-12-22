@@ -19,14 +19,14 @@ public class Stats implements CommandExecutor {
 
             UserData userData = new UserData((Player) sender);
 
-            sender.sendMessage("-----------[" + sender.getName() + "]-----------");
-            sender.sendMessage("Class: " + userData.getClassName());
-            sender.sendMessage("Level: " + userData.getLevel());
-            sender.sendMessage("Experience: " + userData.getExperience() + "/" + userData.getMaxExperience());
-            sender.sendMessage("Health: " + userData.getHealth());
-            sender.sendMessage("Speed: " + userData.getSpeed());
-            sender.sendMessage("Evasion: " + userData.getEvasion());
-            sender.sendMessage("Weight: " + userData.getWeightCapacity());
+            sender.sendMessage("§7-----------[§9" + sender.getName() + "§7]-----------");
+            sender.sendMessage("§7Class: §9" + userData.getClassName());
+            sender.sendMessage("§7Level: §9" + userData.getLevel());
+            sender.sendMessage("§7Experience: §9" + userData.getExperience() + "§7/§9" + userData.getMaxExperience());
+            sender.sendMessage("§7Health: §9" + userData.getHealth());
+            sender.sendMessage("§7Speed: §9" + userData.getSpeed());
+            sender.sendMessage("§7Evasion: §9" + userData.getEvasion());
+            sender.sendMessage("§7Weight: §9" + userData.getWeightCapacity());
             sender.sendMessage("----------------------------------");
 
             return true;
@@ -47,13 +47,14 @@ public class Stats implements CommandExecutor {
 
                 UserData userData = new UserData(object);
 
-                sender.sendMessage("-----------[" + userData.getDisplayName() + "]-----------");
-                sender.sendMessage("Class: " + userData.getClassName());
-                sender.sendMessage("Experience: " + userData.getExperience() + "/" + userData.getMaxExperience());
-                sender.sendMessage("Health: " + userData.getHealth());
-                sender.sendMessage("Speed: " + userData.getSpeed());
-                sender.sendMessage("Evasion: " + userData.getEvasion());
-                sender.sendMessage("Weight: " + userData.getWeightCapacity());
+                sender.sendMessage("§7-----------[§9" + userData.getDisplayName() + "§7]-----------");
+                sender.sendMessage("§7Class: §9" + userData.getClassName());
+                sender.sendMessage("§7Level: §9" + userData.getLevel());
+                sender.sendMessage("§7Experience: §9" + userData.getExperience() + "§7/§9" + userData.getMaxExperience());
+                sender.sendMessage("§7Health: §9" + userData.getHealth());
+                sender.sendMessage("§7Speed: §9" + userData.getSpeed());
+                sender.sendMessage("§7Evasion: §9" + userData.getEvasion());
+                sender.sendMessage("§7Weight: §9" + userData.getWeightCapacity());
                 sender.sendMessage("----------------------------------");
 
                 return true;
