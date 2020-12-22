@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class MySQL {
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
 
-    public void initiate() throws SQLException {
+    public void createTable() throws SQLException {
 
         // Issue the statement that we will use to create the table if it does not
         // exist.
@@ -48,29 +49,167 @@ public class MySQL {
         }
     }
 
-    public void doStatement(String string) throws SQLException {
+    public static void createUser(UUID uuid, String playerName) {
 
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try {
 
-            // Connect to the database and assign that connection to "connection".
+            String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, " + new Date().getTime() + ", 0)";
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            statement.execute(createUser);
+
+        } catch (SQLException e) { e.printStackTrace(); }
+
+    }
+
+    public static void setUsername(UUID uuid, String playerName) {
+
+        try {
+
+            String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             statement.execute(string);
 
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
 
-    public Map<String, String> getStatement(String string) throws SQLException {
+    public static void setClass(UUID uuid, String className) {
 
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try {
 
-            ResultSet results;
+            String string = ("UPDATE historia SET Class = '" + className + "' WHERE UUID = '" + uuid + "'");
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            statement.execute(string);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setClassLevel(UUID uuid, int classLevel) {
+
+        try {
+
+            String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            statement.execute(string);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setLogin(UUID uuid) {
+
+        try {
+
+            String string = ("UPDATE historia SET Login = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            statement.execute(string);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void setLogout(UUID uuid) {
+
+        try {
+
+            String string = ("UPDATE historia SET Logout = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
+
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            statement.execute(string);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static  List<String> getUsernames() {
+
+        String string = "SELECT Username FROM historia";
+        List<String> answer = new ArrayList<>();
+
+        try {
+
+            // Connect to the database and assign that connection to "connection".
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(string);
+
+            while (results.next()) {
+
+                answer.add(results.getString("Username"));
+
+            }
+
+        } catch (Exception e) { e.printStackTrace(); }
+
+        return answer;
+
+    } 
+
+    public static  UUID getUUID(String playerName) {
+
+        String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
+
+        try {
+
+            // Connect to the database and assign that connection to "connection".
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(string);
+
+            results.next();
+
+            return UUID.fromString(results.getString(1));
+
+        } catch (Exception e) { e.printStackTrace(); }
+
+        return null;
+
+    }
+    
+    public static Map<String, String> getUser(UUID uuid) {
+        
+
+        String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
+
+        try {
+
             Map<String, String> map = new HashMap<>();
 
             //Connect to the database and assign that connection to "connection".
-            
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
             Statement statement = connection.createStatement();
-            results = statement.executeQuery(string);
+            ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
 
@@ -86,60 +225,21 @@ public class MySQL {
             
             return map;
 
-        }
-    }
+        } catch (Exception e) { e.printStackTrace(); }
 
-    public List<String> getUsernames() throws SQLException {
-
-        String string = "SELECT Username FROM historia";
-        List<String> answer = new ArrayList<>();
-
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-
-            // Connect to the database and assign that connection to "connection".
-
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            while (results.next()) {
-
-                answer.add(results.getString("Username"));
-
-            }
-
-            return answer;
-
-        }
-
-    } 
-
-    public UUID getUUID(String playerName) throws SQLException {
-
-        String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
-
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-
-            // Connect to the database and assign that connection to "connection".
-
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            results.next();
-
-            return UUID.fromString(results.getString(1));
-
-        }
+        return null;
 
     }
 
-    public List<UUID> getUUIDs() throws SQLException {
+    public static List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
         List<UUID> answer = new ArrayList<>();
 
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        try {
 
             // Connect to the database and assign that connection to "connection".
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
@@ -150,9 +250,9 @@ public class MySQL {
 
             }
 
-            return answer;
+        } catch (Exception e) { e.printStackTrace(); }
 
-        }
+        return answer;
 
     }
 }
