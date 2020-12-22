@@ -21,6 +21,7 @@ public class Stats implements CommandExecutor {
 
             sender.sendMessage("-----------[" + sender.getName() + "]-----------");
             sender.sendMessage("Class: " + userData.getClassName());
+            sender.sendMessage("Level: " + userData.getLevel());
             sender.sendMessage("Experience: " + userData.getExperience() + "/" + userData.getMaxExperience());
             sender.sendMessage("Health: " + userData.getHealth());
             sender.sendMessage("Speed: " + userData.getSpeed());
