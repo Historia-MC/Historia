@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
 import dev.boooiil.historia.commands.Message;
+import dev.boooiil.historia.commands.Stats;
 import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.crafting.RecipeLoader;
 import dev.boooiil.historia.mysql.MySQL;
@@ -37,6 +38,7 @@ public class Main extends JavaPlugin {
         this.getCommand("Message").setExecutor(new Message());
         this.getCommand("Item").setExecutor(new Item());
         this.getCommand("DebugItems").setExecutor(new DebugItems());
+        this.getCommand("Stats").setExecutor(new Stats());
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
 
