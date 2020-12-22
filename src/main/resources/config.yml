@@ -259,8 +259,7 @@ weapons:
         knockback: 2.0
         sweeping: 3.0
         recipe-items: ["IRON_INGOT", "STICK"]
-        recipe-keys: ['I', 'S']
-        recipe-shape: [" I ", " I ", " S "]
+        recipe-shape: [" A ", " A ", " B "]
 
 armor:
     
@@ -280,8 +279,9 @@ armor:
                 lore: [ This is the placeholder helmet. ]
         armor: 10.0
 
-        recipe-shape: []
-        recipe-items: [ IRON_INGOT, IRON_INGOT, IRON_INGOT, IRON_INGOT, AIR, IRON_INGOT, AIR, AIR, AIR ]
+        recipe-items: ["IRON_INGOT"]
+        recipe-shape: ["AAA", "A A", "  "]
+
 
     Placeholder_Chestplate: 
 
@@ -296,6 +296,8 @@ armor:
                 loc-name: Placeholder_Chestplate
                 lore: [ This is the placeholder Chestplate. ]
         armor: 10.0
+        recipe-items: ["IRON_INGOT"]
+        recipe-shape: ["A A", "AAA", "AAA"]
 
     Placeholder_Leggings:
 
@@ -310,6 +312,8 @@ armor:
                 loc-name: Placeholder_Leggings
                 lore: [ This is the placeholder Leggings. ]
         armor: 10.0
+        recipe-items: ["IRON_INGOT"]
+        recipe-shape: ["AAA", "A A", "A A"]
 
     Placeholder_Boots:
 
@@ -324,6 +328,8 @@ armor:
                 loc-name: Placeholder_Boots
                 lore: [ This is the placeholder Boots. ]
         armor: 10.0
+        recipe-items: ["IRON_INGOT"]
+        recipe-shape: ["   ", "A A", "A A"]
 
 items:
     ores:
