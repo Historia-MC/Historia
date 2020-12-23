@@ -47,7 +47,7 @@ public class Stats implements CommandExecutor {
 
                 UserData userData = new UserData(object);
 
-                sender.sendMessage("§7-----------[§9" + userData.getDisplayName() + "§7]-----------");
+                sender.sendMessage("§7-----------[§9" + userData.getPlayerName() + "§7]-----------");
                 sender.sendMessage("§7Class: §9" + userData.getClassName());
                 sender.sendMessage("§7Level: §9" + userData.getLevel());
                 sender.sendMessage("§7Experience: §9" + userData.getExperience() + "§7/§9" + userData.getMaxExperience());
