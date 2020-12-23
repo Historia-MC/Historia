@@ -343,6 +343,126 @@ armor:
         recipe-shape: ["   ", "A A", "A A"]
 
 items:
+    
+    COAL_BLOCK:
+        sulphur:
+            chance: 30
+
+        coal:
+            chance: 70
+
+    IRON_BLOCK:
+
+        iron:
+            chance: 30
+
+            LOW_IRON_CHUNK:
+
+                class: Any
+                chance: 80
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Low Quality Iron Chunk
+                        loc-name: LOW_IRON_CHUNK
+                        lore: [ This ore is of a lower quality. ]
+
+            MEDIUM_IRON_CHUNK:
+
+                class: Miner
+                chance: 15
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Medium Quality Iron Chunk
+                        loc-name: MEDIUM_IRON_CHUNK
+                        lore: [ This ore is of a medium quality. ]
+
+            HIGH_IRON_CHUNK:
+
+                class: Miner
+                chance: 5
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: High Quality Iron Chunk
+                        loc-name: HIGH_IRON_CHUNK
+                        lore: [ This ore is of a high quality. ]
+
+        tin:
+            chance: 70
+
+            LOW_TIN_CHUNK:
+
+                class: Any
+                chance: 80
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Low Quality Tin Chunk
+                        loc-name: LOW_TIN_CHUNK
+                        lore: [ This ore is of a lower quality. ]
+
+            MEDIUM_TIN_CHUNK:
+
+                class: Miner
+                chance: 15
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Medium Quality Tin Chunk
+                        loc-name: MEDIUM_TIN_CHUNK
+                        lore: [ This ore is of a medium quality. ]
+
+            HIGH_TIN_CHUNK:
+
+                class: Miner
+                chance: 5
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: IRON_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: High Quality Tin Chunk
+                        loc-name: HIGH_TIN_CHUNK
+                        lore: [ This ore is of a high quality. ]
+
+    GOLD_BLOCK:
+        
+        gold:
+            chance: 30
+
+        copper:
+            chance: 70
+
     ores:
         list: [ LOW_IRON, MEDIUM_IRON, HIGH_IRON, LOW_BRONZE, MEDIUM_BRONZE, HIGH_BRONZE, LOW_SHEEP_LEATHER, MEDIUM_SHEEP_LEATHER, HIGH_SHEEP_LEATHER ]
 
