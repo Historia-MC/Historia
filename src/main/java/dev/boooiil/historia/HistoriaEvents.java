@@ -38,6 +38,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
 import dev.boooiil.historia.classes.ClassManager;
+import dev.boooiil.historia.classes.ClassSkills;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
@@ -81,6 +82,10 @@ public class HistoriaEvents implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getCurrentItem(), event.getWhoClicked());
+
+        // Add feather falling
+        ClassSkills classSkills = new ClassSkills();
+        classSkills.AddFeatherFalling(event.getCurrentItem(), event.getWhoClicked());
         
     }
 
