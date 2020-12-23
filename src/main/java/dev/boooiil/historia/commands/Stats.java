@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import dev.boooiil.historia.Config;
 import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.mysql.UserData;
 
@@ -56,6 +57,8 @@ public class Stats implements CommandExecutor {
                 sender.sendMessage("§7Evasion: §9" + userData.getEvasion());
                 sender.sendMessage("§7Weight: §9" + userData.getWeightCapacity());
                 sender.sendMessage("----------------------------------");
+
+                Bukkit.getLogger().info("Map: " + Config.getMap());
 
                 return true;
 
