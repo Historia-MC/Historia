@@ -173,10 +173,10 @@ public class MySQL {
         return answer;
 
     } 
+    
+    public static String getUsername(UUID uuid) {
 
-    public static  UUID getUUID(String playerName) {
-
-        String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
+        String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
 
@@ -188,14 +188,14 @@ public class MySQL {
 
             results.next();
 
-            return UUID.fromString(results.getString(1));
+            return results.getString(1);
 
         } catch (Exception e) { e.printStackTrace(); }
 
         return null;
 
     }
-    
+
     public static Map<String, String> getUser(UUID uuid) {
         
 
@@ -255,4 +255,27 @@ public class MySQL {
         return answer;
 
     }
+
+    public static  UUID getUUID(String playerName) {
+
+        String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
+
+        try {
+
+            // Connect to the database and assign that connection to "connection".
+            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(string);
+
+            results.next();
+
+            return UUID.fromString(results.getString(1));
+
+        } catch (Exception e) { e.printStackTrace(); }
+
+        return null;
+
+    }
+    
 }
