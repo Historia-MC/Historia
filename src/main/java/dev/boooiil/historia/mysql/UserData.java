@@ -1,6 +1,5 @@
 package dev.boooiil.historia.mysql;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +29,6 @@ public class UserData {
      * 
      */
 
-    MySQL sql = new MySQL();
     Config config = new Config();
 
     // Assign accessable variables.
@@ -73,6 +71,12 @@ public class UserData {
 
             playerName = user.getName();
 
+            if (playerName == null) {
+
+                playerName = MySQL.getUsername(uuid);
+
+            }
+
             uuid = user.getUniqueId();
 
         }
@@ -102,6 +106,8 @@ public class UserData {
             lastLogin = Long.parseLong(result.get("Login"));
             lastLogout = Long.parseLong(result.get("Logout"));
 
+            if (!storedName.equals(playerName)) setName();
+
         } else {
 
             className = "None";
@@ -114,22 +120,46 @@ public class UserData {
         }
     }
 
+    /**
+     * Update the player's name in the database to the name given when this object is instanced.
+     */
+
     public void setName() {
 
         MySQL.setUsername(uuid, playerName);
 
     }
 
+    /**
+     * Update the player's class name in the database with the given class.
+     * 
+     * <p> This will set experience and level to 0.
+     * 
+     * <p> This method does not validate if the class exists.
+     * 
+     * @param className - The class to update.
+     */
+
     public void setClass(String className) {
 
         MySQL.setClass(uuid, className);
 
     }
+    
+    /**
+     * Update the player's level in the database with the given number. 
+     * 
+     * @param level - The level of the class.
+     */
 
     public void setLevel(int level) {
 
         MySQL.setClassLevel(uuid, level);
     }
+
+    /**
+     * Update the player's login date in the database.
+     */
 
     public void setLogin() {
 
@@ -137,11 +167,21 @@ public class UserData {
 
     }
 
+    /**
+     * Update the player's logout date in the database.
+     */
+
     public void setLogout() {
 
         MySQL.setLogout(uuid);
 
     }
+
+    /**
+     * Get the total amount of armor that the user is wearing.
+     * 
+     * @return Double - Total armor.
+     */
 
     public Double getArmorValue() {
 
@@ -166,6 +206,12 @@ public class UserData {
 
     }
 
+    /**
+     * Get the config values of the weapon in the player's main hand.
+     * 
+     * @return Map<String, Double> - Contains: Damage, Knockback, SweepingEdge
+     */
+
     public Map<String, Double> getMainHandWeaponStats() {
 
         ItemStack mainHand = playerInventory.getItemInMainHand();
@@ -181,6 +227,12 @@ public class UserData {
         return weapon;
 
     }
+
+    /**
+     * Get the config values of the weapon in the player's off hand.
+     * 
+     * @return Map<String, Double> - Contains: Damage, Knockback, SweepingEdge
+     */
 
     public Map<String, Double> getOffHandWeaponStats() {
 
@@ -198,6 +250,12 @@ public class UserData {
 
     }
 
+    /**
+     * Get the calculated player's heath.
+     * 
+     * @return Double - Calculated health.
+     */
+
     public double getHealth() {
 
         double baseHealth = config.getClassInfo(className).get("HEALTH");
@@ -209,6 +267,12 @@ public class UserData {
 
     }
 
+    /**
+     * Get the calculated player's heath on level up.
+     * 
+     * @return Double - Calculated health.
+     */
+
     public double getHealthOnLevelUp() {
 
         double baseHealth = config.getClassInfo(className).get("HEALTH");
@@ -219,11 +283,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's base speed.
+     * 
+     * @return FLoat - Player's speed.
+     */
+
     public float getSpeed() {
 
         return Float.parseFloat(config.getClassInfo(className).get("SPEED").toString());
 
     }
+
+    /**
+     * Get the player's base saturation drain.
+     * 
+     * @return Integer - Base speed.
+     */
 
     public int getSaturationDrain() {
 
@@ -231,11 +307,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's class level.
+     * 
+     * @return Integer - Class level.
+     */
+
     public int getLevel() {
 
         return classLevel;
 
     }
+
+    /**
+     * Get the player's class experience.
+     * 
+     * @return Integer - Class experience.
+     */
 
     public int getExperience() {
 
@@ -243,17 +331,35 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's max class experience.
+     * 
+     * @return Integer - Max class experience.
+     */
+
     public int getMaxExperience() {
 
         return (int) Math.pow(getLevel(), 1.68);
 
     }
 
+    /**
+     * Get the player's base evasion.
+     * 
+     * @return Double - Class evasion.
+     */
+
     public double getEvasion() {
 
         return config.getClassInfo(className).get("EVASION");
 
     }
+
+    /**
+     * Get the player's base evasion on level up.
+     * 
+     * @return Double - Class evasion.
+     */
 
     public double getEvasionOnLevelUp() {
 
@@ -265,11 +371,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's base weapon proficiency.
+     * 
+     * @return Double - Weapon proficiency.
+     */
+
     public double getWeaponProficiency() {
 
         return config.getClassInfo(className).get("WEAPON_PROFICIENCY");
 
     }
+
+    /**
+     * Get the if the player will hit its target.
+     * 
+     * @return boolean - Whether or not the player hit its target.
+     */
 
     public boolean willHit() {
 
@@ -307,7 +425,7 @@ public class UserData {
 
     }
 
-    public String getDisplayName() {
+    public String getPlayerName() {
 
         return playerName;
 
