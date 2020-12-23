@@ -282,7 +282,7 @@ public class HistoriaEvents implements Listener {
         MySQL.setLogin(event.getPlayer().getUniqueId());
 
         System.out.println("Login: " + playerData.getClassName());
-        System.out.println("Login: " + playerData.getDisplayName());
+        System.out.println("Login: " + playerData.getPlayerName());
         System.out.println("Login: " + playerData.getLogin());
         System.out.println("Login: " + playerData.getLogout());
         System.out.println("Login: " + playerData.getHomeBlockLocation());
@@ -301,7 +301,7 @@ public class HistoriaEvents implements Listener {
         MySQL.setLogout(event.getPlayer().getUniqueId());
 
         System.out.println("Logout: " + playerData.getClassName());
-        System.out.println("Logout: " + playerData.getDisplayName());
+        System.out.println("Logout: " + playerData.getPlayerName());
         System.out.println("Logout: " + playerData.getLogin());
         System.out.println("Logout: " + playerData.getLogout());
 
