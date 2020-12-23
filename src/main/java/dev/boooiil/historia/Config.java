@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.login.Configuration;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -15,7 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 public class Config {
 
     //Get the current configuration file for the plugin.
-    private FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
+    private static FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
 
     //Load lists.
     final List<String> armorList = configuration.getStringList("armors.list");
@@ -66,6 +68,12 @@ public class Config {
 
         return weaponList;
         
+    }
+
+    public static Map<String, Object> getMap() {
+
+        return configuration.getValues(true);
+
     }
 
     public boolean validClass(String className) {
