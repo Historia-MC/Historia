@@ -106,7 +106,7 @@ public class UserData {
             lastLogin = Long.parseLong(result.get("Login"));
             lastLogout = Long.parseLong(result.get("Logout"));
 
-            if (!storedName.equals(playerName)) setName();
+            if (playerName != null && !storedName.equals(playerName)) setName();
 
         } else {
 
