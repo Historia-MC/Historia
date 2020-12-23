@@ -77,7 +77,7 @@ public class TownyHandler {
     public static String getTownName(String playerName) {
 
         if (hasTown(playerName)) return getTown(playerName).getName();
-        else return "None";
+        else return "Wilderness";
     }
 
     public static boolean hasHomeBlock(String playerName) {

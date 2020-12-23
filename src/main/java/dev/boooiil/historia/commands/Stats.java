@@ -79,9 +79,7 @@ public class Stats implements CommandExecutor {
 
             try {
 
-                MySQL sql = new MySQL();
-
-                UUID uuid = sql.getUUID(playerName);
+                UUID uuid = MySQL.getUUID(playerName);
 
                 return Bukkit.getOfflinePlayer(uuid);
 
