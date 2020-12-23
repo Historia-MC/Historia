@@ -180,7 +180,7 @@ public class UserData {
     /**
      * Get the total amount of armor that the user is wearing.
      * 
-     * @return Double - Total armor.
+     * @return Total armor.
      */
 
     public Double getArmorValue() {
@@ -209,7 +209,7 @@ public class UserData {
     /**
      * Get the config values of the weapon in the player's main hand.
      * 
-     * @return Map<String, Double> - Contains: Damage, Knockback, SweepingEdge
+     * @return Contains: Damage, Knockback, SweepingEdge
      */
 
     public Map<String, Double> getMainHandWeaponStats() {
@@ -231,7 +231,7 @@ public class UserData {
     /**
      * Get the config values of the weapon in the player's off hand.
      * 
-     * @return Map<String, Double> - Contains: Damage, Knockback, SweepingEdge
+     * @return Contains: Damage, Knockback, SweepingEdge
      */
 
     public Map<String, Double> getOffHandWeaponStats() {
@@ -253,7 +253,7 @@ public class UserData {
     /**
      * Get the calculated player's heath.
      * 
-     * @return Double - Calculated health.
+     * @return Calculated health.
      */
 
     public double getHealth() {
@@ -270,7 +270,7 @@ public class UserData {
     /**
      * Get the calculated player's heath on level up.
      * 
-     * @return Double - Calculated health.
+     * @return Calculated health.
      */
 
     public double getHealthOnLevelUp() {
@@ -286,7 +286,7 @@ public class UserData {
     /**
      * Get the player's base speed.
      * 
-     * @return FLoat - Player's speed.
+     * @return Player's speed.
      */
 
     public float getSpeed() {
@@ -298,7 +298,7 @@ public class UserData {
     /**
      * Get the player's base saturation drain.
      * 
-     * @return Integer - Base speed.
+     * @return Base speed.
      */
 
     public int getSaturationDrain() {
@@ -310,7 +310,7 @@ public class UserData {
     /**
      * Get the player's class level.
      * 
-     * @return Integer - Class level.
+     * @return Class level.
      */
 
     public int getLevel() {
@@ -322,7 +322,7 @@ public class UserData {
     /**
      * Get the player's class experience.
      * 
-     * @return Integer - Class experience.
+     * @return Class experience.
      */
 
     public int getExperience() {
@@ -334,7 +334,7 @@ public class UserData {
     /**
      * Get the player's max class experience.
      * 
-     * @return Integer - Max class experience.
+     * @return Max class experience.
      */
 
     public int getMaxExperience() {
@@ -346,7 +346,7 @@ public class UserData {
     /**
      * Get the player's base evasion.
      * 
-     * @return Double - Class evasion.
+     * @return Class evasion.
      */
 
     public double getEvasion() {
@@ -358,7 +358,7 @@ public class UserData {
     /**
      * Get the player's base evasion on level up.
      * 
-     * @return Double - Class evasion.
+     * @return Class evasion.
      */
 
     public double getEvasionOnLevelUp() {
@@ -374,7 +374,7 @@ public class UserData {
     /**
      * Get the player's base weapon proficiency.
      * 
-     * @return Double - Weapon proficiency.
+     * @return Weapon proficiency.
      */
 
     public double getWeaponProficiency() {
@@ -386,7 +386,7 @@ public class UserData {
     /**
      * Get the if the player will hit its target.
      * 
-     * @return boolean - Whether or not the player hit its target.
+     * @return Whether or not the player hit its target.
      */
 
     public boolean willHit() {
@@ -401,11 +401,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's base bow proficiency.
+     * 
+     * @return Bow proficiency.
+     */
+
     public double getBowProficiency() {
 
         return config.getClassInfo(className).get("BOW_PROFICIENCY");
 
     }
+
+    /**
+     * Get the player's base crossbow proficiency.
+     * 
+     * @return Crossbow proficiency.
+     */
 
     public double getCrossbowProficiency() {
 
@@ -413,11 +425,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's base weight capacity.
+     * 
+     * @return Base weight capacity.
+     */
+
     public double getWeightCapacity() {
 
         return 40.0;
 
     }
+
+    /**
+     * Get the player's base weight capacity on level up.
+     * 
+     * @return Base weight capacity on level up.
+     */
 
     public double getWeightCapacityOnLevelUp() {
 
@@ -425,11 +449,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's name.
+     * 
+     * @return Player name.
+     */
+
     public String getPlayerName() {
 
         return playerName;
 
     }
+
+    /**
+     * Get the player's class name.
+     * 
+     * @return Player class name.
+     */
 
     public String getClassName() {
 
@@ -437,11 +473,23 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's last login.
+     * 
+     * @return Player's last login.
+     */
+
     public long getLogin() {
 
         return lastLogin;
 
     }
+
+    /**
+     * Get the player's last logout.
+     * 
+     * @return Player's last logout.
+     */
 
     public long getLogout() {
 
@@ -449,17 +497,39 @@ public class UserData {
 
     }
 
+    /**
+     * Get the player's current town.
+     * 
+     * @return The player's town or null if no town was found.
+     * 
+     * @see Town
+     */
+
     public Town getTown() {
 
         return TownyHandler.getTown(playerName);
 
     }
+    
+    /**
+     * Get the player's current town name.
+     * 
+     * @return The player's town name.
+     */
 
     public String getTownName() {
 
         return TownyHandler.getTownName(playerName);
 
     }
+
+    /**
+     * Get the player's current home block location.
+     * 
+     * @return The player's home block location.
+     * 
+     * @see Location
+     */
 
     public Location getHomeBlockLocation() {
 
@@ -476,6 +546,14 @@ public class UserData {
         }
 
     }
+
+    /**
+     * Get the player's current spawn block location.
+     * 
+     * @return The player's spawn block location.
+     * 
+     * @see Location
+     */
 
     public Location getSpawnBlockLocation() {
 
