@@ -1,7 +1,9 @@
 package dev.boooiil.historia;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,19 +20,19 @@ public class Config {
     private static FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
 
     //Load lists.
-    final Set<String> armorSet = configuration.getConfigurationSection("armor").getKeys(false);
-    final Set<String> blockSet = configuration.getConfigurationSection("items.blocks").getKeys(false);
-    final Set<String> classSet = configuration.getConfigurationSection("classes").getKeys(false);
-    final Set<String> foodSet = configuration.getConfigurationSection("foods").getKeys(false);
-    final Set<String> oreSet = configuration.getConfigurationSection("items.ores").getKeys(false);
-    final Set<String> weaponSet = configuration.getConfigurationSection("weapons").getKeys(false);
+    static final Set<String> armorSet = configuration.getConfigurationSection("armor").getKeys(false);
+    static final Set<String> blockSet = configuration.getConfigurationSection("items.blocks").getKeys(false);
+    static final Set<String> classSet = configuration.getConfigurationSection("classes").getKeys(false);
+    static final Set<String> foodSet = configuration.getConfigurationSection("foods").getKeys(false);
+    static final Set<String> oreSet = configuration.getConfigurationSection("items.ores").getKeys(false);
+    static final Set<String> weaponSet = configuration.getConfigurationSection("weapons").getKeys(false);
 
-    private Map<String, Object> armorMap = new HashMap<>();
-    private Map<String, Double> classMap = new HashMap<>();
-    private Map<String, Object> foodMap = new HashMap<>();
-    private Map<String, String> mySQLMap = new HashMap<>();
-    private Map<String, Object> oreMap = new HashMap<>();
-    private Map<String, Object> weaponMap = new HashMap<>();
+    private static Map<String, Object> armorMap = new HashMap<>();
+    private static Map<String, Double> classMap = new HashMap<>();
+    private static Map<String, Object> foodMap = new HashMap<>();
+    private static Map<String, String> mySQLMap = new HashMap<>();
+    private static Map<String, Object> oreMap = new HashMap<>();
+    private static Map<String, Object> weaponMap = new HashMap<>();
 
 
     /**
@@ -41,7 +43,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-    public Set<String> getArmorSet() {
+    public static Set<String> getArmorSet() {
 
         return armorSet;
 
@@ -56,7 +58,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public Set<String> getBlockSet() {
+    public static Set<String> getBlockSet() {
 
         return blockSet;
         
@@ -71,7 +73,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public Set<String> getClassSet() {
+    public static Set<String> getClassSet() {
 
         return classSet;
         
@@ -86,7 +88,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public Set<String> getFoodSet() {
+    public static Set<String> getFoodSet() {
 
         return foodSet;
         
@@ -101,7 +103,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public Set<String> getOreSet() {
+    public static Set<String> getOreSet() {
 
         return oreSet;
         
@@ -116,7 +118,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public Set<String> getWeaponSet() {
+    public static Set<String> getWeaponSet() {
 
         return weaponSet;
         
@@ -129,7 +131,7 @@ public class Config {
      * @return Whether or not the class provided is in the config.yml.
      */
 
-    public boolean validClass(String className) {
+    public static boolean validClass(String className) {
 
         return classSet.contains(className);
 
@@ -142,7 +144,7 @@ public class Config {
      * @return Whether or not the food provided is in the config.yml.
      */
 
-    public boolean validFood(String foodName) {
+    public static boolean validFood(String foodName) {
 
         return foodSet.contains(foodName);
 
@@ -155,7 +157,7 @@ public class Config {
      * @return Whether or not the weapon provided is in the config.yml.
      */
 
-    public boolean validWeapon(String weaponName) {
+    public static boolean validWeapon(String weaponName) {
 
         return weaponSet.contains(weaponName);
 
@@ -168,7 +170,7 @@ public class Config {
      * @return Whether or not the armor  provided is in the config.yml.
      */
 
-    public boolean validArmor(String armorName) {
+    public static boolean validArmor(String armorName) {
 
         return armorSet.contains(armorName);
 
@@ -181,7 +183,7 @@ public class Config {
      * @return Whether or not the ore provided is in the config.yml.
      */
 
-    public boolean validOre(String oreName) {
+    public static boolean validOre(String oreName) {
 
         return oreSet.contains(oreName);
 
@@ -194,7 +196,7 @@ public class Config {
      * @return Whether or not the block provided is in the config.yml.
      */
 
-    public boolean validBlock(String blockName) {
+    public static boolean validBlock(String blockName) {
 
         return blockSet.contains(blockName);
 
@@ -216,7 +218,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public Map<String, Double> getClassInfo(String className) {
+    public static Map<String, Double> getClassInfo(String className) {
 
         if (validClass(className)) {
 
@@ -258,7 +260,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public Map<String, Object> getFoodInfo(String foodName) {
+    public static Map<String, Object> getFoodInfo(String foodName) {
 
         if (validFood(foodName)) {
 
@@ -295,7 +297,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public Map<String, Object> getWeaponInfo(String weaponName) {
+    public static Map<String, Object> getWeaponInfo(String weaponName) {
 
         if (validWeapon(weaponName)) {
 
@@ -336,7 +338,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public Map<String, Object> getArmorInfo(String armorName) {
+    public static Map<String, Object> getArmorInfo(String armorName) {
 
         Bukkit.getLogger().info("VALID? " + armorName + " " + validArmor(armorName));
 
@@ -378,7 +380,7 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public Map<String, Object> getOreInfo(String oreName) {
+    public static Map<String, Object> getOreInfo(String oreName) {
 
         if (validOre(oreName)) {
 
@@ -404,7 +406,7 @@ public class Config {
 
     }
 
-    public Map<String, String> getMySQLInfo() {
+    public static Map<String, String> getMySQLInfo() {
 
         String root = "MySQL";
 
