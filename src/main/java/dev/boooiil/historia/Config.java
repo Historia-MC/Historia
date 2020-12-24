@@ -340,13 +340,9 @@ public class Config {
 
     public static Map<String, Object> getArmorInfo(String armorName) {
 
-        Bukkit.getLogger().info("VALID? " + armorName + " " + validArmor(armorName));
-
         if (validArmor(armorName)) {
 
             String root = "armor." + armorName;
-
-            Bukkit.getLogger().info("SHAPE: " + configuration.getStringList(root + ".recipe-shape"));
 
             armorMap.put("ITEM", configuration.getItemStack(root + ".item"));
             armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
