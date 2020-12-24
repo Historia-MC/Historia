@@ -1,3 +1,4 @@
+version: 1
 
 foods:
     not-listed: 6
@@ -32,11 +33,11 @@ foods:
     COOKIE: 16
 
 MySQL:
-    user: User
-    password: Titaniumsilky26
-    database: historia-dev
-    ip: boooiil.sytes.net
-    port: 3306
+    user:
+    password:
+    database:
+    ip:
+    port:
 
 classes:
     list: [ None, Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer ]
@@ -293,7 +294,6 @@ armor:
         recipe-items: ["IRON_INGOT"]
         recipe-shape: ["AAA", "A A", "  "]
 
-
     Placeholder_Chestplate: 
 
         item:
@@ -348,8 +348,34 @@ items:
         sulphur:
             chance: 30
 
+            SULPHUR:
+
+                class: Miner
+                chance: 100
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GLOWSTONE_DUST
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Sulphur
+                        loc-name: SULPHUR
+                        lore: [ What an unpleasant smell. ]
+
         coal:
             chance: 70
+
+            COAL:
+
+                class: Any
+                chance: 100
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: COAL
+                    amount: 1
 
     IRON_BLOCK:
 
@@ -456,12 +482,108 @@ items:
                         lore: [ This ore is of a high quality. ]
 
     GOLD_BLOCK:
-        
+
         gold:
             chance: 30
 
+            LOW_GOLD_CHUNK:
+
+                class: Any
+                chance: 80
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Low Quality Gold Chunk
+                        loc-name: LOW_GOLD_CHUNK
+                        lore: [ This ore is of a lower quality. ]
+
+            MEDIUM_GOLD_CHUNK:
+
+                class: Miner
+                chance: 15
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Medium Quality Gold Chunk
+                        loc-name: MEDIUM_GOLD_CHUNK
+                        lore: [ This ore is of a medium quality. ]
+
+            HIGH_GOLD_CHUNK:
+
+                class: Miner
+                chance: 5
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: High Quality Gold Chunk
+                        loc-name: HIGH_GOLD_CHUNK
+                        lore: [ This ore is of a high quality. ]
+
         copper:
             chance: 70
+
+            LOW_COPPER_CHUNK:
+
+                class: Any
+                chance: 80
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Low Quality Copper Chunk
+                        loc-name: LOW_COPPER_CHUNK
+                        lore: [ This ore is of a lower quality. ]
+
+            MEDIUM_COPPER_CHUNK:
+
+                class: Miner
+                chance: 15
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: Medium Quality Cropper Chunk
+                        loc-name: MEDIUM_COPPER_CHUNK
+                        lore: [ This ore is of a medium quality. ]
+
+            HIGH_COPPER_CHUNK:
+
+                class: Miner
+                chance: 5
+
+                item:
+                    ==: org.bukkit.inventory.ItemStack
+                    type: GOLD_ORE
+                    amount: 1
+                    meta:
+                        ==: ItemMeta
+                        meta-type: UNSPECIFIC
+                        display-name: High Quality Copper Chunk
+                        loc-name: HIGH_COPPER_CHUNK
+                        lore: [ This ore is of a high quality. ]
 
     ores:
         list: [ LOW_IRON, MEDIUM_IRON, HIGH_IRON, LOW_BRONZE, MEDIUM_BRONZE, HIGH_BRONZE, LOW_SHEEP_LEATHER, MEDIUM_SHEEP_LEATHER, HIGH_SHEEP_LEATHER ]
