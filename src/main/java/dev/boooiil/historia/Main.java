@@ -46,13 +46,11 @@ public class Main extends JavaPlugin {
 
         
         //Save / Load the config in the Historia plugins folder.
-        //setConfig();
-
         this.saveDefaultConfig();
 
         getLogger().info("Plugin enabled.");
 
-        RecipeLoader.load(this);
+        //RecipeLoader.load(this);
 
         try {
 
