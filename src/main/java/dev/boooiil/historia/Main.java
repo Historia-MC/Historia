@@ -1,6 +1,5 @@
 package dev.boooiil.historia;
 
-import java.io.File;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.Ignite;
@@ -47,7 +46,9 @@ public class Main extends JavaPlugin {
 
         
         //Save / Load the config in the Historia plugins folder.
-        setConfig();
+        //setConfig();
+
+        this.saveDefaultConfig();
 
         getLogger().info("Plugin enabled.");
 
@@ -68,32 +69,5 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("Plugin disabled.");
-    }
-
-    private void setConfig() {
-
-        //Create an association for the file, "config.yml"
-        File configFile = new File(getDataFolder(), "config.yml");
-
-        //If the file doesn't exist, save it to the current directory.
-        if (!configFile.exists()) { 
-            
-            getLogger().info("Saving Config.");
-
-            try { this.getConfig().save("./plugins/Historia/config.yml"); }
-            catch (Exception e) { e.printStackTrace(); }
-        
-        } 
-
-        //Else, laod the config from file.
-        else {
-
-            getLogger().info("Loading Config.");
-
-            try { this.getConfig().load(configFile); } 
-            
-            catch (Exception e) { e.printStackTrace(); }
-
-        }
     }
 }
