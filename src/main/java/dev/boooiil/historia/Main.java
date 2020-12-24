@@ -50,7 +50,7 @@ public class Main extends JavaPlugin {
 
         getLogger().info("Plugin enabled.");
 
-        //RecipeLoader.load(this);
+        RecipeLoader.load(this);
 
         try {
 
