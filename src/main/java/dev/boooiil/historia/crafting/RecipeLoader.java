@@ -129,7 +129,9 @@ public class RecipeLoader {
             // Get the shape (through Config.java)
             List<String> shape = (List<String>) config.getArmorInfo(armor).get("SHAPE");
 
-            Bukkit.getLogger().info(shape.get(0) + " " + shape.get(1) + " " + shape.get(2));
+            // Debug in case the recipe loader shape breaks
+            // Bukkit.getLogger().info("ARMOR! " + armor);
+            // Bukkit.getLogger().info(":" + shape.get(0) + ":" + shape.get(1) + ":" + shape.get(2) + ":");
 
             // Set recipe shape (through Config.java)
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));

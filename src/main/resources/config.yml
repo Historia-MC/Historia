@@ -288,7 +288,7 @@ armor:
         armor: 10.0
 
         recipe-items: ["IRON_INGOT"]
-        recipe-shape: ["AAA", "A A", "  "]
+        recipe-shape: ["AAA", "A A", "   "]
 
     Placeholder_Chestplate: 
 
