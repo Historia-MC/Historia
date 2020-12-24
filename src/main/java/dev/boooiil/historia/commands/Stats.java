@@ -58,8 +58,6 @@ public class Stats implements CommandExecutor {
                 sender.sendMessage("§7Weight: §9" + userData.getWeightCapacity());
                 sender.sendMessage("----------------------------------");
 
-                Bukkit.getLogger().info("Map: " + Config.getMap());
-
                 return true;
 
             }
