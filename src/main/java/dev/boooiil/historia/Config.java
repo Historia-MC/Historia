@@ -2,10 +2,8 @@ package dev.boooiil.historia;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import javax.security.auth.login.Configuration;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,12 +18,12 @@ public class Config {
     private static FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
 
     //Load lists.
-    final List<String> armorList = configuration.getStringList("armors.list");
-    final List<String> blockList = configuration.getStringList("blocks.list");
-    final List<String> classList = configuration.getStringList("classes.list");
-    final List<String> foodList = configuration.getStringList("foods.list");
-    final List<String> oreList = configuration.getStringList("ores.list");
-    final List<String> weaponList = configuration.getStringList("weapons.list");
+    final Set<String> armorSet = configuration.getConfigurationSection("armor").getKeys(false);
+    final Set<String> blockSet = configuration.getConfigurationSection("items.blocks").getKeys(false);
+    final Set<String> classSet = configuration.getConfigurationSection("classes").getKeys(false);
+    final Set<String> foodSet = configuration.getConfigurationSection("foods").getKeys(false);
+    final Set<String> oreSet = configuration.getConfigurationSection("items.ores").getKeys(false);
+    final Set<String> weaponSet = configuration.getConfigurationSection("weapons").getKeys(false);
 
     private Map<String, Object> armorMap = new HashMap<>();
     private Map<String, Double> classMap = new HashMap<>();
@@ -34,83 +32,189 @@ public class Config {
     private Map<String, Object> oreMap = new HashMap<>();
     private Map<String, Object> weaponMap = new HashMap<>();
 
-    public List<String> getArmorList() {
 
-        return armorList;
+    /**
+     * Get a set (unordered list) of all armors described in the config.yml.
+     * 
+     * 
+     * @return Set of all armors described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
+    public Set<String> getArmorSet() {
+
+        return armorSet;
 
     }
 
-    public List<String> getBlockList() {
+    /**
+     * Get a set (unordered list) of all blocks described in the config.yml.
+     * 
+     * 
+     * @return Set of all blocks described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
 
-        return blockList;
+    public Set<String> getBlockSet() {
+
+        return blockSet;
         
     }
 
-    public List<String> getClassList() {
+    /**
+     * Get a set (unordered list) of all classes described in the config.yml.
+     * 
+     * 
+     * @return Set of all classes described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
 
-        return classList;
+    public Set<String> getClassSet() {
+
+        return classSet;
         
     }
 
-    public List<String> getFoodList() {
+    /**
+     * Get a set (unordered list) of all foods described in the config.yml.
+     * 
+     * 
+     * @return Set of all foods described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
 
-        return foodList;
+    public Set<String> getFoodSet() {
+
+        return foodSet;
         
     }
 
-    public List<String> getOreList() {
+    /**
+     * Get a set (unordered list) of all ores described in the config.yml.
+     * 
+     * 
+     * @return Set of all ores described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
 
-        return oreList;
+    public Set<String> getOreSet() {
+
+        return oreSet;
         
     }
 
-    public List<String> getWeaponList() {
+    /**
+     * Get a set (unordered list) of all weapons described in the config.yml.
+     * 
+     * 
+     * @return Set of all weapons described in the config.yml.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
+     */
 
-        return weaponList;
+    public Set<String> getWeaponSet() {
+
+        return weaponSet;
         
     }
 
-    public static Map<String, Object> getMap() {
-
-        return configuration.getValues(true);
-
-    }
+    /**
+     * Whether or not the class provided is in the config.yml.
+     * 
+     * @param className - Name of the class to check.
+     * @return Whether or not the class provided is in the config.yml.
+     */
 
     public boolean validClass(String className) {
 
-        return classList.contains(className);
+        return classSet.contains(className);
 
     }
+
+    /**
+     * Whether or not the food provided is in the config.yml.
+     * 
+     * @param foodName - Name of the food to check.
+     * @return Whether or not the food provided is in the config.yml.
+     */
 
     public boolean validFood(String foodName) {
 
-        return foodList.contains(foodName);
+        return foodSet.contains(foodName);
 
     }
+
+    /**
+     * Whether or not the weapon provided is in the config.yml.
+     * 
+     * @param weaponName - Name of the weapon to check.
+     * @return Whether or not the weapon provided is in the config.yml.
+     */
 
     public boolean validWeapon(String weaponName) {
 
-        return weaponList.contains(weaponName);
+        return weaponSet.contains(weaponName);
 
     }
+
+    /**
+     * Whether or not the armor provided is in the config.yml.
+     * 
+     * @param armorName - Name of the armor to check.
+     * @return Whether or not the armor  provided is in the config.yml.
+     */
 
     public boolean validArmor(String armorName) {
 
-        return armorList.contains(armorName);
+        return armorSet.contains(armorName);
 
     }
+
+    /**
+     * Whether or not the ore provided is in the config.yml.
+     * 
+     * @param oreName - Name of the ore to check.
+     * @return Whether or not the ore provided is in the config.yml.
+     */
 
     public boolean validOre(String oreName) {
 
-        return oreList.contains(oreName);
+        return oreSet.contains(oreName);
 
     }
+
+    /**
+     * Whether or not the block provided is in the config.yml.
+     * 
+     * @param blockName - Name of the block to check.
+     * @return Whether or not the block provided is in the config.yml.
+     */
 
     public boolean validBlock(String blockName) {
 
-        return blockList.contains(blockName);
+        return blockSet.contains(blockName);
 
     }
+
+    /**
+     * Class information provided in a Map.
+     *  
+     * @param className - Name of the class to get.
+     * @return 
+     * <p> <"HEALTH", {@link java.lang.Double Double}> 
+     * <p> <"MAX_HEALTH", {@link java.lang.Double Double}> 
+     * <p> <"SPEED", {@link java.lang.Double Double}> 
+     * <p> <"EVASION", {@link java.lang.Double Double}> 
+     * <p> <"WEAPON_PROFICIENCY", {@link java.lang.Double Double}> 
+     * <p> <"BOW_PROFICIENCY", {@link java.lang.Double Double}> 
+     * <p> <"CROSSBOW_PROFICIENCY", {@link java.lang.Double Double}> 
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
 
     public Map<String, Double> getClassInfo(String className) {
 
@@ -142,6 +246,18 @@ public class Config {
 
     }
 
+    /**
+     * Food information provided in a Map.
+     *  
+     * @param foodName - Name of the class to get.
+     * @return 
+     * <p> <"EXPIRY", {@link java.lang.Integer Integer}> 
+     * <p> <"POISON", {@link org.bukkit.potion.PotionEffect PotionEffect}> 
+     * <p> <"HUNGER", {@link org.bukkit.potion.PotionEffect PotionEffect}>
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
+
     public Map<String, Object> getFoodInfo(String foodName) {
 
         if (validFood(foodName)) {
@@ -163,6 +279,21 @@ public class Config {
         return foodMap;
 
     }
+
+    /**
+     * Weapon information provided in a Map.
+     *  
+     * @param weaponName - Name of the weapon to get.
+     * @return 
+     * <p> <"DAMAGE", {@link java.lang.Double Double}> 
+     * <p> <"KNOCKBACK", {@link java.lang.Double Double}> 
+     * <p> <"SWEEPING", {@link java.lang.Double Double}> 
+     * <p> <"ITEM", {@link org.bukkit.entity.Item Item}> 
+     * <p> <"SHAPE", {@link java.util.List List}> 
+     * <p> <"RECIPE", {@link java.util.List List}>
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
 
     public Map<String, Object> getWeaponInfo(String weaponName) {
 
@@ -192,11 +323,28 @@ public class Config {
 
     }
 
+    /**
+     * Armor information provided in a Map.
+     *  
+     * @param armorName - Name of the armor to get.
+     * @return 
+     * <p> <"ITEM", {@link org.bukkit.entity.Item Item}> 
+     * <p> <"ARMOR", {@link java.lang.Double Double}> 
+     * <p> <"SHAPE", {@link java.util.List List}> 
+     * <p> <"RECIPE", {@link java.util.List List}>
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
+
     public Map<String, Object> getArmorInfo(String armorName) {
+
+        Bukkit.getLogger().info("VALID? " + armorName + " " + validArmor(armorName));
 
         if (validArmor(armorName)) {
 
             String root = "armor." + armorName;
+
+            Bukkit.getLogger().info("SHAPE: " + configuration.getStringList(root + ".recipe-shape"));
 
             armorMap.put("ITEM", configuration.getItemStack(root + ".item"));
             armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
@@ -215,6 +363,20 @@ public class Config {
         return armorMap;
 
     }
+    
+    /**
+     * Ore information provided in a Map.
+     *  
+     * @param oreName - Name of the ore to get.
+     * @return 
+     * <p> <"PROGRESSION", {@link java.lang.String String}> 
+     * <p> <"ITEM", {@link org.bukkit.entity.Item Item}> 
+     * <p> <"SMELT_TIME", {@link java.lang.Integer Integer}> 
+     * <p> <"SMELT_AMOUNT", {@link java.lang.Integer Integer}> 
+     * <p> <"LOSS", {@link java.lang.Integer Integer}>
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
 
     public Map<String, Object> getOreInfo(String oreName) {
 
