@@ -33,6 +33,11 @@ public class MySQL {
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
 
+    /**
+     * Create the table in the database if it does not exist.
+     * 
+     * @throws SQLException Generally, if the plugin can't connect to the database.
+     */
     public void createTable() throws SQLException {
 
         // Issue the statement that we will use to create the table if it does not
@@ -49,6 +54,13 @@ public class MySQL {
         }
     }
 
+    /**
+     * Create the user in the database.
+     * 
+     * @param uuid - UUID of the player.
+     * @param playerName - Name of the player.
+     */
+
     public static void createUser(UUID uuid, String playerName) {
 
         try {
@@ -63,6 +75,12 @@ public class MySQL {
         } catch (SQLException e) { e.printStackTrace(); }
 
     }
+
+    /**
+     * Set the username for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
     public static void setUsername(UUID uuid, String playerName) {
 
@@ -81,6 +99,12 @@ public class MySQL {
 
     }
 
+    /**
+     * Set the class name for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
+
     public static void setClass(UUID uuid, String className) {
 
         try {
@@ -97,6 +121,12 @@ public class MySQL {
         }
 
     }
+
+    /**
+     * Set the class level for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
     public static void setClassLevel(UUID uuid, int classLevel) {
 
@@ -115,6 +145,12 @@ public class MySQL {
 
     }
 
+    /**
+     * Set the login time for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
+
     public static void setLogin(UUID uuid) {
 
         try {
@@ -131,6 +167,12 @@ public class MySQL {
         }
 
     }
+
+    /**
+     * Set the logout time for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
     public static void setLogout(UUID uuid) {
 
@@ -149,7 +191,15 @@ public class MySQL {
 
     }
 
-    public static  List<String> getUsernames() {
+    /**
+     * Get a list of usernames from the database.
+     *
+     * @return List of usernames.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public static List<String> getUsernames() {
 
         String string = "SELECT Username FROM historia";
         List<String> answer = new ArrayList<>();
@@ -172,7 +222,14 @@ public class MySQL {
 
         return answer;
 
-    } 
+    }
+
+    /**
+     * Get the username with a given UUID.
+     * 
+     * @param uuid - UUID of the player.
+     * @return Username of the player.
+     */
     
     public static String getUsername(UUID uuid) {
 
@@ -195,6 +252,23 @@ public class MySQL {
         return null;
 
     }
+
+    /**
+     * Get all user information from the database.
+     * 
+     * @param uuid - UUID of the player.
+     *
+     * @return
+     * <p> <"UUID", {@link java.lang.String String}> 
+     * <p> <"Username", {@link java.lang.String String}> 
+     * <p> <"Class", {@link java.lang.String String}> 
+     * <p> <"Level", {@link java.lang.String String}> 
+     * <p> <"Experience", {@link java.lang.String String}> 
+     * <p> <"Login", {@link java.lang.String String}>
+     * <p> <"Logout", {@link java.lang.String String}>
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
+     */
 
     public static Map<String, String> getUser(UUID uuid) {
         
@@ -231,6 +305,15 @@ public class MySQL {
 
     }
 
+    /**
+     * Get a list of UUIDs from the database.
+     *
+     * @return List of UUIDs.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     */
+
     public static List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
@@ -256,7 +339,17 @@ public class MySQL {
 
     }
 
-    public static  UUID getUUID(String playerName) {
+    /**
+     * Get a specific UUID from the database using a username.
+     * 
+     * @param playerName - Name of the player.
+     *
+     * @return UUID of the given username.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     */
+
+    public static UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
