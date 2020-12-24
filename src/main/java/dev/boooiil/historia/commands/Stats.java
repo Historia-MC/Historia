@@ -8,7 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.Config;
 import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.mysql.UserData;
 
