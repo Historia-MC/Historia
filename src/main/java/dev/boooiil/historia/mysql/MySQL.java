@@ -19,9 +19,7 @@ import dev.boooiil.historia.Config;
 
 public class MySQL {
 
-    private static Config config = new Config();
-
-    private static Map<String, String> sql = config.getMySQLInfo();
+    private static Map<String, String> sql = Config.getMySQLInfo();
 
     // Assign variables that we will use to connect to the database.
     private static final String DATABASE = sql.get("DATABASE");

@@ -24,8 +24,6 @@ public class StoneCutterItem {
     ItemStack item;
     ItemMeta itemMeta;
 
-    Config config = new Config();
-
     List<String> numList = Arrays.asList("I", "II", "III", "IV", "V");
 
     public StoneCutterItem(Player p, ItemStack i) {
@@ -180,7 +178,7 @@ public class StoneCutterItem {
 
     private boolean isConfiguredWeapon() {
 
-        return config.validWeapon(itemMeta.getLocalizedName());
+        return Config.validWeapon(itemMeta.getLocalizedName());
 
     }
 

@@ -29,8 +29,6 @@ public class UserData {
      * 
      */
 
-    Config config = new Config();
-
     // Assign accessable variables.
     UUID uuid;
 
@@ -192,10 +190,10 @@ public class UserData {
         ItemStack leggings = playerArmor[2] != null ? playerArmor[2] : new ItemStack(Material.AIR);
         ItemStack boots = playerArmor[3] != null ? playerArmor[3] : new ItemStack(Material.AIR);
 
-        Map<String, Object> helmetMap = config.getArmorInfo(helmet.getItemMeta().getLocalizedName());
-        Map<String, Object> chestplateMap = config.getArmorInfo(chestplate.getItemMeta().getLocalizedName());
-        Map<String, Object> leggingsMap = config.getArmorInfo(leggings.getItemMeta().getLocalizedName());
-        Map<String, Object> bootMap = config.getArmorInfo(boots.getItemMeta().getLocalizedName());
+        Map<String, Object> helmetMap = Config.getArmorInfo(helmet.getItemMeta().getLocalizedName());
+        Map<String, Object> chestplateMap = Config.getArmorInfo(chestplate.getItemMeta().getLocalizedName());
+        Map<String, Object> leggingsMap = Config.getArmorInfo(leggings.getItemMeta().getLocalizedName());
+        Map<String, Object> bootMap = Config.getArmorInfo(boots.getItemMeta().getLocalizedName());
 
         double helmetArmor = (double) helmetMap.get("ARMOR");
         double chestplateArmor = (double) chestplateMap.get("ARMOR");
@@ -207,7 +205,7 @@ public class UserData {
     }
 
     /**
-     * Get the config values of the weapon in the player's main hand.
+     * Get the Config values of the weapon in the player's main hand.
      * 
      * @return Contains: Damage, Knockback, SweepingEdge
      */
@@ -218,7 +216,7 @@ public class UserData {
 
         Map<String, Double> weapon = new HashMap<>();
 
-        Map<String, Object> weaponMap = config.getWeaponInfo(mainHand.getItemMeta().getLocalizedName());
+        Map<String, Object> weaponMap = Config.getWeaponInfo(mainHand.getItemMeta().getLocalizedName());
 
         weapon.put("Damage", (Double) weaponMap.get("DAMAGE"));
         weapon.put("Knockback", (Double) weaponMap.get("KNOCKBACK"));
@@ -229,7 +227,7 @@ public class UserData {
     }
 
     /**
-     * Get the config values of the weapon in the player's off hand.
+     * Get the Config values of the weapon in the player's off hand.
      * 
      * @return Contains: Damage, Knockback, SweepingEdge
      */
@@ -240,7 +238,7 @@ public class UserData {
 
         Map<String, Double> weapon = new HashMap<>();
 
-        Map<String, Object> weaponMap = config.getWeaponInfo(offHand.getItemMeta().getLocalizedName());
+        Map<String, Object> weaponMap = Config.getWeaponInfo(offHand.getItemMeta().getLocalizedName());
 
         weapon.put("Damage", (Double) weaponMap.get("DAMAGE"));
         weapon.put("Knockback", (Double) weaponMap.get("KNOCKBACK"));
@@ -258,8 +256,8 @@ public class UserData {
 
     public double getHealth() {
 
-        double baseHealth = config.getClassInfo(className).get("HEALTH");
-        double maxHealth = config.getClassInfo(className).get("MAX_HEALTH");
+        double baseHealth = Config.getClassInfo(className).get("HEALTH");
+        double maxHealth = Config.getClassInfo(className).get("MAX_HEALTH");
 
         classHealth = (baseHealth + ((maxHealth - baseHealth) / 100)) * getLevel();
 
@@ -275,8 +273,8 @@ public class UserData {
 
     public double getHealthOnLevelUp() {
 
-        double baseHealth = config.getClassInfo(className).get("HEALTH");
-        double maxHealth = config.getClassInfo(className).get("MAX_HEALTH");
+        double baseHealth = Config.getClassInfo(className).get("HEALTH");
+        double maxHealth = Config.getClassInfo(className).get("MAX_HEALTH");
         int nextLevel = getLevel() + 1;
 
         return (baseHealth + ((maxHealth - baseHealth) / 100)) * nextLevel;
@@ -291,7 +289,7 @@ public class UserData {
 
     public float getSpeed() {
 
-        return Float.parseFloat(config.getClassInfo(className).get("SPEED").toString());
+        return Float.parseFloat(Config.getClassInfo(className).get("SPEED").toString());
 
     }
 
@@ -351,7 +349,7 @@ public class UserData {
 
     public double getEvasion() {
 
-        return config.getClassInfo(className).get("EVASION");
+        return Config.getClassInfo(className).get("EVASION");
 
     }
 
@@ -379,7 +377,7 @@ public class UserData {
 
     public double getWeaponProficiency() {
 
-        return config.getClassInfo(className).get("WEAPON_PROFICIENCY");
+        return Config.getClassInfo(className).get("WEAPON_PROFICIENCY");
 
     }
 
@@ -409,7 +407,7 @@ public class UserData {
 
     public double getBowProficiency() {
 
-        return config.getClassInfo(className).get("BOW_PROFICIENCY");
+        return Config.getClassInfo(className).get("BOW_PROFICIENCY");
 
     }
 
@@ -421,7 +419,7 @@ public class UserData {
 
     public double getCrossbowProficiency() {
 
-        return config.getClassInfo(className).get("CROSSBOW_PROFICIENCY");
+        return Config.getClassInfo(className).get("CROSSBOW_PROFICIENCY");
 
     }
 
