@@ -2,11 +2,13 @@ package dev.boooiil.historia;
 
 import java.util.Date;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -197,12 +199,14 @@ public class HistoriaEvents implements Listener {
 
         if (event.getDamager() instanceof Player) {
 
+            Config config = new Config();
+
             Player player = (Player) event.getDamager();
             ItemStack handItem = player.getInventory().getItemInMainHand();
 
             StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
-            if (handItem.getType().toString().contains("SWORD")) sci.decrementSharpness();
+            if (config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
 
         }
         //DamageManager manager = new DamageManager();
