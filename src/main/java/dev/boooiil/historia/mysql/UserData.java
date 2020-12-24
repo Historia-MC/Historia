@@ -502,7 +502,7 @@ public class UserData {
      * 
      * @return The player's town or null if no town was found.
      * 
-     * @see Town
+     * @see <a href ="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Town</a>
      */
 
     public Town getTown() {
@@ -528,7 +528,7 @@ public class UserData {
      * 
      * @return The player's home block location.
      * 
-     * @see Location
+     * @see <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html">Location</a>
      */
 
     public Location getHomeBlockLocation() {
@@ -552,7 +552,7 @@ public class UserData {
      * 
      * @return The player's spawn block location.
      * 
-     * @see Location
+     * @see <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html">Location</a>
      */
 
     public Location getSpawnBlockLocation() {
