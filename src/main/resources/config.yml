@@ -40,7 +40,7 @@ MySQL:
     port:
 
 classes:
-    list: [ None, Warrior, Archer, Fisherman, Miner, Blacksmith, Hunter, Apothecary, Architect, Lumberjack, Farmer ]
+
     None:
 
         stats:
@@ -254,8 +254,6 @@ classes:
 
 weapons:
 
-    list: [ Placeholder_Sword ]
-
     Placeholder_Sword:
         item:
             ==: org.bukkit.inventory.ItemStack
@@ -274,8 +272,6 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
 armor:
-    
-    list: [ "Placeholder_Helmet", "Placeholder_Chestplate", "Placeholder_Leggings", "Placeholder_Boots" ]
 
     Placeholder_Helmet:
     
@@ -586,7 +582,6 @@ items:
                         lore: [ This ore is of a high quality. ]
 
     ores:
-        list: [ LOW_IRON, MEDIUM_IRON, HIGH_IRON, LOW_BRONZE, MEDIUM_BRONZE, HIGH_BRONZE, LOW_SHEEP_LEATHER, MEDIUM_SHEEP_LEATHER, HIGH_SHEEP_LEATHER ]
 
         LOW_IRON:
 
@@ -759,8 +754,7 @@ items:
             smelt_times: 1
 
     blocks:
-        list: [ LOW_IRON_CHUNK, MEDIUM_IRON_CHUNK, HIGH_IRON_CHUNK, LOW_BRONZE_CHUNK, MEDIUM_BRONZE_CHUNK, HIGH_BRONZE_CHUNK ]
-
+    
         LOW_IRON_CHUNK:
 
             item:
