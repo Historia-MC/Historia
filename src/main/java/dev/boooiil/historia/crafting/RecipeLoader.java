@@ -27,7 +27,7 @@ public class RecipeLoader {
 
         // For each weapon in the config weapon list
         // (Loading Weapons)
-        for (String weapon : config.getWeaponList()) {
+        for (String weapon : config.getWeaponSet()) {
 
             // Get the item stack of the weapon
             ItemStack item = (ItemStack) config.getWeaponInfo(weapon).get("ITEM");
@@ -95,7 +95,7 @@ public class RecipeLoader {
 
         // For each armor in the config weapon list
         // (Loading Armor)
-        for (String armor : config.getArmorList()) {
+        for (String armor : config.getArmorSet()) {
 
             // Get the item stack of the weapon
             ItemStack item = (ItemStack) config.getArmorInfo(armor).get("ITEM");
@@ -129,6 +129,8 @@ public class RecipeLoader {
             // Get the shape (through Config.java)
             List<String> shape = (List<String>) config.getArmorInfo(armor).get("SHAPE");
 
+            Bukkit.getLogger().info(shape.get(0) + " " + shape.get(1) + " " + shape.get(2));
+
             // Set recipe shape (through Config.java)
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
@@ -149,165 +151,6 @@ public class RecipeLoader {
             Bukkit.addRecipe(recipe);
 
         }
-
-
-    }
-
-    public static void loadLegacy(Plugin plugin) {
-
-        // ~~~ Iterate through weapon.List and armor.List in config ~~~
-
-        Config config = new Config();
-
-        //You don't technically need this
-        
-        Bukkit.getLogger().info("~~~ Weapons ~~~");
-
-        int i = 0;
-
-        for (String weapon : config.getWeaponList()) {
-
-            Bukkit.getLogger().info("~Armor Name: " + weapon);
-            Bukkit.getLogger().info(config.getWeaponInfo(weapon).toString());
-
-            ItemStack item = (ItemStack) config.getWeaponInfo(weapon).get("ITEM");
-
-            ItemMeta meta = item.getItemMeta();
-
-            // We will initialise the next variable after changing the properties of the sword
-            // This sets the name of the item.
-            // Instead of the § symbol, you can use ChatColor.<color>
-            meta.setDisplayName("§a" + meta.getDisplayName());
-            meta.setLocalizedName(meta.getLocalizedName());
-
-            // Set item damage
-            AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", 100, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
-            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
-
-             // Set the meta of the sword to the edited meta.
-            item.setItemMeta(meta);
-
-            // create a NamespacedKey for your recipe
-            NamespacedKey craftingKey = new NamespacedKey(plugin, meta.getLocalizedName().toLowerCase());
-
-            // Create our custom recipe variable
-            ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
-
-            // RECIPES: 
-            // How they work:
-            // recipe.shape("XXX", "XXX", "XXX");
-            // Where Each "X" is a space on the crafting bench
-
-            // IMPORTNAT!
-            // Weapon values by ID:
-            // 0 = placeholder sword
-            if (i == 0)
-            {
-                recipe.shape(" I ", " I ", " S ");
-            }
-            if (i == 1)
-            {
-
-            }
-            if (i == 2)
-            {
-
-            }
-            if (i == 3)
-            {
-
-            }
-
-            
-
-            // Set what the letters represent.
-            // I = Iron Ingot, S = Stick
-            recipe.setIngredient('I', Material.IRON_INGOT);
-            recipe.setIngredient('S', Material.STICK);
-            // recipe.setIngredient('S', Material.STICK);
-
-            // Finally, add the recipe to the bukkit recipes
-            Bukkit.addRecipe(recipe);
-
-            //Bukkit.getLogger().info("~~~WE DID IT!~~~");
-
-
-            i++;
-        }
-
-        // ~~~ ARMOR ~~~
-        Bukkit.getLogger().info("~~~ Armor ~~~");
-
-        // For testing purposes only
-        i = 0;
-
-        for (String armor : config.getArmorList()) {
-
-            ItemStack item = (ItemStack) config.getArmorInfo(armor).get("ITEM");
-
-            ItemMeta meta = item.getItemMeta();
-
-            // We will initialise the next variable after changing the properties of the sword
-            // This sets the name of the item.
-            // Instead of the § symbol, you can use ChatColor.<color>
-            meta.setDisplayName("§a" + meta.getDisplayName());
-            meta.setLocalizedName(meta.getLocalizedName());
-
-             // Set the meta of the sword to the edited meta.
-            item.setItemMeta(meta);
-
-            // create a NamespacedKey for your recipe
-            NamespacedKey craftingKey = new NamespacedKey(plugin, meta.getLocalizedName().toLowerCase());
-
-            // Create our custom recipe variable
-            ShapedRecipe recipe = new ShapedRecipe(craftingKey, item);
-
-            // RECIPES: 
-            // How they work:
-            // recipe.shape("XXX", "XXX", "XXX");
-            // Where Each "X" is a space on the crafting bench
-
-            // IMPORTNAT!
-            // Armor values by ID:
-            // 0 = placeholder helmet
-            // 1 = placeholder chest
-            // 2 = placeholder leggings
-            // 3 = placeholder boots
-            if (i == 0)
-            {
-                recipe.shape("III", "I I", "   ");
-            }
-            if (i == 1)
-            {
-                recipe.shape("I I", "III", "III");
-            }
-            if (i == 2)
-            {
-                recipe.shape("III", "I I", "I I");
-            }
-            if (i == 3)
-            {
-                recipe.shape("   ", "I I", "I I");
-            }
-
-            // Here we will set the places. E and S can represent anything, and the letters can be anything. Beware; this is case sensitive.
-            // recipe.shape("III", "I I", "   ");
-
-            // Set what the letters represent.
-            // I = Iron Ingot, S = Stick
-            recipe.setIngredient('I', Material.IRON_INGOT);
-            // recipe.setIngredient('S', Material.STICK);
-
-            // Finally, add the recipe to the bukkit recipes
-            Bukkit.addRecipe(recipe);
-
-            //Bukkit.getLogger().info("~~~WE DID IT!~~~");
-
-
-            i++;
-        }
-
-        Bukkit.getLogger().info("~~~");
 
 
     }
