@@ -434,7 +434,7 @@ public class Config {
 
         if (validClass(className)) {
 
-            List<String> classProficient = getProficientWeapons(className);
+            List<String> classProficient = getClassWeaponTypes(className);
         
             List<String> found = new ArrayList<>();
 
@@ -449,9 +449,6 @@ public class Config {
             return found;
 
         } else return Arrays.asList("NOT A VALID CLASS");
-
-
-
 
     }
 
@@ -487,7 +484,7 @@ public class Config {
 
         if (validClass(className)) {
 
-            List<String> classProficient = getProficientArmor(className);
+            List<String> classProficient = getClassArmorTypes(className);
         
             List<String> found = new ArrayList<>();
 
@@ -502,9 +499,6 @@ public class Config {
             return found;
 
         } else return Arrays.asList("NOT A VALID CLASS");
-
-
-
 
     }
 
