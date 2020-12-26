@@ -2,6 +2,7 @@ package dev.boooiil.historia.mysql;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -370,18 +371,6 @@ public class UserData {
     }
 
     /**
-     * Get the player's base weapon proficiency.
-     * 
-     * @return Weapon proficiency.
-     */
-
-    public double getWeaponProficiency() {
-
-        return Config.getClassInfo(className).get("WEAPON_PROFICIENCY");
-
-    }
-
-    /**
      * Get the if the player will hit its target.
      * 
      * @return Whether or not the player hit its target.
@@ -396,6 +385,74 @@ public class UserData {
         // Defenders evasion rating
 
         return false;
+
+    }
+
+    /**
+     * List of all armor types the class can use.
+     *  
+     * @return List of armor types the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public List<String> getArmorTypes() {
+
+        return Config.getClassArmorTypes(className);
+
+    }
+
+    /**
+     * List of all armor the class can use.
+     *  
+     * @return List of armor the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public List<String> getUsableArmor() {
+
+        return Config.getUsableArmor(className);
+
+    }
+
+    /**
+     * List of all weapon types the class can use.
+     *  
+     * @return List of weapon types the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public List<String> getWeaponTypes() {
+
+        return Config.getClassWeaponTypes(className);
+
+    }
+
+    /**
+     * List of all weapons the class can use.
+     *  
+     * @return List of weapons the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public List<String> getUsableWeapons() {
+
+        return Config.getUsableWeapons(className);
+
+    }
+
+    /**
+     * Get the player's base weapon proficiency.
+     * 
+     * @return Weapon proficiency.
+     */
+
+    public double getWeaponProficiency() {
+
+        return Config.getClassInfo(className).get("WEAPON_PROFICIENCY");
 
     }
 
