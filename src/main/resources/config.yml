@@ -53,6 +53,9 @@ classes:
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
 
+            weaponProficiency: [ Light ]
+            armorProficiency: [ Light ]
+
     Warrior:
 
         stats:
@@ -64,6 +67,9 @@ classes:
             baseWeaponProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light, Medium, Heavy ]
+            armorProficiency: [ Light, Medium, Heavy ]
 
         skills:
             nametag: true
@@ -82,6 +88,9 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Bow, Crossbow, Light ]
+            armorProficiency: [ Light ]
 
         extra:
             nametag: true
@@ -102,6 +111,9 @@ classes:
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
 
+            weaponProficiency: [ Trident, Light ]
+            armorProficiency: [ Light ]
+
         extra:
             nametag: true
             harvestChance: 0.2
@@ -121,6 +133,9 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light, Medium ]
+            armorProficiency: [ Light, Medium ]
 
         extra:
 
@@ -143,6 +158,9 @@ classes:
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
 
+            weaponProficiency: [ Light, Medium ]
+            armorProficiency: [ Light, Medium, Heavy ]
+
         extra:
             nametag: true
             harvestChance: 0.2
@@ -152,7 +170,7 @@ classes:
             craftSaddle: true
             chanceAnvilNoDamage: true
 
-    Hunter:
+    Huntsman:
 
         stats:
             baseHealth: 16
@@ -163,6 +181,10 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light ]
+            armorProficiency: [ Bow, Light ]
+
         extra:
             nametag: false
             beheadChance: 0.07
@@ -183,6 +205,10 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light ]
+            armorProficiency: [ Light ]
+
         extra:
             nametag: true
             harvestChance: 0.2
@@ -202,6 +228,9 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light ]
+            armorProficiency: [ Light ]
 
         extra:
             nametag: true
@@ -223,6 +252,9 @@ classes:
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
 
+            weaponProficiency: [ Light, Medium ]
+            armorProficiency: [ Light, Medium ]
+
         extra:
 
             nametag: true
@@ -242,6 +274,9 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+
+            weaponProficiency: [ Light ]
+            armorProficiency: [ Light, Medium ]
             
         extra:
             nametag: true
@@ -268,6 +303,7 @@ weapons:
         damage: 10.0
         knockback: 2.0
         sweeping: 3.0
+        type: Heavy
         recipe-items: ["IRON_INGOT", "STICK"]
         recipe-shape: [" A ", " A ", " B "]
 
@@ -286,7 +322,7 @@ armor:
                 loc-name: Placeholder_Helmet
                 lore: [ This is the placeholder helmet. ]
         armor: 10.0
-
+        type: Heavy
         recipe-items: ["IRON_INGOT"]
         recipe-shape: ["AAA", "A A", "   "]
 
@@ -303,6 +339,7 @@ armor:
                 loc-name: Placeholder_Chestplate
                 lore: [ This is the placeholder Chestplate. ]
         armor: 10.0
+        type: Medium
         recipe-items: ["IRON_INGOT"]
         recipe-shape: ["A A", "AAA", "AAA"]
 
@@ -319,6 +356,7 @@ armor:
                 loc-name: Placeholder_Leggings
                 lore: [ This is the placeholder Leggings. ]
         armor: 10.0
+        type: Light
         recipe-items: ["IRON_INGOT"]
         recipe-shape: ["AAA", "A A", "A A"]
 
@@ -335,6 +373,7 @@ armor:
                 loc-name: Placeholder_Boots
                 lore: [ This is the placeholder Boots. ]
         armor: 10.0
+        type: Medium
         recipe-items: ["IRON_INGOT"]
         recipe-shape: ["   ", "A A", "A A"]
 
