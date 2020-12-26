@@ -24,7 +24,7 @@ public class StoneCutterItem {
     ItemStack item;
     ItemMeta itemMeta;
 
-    List<String> numList = Arrays.asList("I", "II", "III", "IV", "V");
+    List<String> numList = Arrays.asList("", "I", "II", "III", "IV", "V");
 
     public StoneCutterItem(Player p, ItemStack i) {
 
@@ -41,7 +41,7 @@ public class StoneCutterItem {
 
             Map<String, Integer> uses = getSharpnessUse();
 
-            String sharpnessLevel = numList.get(getSharpnessLevel() == 0 ? getSharpnessLevel() : getSharpnessLevel() - 1);
+            String sharpnessLevel = numList.get(getSharpnessLevel());
 
             Integer used = uses.get("USES");
             Integer total = uses.get("TOTAL");
@@ -244,7 +244,6 @@ public class StoneCutterItem {
                 }
             }
 
-            //String found = Pattern.compile("([0-9]|[0-9][0-9])(.*)([0-9][0-9])").matcher(loreLine).replaceAll("");
             String[] found = Pattern.compile("Sharpness .*: ").matcher(loreLine).replaceAll("").split("/");
 
             uses.put("USES", Integer.parseInt(found[0]));
