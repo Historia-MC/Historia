@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownBlock;
 
@@ -89,7 +90,9 @@ public class UserData {
 
         if (result == null) {
 
-            Bukkit.getLogger().warning("Could not load info for user " + playerName + " with UUID " + uuid);
+            String message = "Could not load info for user " + playerName + " with UUID " + uuid;
+
+            Bukkit.getLogger().warning(message);
             return;
 
         }
@@ -206,6 +209,18 @@ public class UserData {
     }
 
     /**
+     * Get the player's armor in an ItemStack array.
+     * 
+     * @return Player's armor.
+     */
+
+    public ItemStack[] getArmor() {
+
+        return playerInventory.getArmorContents();
+
+    }
+
+    /**
      * Get the Config values of the weapon in the player's main hand.
      * 
      * @return Contains: Damage, Knockback, SweepingEdge
@@ -291,6 +306,46 @@ public class UserData {
     public float getSpeed() {
 
         return Float.parseFloat(Config.getClassInfo(className).get("SPEED").toString());
+
+    }
+
+    /**
+     * Get the speed penalty of the current armor  being worn.
+     * 
+     * @return Speed penalty.
+     */
+
+    public float getSpeedPenalty() {
+
+        List<String> usable = getUsableArmor();
+        ItemStack[] armor = getArmor();
+
+        float heavy = (float) 0.02;
+        float medium = (float) 0.01;
+
+        int heavyItems = 0;
+        int mediumItems = 0;
+
+        for (ItemStack item : armor) {
+
+            if (item != null) {
+
+                String name = item.getItemMeta().getLocalizedName();
+
+                if (!usable.contains(name)) {
+    
+                    String type = (String) Config.getArmorInfo(name).get("TYPE");
+    
+                    if (type.equals("Heavy")) heavyItems ++;
+                    if (type.equals("Medium")) mediumItems ++;
+    
+                }
+    
+            }
+        }
+
+        return (heavyItems * heavy) + (mediumItems * medium);
+
 
     }
 
@@ -621,5 +676,33 @@ public class UserData {
             return new Location(Bukkit.getWorld("world"), 0, 0, 0);
 
         }
+    }
+
+    /**
+     * Get the player's current nation.
+     * 
+     * @return The player's town or null if no nation was found.
+     * 
+     * @see <a href ="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
+     */
+
+    public Nation getNation() {
+
+        return TownyHandler.getNation(playerName);
+
+    }
+
+    /**
+     * Get the player's current nation name.
+     * 
+     * @return The player's nation name or 'None' if no nation was found.
+     * 
+     * @see <a href ="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
+     */
+
+    public String getNationName() {
+
+        return TownyHandler.getNationName(playerName);
+
     }
 }
