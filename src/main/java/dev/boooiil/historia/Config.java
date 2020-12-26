@@ -402,6 +402,112 @@ public class Config {
 
     }
 
+    /**
+     * List of all weapon types the class can use.
+     *  
+     * @param className - Name of the class.
+     * @return List of weapon types the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public static List<String> getClassWeaponTypes(String className) {
+
+        if (validClass(className)) {
+
+            return configuration.getStringList("classes." + className + ".weaponProficiency");
+
+        } else return Arrays.asList("NOT A VALID CLASS");
+
+    }
+
+    /**
+     * List of all weapons the class can use based on the allowed type.
+     *  
+     * @param className - Name of the class.
+     * @return List of weapons the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public static List<String> getUsableWeapons(String className) {
+
+        if (validClass(className)) {
+
+            List<String> classProficient = getProficientWeapons(className);
+        
+            List<String> found = new ArrayList<>();
+
+            for (String weapon : weaponSet) {
+
+                String type = configuration.getString("weapons." + weapon + ".type");
+
+                if (classProficient.contains(type)) found.add(weapon);
+
+            }
+
+            return found;
+
+        } else return Arrays.asList("NOT A VALID CLASS");
+
+
+
+
+    }
+
+    /**
+     * List of all armor types the class can use.
+     *  
+     * @param className - Name of the class.
+     * @return List of armor types the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public static List<String> getClassArmorTypes(String className) {
+
+        if (validClass(className)) {
+
+            return configuration.getStringList("classes." + className + ".armorProficiency");
+
+        } else return Arrays.asList("NOT A VALID CLASS");
+
+    }
+
+    /**
+     * List of all armor  the class can use based on the allowed type.
+     *  
+     * @param className - Name of the class.
+     * @return List of armor the class can use.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public static List<String> getUsableArmor(String className) {
+
+        if (validClass(className)) {
+
+            List<String> classProficient = getProficientArmor(className);
+        
+            List<String> found = new ArrayList<>();
+
+            for (String armor : armorSet) {
+
+                String type = configuration.getString("armor." + armor + ".type");
+
+                if (classProficient.contains(type)) found.add(armor);
+
+            }
+
+            return found;
+
+        } else return Arrays.asList("NOT A VALID CLASS");
+
+
+
+
+    }
+
     public static Map<String, String> getMySQLInfo() {
 
         String root = "MySQL";
