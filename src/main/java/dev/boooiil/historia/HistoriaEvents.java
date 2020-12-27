@@ -87,7 +87,7 @@ public class HistoriaEvents implements Listener {
 
         // Add feather falling
         ClassSkills classSkills = new ClassSkills();
-        classSkills.AddFeatherFalling(event.getCurrentItem(), event.getWhoClicked());
+        classSkills.AddFeatherFalling(event);
         
     }
 
