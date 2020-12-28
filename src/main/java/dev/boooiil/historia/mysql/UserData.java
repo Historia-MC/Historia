@@ -1,5 +1,6 @@
 package dev.boooiil.historia.mysql;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +44,8 @@ public class UserData {
     int classExperience;
     int classBaseSaturationDrain;
     double classHealth;
+    double classMaxHealth;
+    double classCalculatedHealth;
     float classSpeed;
     double classEvasion;
     double classWeaponProficiency;
@@ -108,6 +111,18 @@ public class UserData {
             lastLogin = Long.parseLong(result.get("Login"));
             lastLogout = Long.parseLong(result.get("Logout"));
 
+            Map<String, Double> classInfo = Config.getClassInfo(className);
+
+            classHealth = classInfo.get("HEALTH");
+            classMaxHealth = classInfo.get("MAX_HEALTH");
+            classCalculatedHealth = (classHealth + ((classMaxHealth - classHealth) / 100)) * classLevel;
+            classEvasion = classInfo.get("EVASION");
+            classSpeed = Float.parseFloat(classInfo.get("SPEED").toString());
+            classWeaponProficiency = classInfo.get("WEAPON_PROFICIENCY");
+            classBowProficiency = classInfo.get("BOW_PROFICIENCY");
+            classCrossbowProficiency = classInfo.get("CROSSBOW_PROFICIENCY");
+
+
             if (playerName != null && !storedName.equals(playerName)) setName();
 
         } else {
@@ -118,6 +133,17 @@ public class UserData {
             lastLogin = new Date().getTime();
 
             MySQL.createUser(uuid, playerName);
+
+            Map<String, Double> classInfo = Config.getClassInfo(className);
+
+            classHealth = classInfo.get("HEALTH");
+            classMaxHealth = classInfo.get("MAX_HEALTH");
+            classCalculatedHealth = (classHealth + ((classMaxHealth - classHealth) / 100)) * classLevel;
+            classEvasion = classInfo.get("EVASION");
+            classSpeed = Float.parseFloat(classInfo.get("SPEED").toString());
+            classWeaponProficiency = classInfo.get("WEAPON_PROFICIENCY");
+            classBowProficiency = classInfo.get("BOW_PROFICIENCY");
+            classCrossbowProficiency = classInfo.get("CROSSBOW_PROFICIENCY");
 
         }
     }
@@ -272,12 +298,7 @@ public class UserData {
 
     public double getHealth() {
 
-        double baseHealth = Config.getClassInfo(className).get("HEALTH");
-        double maxHealth = Config.getClassInfo(className).get("MAX_HEALTH");
-
-        classHealth = (baseHealth + ((maxHealth - baseHealth) / 100)) * getLevel();
-
-        return classHealth;
+        return classCalculatedHealth;
 
     }
 
@@ -289,11 +310,7 @@ public class UserData {
 
     public double getHealthOnLevelUp() {
 
-        double baseHealth = Config.getClassInfo(className).get("HEALTH");
-        double maxHealth = Config.getClassInfo(className).get("MAX_HEALTH");
-        int nextLevel = getLevel() + 1;
-
-        return (baseHealth + ((maxHealth - baseHealth) / 100)) * nextLevel;
+        return (classHealth + ((classMaxHealth - classHealth) / 100)) * classLevel + 1;
 
     }
 
@@ -305,7 +322,7 @@ public class UserData {
 
     public float getSpeed() {
 
-        return Float.parseFloat(Config.getClassInfo(className).get("SPEED").toString());
+        return classSpeed - getSpeedPenalty();
 
     }
 
@@ -345,7 +362,6 @@ public class UserData {
         }
 
         return (heavyItems * heavy) + (mediumItems * medium);
-
 
     }
 
@@ -398,6 +414,32 @@ public class UserData {
     }
 
     /**
+     * Get the accuracy of the user's current weapon.
+     * 
+     * <p> Accuracy will start at 1.0 (100%) then get penalized based on its type.
+     * 
+     * @return Final accuracy.
+     */
+
+    public double getMainHandAccuracy() {
+
+        List<String> types = getWeaponTypes();
+        String type = getMainHandType();
+
+        double baseAccuracy = 1.0;
+        
+        if (!types.contains(type)) {
+
+            if (type.equals("Heavy")) baseAccuracy -= 0.2;
+            if (type.equals("Medium")) baseAccuracy -= 0.1;
+
+        }
+
+        return baseAccuracy;
+
+    }
+
+    /**
      * Get the player's base evasion.
      * 
      * @return Class evasion.
@@ -405,7 +447,26 @@ public class UserData {
 
     public double getEvasion() {
 
-        return Config.getClassInfo(className).get("EVASION");
+        List<String> types = getArmorTypes();
+        List<String> worn = getWornArmorTypes();
+
+        if (!worn.isEmpty()) {
+
+            for (String type : worn) {
+
+                if (!types.contains(type)) {
+
+                    if (type.equals("Heavy")) classEvasion -= 0.05;
+                    if (type.equals("Medium")) classEvasion -= 0.03;
+
+                }
+            }
+
+            return classEvasion;
+
+        } 
+        
+        else return classEvasion;
 
     }
 
@@ -428,10 +489,12 @@ public class UserData {
     /**
      * Get the if the player will hit its target.
      * 
+     * @paran defenderEvasion - Base evasion of the user.
+     * 
      * @return Whether or not the player hit its target.
      */
 
-    public boolean willHit() {
+    public boolean willHit(double defenderEvasion) {
 
         // Will calculate whether or not the user will hit based on:
 
@@ -454,6 +517,33 @@ public class UserData {
     public List<String> getArmorTypes() {
 
         return Config.getClassArmorTypes(className);
+
+    }
+
+    /**
+     * List of armor types the class is wearing.
+     *  
+     * @return List of armor types the class is wearing.
+     * 
+     * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
+
+    public List<String> getWornArmorTypes() {
+
+        List<String> types = new ArrayList<>();
+
+        for (ItemStack armor : getArmor()) {
+
+            if (armor != null) {
+
+                String type = (String) Config.getArmorInfo(armor.getItemMeta().getLocalizedName()).get("TYPE");
+
+                types.add(type);
+
+            }
+        }
+
+        return types;
 
     }
 
@@ -544,6 +634,18 @@ public class UserData {
     public double getWeightCapacity() {
 
         return 40.0;
+
+    }
+
+    public String getMainHandType() {
+
+        return (String) Config.getWeaponInfo(playerInventory.getItemInMainHand().getItemMeta().getLocalizedName()).get("TYPE");
+
+    }
+
+    public String getOffHandType() {
+
+        return (String) Config.getWeaponInfo(playerInventory.getItemInOffHand().getItemMeta().getLocalizedName()).get("TYPE");
 
     }
 

@@ -1,6 +1,7 @@
 package dev.boooiil.historia;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
@@ -9,6 +10,7 @@ import dev.boooiil.historia.commands.Stats;
 import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.crafting.RecipeLoader;
 import dev.boooiil.historia.mysql.MySQL;
+import dev.boooiil.historia.runnable.ClassRunnable;
 
 public class Main extends JavaPlugin {
 
@@ -40,6 +42,10 @@ public class Main extends JavaPlugin {
         this.getCommand("Stats").setExecutor(new Stats());
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
+        
+        ClassRunnable classRunnable = new ClassRunnable(this);
+
+        classRunnable.runTaskTimer(this, 0L, 20L);
 
         //Disabled due to expiry not being finished.
         //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);

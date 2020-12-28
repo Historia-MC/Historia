@@ -348,7 +348,7 @@ public class Config {
 
             armorMap.put("ITEM", configuration.getItemStack(root + ".item"));
             armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
-            weaponMap.put("TYPE", configuration.getString(root + ".type"));
+            armorMap.put("TYPE", configuration.getString(root + ".type"));
             armorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
             armorMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
 
@@ -356,7 +356,7 @@ public class Config {
 
             armorMap.put("ITEM", new ItemStack(Material.AIR));
             armorMap.put("ARMOR", 0);
-            weaponMap.put("TYPE", "Heavy");
+            armorMap.put("TYPE", "Heavy");
             armorMap.put("SHAPE", Arrays.asList(""));
             armorMap.put("RECIPE", Arrays.asList(""));
 
