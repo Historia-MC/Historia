@@ -33,9 +33,15 @@ public class ClassRunnable extends BukkitRunnable {
 
                 }
 
-                if (item != null && item.getType().toString().contains("BOOTS")){
+                if (item != null && item.getType().toString().contains("BOOTS")) {
 
                     validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.PROTECTION_FALL);
+
+                }
+
+                if (item != null && item.getType().toString().contains("AXE")) {
+
+                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
 
                 }
 
@@ -49,6 +55,7 @@ public class ClassRunnable extends BukkitRunnable {
 
         if (className.equals("Miner") && enchantment == Enchantment.DIG_SPEED) return true;
         if (className.equals("Architect") && enchantment == Enchantment.PROTECTION_FALL) return true;
+        if (className.equals("Lumberjack") && enchantment == Enchantment.DIG_SPEED) return true;
         else return false;
 
     }
