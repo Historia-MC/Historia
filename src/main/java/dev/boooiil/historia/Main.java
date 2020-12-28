@@ -43,20 +43,26 @@ public class Main extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
         
+        getLogger().info("Starting class task...");
+
         ClassRunnable classRunnable = new ClassRunnable(this);
 
         classRunnable.runTaskTimer(this, 0L, 20L);
 
-        //Disabled due to expiry not being finished.
-        //this.getServer().getPluginManager().registerEvents(new PlayerItemHeld(), this);
-
+        getLogger().info("Task queued.");
         
         //Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
 
         getLogger().info("Plugin enabled.");
 
+        getLogger().info("Loading Recipes...");
+
         RecipeLoader.load(this);
+
+        getLogger().info("Recipes loaded.");
+
+        getLogger().info("Loading MySQL...");
 
         try {
 
@@ -64,9 +70,9 @@ public class Main extends JavaPlugin {
 
             sql.createTable();
 
-            getLogger().info("Loaded MySQL");
+            getLogger().info("Loaded MySQL.");
 
-        } catch (Exception e) { getLogger().info("Failed to load MySQL"); e.printStackTrace(); }
+        } catch (Exception e) { getLogger().info("Failed to load MySQL."); e.printStackTrace(); }
 
     }
 
