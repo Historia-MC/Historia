@@ -72,7 +72,14 @@ public class Main extends JavaPlugin {
 
             getLogger().info("Loaded MySQL.");
 
-        } catch (Exception e) { getLogger().info("Failed to load MySQL."); e.printStackTrace(); }
+        } catch (Exception e) { 
+
+            getLogger().info("Failed to load MySQL."); 
+
+            e.printStackTrace(); 
+
+            getServer().getPluginManager().disablePlugin(this);
+        }
 
     }
 
