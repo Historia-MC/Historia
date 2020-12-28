@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
 
 import dev.boooiil.historia.Config;
 
@@ -24,9 +27,10 @@ public class MySQL {
     private static final String PASSWORD = sql.get("PASSWORD");
     private static final String IP = sql.get("IP");
     private static final String PORT = sql.get("PORT");
+    private static final Logger log = Bukkit.getLogger();
 
     // Create a URL that we will use to connect to the MySQL database.
-    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
+    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?allowPublicKeyRetrieval=true&useSSL=false;";
 
     /**
      * Create the table in the database if it does not exist.
@@ -88,8 +92,12 @@ public class MySQL {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
+            log.info("Created user: " + playerName + " in the Database.");
+
         } catch (SQLException e) {
             e.printStackTrace();
+
+            log.severe("FAILED TO CREATE USER.");
         }
 
     }
@@ -363,6 +371,41 @@ public class MySQL {
         } catch (Exception e) { e.printStackTrace(); }
 
         return null;
+
+    }
+
+    private void validateFields() {
+
+        if (DATABASE == null) {
+
+            log.severe("VALUE IN MySQL.database IS NULL.");
+            Bukkit.getServer().getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("Historia"));
+
+        }
+
+        if (IP == null) {
+
+            log.severe("VALUE IN MySQL.ip IS NULL.");
+            
+        }
+
+        if (USERNAME == null) {
+
+            log.severe("VALUE IN MySQL.username IS NULL.");
+            
+        }
+
+        if (PASSWORD == null) {
+
+            log.severe("VALUE IN MySQL.password IS NULL.");
+            
+        }
+
+        if (PORT == null) {
+
+            log.severe("VALUE IN MySQL.port IS NULL.");
+            
+        }
 
     }
     
