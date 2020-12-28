@@ -2,13 +2,17 @@ package dev.boooiil.historia.expiry;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import dev.boooiil.historia.Config;
 
 public class ExpiryManager {
 
@@ -73,11 +77,25 @@ public class ExpiryManager {
 
     private ItemMeta setExpiry(ItemStack item) {
 
-        Calendar date = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         ItemMeta meta = item.getItemMeta();
-        
-        meta.setLore(Arrays.asList("Expiry: " + (date.get(Calendar.MONTH) + 1)  + "-" + date.get(Calendar.DATE) + "-" + date.get(Calendar.YEAR))); 
 
+        // START William: This should get from the config the expiry data
+
+        // Get the expiry from the config
+        Integer expiry = (Integer)Config.getFoodInfo(item.getType().toString()).get("EXPIRY");
+
+        // DEBUG TESTS
+        // Bukkit.getLogger().info("Getting Expiry!");
+        // Bukkit.getLogger().info("Expiry: " + expiry.toString());
+
+        //Calculate the new date based on the values.
+        calendar.add(Calendar.DATE, expiry);
+
+        // Set the lore
+        meta.setLore(Arrays.asList("Expiry: " + (calendar.get(Calendar.MONTH) + 1)  + "-" + calendar.get(Calendar.DATE) + "-" + calendar.get(Calendar.YEAR))); 
+
+        // END WILLIAM
         return newExpiryMeta = meta;
 
     }
