@@ -1,5 +1,7 @@
 package dev.boooiil.historia;
 
+import org.bukkit.Server;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -78,7 +80,7 @@ public class Main extends JavaPlugin {
 
             e.printStackTrace(); 
 
-            getServer().getPluginManager().disablePlugin(this);
+            disable((Plugin) this);
         }
 
     }
@@ -86,5 +88,11 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         getLogger().info("Plugin disabled.");
+    }
+
+    public static void disable(Plugin plugin) {
+
+        plugin.getServer().getPluginManager().disablePlugin(plugin);
+
     }
 }
