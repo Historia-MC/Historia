@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.Main;
 
 public class MySQL {
 
@@ -27,10 +28,10 @@ public class MySQL {
     private static final String PASSWORD = sql.get("PASSWORD");
     private static final String IP = sql.get("IP");
     private static final String PORT = sql.get("PORT");
-    private static final Logger log = Bukkit.getLogger();
+    private static final Logger log = Bukkit.getPluginManager().getPlugin("Historia").getLogger();
 
     // Create a URL that we will use to connect to the MySQL database.
-    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?allowPublicKeyRetrieval=true&useSSL=false";
+    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
 
     /**
      * Create the table in the database if it does not exist.
@@ -39,17 +40,20 @@ public class MySQL {
      */
     public void createTable() throws SQLException {
 
-        // Issue the statement that we will use to create the table if it does not
-        // exist.
-        String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, Login bigint, Logout bigint, PRIMARY KEY (UUID))";
+        if (validateFields()) {
 
-        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            // Issue the statement that we will use to create the table if it does not
+            // exist.
+            String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, Login bigint, Logout bigint, PRIMARY KEY (UUID))";
 
-            // Connect to the database and assign that connection to "connection".
+            try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
 
-            Statement statement = connection.createStatement();
-            statement.execute(createTable);
+                // Connect to the database and assign that connection to "connection".
 
+                Statement statement = connection.createStatement();
+                statement.execute(createTable);
+
+            }
         }
     }
 
@@ -374,18 +378,23 @@ public class MySQL {
 
     }
 
-    private void validateFields() {
+    private boolean validateFields() {
+
+        int caught = 0;
 
         if (DATABASE == null) {
 
             log.severe("VALUE IN MySQL.database IS NULL.");
-            Bukkit.getServer().getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin("Historia"));
+
+            caught++;
 
         }
 
         if (IP == null) {
 
             log.severe("VALUE IN MySQL.ip IS NULL.");
+
+            caught++;
             
         }
 
@@ -393,11 +402,15 @@ public class MySQL {
 
             log.severe("VALUE IN MySQL.username IS NULL.");
             
+            caught++;
+
         }
 
         if (PASSWORD == null) {
 
             log.severe("VALUE IN MySQL.password IS NULL.");
+            
+            caught++;
             
         }
 
@@ -405,7 +418,18 @@ public class MySQL {
 
             log.severe("VALUE IN MySQL.port IS NULL.");
             
+            caught++;
+            
         }
+
+        if (caught > 0) {
+
+            Main.disable(Bukkit.getPluginManager().getPlugin("Historia"));
+
+            return false;
+        }
+
+        return true;
 
     }
     
