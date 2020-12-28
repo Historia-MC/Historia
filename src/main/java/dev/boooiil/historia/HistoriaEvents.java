@@ -82,12 +82,21 @@ public class HistoriaEvents implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
+
+        /*
+        Bukkit.getLogger().info("Action: " + event.getAction());
+        Bukkit.getLogger().info("ClickType: " + event.getAction());
+        Bukkit.getLogger().info("Item: " + event.getCurrentItem());
+        Bukkit.getLogger().info("Cursor: " + event.getCursor());
+        Bukkit.getLogger().info("Slot: " + event.getSlot());
+        Bukkit.getLogger().info("Slot Type: " + event.getSlotType());
+        Bukkit.getLogger().info("Left Click: " + event.isLeftClick());
+        Bukkit.getLogger().info("Right Click: " + event.isRightClick());
+        Bukkit.getLogger().info("Shift Click: " + event.isShiftClick());
+        */
+
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getCurrentItem(), event.getWhoClicked());
-
-        // Add feather falling
-        ClassSkills classSkills = new ClassSkills();
-        classSkills.AddFeatherFalling(event);
         
     }
 
