@@ -27,19 +27,19 @@ public class ClassRunnable extends BukkitRunnable {
 
             for (ItemStack item : player.getInventory().getContents()) {
 
-                if (item != null && item.getType().toString().contains("PICKAXE")) {
+                if (item != null && item.getType().toString().contains("_PICKAXE")) {
 
                     validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
 
                 }
 
-                if (item != null && item.getType().toString().contains("BOOTS")) {
+                if (item != null && item.getType().toString().contains("_BOOTS")) {
 
                     validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.PROTECTION_FALL);
 
                 }
 
-                if (item != null && item.getType().toString().contains("AXE")) {
+                if (item != null && item.getType().toString().contains("_AXE")) {
 
                     validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
 
