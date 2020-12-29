@@ -81,13 +81,7 @@ public class ExpiryManager {
         ItemMeta meta = item.getItemMeta();
 
         // START William: This should get from the config the expiry data
-
-        // Get the expiry from the config
         Integer expiry = (Integer)Config.getFoodInfo(item.getType().toString()).get("EXPIRY");
-
-        // DEBUG TESTS
-        // Bukkit.getLogger().info("Getting Expiry!");
-        // Bukkit.getLogger().info("Expiry: " + expiry.toString());
 
         //Calculate the new date based on the values.
         calendar.add(Calendar.DATE, expiry);
