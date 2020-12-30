@@ -489,6 +489,96 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
 
+    public static List<Material> getAllAxes() {
+
+        List<Material> found = new ArrayList<>();
+
+        for (Material material : Material.values()) {
+
+            if (material.toString().contains("AXE") && !material.toString().contains("PICKAXE")) {
+
+                found.add(material);
+
+            }
+
+        }
+        
+        return found;
+
+    }
+
+    public static List<Material> getAllPickaxes() {
+
+        List<Material> found = new ArrayList<>();
+
+        for (Material material : Material.values()) {
+
+            if (material.toString().contains("PICKAXE")) {
+
+                found.add(material);
+
+            }
+
+        }
+        
+        return found;
+
+    }
+
+    public static List<Material> getAllShovels() {
+
+        List<Material> found = new ArrayList<>();
+
+        for (Material material : Material.values()) {
+
+            if (material.toString().contains("SHOVEL")) {
+
+                found.add(material);
+
+            }
+
+        }
+        
+        return found;
+
+    }
+
+    public static List<Material> getAllHoes() {
+
+        List<Material> found = new ArrayList<>();
+
+        for (Material material : Material.values()) {
+
+            if (material.toString().contains("HOE")) {
+
+                found.add(material);
+
+            }
+
+        }
+        
+        return found;
+
+    }
+
+    public static List<Material> getAllBoots() {
+
+        List<Material> found = new ArrayList<>();
+
+        for (Material material : Material.values()) {
+
+            if (material.toString().contains("BOOTS")) {
+
+                found.add(material);
+
+            }
+
+        }
+        
+        return found;
+
+    }
+
     public static List<String> getUsableArmor(String className) {
 
         if (validClass(className)) {
