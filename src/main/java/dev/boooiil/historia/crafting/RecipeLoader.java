@@ -1,14 +1,12 @@
 package dev.boooiil.historia.crafting;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,38 +20,34 @@ public class RecipeLoader {
 
     public static void load(Plugin plugin){
 
-        // Create new config
-        Config config = new Config();
-
         // For each weapon in the config weapon list
         // (Loading Weapons)
-        for (String weapon : config.getWeaponSet()) {
+        for (String weapon : Config.getWeaponSet()) {
 
             // Get the item stack of the weapon
-            ItemStack item = (ItemStack) config.getWeaponInfo(weapon).get("ITEM");
+            ItemStack item = (ItemStack) Config.getWeaponInfo(weapon).get("ITEM");
 
             // Get the item meta
             ItemMeta meta = item.getItemMeta();
+            List<String> lore = meta.getLore();
 
             // The display name shows the name of the weapon
             // While the localized name is used to determine the weapon type in code
             meta.setDisplayName("§a" + meta.getDisplayName());
             meta.setLocalizedName(meta.getLocalizedName());
 
-            // Get stats
-            double damage = (double)config.getWeaponInfo(weapon).get("DAMAGE");
-            double knockback = (double)config.getWeaponInfo(weapon).get("KNOCKBACK");
-            double sweeping = (double)config.getWeaponInfo(weapon).get("SWEEPING");
+            lore.add("");
+            lore.add("§9-----------------");
+            lore.add("");
+            lore.add("§7Damage - §k?");
+            lore.add("§7Sweeping - §k?");
+            lore.add("§7Knockback - §k?");
+            lore.add("§7Speed - §k?");
+            lore.add("");
 
-            // Set weapon attributes (set to 100 for testing purposes) 
-            AttributeModifier damageModifier = new AttributeModifier(UUID.randomUUID(), "generic.attackDamage", damage, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
-            AttributeModifier knockbackModifier = new AttributeModifier(UUID.randomUUID(), "generic.attackKnockback", knockback, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
-            // AttributeModifier sweepignModifier = new AttributeModifier(UUID.randomUUID(), "generic.attackSweeping", sweeping, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
-            
-            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
-            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_KNOCKBACK, knockbackModifier);
-            // meta.addAttributeModifier(Attribute., modifier)
+            meta.setLore(lore);
 
+            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
             // Set the meta of the sword to the edited meta.
             item.setItemMeta(meta);
@@ -70,13 +64,13 @@ public class RecipeLoader {
             // Where Each "X" is a space on the crafting bench
 
             // Get the shape (through Config.java)
-            List<String> shape = (List<String>) config.getWeaponInfo(weapon).get("SHAPE");
+            List<String> shape = (List<String>) Config.getWeaponInfo(weapon).get("SHAPE");
 
             // Set recipe shape (through Config.java)
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
             // Get recipe ingredients and keys (through Config.java)
-            List<String> items = (List<String>) config.getWeaponInfo(weapon).get("RECIPE");
+            List<String> items = (List<String>) Config.getWeaponInfo(weapon).get("RECIPE");
 
             // The letters used to identify the ingredients
             // A = 0th element, B = 1st element, and so on
@@ -95,10 +89,10 @@ public class RecipeLoader {
 
         // For each armor in the config weapon list
         // (Loading Armor)
-        for (String armor : config.getArmorSet()) {
+        for (String armor : Config.getArmorSet()) {
 
             // Get the item stack of the weapon
-            ItemStack item = (ItemStack) config.getArmorInfo(armor).get("ITEM");
+            ItemStack item = (ItemStack) Config.getArmorInfo(armor).get("ITEM");
 
             // Get the item meta
             ItemMeta meta = item.getItemMeta();
@@ -127,7 +121,7 @@ public class RecipeLoader {
             // Where Each "X" is a space on the crafting bench
 
             // Get the shape (through Config.java)
-            List<String> shape = (List<String>) config.getArmorInfo(armor).get("SHAPE");
+            List<String> shape = (List<String>) Config.getArmorInfo(armor).get("SHAPE");
 
             // Debug in case the recipe loader shape breaks
             // Bukkit.getLogger().info("ARMOR! " + armor);
@@ -137,7 +131,7 @@ public class RecipeLoader {
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
             // Get recipe ingredients and keys (through Config.java)
-            List<String> items = (List<String>) config.getArmorInfo(armor).get("RECIPE");
+            List<String> items = (List<String>) Config.getArmorInfo(armor).get("RECIPE");
 
             // The letters used to identify the ingredients
             // A = 0th element, B = 1st element, and so on
