@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.Damageable;
 // Add the Inventory Item Meta
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.worldguard.WorldGuardHandler;
+import dev.boooiil.historia.dependents.worldguard.WorldGuardHandler;
 
 public class FlameArrowHandler {
 
