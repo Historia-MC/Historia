@@ -320,7 +320,7 @@ public class Config {
             weaponMap.put("DAMAGE", blank_double);
             weaponMap.put("KNOCKBACK", blank_double);
             weaponMap.put("SWEEPING", blank_double);
-            weaponMap.put("DURABILITY", blank_integer)
+            weaponMap.put("DURABILITY", blank_integer);
             weaponMap.put("ITEM", new ItemStack(Material.AIR));
             weaponMap.put("TYPE", "Light");
             weaponMap.put("SHAPE", Arrays.asList(""));
