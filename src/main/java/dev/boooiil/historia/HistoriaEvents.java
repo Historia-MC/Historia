@@ -21,6 +21,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
@@ -41,6 +42,7 @@ import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
 import dev.boooiil.historia.classes.ClassManager;
 import dev.boooiil.historia.classes.ClassSkills;
+import dev.boooiil.historia.crafting.WeaponStats;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
@@ -284,6 +286,11 @@ public class HistoriaEvents implements Listener {
 
         furnaceManager.FishSmelting(furnaceSmeltEvent);
 
+    }
+
+    @EventHandler
+    public void onCraftItemEvent(CraftItemEvent craftItemEvent){
+        WeaponStats.initiate(craftItemEvent);
     }
 
     @EventHandler
