@@ -303,9 +303,10 @@ public class Config {
 
             String root = "weapons." + weaponName;
 
-            weaponMap.put("DAMAGE", configuration.getDouble(root + ".damage"));
-            weaponMap.put("KNOCKBACK", configuration.getDouble(root + ".knockback"));
-            weaponMap.put("SWEEPING", configuration.getDouble(root + ".sweeping"));
+            weaponMap.put("DAMAGE", configuration.getDoubleList(root + ".damage"));
+            weaponMap.put("KNOCKBACK", configuration.getDoubleList(root + ".knockback"));
+            weaponMap.put("SWEEPING", configuration.getDoubleList(root + ".sweeping"));
+            weaponMap.put("DURABILITY", configuration.getIntegerList(root + ".durability"));
             weaponMap.put("ITEM", configuration.getItemStack(root + ".item"));
             weaponMap.put("TYPE", configuration.getString(root + ".type"));
             weaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
@@ -313,9 +314,13 @@ public class Config {
 
         } else {
 
-            weaponMap.put("DAMAGE", 1);
-            weaponMap.put("KNOCKBACK", 0);
-            weaponMap.put("SWEEPING", 0);
+            Double[] blank_double = {0.0, 0.0};
+            Integer[] blank_integer = {0, 0};
+
+            weaponMap.put("DAMAGE", blank_double);
+            weaponMap.put("KNOCKBACK", blank_double);
+            weaponMap.put("SWEEPING", blank_double);
+            weaponMap.put("DURABILITY", blank_integer)
             weaponMap.put("ITEM", new ItemStack(Material.AIR));
             weaponMap.put("TYPE", "Light");
             weaponMap.put("SHAPE", Arrays.asList(""));
