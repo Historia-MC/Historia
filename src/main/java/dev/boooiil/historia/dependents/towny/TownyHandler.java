@@ -1,4 +1,4 @@
-package dev.boooiil.historia.towny;
+package dev.boooiil.historia.dependents.towny;
 
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.object.Nation;

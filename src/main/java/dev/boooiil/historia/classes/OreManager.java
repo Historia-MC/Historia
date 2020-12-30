@@ -1,4 +1,4 @@
-package dev.boooiil.historia.misc;
+package dev.boooiil.historia.classes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class OreDrops {
+public class OreManager {
 
     /**
      * Event is fired with the player being part of the event.

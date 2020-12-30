@@ -1,4 +1,4 @@
-package dev.boooiil.historia.worldguard;
+package dev.boooiil.historia.dependents.worldguard;
 
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.LocalPlayer;

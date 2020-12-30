@@ -29,7 +29,11 @@ public class ClassRunnable extends BukkitRunnable {
 
             for (ItemStack item : player.getInventory().getContents()) {
 
-                if (item != null && Config.getAllPickaxes().contains(item.getType())) {
+                if (item != null && Config.getAllPickaxes().contains(item.getType())
+                        || Config.getAllHoes().contains(item.getType())
+                        || Config.getAllShovels().contains(item.getType())
+                        || Config.getAllAxes().contains(item.getType())
+                        || Config.getAllPickaxes().contains(item.getType())) {
 
                     validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
 
@@ -41,40 +45,16 @@ public class ClassRunnable extends BukkitRunnable {
 
                 }
 
-                if (item != null && Config.getAllShovels().contains(item.getType())) {
-
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
-
-                }
-
-                if (item != null && Config.getAllHoes().contains(item.getType())) {
-
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
-
-                }
-                
-                if (item != null && Config.getAllAxes().contains(item.getType())) {
-
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
-
-                }
-                
-                if (item != null && Config.getAllPickaxes().contains(item.getType())) {
-
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
-
-                }
-
             }
 
         }
 
     }
-    
+
     private void validate(String className, ItemStack item, ItemMeta itemMeta, Enchantment enchant) {
 
         if (canApply(className, item.getType())) {
-    
+
             itemMeta.addEnchant(enchant, 1, false);
 
             item.setItemMeta(itemMeta);
@@ -89,14 +69,19 @@ public class ClassRunnable extends BukkitRunnable {
 
         }
     }
-    
+
     private boolean canApply(String className, Material type) {
 
-        if (className.equals("Miner") && Config.getAllPickaxes().contains(type)) return true;
-        if (className.equals("Architect") && Config.getAllBoots().contains(type)) return true;
-        if (className.equals("Lumberjack") && Config.getAllAxes().contains(type)) return true;
-        if (className.equals("Farmer") && Config.getAllShovels().contains(type) || Config.getAllHoes().contains(type)) return true;
-        else return false;
+        if (className.equals("Miner") && Config.getAllPickaxes().contains(type))
+            return true;
+        if (className.equals("Architect") && Config.getAllBoots().contains(type))
+            return true;
+        if (className.equals("Lumberjack") && Config.getAllAxes().contains(type))
+            return true;
+        if (className.equals("Farmer") && Config.getAllShovels().contains(type) || Config.getAllHoes().contains(type))
+            return true;
+        else
+            return false;
 
     }
 }

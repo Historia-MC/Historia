@@ -46,7 +46,7 @@ import dev.boooiil.historia.crafting.WeaponStats;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
-import dev.boooiil.historia.misc.OreDrops;
+import dev.boooiil.historia.classes.OreDrops;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
@@ -54,8 +54,8 @@ import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
-import dev.boooiil.historia.towny.TownyHandler;
-import dev.boooiil.historia.worldguard.WorldGuardHandler;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
+import dev.boooiil.historia.dependents.worldguard.WorldGuardHandler;
 
 public class HistoriaEvents implements Listener {
 
