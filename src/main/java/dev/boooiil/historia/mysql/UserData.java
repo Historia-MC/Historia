@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.Config;
-import dev.boooiil.historia.towny.TownyHandler;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
 
 public class UserData {
 
