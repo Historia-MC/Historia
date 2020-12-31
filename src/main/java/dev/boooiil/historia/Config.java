@@ -231,6 +231,7 @@ public class Config {
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble(root + ".baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble(root + ".baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble(root + ".baseCrossbowProficiency"));
+            classMap.put("HARVEST_CHANCE", configuration.getDouble(root + ".extra.harvestChance"));
 
         } else {
 
@@ -241,6 +242,7 @@ public class Config {
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble("classes.None.stats.baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseCrossbowProficiency"));
+            classMap.put("HARVEST_CHANCE", 0.2);
 
         }
 
@@ -575,6 +577,40 @@ public class Config {
 
         }
         
+        return found;
+
+    }
+
+    public static List<Material> getCropBlocks() {
+
+        List<Material> found = new ArrayList<>();
+
+        found.add(Material.WHEAT);
+        found.add(Material.CARROTS);
+        found.add(Material.POTATOES);
+        found.add(Material.BEETROOT);
+        found.add(Material.PUMPKIN);
+        found.add(Material.MELON);
+        found.add(Material.COCOA_BEANS);
+        found.add(Material.SWEET_BERRIES);
+        found.add(Material.SUGAR_CANE);
+
+        return found;
+
+    }
+
+    public static List<Material> getFarmerExclusiveCrops() {
+
+        List<Material> found = new ArrayList<>();
+
+        found.add(Material.PUMPKIN);
+        found.add(Material.MELON);
+        found.add(Material.COCOA_BEANS);
+        found.add(Material.SWEET_BERRIES);
+        found.add(Material.SUGAR_CANE);
+        found.add(Material.BAMBOO);
+        found.add(Material.BAMBOO_SAPLING);
+
         return found;
 
     }
