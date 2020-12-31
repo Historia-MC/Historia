@@ -62,7 +62,7 @@ public class Main extends JavaPlugin {
 
             sql.createTable();
 
-            getLogger().info("Loaded MySQL.");
+            getLogger().info("MySQL loaded.");
 
         } catch (Exception e) { 
 
