@@ -60,7 +60,7 @@ public class Main extends JavaPlugin {
 
         getLogger().info("Loading Recipes...");
 
-        RecipeLoader.load(this);
+        //RecipeLoader.load(this);
 
         getLogger().info("Recipes loaded.");
 
