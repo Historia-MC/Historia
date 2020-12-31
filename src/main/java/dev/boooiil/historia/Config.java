@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bouncycastle.i18n.LocalizedMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 public class Config {
 
@@ -304,12 +308,21 @@ public class Config {
         if (validWeapon(weaponName)) {
 
             String root = "weapons." + weaponName;
+            String itemRoot = root + ".item";
+
+            String type = configuration.getString(itemRoot + ".type");
+            String localizedName = configuration.getString(itemRoot + ".loc-name");
+            String displayName = configuration.getString(itemRoot + ".display-name");
+            List<String> lore = configuration.getStringList(itemRoot + ".lore");
+            int amount = configuration.getInt(itemRoot + ".amount");
+
+            ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
             weaponMap.put("DAMAGE", configuration.getDoubleList(root + ".damage"));
             weaponMap.put("KNOCKBACK", configuration.getDoubleList(root + ".knockback"));
             weaponMap.put("SWEEPING", configuration.getDoubleList(root + ".sweeping"));
             weaponMap.put("DURABILITY", configuration.getIntegerList(root + ".durability"));
-            weaponMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            weaponMap.put("ITEM", item);
             weaponMap.put("TYPE", configuration.getString(root + ".type"));
             weaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
             weaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
@@ -643,5 +656,23 @@ public class Config {
             return new ItemStack(Material.AIR);
 
         }
+    }
+
+    private static ItemStack constructItemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
+
+        if (type == null) throw new NullPointerException("Type can not be null!");
+
+        ItemStack item = new ItemStack(Material.getMaterial(type), amount);
+
+        ItemMeta meta = item.getItemMeta();
+
+        if (displayName != null) meta.setDisplayName(displayName);
+        if (localizedName != null) meta.setLocalizedName(localizedName);
+        if (lore != null && !lore.isEmpty()) meta.setLore(lore);
+
+        item.setItemMeta(meta);
+
+        return item;
+
     }
 }
