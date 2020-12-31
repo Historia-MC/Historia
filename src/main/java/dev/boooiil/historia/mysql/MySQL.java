@@ -33,12 +33,14 @@ public class MySQL {
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
 
+    private static Connection connection;
+
     /**
      * Create the table in the database if it does not exist.
      * 
      * @throws SQLException Generally, if the plugin can't connect to the database.
      */
-    public void createTable() throws SQLException {
+    public void createTable() {
 
         if (validateFields()) {
 
@@ -46,14 +48,16 @@ public class MySQL {
             // exist.
             String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, Login bigint, Logout bigint, PRIMARY KEY (UUID))";
 
-            try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            try {
+
+                connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
                 // Connect to the database and assign that connection to "connection".
 
                 Statement statement = connection.createStatement();
                 statement.execute(createTable);
 
-            }
+            } catch (SQLException e) { e.printStackTrace(); }
         }
     }
 
@@ -69,8 +73,6 @@ public class MySQL {
         try {
 
             String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, " + new Date().getTime() + ", 0)";
-
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             statement.execute(createUser);
@@ -90,8 +92,6 @@ public class MySQL {
         try {
 
             String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
-
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -118,8 +118,6 @@ public class MySQL {
 
             String string = ("UPDATE historia SET Class = '" + className + "' WHERE UUID = '" + uuid + "'");
 
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
             Statement statement = connection.createStatement();
             statement.execute(string);
 
@@ -140,8 +138,6 @@ public class MySQL {
         try {
 
             String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
-
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -164,8 +160,6 @@ public class MySQL {
 
             String string = ("UPDATE historia SET Login = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
 
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
             Statement statement = connection.createStatement();
             statement.execute(string);
 
@@ -186,8 +180,6 @@ public class MySQL {
         try {
 
             String string = ("UPDATE historia SET Logout = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
-
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -212,9 +204,6 @@ public class MySQL {
         List<String> answer = new ArrayList<>();
 
         try {
-
-            // Connect to the database and assign that connection to "connection".
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
@@ -243,9 +232,6 @@ public class MySQL {
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
-
-            // Connect to the database and assign that connection to "connection".
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
@@ -286,9 +272,6 @@ public class MySQL {
 
             Map<String, String> map = new HashMap<>();
 
-            //Connect to the database and assign that connection to "connection".
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
 
@@ -328,9 +311,6 @@ public class MySQL {
 
         try {
 
-            // Connect to the database and assign that connection to "connection".
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
 
@@ -361,9 +341,6 @@ public class MySQL {
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
         try {
-
-            // Connect to the database and assign that connection to "connection".
-            Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
