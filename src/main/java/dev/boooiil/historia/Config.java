@@ -495,15 +495,11 @@ public class Config {
 
         List<Material> found = new ArrayList<>();
 
-        for (Material material : Material.values()) {
-
-            if (material.toString().contains("AXE") && !material.toString().contains("PICKAXE")) {
-
-                found.add(material);
-
-            }
-
-        }
+        found.add(Material.WOODEN_AXE);
+        found.add(Material.STONE_AXE);
+        found.add(Material.IRON_AXE);
+        found.add(Material.GOLDEN_AXE);
+        found.add(Material.NETHERITE_AXE);
         
         return found;
 
@@ -513,15 +509,11 @@ public class Config {
 
         List<Material> found = new ArrayList<>();
 
-        for (Material material : Material.values()) {
-
-            if (material.toString().contains("PICKAXE")) {
-
-                found.add(material);
-
-            }
-
-        }
+        found.add(Material.WOODEN_PICKAXE);
+        found.add(Material.STONE_PICKAXE);
+        found.add(Material.IRON_PICKAXE);
+        found.add(Material.GOLDEN_PICKAXE);
+        found.add(Material.NETHERITE_PICKAXE);
         
         return found;
 
@@ -531,15 +523,11 @@ public class Config {
 
         List<Material> found = new ArrayList<>();
 
-        for (Material material : Material.values()) {
-
-            if (material.toString().contains("SHOVEL")) {
-
-                found.add(material);
-
-            }
-
-        }
+        found.add(Material.WOODEN_SHOVEL);
+        found.add(Material.STONE_SHOVEL);
+        found.add(Material.IRON_SHOVEL);
+        found.add(Material.GOLDEN_SHOVEL);
+        found.add(Material.NETHERITE_SHOVEL);
         
         return found;
 
@@ -549,15 +537,11 @@ public class Config {
 
         List<Material> found = new ArrayList<>();
 
-        for (Material material : Material.values()) {
-
-            if (material.toString().contains("HOE")) {
-
-                found.add(material);
-
-            }
-
-        }
+        found.add(Material.WOODEN_HOE);
+        found.add(Material.STONE_HOE);
+        found.add(Material.IRON_HOE);
+        found.add(Material.GOLDEN_HOE);
+        found.add(Material.NETHERITE_HOE);
         
         return found;
 
@@ -567,15 +551,10 @@ public class Config {
 
         List<Material> found = new ArrayList<>();
 
-        for (Material material : Material.values()) {
-
-            if (material.toString().contains("BOOTS")) {
-
-                found.add(material);
-
-            }
-
-        }
+        found.add(Material.LEATHER_BOOTS);
+        found.add(Material.IRON_BOOTS);
+        found.add(Material.GOLDEN_BOOTS);
+        found.add(Material.NETHERITE_BOOTS);
         
         return found;
 
