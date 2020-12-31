@@ -1,5 +1,8 @@
 package dev.boooiil.historia.runnable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -29,19 +32,10 @@ public class ClassRunnable extends BukkitRunnable {
 
             for (ItemStack item : player.getInventory().getContents()) {
 
-                if (item != null && Config.getAllPickaxes().contains(item.getType())
-                        || Config.getAllHoes().contains(item.getType())
-                        || Config.getAllShovels().contains(item.getType())
-                        || Config.getAllAxes().contains(item.getType())
-                        || Config.getAllPickaxes().contains(item.getType())) {
+                if (item != null) {
 
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
-
-                }
-
-                if (item != null && Config.getAllBoots().contains(item.getType())) {
-
-                    validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.PROTECTION_FALL);
+                    if (getDigSpeedItems().contains(item.getType())) validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.DIG_SPEED);
+                    if (Config.getAllBoots().contains(item.getType())) validate(userData.getClassName(), item, item.getItemMeta(), Enchantment.PROTECTION_FALL);
 
                 }
 
@@ -84,4 +78,32 @@ public class ClassRunnable extends BukkitRunnable {
             return false;
 
     }
+
+    private List<Material> getDigSpeedItems() {
+
+        List<Material> total = new ArrayList<>();
+        
+        for (Material material : Config.getAllAxes()) {
+
+            total.add(material);
+
+        }
+
+        for (Material material : Config.getAllPickaxes()) {
+
+            total.add(material);
+
+        }
+
+        for (Material material : Config.getAllShovels()) {
+
+            total.add(material);
+
+        }
+
+        return total;
+
+    }
+
+
 }
