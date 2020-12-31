@@ -1,16 +1,12 @@
 package dev.boooiil.historia;
 
-import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
-import dev.boooiil.historia.commands.Message;
 import dev.boooiil.historia.commands.Stats;
 import dev.boooiil.historia.commands.DebugItems;
-import dev.boooiil.historia.crafting.RecipeLoader;
 import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.runnable.ClassRunnable;
 
@@ -38,7 +34,7 @@ public class Main extends JavaPlugin {
 
         //Disabled due to being beginner commands and not having a use.
         this.getCommand("Ignite").setExecutor(new Ignite());
-        this.getCommand("Message").setExecutor(new Message());
+        this.getCommand("Class").setExecutor(new dev.boooiil.historia.commands.Class());
         this.getCommand("Item").setExecutor(new Item());
         this.getCommand("DebugItems").setExecutor(new DebugItems());
         this.getCommand("Stats").setExecutor(new Stats());
@@ -57,12 +53,6 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
 
         getLogger().info("Plugin enabled.");
-
-        getLogger().info("Loading Recipes...");
-
-        //RecipeLoader.load(this);
-
-        getLogger().info("Recipes loaded.");
 
         getLogger().info("Loading MySQL...");
 
