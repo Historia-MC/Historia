@@ -475,6 +475,13 @@ public class UserData {
         return Config.getClassInfo(className).get("HARVEST_CHANCE");
 
     }
+
+    public double getDoubleHarvestChance() {
+
+        return Config.getClassInfo(className).get("DOUBLE_HARVEST_CHANCE");
+
+    }
+
     /**
      * Get the player's base evasion on level up.
      * 
