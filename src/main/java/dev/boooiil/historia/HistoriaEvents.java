@@ -210,14 +210,12 @@ public class HistoriaEvents implements Listener {
 
         if (event.getDamager() instanceof Player) {
 
-            Config config = new Config();
-
             Player player = (Player) event.getDamager();
             ItemStack handItem = player.getInventory().getItemInMainHand();
 
             StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
-            if (config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
+            if (handItem.getItemMeta().hasLocalizedName() && Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
 
         }
         //DamageManager manager = new DamageManager();

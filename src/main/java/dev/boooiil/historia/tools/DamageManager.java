@@ -137,17 +137,13 @@ public class DamageManager {
 
     private double getArmorValue(String armorName) {
 
-        Config config = new Config();
-
-        return (double) config.getArmorInfo(armorName).get("ARMOR");
+        return (double) Config.getArmorInfo(armorName).get("ARMOR");
 
     }
 
     private double getWeaponDamage(String weaponName) {
-        
-        Config config = new Config();
 
-        return (double) config.getWeaponInfo(weaponName).get("DAMAGE");
+        return (double) Config.getWeaponInfo(weaponName).get("DAMAGE");
     
     }
 

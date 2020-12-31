@@ -22,12 +22,10 @@ public class FoodItem {
 
     FoodItem(ItemStack item) {
 
-        Config config = new Config();
+        effectList.add((PotionEffect) Config.getFoodInfo("None").get("POISON"));
+        effectList.add((PotionEffect) Config.getFoodInfo("None").get("HUNGER"));
 
-        effectList.add((PotionEffect) config.getFoodInfo("None").get("POISON"));
-        effectList.add((PotionEffect) config.getFoodInfo("None").get("HUNGER"));
-
-        foodDays = (int) config.getFoodInfo(item.getType().toString()).get("EXPIRY");
+        foodDays = (int) Config.getFoodInfo(item.getType().toString()).get("EXPIRY");
         foodMilliseconds = (long) foodDays * 86400000;
 
     }
