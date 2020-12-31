@@ -46,7 +46,7 @@ import dev.boooiil.historia.crafting.WeaponStats;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
-import dev.boooiil.historia.classes.OreDrops;
+import dev.boooiil.historia.classes.OreManager;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
@@ -241,7 +241,7 @@ public class HistoriaEvents implements Listener {
 
         if (material == Material.COAL_BLOCK && TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
 
-            OreDrops.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
+            OreManager.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
 
         }
 
