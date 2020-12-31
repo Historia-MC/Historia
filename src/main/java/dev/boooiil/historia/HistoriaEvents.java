@@ -3,6 +3,7 @@ package dev.boooiil.historia;
 import java.util.Date;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -42,6 +43,7 @@ import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
 import dev.boooiil.historia.classes.ClassManager;
 import dev.boooiil.historia.classes.ClassSkills;
+import dev.boooiil.historia.classes.CropManager;
 import dev.boooiil.historia.crafting.WeaponStats;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
@@ -232,37 +234,16 @@ public class HistoriaEvents implements Listener {
 
         //String string = string;
         //returns null;
-
+        Player player = event.getPlayer();
         Block block = event.getBlock();
-
+        Location location = block.getLocation();
         Material material = block.getType();
 
-        if (material == Material.COAL_BLOCK && TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getPlayer().getInventory().getItemInMainHand().getType())) {
+        if (TownyHandler.getPermissionByMaterial(player, location, material)) {
 
             OreManager.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
-
-        }
-
-        if (material == Material.IRON_ORE) {
-
-            ItemStack item = new ItemStack(Material.IRON_HELMET);
-
-            ItemMeta meta = item.getItemMeta(); 
             
-            AttributeModifier modifier = new AttributeModifier("generic.armor", (double) 10, AttributeModifier.Operation.ADD_NUMBER);
-
-            meta.addAttributeModifier(Attribute.GENERIC_ARMOR, modifier);
-
-            item.setItemMeta(meta);
-
-            System.out.println("Serialization: " + item.serialize());
-            
-
-            //Config blockConfig = new Config("LOW_IRON_CHUNK");
-            //Config armorConfig = new Config("Placeholder_Helmet");
-
-            //event.getPlayer().getLocation().getWorld().dropItemNaturally(event.getPlayer().getLocation(), blockConfig.blockItem);
-            event.getPlayer().getLocation().getWorld().dropItemNaturally(event.getPlayer().getLocation(), item);
+            CropManager.calculateDrop(event);
 
         }
 
