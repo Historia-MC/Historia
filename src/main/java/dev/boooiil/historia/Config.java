@@ -1,6 +1,5 @@
 package dev.boooiil.historia;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -235,6 +234,7 @@ public class Config {
             classMap.put("BOW_PROFICIENCY", configuration.getDouble(root + ".baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble(root + ".baseCrossbowProficiency"));
             classMap.put("HARVEST_CHANCE", configuration.getDouble(root + ".extra.harvestChance"));
+            classMap.put("DOUBLE_HARVEST_CHANCE", configuration.getDouble(root + ".extra.doubleHarvestChance"));
 
         } else {
 
@@ -246,6 +246,7 @@ public class Config {
             classMap.put("BOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseBowProficiency"));
             classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseCrossbowProficiency"));
             classMap.put("HARVEST_CHANCE", 0.2);
+            classMap.put("DOUBLE_HARVEST_CHANCE", 0.0);
 
         }
 
