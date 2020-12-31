@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.Config;
-import dev.boooiil.historia.mysql.UserData;
 
 public class DebugItems implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -50,13 +49,11 @@ public class DebugItems implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("config")) {
 
-                        Config config = new Config();
-
-                        Map<String, Object> weapon = config.getWeaponInfo("Placeholder_Sword"); 
-                        Map<String, Object> helmet = config.getArmorInfo("Placeholder_Helmet");
-                        Map<String, Object> chestplate = config.getArmorInfo("Placeholder_Chestplate");
-                        Map<String, Object> leggings = config.getArmorInfo("Placeholder_Leggings");
-                        Map<String, Object> boots = config.getArmorInfo("Placeholder_Boots");
+                        Map<String, Object> weapon = Config.getWeaponInfo("Placeholder_Sword"); 
+                        Map<String, Object> helmet = Config.getArmorInfo("Placeholder_Helmet");
+                        Map<String, Object> chestplate = Config.getArmorInfo("Placeholder_Chestplate");
+                        Map<String, Object> leggings = Config.getArmorInfo("Placeholder_Leggings");
+                        Map<String, Object> boots = Config.getArmorInfo("Placeholder_Boots");
 
 
                         sender.sendMessage("Weapon: " + weapon.toString());
@@ -67,43 +64,6 @@ public class DebugItems implements CommandExecutor {
                     
                     }
 
-                    if (args[0].equalsIgnoreCase("player")) {
-
-                        UserData data = new UserData((Player) sender);
-
-                        sender.sendMessage(data.getClassName());
-                    }
-                    if (args[0].equalsIgnoreCase("class")) {
-
-                        Player player = (Player) sender;
-                        Config config = new Config();
-                        UserData user = new UserData(player);
-
-                        if (args[1].equalsIgnoreCase("add")) {
-
-                            if (config.validClass(args[2])) {
-                                
-                                user.setClass(args[2]);
-
-                            } else sender.sendMessage("That class was not in the list of classes.");
-
-                        }
-                        else if (args[1].equalsIgnoreCase("remove")) {
-
-                            user.setClass("None");
-
-                        }
-                        else if (args[1].equalsIgnoreCase("stats")) {
-
-                            sender.sendMessage("Name:" + user.getClassName());
-                            sender.sendMessage("Armor:" + user.getArmorValue());
-                            sender.sendMessage("Experience:" + user.getExperience());
-                            sender.sendMessage("Level:" + user.getLevel());
-                            sender.sendMessage("Health:" + user.getHealth());
-
-                        } else sender.sendMessage("Must be format /debugitems class add <class>, /debugitems class remove <class>, /debugitems class stats");
-
-                    }
                 }
 
             }
