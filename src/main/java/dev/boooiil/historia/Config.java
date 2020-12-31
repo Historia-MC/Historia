@@ -1,5 +1,6 @@
 package dev.boooiil.historia;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.bouncycastle.i18n.LocalizedMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,7 +16,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import edu.umd.cs.findbugs.annotations.CheckForNull;
 
 public class Config {
 
@@ -656,6 +655,76 @@ public class Config {
             return new ItemStack(Material.AIR);
 
         }
+    }
+
+    public static Map<String, Integer> getOreChance(String oreName) {
+        
+        Map<String, Integer> chance = new HashMap<>();
+
+        if (validOre(oreName)) {
+
+            String root = "items." + oreName;
+            Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
+    
+            for (String key : keys) {
+    
+                root += "." + key;
+    
+                chance.put(key, configuration.getInt(root + ".chance"));
+    
+            }
+
+        } else {
+
+            chance.put("None", 0);
+
+        }
+
+        return chance;
+    }
+
+    public static Map<String, Object> getIngotChance(String oreName, String ingotName, String className) {
+
+        String root = "items." + oreName + "." + ingotName;
+
+        Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
+        Map<String, Object> map = new HashMap<>();
+
+        boolean miner = className.equals("Miner");
+
+        for (String key : keys) {
+
+            root += "." + key;
+
+            if (!miner && configuration.getString(root + ".class").equals("Any")) {
+
+                map.put(key, configuration.getInt(root + ".chance"));
+
+            } else {
+
+                map.put(key, configuration.getInt(root + ".chance"));
+
+            }
+
+        }
+
+
+        return map;
+
+    }
+
+    public static ItemStack getIngot(String oreName, String ingotName, String ingotType) {
+
+        String root = "items." + oreName + "." + ingotName + "." + ingotType;
+
+        String type = configuration.getString(root + ".type");
+        int amount = configuration.getInt(root + ".amount");
+        String displayName = configuration.getString(root + ".display-name");
+        String localizedName = configuration.getString(root + ".loc-name");
+        List<String> lore = configuration.getStringList(root + ".lore");
+
+        return constructItemStack(type, amount, displayName, localizedName, lore);
+
     }
 
     private static ItemStack constructItemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
