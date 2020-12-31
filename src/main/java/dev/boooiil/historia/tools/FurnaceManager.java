@@ -3,6 +3,7 @@ package dev.boooiil.historia.tools;
 import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,14 +19,25 @@ public class FurnaceManager {
         //Bukkit.getLogger().info("1 check");
         if (!furnaceSmeltEvent.getSource().getItemMeta().hasLore()) return;
         //Bukkit.getLogger().info("2 check");
-        // THIS THIRD CHECK SHOULD SEE IF lbs exists in the code!
-        // if (!furnaceSmeltEvent.getSource().getItemMeta().getLore().contains("lbs")) return;
+        // THIS THIRD CHECK SHOULD SEE IF the code is the right type!
         //Bukkit.getLogger().info("3 check");
+        Boolean hasRequiredLore = false;
+        
+        for (String lore : furnaceSmeltEvent.getSource().getItemMeta().getLore()) {
+            if (lore.contains("catch")){
+                hasRequiredLore = true;
+                break;
+            }
+        }
+
+        if (!hasRequiredLore) return;
+
+        // Checks finish
 
         // Get item stack and item meta
         ItemStack item = furnaceSmeltEvent.getSource();
-        ItemMeta meta = item.getItemMeta();
-        
+        ItemMeta meta = item.getItemMeta();        
+
         // pounds set to 1 by default
         String catchType = "";
 
@@ -57,7 +69,7 @@ public class FurnaceManager {
                 break;
         }
 
-        // Debug statement
+        // Debug statement (leave commented unless you want a ton of messages!)
         //Bukkit.getLogger().info("Pounds: " + lbs);
 
         // Get the resulting output item
@@ -67,9 +79,23 @@ public class FurnaceManager {
         // Subtract 1 from the amount! kind of a glitch... Too bad!
         output.setAmount(output.getAmount() - 1 + (amount));
 
-        // Debug statement
-        Bukkit.getLogger().info("Finished: " + amount);
+        // Debug statement (COMNMENT OUT UNLESS YOU WANT A LOT OF MESSAGES!)
+        // Bukkit.getLogger().info("Finished: " + amount);
 
     }
+
+    public void IronQualitySmelting(FurnaceSmeltEvent furnaceSmeltEvent){
+        // return if the following conditions are failed
+        if (!(furnaceSmeltEvent instanceof FurnaceSmeltEvent)) return;
+        if (!furnaceSmeltEvent.getSource().getItemMeta().hasLore()) return;
+        if (!furnaceSmeltEvent.getSource().getItemMeta().getLocalizedName().contains("IRON")) return;
+
+        // Checks finish
+
+        Bukkit.getLogger().info("Smelting Iron Ore!");
+
+    }
+
+
 
 }
