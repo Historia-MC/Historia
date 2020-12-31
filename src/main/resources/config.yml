@@ -290,16 +290,14 @@ classes:
 weapons:
     
     Light_Wooden_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: WOODEN_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Light Sword
-                loc-name: Light_Wooden_Sword
-                lore: [ "", "§7Woody." ]
+            display-name: Light Sword
+            loc-name: Light_Wooden_Sword
+            lore: [ "", "§7Woody." ]
+            
         damage: [1.0, 2.0]
         speed: [1.4, 1.6]
         knockback: [0.0, 0.5]
@@ -310,16 +308,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Light_Wooden_Axe:
+    
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: WOODEN_AXE
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Light Axe
-                    loc-name: Light_Wooden_Axe
-                    lore: [ "", "§7Woody." ]
+                display-name: Light Axe
+                loc-name: Light_Wooden_Axe
+                lore: [ "", "§7Woody." ]
+                
             damage: [2.0, 3.0]
             speed: [0.8, 1.2]
             knockback: [0.0, 1.0]
@@ -330,16 +326,14 @@ weapons:
             recipe-shape: ["AA ", "AB ", " B "]
 
     Light_Tin_Sword:
+    
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_SWORD
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Tin Sword
-                    loc-name: Light_Tin_Sword
-                    lore: [ "", "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."]
+                display-name: Tin Sword
+                loc-name: Light_Tin_Sword
+                lore: [ "", "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."]
+                    
             damage: [2.0, 3.0]
             speed: [1.4, 1.6]
             knockback: [0.5, 1.0]
@@ -350,16 +344,14 @@ weapons:
             recipe-shape: [" A ", " A ", " B "]
 
     Light_Tin_Axe:
+    
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_AXE
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Tin Axe
-                    loc-name: Light_Tin_Axe
-                    lore: [ "", "§7A light, tin axe. Doesn't hit hard but swings faster than most hatchets. "]
+                display-name: Tin Axe
+                loc-name: Light_Tin_Axe
+                lore: [ "", "§7A light, tin axe. Doesn't hit hard but swings faster than most hatchets. "]
+                
             damage: [2.0, 4.0]
             speed: [0.8, 1.2]
             knockback: [0.0, 1.0]
@@ -370,16 +362,14 @@ weapons:
             recipe-shape: ["AA ", "AB ", " B "]
 
     Heavy_Stone_Sword:
+    
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: STONE_SWORD
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Stone Club
-                    loc-name: Heavy_Stone_Sword
-                    lore: [ "", "§7A crude weapon. "]
+                display-name: Stone Club
+                loc-name: Heavy_Stone_Sword
+                lore: [ "", "§7A crude weapon. "]
+                
             damage: [2.0, 5.0]
             speed: [1.0, 1.3]
             knockback: [2.0, 3.5]
@@ -390,16 +380,14 @@ weapons:
             recipe-shape: [" A ", " A ", " B "]
             
     Heavy_Stone_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: STONE_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Stone Axe
-                loc-name: Heavy_Stone_Sword
-                lore: [ "", "§7Slower than a club, but hits harder. "]
+            display-name: Stone Axe
+            loc-name: Heavy_Stone_Sword
+            lore: [ "", "§7Slower than a club, but hits harder. "]
+            
         damage: [2.0, 6.0]
         speed: [0.4, 0.7]
         knockback: [3.0, 4.5]
@@ -410,16 +398,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Light_Bronze_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Dagger
-                loc-name: Light_Bronze_Sword
-                lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
+            display-name: Bronze Dagger
+            loc-name: Light_Bronze_Sword
+            lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
+                
         damage: [2.0, 4.5]
         speed: [1.0, 1.4]
         knockback: [0.0, 0.5]
@@ -430,16 +416,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Medium_Bronze_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Sword
-                loc-name: Medium_Bronze_Sword
-                lore: [ "", "§7An average sword. "]
+            display-name: Bronze Sword
+            loc-name: Medium_Bronze_Sword
+            lore: [ "", "§7An average sword. "]
+            
         damage: [3.0, 5.0]
         speed: [1.0, 1.3]
         knockback: [0.5, 2.0]
@@ -450,16 +434,15 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
     
     Heavy_Bronze_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_SWORD
             amount: 1
             meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Greatsword
-                loc-name: Heavy_Bronze_Sword
-                lore: [ "", "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. "]
+            display-name: Bronze Greatsword
+            loc-name: Heavy_Bronze_Sword
+            lore: [ "", "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. "]
+            
         damage: [3.0, 6.5]
         speed: [0.8, 1.0]
         knockback: [2.0, 3.5]
@@ -470,16 +453,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Light_Bronze_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Hatchet
-                loc-name: Light_Bronze_Axe
-                lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            display-name: Bronze Hatchet
+            loc-name: Light_Bronze_Axe
+            lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            
         damage: [3.0, 6.0]
         speed: [0.6, 1.0]
         knockback: [0.0, 0.5]
@@ -490,16 +471,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Medium_Bronze_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Axe
-                loc-name: Medium_Bronze_Axe
-                lore: [ "", "§7An average bronze axe. " ]
+            display-name: Bronze Axe
+            loc-name: Medium_Bronze_Axe
+            lore: [ "", "§7An average bronze axe. " ]
+                
         damage: [4.0, 6.5]
         speed: [0.6, 0.9]
         knockback: [1.5, 3.0]
@@ -510,16 +489,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
     
     Heavy_Bronze_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: GOLDEN_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Bronze Bardiche
-                loc-name: Heavy_Bronze_Axe
-                lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            display-name: Bronze Bardiche
+            loc-name: Heavy_Bronze_Axe
+            lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            
         damage: [4.0, 7.0]
         speed: [0.5, 0.8]
         knockback: [3.0, 4.5]
@@ -530,16 +507,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Light_Iron_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Dagger
-                loc-name: Light_Bronze_Sword
-                lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
+            display-name: Iron Dagger
+            loc-name: Light_Bronze_Sword
+            lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
+            
         damage: [3.5, 5.5]
         speed: [1.3, 1.6]
         knockback: [0.0, 0.5]
@@ -550,16 +525,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Medium_Iron_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Sword
-                loc-name: Medium_Iron_Sword
-                lore: [ An average iron sword. ]
+            display-name: Iron Sword
+            loc-name: Medium_Iron_Sword
+            lore: [ An average iron sword. ]
+                
         damage: [4.5, 6.0]
         speed: [1.0, 1.4]
         knockback: [0.5, 2.0]
@@ -570,16 +543,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
     
     Heavy_Iron_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Greatsword
-                loc-name: Heavy_Iron_Sword
-                lore: [ Greatswords deal strong damage with a slower swing speed. ]
+            display-name: Iron Greatsword
+            loc-name: Heavy_Iron_Sword
+            lore: [ Greatswords deal strong damage with a slower swing speed. ]
+            
         damage: [5.0, 7.0]
         speed: [0.8, 1.2]
         knockback: [2.0, 3.5]
@@ -590,16 +561,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Light_Iron_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Hatchet
-                loc-name: Light_Iron_Axe
-                lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            display-name: Iron Hatchet
+            loc-name: Light_Iron_Axe
+            lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            
         damage: [4.0, 7.0]
         speed: [0.6, 1.0]
         knockback: [1.0, 1.5]
@@ -610,16 +579,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Medium_Iron_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Axe
-                loc-name: Medium_Iron_Axe
-                lore: [ "", "§7An average iron axe. " ]
+            display-name: Iron Axe
+            loc-name: Medium_Iron_Axe
+            lore: [ "", "§7An average iron axe. " ]
+            
         damage: [4.5, 7.5]
         speed: [0.6, 0.9]
         knockback: [1.5, 3.0]
@@ -630,16 +597,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
     
     Heavy_Iron_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: IRON_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Bardiche
-                loc-name: Heavy_Iron_Axe
-                lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            display-name: Iron Bardiche
+            loc-name: Heavy_Iron_Axe
+            lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            
         damage: [5.0, 8.0]
         speed: [0.5, 0.8]
         knockback: [3.0, 4.5]
@@ -650,16 +615,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Light_Steel_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Steel Dagger
-                loc-name: Light_Steel_Sword
-                lore: [ "", "§7A steel dagger. Fast speed with weak damage, and little knockback. "]
+            display-name: Steel Dagger
+            loc-name: Light_Steel_Sword
+            lore: [ "", "§7A steel dagger. Fast speed with weak damage, and little knockback. "]
+            
         damage: [4.5, 6.0]
         speed: [1.3, 1.6]
         knockback: [0.0, 0.5]
@@ -670,16 +633,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Medium_Steel_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Steel Sword
-                loc-name: Medium_Steel_Sword
-                lore: [ "", "§7An average steel sword. " ]
+            display-name: Steel Sword
+            loc-name: Medium_Steel_Sword
+            lore: [ "", "§7An average steel sword. " ]
+            
         damage: [5.0, 7.0]
         speed: [1.0, 1.4]
         knockback: [0.5, 2.0]
@@ -690,16 +651,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
     
     Heavy_Steel_Sword:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_SWORD
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Steel Greatsword
-                loc-name: Heavy_Steel_Sword
-                lore: [ "", "§7Greatswords deal strong damage with a slower swing speed. "]
+            display-name: Steel Greatsword
+            loc-name: Heavy_Steel_Sword
+            lore: [ "", "§7Greatswords deal strong damage with a slower swing speed. "]
+            
         damage: [6.5, 9.0]
         speed: [0.8, 1.0]
         knockback: [2.0, 3.5]
@@ -710,16 +669,14 @@ weapons:
         recipe-shape: [" A ", " A ", " B "]
 
     Light_Steel_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Hatchet
-                loc-name: Light_Iron_Axe
-                lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            display-name: Iron Hatchet
+            loc-name: Light_Iron_Axe
+            lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
+            
         damage: [7.0, 9.0]
         speed: [0.6, 1.0]
         knockback: [1.5, 3.0]
@@ -730,16 +687,14 @@ weapons:
         recipe-shape: ["AA ", "AB ", " B "]
 
     Medium_Steel_Axe:
+    
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Axe
-                loc-name: Medium_Iron_Axe
-                lore: [ "", "§7An average iron axe. "]
+            display-name: Iron Axe
+            loc-name: Medium_Iron_Axe
+            lore: [ "", "§7An average iron axe. "]
+            
         damage: [7.5, 10]
         speed: [0.7, 0.9]
         knockback: [1.5, 3.0]
@@ -751,15 +706,12 @@ weapons:
     
     Heavy_Steel_Axe:
         item:
-            ==: org.bukkit.inventory.ItemStack
             type: NETHERITE_AXE
             amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Iron Mace
-                loc-name: Heavy_Iron_Axe
-                lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            display-name: Iron Mace
+            loc-name: Heavy_Iron_Axe
+            lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
+            
         damage: [5.0, 8.0]
         speed: [0.5, 0.8]
         knockback: [3.0, 4.5]
@@ -768,80 +720,16 @@ weapons:
         type: Heavy
         recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
         recipe-shape: ["AA ", "AB ", " B "]
+    
 
 armor:
-
-    Placeholder_Helmet:
-    
-        item:
-            ==: org.bukkit.inventory.ItemStack
-            type: IRON_HELMET
-            amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Placeholder Helmet
-                loc-name: Placeholder_Helmet
-                lore: [ This is the placeholder helmet. ]
-        armor: 10.0
-        type: Heavy
-        recipe-items: ["IRON_INGOT"]
-        recipe-shape: ["AAA", "A A", "   "]
-
-    Placeholder_Chestplate: 
-
-        item:
-            ==: org.bukkit.inventory.ItemStack
-            type: IRON_CHESTPLATE
-            amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Placeholder Chestplate
-                loc-name: Placeholder_Chestplate
-                lore: [ This is the placeholder Chestplate. ]
-        armor: 10.0
-        type: Medium
-        recipe-items: ["IRON_INGOT"]
-        recipe-shape: ["A A", "AAA", "AAA"]
-
-    Placeholder_Leggings:
-
-        item:
-            ==: org.bukkit.inventory.ItemStack
-            type: IRON_LEGGINGS
-            amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Placeholder Leggings
-                loc-name: Placeholder_Leggings
-                lore: [ This is the placeholder Leggings. ]
-        armor: 10.0
-        type: Light
-        recipe-items: ["IRON_INGOT"]
-        recipe-shape: ["AAA", "A A", "A A"]
-
-    Placeholder_Boots:
-
-        item:
-            ==: org.bukkit.inventory.ItemStack
-            type: IRON_BOOTS
-            amount: 1
-            meta:
-                ==: ItemMeta
-                meta-type: UNSPECIFIC
-                display-name: Placeholder Boots
-                loc-name: Placeholder_Boots
-                lore: [ This is the placeholder Boots. ]
-        armor: 10.0
-        type: Medium
-        recipe-items: ["IRON_INGOT"]
-        recipe-shape: ["   ", "A A", "A A"]
+    key: false
 
 items:
+
     
     COAL_BLOCK:
+    
         sulphur:
             chance: 30
 
@@ -851,16 +739,13 @@ items:
                 chance: 100
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GLOWSTONE_DUST
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Sulphur
-                        loc-name: SULPHUR
-                        lore: [ What an unpleasant smell. ]
+                    display-name: Sulphur
+                    loc-name: SULPHUR
+                    lore: [ What an unpleasant smell. ]
 
+        
         coal:
             chance: 70
 
@@ -870,7 +755,6 @@ items:
                 chance: 100
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: COAL
                     amount: 1
 
@@ -885,15 +769,11 @@ items:
                 chance: 80
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Low Quality Iron Chunk
-                        loc-name: LOW_IRON_CHUNK
-                        lore: [ This ore is of a lower quality. ]
+                    display-name: Low Quality Iron Chunk
+                    loc-name: LOW_IRON_CHUNK
+                    lore: [ This ore is of a lower quality. ]
 
             MEDIUM_IRON_CHUNK:
 
@@ -901,15 +781,11 @@ items:
                 chance: 15
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Medium Quality Iron Chunk
-                        loc-name: MEDIUM_IRON_CHUNK
-                        lore: [ This ore is of a medium quality. ]
+                    display-name: Medium Quality Iron Chunk
+                    loc-name: MEDIUM_IRON_CHUNK
+                    lore: [ This ore is of a medium quality. ]
 
             HIGH_IRON_CHUNK:
 
@@ -917,16 +793,13 @@ items:
                 chance: 5
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: High Quality Iron Chunk
-                        loc-name: HIGH_IRON_CHUNK
-                        lore: [ This ore is of a high quality. ]
+                    display-name: High Quality Iron Chunk
+                    loc-name: HIGH_IRON_CHUNK
+                    lore: [ This ore is of a high quality. ]
 
+        
         tin:
             chance: 70
 
@@ -936,15 +809,11 @@ items:
                 chance: 80
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Low Quality Tin Chunk
-                        loc-name: LOW_TIN_CHUNK
-                        lore: [ This ore is of a lower quality. ]
+                    display-name: Low Quality Tin Chunk
+                    loc-name: LOW_TIN_CHUNK
+                    lore: [ This ore is of a lower quality. ]
 
             MEDIUM_TIN_CHUNK:
 
@@ -952,15 +821,11 @@ items:
                 chance: 15
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Medium Quality Tin Chunk
-                        loc-name: MEDIUM_TIN_CHUNK
-                        lore: [ This ore is of a medium quality. ]
+                    display-name: Medium Quality Tin Chunk
+                    loc-name: MEDIUM_TIN_CHUNK
+                    lore: [ This ore is of a medium quality. ]
 
             HIGH_TIN_CHUNK:
 
@@ -968,15 +833,11 @@ items:
                 chance: 5
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: IRON_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: High Quality Tin Chunk
-                        loc-name: HIGH_TIN_CHUNK
-                        lore: [ This ore is of a high quality. ]
+                    display-name: High Quality Tin Chunk
+                    loc-name: HIGH_TIN_CHUNK
+                    lore: [ This ore is of a high quality. ]
 
     GOLD_BLOCK:
 
@@ -989,15 +850,11 @@ items:
                 chance: 80
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Low Quality Gold Chunk
-                        loc-name: LOW_GOLD_CHUNK
-                        lore: [ This ore is of a lower quality. ]
+                    display-name: Low Quality Gold Chunk
+                    loc-name: LOW_GOLD_CHUNK
+                    lore: [ This ore is of a lower quality. ]
 
             MEDIUM_GOLD_CHUNK:
 
@@ -1005,15 +862,11 @@ items:
                 chance: 15
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Medium Quality Gold Chunk
-                        loc-name: MEDIUM_GOLD_CHUNK
-                        lore: [ This ore is of a medium quality. ]
+                    display-name: Medium Quality Gold Chunk
+                    loc-name: MEDIUM_GOLD_CHUNK
+                    lore: [ This ore is of a medium quality. ]
 
             HIGH_GOLD_CHUNK:
 
@@ -1021,16 +874,13 @@ items:
                 chance: 5
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: High Quality Gold Chunk
-                        loc-name: HIGH_GOLD_CHUNK
-                        lore: [ This ore is of a high quality. ]
+                    display-name: High Quality Gold Chunk
+                    loc-name: HIGH_GOLD_CHUNK
+                    lore: [ This ore is of a high quality. ]
 
+        
         copper:
             chance: 70
 
@@ -1040,15 +890,11 @@ items:
                 chance: 80
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Low Quality Copper Chunk
-                        loc-name: LOW_COPPER_CHUNK
-                        lore: [ This ore is of a lower quality. ]
+                    display-name: Low Quality Copper Chunk
+                    loc-name: LOW_COPPER_CHUNK
+                    lore: [ This ore is of a lower quality. ]
 
             MEDIUM_COPPER_CHUNK:
 
@@ -1056,15 +902,11 @@ items:
                 chance: 15
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: Medium Quality Cropper Chunk
-                        loc-name: MEDIUM_COPPER_CHUNK
-                        lore: [ This ore is of a medium quality. ]
+                    display-name: Medium Quality Cropper Chunk
+                    loc-name: MEDIUM_COPPER_CHUNK
+                    lore: [ This ore is of a medium quality. ]
 
             HIGH_COPPER_CHUNK:
 
@@ -1072,30 +914,23 @@ items:
                 chance: 5
 
                 item:
-                    ==: org.bukkit.inventory.ItemStack
                     type: GOLD_ORE
                     amount: 1
-                    meta:
-                        ==: ItemMeta
-                        meta-type: UNSPECIFIC
-                        display-name: High Quality Copper Chunk
-                        loc-name: HIGH_COPPER_CHUNK
-                        lore: [ This ore is of a high quality. ]
+                    display-name: High Quality Copper Chunk
+                    loc-name: HIGH_COPPER_CHUNK
+                    lore: [ This ore is of a high quality. ]
+
 
     ores:
 
         LOW_IRON:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Iron
-                    loc-name: LOW_IRON
-                    lore: [ This ingot is of a lower quality. ]
+                display-name: Low Quality Iron
+                loc-name: LOW_IRON
+                lore: [ This ingot is of a lower quality. ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1105,15 +940,11 @@ items:
         MEDIUM_IRON:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Medium Quality Iron
-                    loc-name: MEDIUM_IRON
-                    lore: [ This ingot is of a medium quality. ]
+                display-name: Medium Quality Iron
+                loc-name: MEDIUM_IRON
+                lore: [ This ingot is of a medium quality. ]
 
             smelt_into: HIGH_IRON
             time: 180
@@ -1123,28 +954,20 @@ items:
         HIGH_IRON:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: High Quality Iron
-                    loc-name: HIGH_IRON
-                    lore: [ This ingot is of a high quality. ]
+                display-name: High Quality Iron
+                loc-name: HIGH_IRON
+                lore: [ This ingot is of a high quality. ]
 
         LOW_BRONZE:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Bronze
-                    loc-name: LOW_BRONZE
-                    lore: [ This ingot is of a lower quality. ]
+                display-name: Low Quality Bronze
+                loc-name: LOW_BRONZE
+                lore: [ This ingot is of a lower quality. ]
 
             smelt_into: MEDIUM_BRONZE
             time: 30
@@ -1154,15 +977,11 @@ items:
         MEDIUM_BRONZE:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Medium Quality Bronze
-                    loc-name: MEDIUM_BRONZE
-                    lore: [ This ingot is of a medium quality. ]
+                display-name: Medium Quality Bronze
+                loc-name: MEDIUM_BRONZE
+                lore: [ This ingot is of a medium quality. ]
 
             smelt_into: HIGH_BRONZE
             time: 180
@@ -1172,28 +991,20 @@ items:
         HIGH_BRONZE:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: IRON_INGOT
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: High Quality Bronze
-                    loc-name: HIGH_BRONZE
-                    lore: [ This ingot is of a high quality. ]
+                display-name: High Quality Bronze
+                loc-name: HIGH_BRONZE
+                lore: [ This ingot is of a high quality. ]
 
         LOW_SHEEP_LEATHER:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: LEATHER
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Sheep Leather
-                    loc-name: LOW_SHEEP_LEATHER
-                    lore: [ This leather is of a lower quality. ]
+                display-name: Low Quality Sheep Leather
+                loc-name: LOW_SHEEP_LEATHER
+                lore: [ This leather is of a lower quality. ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1203,15 +1014,11 @@ items:
         LOW_COW_LEATHER:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: LEATHER
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Cow Leather
-                    loc-name: LOW_COW_LEATHER
-                    lore: [ This leather is of a lower quality. ]
+                display-name: Low Quality Cow Leather
+                loc-name: LOW_COW_LEATHER
+                lore: [ This leather is of a lower quality. ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1221,15 +1028,11 @@ items:
         LOW_PIG_LEATHER:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: LEATHER
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Pig Leather
-                    loc-name: LOW_PIG_LEATHER
-                    lore: [ This leather is of a lower quality. ]
+                display-name: Low Quality Pig Leather
+                loc-name: LOW_PIG_LEATHER
+                lore: [ This leather is of a lower quality. ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1239,15 +1042,11 @@ items:
         LOW_HORSE_LEATHER:
 
             item:
-                ==: org.bukkit.inventory.ItemStack
                 type: LEATHER
                 amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Horse Leather
-                    loc-name: LOW_HORSE_LEATHER
-                    lore: [ This leather is of a lower quality. ]
+                display-name: Low Quality Horse Leather
+                loc-name: LOW_HORSE_LEATHER
+                lore: [ This leather is of a lower quality. ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1255,84 +1054,5 @@ items:
             smelt_times: 1
 
     blocks:
-    
-        LOW_IRON_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Iron Chunk
-                    loc-name: LOW_IRON_CHUNK
-                    lore: [ This ore is of a lower quality. ]
-
-        MEDIUM_IRON_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Medium Quality Iron Chunk
-                    loc-name: MEDIUM_IRON_CHUNK
-                    lore: [ This ore is of a medium quality. ]
-
-        HIGH_IRON_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: High Quality Iron Chunk
-                    loc-name: HIGH_IRON_CHUNK
-                    lore: [ This ore is of a high quality. ]
-
-        LOW_BRONZE_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Low Quality Bronze Chunk
-                    loc-name: LOW_BRONZE_CHUNK
-                    lore: [ This ore is of a lower quality. ]
-
-        MEDIUM_BRONZE_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: Medium Quality Bronze Chunk
-                    loc-name: MEDIUM_BRONZE_CHUNK
-                    lore: [ This ore is of a medium quality. ]
-
-        HIGH_BRONZE_CHUNK:
-
-            item:
-                ==: org.bukkit.inventory.ItemStack
-                type: IRON_ORE
-                amount: 1
-                meta:
-                    ==: ItemMeta
-                    meta-type: UNSPECIFIC
-                    display-name: High Quality Bronze Chunk
-                    loc-name: HIGH_BRONZE_CHUNK
-                    lore: [ This ore is of a high quality. ]
-
-
+        key: false
     
