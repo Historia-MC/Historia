@@ -470,6 +470,11 @@ public class UserData {
 
     }
 
+    public double getHarvestChance() {
+
+        return Config.getClassInfo(className).get("HARVEST_CHANCE");
+
+    }
     /**
      * Get the player's base evasion on level up.
      * 
@@ -801,7 +806,6 @@ public class UserData {
      * 
      * @see <a href ="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
      */
-
     public String getNationName() {
 
         return TownyHandler.getNationName(playerName);
