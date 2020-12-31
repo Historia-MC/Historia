@@ -21,8 +21,8 @@ public class DeathNotify {
 
                 if (!player.getDisplayName().equals(killerString) && online.getDisplayName().equals(killerString)) {
 
-                    Player killer = (Player) online;
-                    PlayerInventory killerInventory = (PlayerInventory) killer.getInventory();
+                    Player killer = online;
+                    PlayerInventory killerInventory = killer.getInventory();
 
                     String deathX = "" + Math.rint(player.getLocation().getX());
                     String deathY = "" + Math.rint(player.getLocation().getY());
@@ -47,20 +47,20 @@ public class DeathNotify {
                                     for (String lore : item.getLore()) {
                                         itemLore += "\n§5" + lore;
                                     }
-                                    itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + item.getEnchants() + "\n" + itemLore.trim()).create()));
+                                    //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + item.getEnchants() + "\n" + itemLore.trim()).create()));
                                 } else {
                                     String itemLore = "";
                                     for (String lore : item.getLore()) {
                                         itemLore += "\n§5" + lore;
                                     }
-                                    itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + itemLore.trim()).create()));
+                                    //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + itemLore.trim()).create()));
                                 }
                             }
 
                             else if (item.hasEnchants()) {
-                                itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + item.getEnchants()).create()));
+                                //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + item.getEnchants()).create()));
                             } else {
-                                itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName()).create()));
+                                //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName()).create()));
                             }
                         }
 
@@ -70,25 +70,25 @@ public class DeathNotify {
                                 for (String lore : item.getLore()) {
                                     itemLore += "\n§5" + lore;
                                 }
-                                itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getEnchants() + "\n" + itemLore.trim()).create()));
+                                //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getEnchants() + "\n" + itemLore.trim()).create()));
                             } else {
                                 String itemLore = "";
                                 for (String lore : item.getLore()) {
                                     itemLore += "\n§5" + lore;
                                 }
-                                itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(itemLore.trim()).create()));
+                                //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(itemLore.trim()).create()));
                             }
                         }
 
                         else if (item.hasEnchants()) {
-                            itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" + item.getEnchants()).create()));
+                            //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("" + item.getEnchants()).create()));
                         } 
                     }
 
                     TextComponent locationMessage = new TextComponent(ChatColor.BLUE + "" + deathX + " " + deathY + " " + deathZ);
 
                     locationMessage.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tp " + deathX + " " + deathY + " " + deathZ));
-                    locationMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport to " + deathX + ", " + deathY + ", " + deathZ).create()));
+                    //locationMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Teleport to " + deathX + ", " + deathY + ", " + deathZ).create()));
 
                     for (Player onlineUsersPerm : Bukkit.getServer().getOnlinePlayers()) {
                         if (onlineUsersPerm.hasPermission("historia.alerts") || onlineUsersPerm.isOp()) {
