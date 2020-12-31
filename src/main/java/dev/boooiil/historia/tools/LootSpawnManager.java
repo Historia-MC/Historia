@@ -22,8 +22,8 @@ public class LootSpawnManager {
         // If we haven't caught anything, return
         if (fishEvent.getCaught() == null) return;
 
-        // Debug Print
-        Bukkit.getLogger().info("Fishing Event! Caught: " + fishEvent.getCaught().getName());
+        // Debug statement (COMNMENT OUT UNLESS YOU WANT A LOT OF MESSAGES!)
+        // Bukkit.getLogger().info("Fishing Event! Caught: " + fishEvent.getCaught().getName());
 
         // Cast fishEvent.getCaught() to an Item
         // Convert to itemStack
