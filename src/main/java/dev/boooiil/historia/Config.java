@@ -607,6 +607,25 @@ public class Config {
 
     }
 
+    public static List<Material> getOreBlocks() {
+
+        Set<String> blocks = configuration.getConfigurationSection("items").getKeys(false);
+        List<Material> found = new ArrayList<>();
+
+        for (String block : blocks) {
+
+            if (!block.equals("ores") && !block.equals("blocks")) {
+
+                found.add(Material.getMaterial(block));
+
+            }
+
+        }
+
+        return found;
+
+    }
+
     public static List<String> getUsableArmor(String className) {
 
         if (validClass(className)) {
@@ -662,51 +681,52 @@ public class Config {
         
         Map<String, Integer> chance = new HashMap<>();
 
-        if (validOre(oreName)) {
-
             String root = "items." + oreName;
             Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
     
             for (String key : keys) {
     
-                root += "." + key;
+                if (!key.equals("chance")) {
+
+                    String newRoot = root + "." + key;
     
-                chance.put(key, configuration.getInt(root + ".chance"));
+                    chance.put(key, configuration.getInt(newRoot + ".chance"));
+                }
     
             }
-
-        } else {
-
-            chance.put("None", 0);
-
-        }
 
         return chance;
     }
 
-    public static Map<String, Object> getIngotChance(String oreName, String ingotName, String className) {
+    public static Map<String, Integer> getIngotChance(String oreName, String ingotName, String className) {
 
         String root = "items." + oreName + "." + ingotName;
 
         Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
 
         boolean miner = className.equals("Miner");
 
         for (String key : keys) {
 
-            root += "." + key;
+            Bukkit.getLogger().info("[CONFIG.JAVA] [getIngotChance] KEY: " + key);
 
-            if (!miner && configuration.getString(root + ".class").equals("Any")) {
+            if (!key.equals("chance")) {
 
-                map.put(key, configuration.getInt(root + ".chance"));
+                String newRoot = root + "." + key;
 
-            } else {
+                if (!miner && configuration.getString(newRoot + ".class").equals("Any")) {
+    
+                    map.put(key, configuration.getInt(newRoot + ".chance"));
 
-                map.put(key, configuration.getInt(root + ".chance"));
-
+                    return map;
+    
+                } else {
+    
+                    map.put(key, configuration.getInt(newRoot + ".chance"));
+    
+                }
             }
-
         }
 
 
@@ -716,19 +736,23 @@ public class Config {
 
     public static ItemStack getIngot(String oreName, String ingotName, String ingotType) {
 
+        Bukkit.getLogger().info("oreName: " + oreName + " ingotName: " + ingotName + " ingotType: " + ingotType);
+
         String root = "items." + oreName + "." + ingotName + "." + ingotType;
 
-        String type = configuration.getString(root + ".type");
-        int amount = configuration.getInt(root + ".amount");
-        String displayName = configuration.getString(root + ".display-name");
-        String localizedName = configuration.getString(root + ".loc-name");
-        List<String> lore = configuration.getStringList(root + ".lore");
+        String type = configuration.getString(root + ".item.type");
+        int amount = configuration.getInt(root + ".item.amount");
+        String displayName = configuration.getString(root + ".item.display-name");
+        String localizedName = configuration.getString(root + ".item.loc-name");
+        List<String> lore = configuration.getStringList(root + ".item.lore");
 
         return constructItemStack(type, amount, displayName, localizedName, lore);
 
     }
 
     private static ItemStack constructItemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
+
+        Bukkit.getLogger().info("type: " + type + " amount: " + amount + " display-name: " + displayName + " loc-name: " + localizedName + " lore: " + lore);
 
         if (type == null) throw new NullPointerException("Type can not be null!");
 
