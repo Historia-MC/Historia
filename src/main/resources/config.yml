@@ -960,10 +960,47 @@ items:
                 loc-name: HIGH_IRON
                 lore: [ "", §7Quality - §6High ]
 
-        LOW_BRONZE:
+        LOW_TIN:
 
             item:
                 type: IRON_INGOT
+                amount: 1
+                display-name: §cTin
+                loc-name: LOW_TIN
+                lore: [ "", §7Quality - §cLow ]
+
+            smelt_into: MEDIUM_TIN
+            time: 30
+            loss: 15
+            smelt_times: 1
+
+        MEDIUM_TIN:
+
+            item:
+                type: IRON_INGOT
+                amount: 1
+                display-name: §2Tin
+                loc-name: MEDIUM_TIN
+                lore: [ "", §7Quality - §2Medium ]
+
+            smelt_into: HIGH_TIN
+            time: 180
+            loss: 10
+            smelt_times: 1
+
+        HIGH_TIN:
+
+            item:
+                type: IRON_INGOT
+                amount: 1
+                display-name: §6Tin
+                loc-name: HIGH_TIN
+                lore: [ "", §7Quality - §6High ]
+
+        LOW_BRONZE:
+
+            item:
+                type: GOLD_INGOT
                 amount: 1
                 display-name: §cBronze
                 loc-name: LOW_BRONZE
@@ -977,7 +1014,7 @@ items:
         MEDIUM_BRONZE:
 
             item:
-                type: IRON_INGOT
+                type: GOLD_INGOT
                 amount: 1
                 display-name: §2Bronze
                 loc-name: MEDIUM_BRONZE
@@ -991,10 +1028,47 @@ items:
         HIGH_BRONZE:
 
             item:
-                type: IRON_INGOT
+                type: GOLD_INGOT
                 amount: 1
                 display-name: §6Bronze
                 loc-name: HIGH_BRONZE
+                lore: [ "", §7Quality - §6High ]
+
+        LOW_GOLD:
+
+            item:
+                type: GOLD_INGOT
+                amount: 1
+                display-name: §cGold
+                loc-name: LOW_GOLD
+                lore: [ "", §7Quality - §cLow ]
+
+            smelt_into: MEDIUM_BRONZE
+            time: 30
+            loss: 15
+            smelt_times: 1
+
+        MEDIUM_GOLD:
+
+            item:
+                type: GOLD_INGOT
+                amount: 1
+                display-name: §2Gold
+                loc-name: MEDIUM_GOLD
+                lore: [ "", §7Quality - §2Medium ]
+
+            smelt_into: HIGH_BRONZE
+            time: 180
+            loss: 10
+            smelt_times: 1
+
+        HIGH_GOLD:
+
+            item:
+                type: GOLD_INGOT
+                amount: 1
+                display-name: §6Gold
+                loc-name: HIGH_GOLD
                 lore: [ "", §7Quality - §6High ]
 
         LOW_SHEEP_LEATHER:
