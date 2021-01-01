@@ -229,6 +229,7 @@ public class Config {
             classMap.put("HEALTH", configuration.getDouble(root + ".baseHealth"));
             classMap.put("MAX_HEALTH", configuration.getDouble(root + ".maxHealth"));
             classMap.put("SPEED", configuration.getDouble(root + ".baseSpeed"));
+            classMap.put("EXPERIENCE_GAIN", configuration.getDouble(root + "baseExperienceGain"));
             classMap.put("EVASION", configuration.getDouble(root + ".baseEvasion"));
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble(root + ".baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble(root + ".baseBowProficiency"));
@@ -241,6 +242,7 @@ public class Config {
             classMap.put("HEALTH", configuration.getDouble("classes.None.stats.health"));
             classMap.put("MAX_HEALTH", configuration.getDouble("classes.None.stats.health"));
             classMap.put("SPEED", configuration.getDouble("classes.None.stats.speed"));
+            classMap.put("EXPERIENCE_GAIN", configuration.getDouble("classes.none.stats.baseExperienceGain"));
             classMap.put("EVASION", configuration.getDouble("classes.None.stats.baseEvasion"));
             classMap.put("WEAPON_PROFICIENCY", configuration.getDouble("classes.None.stats.baseWeaponProficiency"));
             classMap.put("BOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseBowProficiency"));
@@ -366,7 +368,17 @@ public class Config {
 
             String root = "armor." + armorName;
 
-            armorMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            String itemRoot = root + ".item";
+
+            String type = configuration.getString(itemRoot + ".type");
+            String localizedName = configuration.getString(itemRoot + ".loc-name");
+            String displayName = configuration.getString(itemRoot + ".display-name");
+            List<String> lore = configuration.getStringList(itemRoot + ".lore");
+            int amount = configuration.getInt(itemRoot + ".amount");
+
+            ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
+
+            armorMap.put("ITEM", item);
             armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
             armorMap.put("TYPE", configuration.getString(root + ".type"));
             armorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
@@ -406,8 +418,18 @@ public class Config {
 
             String root = "items.ores." + oreName;
 
+            String itemRoot = root + ".item";
+
+            String type = configuration.getString(itemRoot + ".type");
+            String localizedName = configuration.getString(itemRoot + ".loc-name");
+            String displayName = configuration.getString(itemRoot + ".display-name");
+            List<String> lore = configuration.getStringList(itemRoot + ".lore");
+            int amount = configuration.getInt(itemRoot + ".amount");
+
+            ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
+
             oreMap.put("PROGRESSION", configuration.getString(root + ".smelt_into"));
-            oreMap.put("ITEM", configuration.getItemStack(root + ".item"));
+            oreMap.put("ITEM", item);
             oreMap.put("SMELT_TIME", configuration.getInt(root + ".time"));
             oreMap.put("SMELT_AMOUNT", configuration.getInt(root + ".smelt_times"));
             oreMap.put("LOSS", configuration.getInt(root + ".loss"));
@@ -646,6 +668,17 @@ public class Config {
 
         } else return Arrays.asList("NOT A VALID CLASS");
 
+    }
+
+    public static List<Material> getFish() {
+
+        List<Material> found = new ArrayList<>();
+
+        found.add(Material.COD);
+        found.add(Material.SALMON);
+
+        return found;
+    
     }
 
     public static Map<String, String> getMySQLInfo() {
