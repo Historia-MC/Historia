@@ -1,11 +1,11 @@
 package dev.boooiil.historia.crafting;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
@@ -17,6 +17,39 @@ import dev.boooiil.historia.Config;
 public class RecipeLoader {
 
     private RecipeLoader() { throw new IllegalStateException("Static utility class."); }
+
+    public static void disableRecipes() {
+
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("stone_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("wood_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("stone_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("wood_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_boots"));
+
+    }
+
+    public static void loadRecipes() {
+
+        NamespacedKey ironIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "ingot_upgrade");
+
+        FurnaceRecipe ironRecipe = new FurnaceRecipe(ironIngotUpgrade, new ItemStack(Material.IRON_INGOT), Material.IRON_INGOT, 0, 200);
+
+        Bukkit.addRecipe(ironRecipe);
+
+        NamespacedKey goldIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "ingot_upgrade");
+
+        FurnaceRecipe goldRecipe = new FurnaceRecipe(goldIngotUpgrade, new ItemStack(Material.GOLD_INGOT), Material.GOLD_INGOT, 0, 200);
+
+        Bukkit.addRecipe(goldRecipe);
+
+    }
 
     public static void load(Plugin plugin){
 
