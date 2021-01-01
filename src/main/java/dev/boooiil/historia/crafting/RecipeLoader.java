@@ -28,6 +28,8 @@ public class RecipeLoader {
         Bukkit.removeRecipe(NamespacedKey.minecraft("gold_axe"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("stone_axe"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("wood_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_nugget"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_nugget"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_helmet"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
@@ -37,13 +39,13 @@ public class RecipeLoader {
 
     public static void loadRecipes() {
 
-        NamespacedKey ironIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "ingot_upgrade");
+        NamespacedKey ironIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "iron_ingot_upgrade");
 
         FurnaceRecipe ironRecipe = new FurnaceRecipe(ironIngotUpgrade, new ItemStack(Material.IRON_INGOT), Material.IRON_INGOT, 0, 200);
 
         Bukkit.addRecipe(ironRecipe);
 
-        NamespacedKey goldIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "ingot_upgrade");
+        NamespacedKey goldIngotUpgrade = new NamespacedKey(Bukkit.getPluginManager().getPlugin("Historia"), "gold_ingot_upgrade");
 
         FurnaceRecipe goldRecipe = new FurnaceRecipe(goldIngotUpgrade, new ItemStack(Material.GOLD_INGOT), Material.GOLD_INGOT, 0, 200);
 
