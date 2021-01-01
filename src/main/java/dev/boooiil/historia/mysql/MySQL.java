@@ -35,12 +35,14 @@ public class MySQL {
 
     private static Connection connection;
 
+    private MySQL() { throw new IllegalStateException("This class should not be initialized."); } 
+
     /**
      * Create the table in the database if it does not exist.
      * 
      * @throws SQLException Generally, if the plugin can't connect to the database.
      */
-    public void createTable() {
+    public static void createTable() {
 
         if (validateFields()) {
 
@@ -57,7 +59,7 @@ public class MySQL {
                 Statement statement = connection.createStatement();
                 statement.execute(createTable);
 
-            } catch (SQLException e) { e.printStackTrace(); }
+            } catch (SQLException e) { Bukkit.getLogger().info("Failed to load MySQL."); e.printStackTrace(); Main.disable(Bukkit.getPluginManager().getPlugin("Historia"));}
         }
     }
 
@@ -355,7 +357,7 @@ public class MySQL {
 
     }
 
-    private boolean validateFields() {
+    private static boolean validateFields() {
 
         int caught = 0;
 
