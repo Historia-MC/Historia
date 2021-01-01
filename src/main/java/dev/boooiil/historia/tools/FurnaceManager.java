@@ -1,16 +1,21 @@
 package dev.boooiil.historia.tools;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Furnace;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.Config;
+
 public class FurnaceManager {
     
-    public void FishSmelting(FurnaceSmeltEvent furnaceSmeltEvent){
+    public static void fishSmelting(FurnaceSmeltEvent furnaceSmeltEvent){
         
         // ~~~ Return checks ~~~
 
@@ -67,6 +72,9 @@ public class FurnaceManager {
             case("Legendary"):
                 amount = 5;
                 break;
+            default:
+                amount = 1;
+                break;
         }
 
         // Debug statement (leave commented unless you want a ton of messages!)
@@ -84,18 +92,90 @@ public class FurnaceManager {
 
     }
 
-    public void IronQualitySmelting(FurnaceSmeltEvent furnaceSmeltEvent){
-        // return if the following conditions are failed
-        if (!(furnaceSmeltEvent instanceof FurnaceSmeltEvent)) return;
-        if (!furnaceSmeltEvent.getSource().getItemMeta().hasLore()) return;
-        if (!furnaceSmeltEvent.getSource().getItemMeta().getLocalizedName().contains("IRON")) return;
+    public static void grantExperienceFromSmelting(FurnaceSmeltEvent event){
 
+        //This should check to see what the item result is and then apply experience to the current player based on that.
+
+        ItemStack item = event.getSource();
+        ItemMeta meta = item.getItemMeta();
+        
         // Checks finish
-
-        Bukkit.getLogger().info("Smelting Iron Ore!");
 
     }
 
+    public static void setCookTime(ItemStack item, Block block) {
 
+        if (block instanceof Furnace && item.getItemMeta().hasLocalizedName()) {
 
+            Furnace furnace = (Furnace) block;
+
+            Map<String, Object> ore = Config.getOreInfo(item.getItemMeta().getLocalizedName());
+
+            int cookTime = (int) ore.get("SMELT_TIME") * 60 * 20;
+
+            if (furnace.getCookTimeTotal() != cookTime) {
+
+                furnace.setCookTimeTotal(cookTime);
+
+            }
+        }
+    }
+
+    public static void setCookTime(ItemStack item, Furnace furnace) {
+
+        if (item.getItemMeta().hasLocalizedName()) {
+
+            Map<String, Object> ore = Config.getOreInfo(item.getItemMeta().getLocalizedName());
+
+            int cookTime = (int) ore.get("SMELT_TIME") * 60 * 20;
+
+            if (furnace.getCookTimeTotal() != cookTime) {
+
+                furnace.setCookTimeTotal(cookTime);
+
+            }
+        }
+    }
+
+    public static ItemStack smeltChunk(ItemStack chunk) {
+
+        ItemMeta meta = chunk.getItemMeta();
+
+        String ore = meta.getLocalizedName().replace("CHUNK", "INGOT");
+
+        Map<String, Object> oreMap = Config.getOreInfo(ore);
+
+        return (ItemStack) oreMap.get("ITEM");
+
+    }
+
+    public static ItemStack upgradeIngot(ItemStack oldIngot) {
+
+        if (!oldIngot.getItemMeta().hasLocalizedName()) {
+
+            Map<String, Object> oldIngotMap;
+
+            if (oldIngot.getType() == Material.IRON_INGOT) oldIngotMap = Config.getOreInfo("LOW_IRON_INGOT");
+            else oldIngotMap = Config.getOreInfo("LOW_GOLD_INGOT");
+
+            return (ItemStack) oldIngotMap.get("ITEM");
+        }
+
+        else {
+
+            Map<String, Object> oldIngotMap = Config.getOreInfo(oldIngot.getItemMeta().getLocalizedName());
+
+            if (oldIngotMap.get("PROGRESSION") != null) {
+    
+                Bukkit.getLogger().info("Ingot had progression.");
+    
+                Map<String, Object> newIngotMap = Config.getOreInfo((String) oldIngotMap.get("PROGRESSION"));
+    
+                return (ItemStack) newIngotMap.get("ITEM");
+            }
+    
+            else return oldIngot;
+
+        }
+    }
 }
