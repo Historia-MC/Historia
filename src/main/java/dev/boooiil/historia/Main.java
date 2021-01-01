@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
 import dev.boooiil.historia.commands.Stats;
+import dev.boooiil.historia.crafting.RecipeLoader;
 import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.mysql.MySQL;
 import dev.boooiil.historia.runnable.ClassRunnable;
@@ -57,6 +58,9 @@ public class Main extends JavaPlugin {
         getLogger().info("Loading MySQL...");
 
         MySQL.createTable();
+
+        RecipeLoader.disableRecipes();
+        RecipeLoader.loadRecipes();
 
     }
 
