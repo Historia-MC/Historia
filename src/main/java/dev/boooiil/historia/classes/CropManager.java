@@ -6,6 +6,7 @@ import java.util.Random;
 
 import org.bukkit.World;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -56,6 +57,8 @@ public class CropManager {
 
             if (willDouble(twice)) {
 
+                player.sendMessage("§7[§9Historia§7] §7You have doubled this harvest.");
+
                 Collection<ItemStack> drops = block.getDrops();
 
                 World world = block.getWorld();
@@ -73,10 +76,10 @@ public class CropManager {
 
         else {
 
-            player.sendMessage("§7[§9Historia§7] §4You have botched this harvest.");
+            player.sendMessage("§7[§9Historia§7] §cYou have botched this harvest.");
 
             bbe.setCancelled(true);
-            block.breakNaturally();
+            block.setType(Material.AIR);
 
         }
 
@@ -94,10 +97,10 @@ public class CropManager {
 
         else {
 
-            player.sendMessage("§7[§9Historia§7] §4You have botched this harvest.");
+            player.sendMessage("§7[§9Historia§7] §cYou have botched this harvest.");
 
             bbe.setCancelled(true);
-            block.breakNaturally();
+            block.setType(Material.AIR);
 
         }
 
