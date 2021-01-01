@@ -1,5 +1,6 @@
 package dev.boooiil.historia;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -21,6 +22,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
@@ -34,7 +36,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
@@ -95,6 +99,8 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
 
+        ItemStack item = event.getCursor();
+
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getCurrentItem(), event.getWhoClicked());
         
@@ -148,8 +154,7 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
 
-        ClassManager manager = new ClassManager();
-        manager.initiate(event.getPlayer());
+        ClassManager.initiate(event.getPlayer());
 
     }
 
@@ -245,20 +250,37 @@ public class HistoriaEvents implements Listener {
     }
 
     @EventHandler
-    public void onFurnaceEvent(FurnaceSmeltEvent furnaceSmeltEvent){
+    public void onFurnaceEvent(FurnaceSmeltEvent event) {
 
-        FurnaceManager furnaceManager = new FurnaceManager();
+        ItemStack item = event.getSource();
+        ItemMeta meta = item.getItemMeta();
 
-        furnaceManager.FishSmelting(furnaceSmeltEvent);
+        if (Config.getFish().contains(item.getType())) FurnaceManager.fishSmelting(event);
+
+        if (meta.hasLocalizedName() && meta.getLocalizedName().contains("CHUNK")) {
+
+            Bukkit.getLogger().info("SMELTING CHUNK TYPE: " + meta.getLocalizedName());
+            Bukkit.getLogger().info("RESULT: " + event.getResult());
+            event.setResult(FurnaceManager.smeltChunk(item));
+
+        }
+
+
+        if ((meta.hasLocalizedName() && meta.getLocalizedName().contains("INGOT")) || item.getType() == Material.IRON_INGOT) {
+            
+            if (meta.hasLocalizedName()) Bukkit.getLogger().info("SMELTING INGOT TYPE: " + meta.getLocalizedName());
+            else Bukkit.getLogger().info("SMELTING FROM BASIC IRON");
+
+            event.setResult(FurnaceManager.upgradeIngot(item));
+
+        }
 
     }
 
     @EventHandler
     public void onPlayerLogin(PlayerJoinEvent event) { 
 
-        ClassManager manager = new ClassManager();
-
-        manager.initiate(event.getPlayer());
+        ClassManager.initiate(event.getPlayer());
 
         MySQL.setLogin(event.getPlayer().getUniqueId());
 
