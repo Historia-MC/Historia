@@ -2,276 +2,134 @@ package dev.boooiil.historia.classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
+
+import dev.boooiil.historia.Config;
+import dev.boooiil.historia.mysql.UserData;
 
 public class OreManager {
-
-    /**
-     * Event is fired with the player being part of the event.
-     * We pass the player into the current class by calling initiate().
-     * 
-     * initiate() will only accept a variable that contains Player since we specified that in the method.
-     * 
-     * If we try to pass Integer, String, Boolean, Etc. to initiate() it will return an error.
-     * 
-     */
-
-     //int and Integer
-
-    public static void doOreDrop(Player player, Block block, Material material, String itemName, Integer amount) {
-
-        //if (class != "miner") return; 
-        
-        ItemStack droppedItem = new ItemStack(material, amount);
-
-        ItemMeta droppedMeta = droppedItem.getItemMeta();
-
-        droppedMeta.setLocalizedName(itemName);
-
-        droppedMeta.setDisplayName(itemName);
-
-        droppedItem.setItemMeta(droppedMeta);
-
-        Location brokeBlock = block.getLocation();
-
-        brokeBlock.getWorld().dropItemNaturally(brokeBlock, droppedItem);
-
-    } 
     
+    private static UserData userData;
+
+    private OreManager() { throw new IllegalStateException("This class should not be instanced."); }
     
-    public static void initiate_legacy(BlockBreakEvent event) {
+    public static void calculateDrop(BlockBreakEvent event) {
 
         Block block = event.getBlock();
+        Material material = block.getType();
+        World world = block.getWorld();
+        Location location = block.getLocation();
 
-        if (block.getType()== Material.COAL_BLOCK) {
-            Player player = event.getPlayer(); 
-            
-            PlayerInventory inventory = player.getInventory();
+        Bukkit.getLogger().severe("List? " + Config.getOreBlocks());
 
-            ItemStack mainHand = inventory.getItemInMainHand();
+        Bukkit.getLogger().info("True?" + Config.getOreBlocks().contains(block.getType()));
 
-            
+        if (Config.getOreBlocks().contains(block.getType())) {
 
+            userData = new UserData(event.getPlayer());
 
-            ItemMeta mainHandMeta = mainHand.getItemMeta();
+            block.setType(Material.AIR);
 
-            if (mainHandMeta instanceof Damageable) { //Sees if item in mainhand is damageable
+            ItemStack item = getIngotByChance(material.toString());
 
-                Damageable mainHandDamageable = (Damageable) mainHandMeta; //Converts itemMeta into damageable
+            if (item.getType() == Material.AIR) {
 
-                int mainHandDamage = mainHandDamageable.getDamage() + 1; //Gets current damage for item and adds 1
-
-                //int x = 1;
-                //int y = x + 1
-                //if (y >= x) do this 
-                
-
-                if (mainHandDamage >= mainHand.getType().getMaxDurability()) {
-
-                    inventory.setItemInMainHand(new ItemStack(Material.AIR));
-
-                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
-
-
-
-                } else {
-
-                    mainHandDamageable.setDamage(mainHandDamage);
-
-                }
-
-
-            
-
-                //sword: 10/10 => #getDamage() => 0
-                //sword: 9/10 => #getDamage() => 1 
-                //sword: 10/10 => #getDamage() + 2 => sword: 8/10
-
-
-
-
-
-                /**
-                 * 
-                 * Types of Entites:
-                 *  Entity //All entities on the server.
-                 *  LivingEntity //All living (hearts) entities on the server.
-                 *  HumanEntity //NPC or Players.
-                 *  Breedable //Any entity that can breed.
-                 *  Creature //LivingEntity excluding Player
-                 *  Damageable //Any entity that can be damaged.
-                 *  ComplexLivingEntity //Ender Dragon.
-                 *  Player //Players
-                 *  Bat //Bats
-                 *  Zombie //Zombies
-                 *  Etc.
-                 * 
-                 * 
-                 * 
-                 * 
-                 * 
-                 * LivingEntity boooiil;
-                 * 
-                 * boooiil instanceof Player => true
-                 * boooiil instanceof HumanEntity => true
-                 * 
-                 * if (boooiil instanceof Player) {
-                 *      
-                 *      //Since we checked if boooiil was a player we can cast Player (basically convert LivingEntity to a Player type) onto boooiil.
-                 *      Player player = (Player) boooiil; //This converts (LivingEntity) boooiil into (Player) boooiil.
-                 * }
-                 * 
-                 * LivingEntity bat;
-                 * 
-                 * bat instanceof Player => false
-                 * bat instanceof HumanEntity => false
-                 * 
-                 * if (bat instanceof Player) {
-                 *  
-                 *      //Will never run because bat is not a player.
-                 * 
-                 * }
-                 * 
-                 * We do this check for sanity, else something like:
-                 * 
-                 * Player player = (Player) bat; //This would try to convert (LivingEntity) bat into (Player) bat but fails.
-                 * 
-                 * would create errors within the plugin.
-                 * 
-                 */
-
-
+                event.setCancelled(true);
 
             }
 
-            event.setCancelled(true);
+            else world.dropItemNaturally(location, item);
             
-            block.getLocation().getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.FLINT));
-
-
-        }
+        } 
 
     }
 
-    // William's Initiate func
-    public static void initiate(BlockBreakEvent event){
+    //Gets sulphur from coal
+    private static String getOreByChance(String oreName) {
+
+        Map<String, Integer> map = Config.getOreChance(oreName);
         
-        // Return statements to prevent any errors
-        if (!(event instanceof BlockBreakEvent)) return;
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] Map:" + map);
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] ORE: " + oreName);
 
-        Block block = event.getBlock();
+        List<Integer> chances = new ArrayList<>();
+        List<String> blocks = new ArrayList<>();
 
-        // If the block is iron ore...
-        // meaning it is either bronze or iron of varying qualities
-        if (block.getType() == Material.IRON_ORE){
+        Integer sum = 0;
+        Integer found = 0;
+        Integer random = new Random().ints(1, 100).findFirst().getAsInt();
 
-            // GETTING PICKAXE DAMAGE AND OTHER EVENTS
+        for (Integer integer : map.values()) {
 
-            Player player = event.getPlayer(); 
+            Bukkit.getLogger().warning("[OreManager.JAVA] [getIngotByChance] [FOR] SUM: " + sum + " INTEGER: " + integer + " LOOKING: " + random);
+
+            if (random >= sum && random <= sum + integer) found = integer;
             
-            PlayerInventory inventory = player.getInventory();
+            sum += integer;
 
-            ItemStack mainHand = inventory.getItemInMainHand();
-
-            ItemMeta mainHandMeta = mainHand.getItemMeta();
-
-            if (mainHandMeta instanceof Damageable) { //Sees if item in mainhand is damageable
-
-                Damageable mainHandDamageable = (Damageable) mainHandMeta; //Converts itemMeta into damageable
-
-                int mainHandDamage = mainHandDamageable.getDamage() + 1; //Gets current damage for item and adds 1
-
-                if (mainHandDamage >= mainHand.getType().getMaxDurability()) {
-
-                    inventory.setItemInMainHand(new ItemStack(Material.AIR));
-
-                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 15, 1);
-
-                } else {
-
-                    mainHandDamageable.setDamage(mainHandDamage);
-
-                }
-
-                // Debug Statements
-                Bukkit.getLogger().info("Destroying IRon Ore!");
-                Bukkit.getLogger().info("Dropped Item " + block.getDrops());
-
-                // Get random
-                Random random = new Random();
-
-                // For each item in the drops (in case we have FORTUNE)...
-                // Set the item lore to a random value (a type of bronze or iron of varying quality)
-                for (ItemStack item : block.getDrops()){
-
-                    // Get rid of currentItem
-                    event.getBlock().setType(Material.AIR);
-                    Item newItem = event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new ItemStack(Material.IRON_ORE));
-
-                    ItemStack itemStack = newItem.getItemStack();
-
-                    // Get the item Meta
-                    ItemMeta meta = itemStack.getItemMeta();
-
-                    // Random id for lore
-                    // RANGE(0 to #-1)
-                    Integer itemId = random.nextInt(2);
-
-                    Bukkit.getLogger().info("Item ID: " + itemId.toString());
-
-                    // ItemLore list
-                    List<String> itemLore = new ArrayList<String>();
-
-                    // Localized name
-                    String locName = "";
-                    String displayName = "";
-
-                    // Switch statement to see what lore is added
-                    switch (itemId){
-                        case 0:
-                            itemLore.add("Low Quality Bronze");
-                            displayName = "Low Quality Bronze Chunk";
-                            locName = "LOW_BRONZE_CHUNK";
-                            break;
-                        case 1:
-                            itemLore.add("Med Quality Bronze");
-                            displayName = "Med Quality Bronze Chunk";
-                            locName = "MED_BRONZE_CHUNK";
-                            break;
-                        default:
-                            Bukkit.getLogger().info("ERROR! Default Should not run! (OreDrops.java)");
-                            break;
-                    }
-
-                    meta.setLore(itemLore);
-                    meta.setLocalizedName(locName);
-                    meta.setDisplayName(displayName);
-
-                    itemStack.setItemMeta(meta);
-
-                    Bukkit.getLogger().info("ITEM DISPLAY NAME: " + item.getItemMeta().getDisplayName());
-
-                }
-
-            }
-
+            chances.add(integer);
 
         }
+
+        for (String key : map.keySet()) blocks.add(key);
+
+        return blocks.get(chances.indexOf(found));
+
     }
 
+    //gets SULPHUR from SULPHUR
+    private static ItemStack getIngotByChance(String oreName) {
 
+        String ingotType = getOreByChance(oreName);
 
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance]  ORE: " + oreName + " INGOT TYPE:" + ingotType);
+
+        Map<String, Integer> map = Config.getIngotChance(oreName, ingotType, userData.getClassName());
+        
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] Map:" + map);
+
+        List<Integer> chances = new ArrayList<>();
+        List<String> blocks = new ArrayList<>();
+
+        Integer sum = 0;
+        Integer found = 0;
+        Integer random = new Random().ints(1, 100).findFirst().getAsInt();
+
+        for (Integer integer : map.values()) {
+
+            Bukkit.getLogger().warning("[OreManager.JAVA] [getIngotByChance] [FOR] SUM: " + sum + " INTEGER: " + integer + " LOOKING: " + random);
+
+            if (random >= sum && random <= sum + integer) found = integer;
+            
+            sum += integer;
+
+            chances.add(integer);
+
+        }
+
+        for (String key : map.keySet()) blocks.add(key);
+        
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] ORE: " + oreName + " INGOT TYPE:" + ingotType);
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] BLOCKS: " + blocks);
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] FOUND BLOCK: " + found);
+        Bukkit.getLogger().info("[OreManager.JAVA] [getIngotByChance] SUM: " + sum + " FOUND: " + found + " LOOKING: " + random);
+
+        if (found != 0) {
+
+            return Config.getIngot(oreName, ingotType, blocks.get(chances.indexOf(found)));
+
+        }
+
+        else return new ItemStack(Material.AIR);
+
+    }
 }
