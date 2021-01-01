@@ -56,22 +56,7 @@ public class Main extends JavaPlugin {
 
         getLogger().info("Loading MySQL...");
 
-        try {
-
-            MySQL sql = new MySQL();
-
-            sql.createTable();
-
-            getLogger().info("MySQL loaded.");
-
-        } catch (Exception e) { 
-
-            getLogger().info("Failed to load MySQL."); 
-
-            e.printStackTrace(); 
-
-            disable((Plugin) this);
-        }
+        MySQL.createTable();
 
     }
 
