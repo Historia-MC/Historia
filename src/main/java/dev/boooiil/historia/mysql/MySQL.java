@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -98,7 +99,7 @@ public class MySQL {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
-            log.info("Created user: " + playerName + " in the Database.");
+            log.log(Level.INFO, "Created user: {0} in the Database.", playerName);
 
         } catch (SQLException e) {
             e.printStackTrace();
