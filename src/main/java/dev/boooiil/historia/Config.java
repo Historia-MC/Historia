@@ -709,8 +709,6 @@ public class Config {
 
         for (String key : keys) {
 
-            Bukkit.getLogger().info("[CONFIG.JAVA] [getIngotChance] KEY: " + key);
-
             if (!key.equals("chance")) {
 
                 String newRoot = root + "." + key;
