@@ -1,16 +1,10 @@
 package dev.boooiil.historia;
 
-import java.util.Date;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -18,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -40,14 +35,11 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.alerts.BoatNotify;
 import dev.boooiil.historia.alerts.DeathNotify;
 import dev.boooiil.historia.classes.ClassManager;
-import dev.boooiil.historia.classes.ClassSkills;
 import dev.boooiil.historia.classes.CropManager;
-import dev.boooiil.historia.crafting.WeaponStats;
 import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
@@ -56,7 +48,6 @@ import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
 import dev.boooiil.historia.mysql.MySQL;
-import dev.boooiil.historia.mysql.UserData;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
@@ -88,19 +79,21 @@ public class HistoriaEvents implements Listener {
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
+    public void onBlockPlace(BlockPlaceEvent event) {
 
-        /*
-        Bukkit.getLogger().info("Action: " + event.getAction());
-        Bukkit.getLogger().info("ClickType: " + event.getAction());
-        Bukkit.getLogger().info("Item: " + event.getCurrentItem());
-        Bukkit.getLogger().info("Cursor: " + event.getCursor());
-        Bukkit.getLogger().info("Slot: " + event.getSlot());
-        Bukkit.getLogger().info("Slot Type: " + event.getSlotType());
-        Bukkit.getLogger().info("Left Click: " + event.isLeftClick());
-        Bukkit.getLogger().info("Right Click: " + event.isRightClick());
-        Bukkit.getLogger().info("Shift Click: " + event.isShiftClick());
-        */
+        ItemStack item = event.getItemInHand();
+        boolean hasLocalizedName = item.getItemMeta().hasLocalizedName();
+
+        if (hasLocalizedName) {
+
+            event.setCancelled(true);
+            event.getPlayer().sendMessage("§7[§9Historia§7] You can not place this block.");
+
+        }
+    }
+
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
 
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getCurrentItem(), event.getWhoClicked());
@@ -223,32 +216,22 @@ public class HistoriaEvents implements Listener {
             if (handItem.getItemMeta().hasLocalizedName() && Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
 
         }
-        //DamageManager manager = new DamageManager();
-        //manager.initiate(event);
 
     }
     
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
-        //Type     Variable       New OreDrops object containing doOreDrop method.
-        //OreDrops oreDrops = new OreDrops(); https://hub.spigotmc.org/javadocs/spigot/org/bukkit/block/Block.html
-
-
-        //String string = string;
-        //returns null;
         Player player = event.getPlayer();
         Block block = event.getBlock();
         Location location = block.getLocation();
         Material material = block.getType();
+        Material handMaterial = player.getInventory().getItemInMainHand().getType();
 
-        if (TownyHandler.getPermissionByMaterial(player, location, material)) {
+        boolean hasPermission = TownyHandler.getPermissionByMaterial(player, location, material);
 
-            OreManager.doOreDrop(event.getPlayer(), block, Material.FLINT, "Hurty", 1);
-            
-            CropManager.calculateDrop(event);
-
-        }
+        if (hasPermission && Config.getAllPickaxes().contains(handMaterial)) OreManager.calculateDrop(event);
+        if (hasPermission) CropManager.calculateDrop(event);
 
     }
 
@@ -267,6 +250,24 @@ public class HistoriaEvents implements Listener {
         FurnaceManager furnaceManager = new FurnaceManager();
 
         furnaceManager.FishSmelting(furnaceSmeltEvent);
+
+    }
+
+    @EventHandler
+    public void onPlayerLogin(PlayerJoinEvent event) { 
+
+        ClassManager manager = new ClassManager();
+
+        manager.initiate(event.getPlayer());
+
+        MySQL.setLogin(event.getPlayer().getUniqueId());
+
+    }
+
+    @EventHandler
+    public void onPlayerLogout(PlayerQuitEvent event) {
+
+        MySQL.setLogout(event.getPlayer().getUniqueId());
 
     }
 
@@ -300,44 +301,5 @@ public class HistoriaEvents implements Listener {
             LootSpawnManager.ChickenDeathEvent(entityDeathEvent);
         }
         
-    }
-
-    @EventHandler
-    public void onPlayerLogin(PlayerJoinEvent event) { 
-
-        Date date = new Date();
-
-        UserData playerData = new UserData(event.getPlayer());
-
-        ClassManager manager = new ClassManager();
-
-        manager.initiate(event.getPlayer());
-
-        MySQL.setLogin(event.getPlayer().getUniqueId());
-
-        System.out.println("Login: " + playerData.getClassName());
-        System.out.println("Login: " + playerData.getPlayerName());
-        System.out.println("Login: " + playerData.getLogin());
-        System.out.println("Login: " + playerData.getLogout());
-        System.out.println("Login: " + playerData.getHomeBlockLocation());
-        System.out.println("Login: " + playerData.getSpawnBlockLocation());
-        System.out.println("Login: " + playerData.getTownName());
-
-    }
-
-    @EventHandler
-    public void onPlayerLogout(PlayerQuitEvent event) {
-
-        Date date = new Date();
-
-        UserData playerData = new UserData(event.getPlayer());
-
-        MySQL.setLogout(event.getPlayer().getUniqueId());
-
-        System.out.println("Logout: " + playerData.getClassName());
-        System.out.println("Logout: " + playerData.getPlayerName());
-        System.out.println("Logout: " + playerData.getLogin());
-        System.out.println("Logout: " + playerData.getLogout());
-
     }
 }
