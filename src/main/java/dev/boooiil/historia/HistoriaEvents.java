@@ -10,6 +10,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -25,6 +27,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerBucketFillEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -269,7 +272,34 @@ public class HistoriaEvents implements Listener {
 
     @EventHandler
     public void onCraftItemEvent(CraftItemEvent craftItemEvent){
-        WeaponStats.initiate(craftItemEvent);
+        // WeaponStats.initiate(craftItemEvent);
+    }
+
+    @EventHandler
+    public void onPrepareItemCraftEvent(PrepareItemCraftEvent prepareItemCraftEvent){
+        // WeaponStats.initiate(prepareItemCraftEvent);
+    }
+
+    @EventHandler
+    public void onEntityDeathEvent(EntityDeathEvent entityDeathEvent){
+
+        
+
+
+        // If the ageable entity is an adult
+            // If a sheep is killed
+        if (entityDeathEvent.getEntityType() == EntityType.SHEEP){
+            LootSpawnManager.SheepDeathEvent(entityDeathEvent);
+        }
+        // If a horse is killed
+        if (entityDeathEvent.getEntityType() == EntityType.HORSE){
+            LootSpawnManager.HorseDeathEvent(entityDeathEvent);
+        }
+        // If a chicken is killed
+        if (entityDeathEvent.getEntityType() == EntityType.CHICKEN){
+            LootSpawnManager.ChickenDeathEvent(entityDeathEvent);
+        }
+        
     }
 
     @EventHandler
