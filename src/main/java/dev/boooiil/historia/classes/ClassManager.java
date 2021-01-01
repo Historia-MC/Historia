@@ -6,7 +6,7 @@ import dev.boooiil.historia.mysql.UserData;
 
 public class ClassManager {
     
-    public void initiate(Player player) {
+    public static void initiate(Player player) {
 
         //do check for player stats
         UserData user = new UserData(player);
