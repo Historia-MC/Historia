@@ -56,10 +56,10 @@ public class LootSpawnManager {
             if (randomInteger > 97){
                 itemLore.add("Legendary" + " catch");
             }
-            else if (randomInteger < 97 && randomInteger > 90){
+            else if (randomInteger <= 97 && randomInteger > 90){
                 itemLore.add("Large" + " catch");
             }
-            else if (randomInteger < 90 && randomInteger > 75){
+            else if (randomInteger <= 90 && randomInteger > 75){
                 itemLore.add("Medium" + " catch");
             }
             else{
@@ -96,10 +96,38 @@ public class LootSpawnManager {
         spawnedAmount = random.nextInt(3) + spawnedMin;
 
         // Spawn Material STRING
-        for (int i = 0; i <= spawnedAmount-1; i++){
-            e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.STRING));
+        e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.STRING, spawnedAmount));
+
+        // ~~~ Add lore values to the meat if any exists
+
+        List<ItemStack> itemStacks = new ArrayList<ItemStack>();
+        
+        // Get each drop
+        for (ItemStack drop : e.getDrops()){
+            // if the drop is edible
+            if (drop.getType().isEdible()){
+                // Add the drop to the item stacks list
+                // And set the type of the drop to AIR
+                itemStacks.add(new ItemStack(drop.getType(), drop.getAmount()));
+                drop.setType(Material.AIR);
+            }
         }
+
+        // Set the new drops as well
+        // Needed because the item meta can't be set with drops
+        for (ItemStack item : itemStacks){
+            ItemMeta meta = item.getItemMeta();
+            List<String> lore = new ArrayList<String>();
+            lore.add(randomMeatLore());
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), item);
+        }
+
+
     }
+
+ 
 
     public static void HorseDeathEvent(EntityDeathEvent e){
         // Debug statment
@@ -117,12 +145,20 @@ public class LootSpawnManager {
         // Add a random value to the spawned amount
         // Returns 1-5
         Random random = new Random();
-        spawnedAmount = random.nextInt(6) + spawnedMin;
+        spawnedAmount = random.nextInt(5) + spawnedMin;
 
-        // Spawn material MUTTON        
-        for (int i = 0; i <= spawnedAmount-1; i++){
-            e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.MUTTON));
-        }
+        // We need to do this because we are spawning meat with a value (Small, Medium, Large)
+        ItemStack itemStack = new ItemStack(Material.MUTTON);
+        ItemMeta meta = itemStack.getItemMeta();
+        List<String> lore = new ArrayList<String>();
+        lore.add(randomMeatLore());
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+        itemStack.setAmount(spawnedAmount);
+
+        // Spawn mutton
+        e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), itemStack);
+
     }
 
     public static void ChickenDeathEvent(EntityDeathEvent e){
@@ -143,10 +179,56 @@ public class LootSpawnManager {
         Random random = new Random();
         spawnedAmount = random.nextInt(2) + spawnedMin;
 
-        // Spawn material EGG        
-        for (int i = 0; i <= spawnedAmount-1; i++){
-            e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.EGG));
+        if (spawnedAmount > 0){
+            e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), new ItemStack(Material.EGG, spawnedAmount));
         }
+
+         // ~~~ Add lore values to the meat if any exists
+
+         List<ItemStack> itemStacks = new ArrayList<ItemStack>();
+        
+         // Get each drop
+         for (ItemStack drop : e.getDrops()){
+             // if the drop is edible
+             if (drop.getType().isEdible()){
+                 // Add the drop to the item stacks list
+                 // And set the type of the drop to AIR
+                 itemStacks.add(new ItemStack(drop.getType(), drop.getAmount()));
+                 drop.setType(Material.AIR);
+             }
+         }
+ 
+         // Set the new drops as well
+         // Needed because the item meta can't be set with drops
+         for (ItemStack item : itemStacks){
+             ItemMeta meta = item.getItemMeta();
+             List<String> lore = new ArrayList<String>();
+             lore.add(randomMeatLore());
+             meta.setLore(lore);
+             item.setItemMeta(meta);
+             e.getEntity().getWorld().dropItemNaturally(e.getEntity().getLocation(), item);
+         }
+    }
+
+   // Gets the random meat lore as a string
+   public static String randomMeatLore(){
+
+        String str = "Small amount of meat";
+        
+        // Get a new instance of random
+        Random random = new Random();
+
+        // New way (fish description)
+        Integer randomInteger = random.nextInt(100) + 1;
+
+        if (randomInteger >= 67){
+            str = "Large amount of meat";
+        }
+        else if (randomInteger < 67 && randomInteger >= 37){
+            str = "Medium amount of meat";
+        }
+
+        return str;
     }
 
 }
