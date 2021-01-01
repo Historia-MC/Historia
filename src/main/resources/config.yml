@@ -52,6 +52,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 0
 
             weaponProficiency: [ Light ]
             armorProficiency: [ Light ]
@@ -67,6 +68,7 @@ classes:
             baseWeaponProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 2.5
 
             weaponProficiency: [ Light, Medium, Heavy ]
             armorProficiency: [ Light, Medium, Heavy ]
@@ -88,6 +90,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 2.5
 
             weaponProficiency: [ Bow, Crossbow, Light ]
             armorProficiency: [ Light ]
@@ -110,6 +113,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 1.5
 
             weaponProficiency: [ Trident, Light ]
             armorProficiency: [ Light ]
@@ -133,6 +137,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 0.5
 
             weaponProficiency: [ Light, Medium ]
             armorProficiency: [ Light, Medium ]
@@ -157,6 +162,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 1.5
 
             weaponProficiency: [ Light, Medium ]
             armorProficiency: [ Light, Medium, Heavy ]
@@ -181,6 +187,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 1.0
 
             weaponProficiency: [ Light ]
             armorProficiency: [ Bow, Light ]
@@ -205,6 +212,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 1.5
 
             weaponProficiency: [ Light ]
             armorProficiency: [ Light ]
@@ -228,6 +236,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 0.25
 
             weaponProficiency: [ Light ]
             armorProficiency: [ Light ]
@@ -251,6 +260,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 0.25
 
             weaponProficiency: [ Light, Medium ]
             armorProficiency: [ Light, Medium ]
@@ -274,6 +284,7 @@ classes:
             baseSwordProficiency: 1.0
             baseBowProficiency: 0.5
             baseCrossbowProficiency: 0.5
+            baseExperienceGain: 0.25
 
             weaponProficiency: [ Light ]
             armorProficiency: [ Light, Medium ]
@@ -774,7 +785,7 @@ items:
                     amount: 1
                     display-name: §cIron Chunk
                     loc-name: LOW_IRON_CHUNK
-                    lore: [ "", §7Quality - §cLow ]
+                    lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
             MEDIUM_IRON_CHUNK:
 
@@ -786,7 +797,7 @@ items:
                     amount: 1
                     display-name: §2Iron Chunk
                     loc-name: MEDIUM_IRON_CHUNK
-                    lore: [ "", §7Quality - §2Medium ]
+                    lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
             HIGH_IRON_CHUNK:
 
@@ -798,7 +809,7 @@ items:
                     amount: 1
                     display-name: §6Iron Chunk
                     loc-name: HIGH_IRON_CHUNK
-                    lore: [ "", §7Quality - §6High ]
+                    lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
         
         tin:
@@ -814,7 +825,7 @@ items:
                     amount: 1
                     display-name: §cTin Chunk
                     loc-name: LOW_TIN_CHUNK
-                    lore: [ "", §7Quality - §cLow ]
+                    lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
             MEDIUM_TIN_CHUNK:
 
@@ -826,7 +837,7 @@ items:
                     amount: 1
                     display-name: §2Tin Chunk
                     loc-name: MEDIUM_TIN_CHUNK
-                    lore: [ "", §7Quality - §2Medium ]
+                    lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
             HIGH_TIN_CHUNK:
 
@@ -838,7 +849,7 @@ items:
                     amount: 1
                     display-name: §6Tin Chunk
                     loc-name: HIGH_TIN_CHUNK
-                    lore: [ "", §7Quality - §6High ]
+                    lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
     GOLD_ORE:
 
@@ -855,7 +866,7 @@ items:
                     amount: 1
                     display-name: §cGold Chunk
                     loc-name: LOW_GOLD_CHUNK
-                    lore: [ "", §7Quality - §cLow ]
+                    lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
             MEDIUM_GOLD_CHUNK:
 
@@ -867,7 +878,7 @@ items:
                     amount: 1
                     display-name: §2Gold Chunk
                     loc-name: MEDIUM_GOLD_CHUNK
-                    lore: [ "", §7Quality - §2Medium ]
+                    lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
             HIGH_GOLD_CHUNK:
 
@@ -879,9 +890,8 @@ items:
                     amount: 1
                     display-name: §6Gold Chunk
                     loc-name: HIGH_GOLD_CHUNK
-                    lore: [ "", §7Quality - §6High ]
+                    lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        
         copper:
             chance: 70
 
@@ -895,7 +905,7 @@ items:
                     amount: 1
                     display-name: §cCopper Chunk
                     loc-name: LOW_COPPER_CHUNK
-                    lore: [ "", §7Quality - §cLow ]
+                    lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
             MEDIUM_COPPER_CHUNK:
 
@@ -907,7 +917,7 @@ items:
                     amount: 1
                     display-name: §2Cropper Chunk
                     loc-name: MEDIUM_COPPER_CHUNK
-                    lore: [ "", §7Quality - §2Medium ]
+                    lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
             HIGH_COPPER_CHUNK:
 
@@ -919,157 +929,157 @@ items:
                     amount: 1
                     display-name: §6Copper Chunk
                     loc-name: HIGH_COPPER_CHUNK
-                    lore: [ "", §7Quality - §6High ]
+                    lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
     ores:
 
-        LOW_IRON:
+        LOW_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §cIron
-                loc-name: LOW_IRON
-                lore: [ "", §7Quality - §cLow ]
+                loc-name: LOW_IRON_INGOT
+                lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_IRON
+            smelt_into: MEDIUM_IRON_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_IRON:
+        MEDIUM_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §2Iron
-                loc-name: MEDIUM_IRON
-                lore: [ "", §7Quality - §2Medium ]
+                loc-name: MEDIUM_IRON_INGOT
+                lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_IRON
+            smelt_into: HIGH_IRON_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_IRON:
+        HIGH_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §6Iron
-                loc-name: HIGH_IRON
-                lore: [ "", §7Quality - §6High ]
+                loc-name: HIGH_IRON_INGOT
+                lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_TIN:
+        LOW_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §cTin
-                loc-name: LOW_TIN
-                lore: [ "", §7Quality - §cLow ]
+                loc-name: LOW_TIN_INGOT
+                lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_TIN
+            smelt_into: MEDIUM_TIN_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_TIN:
+        MEDIUM_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §2Tin
-                loc-name: MEDIUM_TIN
-                lore: [ "", §7Quality - §2Medium ]
+                loc-name: MEDIUM_TIN_INGOT
+                lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_TIN
+            smelt_into: HIGH_TIN_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_TIN:
+        HIGH_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §6Tin
-                loc-name: HIGH_TIN
-                lore: [ "", §7Quality - §6High ]
+                loc-name: HIGH_TIN_INGOT
+                lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_BRONZE:
+        LOW_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §cBronze
-                loc-name: LOW_BRONZE
-                lore: [ "", §7Quality - §cLow ]
+                loc-name: LOW_BRONZE_INGOT
+                lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_BRONZE
+            smelt_into: MEDIUM_BRONZE_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_BRONZE:
+        MEDIUM_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §2Bronze
-                loc-name: MEDIUM_BRONZE
-                lore: [ "", §7Quality - §2Medium ]
+                loc-name: MEDIUM_BRONZE_INGOT
+                lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_BRONZE
+            smelt_into: HIGH_BRONZE_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_BRONZE:
+        HIGH_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §6Bronze
-                loc-name: HIGH_BRONZE
-                lore: [ "", §7Quality - §6High ]
+                loc-name: HIGH_BRONZE_INGOT
+                lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_GOLD:
+        LOW_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §cGold
-                loc-name: LOW_GOLD
-                lore: [ "", §7Quality - §cLow ]
+                loc-name: LOW_GOLD_INGOT
+                lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_BRONZE
+            smelt_into: MEDIUM_BRONZE_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_GOLD:
+        MEDIUM_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §2Gold
-                loc-name: MEDIUM_GOLD
-                lore: [ "", §7Quality - §2Medium ]
+                loc-name: MEDIUM_GOLD_INGOT
+                lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_BRONZE
+            smelt_into: HIGH_BRONZE_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_GOLD:
+        HIGH_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §6Gold
-                loc-name: HIGH_GOLD
-                lore: [ "", §7Quality - §6High ]
+                loc-name: HIGH_GOLD_INGOT
+                lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
         LOW_SHEEP_LEATHER:
 
