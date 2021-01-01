@@ -287,6 +287,7 @@ classes:
             breakGrass: true
             instantGrowChance: 0.3
 
+
 weapons:
     
     Light_Wooden_Sword:
@@ -294,7 +295,7 @@ weapons:
         item:
             type: WOODEN_SWORD
             amount: 1
-            display-name: Light Sword
+            display-name: §7Light Sword
             loc-name: Light_Wooden_Sword
             lore: [ "", "§7Woody." ]
             
@@ -312,7 +313,7 @@ weapons:
             item:
                 type: WOODEN_AXE
                 amount: 1
-                display-name: Light Axe
+                display-name: §7Light Axe
                 loc-name: Light_Wooden_Axe
                 lore: [ "", "§7Woody." ]
                 
@@ -330,7 +331,7 @@ weapons:
             item:
                 type: IRON_SWORD
                 amount: 1
-                display-name: Tin Sword
+                display-name: §7Tin Sword
                 loc-name: Light_Tin_Sword
                 lore: [ "", "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."]
                     
@@ -348,7 +349,7 @@ weapons:
             item:
                 type: IRON_AXE
                 amount: 1
-                display-name: Tin Axe
+                display-name: §7Tin Axe
                 loc-name: Light_Tin_Axe
                 lore: [ "", "§7A light, tin axe. Doesn't hit hard but swings faster than most hatchets. "]
                 
@@ -366,7 +367,7 @@ weapons:
             item:
                 type: STONE_SWORD
                 amount: 1
-                display-name: Stone Club
+                display-name: §7Stone Club
                 loc-name: Heavy_Stone_Sword
                 lore: [ "", "§7A crude weapon. "]
                 
@@ -384,7 +385,7 @@ weapons:
         item:
             type: STONE_AXE
             amount: 1
-            display-name: Stone Axe
+            display-name: §7Stone Axe
             loc-name: Heavy_Stone_Sword
             lore: [ "", "§7Slower than a club, but hits harder. "]
             
@@ -402,7 +403,7 @@ weapons:
         item:
             type: GOLDEN_SWORD
             amount: 1
-            display-name: Bronze Dagger
+            display-name: §7Bronze Dagger
             loc-name: Light_Bronze_Sword
             lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
                 
@@ -420,7 +421,7 @@ weapons:
         item:
             type: GOLDEN_SWORD
             amount: 1
-            display-name: Bronze Sword
+            display-name: §7Bronze Sword
             loc-name: Medium_Bronze_Sword
             lore: [ "", "§7An average sword. "]
             
@@ -439,7 +440,7 @@ weapons:
             type: GOLDEN_SWORD
             amount: 1
             meta:
-            display-name: Bronze Greatsword
+            display-name: §7Bronze Greatsword
             loc-name: Heavy_Bronze_Sword
             lore: [ "", "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. "]
             
@@ -457,7 +458,7 @@ weapons:
         item:
             type: GOLDEN_AXE
             amount: 1
-            display-name: Bronze Hatchet
+            display-name: §7Bronze Hatchet
             loc-name: Light_Bronze_Axe
             lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
             
@@ -475,7 +476,7 @@ weapons:
         item:
             type: GOLDEN_AXE
             amount: 1
-            display-name: Bronze Axe
+            display-name: §7Bronze Axe
             loc-name: Medium_Bronze_Axe
             lore: [ "", "§7An average bronze axe. " ]
                 
@@ -493,7 +494,7 @@ weapons:
         item:
             type: GOLDEN_AXE
             amount: 1
-            display-name: Bronze Bardiche
+            display-name: §7Bronze Bardiche
             loc-name: Heavy_Bronze_Axe
             lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
             
@@ -511,7 +512,7 @@ weapons:
         item:
             type: IRON_SWORD
             amount: 1
-            display-name: Iron Dagger
+            display-name: §7Iron Dagger
             loc-name: Light_Bronze_Sword
             lore: [ "", "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword."]
             
@@ -529,7 +530,7 @@ weapons:
         item:
             type: IRON_SWORD
             amount: 1
-            display-name: Iron Sword
+            display-name: §7Iron Sword
             loc-name: Medium_Iron_Sword
             lore: [ An average iron sword. ]
                 
@@ -547,7 +548,7 @@ weapons:
         item:
             type: IRON_SWORD
             amount: 1
-            display-name: Iron Greatsword
+            display-name: §7Iron Greatsword
             loc-name: Heavy_Iron_Sword
             lore: [ Greatswords deal strong damage with a slower swing speed. ]
             
@@ -565,7 +566,7 @@ weapons:
         item:
             type: IRON_AXE
             amount: 1
-            display-name: Iron Hatchet
+            display-name: §7Iron Hatchet
             loc-name: Light_Iron_Axe
             lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
             
@@ -583,7 +584,7 @@ weapons:
         item:
             type: IRON_AXE
             amount: 1
-            display-name: Iron Axe
+            display-name: §7Iron Axe
             loc-name: Medium_Iron_Axe
             lore: [ "", "§7An average iron axe. " ]
             
@@ -601,7 +602,7 @@ weapons:
         item:
             type: IRON_AXE
             amount: 1
-            display-name: Iron Bardiche
+            display-name: §7Iron Bardiche
             loc-name: Heavy_Iron_Axe
             lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
             
@@ -619,7 +620,7 @@ weapons:
         item:
             type: NETHERITE_SWORD
             amount: 1
-            display-name: Steel Dagger
+            display-name: §7Steel Dagger
             loc-name: Light_Steel_Sword
             lore: [ "", "§7A steel dagger. Fast speed with weak damage, and little knockback. "]
             
@@ -637,7 +638,7 @@ weapons:
         item:
             type: NETHERITE_SWORD
             amount: 1
-            display-name: Steel Sword
+            display-name: §7Steel Sword
             loc-name: Medium_Steel_Sword
             lore: [ "", "§7An average steel sword. " ]
             
@@ -655,7 +656,7 @@ weapons:
         item:
             type: NETHERITE_SWORD
             amount: 1
-            display-name: Steel Greatsword
+            display-name: §7Steel Greatsword
             loc-name: Heavy_Steel_Sword
             lore: [ "", "§7Greatswords deal strong damage with a slower swing speed. "]
             
@@ -673,7 +674,7 @@ weapons:
         item:
             type: NETHERITE_AXE
             amount: 1
-            display-name: Iron Hatchet
+            display-name: §7Iron Hatchet
             loc-name: Light_Iron_Axe
             lore: [ "", "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. "]
             
@@ -691,7 +692,7 @@ weapons:
         item:
             type: NETHERITE_AXE
             amount: 1
-            display-name: Iron Axe
+            display-name: §7Iron Axe
             loc-name: Medium_Iron_Axe
             lore: [ "", "§7An average iron axe. "]
             
@@ -708,7 +709,7 @@ weapons:
         item:
             type: NETHERITE_AXE
             amount: 1
-            display-name: Iron Mace
+            display-name: §7Iron Mace
             loc-name: Heavy_Iron_Axe
             lore: [ "", "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. "]
             
@@ -728,7 +729,7 @@ armor:
 items:
 
     
-    COAL_BLOCK:
+    COAL_ORE:
     
         sulphur:
             chance: 30
@@ -743,7 +744,7 @@ items:
                     amount: 1
                     display-name: Sulphur
                     loc-name: SULPHUR
-                    lore: [ What an unpleasant smell. ]
+                    lore: [ "", §7What an unpleasant smell. ]
 
         
         coal:
@@ -758,7 +759,7 @@ items:
                     type: COAL
                     amount: 1
 
-    IRON_BLOCK:
+    IRON_ORE:
 
         iron:
             chance: 30
@@ -771,9 +772,9 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: Low Quality Iron Chunk
+                    display-name: §cIron Chunk
                     loc-name: LOW_IRON_CHUNK
-                    lore: [ This ore is of a lower quality. ]
+                    lore: [ "", §7Quality - §cLow ]
 
             MEDIUM_IRON_CHUNK:
 
@@ -783,9 +784,9 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: Medium Quality Iron Chunk
+                    display-name: §2Iron Chunk
                     loc-name: MEDIUM_IRON_CHUNK
-                    lore: [ This ore is of a medium quality. ]
+                    lore: [ "", §7Quality - §2Medium ]
 
             HIGH_IRON_CHUNK:
 
@@ -795,9 +796,9 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: High Quality Iron Chunk
+                    display-name: §6Iron Chunk
                     loc-name: HIGH_IRON_CHUNK
-                    lore: [ This ore is of a high quality. ]
+                    lore: [ "", §7Quality - §6High ]
 
         
         tin:
@@ -811,9 +812,9 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: Low Quality Tin Chunk
+                    display-name: §cTin Chunk
                     loc-name: LOW_TIN_CHUNK
-                    lore: [ This ore is of a lower quality. ]
+                    lore: [ "", §7Quality - §cLow ]
 
             MEDIUM_TIN_CHUNK:
 
@@ -823,9 +824,9 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: Medium Quality Tin Chunk
+                    display-name: §2Tin Chunk
                     loc-name: MEDIUM_TIN_CHUNK
-                    lore: [ This ore is of a medium quality. ]
+                    lore: [ "", §7Quality - §2Medium ]
 
             HIGH_TIN_CHUNK:
 
@@ -835,11 +836,11 @@ items:
                 item:
                     type: IRON_ORE
                     amount: 1
-                    display-name: High Quality Tin Chunk
+                    display-name: §6Tin Chunk
                     loc-name: HIGH_TIN_CHUNK
-                    lore: [ This ore is of a high quality. ]
+                    lore: [ "", §7Quality - §6High ]
 
-    GOLD_BLOCK:
+    GOLD_ORE:
 
         gold:
             chance: 30
@@ -852,9 +853,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: Low Quality Gold Chunk
+                    display-name: §cGold Chunk
                     loc-name: LOW_GOLD_CHUNK
-                    lore: [ This ore is of a lower quality. ]
+                    lore: [ "", §7Quality - §cLow ]
 
             MEDIUM_GOLD_CHUNK:
 
@@ -864,9 +865,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: Medium Quality Gold Chunk
+                    display-name: §2Gold Chunk
                     loc-name: MEDIUM_GOLD_CHUNK
-                    lore: [ This ore is of a medium quality. ]
+                    lore: [ "", §7Quality - §2Medium ]
 
             HIGH_GOLD_CHUNK:
 
@@ -876,9 +877,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: High Quality Gold Chunk
+                    display-name: §6Gold Chunk
                     loc-name: HIGH_GOLD_CHUNK
-                    lore: [ This ore is of a high quality. ]
+                    lore: [ "", §7Quality - §6High ]
 
         
         copper:
@@ -892,9 +893,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: Low Quality Copper Chunk
+                    display-name: §cCopper Chunk
                     loc-name: LOW_COPPER_CHUNK
-                    lore: [ This ore is of a lower quality. ]
+                    lore: [ "", §7Quality - §cLow ]
 
             MEDIUM_COPPER_CHUNK:
 
@@ -904,9 +905,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: Medium Quality Cropper Chunk
+                    display-name: §2Cropper Chunk
                     loc-name: MEDIUM_COPPER_CHUNK
-                    lore: [ This ore is of a medium quality. ]
+                    lore: [ "", §7Quality - §2Medium ]
 
             HIGH_COPPER_CHUNK:
 
@@ -916,10 +917,9 @@ items:
                 item:
                     type: GOLD_ORE
                     amount: 1
-                    display-name: High Quality Copper Chunk
+                    display-name: §6Copper Chunk
                     loc-name: HIGH_COPPER_CHUNK
-                    lore: [ This ore is of a high quality. ]
-
+                    lore: [ "", §7Quality - §6High ]
 
     ores:
 
@@ -928,9 +928,9 @@ items:
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: Low Quality Iron
+                display-name: §cIron
                 loc-name: LOW_IRON
-                lore: [ This ingot is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -942,9 +942,9 @@ items:
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: Medium Quality Iron
+                display-name: §2Iron
                 loc-name: MEDIUM_IRON
-                lore: [ This ingot is of a medium quality. ]
+                lore: [ "", §7Quality - §2Medium ]
 
             smelt_into: HIGH_IRON
             time: 180
@@ -956,18 +956,18 @@ items:
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: High Quality Iron
+                display-name: §6Iron
                 loc-name: HIGH_IRON
-                lore: [ This ingot is of a high quality. ]
+                lore: [ "", §7Quality - §6High ]
 
         LOW_BRONZE:
 
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: Low Quality Bronze
+                display-name: §cBronze
                 loc-name: LOW_BRONZE
-                lore: [ This ingot is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_BRONZE
             time: 30
@@ -979,9 +979,9 @@ items:
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: Medium Quality Bronze
+                display-name: §2Bronze
                 loc-name: MEDIUM_BRONZE
-                lore: [ This ingot is of a medium quality. ]
+                lore: [ "", §7Quality - §2Medium ]
 
             smelt_into: HIGH_BRONZE
             time: 180
@@ -993,18 +993,18 @@ items:
             item:
                 type: IRON_INGOT
                 amount: 1
-                display-name: High Quality Bronze
+                display-name: §6Bronze
                 loc-name: HIGH_BRONZE
-                lore: [ This ingot is of a high quality. ]
+                lore: [ "", §7Quality - §6High ]
 
         LOW_SHEEP_LEATHER:
 
             item:
                 type: LEATHER
                 amount: 1
-                display-name: Low Quality Sheep Leather
+                display-name: §cSheep Leather
                 loc-name: LOW_SHEEP_LEATHER
-                lore: [ This leather is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1016,9 +1016,9 @@ items:
             item:
                 type: LEATHER
                 amount: 1
-                display-name: Low Quality Cow Leather
+                display-name: §cCow Leather
                 loc-name: LOW_COW_LEATHER
-                lore: [ This leather is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1030,9 +1030,9 @@ items:
             item:
                 type: LEATHER
                 amount: 1
-                display-name: Low Quality Pig Leather
+                display-name: §cPig Leather
                 loc-name: LOW_PIG_LEATHER
-                lore: [ This leather is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_IRON
             time: 30
@@ -1044,9 +1044,9 @@ items:
             item:
                 type: LEATHER
                 amount: 1
-                display-name: Low Quality Horse Leather
+                display-name: §cHorse Leather
                 loc-name: LOW_HORSE_LEATHER
-                lore: [ This leather is of a lower quality. ]
+                lore: [ "", §7Quality - §cLow ]
 
             smelt_into: MEDIUM_IRON
             time: 30
