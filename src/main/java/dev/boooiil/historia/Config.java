@@ -681,6 +681,46 @@ public class Config {
     
     }
 
+    public static Map<String, List<String>> getPatterns() {
+
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String weapon : getWeaponSet()) {
+
+            map.put(weapon, configuration.getStringList("weapons." + weapon + ".recipe-shape"));
+
+        }
+
+        for (String armor : getArmorSet()) {
+
+            map.put(armor, configuration.getStringList("armor." + armor + ".recipe-shape"));
+
+        }
+
+        return map;
+
+    }
+
+    public static Map<String, List<String>> getRecipeItems() {
+
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String weapon : getWeaponSet()) {
+
+            map.put(weapon, configuration.getStringList("weapons." + weapon + ".recipe-items"));
+
+        }
+
+        for (String armor : getArmorSet()) {
+
+            map.put(armor, configuration.getStringList("armor." + armor + ".recipe-items"));
+
+        }
+
+        return map;
+
+    }
+
     public static Map<String, String> getMySQLInfo() {
 
         String root = "MySQL";
