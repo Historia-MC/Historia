@@ -1,5 +1,8 @@
 package dev.boooiil.historia;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,7 +23,6 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -36,7 +38,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -48,6 +49,7 @@ import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
 import dev.boooiil.historia.classes.OreManager;
+import dev.boooiil.historia.crafting.CraftingTableManager;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
@@ -98,8 +100,6 @@ public class HistoriaEvents implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-
-        ItemStack item = event.getCursor();
 
         ExpiryManager manager = new ExpiryManager();
         manager.initiate(event.getCurrentItem(), event.getWhoClicked());
@@ -294,12 +294,10 @@ public class HistoriaEvents implements Listener {
     }
 
     @EventHandler
-    public void onCraftItemEvent(CraftItemEvent craftItemEvent){
-        // WeaponStats.initiate(craftItemEvent);
-    }
+    public void onPrepareItemCraftEvent(PrepareItemCraftEvent event){
 
-    @EventHandler
-    public void onPrepareItemCraftEvent(PrepareItemCraftEvent prepareItemCraftEvent){
+        CraftingTableManager.craftItem(event.getInventory());
+
         // WeaponStats.initiate(prepareItemCraftEvent);
     }
 
@@ -323,5 +321,33 @@ public class HistoriaEvents implements Listener {
             LootSpawnManager.ChickenDeathEvent(entityDeathEvent);
         }
         
+    }
+
+    private List<InventoryAction> place() {
+
+        List<InventoryAction> place = new ArrayList<>();
+
+        place.add(InventoryAction.PLACE_ALL);
+        place.add(InventoryAction.PLACE_ONE);
+        place.add(InventoryAction.PLACE_SOME);
+
+        return place;
+        
+    }
+
+    private List<InventoryAction> take() {
+
+        List<InventoryAction> take = new ArrayList<>();
+
+        take.add(InventoryAction.DROP_ALL_SLOT);
+        take.add(InventoryAction.PICKUP_ALL);
+        take.add(InventoryAction.PICKUP_ONE);
+        take.add(InventoryAction.PICKUP_HALF);
+        take.add(InventoryAction.PICKUP_SOME);
+        take.add(InventoryAction.HOTBAR_SWAP);
+        take.add(InventoryAction.SWAP_WITH_CURSOR);
+
+        return take;
+
     }
 }
