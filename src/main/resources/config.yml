@@ -308,7 +308,15 @@ weapons:
             amount: 1
             display-name: §7Light Sword
             loc-name: Light_Wooden_Sword
-            lore: [ "", "§7Woody." ]
+            lore: 
+              - "" 
+              - "§7Woody. "
+              - ""
+              - "§9-----------------"
+              - "§7Damage - §k?"
+              - "§7Knockback - §k?"
+              - "§7Speed - §k?"
+              - ""
             
         damage: [1.0, 2.0]
         speed: [1.4, 1.6]
@@ -326,7 +334,15 @@ weapons:
                 amount: 1
                 display-name: §7Light Axe
                 loc-name: Light_Wooden_Axe
-                lore: [ "", "§7Woody." ]
+                lore: 
+              - "" 
+              - "§7Woody. "
+              - ""
+              - "§9-----------------"
+              - "§7Damage - §k?"
+              - "§7Knockback - §k?"
+              - "§7Speed - §k?"
+              - ""
                 
             damage: [2.0, 3.0]
             speed: [0.8, 1.2]
@@ -345,6 +361,15 @@ weapons:
                 display-name: §7Tin Sword
                 loc-name: Light_Tin_Sword
                 lore: [ "", "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."]
+                lore: 
+              - "" 
+              - "§7Woody. "
+              - ""
+              - "§9-----------------"
+              - "§7Damage - §k?"
+              - "§7Knockback - §k?"
+              - "§7Speed - §k?"
+              - ""
                     
             damage: [2.0, 3.0]
             speed: [1.4, 1.6]
@@ -1785,152 +1810,152 @@ items:
 
     ores:
 
-        LOW_IRON_INGOT:
+        LOW_LIGHT_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §cIron
-                loc-name: LOW_IRON_INGOT
+                loc-name: LOW_LIGHT_IRON_INGOT
                 lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_IRON_INGOT
+            smelt_into: MEDIUM_LIGHT_IRON_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_IRON_INGOT:
+        MEDIUM_LIGHT_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §2Iron
-                loc-name: MEDIUM_IRON_INGOT
+                loc-name: MEDIUM_LIGHT_IRON_INGOT
                 lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_IRON_INGOT
+            smelt_into: HIGH_LIGHT_IRON_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_IRON_INGOT:
+        HIGH_LIGHT_IRON_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §6Iron
-                loc-name: HIGH_IRON_INGOT
+                loc-name: HIGH_LIGHT_IRON_INGOT
                 lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_TIN_INGOT:
+        LOW_LIGHT_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §cTin
-                loc-name: LOW_TIN_INGOT
+                loc-name: LOW_LIGHT_TIN_INGOT
                 lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_TIN_INGOT
+            smelt_into: MEDIUM_LIGHT_TIN_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_TIN_INGOT:
+        MEDIUM_LIGHT_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §2Tin
-                loc-name: MEDIUM_TIN_INGOT
+                loc-name: MEDIUM_LIGHT_TIN_INGOT
                 lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_TIN_INGOT
+            smelt_into: HIGH_LIGHT_TIN_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_TIN_INGOT:
+        HIGH_LIGHT_TIN_INGOT:
 
             item:
                 type: IRON_INGOT
                 amount: 1
                 display-name: §6Tin
-                loc-name: HIGH_TIN_INGOT
+                loc-name: HIGH_LIGHT_TIN_INGOT
                 lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_BRONZE_INGOT:
+        LOW_LIGHT_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §cBronze
-                loc-name: LOW_BRONZE_INGOT
+                loc-name: LOW_LIGHT_BRONZE_INGOT
                 lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_BRONZE_INGOT
+            smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_BRONZE_INGOT:
+        MEDIUM_LIGHT_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §2Bronze
-                loc-name: MEDIUM_BRONZE_INGOT
+                loc-name: MEDIUM_LIGHT_BRONZE_INGOT
                 lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_BRONZE_INGOT
+            smelt_into: HIGH_LIGHT_BRONZE_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_BRONZE_INGOT:
+        HIGH_LIGHT_BRONZE_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §6Bronze
-                loc-name: HIGH_BRONZE_INGOT
+                loc-name: HIGH_LIGHT_BRONZE_INGOT
                 lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
-        LOW_GOLD_INGOT:
+        LOW_LIGHT_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §cGold
-                loc-name: LOW_GOLD_INGOT
+                loc-name: LOW_LIGHT_GOLD_INGOT
                 lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            smelt_into: MEDIUM_BRONZE_INGOT
+            smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
             time: 30
             loss: 15
             smelt_times: 1
 
-        MEDIUM_GOLD_INGOT:
+        MEDIUM_LIGHT_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §2Gold
-                loc-name: MEDIUM_GOLD_INGOT
+                loc-name: MEDIUM_LIGHT_GOLD_INGOT
                 lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            smelt_into: HIGH_BRONZE_INGOT
+            smelt_into: HIGH_LIGHT_BRONZE_INGOT
             time: 180
             loss: 10
             smelt_times: 1
 
-        HIGH_GOLD_INGOT:
+        HIGH_LIGHT_GOLD_INGOT:
 
             item:
                 type: GOLD_INGOT
                 amount: 1
                 display-name: §6Gold
-                loc-name: HIGH_GOLD_INGOT
+                loc-name: HIGH_LIGHT_GOLD_INGOT
                 lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
         LOW_SHEEP_LEATHER:
