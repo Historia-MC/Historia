@@ -441,6 +441,44 @@ public class Config {
         return armorMap;
 
     }
+
+    public Map<String, Object> iArmorInfo(String armorName) {
+
+        Map<String, Object> iArmorMap = new HashMap<>();
+
+        if (validArmor(armorName)) {
+
+            String root = "armor." + armorName;
+
+            String itemRoot = root + ".item";
+
+            String type = configuration.getString(itemRoot + ".type");
+            String localizedName = configuration.getString(itemRoot + ".loc-name");
+            String displayName = configuration.getString(itemRoot + ".display-name");
+            List<String> lore = configuration.getStringList(itemRoot + ".lore");
+            int amount = configuration.getInt(itemRoot + ".amount");
+
+            ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
+
+            iArmorMap.put("ITEM", item);
+            iArmorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
+            iArmorMap.put("TYPE", configuration.getString(root + ".type"));
+            iArmorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
+            iArmorMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+
+        } else {
+
+            iArmorMap.put("ITEM", new ItemStack(Material.AIR));
+            iArmorMap.put("ARMOR", 0);
+            iArmorMap.put("TYPE", "Heavy");
+            iArmorMap.put("SHAPE", Arrays.asList(""));
+            iArmorMap.put("RECIPE", Arrays.asList(""));
+
+        }
+
+        return iArmorMap;
+
+    }
     
     /**
      * Ore information provided in a Map.
