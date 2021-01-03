@@ -349,6 +349,50 @@ public class Config {
 
     }
 
+    public Map<String, Object> iWeaponInfo(String weaponName) {
+
+        Map<String, Object> iWeaponMap = new HashMap<>();
+
+        if (validWeapon(weaponName)) {
+
+            String root = "weapons." + weaponName;
+            String itemRoot = root + ".item";
+
+            String type = configuration.getString(itemRoot + ".type");
+            String localizedName = configuration.getString(itemRoot + ".loc-name");
+            String displayName = configuration.getString(itemRoot + ".display-name");
+            List<String> lore = configuration.getStringList(itemRoot + ".lore");
+            int amount = configuration.getInt(itemRoot + ".amount");
+
+            ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
+
+            iWeaponMap.put("DAMAGE", configuration.getDoubleList(root + ".damage"));
+            iWeaponMap.put("KNOCKBACK", configuration.getDoubleList(root + ".knockback"));
+            iWeaponMap.put("SWEEPING", configuration.getDoubleList(root + ".sweeping"));
+            iWeaponMap.put("DURABILITY", configuration.getIntegerList(root + ".durability"));
+            iWeaponMap.put("ITEM", item);
+            iWeaponMap.put("TYPE", configuration.getString(root + ".type"));
+            iWeaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
+            iWeaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+
+        } else {
+
+            Double[] blank_double = {0.0, 0.0};
+            Integer[] blank_integer = {0, 0};
+
+            iWeaponMap.put("DAMAGE", blank_double);
+            iWeaponMap.put("KNOCKBACK", blank_double);
+            iWeaponMap.put("SWEEPING", blank_double);
+            iWeaponMap.put("DURABILITY", blank_integer);
+            iWeaponMap.put("ITEM", new ItemStack(Material.AIR));
+            iWeaponMap.put("TYPE", "Light");
+            iWeaponMap.put("SHAPE", Arrays.asList(""));
+            iWeaponMap.put("RECIPE", Arrays.asList(""));
+
+        }
+        
+        return iWeaponMap;
+    }
     /**
      * Armor information provided in a Map.
      *  
