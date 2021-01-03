@@ -17,12 +17,12 @@ import dev.boooiil.historia.Config;
 
 public class CraftingTableManager {
     
-    static Logger log = Bukkit.getLogger();
-    static String prefix = "[CTM.java] ";
-    static String replace = "LOW_|MEDIUM_|HIGH_";
+    Logger log = Bukkit.getLogger();
+    String prefix = "[CTM.java] ";
+    String replace = "LOW_|MEDIUM_|HIGH_";
 
 
-    public static void craftItem(CraftingInventory inventory) {
+    public void craftItem(CraftingInventory inventory) {
 
         Map<Integer, ItemStack> input = inspectTable(inventory.getMatrix());
         Map<String, Object> pattern = constructPattern(input);
@@ -42,7 +42,7 @@ public class CraftingTableManager {
         }
     }
 
-    private static Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
+    private Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
 
         Map<Integer, ItemStack> found = new HashMap<>();
         
@@ -62,13 +62,13 @@ public class CraftingTableManager {
 
     }
 
-    private static Integer getQualityModifier() {
+    private Integer getQualityModifier() {
 
         return 0;
 
     }
 
-    private static Map<String, Object> constructPattern(Map<Integer, ItemStack> input) {
+    private Map<String, Object> constructPattern(Map<Integer, ItemStack> input) {
 
         Map<String, Object> map = new HashMap<>();
         List<String> pattern = new ArrayList<>();
@@ -161,7 +161,7 @@ public class CraftingTableManager {
 
     }
 
-    private static boolean hasRecipe(List<String> pattern) {
+    private boolean hasRecipe(List<String> pattern) {
 
         Map<String, List<String>> patterns = Config.getPatterns();
 
@@ -170,7 +170,7 @@ public class CraftingTableManager {
         return patterns.containsValue(pattern);
     }
 
-    private static Map<String, Object> getItemsBasedOnPattern(List<String> pattern) {
+    private Map<String, Object> getItemsBasedOnPattern(List<String> pattern) {
 
         Map<String, Object> itemList = new HashMap<>();
 
@@ -181,12 +181,14 @@ public class CraftingTableManager {
 
             if (itemPattern.equals(pattern)) {
 
+                Config config = new Config();
+
                 //PROBLEM IS HERE.
                 //LAST KEY PUT INTO THE LIST IS OVERWRITING THE WEAPON INFO.
                 //IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
                 //NO IDEA WHAT TO DO.
                 
-                itemList.put(itemName, Config.getWeaponInfo(itemName));
+                itemList.put(itemName, config.iWeaponInfo(itemName));
 
                 log.severe(prefix + "[getItemsBasedOnPattern] Map:" + itemList);
 
@@ -200,7 +202,7 @@ public class CraftingTableManager {
         return itemList;
     }
 
-    private static ItemStack getItemBasedOnIngot(Map<String, Object> items, List<String> materials) {
+    private ItemStack getItemBasedOnIngot(Map<String, Object> items, List<String> materials) {
 
         for (Entry<String, Object> item : items.entrySet()) {
 
