@@ -35,7 +35,7 @@ public class CraftingTableManager {
 
         if (hasRecipe(shape)) {
 
-            List<Map<String, Object>> itemsBasedOnPattern = getItemsBasedOnPattern(shape);
+            Map<String, Object> itemsBasedOnPattern = getItemsBasedOnPattern(shape);
 
             inventory.setResult(getItemBasedOnIngot(itemsBasedOnPattern, materials));
 
@@ -170,9 +170,9 @@ public class CraftingTableManager {
         return patterns.containsValue(pattern);
     }
 
-    private static List<Map<String, Object>> getItemsBasedOnPattern(List<String> pattern) {
+    private static Map<String, Object> getItemsBasedOnPattern(List<String> pattern) {
 
-        List<Map<String, Object>> itemList = new ArrayList<>();
+        Map<String, Object> itemList = new HashMap<>();
 
         for (Entry<String, List<String>> item : Config.getPatterns().entrySet()) {
 
@@ -185,17 +185,10 @@ public class CraftingTableManager {
                 //LAST KEY PUT INTO THE LIST IS OVERWRITING THE WEAPON INFO.
                 //IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
                 //NO IDEA WHAT TO DO.
-
-                Map<String, Object> weaponInfo = Config.getWeaponInfo(itemName);
-                Map<String, Object> found = new HashMap<>();
-
-                found.put(itemName, weaponInfo);
-
-                log.warning(prefix + "[getItemsBasedOnPattern] Found:" + found);
                 
-                itemList.add(found);
+                itemList.put(itemName, Config.getWeaponInfo(itemName));
 
-                log.severe(prefix + "[getItemsBasedOnPattern] List:" + itemList);
+                log.severe(prefix + "[getItemsBasedOnPattern] Map:" + itemList);
 
             }
         }
@@ -207,13 +200,12 @@ public class CraftingTableManager {
         return itemList;
     }
 
-    private static ItemStack getItemBasedOnIngot(List<Map<String, Object>> items, List<String> materials) {
+    private static ItemStack getItemBasedOnIngot(Map<String, Object> items, List<String> materials) {
 
-        for (Map<String, Object> item : items) {
+        for (Entry<String, Object> item : items.entrySet()) {
 
-            String itemName = item.keySet().iterator().next();
-
-            Map<String, Object> itemInfo = (Map<String, Object>) item.get(itemName);
+            String itemName = item.getKey();
+            Map<String, Object> itemInfo = (Map<String, Object>) item.getValue();
 
             List<String> itemMaterials = (List<String>) itemInfo.get("RECIPE");
             int need = materials.size();
