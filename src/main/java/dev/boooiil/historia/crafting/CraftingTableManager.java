@@ -188,7 +188,8 @@ public class CraftingTableManager {
                 //IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
                 //NO IDEA WHAT TO DO.
                 
-                itemList.put(itemName, config.iWeaponInfo(itemName));
+                if (Config.getWeaponSet().contains(itemName)) itemList.put(itemName, config.iWeaponInfo(itemName));
+                else itemList.put(itemName, config.iArmorInfo(itemName));
 
                 log.severe(prefix + "[getItemsBasedOnPattern] Map:" + itemList);
 
