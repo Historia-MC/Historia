@@ -761,7 +761,7 @@ armor:
     Light_Leather_Helmet:
         
             item:
-                type: Leather_Helmet
+                type: LEATHER_HELMET
                 amount: 1
                 display-name: §7Leather Helmet
                 loc-name: Light_Leather_Helmet
@@ -777,7 +777,7 @@ armor:
     Medium_Leather_Helmet:
         
             item:
-                type: Leather_Helmet
+                type: LEATHER_HELMET
                 amount: 1
                 display-name: §7Leather Helmet
                 loc-name: Medium_Leather_Helmet
@@ -793,7 +793,7 @@ armor:
     Heavy_Leather_Helmet:
         
             item:
-                type: Leather_Helmet
+                type: LEATHER_HELMET
                 amount: 1
                 display-name: §7Leather Helmet
                 loc-name: Heavy_Leather_Helmet
@@ -809,7 +809,7 @@ armor:
     Light_Leather_Chestplate:
         
             item:
-                type: Leather_Chestplate
+                type: LEATHER_CHESTPLATE
                 amount: 1
                 display-name: §7Leather Chestplate
                 loc-name: Light_Leather_Chestplate
@@ -825,7 +825,7 @@ armor:
     Medium_Leather_Chestplate:
         
             item:
-                type: Leather_Chestplate
+                type: LEATHER_CHESTPLATE
                 amount: 1
                 display-name: §7Leather Chestplate
                 loc-name: Medium_Leather_Chestplate
@@ -841,7 +841,7 @@ armor:
     Heavy_Leather_Chestplate:
         
             item:
-                type: Leather_Chestplate
+                type: LEATHER_CHESTPLATE
                 amount: 1
                 display-name: §7Leather Chestplate
                 loc-name: Heavy_Leather_Chestplate
@@ -857,7 +857,7 @@ armor:
     Light_Leather_Leggings:
         
             item:
-                type: Leather_Leggings
+                type: LEATHER_LEGGINGS
                 amount: 1
                 display-name: §7Leather Leggings
                 loc-name: Light_Leather_Leggings
@@ -873,7 +873,7 @@ armor:
     Medium_Leather_Leggings:
         
             item:
-                type: Leather_Leggings
+                type: LEATHER_LEGGINGS
                 amount: 1
                 display-name: §7Leather Leggings
                 loc-name: Medium_Leather_Leggings
@@ -889,7 +889,7 @@ armor:
     Heavy_Leather_Leggings:
         
             item:
-                type: Leather_Leggings
+                type: LEATHER_LEGGINGS
                 amount: 1
                 display-name: §7Leather Leggings
                 loc-name: Heavy_Leather_Leggings
@@ -905,7 +905,7 @@ armor:
     Light_Leather_Boots:
         
             item:
-                type: Leather_Boots
+                type: LEATHER_BOOTS
                 amount: 1
                 display-name: §7Leather Boots
                 loc-name: Light_Leather_Boots
@@ -921,7 +921,7 @@ armor:
     Medium_Leather_Boots:
         
             item:
-                type: Leather_Boots
+                type: LEATHER_BOOTS
                 amount: 1
                 display-name: §7Leather Boots
                 loc-name: Medium_Leather_Boots
@@ -937,7 +937,7 @@ armor:
     Heavy_Leather_Boots:
         
             item:
-                type: Leather_Boots
+                type: LEATHER_BOOTS
                 amount: 1
                 display-name: §7Leather Boots
                 loc-name: Heavy_Leather_Boots
@@ -953,7 +953,7 @@ armor:
     Light_Tin_Helmet:
         
             item:
-                type: Iron_Helmet
+                type: IRON_HELMET
                 amount: 1
                 display-name: §7Tin Helmet
                 loc-name: Light_Tin_Helmet
@@ -969,7 +969,7 @@ armor:
     Light_Tin_Chestplate:
         
             item:
-                type: Iron_Chestplate
+                type: IRON_CHESTPLATE
                 amount: 1
                 display-name: §7Tin Chestplate
                 loc-name: Light_Tin_Chestplate
@@ -985,7 +985,7 @@ armor:
     Light_Tin_Leggings:
         
             item:
-                type: Iron_Leggings
+                type: IRON_LEGGINGS
                 amount: 1
                 display-name: §7Tin Leggings
                 loc-name: Light_Tin_Leggings
@@ -1001,7 +1001,7 @@ armor:
     Light_Tin_Boots:
         
             item:
-                type: Iron_Boots
+                type: IRON_BOOTS
                 amount: 1
                 display-name: §7Tin Boots
                 loc-name: Light_Tin_Boots
@@ -1017,7 +1017,7 @@ armor:
     Light_Bronze_Helmet:
         
             item:
-                type: Golden_Helmet
+                type: GOLDEN_HELMET
                 amount: 1
                 display-name: §7Bronze Helmet
                 loc-name: Light_Bronze_Helmet
@@ -1033,7 +1033,7 @@ armor:
     Medium_Bronze_Helmet:
         
             item:
-                type: Golden_Helmet
+                type: GOLDEN_HELMET
                 amount: 1
                 display-name: §7Bronze Helmet
                 loc-name: Medium_Bronze_Helmet
@@ -1049,7 +1049,7 @@ armor:
     Heavy_Bronze_Helmet:
         
             item:
-                type: Golden_Helmet
+                type: GOLDEN_HELMET
                 amount: 1
                 display-name: §7Bronze Helmet
                 loc-name: Heavy_Bronze_Helmet
@@ -1065,7 +1065,7 @@ armor:
     Light_Bronze_Chestplate:
         
             item:
-                type: Golden_Chestplate
+                type: GOLDEN_CHESTPLATE
                 amount: 1
                 display-name: §7Bronze Chestplate
                 loc-name: Light_Bronze_Chestplate
@@ -1081,7 +1081,7 @@ armor:
     Medium_Bronze_Chestplate:
         
             item:
-                type: Golden_Chestplate
+                type: GOLDEN_CHESTPLATE
                 amount: 1
                 display-name: §7Bronze Chestplate
                 loc-name: Medium_Bronze_Chestplate
@@ -1097,7 +1097,7 @@ armor:
     Heavy_Bronze_Chestplate:
         
             item:
-                type: Golden_Chestplate
+                type: GOLDEN_CHESTPLATE
                 amount: 1
                 display-name: §7Bronze Chestplate
                 loc-name: Heavy_Bronze_Chestplate
@@ -1113,7 +1113,7 @@ armor:
     Light_Bronze_Leggings:
         
             item:
-                type: Golden_Leggings
+                type: GOLDEN_LEGGINGS
                 amount: 1
                 display-name: §7Bronze Leggings
                 loc-name: Light_Bronze_Leggings
@@ -1129,7 +1129,7 @@ armor:
     Medium_Bronze_Leggings:
         
             item:
-                type: Golden_Leggings
+                type: GOLDEN_LEGGINGS
                 amount: 1
                 display-name: §7Bronze Leggings
                 loc-name: Medium_Bronze_Leggings
@@ -1139,13 +1139,13 @@ armor:
             weight: 35
             durability: [80,150]
             type: Medium
-            recipe-items: ["MEDIUM_BRONZE"]
+            recipe-items: ["MEDIUM_BRONZE_INGOT"]
             recipe-shape: ["AAA", "A A", "A A"]
 
     Heavy_Bronze_Leggings:
         
             item:
-                type: Golden_Leggings
+                type: GOLDEN_LEGGINGS
                 amount: 1
                 display-name: §7Bronze Leggings
                 loc-name: Heavy_Bronze_Leggings
@@ -1161,7 +1161,7 @@ armor:
     Light_Bronze_Boots:
         
             item:
-                type: Golden_Boots
+                type: GOLDEN_BOOTS
                 amount: 1
                 display-name: §7Bronze Boots
                 loc-name: Light_Bronze_Boots
@@ -1177,7 +1177,7 @@ armor:
     Medium_Bronze_Boots:
         
             item:
-                type: Golden_Boots
+                type: GOLDEN_BOOTS
                 amount: 1
                 display-name: §7Bronze Boots
                 loc-name: Medium_Bronze_Boots
@@ -1193,7 +1193,7 @@ armor:
     Heavy_Bronze_Boots:
         
             item:
-                type: Golden_Boots
+                type: GOLDEN_BOOTS
                 amount: 1
                 display-name: §7Bronze Boots
                 loc-name: Heavy_Bronze_Boots
@@ -1209,7 +1209,7 @@ armor:
     Light_Iron_Helmet:
         
             item:
-                type: Chainmail_Helmet
+                type: CHAINMAIL_HELMET
                 amount: 1
                 display-name: §7Chainmail Helmet
                 loc-name: Light_Iron_Helmet
@@ -1225,7 +1225,7 @@ armor:
     Medium_Iron_Helmet:
         
             item:
-                type: Iron_Helmet
+                type: IRON_HELMET
                 amount: 1
                 display-name: §7Iron Helmet
                 loc-name: Medium_Iron_Helmet
@@ -1241,7 +1241,7 @@ armor:
     Heavy_Iron_Helmet:
         
             item:
-                type: Iron_Helmet
+                type: IRON_HELMET
                 amount: 1
                 display-name: §7Iron Helmet
                 loc-name: Heavy_Iron_Helmet
@@ -1257,7 +1257,7 @@ armor:
     Light_Iron_Chestplate:
         
             item:
-                type: Chainmail_Chestplate
+                type: CHAINMAIL_CHESTPLATE
                 amount: 1
                 display-name: §7Chainmail Chestplate
                 loc-name: Light_Iron_Chestplate
@@ -1273,7 +1273,7 @@ armor:
     Medium_Iron_Chestplate:
         
             item:
-                type: Iron_Chestplate
+                type: IRON_CHESTPLATE
                 amount: 1
                 display-name: §7Iron Chestplate
                 loc-name: Medium_Iron_Chestplate
@@ -1289,7 +1289,7 @@ armor:
     Heavy_Iron_Chestplate:
         
             item:
-                type: Iron_Chestplate
+                type: IRON_CHESTPLATE
                 amount: 1
                 display-name: §7Iron Chestplate
                 loc-name: Heavy_Iron_Chestplate
@@ -1305,7 +1305,7 @@ armor:
     Light_Iron_Leggings:
         
             item:
-                type: Chainmail_Leggings
+                type: CHAINMAIL_LEGGINGS
                 amount: 1
                 display-name: §7Chainmail Leggings
                 loc-name: Light_Iron_Leggings
@@ -1321,7 +1321,7 @@ armor:
     Medium_Iron_Leggings:
         
             item:
-                type: Iron_Leggings
+                type: IRON_LEGGINGS
                 amount: 1
                 display-name: §7Iron Leggings
                 loc-name: Medium_Iron_Leggings
@@ -1337,7 +1337,7 @@ armor:
     Heavy_Iron_Leggings:
         
             item:
-                type: Iron_Leggings
+                type: IRON_LEGGINGS
                 amount: 1
                 display-name: §7Iron Leggings
                 loc-name: Heavy_Iron_Leggings
@@ -1353,9 +1353,9 @@ armor:
     Light_Iron_Boots:
         
             item:
-                type: Chainmail_Boots
+                type: CHAINMAIL_BOOTS
                 amount: 1
-                display-name: §7Iron Boots
+                display-name: §7Chainmail Boots
                 loc-name: Light_Iron_Boots
                 lore: [ "", "§7Placeholder" ]
                 
@@ -1369,7 +1369,7 @@ armor:
     Medium_Iron_Boots:
         
             item:
-                type: Iron_Boots
+                type: IRON_BOOTS
                 amount: 1
                 display-name: §7Iron Boots
                 loc-name: Medium_Iron_Boots
@@ -1385,7 +1385,7 @@ armor:
     Heavy_Iron_Boots:
         
             item:
-                type: Iron_Boots
+                type: IRON_BOOTS
                 amount: 1
                 display-name: §7Iron Boots
                 loc-name: Heavy_Iron_Boots
@@ -1401,7 +1401,7 @@ armor:
     Light_Steel_Helmet:
         
             item:
-                type: Netherite_Helmet
+                type: NETHERITE_HELMET
                 amount: 1
                 display-name: §7Steel Helmet
                 loc-name: Light_Steel_Helmet
@@ -1417,7 +1417,7 @@ armor:
     Medium_Steel_Helmet:
         
             item:
-                type: Netherite_Helmet
+                type: NETHERITE_HELMET
                 amount: 1
                 display-name: §7Steel Helmet
                 loc-name: Medium_Steel_Helmet
@@ -1433,7 +1433,7 @@ armor:
     Heavy_Steel_Helmet:
         
             item:
-                type: Netherite_Helmet
+                type: NETHERITE_HELMET
                 amount: 1
                 display-name: §7Steel Helmet
                 loc-name: Heavy_Steel_Helmet
@@ -1449,7 +1449,7 @@ armor:
     Light_Steel_Chestplate:
         
             item:
-                type: Netherite_Chestplate
+                type: NETHERITE_CHESTPLATE
                 amount: 1
                 display-name: §7Steel Chestplate
                 loc-name: Light_Steel_Chestplate
@@ -1465,7 +1465,7 @@ armor:
     Medium_Steel_Chestplate:
         
             item:
-                type: Netherite_Chestplate
+                type: NETHERITE_CHESTPLATE
                 amount: 1
                 display-name: §7Steel Chestplate
                 loc-name: Medium_Steel_Chestplate
@@ -1481,7 +1481,7 @@ armor:
     Heavy_Steel_Chestplate:
         
             item:
-                type: Netherite_Chestplate
+                type: NETHERITE_CHESTPLATE
                 amount: 1
                 display-name: §7Steel Chestplate
                 loc-name: Heavy_Steel_Chestplate
@@ -1497,7 +1497,7 @@ armor:
     Light_Steel_Leggings:
         
             item:
-                type: Netherite_Leggings
+                type: NETHERITE_LEGGINGS
                 amount: 1
                 display-name: §7Steel Leggings
                 loc-name: Light_Steel_Leggings
@@ -1513,7 +1513,7 @@ armor:
     Medium_Steel_Leggings:
         
             item:
-                type: Netherite_Leggings
+                type: NETHERITE_LEGGINGS
                 amount: 1
                 display-name: §7Steel Leggings
                 loc-name: Medium_Steel_Leggings
@@ -1529,7 +1529,7 @@ armor:
     Heavy_Steel_Leggings:
         
             item:
-                type: Netherite_Leggings
+                type: NETHERITE_LEGGINGS
                 amount: 1
                 display-name: §7Steel Leggings
                 loc-name: Heavy_Steel_Leggings
@@ -1545,7 +1545,7 @@ armor:
     Light_Steel_Boots:
         
             item:
-                type: Netherite_Boots
+                type: NETHERITE_BOOTS
                 amount: 1
                 display-name: §7Steel Boots
                 loc-name: Light_Steel_Boots
@@ -1561,7 +1561,7 @@ armor:
     Medium_Steel_Boots:
         
             item:
-                type: Netherite_Boots
+                type: NETHERITE_BOOTS
                 amount: 1
                 display-name: §7Steel Boots
                 loc-name: Medium_Steel_Boots
@@ -1577,7 +1577,7 @@ armor:
     Heavy_Steel_Boots:
         
             item:
-                type: Netherite_Boots
+                type: NETHERITE_BOOTS
                 amount: 1
                 display-name: §7Steel Boots
                 loc-name: Heavy_Steel_Boots
@@ -1593,7 +1593,7 @@ armor:
     Heavy_Turtle_Helmet:
         
             item:
-                type: Turtle_Helmet
+                type: TURTLE_HELMET
                 amount: 1
                 display-name: §7Turtle Shell
                 loc-name: Heavy_Turtle_Helmet
