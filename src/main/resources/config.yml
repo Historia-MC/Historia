@@ -298,9 +298,8 @@ classes:
             breakGrass: true
             instantGrowChance: 0.3
 
-
 weapons:
-    
+
     Light_Wooden_Sword:
     
         item:
@@ -309,14 +308,14 @@ weapons:
             display-name: §7Light Sword
             loc-name: Light_Wooden_Sword
             lore: 
-              - "" 
-              - "§7Woody. "
-              - ""
-              - "§9-----------------"
-              - "§7Damage - §k?"
-              - "§7Knockback - §k?"
-              - "§7Speed - §k?"
-              - ""
+                - "" 
+                - "§7Woody. "
+                - ""
+                - "§9-----------------"
+                - "§7Damage - §k?"
+                - "§7Knockback - §k?"
+                - "§7Speed - §k?"
+                - ""
             
         damage: [1.0, 2.0]
         speed: [1.4, 1.6]
@@ -335,14 +334,14 @@ weapons:
                 display-name: §7Light Axe
                 loc-name: Light_Wooden_Axe
                 lore: 
-              - "" 
-              - "§7Woody. "
-              - ""
-              - "§9-----------------"
-              - "§7Damage - §k?"
-              - "§7Knockback - §k?"
-              - "§7Speed - §k?"
-              - ""
+                    - "" 
+                    - "§7Woody. "
+                    - ""
+                    - "§9-----------------"
+                    - "§7Damage - §k?"
+                    - "§7Knockback - §k?"
+                    - "§7Speed - §k?"
+                    - ""
                 
             damage: [2.0, 3.0]
             speed: [0.8, 1.2]
@@ -360,16 +359,15 @@ weapons:
                 amount: 1
                 display-name: §7Tin Sword
                 loc-name: Light_Tin_Sword
-                lore: [ "", "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."]
                 lore: 
-              - "" 
-              - "§7Woody. "
-              - ""
-              - "§9-----------------"
-              - "§7Damage - §k?"
-              - "§7Knockback - §k?"
-              - "§7Speed - §k?"
-              - ""
+                    - "" 
+                    - "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."
+                    - ""
+                    - "§9-----------------"
+                    - "§7Damage - §k?"
+                    - "§7Knockback - §k?"
+                    - "§7Speed - §k?"
+                    - ""
                     
             damage: [2.0, 3.0]
             speed: [1.4, 1.6]
@@ -415,7 +413,7 @@ weapons:
             type: Heavy
             recipe-items: ["STONE", "STICK"]
             recipe-shape: [" A ", " A ", " B "]
-            
+
     Heavy_Stone_Axe:
     
         item:
@@ -469,7 +467,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
         recipe-shape: [" A ", " A ", " B "]
-    
+
     Heavy_Bronze_Sword:
     
         item:
@@ -524,7 +522,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
         recipe-shape: ["AA ", "AB ", " B "]
-    
+
     Heavy_Bronze_Axe:
     
         item:
@@ -578,7 +576,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
         recipe-shape: [" A ", " A ", " B "]
-    
+
     Heavy_Iron_Sword:
     
         item:
@@ -632,7 +630,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
         recipe-shape: ["AA ", "AB ", " B "]
-    
+
     Heavy_Iron_Axe:
     
         item:
@@ -686,7 +684,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
         recipe-shape: [" A ", " A ", " B "]
-    
+
     Heavy_Steel_Sword:
     
         item:
@@ -740,7 +738,7 @@ weapons:
         type: Medium
         recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
         recipe-shape: ["AA ", "AB ", " B "]
-    
+
     Heavy_Steel_Axe:
         item:
             type: NETHERITE_AXE
@@ -757,7 +755,6 @@ weapons:
         type: Heavy
         recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
         recipe-shape: ["AA ", "AB ", " B "]
-    
 
 armor:
 
@@ -1609,11 +1606,6 @@ armor:
             recipe-items: ["SCUTE"]
             recipe-shape: ["AAA", "A A", "   "]
 
-
-                  
-
-
-
 items:
 
     
@@ -1652,7 +1644,7 @@ items:
         iron:
             chance: 30
 
-            LOW_IRON_CHUNK:
+            LOW_LIGHT_IRON_CHUNK:
 
                 class: Any
                 chance: 80
@@ -1661,10 +1653,10 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §cIron Chunk
-                    loc-name: LOW_IRON_CHUNK
+                    loc-name: LOW_LIGHT_IRON_CHUNK
                     lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            MEDIUM_IRON_CHUNK:
+            MEDIUM_LIGHT_IRON_CHUNK:
 
                 class: Miner
                 chance: 15
@@ -1673,10 +1665,10 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §2Iron Chunk
-                    loc-name: MEDIUM_IRON_CHUNK
+                    loc-name: MEDIUM_LIGHT_IRON_CHUNK
                     lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            HIGH_IRON_CHUNK:
+            HIGH_LIGHT_IRON_CHUNK:
 
                 class: Miner
                 chance: 5
@@ -1685,14 +1677,14 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §6Iron Chunk
-                    loc-name: HIGH_IRON_CHUNK
+                    loc-name: HIGH_LIGHT_IRON_CHUNK
                     lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
         
         tin:
             chance: 70
 
-            LOW_TIN_CHUNK:
+            LOW_LIGHT_TIN_CHUNK:
 
                 class: Any
                 chance: 80
@@ -1701,10 +1693,10 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §cTin Chunk
-                    loc-name: LOW_TIN_CHUNK
+                    loc-name: LOW_LIGHT_TIN_CHUNK
                     lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            MEDIUM_TIN_CHUNK:
+            MEDIUM_LIGHT_TIN_CHUNK:
 
                 class: Miner
                 chance: 15
@@ -1713,10 +1705,10 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §2Tin Chunk
-                    loc-name: MEDIUM_TIN_CHUNK
+                    loc-name: MEDIUM_LIGHT_TIN_CHUNK
                     lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            HIGH_TIN_CHUNK:
+            HIGH_LIGHT_TIN_CHUNK:
 
                 class: Miner
                 chance: 5
@@ -1725,7 +1717,7 @@ items:
                     type: IRON_ORE
                     amount: 1
                     display-name: §6Tin Chunk
-                    loc-name: HIGH_TIN_CHUNK
+                    loc-name: HIGH_LIGHT_TIN_CHUNK
                     lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
     GOLD_ORE:
@@ -1733,7 +1725,7 @@ items:
         gold:
             chance: 30
 
-            LOW_GOLD_CHUNK:
+            LOW_LIGHT_GOLD_CHUNK:
 
                 class: Any
                 chance: 80
@@ -1742,10 +1734,10 @@ items:
                     type: GOLD_ORE
                     amount: 1
                     display-name: §cGold Chunk
-                    loc-name: LOW_GOLD_CHUNK
+                    loc-name: LOW_LIGHT_GOLD_CHUNK
                     lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
 
-            MEDIUM_GOLD_CHUNK:
+            MEDIUM_LIGHT_GOLD_CHUNK:
 
                 class: Miner
                 chance: 15
@@ -1754,10 +1746,10 @@ items:
                     type: GOLD_ORE
                     amount: 1
                     display-name: §2Gold Chunk
-                    loc-name: MEDIUM_GOLD_CHUNK
+                    loc-name: MEDIUM_LIGHT_GOLD_CHUNK
                     lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
 
-            HIGH_GOLD_CHUNK:
+            HIGH_LIGHT_GOLD_CHUNK:
 
                 class: Miner
                 chance: 5
@@ -1766,48 +1758,24 @@ items:
                     type: GOLD_ORE
                     amount: 1
                     display-name: §6Gold Chunk
-                    loc-name: HIGH_GOLD_CHUNK
+                    loc-name: HIGH_LIGHT_GOLD_CHUNK
                     lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
 
         copper:
             chance: 70
 
-            LOW_COPPER_CHUNK:
+            LOW_LIGHT_COPPER_CHUNK:
 
                 class: Any
-                chance: 80
+                chance: 100
 
                 item:
-                    type: GOLD_ORE
+                    type: GOLD_NUGGET
                     amount: 1
                     display-name: §cCopper Chunk
-                    loc-name: LOW_COPPER_CHUNK
-                    lore: [ "", §7Quality - §cLow, §7Tier - §9Light ]
-
-            MEDIUM_COPPER_CHUNK:
-
-                class: Miner
-                chance: 15
-
-                item:
-                    type: GOLD_ORE
-                    amount: 1
-                    display-name: §2Cropper Chunk
-                    loc-name: MEDIUM_COPPER_CHUNK
-                    lore: [ "", §7Quality - §2Medium, §7Tier - §9Light ]
-
-            HIGH_COPPER_CHUNK:
-
-                class: Miner
-                chance: 5
-
-                item:
-                    type: GOLD_ORE
-                    amount: 1
-                    display-name: §6Copper Chunk
-                    loc-name: HIGH_COPPER_CHUNK
-                    lore: [ "", §7Quality - §6High, §7Tier - §9Light ]
-
+                    loc-name: LOW_LIGHT_COPPER_CHUNK
+                    lore: [ "", §7Quality - Standerd ]
+    
     ores:
 
         LOW_LIGHT_IRON_INGOT:
@@ -2016,4 +1984,3 @@ items:
 
     blocks:
         key: false
-    
