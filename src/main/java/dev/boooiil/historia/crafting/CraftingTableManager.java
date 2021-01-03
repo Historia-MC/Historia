@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.Config;
 
@@ -18,6 +19,7 @@ public class CraftingTableManager {
     
     static Logger log = Bukkit.getLogger();
     static String prefix = "[CTM.java] ";
+    static String replace = "LOW_|MEDIUM_|HIGH_";
 
 
     public static void craftItem(CraftingInventory inventory) {
@@ -38,9 +40,6 @@ public class CraftingTableManager {
             inventory.setResult(getItemBasedOnIngot(itemsBasedOnPattern, materials));
 
         }
-
-        //inventory.setResult(getRecipe(inventory.getMatrix()));
-
     }
 
     private static Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
@@ -65,7 +64,7 @@ public class CraftingTableManager {
 
     private static Integer getQualityModifier() {
 
-
+        return 0;
 
     }
 
@@ -85,20 +84,23 @@ public class CraftingTableManager {
 
             Integer key = slot.getKey();
             ItemStack item = slot.getValue();
+            ItemMeta meta = item.getItemMeta();
+
+            String type = item.getType() != Material.AIR && meta.hasLocalizedName() ? meta.getLocalizedName().replaceFirst(replace, "") : item.getType().toString();
 
             if (key >= 0 && slot.getKey() <= 2) {
 
                 if (item.getType() == Material.AIR) first += " ";
 
-                else if (knownItems.contains(item.getType().toString())) {
+                else if (knownItems.contains(type)) {
 
-                    first += options[knownItems.indexOf(item.getType().toString())];
+                    first += options[knownItems.indexOf(type)];
 
                 }
 
                 else {
 
-                    knownItems.add(item.getType().toString());
+                    knownItems.add(type);
                     first += options[knownItems.size() - 1];
 
                 }
@@ -109,15 +111,15 @@ public class CraftingTableManager {
 
                 if (item.getType() == Material.AIR) second += " ";
 
-                else if (knownItems.contains(item.getType().toString())) {
+                else if (knownItems.contains(type)) {
 
-                    second += options[knownItems.indexOf(item.getType().toString())];
+                    second += options[knownItems.indexOf(type)];
 
                 }
 
                 else {
 
-                    knownItems.add(item.getType().toString());
+                    knownItems.add(type);
                     second += options[knownItems.size() - 1];
 
                 }
@@ -128,21 +130,22 @@ public class CraftingTableManager {
 
                 if (item.getType() == Material.AIR) third += " ";
 
-                else if (knownItems.contains(item.getType().toString())) {
+                else if (knownItems.contains(type)) {
 
-                    third += options[knownItems.indexOf(item.getType().toString())];
+                    third += options[knownItems.indexOf(type)];
 
                 }
 
                 else {
 
-                    knownItems.add(item.getType().toString());
+                    knownItems.add(type);
                     third += options[knownItems.size() - 1];
 
                 }
 
             }
 
+            log.info(prefix + "[constructPattern] Type: " + type);
         }
 
         pattern.add(first);
@@ -175,18 +178,31 @@ public class CraftingTableManager {
 
             String itemName = item.getKey();
             List<String> itemPattern = item.getValue();
-            
-            log.info(prefix + "[getItemsBasedOnPattern] " + itemName + " " + itemPattern + " == " + pattern);
-            log.info(prefix + "[getItemsBasedOnPattern] " + (itemPattern == pattern));
 
             if (itemPattern.equals(pattern)) {
 
-                itemList.add(Config.getWeaponInfo(itemName));
+                //PROBLEM IS HERE.
+                //LAST KEY PUT INTO THE LIST IS OVERWRITING THE WEAPON INFO.
+                //IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
+                //NO IDEA WHAT TO DO.
+
+                Map<String, Object> weaponInfo = Config.getWeaponInfo(itemName);
+                Map<String, Object> found = new HashMap<>();
+
+                found.put(itemName, weaponInfo);
+
+                log.warning(prefix + "[getItemsBasedOnPattern] Found:" + found);
+                
+                itemList.add(found);
+
+                log.severe(prefix + "[getItemsBasedOnPattern] List:" + itemList);
 
             }
         }
 
-        log.info(prefix + "[getItemsBasedOnPattern] " + itemList);
+        //log.info(prefix + "[getItemsBasedOnPattern] " + itemList);
+        
+        log.info(prefix + "[getItemsBasedOnPattern] Item List:" + itemList);
 
         return itemList;
     }
@@ -195,18 +211,34 @@ public class CraftingTableManager {
 
         for (Map<String, Object> item : items) {
 
-            List<String> itemMaterials = (List<String>) item.get("RECIPE");
+            String itemName = item.keySet().iterator().next();
+
+            Map<String, Object> itemInfo = (Map<String, Object>) item.get(itemName);
+
+            List<String> itemMaterials = (List<String>) itemInfo.get("RECIPE");
+            int need = materials.size();
+            int matched = 0;
+            
+            log.warning(prefix + "[getItemBasedOnIngot] Item: " + itemInfo);
+            log.info(prefix + "[getItemBasedOnIngot] Item Name: " + itemName);
+            log.info(prefix + "[getItemBasedOnIngot] Materials: " + itemMaterials);
+            log.info(prefix + "[getItemBasedOnIngot] need: " + need);
+            log.info(prefix + "[getItemBasedOnIngot] matched: " + matched);
 
             if (materials.size() == itemMaterials.size()) {
 
+                for (String material : itemMaterials) {
+
+                    if (materials.contains(material.replaceFirst(replace, ""))) matched ++;
+
+                }
+
                 log.info(prefix + "[getItemBasedOnIngot] " + item);
 
-                return (ItemStack) item.get("ITEM");
+                if (matched == need) return (ItemStack) itemInfo.get("ITEM");
 
             }
-
         }
-
 
         return new ItemStack(Material.AIR);
 
