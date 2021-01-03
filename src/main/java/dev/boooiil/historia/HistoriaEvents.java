@@ -61,6 +61,8 @@ import dev.boooiil.historia.dependents.worldguard.WorldGuardHandler;
 
 public class HistoriaEvents implements Listener {
 
+    CraftingTableManager ctm = new CraftingTableManager();
+
     @EventHandler
     public void onProjectileLaunch(ProjectileLaunchEvent event) {
         FlameArrowHandler.onShoot(event.getEntity());
@@ -296,7 +298,7 @@ public class HistoriaEvents implements Listener {
     @EventHandler
     public void onPrepareItemCraftEvent(PrepareItemCraftEvent event){
 
-        CraftingTableManager.craftItem(event.getInventory());
+        ctm.craftItem(event.getInventory());
 
         // WeaponStats.initiate(prepareItemCraftEvent);
     }
