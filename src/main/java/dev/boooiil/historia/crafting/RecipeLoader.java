@@ -24,16 +24,41 @@ public class RecipeLoader {
         Bukkit.removeRecipe(NamespacedKey.minecraft("gold_sword"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("stone_sword"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("wood_sword"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_sword"));
+
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_axe"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("gold_axe"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("stone_axe"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("wood_axe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_axe"));
+        
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_pickaxe"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_shovel"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_hoe"));
+
         Bukkit.removeRecipe(NamespacedKey.minecraft("iron_nugget"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("gold_nugget"));
+
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_helmet"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
         Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_boots"));
+
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_boots"));
+
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_boots"));
+
+        Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_helmet"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_chestplate"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_leggings"));
+        Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_boots"));
+
 
     }
 
