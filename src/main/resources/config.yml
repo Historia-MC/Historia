@@ -963,7 +963,7 @@ armor:
             weight: 15 
             durability: [60,90]
             type: Light
-            recipe-items: ["TIN_INGOT"]
+            recipe-items: ["LIGHT_TIN_INGOT"]
             recipe-shape: ["AAA", "A A", "   "]
 
     Light_Tin_Chestplate:
@@ -979,7 +979,7 @@ armor:
             weight: 25
             durability: [70,125]
             type: Light
-            recipe-items: ["TIN_INGOT"]
+            recipe-items: ["LIGHT_TIN_INGOT"]
             recipe-shape: ["A A", "AAA", "AAA"]
 
     Light_Tin_Leggings:
@@ -995,7 +995,7 @@ armor:
             weight: 25
             durability: [70,125]
             type: Light
-            recipe-items: ["TIN_INGOT"]
+            recipe-items: ["LIGHT_TIN_INGOT"]
             recipe-shape: ["AAA", "A A", "A A"]
 
     Light_Tin_Boots:
@@ -1011,7 +1011,7 @@ armor:
             weight: 15
             durability: [60,90]
             type: Light
-            recipe-items: ["TIN_INGOT"]
+            recipe-items: ["LIGHT_TIN_INGOT"]
             recipe-shape: ["A A", "A A", "   "]
 
     Light_Bronze_Helmet:
