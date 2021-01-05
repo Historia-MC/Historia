@@ -27,7 +27,10 @@ public class CraftingTableManager {
         Map<Integer, ItemStack> input = inspectTable(inventory.getMatrix());
         Map<String, Object> pattern = constructPattern(input);
 
+        @SuppressWarnings("unchecked")
         List<String> shape = (List<String>) pattern.get("PATTERN");
+        
+        @SuppressWarnings("unchecked")
         List<String> materials = (List<String>) pattern.get("MATERIALS");
 
         log.info(prefix + "[craftItem] " + shape);
@@ -86,7 +89,7 @@ public class CraftingTableManager {
             ItemStack item = slot.getValue();
             ItemMeta meta = item.getItemMeta();
 
-            String type = item.getType() != Material.AIR && meta.hasLocalizedName() ? meta.getLocalizedName().replaceFirst(replace, "") : item.getType().toString();
+            String type = item.getType() != Material.AIR && meta.hasLocalizedName() ? meta.getLocalizedName() : item.getType().toString();
 
             if (key >= 0 && slot.getKey() <= 2) {
 
@@ -208,8 +211,11 @@ public class CraftingTableManager {
         for (Entry<String, Object> item : items.entrySet()) {
 
             String itemName = item.getKey();
+
+            @SuppressWarnings("unchecked")
             Map<String, Object> itemInfo = (Map<String, Object>) item.getValue();
 
+            @SuppressWarnings("unchecked")
             List<String> itemMaterials = (List<String>) itemInfo.get("RECIPE");
             int need = materials.size();
             int matched = 0;
@@ -222,9 +228,9 @@ public class CraftingTableManager {
 
             if (materials.size() == itemMaterials.size()) {
 
-                for (String material : itemMaterials) {
+                for (String material : materials) {
 
-                    if (materials.contains(material.replaceFirst(replace, ""))) matched ++;
+                    if (itemMaterials.contains(material.replaceFirst(replace, ""))) matched ++;
 
                 }
 
