@@ -1,5 +1,6 @@
 package dev.boooiil.historia.crafting;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
+import org.apache.commons.codec.binary.Hex;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +32,7 @@ public class CraftingTableManager {
 
         @SuppressWarnings("unchecked")
         List<String> shape = (List<String>) pattern.get("PATTERN");
-        
+
         @SuppressWarnings("unchecked")
         List<String> materials = (List<String>) pattern.get("MATERIALS");
 
@@ -65,9 +68,16 @@ public class CraftingTableManager {
 
     }
 
-    private Integer getQualityModifier() {
+    private float getQualityModifier(int complexity) {
 
-        return 0;
+        int medium = 0;
+        int high = 0;
+        float mediumWeight = 50 / (float) complexity;
+        float highWeight = 100 / (float) complexity;
+
+
+
+        return (medium * mediumWeight) + (high * highWeight);
 
     }
 
@@ -245,4 +255,17 @@ public class CraftingTableManager {
 
     }
     
+    public static String hideText(String text) {
+
+        StringBuilder output = new StringBuilder();
+
+        byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
+        String hex = Hex.encodeHexString(bytes);
+
+        for (char c : hex.toCharArray()) {
+            output.append(ChatColor.COLOR_CHAR).append(c);
+        }
+
+        return output.toString();
+    }
 }
