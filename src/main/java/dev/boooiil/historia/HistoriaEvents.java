@@ -218,6 +218,8 @@ public class HistoriaEvents implements Listener {
             Player player = (Player) event.getDamager();
             ItemStack handItem = player.getInventory().getItemInMainHand();
 
+            if (handItem == null) handItem = new ItemStack(Material.AIR);
+
             StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
             if (handItem.getItemMeta().hasLocalizedName() && Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
