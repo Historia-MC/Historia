@@ -1,0 +1,478 @@
+version: 1
+
+Light_Wooden_Sword:
+  item:
+    type: WOODEN_SWORD
+    amount: 1
+    display-name: §7Light Sword
+    loc-name: Light_Wooden_Sword
+    lore:
+      - ""
+      - "§7Woody. "
+      - ""
+      - "§9-----------------"
+      - "§7Damage - §k?"
+      - "§7Knockback - §k?"
+      - "§7Speed - §k?"
+      - ""
+
+  damage: [1.0, 2.0]
+  speed: [1.4, 1.6]
+  knockback: [0.0, 0.5]
+  sweeping: [0.5, 1.0]
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["WOOD", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Light_Wooden_Axe:
+  item:
+    type: WOODEN_AXE
+    amount: 1
+    display-name: §7Light Axe
+    loc-name: Light_Wooden_Axe
+    lore:
+      - ""
+      - "§7Woody. "
+      - ""
+      - "§9-----------------"
+      - "§7Damage - §k?"
+      - "§7Knockback - §k?"
+      - "§7Speed - §k?"
+      - ""
+
+  damage: [2.0, 3.0]
+  speed: [0.8, 1.2]
+  knockback: [0.0, 1.0]
+  sweeping: [0.5, 1.0]
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["WOOD", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Light_Tin_Sword:
+  item:
+    type: IRON_SWORD
+    amount: 1
+    display-name: §7Tin Sword
+    loc-name: Light_Tin_Sword
+    lore:
+      - ""
+      - "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."
+      - ""
+      - "§9-----------------"
+      - "§7Damage - §k?"
+      - "§7Knockback - §k?"
+      - "§7Speed - §k?"
+      - ""
+
+  damage: [2.0, 3.0]
+  speed: [1.4, 1.6]
+  knockback: [0.5, 1.0]
+  sweeping: [1.0, 1.5]
+  durability: [50, 75]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Light_Tin_Axe:
+  item:
+    type: IRON_AXE
+    amount: 1
+    display-name: §7Tin Axe
+    loc-name: Light_Tin_Axe
+    lore:
+      [
+        "",
+        "§7A light, tin axe. Doesn't hit hard but swings faster than most hatchets. ",
+      ]
+
+  damage: [2.0, 4.0]
+  speed: [0.8, 1.2]
+  knockback: [0.0, 1.0]
+  sweeping: [0.0, 0.0]
+  durability: [50, 75]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Heavy_Stone_Sword:
+  item:
+    type: STONE_SWORD
+    amount: 1
+    display-name: §7Stone Club
+    loc-name: Heavy_Stone_Sword
+    lore: ["", "§7A crude weapon. "]
+
+  damage: [2.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [2.0, 3.5]
+  sweeping: [1.0, 2.5]
+  durability: [100, 132]
+  type: Heavy
+  recipe-items: ["STONE", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Heavy_Stone_Axe:
+  item:
+    type: STONE_AXE
+    amount: 1
+    display-name: §7Stone Axe
+    loc-name: Heavy_Stone_Sword
+    lore: ["", "§7Slower than a club, but hits harder. "]
+
+  damage: [2.0, 6.0]
+  speed: [0.4, 0.7]
+  knockback: [3.0, 4.5]
+  sweeping: [0.0, 0.0]
+  durability: [100, 132]
+  type: Heavy
+  recipe-items: ["STONE", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Light_Bronze_Sword:
+  item:
+    type: GOLDEN_SWORD
+    amount: 1
+    display-name: §7Bronze Dagger
+    loc-name: Light_Bronze_Sword
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword.",
+      ]
+
+  damage: [2.0, 4.5]
+  speed: [1.0, 1.4]
+  knockback: [0.0, 0.5]
+  sweeping: [1.0, 2.25]
+  durability: [75, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Medium_Bronze_Sword:
+  item:
+    type: GOLDEN_SWORD
+    amount: 1
+    display-name: §7Bronze Sword
+    loc-name: Medium_Bronze_Sword
+    lore: ["", "§7An average sword. "]
+
+  damage: [3.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [0.5, 2.0]
+  sweeping: [1.5, 2.5]
+  durability: [100, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Heavy_Bronze_Sword:
+  item:
+    type: GOLDEN_SWORD
+    amount: 1
+    meta:
+    display-name: §7Bronze Greatsword
+    loc-name: Heavy_Bronze_Sword
+    lore:
+      [
+        "",
+        "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. ",
+      ]
+
+  damage: [3.0, 6.5]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  sweeping: [1.5, 3.25]
+  durability: [125, 160]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Light_Bronze_Axe:
+  item:
+    type: GOLDEN_AXE
+    amount: 1
+    display-name: §7Bronze Hatchet
+    loc-name: Light_Bronze_Axe
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+      ]
+
+  damage: [3.0, 6.0]
+  speed: [0.6, 1.0]
+  knockback: [0.0, 0.5]
+  sweeping: [0.0, 0.0]
+  durability: [75, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Medium_Bronze_Axe:
+  item:
+    type: GOLDEN_AXE
+    amount: 1
+    display-name: §7Bronze Axe
+    loc-name: Medium_Bronze_Axe
+    lore: ["", "§7An average bronze axe. "]
+
+  damage: [4.0, 6.5]
+  speed: [0.6, 0.9]
+  knockback: [1.5, 3.0]
+  sweeping: [0.0, 0.0]
+  durability: [100, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Heavy_Bronze_Axe:
+  item:
+    type: GOLDEN_AXE
+    amount: 1
+    display-name: §7Bronze Bardiche
+    loc-name: Heavy_Bronze_Axe
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+      ]
+
+  damage: [4.0, 7.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  sweeping: [0.0, 0.0]
+  durability: [125, 160]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Light_Iron_Sword:
+  item:
+    type: IRON_SWORD
+    amount: 1
+    display-name: §7Iron Dagger
+    loc-name: Light_Bronze_Sword
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword.",
+      ]
+
+  damage: [3.5, 5.5]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  sweeping: [1.75, 2.75]
+  durability: [145, 175]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Medium_Iron_Sword:
+  item:
+    type: IRON_SWORD
+    amount: 1
+    display-name: §7Iron Sword
+    loc-name: Medium_Iron_Sword
+    lore: [An average iron sword.]
+
+  damage: [4.5, 6.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  sweeping: [2.25, 3.0]
+  durability: [175, 225]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Heavy_Iron_Sword:
+  item:
+    type: IRON_SWORD
+    amount: 1
+    display-name: §7Iron Greatsword
+    loc-name: Heavy_Iron_Sword
+    lore: [Greatswords deal strong damage with a slower swing speed.]
+
+  damage: [5.0, 7.0]
+  speed: [0.8, 1.2]
+  knockback: [2.0, 3.5]
+  sweeping: [2.5, 3.5]
+  durability: [200, 250]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Light_Iron_Axe:
+  item:
+    type: IRON_AXE
+    amount: 1
+    display-name: §7Iron Hatchet
+    loc-name: Light_Iron_Axe
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+      ]
+
+  damage: [4.0, 7.0]
+  speed: [0.6, 1.0]
+  knockback: [1.0, 1.5]
+  sweeping: [0.0, 0.0]
+  durability: [145, 175]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Medium_Iron_Axe:
+  item:
+    type: IRON_AXE
+    amount: 1
+    display-name: §7Iron Axe
+    loc-name: Medium_Iron_Axe
+    lore: ["", "§7An average iron axe. "]
+
+  damage: [4.5, 7.5]
+  speed: [0.6, 0.9]
+  knockback: [1.5, 3.0]
+  sweeping: [0.0, 0.0]
+  durability: [175, 225]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Heavy_Iron_Axe:
+  item:
+    type: IRON_AXE
+    amount: 1
+    display-name: §7Iron Bardiche
+    loc-name: Heavy_Iron_Axe
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+      ]
+
+  damage: [5.0, 8.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  sweeping: [0.0, 0.0]
+  durability: [200, 275]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Light_Steel_Sword:
+  item:
+    type: NETHERITE_SWORD
+    amount: 1
+    display-name: §7Steel Dagger
+    loc-name: Light_Steel_Sword
+    lore:
+      [
+        "",
+        "§7A steel dagger. Fast speed with weak damage, and little knockback. ",
+      ]
+
+  damage: [4.5, 6.0]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  sweeping: [2.35, 3.0]
+  durability: [300, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Medium_Steel_Sword:
+  item:
+    type: NETHERITE_SWORD
+    amount: 1
+    display-name: §7Steel Sword
+    loc-name: Medium_Steel_Sword
+    lore: ["", "§7An average steel sword. "]
+
+  damage: [5.0, 7.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  sweeping: [2.5, 3.5]
+  durability: [350, 400]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Heavy_Steel_Sword:
+  item:
+    type: NETHERITE_SWORD
+    amount: 1
+    display-name: §7Steel Greatsword
+    loc-name: Heavy_Steel_Sword
+    lore: ["", "§7Greatswords deal strong damage with a slower swing speed. "]
+
+  damage: [6.5, 9.0]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  sweeping: [3.25, 4.5]
+  durability: [450, 600]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " A ", " B "]
+
+Light_Steel_Axe:
+  item:
+    type: NETHERITE_AXE
+    amount: 1
+    display-name: §7Iron Hatchet
+    loc-name: Light_Iron_Axe
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+      ]
+
+  damage: [7.0, 9.0]
+  speed: [0.6, 1.0]
+  knockback: [1.5, 3.0]
+  sweeping: [0.0, 0.0]
+  durability: [300, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Medium_Steel_Axe:
+  item:
+    type: NETHERITE_AXE
+    amount: 1
+    display-name: §7Iron Axe
+    loc-name: Medium_Iron_Axe
+    lore: ["", "§7An average iron axe. "]
+
+  damage: [7.5, 10]
+  speed: [0.7, 0.9]
+  knockback: [1.5, 3.0]
+  sweeping: [0.0, 0.0]
+  durability: [350, 400]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]
+
+Heavy_Steel_Axe:
+  item:
+    type: NETHERITE_AXE
+    amount: 1
+    display-name: §7Iron Mace
+    loc-name: Heavy_Iron_Axe
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+      ]
+
+  damage: [5.0, 8.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  sweeping: [0.0, 0.0]
+  durability: [200, 275]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AA ", "AB ", " B "]

@@ -1,0 +1,151 @@
+version: 1
+
+COAL_ORE:
+  sulphur:
+    chance: 30
+
+    SULPHUR:
+      class: Miner
+      chance: 100
+
+      item:
+        type: GLOWSTONE_DUST
+        amount: 1
+        display-name: Sulphur
+        loc-name: SULPHUR
+        lore: ["", §7What an unpleasant smell.]
+
+  coal:
+    chance: 70
+
+    COAL:
+      class: Any
+      chance: 100
+
+      item:
+        type: COAL
+        amount: 1
+
+IRON_ORE:
+  iron:
+    chance: 30
+
+    LOW_LIGHT_IRON_CHUNK:
+      class: Any
+      chance: 80
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §cIron Chunk
+        loc-name: LOW_LIGHT_IRON_CHUNK
+        lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+    MEDIUM_LIGHT_IRON_CHUNK:
+      class: Miner
+      chance: 15
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §2Iron Chunk
+        loc-name: MEDIUM_LIGHT_IRON_CHUNK
+        lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
+
+    HIGH_LIGHT_IRON_CHUNK:
+      class: Miner
+      chance: 5
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §6Iron Chunk
+        loc-name: HIGH_LIGHT_IRON_CHUNK
+        lore: ["", §7Quality - §6High, §7Tier - §9Light]
+
+  tin:
+    chance: 70
+
+    LOW_LIGHT_TIN_CHUNK:
+      class: Any
+      chance: 80
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §cTin Chunk
+        loc-name: LOW_LIGHT_TIN_CHUNK
+        lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+    MEDIUM_LIGHT_TIN_CHUNK:
+      class: Miner
+      chance: 15
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §2Tin Chunk
+        loc-name: MEDIUM_LIGHT_TIN_CHUNK
+        lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
+
+    HIGH_LIGHT_TIN_CHUNK:
+      class: Miner
+      chance: 5
+
+      item:
+        type: IRON_ORE
+        amount: 1
+        display-name: §6Tin Chunk
+        loc-name: HIGH_LIGHT_TIN_CHUNK
+        lore: ["", §7Quality - §6High, §7Tier - §9Light]
+
+GOLD_ORE:
+  gold:
+    chance: 30
+
+    LOW_LIGHT_GOLD_CHUNK:
+      class: Any
+      chance: 80
+
+      item:
+        type: GOLD_ORE
+        amount: 1
+        display-name: §cGold Chunk
+        loc-name: LOW_LIGHT_GOLD_CHUNK
+        lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+    MEDIUM_LIGHT_GOLD_CHUNK:
+      class: Miner
+      chance: 15
+
+      item:
+        type: GOLD_ORE
+        amount: 1
+        display-name: §2Gold Chunk
+        loc-name: MEDIUM_LIGHT_GOLD_CHUNK
+        lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
+
+    HIGH_LIGHT_GOLD_CHUNK:
+      class: Miner
+      chance: 5
+
+      item:
+        type: GOLD_ORE
+        amount: 1
+        display-name: §6Gold Chunk
+        loc-name: HIGH_LIGHT_GOLD_CHUNK
+        lore: ["", §7Quality - §6High, §7Tier - §9Light]
+
+  copper:
+    chance: 70
+
+    LOW_LIGHT_COPPER_CHUNK:
+      class: Any
+      chance: 100
+
+      item:
+        type: GOLD_NUGGET
+        amount: 1
+        display-name: §cCopper Chunk
+        loc-name: LOW_LIGHT_COPPER_CHUNK
+        lore: ["", §7Quality - Standerd]
