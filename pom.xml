@@ -80,7 +80,7 @@
         <version>3.2.0</version>
 
         <configuration>
-          <outputDirectory>/home/machine/Desktop/Server/plugins/</outputDirectory>
+          <outputDirectory>C:\Users\boooi\Desktop\Plugin Test Server\plugins\</outputDirectory>
         </configuration>
 
       </plugin>
@@ -90,8 +90,14 @@
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
         <includes>
-          <include>plugin.yml</include>
+          <include>armor.yml</include>
+          <include>classes.yml</include>
           <include>config.yml</include>
+          <include>expiry.yml</include>
+          <include>ingots.yml</include>
+          <include>ores.yml</include>
+          <include>plugin.yml</include>
+          <include>weapons.yml</include>
         </includes>
       </resource>
     </resources>
