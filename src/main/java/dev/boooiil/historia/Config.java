@@ -1,15 +1,21 @@
 package dev.boooiil.historia;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -20,14 +26,20 @@ public class Config {
 
     //Get the current configuration file for the plugin.
     private static FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
+    private static FileConfiguration armorConfig = armorConfig();
+    private static FileConfiguration classConfig = classConfig();
+    private static FileConfiguration expiryConfig = expiryConfig();
+    private static FileConfiguration ingotConfig = ingotConfig();
+    private static FileConfiguration oreConfig = oreConfig();
+    private static FileConfiguration weaponConfig = weaponConfig();
 
     //Load lists.
-    static final Set<String> armorSet = configuration.getConfigurationSection("armor").getKeys(false);
-    static final Set<String> blockSet = configuration.getConfigurationSection("items.blocks").getKeys(false);
-    static final Set<String> classSet = configuration.getConfigurationSection("classes").getKeys(false);
-    static final Set<String> foodSet = configuration.getConfigurationSection("foods").getKeys(false);
-    static final Set<String> oreSet = configuration.getConfigurationSection("items.ores").getKeys(false);
-    static final Set<String> weaponSet = configuration.getConfigurationSection("weapons").getKeys(false);
+    static final Set<String> armorSet = armorConfig.getKeys(false);
+    static final Set<String> blockSet = oreConfig.getKeys(false);
+    static final Set<String> classSet = classConfig.getKeys(false);
+    static final Set<String> foodSet  = expiryConfig.getKeys(false);
+    static final Set<String> oreSet  = ingotConfig.getKeys(false);
+    static final Set<String> weaponSet  = weaponConfig.getKeys(false);
 
     private static Map<String, Object> armorMap = new HashMap<>();
     private static Map<String, Double> classMap = new HashMap<>();
@@ -920,6 +932,168 @@ public class Config {
         item.setItemMeta(meta);
 
         return item;
+
+    }
+
+    private static boolean findFile(File[] files, String check) {
+
+        for (File file : files) {
+
+            if (file.getName().equals(check)) return true;
+
+        }
+
+        return false;
+
+    }
+
+    private static FileConfiguration armorConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "armor.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "armor.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("armor.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
+
+    }
+
+    private static FileConfiguration classConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "classes.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "classes.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("classes.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
+
+    }
+
+    private static FileConfiguration expiryConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "expiry.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "expiry.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("expiry.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
+
+    }
+    
+    private static FileConfiguration ingotConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "ingots.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "ingots.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("ingots.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
+
+    }
+
+    private static FileConfiguration oreConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "ores.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "ores.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("ores.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
+
+    }
+
+    private static FileConfiguration weaponConfig() {
+
+        FileConfiguration config;
+
+        if (findFile(Main.plugin().getDataFolder().listFiles(), "weapons.yml")) {
+
+            File file = new File(Main.plugin().getDataFolder().getPath(), "weapons.yml");
+
+            config = YamlConfiguration.loadConfiguration(file);
+        }
+
+        else {
+
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("weapons.yml");
+
+            Reader reader = new InputStreamReader(is);
+
+            config = YamlConfiguration.loadConfiguration(reader);
+
+        }
+
+        return config;
 
     }
 }
