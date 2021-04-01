@@ -1,7 +1,23 @@
 package dev.boooiil.historia;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.palmergames.compress.utils.ByteUtils.OutputStreamByteConsumer;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.FileUtil;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
@@ -15,9 +31,11 @@ public class Main extends JavaPlugin {
 
     /**
      * 
-     * Server starts => Config loaded => passed to respective handler => other classes can access the object
+     * Server starts => Config loaded => passed to respective handler => other
+     * classes can access the object
      * 
-     * Config section (class, expiry, etc) passed to respective handler that parses that infromation into an accessable object.
+     * Config section (class, expiry, etc) passed to respective handler that parses
+     * that infromation into an accessable object.
      * 
      * Player logs in and is applied stats based on the configuration stored.
      * 
@@ -33,7 +51,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        //Disabled due to being beginner commands and not having a use.
+        // Disabled due to being beginner commands and not having a use.
         this.getCommand("Ignite").setExecutor(new Ignite());
         this.getCommand("Class").setExecutor(new dev.boooiil.historia.commands.Class());
         this.getCommand("Item").setExecutor(new Item());
@@ -41,7 +59,16 @@ public class Main extends JavaPlugin {
         this.getCommand("Stats").setExecutor(new Stats());
 
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
-        
+
+        getLogger().info("Checking configs...");
+
+        if (isMissingConfig()) {
+
+            saveConfig(missingConfig());
+
+        } else
+            getLogger().info("All config files exist.");
+
         getLogger().info("Starting class task...");
 
         ClassRunnable classRunnable = new ClassRunnable(this);
@@ -49,8 +76,8 @@ public class Main extends JavaPlugin {
         classRunnable.runTaskTimer(this, 0L, 20L);
 
         getLogger().info("Task queued.");
-        
-        //Save / Load the config in the Historia plugins folder.
+
+        // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
 
         getLogger().info("Plugin enabled.");
@@ -73,5 +100,67 @@ public class Main extends JavaPlugin {
 
         plugin.getServer().getPluginManager().disablePlugin(plugin);
 
+    }
+
+    private boolean isMissingConfig() {
+
+        return this.getDataFolder().listFiles().length != 7;
+
+    }
+
+    private List<String> missingConfig() {
+
+        List<String> check = new ArrayList<>();
+
+        check.add("armor.yml");
+        check.add("classes.yml");
+        check.add("expiry.yml");
+        check.add("ingots.yml");
+        check.add("ores.yml");
+        check.add("weapons.yml");
+
+        for (File file : this.getDataFolder().listFiles()) {
+
+            if (check.contains(file.getName()))
+                check.remove(file.getName());
+
+        }
+
+        return check;
+
+    }
+
+    private boolean saveConfig(List<String> missingConfig) {
+
+        try {
+
+            for (String config : missingConfig) {
+
+                ClassLoader classLoader = getClass().getClassLoader();
+                InputStream is = classLoader.getResourceAsStream(config);
+
+                byte[] buffer = new byte[is.available()];
+                is.read(buffer);
+
+                File internal = new File(getDataFolder(), config);
+                OutputStream outputStream = new FileOutputStream(internal);
+                outputStream.write(buffer);
+
+                getLogger().info(config +" was saved successfully.");
+
+                outputStream.close();
+
+            }
+        }
+
+        catch (Exception e) {
+
+            getLogger().severe(e.getMessage());
+            getLogger().warning("Files could not be saved, " + missingConfig.toString());
+
+            return false;
+        }
+
+        return true;
     }
 }
