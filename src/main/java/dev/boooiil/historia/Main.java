@@ -2,22 +2,14 @@ package dev.boooiil.historia;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.palmergames.compress.utils.ByteUtils.OutputStreamByteConsumer;
-
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.FileUtil;
 
 import dev.boooiil.historia.commands.Ignite;
 import dev.boooiil.historia.commands.Item;
@@ -66,8 +58,9 @@ public class Main extends JavaPlugin {
 
             saveConfig(missingConfig());
 
-        } else
-            getLogger().info("All config files exist.");
+            getLogger().info("Config files saved.");
+
+        } else getLogger().info("All config files exist.");
 
         getLogger().info("Starting class task...");
 
@@ -96,6 +89,11 @@ public class Main extends JavaPlugin {
         getLogger().info("Plugin disabled.");
     }
 
+    public static Plugin plugin() {
+
+        return Bukkit.getPluginManager().getPlugin("Historia");
+
+    }
     public static void disable(Plugin plugin) {
 
         plugin.getServer().getPluginManager().disablePlugin(plugin);
