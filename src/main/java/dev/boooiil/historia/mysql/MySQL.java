@@ -32,7 +32,7 @@ public class MySQL {
     private static final Logger log = Bukkit.getPluginManager().getPlugin("Historia").getLogger();
 
     // Create a URL that we will use to connect to the MySQL database.
-    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?useSSL=false";
+    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?allowPublicKeyRetrieval=true&useSSL=false";
 
     private static Connection connection;
 
