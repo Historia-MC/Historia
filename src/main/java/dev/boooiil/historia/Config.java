@@ -25,20 +25,20 @@ import org.bukkit.potion.PotionEffectType;
 public class Config {
 
     //Get the current configuration file for the plugin.
-    private static FileConfiguration configuration = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
-    private static FileConfiguration armorConfig = armorConfig();
-    private static FileConfiguration classConfig = classConfig();
-    private static FileConfiguration expiryConfig = expiryConfig();
-    private static FileConfiguration ingotConfig = ingotConfig();
-    private static FileConfiguration oreConfig = oreConfig();
-    private static FileConfiguration weaponConfig = weaponConfig();
+    private static FileConfiguration miscConfig = Bukkit.getPluginManager().getPlugin("Historia").getConfig();
+    private static FileConfiguration armorConfig = getConfig("armor.yml");
+    private static FileConfiguration classConfig = getConfig("classes.yml");
+    private static FileConfiguration expiryConfig = getConfig("expiry.yml");
+    private static FileConfiguration ingotConfig = getConfig("ingots.yml");
+    private static FileConfiguration oreConfig = getConfig("ores.yml");
+    private static FileConfiguration weaponConfig = getConfig("weapons.yml");
 
     //Load lists.
     static final Set<String> armorSet = armorConfig.getKeys(false);
-    static final Set<String> blockSet = oreConfig.getKeys(false);
+    static final Set<String> oreSet = oreConfig.getKeys(false);
     static final Set<String> classSet = classConfig.getKeys(false);
     static final Set<String> foodSet  = expiryConfig.getKeys(false);
-    static final Set<String> oreSet  = ingotConfig.getKeys(false);
+    static final Set<String> ingotSet  = ingotConfig.getKeys(false);
     static final Set<String> weaponSet  = weaponConfig.getKeys(false);
 
     private static Map<String, Object> armorMap = new HashMap<>();
@@ -64,25 +64,25 @@ public class Config {
     }
 
     /**
-     * Get a set (unordered list) of all blocks described in the config.yml.
+     * Get a set (unordered list) of all blocks described in ingots.yml.
      * 
      * 
-     * @return Set of all blocks described in the config.yml.
+     * @return Set of all ingots described in ingots.yml.
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
 
-    public static Set<String> getBlockSet() {
+    public static Set<String> getIngot() {
 
-        return blockSet;
+        return ingotSet;
         
     }
 
     /**
-     * Get a set (unordered list) of all classes described in the config.yml.
+     * Get a set (unordered list) of all classes described in classes.yml.
      * 
      * 
-     * @return Set of all classes described in the config.yml.
+     * @return Set of all classes described in classes.yml.
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
@@ -94,10 +94,10 @@ public class Config {
     }
 
     /**
-     * Get a set (unordered list) of all foods described in the config.yml.
+     * Get a set (unordered list) of all foods described in expiry.yml.
      * 
      * 
-     * @return Set of all foods described in the config.yml.
+     * @return Set of all foods described in expiry.yml.
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
@@ -109,10 +109,10 @@ public class Config {
     }
 
     /**
-     * Get a set (unordered list) of all ores described in the config.yml.
+     * Get a set (unordered list) of all ores described in ores.yml.
      * 
      * 
-     * @return Set of all ores described in the config.yml.
+     * @return Set of all ores described in ores.yml.
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
@@ -204,15 +204,15 @@ public class Config {
     }
 
     /**
-     * Whether or not the block provided is in the config.yml.
+     * Whether or not the ingot provided is in ingots.yml.
      * 
-     * @param blockName - Name of the block to check.
-     * @return Whether or not the block provided is in the config.yml.
+     * @param blockName - Name of the ingot to check.
+     * @return Whether or not the ingot provided is in ingots.yml.
      */
 
-    public static boolean validBlock(String blockName) {
+    public static boolean validIngot(String ingotName) {
 
-        return blockSet.contains(blockName);
+        return ingotSet.contains(ingotName);
 
     }
 
@@ -236,29 +236,29 @@ public class Config {
 
         if (validClass(className)) {
 
-            String root = "classes." + className + ".stats";
+            String root = className + ".stats";
 
-            classMap.put("HEALTH", configuration.getDouble(root + ".baseHealth"));
-            classMap.put("MAX_HEALTH", configuration.getDouble(root + ".maxHealth"));
-            classMap.put("SPEED", configuration.getDouble(root + ".baseSpeed"));
-            classMap.put("EXPERIENCE_GAIN", configuration.getDouble(root + "baseExperienceGain"));
-            classMap.put("EVASION", configuration.getDouble(root + ".baseEvasion"));
-            classMap.put("WEAPON_PROFICIENCY", configuration.getDouble(root + ".baseWeaponProficiency"));
-            classMap.put("BOW_PROFICIENCY", configuration.getDouble(root + ".baseBowProficiency"));
-            classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble(root + ".baseCrossbowProficiency"));
-            classMap.put("HARVEST_CHANCE", configuration.getDouble(root + ".extra.harvestChance"));
-            classMap.put("DOUBLE_HARVEST_CHANCE", configuration.getDouble(root + ".extra.doubleHarvestChance"));
+            classMap.put("HEALTH", classConfig.getDouble(root + ".baseHealth"));
+            classMap.put("MAX_HEALTH", classConfig.getDouble(root + ".maxHealth"));
+            classMap.put("SPEED", classConfig.getDouble(root + ".baseSpeed"));
+            classMap.put("EXPERIENCE_GAIN", classConfig.getDouble(root + "baseExperienceGain"));
+            classMap.put("EVASION", classConfig.getDouble(root + ".baseEvasion"));
+            classMap.put("WEAPON_PROFICIENCY", classConfig.getDouble(root + ".baseWeaponProficiency"));
+            classMap.put("BOW_PROFICIENCY", classConfig.getDouble(root + ".baseBowProficiency"));
+            classMap.put("CROSSBOW_PROFICIENCY", classConfig.getDouble(root + ".baseCrossbowProficiency"));
+            classMap.put("HARVEST_CHANCE", classConfig.getDouble(root + ".extra.harvestChance"));
+            classMap.put("DOUBLE_HARVEST_CHANCE", classConfig.getDouble(root + ".extra.doubleHarvestChance"));
 
         } else {
 
-            classMap.put("HEALTH", configuration.getDouble("classes.None.stats.health"));
-            classMap.put("MAX_HEALTH", configuration.getDouble("classes.None.stats.health"));
-            classMap.put("SPEED", configuration.getDouble("classes.None.stats.speed"));
-            classMap.put("EXPERIENCE_GAIN", configuration.getDouble("classes.none.stats.baseExperienceGain"));
-            classMap.put("EVASION", configuration.getDouble("classes.None.stats.baseEvasion"));
-            classMap.put("WEAPON_PROFICIENCY", configuration.getDouble("classes.None.stats.baseWeaponProficiency"));
-            classMap.put("BOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseBowProficiency"));
-            classMap.put("CROSSBOW_PROFICIENCY", configuration.getDouble("classes.None.stats.baseCrossbowProficiency"));
+            classMap.put("HEALTH", classConfig.getDouble("classes.None.stats.health"));
+            classMap.put("MAX_HEALTH", classConfig.getDouble("classes.None.stats.health"));
+            classMap.put("SPEED", classConfig.getDouble("classes.None.stats.speed"));
+            classMap.put("EXPERIENCE_GAIN", classConfig.getDouble("classes.none.stats.baseExperienceGain"));
+            classMap.put("EVASION", classConfig.getDouble("classes.None.stats.baseEvasion"));
+            classMap.put("WEAPON_PROFICIENCY", classConfig.getDouble("classes.None.stats.baseWeaponProficiency"));
+            classMap.put("BOW_PROFICIENCY", classConfig.getDouble("classes.None.stats.baseBowProficiency"));
+            classMap.put("CROSSBOW_PROFICIENCY", classConfig.getDouble("classes.None.stats.baseCrossbowProficiency"));
             classMap.put("HARVEST_CHANCE", 0.2);
             classMap.put("DOUBLE_HARVEST_CHANCE", 0.0);
 
@@ -284,15 +284,15 @@ public class Config {
 
         if (validFood(foodName)) {
 
-            String root = "foods." + foodName;
+            String root = foodName;
 
-            foodMap.put("EXPIRY", configuration.getInt(root));
+            foodMap.put("EXPIRY", expiryConfig.getInt(root));
             foodMap.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
             foodMap.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
 
         } else {
 
-            foodMap.put("EXPIRY", configuration.getInt("foods.not-listed"));
+            foodMap.put("EXPIRY", expiryConfig.getInt("foods.not-listed"));
             foodMap.put("POISON", new PotionEffect(PotionEffectType.POISON, 100, 1));
             foodMap.put("HUNGER", new PotionEffect(PotionEffectType.HUNGER, 300, 1));
 
@@ -321,25 +321,25 @@ public class Config {
 
         if (validWeapon(weaponName)) {
 
-            String root = "weapons." + weaponName;
+            String root = weaponName;
             String itemRoot = root + ".item";
 
-            String type = configuration.getString(itemRoot + ".type");
-            String localizedName = configuration.getString(itemRoot + ".loc-name");
-            String displayName = configuration.getString(itemRoot + ".display-name");
-            List<String> lore = configuration.getStringList(itemRoot + ".lore");
-            int amount = configuration.getInt(itemRoot + ".amount");
+            String type = weaponConfig.getString(itemRoot + ".type");
+            String localizedName = weaponConfig.getString(itemRoot + ".loc-name");
+            String displayName = weaponConfig.getString(itemRoot + ".display-name");
+            List<String> lore = weaponConfig.getStringList(itemRoot + ".lore");
+            int amount = weaponConfig.getInt(itemRoot + ".amount");
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
-            weaponMap.put("DAMAGE", configuration.getDoubleList(root + ".damage"));
-            weaponMap.put("KNOCKBACK", configuration.getDoubleList(root + ".knockback"));
-            weaponMap.put("SWEEPING", configuration.getDoubleList(root + ".sweeping"));
-            weaponMap.put("DURABILITY", configuration.getIntegerList(root + ".durability"));
+            weaponMap.put("DAMAGE", weaponConfig.getDoubleList(root + ".damage"));
+            weaponMap.put("KNOCKBACK", weaponConfig.getDoubleList(root + ".knockback"));
+            weaponMap.put("SWEEPING", weaponConfig.getDoubleList(root + ".sweeping"));
+            weaponMap.put("DURABILITY", weaponConfig.getIntegerList(root + ".durability"));
             weaponMap.put("ITEM", item);
-            weaponMap.put("TYPE", configuration.getString(root + ".type"));
-            weaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
-            weaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+            weaponMap.put("TYPE", weaponConfig.getString(root + ".type"));
+            weaponMap.put("SHAPE", weaponConfig.getStringList(root + ".recipe-shape"));
+            weaponMap.put("RECIPE", weaponConfig.getStringList(root + ".recipe-items"));
 
         } else {
 
@@ -367,25 +367,25 @@ public class Config {
 
         if (validWeapon(weaponName)) {
 
-            String root = "weapons." + weaponName;
+            String root = weaponName;
             String itemRoot = root + ".item";
 
-            String type = configuration.getString(itemRoot + ".type");
-            String localizedName = configuration.getString(itemRoot + ".loc-name");
-            String displayName = configuration.getString(itemRoot + ".display-name");
-            List<String> lore = configuration.getStringList(itemRoot + ".lore");
-            int amount = configuration.getInt(itemRoot + ".amount");
+            String type = weaponConfig.getString(itemRoot + ".type");
+            String localizedName = weaponConfig.getString(itemRoot + ".loc-name");
+            String displayName = weaponConfig.getString(itemRoot + ".display-name");
+            List<String> lore = weaponConfig.getStringList(itemRoot + ".lore");
+            int amount = weaponConfig.getInt(itemRoot + ".amount");
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
-            iWeaponMap.put("DAMAGE", configuration.getDoubleList(root + ".damage"));
-            iWeaponMap.put("KNOCKBACK", configuration.getDoubleList(root + ".knockback"));
-            iWeaponMap.put("SWEEPING", configuration.getDoubleList(root + ".sweeping"));
-            iWeaponMap.put("DURABILITY", configuration.getIntegerList(root + ".durability"));
+            iWeaponMap.put("DAMAGE", weaponConfig.getDoubleList(root + ".damage"));
+            iWeaponMap.put("KNOCKBACK", weaponConfig.getDoubleList(root + ".knockback"));
+            iWeaponMap.put("SWEEPING", weaponConfig.getDoubleList(root + ".sweeping"));
+            iWeaponMap.put("DURABILITY", weaponConfig.getIntegerList(root + ".durability"));
             iWeaponMap.put("ITEM", item);
-            iWeaponMap.put("TYPE", configuration.getString(root + ".type"));
-            iWeaponMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
-            iWeaponMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+            iWeaponMap.put("TYPE", weaponConfig.getString(root + ".type"));
+            iWeaponMap.put("SHAPE", weaponConfig.getStringList(root + ".recipe-shape"));
+            iWeaponMap.put("RECIPE", weaponConfig.getStringList(root + ".recipe-items"));
 
         } else {
 
@@ -422,23 +422,23 @@ public class Config {
 
         if (validArmor(armorName)) {
 
-            String root = "armor." + armorName;
+            String root = armorName;
 
             String itemRoot = root + ".item";
 
-            String type = configuration.getString(itemRoot + ".type");
-            String localizedName = configuration.getString(itemRoot + ".loc-name");
-            String displayName = configuration.getString(itemRoot + ".display-name");
-            List<String> lore = configuration.getStringList(itemRoot + ".lore");
-            int amount = configuration.getInt(itemRoot + ".amount");
+            String type = armorConfig.getString(itemRoot + ".type");
+            String localizedName = armorConfig.getString(itemRoot + ".loc-name");
+            String displayName = armorConfig.getString(itemRoot + ".display-name");
+            List<String> lore = armorConfig.getStringList(itemRoot + ".lore");
+            int amount = armorConfig.getInt(itemRoot + ".amount");
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
             armorMap.put("ITEM", item);
-            armorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
-            armorMap.put("TYPE", configuration.getString(root + ".type"));
-            armorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
-            armorMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+            armorMap.put("ARMOR", armorConfig.getDouble(root + ".armor"));
+            armorMap.put("TYPE", armorConfig.getString(root + ".type"));
+            armorMap.put("SHAPE", armorConfig.getStringList(root + ".recipe-shape"));
+            armorMap.put("RECIPE", armorConfig.getStringList(root + ".recipe-items"));
 
         } else {
 
@@ -460,23 +460,23 @@ public class Config {
 
         if (validArmor(armorName)) {
 
-            String root = "armor." + armorName;
+            String root = armorName;
 
             String itemRoot = root + ".item";
 
-            String type = configuration.getString(itemRoot + ".type");
-            String localizedName = configuration.getString(itemRoot + ".loc-name");
-            String displayName = configuration.getString(itemRoot + ".display-name");
-            List<String> lore = configuration.getStringList(itemRoot + ".lore");
-            int amount = configuration.getInt(itemRoot + ".amount");
+            String type = armorConfig.getString(itemRoot + ".type");
+            String localizedName = armorConfig.getString(itemRoot + ".loc-name");
+            String displayName = armorConfig.getString(itemRoot + ".display-name");
+            List<String> lore = armorConfig.getStringList(itemRoot + ".lore");
+            int amount = armorConfig.getInt(itemRoot + ".amount");
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
             iArmorMap.put("ITEM", item);
-            iArmorMap.put("ARMOR", configuration.getDouble(root + ".armor"));
-            iArmorMap.put("TYPE", configuration.getString(root + ".type"));
-            iArmorMap.put("SHAPE", configuration.getStringList(root + ".recipe-shape"));
-            iArmorMap.put("RECIPE", configuration.getStringList(root + ".recipe-items"));
+            iArmorMap.put("ARMOR", armorConfig.getDouble(root + ".armor"));
+            iArmorMap.put("TYPE", armorConfig.getString(root + ".type"));
+            iArmorMap.put("SHAPE", armorConfig.getStringList(root + ".recipe-shape"));
+            iArmorMap.put("RECIPE", armorConfig.getStringList(root + ".recipe-items"));
 
         } else {
 
@@ -510,23 +510,23 @@ public class Config {
 
         if (validOre(oreName)) {
 
-            String root = "items.ores." + oreName;
+            String root = oreName;
 
             String itemRoot = root + ".item";
 
-            String type = configuration.getString(itemRoot + ".type");
-            String localizedName = configuration.getString(itemRoot + ".loc-name");
-            String displayName = configuration.getString(itemRoot + ".display-name");
-            List<String> lore = configuration.getStringList(itemRoot + ".lore");
-            int amount = configuration.getInt(itemRoot + ".amount");
+            String type = oreConfig.getString(itemRoot + ".type");
+            String localizedName = oreConfig.getString(itemRoot + ".loc-name");
+            String displayName = oreConfig.getString(itemRoot + ".display-name");
+            List<String> lore = oreConfig.getStringList(itemRoot + ".lore");
+            int amount = oreConfig.getInt(itemRoot + ".amount");
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
-            oreMap.put("PROGRESSION", configuration.getString(root + ".smelt_into"));
+            oreMap.put("PROGRESSION", oreConfig.getString(root + ".smelt_into"));
             oreMap.put("ITEM", item);
-            oreMap.put("SMELT_TIME", configuration.getInt(root + ".time"));
-            oreMap.put("SMELT_AMOUNT", configuration.getInt(root + ".smelt_times"));
-            oreMap.put("LOSS", configuration.getInt(root + ".loss"));
+            oreMap.put("SMELT_TIME", oreConfig.getInt(root + ".time"));
+            oreMap.put("SMELT_AMOUNT", oreConfig.getInt(root + ".smelt_times"));
+            oreMap.put("LOSS", oreConfig.getInt(root + ".loss"));
 
         } else {
 
@@ -555,7 +555,7 @@ public class Config {
 
         if (validClass(className)) {
 
-            return configuration.getStringList("classes." + className + ".weaponProficiency");
+            return classConfig.getStringList(className + ".weaponProficiency");
 
         } else return Arrays.asList("NOT A VALID CLASS");
 
@@ -580,7 +580,7 @@ public class Config {
 
             for (String weapon : weaponSet) {
 
-                String type = configuration.getString("weapons." + weapon + ".type");
+                String type = weaponConfig.getString(weapon + ".type");
 
                 if (classProficient.contains(type)) found.add(weapon);
 
@@ -605,7 +605,7 @@ public class Config {
 
         if (validClass(className)) {
 
-            return configuration.getStringList("classes." + className + ".armorProficiency");
+            return classConfig.getStringList(className + ".armorProficiency");
 
         } else return Arrays.asList("NOT A VALID CLASS");
 
@@ -725,16 +725,12 @@ public class Config {
 
     public static List<Material> getOreBlocks() {
 
-        Set<String> blocks = configuration.getConfigurationSection("items").getKeys(false);
+        Set<String> blocks = oreSet;
         List<Material> found = new ArrayList<>();
 
         for (String block : blocks) {
 
-            if (!block.equals("ores") && !block.equals("blocks")) {
-
-                found.add(Material.getMaterial(block));
-
-            }
+            found.add(Material.getMaterial(block));
 
         }
 
@@ -752,7 +748,7 @@ public class Config {
 
             for (String armor : armorSet) {
 
-                String type = configuration.getString("armor." + armor + ".type");
+                String type = armorConfig.getString(armor + ".type");
 
                 if (classProficient.contains(type)) found.add(armor);
 
@@ -781,13 +777,13 @@ public class Config {
 
         for (String weapon : getWeaponSet()) {
 
-            map.put(weapon, configuration.getStringList("weapons." + weapon + ".recipe-shape"));
+            map.put(weapon, weaponConfig.getStringList(weapon + ".recipe-shape"));
 
         }
 
         for (String armor : getArmorSet()) {
 
-            map.put(armor, configuration.getStringList("armor." + armor + ".recipe-shape"));
+            map.put(armor, armorConfig.getStringList(armor + ".recipe-shape"));
 
         }
 
@@ -801,13 +797,13 @@ public class Config {
 
         for (String weapon : getWeaponSet()) {
 
-            map.put(weapon, configuration.getStringList("weapons." + weapon + ".recipe-items"));
+            map.put(weapon, weaponConfig.getStringList(weapon + ".recipe-items"));
 
         }
 
         for (String armor : getArmorSet()) {
 
-            map.put(armor, configuration.getStringList("armor." + armor + ".recipe-items"));
+            map.put(armor, armorConfig.getStringList(armor + ".recipe-items"));
 
         }
 
@@ -819,37 +815,22 @@ public class Config {
 
         String root = "MySQL";
 
-        mySQLMap.put("USER", configuration.getString(root + ".user"));
-        mySQLMap.put("PASSWORD", configuration.getString(root + ".password"));
-        mySQLMap.put("DATABASE", configuration.getString(root + ".database"));
-        mySQLMap.put("IP", configuration.getString(root + ".ip"));
-        mySQLMap.put("PORT", configuration.getString(root + ".port"));
+        mySQLMap.put("USER", miscConfig.getString(root + ".user"));
+        mySQLMap.put("PASSWORD", miscConfig.getString(root + ".password"));
+        mySQLMap.put("DATABASE", miscConfig.getString(root + ".database"));
+        mySQLMap.put("IP", miscConfig.getString(root + ".ip"));
+        mySQLMap.put("PORT", miscConfig.getString(root + ".port"));
 
         return mySQLMap;
 
-    }
-
-    public ItemStack getBlockInfo(String blockName) {
-
-        if (validBlock(blockName)) {
-
-            String root = "items.blocks." + blockName;
-
-            return configuration.getItemStack(root + ".item");
-
-        } else {
-
-            return new ItemStack(Material.AIR);
-
-        }
     }
 
     public static Map<String, Integer> getOreChance(String oreName) {
         
         Map<String, Integer> chance = new HashMap<>();
 
-            String root = "items." + oreName;
-            Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
+            String root = oreName;
+            Set<String> keys = oreConfig.getConfigurationSection(root).getKeys(false);
     
             for (String key : keys) {
     
@@ -857,7 +838,7 @@ public class Config {
 
                     String newRoot = root + "." + key;
     
-                    chance.put(key, configuration.getInt(newRoot + ".chance"));
+                    chance.put(key, oreConfig.getInt(newRoot + ".chance"));
                 }
     
             }
@@ -867,9 +848,9 @@ public class Config {
 
     public static Map<String, Integer> getIngotChance(String oreName, String ingotName, String className) {
 
-        String root = "items." + oreName + "." + ingotName;
+        String root = oreName + "." + ingotName;
 
-        Set<String> keys = configuration.getConfigurationSection(root).getKeys(false);
+        Set<String> keys = oreConfig.getConfigurationSection(root).getKeys(false);
         Map<String, Integer> map = new HashMap<>();
 
         boolean miner = className.equals("Miner");
@@ -880,15 +861,15 @@ public class Config {
 
                 String newRoot = root + "." + key;
 
-                if (!miner && configuration.getString(newRoot + ".class").equals("Any")) {
+                if (!miner && oreConfig.getString(newRoot + ".class").equals("Any")) {
     
-                    map.put(key, configuration.getInt(newRoot + ".chance"));
+                    map.put(key, oreConfig.getInt(newRoot + ".chance"));
 
                     return map;
     
                 } else {
     
-                    map.put(key, configuration.getInt(newRoot + ".chance"));
+                    map.put(key, oreConfig.getInt(newRoot + ".chance"));
     
                 }
             }
@@ -903,13 +884,13 @@ public class Config {
 
         Bukkit.getLogger().info("oreName: " + oreName + " ingotName: " + ingotName + " ingotType: " + ingotType);
 
-        String root = "items." + oreName + "." + ingotName + "." + ingotType;
+        String root = oreName + "." + ingotName + "." + ingotType;
 
-        String type = configuration.getString(root + ".item.type");
-        int amount = configuration.getInt(root + ".item.amount");
-        String displayName = configuration.getString(root + ".item.display-name");
-        String localizedName = configuration.getString(root + ".item.loc-name");
-        List<String> lore = configuration.getStringList(root + ".item.lore");
+        String type = oreConfig.getString(root + ".item.type");
+        int amount = oreConfig.getInt(root + ".item.amount");
+        String displayName = oreConfig.getString(root + ".item.display-name");
+        String localizedName = oreConfig.getString(root + ".item.loc-name");
+        List<String> lore = oreConfig.getStringList(root + ".item.lore");
 
         return constructItemStack(type, amount, displayName, localizedName, lore);
 
@@ -947,20 +928,20 @@ public class Config {
 
     }
 
-    private static FileConfiguration armorConfig() {
+    private static FileConfiguration getConfig(String check) {
 
         FileConfiguration config;
 
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "armor.yml")) {
+        if (findFile(Main.plugin().getDataFolder().listFiles(), check)) {
 
-            File file = new File(Main.plugin().getDataFolder().getPath(), "armor.yml");
+            File file = new File(Main.plugin().getDataFolder().getPath(), check);
 
             config = YamlConfiguration.loadConfiguration(file);
         }
 
         else {
 
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("armor.yml");
+            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream(check);
 
             Reader reader = new InputStreamReader(is);
 
@@ -972,128 +953,4 @@ public class Config {
 
     }
 
-    private static FileConfiguration classConfig() {
-
-        FileConfiguration config;
-
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "classes.yml")) {
-
-            File file = new File(Main.plugin().getDataFolder().getPath(), "classes.yml");
-
-            config = YamlConfiguration.loadConfiguration(file);
-        }
-
-        else {
-
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("classes.yml");
-
-            Reader reader = new InputStreamReader(is);
-
-            config = YamlConfiguration.loadConfiguration(reader);
-
-        }
-
-        return config;
-
-    }
-
-    private static FileConfiguration expiryConfig() {
-
-        FileConfiguration config;
-
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "expiry.yml")) {
-
-            File file = new File(Main.plugin().getDataFolder().getPath(), "expiry.yml");
-
-            config = YamlConfiguration.loadConfiguration(file);
-        }
-
-        else {
-
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("expiry.yml");
-
-            Reader reader = new InputStreamReader(is);
-
-            config = YamlConfiguration.loadConfiguration(reader);
-
-        }
-
-        return config;
-
-    }
-    
-    private static FileConfiguration ingotConfig() {
-
-        FileConfiguration config;
-
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "ingots.yml")) {
-
-            File file = new File(Main.plugin().getDataFolder().getPath(), "ingots.yml");
-
-            config = YamlConfiguration.loadConfiguration(file);
-        }
-
-        else {
-
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("ingots.yml");
-
-            Reader reader = new InputStreamReader(is);
-
-            config = YamlConfiguration.loadConfiguration(reader);
-
-        }
-
-        return config;
-
-    }
-
-    private static FileConfiguration oreConfig() {
-
-        FileConfiguration config;
-
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "ores.yml")) {
-
-            File file = new File(Main.plugin().getDataFolder().getPath(), "ores.yml");
-
-            config = YamlConfiguration.loadConfiguration(file);
-        }
-
-        else {
-
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("ores.yml");
-
-            Reader reader = new InputStreamReader(is);
-
-            config = YamlConfiguration.loadConfiguration(reader);
-
-        }
-
-        return config;
-
-    }
-
-    private static FileConfiguration weaponConfig() {
-
-        FileConfiguration config;
-
-        if (findFile(Main.plugin().getDataFolder().listFiles(), "weapons.yml")) {
-
-            File file = new File(Main.plugin().getDataFolder().getPath(), "weapons.yml");
-
-            config = YamlConfiguration.loadConfiguration(file);
-        }
-
-        else {
-
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream("weapons.yml");
-
-            Reader reader = new InputStreamReader(is);
-
-            config = YamlConfiguration.loadConfiguration(reader);
-
-        }
-
-        return config;
-
-    }
 }
