@@ -506,27 +506,34 @@ public class Config {
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public static Map<String, Object> getOreInfo(String oreName) {
+    public static Map<String, Object> getIngotInfo(String ingotName) {
 
-        if (validOre(oreName)) {
+        if (validIngot(ingotName)) {
 
-            String root = oreName;
+            String root = ingotName;
 
             String itemRoot = root + ".item";
 
-            String type = oreConfig.getString(itemRoot + ".type");
-            String localizedName = oreConfig.getString(itemRoot + ".loc-name");
-            String displayName = oreConfig.getString(itemRoot + ".display-name");
-            List<String> lore = oreConfig.getStringList(itemRoot + ".lore");
-            int amount = oreConfig.getInt(itemRoot + ".amount");
+            String type = ingotConfig.getString(itemRoot + ".type");
+            String localizedName = ingotConfig.getString(itemRoot + ".loc-name");
+            String displayName = ingotConfig.getString(itemRoot + ".display-name");
+            List<String> lore = ingotConfig.getStringList(itemRoot + ".lore");
+            int amount = ingotConfig.getInt(itemRoot + ".amount");
+
+            Bukkit.getLogger().info(ingotName);
+            Bukkit.getLogger().info(type);
+            Bukkit.getLogger().info(localizedName);
+            Bukkit.getLogger().info(displayName);
+            Bukkit.getLogger().info(lore.toString());
+            Bukkit.getLogger().info("" + amount);
 
             ItemStack item = constructItemStack(type, amount, displayName, localizedName, lore);
 
-            oreMap.put("PROGRESSION", oreConfig.getString(root + ".smelt_into"));
+            oreMap.put("PROGRESSION", ingotConfig.getString(root + ".smelt_into"));
             oreMap.put("ITEM", item);
-            oreMap.put("SMELT_TIME", oreConfig.getInt(root + ".time"));
-            oreMap.put("SMELT_AMOUNT", oreConfig.getInt(root + ".smelt_times"));
-            oreMap.put("LOSS", oreConfig.getInt(root + ".loss"));
+            oreMap.put("SMELT_TIME", ingotConfig.getInt(root + ".time"));
+            oreMap.put("SMELT_AMOUNT", ingotConfig.getInt(root + ".smelt_times"));
+            oreMap.put("LOSS", ingotConfig.getInt(root + ".loss"));
 
         } else {
 

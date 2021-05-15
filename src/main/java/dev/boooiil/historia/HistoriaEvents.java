@@ -264,8 +264,8 @@ public class HistoriaEvents implements Listener {
         if (meta.hasLocalizedName() && meta.getLocalizedName().contains("CHUNK")) {
 
             Bukkit.getLogger().info("SMELTING CHUNK TYPE: " + meta.getLocalizedName());
-            Bukkit.getLogger().info("RESULT: " + event.getResult());
             event.setResult(FurnaceManager.smeltChunk(item));
+            Bukkit.getLogger().info("RESULT: " + event.getResult());
 
         }
 

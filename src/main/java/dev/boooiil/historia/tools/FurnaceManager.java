@@ -139,13 +139,17 @@ public class FurnaceManager {
 
     public static ItemStack smeltChunk(ItemStack chunk) {
 
+        //Fails inside of this function.
+
         ItemMeta meta = chunk.getItemMeta();
 
-        String ore = meta.getLocalizedName().replace("CHUNK", "INGOT");
+        String ingot = meta.getLocalizedName().replace("CHUNK", "INGOT");
 
-        Map<String, Object> oreMap = Config.getOreInfo(ore);
+        Map<String, Object> ingotMap = Config.getIngotInfo(ingot);
 
-        return (ItemStack) oreMap.get("ITEM");
+        Bukkit.getLogger().info("LOOKFING FOR INGOT: " + ingot + " RETURNED: " + ingotMap.toString());
+
+        return (ItemStack) ingotMap.get("ITEM");
 
     }
 
@@ -155,21 +159,21 @@ public class FurnaceManager {
 
             Map<String, Object> oldIngotMap;
 
-            if (oldIngot.getType() == Material.IRON_INGOT) oldIngotMap = Config.getOreInfo("LOW_IRON_INGOT");
-            else oldIngotMap = Config.getOreInfo("LOW_GOLD_INGOT");
+            if (oldIngot.getType() == Material.IRON_INGOT) oldIngotMap = Config.getIngotInfo("LOW_IRON_INGOT");
+            else oldIngotMap = Config.getIngotInfo("LOW_GOLD_INGOT");
 
             return (ItemStack) oldIngotMap.get("ITEM");
         }
 
         else {
 
-            Map<String, Object> oldIngotMap = Config.getOreInfo(oldIngot.getItemMeta().getLocalizedName());
+            Map<String, Object> oldIngotMap = Config.getIngotInfo(oldIngot.getItemMeta().getLocalizedName());
 
             if (oldIngotMap.get("PROGRESSION") != null) {
     
                 Bukkit.getLogger().info("Ingot had progression.");
     
-                Map<String, Object> newIngotMap = Config.getOreInfo((String) oldIngotMap.get("PROGRESSION"));
+                Map<String, Object> newIngotMap = Config.getIngotInfo((String) oldIngotMap.get("PROGRESSION"));
     
                 return (ItemStack) newIngotMap.get("ITEM");
             }
