@@ -1,7 +1,5 @@
 package dev.boooiil.historia.commands;
 
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,7 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.ArmorConfig;
+import dev.boooiil.historia.configuration.WeaponConfig;
 
 public class DebugItems implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -49,12 +48,14 @@ public class DebugItems implements CommandExecutor {
                     }
                     if (args[0].equalsIgnoreCase("config")) {
 
-                        Map<String, Object> weapon = Config.getWeaponInfo("Placeholder_Sword"); 
-                        Map<String, Object> helmet = Config.getArmorInfo("Placeholder_Helmet");
-                        Map<String, Object> chestplate = Config.getArmorInfo("Placeholder_Chestplate");
-                        Map<String, Object> leggings = Config.getArmorInfo("Placeholder_Leggings");
-                        Map<String, Object> boots = Config.getArmorInfo("Placeholder_Boots");
+                        WeaponConfig weaponConfig = new WeaponConfig();
+                        ArmorConfig armorConfig = new ArmorConfig();
 
+                        WeaponConfig.Weapon weapon = weaponConfig.new Weapon("Placeholder Sword");
+                        ArmorConfig.Armor helmet = armorConfig.new Armor("Placeholder Helmet");
+                        ArmorConfig.Armor chestplate = armorConfig.new Armor("Placeholder Chestplate");
+                        ArmorConfig.Armor leggings = armorConfig.new Armor("Placeholder Leggings");
+                        ArmorConfig.Armor boots = armorConfig.new Armor("Placeholder Boots");
 
                         sender.sendMessage("Weapon: " + weapon.toString());
                         sender.sendMessage("Helmet: " + helmet.toString());

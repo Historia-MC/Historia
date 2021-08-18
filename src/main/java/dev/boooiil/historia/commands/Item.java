@@ -1,14 +1,10 @@
 package dev.boooiil.historia.commands;
 
-import java.util.Map;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.WeaponConfig;
 
 public class Item implements CommandExecutor {
 
@@ -18,9 +14,10 @@ public class Item implements CommandExecutor {
 
             Player player = (Player) sender;
 
-            Map<String, Object> weapon = Config.getWeaponInfo(args[0]);
+            WeaponConfig weaponConfig = new WeaponConfig();
+            WeaponConfig.Weapon weapon = weaponConfig.new Weapon(args[0]);
 
-            player.getLocation().getWorld().dropItemNaturally(player.getLocation(), (ItemStack) weapon.get("ITEM"));
+            player.getLocation().getWorld().dropItemNaturally(player.getLocation(), weapon.weaponItemStack);
 
             return true;
             

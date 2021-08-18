@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.WeaponConfig;
 
 public class CraftingTableManager {
     
@@ -196,12 +197,15 @@ public class CraftingTableManager {
 
                 Config config = new Config();
 
+                WeaponConfig weaponConfig = new WeaponConfig();
+                WeaponConfig.Weapon weapon = weaponConfig.new Weapon(itemName);
+
                 //PROBLEM IS HERE.
                 //LAST KEY PUT INTO THE LIST IS OVERWRITING THE WEAPON INFO.
                 //IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
                 //NO IDEA WHAT TO DO.
                 
-                if (Config.getWeaponSet().contains(itemName)) itemList.put(itemName, config.iWeaponInfo(itemName));
+                if (weapon.valid) itemList.put(itemName, config.iWeaponInfo(itemName));
                 else itemList.put(itemName, config.iArmorInfo(itemName));
 
                 log.severe(prefix + "[getItemsBasedOnPattern] Map:" + itemList);
