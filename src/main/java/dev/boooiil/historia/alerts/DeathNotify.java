@@ -7,8 +7,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class DeathNotify {
@@ -39,18 +37,24 @@ public class DeathNotify {
                     //get meta
                     if (killerInventory.getItemInMainHand().hasItemMeta()) {
                         ItemMeta item = killerInventory.getItemInMainHand().getItemMeta();
+                        String itemLore = "";
 
                         if (item.hasDisplayName()) {
+
                             if (item.hasLore()) {
+
+
                                 if (item.hasEnchants()) {
-                                    String itemLore = "";
+
                                     for (String lore : item.getLore()) {
+
                                         itemLore += "\n§5" + lore;
                                     }
                                     //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + item.getEnchants() + "\n" + itemLore.trim()).create()));
                                 } else {
-                                    String itemLore = "";
+
                                     for (String lore : item.getLore()) {
+
                                         itemLore += "\n§5" + lore;
                                     }
                                     //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getDisplayName() + "\n" + itemLore.trim()).create()));
@@ -65,14 +69,15 @@ public class DeathNotify {
                         }
 
                         else if (item.hasLore()) {
+                            
                             if (item.hasEnchants()) {
-                                String itemLore = "";
+
                                 for (String lore : item.getLore()) {
                                     itemLore += "\n§5" + lore;
                                 }
                                 //itemMessage.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(item.getEnchants() + "\n" + itemLore.trim()).create()));
                             } else {
-                                String itemLore = "";
+
                                 for (String lore : item.getLore()) {
                                     itemLore += "\n§5" + lore;
                                 }
