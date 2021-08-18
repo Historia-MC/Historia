@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -21,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-
+@Deprecated
 public class Config {
 
     //Get the current configuration file for the plugin.
@@ -56,7 +55,8 @@ public class Config {
      * @return Set of all armors described in the config.yml.
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
-     */
+     */    
+    @Deprecated //
     public static Set<String> getArmorSet() {
 
         return armorSet;
@@ -71,7 +71,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-
+    @Deprecated // IngotConfig.getIngotSet()
     public static Set<String> getIngot() {
 
         return ingotSet;
@@ -86,7 +86,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-
+    @Deprecated //
     public static Set<String> getClassSet() {
 
         return classSet;
@@ -101,7 +101,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-
+    @Deprecated //
     public static Set<String> getFoodSet() {
 
         return foodSet;
@@ -116,7 +116,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-
+    @Deprecated // OreConfig.getOreSet()
     public static Set<String> getOreSet() {
 
         return oreSet;
@@ -131,7 +131,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
      */
-
+    @Deprecated // WeaponConfig.getWeaponSet()
     public static Set<String> getWeaponSet() {
 
         return weaponSet;
@@ -144,7 +144,7 @@ public class Config {
      * @param className - Name of the class to check.
      * @return Whether or not the class provided is in the config.yml.
      */
-
+    @Deprecated // 
     public static boolean validClass(String className) {
 
         return classSet.contains(className);
@@ -157,7 +157,7 @@ public class Config {
      * @param foodName - Name of the food to check.
      * @return Whether or not the food provided is in the config.yml.
      */
-
+    @Deprecated // 
     public static boolean validFood(String foodName) {
 
         return foodSet.contains(foodName);
@@ -170,7 +170,7 @@ public class Config {
      * @param weaponName - Name of the weapon to check.
      * @return Whether or not the weapon provided is in the config.yml.
      */
-
+    @Deprecated // WeaponConfig.validWeapon()
     public static boolean validWeapon(String weaponName) {
 
         return weaponSet.contains(weaponName);
@@ -183,7 +183,7 @@ public class Config {
      * @param armorName - Name of the armor to check.
      * @return Whether or not the armor  provided is in the config.yml.
      */
-
+    @Deprecated //
     public static boolean validArmor(String armorName) {
 
         return armorSet.contains(armorName);
@@ -196,7 +196,7 @@ public class Config {
      * @param oreName - Name of the ore to check.
      * @return Whether or not the ore provided is in the config.yml.
      */
-
+    @Deprecated // OreConfig.validOre()
     public static boolean validOre(String oreName) {
 
         return oreSet.contains(oreName);
@@ -209,7 +209,7 @@ public class Config {
      * @param blockName - Name of the ingot to check.
      * @return Whether or not the ingot provided is in ingots.yml.
      */
-
+    @Deprecated // IngotConfig.validIngot()
     public static boolean validIngot(String ingotName) {
 
         return ingotSet.contains(ingotName);
@@ -231,7 +231,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
-
+    @Deprecated //
     public static Map<String, Double> getClassInfo(String className) {
 
         if (validClass(className)) {
@@ -279,7 +279,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
-
+    @Deprecated //
     public static Map<String, Object> getFoodInfo(String foodName) {
 
         if (validFood(foodName)) {
@@ -316,7 +316,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
-
+    @Deprecated // WeaponConfig.Weapon() constructor
     public static Map<String, Object> getWeaponInfo(String weaponName) {
 
         if (validWeapon(weaponName)) {
@@ -361,6 +361,7 @@ public class Config {
 
     }
 
+    @Deprecated // WeaponConfig.Weapon() constructor
     public Map<String, Object> iWeaponInfo(String weaponName) {
 
         Map<String, Object> iWeaponMap = new HashMap<>();
@@ -405,6 +406,7 @@ public class Config {
         
         return iWeaponMap;
     }
+    
     /**
      * Armor information provided in a Map.
      *  
@@ -417,7 +419,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
-
+    @Deprecated // ArmorConfig.Armor() constructor
     public static Map<String, Object> getArmorInfo(String armorName) {
 
         if (validArmor(armorName)) {
@@ -454,6 +456,7 @@ public class Config {
 
     }
 
+    @Deprecated // Provided in ArmorConfig.Armor() constructor
     public Map<String, Object> iArmorInfo(String armorName) {
 
         Map<String, Object> iArmorMap = new HashMap<>();
@@ -505,7 +508,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
-
+    @Deprecated // IngotConfig.Ingot() constructor
     public static Map<String, Object> getIngotInfo(String ingotName) {
 
         if (validIngot(ingotName)) {
@@ -557,7 +560,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
-
+    @Deprecated //
     public static List<String> getClassWeaponTypes(String className) {
 
         if (validClass(className)) {
@@ -576,7 +579,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
-
+    @Deprecated //
     public static List<String> getUsableWeapons(String className) {
 
         if (validClass(className)) {
@@ -607,7 +610,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
-
+    @Deprecated //
     public static List<String> getClassArmorTypes(String className) {
 
         if (validClass(className)) {
@@ -626,7 +629,7 @@ public class Config {
      * 
      * @see <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
-
+    @Deprecated //
     public static List<Material> getAllAxes() {
 
         List<Material> found = new ArrayList<>();
@@ -640,7 +643,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getAllPickaxes() {
 
         List<Material> found = new ArrayList<>();
@@ -654,7 +658,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getAllShovels() {
 
         List<Material> found = new ArrayList<>();
@@ -668,7 +673,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getAllHoes() {
 
         List<Material> found = new ArrayList<>();
@@ -682,7 +688,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getAllBoots() {
 
         List<Material> found = new ArrayList<>();
@@ -695,7 +702,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getCropBlocks() {
 
         List<Material> found = new ArrayList<>();
@@ -713,7 +721,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getFarmerExclusiveCrops() {
 
         List<Material> found = new ArrayList<>();
@@ -729,7 +738,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getOreBlocks() {
 
         Set<String> blocks = oreSet;
@@ -744,7 +754,8 @@ public class Config {
         return found;
 
     }
-
+    
+    @Deprecated //
     public static List<String> getUsableArmor(String className) {
 
         if (validClass(className)) {
@@ -766,7 +777,8 @@ public class Config {
         } else return Arrays.asList("NOT A VALID CLASS");
 
     }
-
+    
+    @Deprecated //
     public static List<Material> getFish() {
 
         List<Material> found = new ArrayList<>();
@@ -777,7 +789,8 @@ public class Config {
         return found;
     
     }
-
+    
+    @Deprecated // Provided in WeaponConfig.Weapon() constructor and ArmorConfig.Armor() constructor
     public static Map<String, List<String>> getPatterns() {
 
         Map<String, List<String>> map = new HashMap<>();
@@ -797,7 +810,8 @@ public class Config {
         return map;
 
     }
-
+    
+    @Deprecated // Provided in WeaponConfig.Weapon() constructor and ArmorConfig.Armor() constructor
     public static Map<String, List<String>> getRecipeItems() {
 
         Map<String, List<String>> map = new HashMap<>();
@@ -817,7 +831,8 @@ public class Config {
         return map;
 
     }
-
+    
+    @Deprecated // GeneralConfig.MySQL static class
     public static Map<String, String> getMySQLInfo() {
 
         String root = "MySQL";
@@ -831,7 +846,8 @@ public class Config {
         return mySQLMap;
 
     }
-
+    
+    @Deprecated // 
     public static Map<String, Integer> getOreChance(String oreName) {
         
         Map<String, Integer> chance = new HashMap<>();
@@ -852,7 +868,8 @@ public class Config {
 
         return chance;
     }
-
+    
+    @Deprecated //
     public static Map<String, Integer> getIngotChance(String oreName, String ingotName, String className) {
 
         String root = oreName + "." + ingotName;
@@ -886,7 +903,8 @@ public class Config {
         return map;
 
     }
-
+    
+    @Deprecated // 
     public static ItemStack getIngot(String oreName, String ingotName, String ingotType) {
 
         Bukkit.getLogger().info("oreName: " + oreName + " ingotName: " + ingotName + " ingotType: " + ingotType);
@@ -903,6 +921,7 @@ public class Config {
 
     }
 
+    @Deprecated // ConstructItemStack.construct()
     private static ItemStack constructItemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
 
         Bukkit.getLogger().info("type: " + type + " amount: " + amount + " display-name: " + displayName + " loc-name: " + localizedName + " lore: " + lore);
@@ -923,6 +942,7 @@ public class Config {
 
     }
 
+    @Deprecated // FileGetter.find()
     private static boolean findFile(File[] files, String check) {
 
         for (File file : files) {
@@ -935,6 +955,7 @@ public class Config {
 
     }
 
+    @Deprecated // FileGetter.get()
     private static FileConfiguration getConfig(String check) {
 
         FileConfiguration config;
