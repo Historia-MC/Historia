@@ -16,27 +16,25 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 
-import dev.boooiil.historia.Config;
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 
-public class MySQL {
-
-    private static Map<String, String> sql = Config.getMySQLInfo();
+public class MySQLHandler {
 
     // Assign variables that we will use to connect to the database.
-    private static final String DATABASE = sql.get("DATABASE");
-    private static final String USERNAME = sql.get("USER");
-    private static final String PASSWORD = sql.get("PASSWORD");
-    private static final String IP = sql.get("IP");
-    private static final String PORT = sql.get("PORT");
-    private static final Logger log = Bukkit.getPluginManager().getPlugin("Historia").getLogger();
+    private static final String DATABASE = MySQL.database;
+    private static final String USERNAME = MySQL.username;
+    private static final String PASSWORD = MySQL.password;
+    private static final String IP = MySQL.ip;
+    private static final String PORT = MySQL.port;
+    private static final Logger log = Main.logger();
 
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE + "?allowPublicKeyRetrieval=true&useSSL=false";
 
     private static Connection connection;
 
-    private MySQL() { throw new IllegalStateException("This class should not be initialized."); } 
+    private MySQLHandler() { throw new IllegalStateException("This class should not be initialized."); } 
 
     /**
      * Create the table in the database if it does not exist.
