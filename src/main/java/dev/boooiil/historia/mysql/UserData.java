@@ -76,7 +76,7 @@ public class UserData {
 
             if (playerName == null) {
 
-                playerName = MySQL.getUsername(uuid);
+                playerName = MySQLHandler.getUsername(uuid);
 
             }
 
@@ -89,7 +89,7 @@ public class UserData {
         }
 
         // Issue a statement that will return all values related to this user's uuid.
-        Map<String, String> result = MySQL.getUser(uuid);
+        Map<String, String> result = MySQLHandler.getUser(uuid);
 
         if (result == null) {
 
@@ -132,7 +132,7 @@ public class UserData {
             classExperience = 0;
             lastLogin = new Date().getTime();
 
-            MySQL.createUser(uuid, playerName);
+            MySQLHandler.createUser(uuid, playerName);
 
             Map<String, Double> classInfo = Config.getClassInfo(className);
 
@@ -154,7 +154,7 @@ public class UserData {
 
     public void setName() {
 
-        MySQL.setUsername(uuid, playerName);
+        MySQLHandler.setUsername(uuid, playerName);
 
     }
 
@@ -170,7 +170,7 @@ public class UserData {
 
     public void setClass(String className) {
 
-        MySQL.setClass(uuid, className);
+        MySQLHandler.setClass(uuid, className);
 
     }
     
@@ -182,7 +182,7 @@ public class UserData {
 
     public void setLevel(int level) {
 
-        MySQL.setClassLevel(uuid, level);
+        MySQLHandler.setClassLevel(uuid, level);
     }
 
     /**
@@ -191,7 +191,7 @@ public class UserData {
 
     public void setLogin() {
 
-        MySQL.setLogin(uuid);
+        MySQLHandler.setLogin(uuid);
 
     }
 
@@ -201,7 +201,7 @@ public class UserData {
 
     public void setLogout() {
 
-        MySQL.setLogout(uuid);
+        MySQLHandler.setLogout(uuid);
 
     }
 
