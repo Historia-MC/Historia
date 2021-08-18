@@ -49,11 +49,12 @@ import dev.boooiil.historia.expiry.ExpiryManager;
 import dev.boooiil.historia.misc.ChickenShearing;
 import dev.boooiil.historia.misc.FlameArrowHandler;
 import dev.boooiil.historia.classes.OreManager;
+import dev.boooiil.historia.configuration.WeaponConfig;
 import dev.boooiil.historia.crafting.CraftingTableManager;
 import dev.boooiil.historia.misc.PreventLavaPickup;
 import dev.boooiil.historia.misc.ReplaceBlocks;
 import dev.boooiil.historia.misc.StoneCutterItem;
-import dev.boooiil.historia.mysql.MySQL;
+import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
@@ -222,7 +223,7 @@ public class HistoriaEvents implements Listener {
 
             StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
-            if (handItem.getItemMeta().hasLocalizedName() && Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
+            if (handItem.getItemMeta().hasLocalizedName() && WeaponConfig.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
 
         }
 
@@ -286,14 +287,14 @@ public class HistoriaEvents implements Listener {
 
         ClassManager.initiate(event.getPlayer());
 
-        MySQL.setLogin(event.getPlayer().getUniqueId());
+        MySQLHandler.setLogin(event.getPlayer().getUniqueId());
 
     }
 
     @EventHandler
     public void onPlayerLogout(PlayerQuitEvent event) {
 
-        MySQL.setLogout(event.getPlayer().getUniqueId());
+        MySQLHandler.setLogout(event.getPlayer().getUniqueId());
 
     }
 
