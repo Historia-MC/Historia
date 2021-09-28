@@ -222,7 +222,13 @@ public class HistoriaEvents implements Listener {
 
             StoneCutterItem sci = new StoneCutterItem(player, handItem);
 
-            if (handItem.getItemMeta().hasLocalizedName() && Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) && handItem.containsEnchantment(Enchantment.DAMAGE_ALL)) sci.decrementSharpness();
+            boolean hasMeta = handItem.hasItemMeta();
+            boolean hasLName = hasMeta ? handItem.getItemMeta().hasLocalizedName() : false;
+            boolean isWeapon = hasLName ? Config.getWeaponSet().contains(handItem.getItemMeta().getLocalizedName()) : false;
+            
+            boolean hasEnchant = isWeapon ? handItem.containsEnchantment(Enchantment.DAMAGE_ALL) : false;
+
+            if (hasMeta && hasLName && isWeapon && hasEnchant) sci.decrementSharpness();
 
         }
 
