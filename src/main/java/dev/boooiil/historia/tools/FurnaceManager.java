@@ -109,7 +109,7 @@ public class FurnaceManager {
 
             Furnace furnace = (Furnace) block;
 
-            Map<String, Object> ore = Config.getOreInfo(item.getItemMeta().getLocalizedName());
+            Map<String, Object> ore = Config.getIngotInfo(item.getItemMeta().getLocalizedName());
 
             int cookTime = (int) ore.get("SMELT_TIME") * 60 * 20;
 
@@ -125,7 +125,7 @@ public class FurnaceManager {
 
         if (item.getItemMeta().hasLocalizedName()) {
 
-            Map<String, Object> ore = Config.getOreInfo(item.getItemMeta().getLocalizedName());
+            Map<String, Object> ore = Config.getIngotInfo(item.getItemMeta().getLocalizedName());
 
             int cookTime = (int) ore.get("SMELT_TIME") * 60 * 20;
 
