@@ -10,7 +10,7 @@ LOW_LIGHT_IRON_INGOT:
 
   smelt_into: MEDIUM_LIGHT_IRON_INGOT
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 MEDIUM_LIGHT_IRON_INGOT:
@@ -23,7 +23,7 @@ MEDIUM_LIGHT_IRON_INGOT:
 
   smelt_into: HIGH_LIGHT_IRON_INGOT
   time: 180
-  loss: 10
+  fail: 10
   smelt_times: 1
 
 HIGH_LIGHT_IRON_INGOT:
@@ -44,7 +44,7 @@ LOW_LIGHT_TIN_INGOT:
 
   smelt_into: MEDIUM_LIGHT_TIN_INGOT
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 MEDIUM_LIGHT_TIN_INGOT:
@@ -57,7 +57,7 @@ MEDIUM_LIGHT_TIN_INGOT:
 
   smelt_into: HIGH_LIGHT_TIN_INGOT
   time: 180
-  loss: 10
+  fail: 10
   smelt_times: 1
 
 HIGH_LIGHT_TIN_INGOT:
@@ -78,7 +78,7 @@ LOW_LIGHT_BRONZE_INGOT:
 
   smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 MEDIUM_LIGHT_BRONZE_INGOT:
@@ -91,7 +91,7 @@ MEDIUM_LIGHT_BRONZE_INGOT:
 
   smelt_into: HIGH_LIGHT_BRONZE_INGOT
   time: 180
-  loss: 10
+  fail: 10
   smelt_times: 1
 
 HIGH_LIGHT_BRONZE_INGOT:
@@ -112,7 +112,7 @@ LOW_LIGHT_GOLD_INGOT:
 
   smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 MEDIUM_LIGHT_GOLD_INGOT:
@@ -125,7 +125,7 @@ MEDIUM_LIGHT_GOLD_INGOT:
 
   smelt_into: HIGH_LIGHT_BRONZE_INGOT
   time: 180
-  loss: 10
+  fail: 10
   smelt_times: 1
 
 HIGH_LIGHT_GOLD_INGOT:
@@ -146,7 +146,7 @@ LOW_SHEEP_LEATHER:
 
   smelt_into: MEDIUM_IRON
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 LOW_COW_LEATHER:
@@ -159,7 +159,7 @@ LOW_COW_LEATHER:
 
   smelt_into: MEDIUM_IRON
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 LOW_PIG_LEATHER:
@@ -172,7 +172,7 @@ LOW_PIG_LEATHER:
 
   smelt_into: MEDIUM_IRON
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1
 
 LOW_HORSE_LEATHER:
@@ -185,5 +185,5 @@ LOW_HORSE_LEATHER:
 
   smelt_into: MEDIUM_IRON
   time: 30
-  loss: 15
+  fail: 15
   smelt_times: 1

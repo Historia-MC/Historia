@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -16,7 +17,7 @@ import dev.boooiil.historia.commands.Item;
 import dev.boooiil.historia.commands.Stats;
 import dev.boooiil.historia.crafting.RecipeLoader;
 import dev.boooiil.historia.commands.DebugItems;
-import dev.boooiil.historia.mysql.MySQL;
+import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.runnable.ClassRunnable;
 
 public class Main extends JavaPlugin {
@@ -77,7 +78,7 @@ public class Main extends JavaPlugin {
 
         getLogger().info("Loading MySQL...");
 
-        MySQL.createTable();
+        MySQLHandler.createTable();
 
         RecipeLoader.disableRecipes();
         RecipeLoader.loadRecipes();
@@ -94,6 +95,13 @@ public class Main extends JavaPlugin {
         return Bukkit.getPluginManager().getPlugin("Historia");
 
     }
+
+    public static Logger logger() {
+
+        return plugin().getLogger();
+
+    }
+
     public static void disable(Plugin plugin) {
 
         plugin.getServer().getPluginManager().disablePlugin(plugin);

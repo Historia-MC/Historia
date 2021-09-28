@@ -12,7 +12,8 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
-import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.ArmorConfig;
+import dev.boooiil.historia.configuration.WeaponConfig;
 
 public class RecipeLoader {
 
@@ -80,12 +81,17 @@ public class RecipeLoader {
 
     public static void load(Plugin plugin){
 
+        WeaponConfig weaponConfig = new WeaponConfig();
+        ArmorConfig armorConfig = new ArmorConfig();
+
         // For each weapon in the config weapon list
         // (Loading Weapons)
-        for (String weapon : Config.getWeaponSet()) {
+        for (String iterate : WeaponConfig.getWeaponSet()) {
+
+            WeaponConfig.Weapon weapon = weaponConfig.new Weapon(iterate);
 
             // Get the item stack of the weapon
-            ItemStack item = (ItemStack) Config.getWeaponInfo(weapon).get("ITEM");
+            ItemStack item = weapon.weaponItemStack;
 
             // Get the item meta
             ItemMeta meta = item.getItemMeta();
@@ -124,13 +130,13 @@ public class RecipeLoader {
             // Where Each "X" is a space on the crafting bench
 
             // Get the shape (through Config.java)
-            List<String> shape = (List<String>) Config.getWeaponInfo(weapon).get("SHAPE");
+            List<String> shape = weapon.weaponCraftingShape;
 
             // Set recipe shape (through Config.java)
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
             // Get recipe ingredients and keys (through Config.java)
-            List<String> items = (List<String>) Config.getWeaponInfo(weapon).get("RECIPE");
+            List<String> items = weapon.weaponCreaftingRecipe;
 
             // The letters used to identify the ingredients
             // A = 0th element, B = 1st element, and so on
@@ -149,10 +155,12 @@ public class RecipeLoader {
 
         // For each armor in the config weapon list
         // (Loading Armor)
-        for (String armor : Config.getArmorSet()) {
+        for (String iterate : ArmorConfig.getArmorSet()) {
+
+            ArmorConfig.Armor armor = armorConfig.new Armor(iterate);
 
             // Get the item stack of the weapon
-            ItemStack item = (ItemStack) Config.getArmorInfo(armor).get("ITEM");
+            ItemStack item = armor.armorItemStack;
 
             // Get the item meta
             ItemMeta meta = item.getItemMeta();
@@ -181,7 +189,7 @@ public class RecipeLoader {
             // Where Each "X" is a space on the crafting bench
 
             // Get the shape (through Config.java)
-            List<String> shape = (List<String>) Config.getArmorInfo(armor).get("SHAPE");
+            List<String> shape = armor.armorCraftingShape;
 
             // Debug in case the recipe loader shape breaks
             // Bukkit.getLogger().info("ARMOR! " + armor);
@@ -191,7 +199,7 @@ public class RecipeLoader {
             recipe.shape(shape.get(0), shape.get(1), shape.get(2));
 
             // Get recipe ingredients and keys (through Config.java)
-            List<String> items = (List<String>) Config.getArmorInfo(armor).get("RECIPE");
+            List<String> items = armor.armorCreaftingRecipe;
 
             // The letters used to identify the ingredients
             // A = 0th element, B = 1st element, and so on

@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.mysql.MySQL;
+import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.mysql.UserData;
 
 public class Stats implements CommandExecutor {
@@ -79,7 +79,7 @@ public class Stats implements CommandExecutor {
 
             try {
 
-                UUID uuid = MySQL.getUUID(playerName);
+                UUID uuid = MySQLHandler.getUUID(playerName);
 
                 return Bukkit.getOfflinePlayer(uuid);
 

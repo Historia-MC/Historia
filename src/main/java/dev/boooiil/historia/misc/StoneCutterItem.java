@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.WeaponConfig;
 import dev.boooiil.historia.mysql.UserData;
 
 public class StoneCutterItem {
@@ -178,7 +178,7 @@ public class StoneCutterItem {
 
     private boolean isConfiguredWeapon() {
 
-        return Config.validWeapon(itemMeta.getLocalizedName());
+        return WeaponConfig.validWeapon(itemMeta.getLocalizedName());
 
     }
 

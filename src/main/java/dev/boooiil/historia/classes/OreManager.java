@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.Config;
+import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.mysql.UserData;
 
 public class OreManager {
@@ -29,11 +30,11 @@ public class OreManager {
         World world = block.getWorld();
         Location location = block.getLocation();
 
-        Bukkit.getLogger().severe("List? " + Config.getOreBlocks());
+        Bukkit.getLogger().severe("List? " + OreConfig.getOreBlocks());
 
-        Bukkit.getLogger().info("True?" + Config.getOreBlocks().contains(block.getType()));
+        Bukkit.getLogger().info("True?" + OreConfig.getOreBlocks().contains(block.getType()));
 
-        if (Config.getOreBlocks().contains(block.getType())) {
+        if (OreConfig.getOreBlocks().contains(block.getType())) {
 
             userData = new UserData(event.getPlayer());
 
