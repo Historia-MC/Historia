@@ -12,13 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import dev.boooiil.historia.commands.Ignite;
-import dev.boooiil.historia.commands.Item;
-import dev.boooiil.historia.commands.Stats;
-import dev.boooiil.historia.crafting.RecipeLoader;
-import dev.boooiil.historia.commands.DebugItems;
 import dev.boooiil.historia.mysql.MySQLHandler;
-import dev.boooiil.historia.runnable.ClassRunnable;
 
 public class Main extends JavaPlugin {
 
@@ -44,13 +38,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        // Disabled due to being beginner commands and not having a use.
-        this.getCommand("Ignite").setExecutor(new Ignite());
-        this.getCommand("Class").setExecutor(new dev.boooiil.historia.commands.Class());
-        this.getCommand("Item").setExecutor(new Item());
-        this.getCommand("DebugItems").setExecutor(new DebugItems());
-        this.getCommand("Stats").setExecutor(new Stats());
-
         this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
 
         getLogger().info("Checking configs...");
@@ -63,14 +50,6 @@ public class Main extends JavaPlugin {
 
         } else getLogger().info("All config files exist.");
 
-        getLogger().info("Starting class task...");
-
-        ClassRunnable classRunnable = new ClassRunnable(this);
-
-        classRunnable.runTaskTimer(this, 0L, 20L);
-
-        getLogger().info("Task queued.");
-
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
 
@@ -79,9 +58,6 @@ public class Main extends JavaPlugin {
         getLogger().info("Loading MySQL...");
 
         MySQLHandler.createTable();
-
-        RecipeLoader.disableRecipes();
-        RecipeLoader.loadRecipes();
 
     }
 
