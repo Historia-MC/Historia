@@ -75,4 +75,10 @@ public class Logging {
 
     }
 
+    public static void debugToServer(String message) {
+
+        //IF DEBUG ENABLED
+
+    }
+
 }
