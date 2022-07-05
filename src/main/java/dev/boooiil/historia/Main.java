@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -70,6 +71,12 @@ public class Main extends JavaPlugin {
     public static Plugin plugin() {
 
         return Bukkit.getPluginManager().getPlugin("Historia");
+
+    }
+
+    public static Server server() {
+
+        return plugin().getServer();
 
     }
 
