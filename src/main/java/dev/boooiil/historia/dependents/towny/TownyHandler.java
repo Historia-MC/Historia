@@ -8,18 +8,22 @@ import com.palmergames.bukkit.towny.object.TownBlock;
 import com.palmergames.bukkit.towny.object.TownyPermission;
 import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
 
+import java.util.UUID;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class TownyHandler {
 
-    private TownyHandler() { throw new IllegalStateException("Static utility class."); }
-    
+    private TownyHandler() {
+        throw new IllegalStateException("Static utility class.");
+    }
+
     /**
      * Checks to see if the player is able to break the block.
      * 
-     * @param player - Player breaking the block.
+     * @param player   - Player breaking the block.
      * @param location - Location of the block.
      * @param material - Material of the block.
      * @return If the player is able to break the block.
@@ -41,165 +45,167 @@ public class TownyHandler {
     }
 
     /**
-     * Checks to see if the player is a resident.
-     * 
-     * <p>A resident just means Towny has the player's data.
-     * 
-     * @param playerName - Name of the player.
-     * @return - If the player is a resident.
-     */
-
-    public static boolean isResident(String playerName) {
-
-        return TownyAPI.getInstance().getDataSource().hasResident(playerName);
-
-    }
-
-    /**
      * Get the resident object from Towny.
-     *      * 
-     * @param playerName - Name of the player.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Resident object.
      * 
-     * @see <a href="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Resident</a>
+     * @see <a href=
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Resident</a>
      */
 
-    public static Resident getResident(String playerName) {
+    public static Resident getResident(UUID uuid) {
 
-        if (isResident(playerName)) {
+        return TownyAPI.getInstance().getResident(uuid);
 
-            try {
-
-                return TownyAPI.getInstance().getDataSource().getResident(playerName);
-
-            } catch (Exception e) { return null; }
-
-        } else return null;
     }
 
     /**
      * Checks to see if the player is in a town.
-     *  
-     * @param playerName - Name of the player.
+     * 
+     * @param uuid - UUID of the player.
      * @return - If the player has a town.
      */
 
-    public static boolean hasTown(String playerName) {
+    public static boolean hasTown(UUID uuid) {
 
-        Resident resident = getResident(playerName);
+        Resident resident = getResident(uuid);
 
         if (resident != null) {
 
             return resident.hasTown();
 
-        } return false;
+        }
+        return false;
 
     }
 
     /**
      * Get the player's town object from Towny.
-     *      * 
-     * @param playerName - Name of the player.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Town object.
      * 
-     * @see <a href="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Town</a>
+     * @see <a href=
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Town</a>
      */
 
-    public static Town getTown(String playerName) {
+    public static Town getTown(UUID uuid) {
 
-        if (hasTown(playerName)) {
+        if (hasTown(uuid)) {
 
-            Resident resident = getResident(playerName);
+            Resident resident = getResident(uuid);
 
-            try { return resident.getTown(); } 
+            try {
+                return resident.getTown();
+            }
 
-            catch (Exception e) { return null; }
+            catch (Exception e) {
+                return null;
+            }
 
-        } else return null;
+        } else
+            return null;
     }
 
     /**
-     * Get the player's town  name.
-     *      * 
-     * @param playerName - Name of the player.
+     * Get the player's town name.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Town name.
      * 
      */
 
-    public static String getTownName(String playerName) {
+    public static String getTownName(UUID uuid) {
 
-        if (hasTown(playerName)) return getTown(playerName).getName();
-        else return "Wilderness";
+        if (hasTown(uuid))
+            return getTown(uuid).getName();
+        else
+            return "Wilderness";
     }
 
     /**
      * Checks to see if the player's town has a home block.
-     *  
-     * @param playerName - Name of the player.
+     * 
+     * @param uuid - UUID of the player.
      * @return - If the player's town has a home block.
      */
 
-    public static boolean hasHomeBlock(String playerName) {
+    public static boolean hasHomeBlock(UUID uuid) {
 
-        if (hasTown(playerName)) {
+        if (hasTown(uuid)) {
 
             try {
 
-                TownBlock homeBlock = getTown(playerName).getHomeBlock();
+                TownBlock homeBlock = getTown(uuid).getHomeBlock();
 
                 return homeBlock.hasTown();
 
-            } catch (Exception e) { return false; }
-            
-        } else return false;
+            } catch (Exception e) {
+                return false;
+            }
+
+        } else
+            return false;
 
     }
 
     /**
      * Get the player's town block object from Towny.
-     *      * 
-     * @param playerName - Name of the player.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Town block object.
      * 
-     * @see <a href="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">TownBlock</a>
+     * @see <a href=
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">TownBlock</a>
      */
 
-    public static TownBlock getHomeBlock(String playerName) {
+    public static TownBlock getHomeBlock(UUID uuid) {
 
-        if (hasHomeBlock(playerName)) {
+        if (hasHomeBlock(uuid)) {
 
-            Town town = getTown(playerName);
+            Town town = getTown(uuid);
 
             try {
 
                 return town.getHomeBlock();
 
-            } catch (Exception e) { return null; }
+            } catch (Exception e) {
+                return null;
+            }
 
-        } else return null;
+        } else
+            return null;
 
     }
 
     /**
      * Checks to see if the player's town has a spawn block.
-     *  
-     * @param playerName - Name of the player.
+     * 
+     * @param uuid - UUID of the player.
      * @return - If the player's town has a spawn block.
      */
 
-    public static boolean hasSpawnBlock(String playerName) {
+    public static boolean hasSpawnBlock(UUID uuid) {
 
-        if (hasTown(playerName)) {
+        if (hasTown(uuid)) {
 
             try {
 
-                Town town = getTown(playerName);
+                Town town = getTown(uuid);
 
                 return town.hasSpawn();
 
-            } catch (Exception e) { return false; }
+            } catch (Exception e) {
+                return false;
+            }
 
-        } return false;
+        }
+        return false;
 
     }
 
@@ -209,86 +215,98 @@ public class TownyHandler {
      * @param playerName
      * @return The player's spawn block location.
      * 
-     * @see <a href="https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html">Location</a>
+     * @see <a href=
+     *      "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Location.html">Location</a>
      */
-    
-    public static Location getSpawn(String playerName) {
 
-        if (hasTown(playerName) && hasSpawnBlock(playerName)) {
+    public static Location getSpawn(UUID uuid) {
+
+        if (hasTown(uuid) && hasSpawnBlock(uuid)) {
 
             try {
 
-                Town town = getTown(playerName);
+                Town town = getTown(uuid);
 
                 return town.getSpawn();
 
-            } catch (Exception e) { return null; }
+            } catch (Exception e) {
+                return null;
+            }
 
-        } else return null;
+        } else
+            return null;
 
     }
 
     /**
      * Checks to see if the player's town is in a nation.
-     *  
-     * @param playerName - Name of the player.
+     * 
+     * @param uuid - UUID of the player.
      * @return - If the player's town is in a nation.
      */
 
-    public static boolean hasNation(String playerName) {
+    public static boolean hasNation(UUID uuid) {
 
-        if (hasTown(playerName)) {
+        if (hasTown(uuid)) {
 
-            Town town = getTown(playerName);
+            Town town = getTown(uuid);
 
             return town.hasNation();
 
-        } else return false;
+        } else
+            return false;
 
     }
 
     /**
      * Get the player's town's nation object from Towny.
-     *      * 
-     * @param playerName - Name of the player.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Nation object.
      * 
-     * @see <a href="https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
+     * @see <a href=
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
      */
 
-    public static Nation getNation(String playerName) {
+    public static Nation getNation(UUID uuid) {
 
-        if (hasNation(playerName)) {
+        if (hasNation(uuid)) {
 
             try {
 
-                Town town = getTown(playerName);
+                Town town = getTown(uuid);
 
                 return town.getNation();
 
-            } catch (Exception e) { return null; }
+            } catch (Exception e) {
+                return null;
+            }
 
-        } else return null;
+        } else
+            return null;
 
     }
 
     /**
      * Get the player's town's nation name.
-     *      * 
-     * @param playerName - Name of the player.
+     * *
+     * 
+     * @param uuid - UUID of the player.
      * @return Nation name.
      * 
      */
 
-    public static String getNationName(String playerName) {
+    public static String getNationName(UUID uuid) {
 
-        if (hasNation(playerName)) {
+        if (hasNation(uuid)) {
 
-            Nation nation = getNation(playerName);
+            Nation nation = getNation(uuid);
 
             return nation.getName();
 
-        } else return "None";
+        } else
+            return "None";
 
     }
 }
