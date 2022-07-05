@@ -22,7 +22,7 @@ public class Construct {
      * @param lore Any flavor text added to the item.
      * @return Constructed item stack.
      */
-    public ItemStack itemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
+    public static ItemStack itemStack(String type, int amount, String displayName, String localizedName, List<String> lore) {
 
         //LOGGING TO BE REMOVED AFTER PUBLISH
         Logging.infoToServer("type: " + type + " amount: " + amount + " display-name: " + displayName + " loc-name: " + localizedName + " lore: " + lore);
