@@ -14,10 +14,9 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
-
 import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
+import dev.boooiil.historia.util.Logging;
 
 public class MySQLHandler {
 
@@ -62,7 +61,7 @@ public class MySQLHandler {
                 statement.execute(createTable);
 
             } catch (SQLException e) {
-                Bukkit.getLogger().info("Failed to load MySQL.");
+                Logging.infoToServer("Failed to load MySQL.");
                 e.printStackTrace();
                 Main.disable(Main.plugin());
             }
