@@ -4,7 +4,7 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.16.4-R0.1-SNAPSHOT</version>
+  <version>1.18.2-R0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -43,27 +43,27 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.16.4-R0.1-SNAPSHOT</version>
+      <version>1.18.2-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.sk89q.worldguard</groupId>
       <artifactId>worldguard-bukkit</artifactId>
-      <version>7.0.2</version>
+      <version>7.0.7</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
 	    <groupId>com.github.TownyAdvanced</groupId>
 	    <artifactId>Towny</artifactId>
-	    <version>0.96.5.0</version>
+	    <version>0.98.3.0</version>
     </dependency>
     
     <dependency>
       <groupId>com.github.MilkBowl</groupId>
       <artifactId>VaultAPI</artifactId>
-      <version>1.7</version>
+      <version>1.7.1</version>
       <scope>provided</scope>
     </dependency>
 
