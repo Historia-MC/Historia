@@ -57,6 +57,7 @@ import dev.boooiil.historia.misc.StoneCutterItem;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.tools.FurnaceManager;
 import dev.boooiil.historia.tools.LootSpawnManager;
+import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.dependents.worldguard.WorldGuardHandler;
 
@@ -270,17 +271,17 @@ public class HistoriaEvents implements Listener {
 
         if (meta.hasLocalizedName() && meta.getLocalizedName().contains("CHUNK")) {
 
-            Bukkit.getLogger().info("SMELTING CHUNK TYPE: " + meta.getLocalizedName());
+            Logging.infoToServer("SMELTING CHUNK TYPE: " + meta.getLocalizedName());
             event.setResult(FurnaceManager.smeltChunk(item));
-            Bukkit.getLogger().info("RESULT: " + event.getResult());
+            Logging.infoToServer("RESULT: " + event.getResult());
 
         }
 
 
         if ((meta.hasLocalizedName() && meta.getLocalizedName().contains("INGOT")) || item.getType() == Material.IRON_INGOT) {
             
-            if (meta.hasLocalizedName()) Bukkit.getLogger().info("SMELTING INGOT TYPE: " + meta.getLocalizedName());
-            else Bukkit.getLogger().info("SMELTING FROM BASIC IRON");
+            if (meta.hasLocalizedName()) Logging.infoToServer("SMELTING INGOT TYPE: " + meta.getLocalizedName());
+            else Logging.infoToServer("SMELTING FROM BASIC IRON");
 
             event.setResult(FurnaceManager.upgradeIngot(item));
 
