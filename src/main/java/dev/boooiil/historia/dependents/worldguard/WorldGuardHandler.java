@@ -13,6 +13,10 @@ import org.bukkit.entity.Player;
 
 public class WorldGuardHandler {
 
+    /*
+     * Check if the player has permissions to break in the specific location.
+     *
+     */
     public static boolean getPermissions(Player player, Location location) {
         try {
 
