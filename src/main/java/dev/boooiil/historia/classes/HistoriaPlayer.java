@@ -3,42 +3,69 @@ package dev.boooiil.historia.classes;
 import java.util.Map;
 import java.util.UUID;
 
+import dev.boooiil.historia.configuration.ClassConfig;
 import dev.boooiil.historia.mysql.MySQLHandler;
 
 public class HistoriaPlayer {
 
-    private String className;
+    public UUID uuid;
 
-    private int level;
+    public String className;
 
-    private int baseHealth;
-    private int healthMultiplier;
+    public int level;
 
-    private float baseExperience;
-    private float experienceTotal;
-    private float experienceMax;
-    private float experienceMultiplier;
+    public int baseHealth;
+    public int modifiedHealth;
 
-    private String[] allowedWeapons;
-    private String[] allowedTools;
+    public float baseExperience;
+    public float experienceTotal;
+    public float experienceMax;
+
+    public ClassConfig classConfig;
     
     public HistoriaPlayer(UUID uuid) {
 
         //Base health and multiplier will get determined when we finish the class config.
         //Experience max will just be experience * multiplier.
 
+        this.uuid = uuid;
+
+        //Get an object where the key is a string and the value is also a string.
+        //IE: { "key": "value" }, where "key" can be accessed using the .get() method.
         Map<String, String> user = MySQLHandler.getUser(uuid);
 
-        className = user.get("class");
-        level = Integer.parseInt(user.get("level"));
+        this.className = user.get("class");
+        this.level = Integer.parseInt(user.get("level"));
+        this.experienceTotal = Float.parseFloat(user.get("experience"));
 
-        experienceTotal = Float.parseFloat(user.get("experience"));
+        this.classConfig = ClassConfig.getConfig(className);
+
+        this.baseHealth = classConfig.baseHealth;
+
+        //Set this explicitly in the config
+        this.modifiedHealth = 0;
+
+        //TODO: Calculate experience gain
+
+    }
+
+    public ClassConfig getClassConfig() {
+
+        return this.classConfig;
 
     }
 
     public void applyClassStats() {
 
         return;
+
+    }
+
+    public void saveCharacter() {
+
+        //TODO: Create method for adding experience
+
+        MySQLHandler.setClassLevel(uuid, level);
 
     }
 }
