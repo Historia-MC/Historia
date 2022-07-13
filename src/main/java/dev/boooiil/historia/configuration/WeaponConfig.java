@@ -3,6 +3,7 @@ package dev.boooiil.historia.configuration;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -68,7 +69,7 @@ public class WeaponConfig {
                 this.lore = configuration.getStringList(itemRoot + ".lore");
                 this.amount = configuration.getInt(itemRoot + ".amount");
 
-                this.weaponItemStack = Construct.itemStack(type, amount, displayName, localizedName, lore);
+                this.weaponItemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
                 this.weaponDamageRange = configuration.getDoubleList(root + ".damage");
                 this.weaponKnockbackRange = configuration.getDoubleList(root + ".knockback");
                 this.weaponSweepRange = configuration.getDoubleList(root + ".sweeping");

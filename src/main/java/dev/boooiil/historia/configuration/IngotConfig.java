@@ -3,6 +3,7 @@ package dev.boooiil.historia.configuration;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
@@ -60,7 +61,7 @@ public class IngotConfig {
                 this.lore = configuration.getStringList(itemRoot + ".lore");
                 this.amount = configuration.getInt(itemRoot + ".amount");
                 
-                this.ingotItemStack = Construct.itemStack(type, amount, displayName, localizedName, lore);
+                this.ingotItemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
                 this.progression = configuration.getString(root + ".smelt_into");
                 this.smeltTime = configuration.getInt(root + ".time");
                 this.smeltAmount = configuration.getInt(root + ".smelt_times");
