@@ -24,7 +24,7 @@ Warrior:
     baseFood: 16
     baseSpeed: 0.2
     baseEvasion: 0.03
-    baseWeaponProficiency: 1.0
+    baseSwordProficiency: 1.0
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 2.5
