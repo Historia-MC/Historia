@@ -34,7 +34,8 @@ public class Construct {
             List<String> lore) {
 
         // LOGGING TO BE REMOVED AFTER PUBLISH
-        Logging.infoToServer("material: " + material.toString() + " amount: " + amount + " display-name: " + displayName + " loc-name: "
+        Logging.infoToServer("material: " + material.toString() + " amount: " + amount + " display-name: " + displayName
+                + " loc-name: "
                 + localizedName + " lore: " + lore);
 
         ItemStack item = new ItemStack(material, amount);
@@ -54,14 +55,17 @@ public class Construct {
 
     }
 
-    public static boolean blockReplacement(Player player, Block brokenBlock, Material newBlock, Sound sound, List<HashMap<String, String>> givenItems) {
+    public static boolean blockReplacement(Player player, Block brokenBlock, Material newBlock, Sound sound,
+            List<HashMap<String, String>> givenItems) {
 
-        //If the size of the list is greater than 0
-        //IE, if there are items to be given to the player
+        // If the size of the list is greater than 0
+        // IE, if there are items to be given to the player
         if (givenItems.size() > 0) {
 
-            //Iterate through the given item list
-            for(HashMap<String, String> item : givenItems) {
+            brokenBlock.getDrops().clear();
+
+            // Iterate through the given item list
+            for (HashMap<String, String> item : givenItems) {
 
                 Material material = Material.matchMaterial(item.get("material"));
                 Integer amount = Integer.getInteger(item.get("amount"));
@@ -71,12 +75,16 @@ public class Construct {
 
                 ItemStack droppedItem = Construct.itemStack(material, amount, displayName, localizedName, lore);
 
+                brokenBlock.getDrops().add(droppedItem);
+
             }
+
+            return true;
 
         }
 
         return false;
-        
+
     }
 
 }
