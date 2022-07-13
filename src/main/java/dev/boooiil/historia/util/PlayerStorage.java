@@ -37,12 +37,22 @@ public class PlayerStorage {
 
     }
 
+    public static void removePlayer(UUID uuid) {
+
+
+
+    }
+
     /**
      * Save all player data to MySQL.
      */
     public void saveStates() {
 
+        for (UUID uuid : players.keySet()) {
 
+            players.get(uuid).saveCharacter();
+
+        }
 
     }
 
