@@ -40,8 +40,6 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        this.getServer().getPluginManager().registerEvents(new HistoriaEvents(), this);
-
         getLogger().info("Checking configs...");
 
         if (isMissingConfig()) {
@@ -77,12 +75,6 @@ public class Main extends JavaPlugin {
     public static Server server() {
 
         return plugin().getServer();
-
-    }
-
-    public static Logger logger() {
-
-        return plugin().getLogger();
 
     }
 
