@@ -1,6 +1,7 @@
 package dev.boooiil.historia.util;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.IllegalClassException;
 
@@ -9,6 +10,7 @@ import dev.boooiil.historia.Main;
 public class Logging {
 
     private static final String prefix = "§7[§9Historia§7] ";
+    private static final Logger logger = Main.plugin().getLogger();
     
     private Logging() { throw new IllegalClassException( "Static utility class."); }
 
@@ -18,7 +20,7 @@ public class Logging {
      */
     public static void infoToServer(String message) {
 
-        Main.logger().info(message);
+        logger.info(message);
 
     }
 
@@ -39,7 +41,7 @@ public class Logging {
      */
     public static void warnToServer(String message) {
 
-        Main.logger().warning(message);
+        logger.warning(message);
 
     }
 
@@ -60,7 +62,7 @@ public class Logging {
      */
     public static void errorToServer(String message) {
 
-        Main.logger().severe(message);
+        logger.severe(message);
 
     }
 
