@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
@@ -26,7 +24,6 @@ public class MySQLHandler {
     private static final String PASSWORD = MySQL.password;
     private static final String IP = MySQL.ip;
     private static final String PORT = MySQL.port;
-    private static final Logger log = Main.logger();
 
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
@@ -106,12 +103,12 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
-            log.log(Level.INFO, "Created user: {0} in the Database.", playerName);
+            Logging.infoToServer("Created user: " + playerName + " in the Database.");
 
         } catch (SQLException e) {
             e.printStackTrace();
 
-            log.severe("FAILED TO CREATE USER.");
+            Logging.errorToServer("FAILED TO CREATE USER.");
         }
 
     }
@@ -392,7 +389,7 @@ public class MySQLHandler {
 
         if (DATABASE == null) {
 
-            log.severe("VALUE IN MySQL.database IS NULL.");
+            Logging.errorToServer("VALUE IN MySQL.database IS NULL.");
 
             caught++;
 
@@ -400,7 +397,7 @@ public class MySQLHandler {
 
         if (IP == null) {
 
-            log.severe("VALUE IN MySQL.ip IS NULL.");
+            Logging.errorToServer("VALUE IN MySQL.ip IS NULL.");
 
             caught++;
 
@@ -408,7 +405,7 @@ public class MySQLHandler {
 
         if (USERNAME == null) {
 
-            log.severe("VALUE IN MySQL.username IS NULL.");
+            Logging.errorToServer("VALUE IN MySQL.username IS NULL.");
 
             caught++;
 
@@ -416,7 +413,7 @@ public class MySQLHandler {
 
         if (PASSWORD == null) {
 
-            log.severe("VALUE IN MySQL.password IS NULL.");
+            Logging.errorToServer("VALUE IN MySQL.password IS NULL.");
 
             caught++;
 
@@ -424,7 +421,7 @@ public class MySQLHandler {
 
         if (PORT == null) {
 
-            log.severe("VALUE IN MySQL.port IS NULL.");
+            Logging.errorToServer("VALUE IN MySQL.port IS NULL.");
 
             caught++;
 

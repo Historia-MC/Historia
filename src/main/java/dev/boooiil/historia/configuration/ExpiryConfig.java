@@ -5,8 +5,8 @@ import java.util.Set;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.potion.PotionEffect;
 
-import dev.boooiil.historia.Main;
 import dev.boooiil.historia.util.FileGetter;
+import dev.boooiil.historia.util.Logging;
 
 public class ExpiryConfig {
 
@@ -49,8 +49,8 @@ public class ExpiryConfig {
         }
 
         for (String effect : configuration.getStringList("effects")) {
-
-            Main.logger().info(effect);
+ 
+            Logging.infoToServer(effect);
 
         }
 
