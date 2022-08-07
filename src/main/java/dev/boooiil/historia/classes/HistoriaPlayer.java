@@ -38,9 +38,9 @@ public class HistoriaPlayer {
         this.level = Integer.parseInt(user.get("level"));
         this.experienceTotal = Float.parseFloat(user.get("experience"));
 
-        this.classConfig = ClassConfig.getConfig(className);
+        this.classConfig = ClassConfig.getConfig(this.className);
 
-        this.baseHealth = classConfig.baseHealth;
+        this.baseHealth = this.classConfig.baseHealth;
 
         //Set this explicitly in the config
         this.modifiedHealth = 0;
