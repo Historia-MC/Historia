@@ -37,16 +37,25 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Remove a player from our stored player list.
+     * 
+     * This will be used on logout events.
+     * 
+     * @param uuid UUID of the player.
+     */
     public static void removePlayer(UUID uuid) {
 
+        players.get(uuid).saveCharacter();
 
+        players.remove(uuid);
 
     }
 
     /**
      * Save all player data to MySQL.
      */
-    public void saveStates() {
+    public static void saveStates() {
 
         for (UUID uuid : players.keySet()) {
 
