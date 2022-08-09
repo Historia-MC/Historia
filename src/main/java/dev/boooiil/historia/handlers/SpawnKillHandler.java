@@ -16,6 +16,8 @@ public class SpawnKillHandler {
 
             users.get(player).addKillToKiller(killer);
 
+            users.get(player).getKillers().get(killer).setHitBack(false);
+
         }
 
         else {
@@ -36,15 +38,7 @@ public class SpawnKillHandler {
 
             HashMap<UUID, KillerUser> killers = users.get(hitter).getKillers();
 
-            if (killers.containsKey(player)) {
-
-                if (killers.get(player).getKills() >= 3) {
-
-
-
-                }
-
-            }
+            if (killers.containsKey(player)) killers.get(player).setHitBack(true);
 
         }
 
