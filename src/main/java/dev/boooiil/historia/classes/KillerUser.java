@@ -20,9 +20,15 @@ public class KillerUser {
 
     }
 
-    public boolean getLastHit() {
+    public boolean getHitBack() {
 
         return hitBack;
+
+    }
+
+    public void setHitBack(boolean value) {
+
+        hitBack = value;
 
     }
 
