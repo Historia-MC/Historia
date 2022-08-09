@@ -38,6 +38,14 @@ public class SpawnKillTimer {
                             //Remove the killer from our list of killers
                             user.getValue().getKillers().remove(killer.getKey());
 
+                            //If the user no longer has any killers
+                            if (user.getValue().getKillers().size() == 0) {
+
+                                //Remove the user
+                                SpawnKillHandler.users.remove(user.getKey());
+
+                            }
+
                         }
 
                     }
