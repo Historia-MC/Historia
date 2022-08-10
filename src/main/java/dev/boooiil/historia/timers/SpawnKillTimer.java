@@ -17,7 +17,7 @@ public class SpawnKillTimer {
      * killing.
      */
 
-    public void timer() {
+    public static void timer() {
 
         // This timer will run every second.
         new Timer().scheduleAtFixedRate(new TimerTask() {
