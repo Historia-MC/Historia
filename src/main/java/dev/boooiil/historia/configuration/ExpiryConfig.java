@@ -50,7 +50,7 @@ public class ExpiryConfig {
 
         for (String effect : configuration.getStringList("effects")) {
  
-            Logging.infoToServer(effect);
+            Logging.infoToConsole(effect);
 
         }
 

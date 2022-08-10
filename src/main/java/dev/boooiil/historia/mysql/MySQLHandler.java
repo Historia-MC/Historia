@@ -58,7 +58,7 @@ public class MySQLHandler {
                 statement.execute(createTable);
 
             } catch (SQLException e) {
-                Logging.infoToServer("Failed to load MySQL.");
+                Logging.infoToConsole("Failed to load MySQL.");
                 e.printStackTrace();
                 Main.disable(Main.plugin());
             }
@@ -103,12 +103,12 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
-            Logging.infoToServer("Created user: " + playerName + " in the Database.");
+            Logging.infoToConsole("Created user: " + playerName + " in the Database.");
 
         } catch (SQLException e) {
             e.printStackTrace();
 
-            Logging.errorToServer("FAILED TO CREATE USER.");
+            Logging.errorToConsole("FAILED TO CREATE USER.");
         }
 
     }
@@ -389,7 +389,7 @@ public class MySQLHandler {
 
         if (DATABASE == null) {
 
-            Logging.errorToServer("VALUE IN MySQL.database IS NULL.");
+            Logging.errorToConsole("VALUE IN MySQL.database IS NULL.");
 
             caught++;
 
@@ -397,7 +397,7 @@ public class MySQLHandler {
 
         if (IP == null) {
 
-            Logging.errorToServer("VALUE IN MySQL.ip IS NULL.");
+            Logging.errorToConsole("VALUE IN MySQL.ip IS NULL.");
 
             caught++;
 
@@ -405,7 +405,7 @@ public class MySQLHandler {
 
         if (USERNAME == null) {
 
-            Logging.errorToServer("VALUE IN MySQL.username IS NULL.");
+            Logging.errorToConsole("VALUE IN MySQL.username IS NULL.");
 
             caught++;
 
@@ -413,7 +413,7 @@ public class MySQLHandler {
 
         if (PASSWORD == null) {
 
-            Logging.errorToServer("VALUE IN MySQL.password IS NULL.");
+            Logging.errorToConsole("VALUE IN MySQL.password IS NULL.");
 
             caught++;
 
@@ -421,7 +421,7 @@ public class MySQLHandler {
 
         if (PORT == null) {
 
-            Logging.errorToServer("VALUE IN MySQL.port IS NULL.");
+            Logging.errorToConsole("VALUE IN MySQL.port IS NULL.");
 
             caught++;
 

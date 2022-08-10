@@ -34,7 +34,7 @@ public class Construct {
             List<String> lore) {
 
         // LOGGING TO BE REMOVED AFTER PUBLISH
-        Logging.infoToServer("material: " + material.toString() + " amount: " + amount + " display-name: " + displayName
+        Logging.infoToConsole("material: " + material.toString() + " amount: " + amount + " display-name: " + displayName
                 + " loc-name: "
                 + localizedName + " lore: " + lore);
 
