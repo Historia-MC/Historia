@@ -13,6 +13,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.mysql.MySQLHandler;
+import dev.boooiil.historia.timers.SpawnKillTimer;
 
 public class Main extends JavaPlugin {
 
@@ -57,6 +58,8 @@ public class Main extends JavaPlugin {
         getLogger().info("Loading MySQL...");
 
         MySQLHandler.createTable();
+
+        SpawnKillTimer.timer();
 
     }
 
