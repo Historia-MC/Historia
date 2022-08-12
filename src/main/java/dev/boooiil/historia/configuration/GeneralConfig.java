@@ -11,21 +11,23 @@ public class GeneralConfig {
     /**
      * MySQL Configuration Class for grabbing MySQL credentials
      */
-    public static class MySQL {
+    public class MySQL {
 
-        public static String username;
-        public static String password;
-        public static String database;
-        public static String ip;
-        public static String port;
+        public String username;
+        public String password;
+        public String database;
+        public String ip;
+        public String port;
 
-        MySQL() {
+        public MySQL() {
 
-            MySQL.username = configuration.getString("MySQL.user");
-            MySQL.password = configuration.getString("MySQL.password");
-            MySQL.database = configuration.getString("MySQL.database");
-            MySQL.ip = configuration.getString("MySQL.ip");
-            MySQL.port = configuration.getString("MySQL.port");
+            System.out.print(configuration.toString());
+
+            this.username = configuration.getString("MySQL.user");
+            this.password = configuration.getString("MySQL.password");
+            this.database = configuration.getString("MySQL.database");
+            this.ip = configuration.getString("MySQL.ip");
+            this.port = configuration.getString("MySQL.port");
 
         }
 
