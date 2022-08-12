@@ -3,7 +3,7 @@ package dev.boooiil.historia.util;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.IllegalClassException;
+import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.Main;
 
@@ -13,7 +13,7 @@ public class Logging {
     private static final String announcePrefix = "§7[§9Announcement§7] ";
     private static final Logger logger = Main.plugin().getLogger();
     
-    private Logging() { throw new IllegalClassException( "Static utility class."); }
+    private Logging() { throw new IllegalAccessError( "Static utility class."); }
 
     /**
      * Send an info message to console.
@@ -42,7 +42,9 @@ public class Logging {
      */
     public static void infoToPlayer(String message, UUID uuid) {
 
-        Main.server().getPlayer(uuid).sendMessage(messagePrefix + "§7" + message);
+        Player player = Main.server().getPlayer(uuid);
+
+        if (player.isOnline()) player.sendMessage(messagePrefix + "§7" + message);
 
     }
 
@@ -73,7 +75,9 @@ public class Logging {
      */
     public static void warnToPlayer(String message, UUID uuid) {
 
-        Main.server().getPlayer(uuid).sendMessage(messagePrefix + "§6" + message);
+        Player player = Main.server().getPlayer(uuid);
+
+        if (player.isOnline()) player.sendMessage(messagePrefix + "§6" + message);
 
     }
 
@@ -104,7 +108,9 @@ public class Logging {
      */
     public static void errorToPlayer(String message, UUID uuid) {
 
-        Main.server().getPlayer(uuid).sendMessage(messagePrefix + "§c" + message);
+        Player player = Main.server().getPlayer(uuid);
+
+        if (player.isOnline()) player.sendMessage(messagePrefix + "§c" + message);
 
     }
 
