@@ -27,6 +27,8 @@ public class FileGetter {
 
     public static FileConfiguration get(String check) {
 
+        Logging.infoToConsole("Obtained file from external directory: " + check);
+
         FileConfiguration config;
 
         if (find(Main.plugin().getDataFolder().listFiles(), check)) {
@@ -37,6 +39,8 @@ public class FileGetter {
         }
 
         else {
+
+            Logging.errorToConsole("Obtained file from internal directory: " + check);
 
             InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream(check);
 
