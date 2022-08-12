@@ -1,14 +1,21 @@
 package dev.boooiil.historia.timers;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import dev.boooiil.historia.classes.KillerUser;
 import dev.boooiil.historia.classes.TimedUser;
 import dev.boooiil.historia.handlers.SpawnKillHandler;
+import dev.boooiil.historia.util.Logging;
 
 public class SpawnKillTimer {
 
@@ -24,37 +31,74 @@ public class SpawnKillTimer {
             @Override
             public void run() {
 
+                if (SpawnKillHandler.users.size() == 0) return;
+
+                HashMap<UUID, List<UUID>> deletableUsers = new HashMap<UUID, List<UUID>>();
+                List<UUID> deletableKillers = new ArrayList<UUID>();
+
+                Logging.infoToConsole("Size: " + String.valueOf(SpawnKillHandler.users.size()));
+
                 //Iterate over users that have been killed
                 for (Map.Entry<UUID, TimedUser> user : SpawnKillHandler.users.entrySet()) {
 
                     //Iterate over the killers of this user
+                    //This is broken because we delete the next value in the map
                     for (Map.Entry<UUID, KillerUser> killer : user.getValue().getKillers().entrySet()) {
 
                         KillerUser killerUser = killer.getValue();
 
+                        Logging.infoToConsole("Victim UUID: " + user.getKey().toString());
+                        Logging.infoToConsole("Killer UUID: " + killer.getKey().toString());
+                        Logging.infoToConsole("Kills: " + killer.getValue().getKills());
+                        Logging.infoToConsole("Hit Back: " + killer.getValue().getHitBack());
+                        Logging.infoToConsole("Time: " + String.valueOf(new Date().getTime() - killerUser.getLastKill()));
+
                         //If the time between the last kill has been over 30 seconds
                         if (new Date().getTime() - killerUser.getLastKill() > 30000) {
 
-                            //Remove the killer from our list of killers
-                            user.getValue().getKillers().remove(killer.getKey());
-
-                            //If the user no longer has any killers
-                            if (user.getValue().getKillers().size() == 0) {
-
-                                //Remove the user
-                                SpawnKillHandler.users.remove(user.getKey());
-
-                            }
+                            deletableKillers.add(killer.getKey());
+                            deletableUsers.put(user.getKey(), deletableKillers);
 
                         }
 
                     }
 
                 }
+
+                delete(deletableUsers);
                 // Do logic here
 
             }
         }, 0, 1000);
+
+    }
+
+    public static void delete(HashMap<UUID, List<UUID>> deletableKillers) {
+
+        // Remove the killer from our list of killers
+
+        for (Map.Entry<UUID, List<UUID>> user : deletableKillers.entrySet()) {
+
+            Player player = Bukkit.getPlayer(user.getKey());
+            TimedUser timedUser = SpawnKillHandler.users.get(user.getKey());
+
+            for (UUID killer : user.getValue()) {
+
+                Logging.infoToPlayer("Kill protection has expired for " + player.getName() + ".", killer);
+
+                timedUser.getKillers().remove(killer);
+
+            }
+
+            // If the user no longer has any killers
+            if (timedUser.getKillers().size() == 0) {
+
+                // Remove the user
+                SpawnKillHandler.users.remove(user.getKey());
+
+            }
+
+        }
 
     }
 
