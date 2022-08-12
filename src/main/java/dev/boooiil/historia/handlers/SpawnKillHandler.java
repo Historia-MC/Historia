@@ -7,9 +7,19 @@ import dev.boooiil.historia.classes.KillerUser;
 import dev.boooiil.historia.classes.TimedUser;
 
 public class SpawnKillHandler {
-    
-    public static HashMap<UUID, TimedUser> users;
 
+    /**
+     * Realistically, we might need to change this either into a global death limit or town-based death limit.
+     * Currently, we will have it by just player since I do not expect people to just rotate kills.
+     */
+    
+    public static HashMap<UUID, TimedUser> users = new HashMap<UUID, TimedUser>();
+
+    /**
+     * Add a kill to a user, will create a new user if one does not exist already.
+     * @param player - User that was killed.
+     * @param killer - User that killed.
+     */
     public static void addKill(UUID player, UUID killer) {
 
         if (users.containsKey(player)) {
