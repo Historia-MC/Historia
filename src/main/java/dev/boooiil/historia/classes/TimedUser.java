@@ -7,7 +7,7 @@ public class TimedUser {
     
     private int totalDeaths = 0;
 
-    private HashMap<UUID, KillerUser> killers;
+    private HashMap<UUID, KillerUser> killers = new HashMap<UUID, KillerUser>();
 
 
     public void addKillToKiller(UUID killer) {
