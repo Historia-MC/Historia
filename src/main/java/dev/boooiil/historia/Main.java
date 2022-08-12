@@ -12,6 +12,8 @@ import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev.boooiil.historia.events.PlayerHit;
+import dev.boooiil.historia.events.PlayerKilled;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.timers.SpawnKillTimer;
 
@@ -56,6 +58,9 @@ public class Main extends JavaPlugin {
         getLogger().info("Plugin enabled.");
 
         getLogger().info("Loading MySQL...");
+        
+        this.getServer().getPluginManager().registerEvents(new PlayerKilled(), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerHit(), this);
 
         MySQLHandler.createTable();
 
@@ -88,13 +93,17 @@ public class Main extends JavaPlugin {
 
     private boolean isMissingConfig() {
 
-        return this.getDataFolder().listFiles().length != 7;
+        File[] files = this.getDataFolder().listFiles();
+
+        if (files != null) return files.length != 7;
+        else return true;
 
     }
 
     private List<String> missingConfig() {
 
         List<String> check = new ArrayList<>();
+        File[] files = this.getDataFolder().listFiles();
 
         check.add("armor.yml");
         check.add("classes.yml");
@@ -103,7 +112,9 @@ public class Main extends JavaPlugin {
         check.add("ores.yml");
         check.add("weapons.yml");
 
-        for (File file : this.getDataFolder().listFiles()) {
+        if (files == null) return check;
+
+        for (File file : files) {
 
             if (check.contains(file.getName()))
                 check.remove(file.getName());
