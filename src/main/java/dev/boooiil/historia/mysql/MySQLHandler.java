@@ -13,17 +13,22 @@ import java.util.Map;
 import java.util.UUID;
 
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.GeneralConfig;
 import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 import dev.boooiil.historia.util.Logging;
 
 public class MySQLHandler {
 
     // Assign variables that we will use to connect to the database.
-    private static final String DATABASE = MySQL.database;
-    private static final String USERNAME = MySQL.username;
-    private static final String PASSWORD = MySQL.password;
-    private static final String IP = MySQL.ip;
-    private static final String PORT = MySQL.port;
+    private static GeneralConfig generalConfig = new GeneralConfig();
+    
+    private static final MySQL MYSQLCONFIG = generalConfig.new MySQL();
+
+    private static final String DATABASE = MYSQLCONFIG.database;
+    private static final String USERNAME = MYSQLCONFIG.username;
+    private static final String PASSWORD = MYSQLCONFIG.password;
+    private static final String IP = MYSQLCONFIG.ip;
+    private static final String PORT = MYSQLCONFIG.port;
 
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
