@@ -47,12 +47,6 @@ public class SpawnKillTimer {
 
                         KillerUser killerUser = killer.getValue();
 
-                        Logging.infoToConsole("Victim UUID: " + user.getKey().toString());
-                        Logging.infoToConsole("Killer UUID: " + killer.getKey().toString());
-                        Logging.infoToConsole("Kills: " + killer.getValue().getKills());
-                        Logging.infoToConsole("Hit Back: " + killer.getValue().getHitBack());
-                        Logging.infoToConsole("Time: " + String.valueOf(new Date().getTime() - killerUser.getLastKill()));
-
                         //If the time between the last kill has been over 30 seconds
                         if (new Date().getTime() - killerUser.getLastKill() > 30000) {
 
