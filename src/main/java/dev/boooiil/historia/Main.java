@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +17,7 @@ import dev.boooiil.historia.events.PlayerHit;
 import dev.boooiil.historia.events.PlayerKilled;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.timers.SpawnKillTimer;
+import dev.boooiil.historia.util.Logging;
 
 public class Main extends JavaPlugin {
 
@@ -36,35 +38,37 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        getLogger().info("Plugin has loaded.");
+
+        Logging.infoToConsole("Plugin has loaded.");
+
     }
 
     @Override
     public void onEnable() {
 
-        getLogger().info("Checking configs...");
+        Logging.infoToConsole("Checking configs...");
 
         if (isMissingConfig()) {
 
             saveConfig(missingConfig());
 
-            getLogger().info("Config files saved.");
+            Logging.infoToConsole("Missing configuration files have been saved.");
 
-        } else getLogger().info("All config files exist.");
+        } else Logging.infoToConsole("All configuration files exist.");
 
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
-
-        getLogger().info("Plugin enabled.");
-
-        getLogger().info("Loading MySQL...");
         
-        this.getServer().getPluginManager().registerEvents(new PlayerKilled(), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerHit(), this);
+        registerEvent(new PlayerKilled());
+        registerEvent(new PlayerHit());
 
+        Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();
+        Logging.infoToConsole("MySQL Loaded.");
 
         SpawnKillTimer.timer();
+
+        Logging.infoToConsole("Plugin Enabled.");
 
     }
 
@@ -88,6 +92,12 @@ public class Main extends JavaPlugin {
     public static void disable(Plugin plugin) {
 
         plugin.getServer().getPluginManager().disablePlugin(plugin);
+
+    }
+
+    private void registerEvent(Listener event) {
+
+        this.getServer().getPluginManager().registerEvents(event, this);
 
     }
 
