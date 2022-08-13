@@ -36,8 +36,6 @@ public class SpawnKillTimer {
                 HashMap<UUID, List<UUID>> deletableUsers = new HashMap<UUID, List<UUID>>();
                 List<UUID> deletableKillers = new ArrayList<UUID>();
 
-                Logging.infoToConsole("Size: " + String.valueOf(SpawnKillHandler.users.size()));
-
                 //Iterate over users that have been killed
                 for (Map.Entry<UUID, TimedUser> user : SpawnKillHandler.users.entrySet()) {
 
@@ -77,6 +75,15 @@ public class SpawnKillTimer {
             TimedUser timedUser = SpawnKillHandler.users.get(user.getKey());
 
             for (UUID killer : user.getValue()) {
+
+                if (timedUser.getKillers().get(killer).getKills() >= 3) {
+
+                    Player killerPlayer = Bukkit.getPlayer(killer);
+
+                    Logging.warnToPlayer(killerPlayer.getName() + " can now kill you without punishment.", user.getKey());
+                    Logging.debugToConsole(player.getName() + " can now be killed by " + killerPlayer.getName() + ".");
+
+                }
 
                 Logging.infoToPlayer("Kill protection has expired for " + player.getName() + ".", killer);
 
