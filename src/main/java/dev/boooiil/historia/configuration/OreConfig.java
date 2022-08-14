@@ -31,13 +31,14 @@ public class OreConfig {
      * 
      *
      */
-    public class Ore {
+    public static class Ore {
 
         private String type;
         private String localizedName;
         private String displayName;
         private List<String> lore;
         private int amount;
+        private float chance;
 
         
 

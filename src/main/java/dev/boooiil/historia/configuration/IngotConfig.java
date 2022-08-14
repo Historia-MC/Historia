@@ -29,7 +29,7 @@ public class IngotConfig {
      * }
      * </pre>
      */
-    public class Ingot {
+    public static class Ingot {
 
         private String type;
         private String localizedName;

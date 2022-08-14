@@ -30,7 +30,7 @@ public class ArmorConfig {
      * </pre>
      *
      */
-    public class Armor {
+    public static class Armor {
 
         private String type;
         private String localizedName;

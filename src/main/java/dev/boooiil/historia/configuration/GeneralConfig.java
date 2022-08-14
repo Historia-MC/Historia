@@ -11,7 +11,7 @@ public class GeneralConfig {
     /**
      * MySQL Configuration Class for grabbing MySQL credentials
      */
-    public class MySQL {
+    public static class MySQL {
 
         public String username;
         public String password;
