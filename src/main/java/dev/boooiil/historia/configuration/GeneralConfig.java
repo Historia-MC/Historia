@@ -8,6 +8,8 @@ public class GeneralConfig {
 
     private static FileConfiguration configuration = FileGetter.get("config.yml");
 
+    public static boolean debug = configuration.getBoolean("debug");
+
     /**
      * MySQL Configuration Class for grabbing MySQL credentials
      */
