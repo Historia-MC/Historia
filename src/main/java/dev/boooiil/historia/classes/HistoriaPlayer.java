@@ -3,6 +3,9 @@ package dev.boooiil.historia.classes;
 import java.util.Map;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import dev.boooiil.historia.configuration.ClassConfig;
 import dev.boooiil.historia.mysql.MySQLHandler;
 
@@ -22,6 +25,8 @@ public class HistoriaPlayer {
     public float experienceMax;
 
     public ClassConfig classConfig;
+
+    public Player player;
     
     public HistoriaPlayer(UUID uuid) {
 
@@ -46,6 +51,8 @@ public class HistoriaPlayer {
         this.modifiedHealth = 0;
 
         //TODO: Calculate experience gain
+
+        this.player = Bukkit.getPlayer(uuid);
 
     }
 
