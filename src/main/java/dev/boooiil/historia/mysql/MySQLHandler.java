@@ -20,9 +20,9 @@ import dev.boooiil.historia.util.Logging;
 public class MySQLHandler {
 
     // Assign variables that we will use to connect to the database.
-    private static GeneralConfig generalConfig = new GeneralConfig();
+    //private static GeneralConfig generalConfig = new GeneralConfig();
     
-    private static final MySQL MYSQLCONFIG = generalConfig.new MySQL();
+    private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;
