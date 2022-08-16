@@ -309,4 +309,57 @@ public class TownyHandler {
             return "None";
 
     }
+
+    /**
+     * Send a message to all town members.
+     * 
+     * @param uuid    - UUID of the player.
+     * @param message - Message to send.
+     */
+    public static void sendToTown(UUID uuid, String message) {
+
+        Town town = getTown(uuid);
+        String prefix = "[" + town.getName() + "] ";
+
+        if (town != null) {
+
+            town.getResidents().forEach(resident -> {
+
+                if (resident.isOnline()) {
+
+                    resident.getPlayer().sendMessage(prefix + message);
+
+                }
+
+            });
+
+        }
+
+    }
+
+    /**
+     * Send a message to all nation members.
+     * 
+     * @param uuid    - UUID of the player.
+     * @param message - Message to send.
+     */
+    public static void sendToNation(UUID uuid, String message) {
+
+        Nation nation = getNation(uuid);
+        String prefix = "[" + nation.getName() + "] ";
+
+        if (nation != null) {
+
+            nation.getResidents().forEach(resident -> {
+
+                if (resident.isOnline()) {
+
+                    resident.getPlayer().sendMessage(prefix + message);
+
+                }
+
+            });
+
+        }
+    }
 }
