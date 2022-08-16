@@ -52,7 +52,7 @@ public class TownyHandler {
      * @return Resident object.
      * 
      * @see <a href=
-     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Resident</a>
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.98.3.4/javadoc/com/palmergames/bukkit/towny/object/Resident.html">Resident</a>
      */
 
     public static Resident getResident(UUID uuid) {
@@ -89,7 +89,7 @@ public class TownyHandler {
      * @return Town object.
      * 
      * @see <a href=
-     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Town</a>
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.98.3.4/javadoc/com/palmergames/bukkit/towny/object/Town.html">Town</a>
      */
 
     public static Town getTown(UUID uuid) {
@@ -161,7 +161,7 @@ public class TownyHandler {
      * @return Town block object.
      * 
      * @see <a href=
-     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">TownBlock</a>
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.98.3.4/javadoc/com/palmergames/bukkit/towny/object/TownBlock.html">TownBlock</a>
      */
 
     public static TownBlock getHomeBlock(UUID uuid) {
@@ -266,7 +266,7 @@ public class TownyHandler {
      * @return Nation object.
      * 
      * @see <a href=
-     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.96.4.0/javadoc/">Nation</a>
+     *      "https://javadoc.jitpack.io/com/github/TownyAdvanced/Towny/0.98.3.4/javadoc/com/palmergames/bukkit/towny/object/Nation.html">Nation</a>
      */
 
     public static Nation getNation(UUID uuid) {
