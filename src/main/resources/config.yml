@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 MySQL:
     user:
@@ -6,3 +6,5 @@ MySQL:
     database:
     ip:
     port:
+
+debug: false
