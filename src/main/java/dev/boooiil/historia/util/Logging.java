@@ -6,11 +6,14 @@ import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.GeneralConfig;
 
 public class Logging {
 
     private static final String messagePrefix = "§7[§9Historia§7] ";
     private static final String announcePrefix = "§7[§9Announcement§7] ";
+    private static final String debugPrefix = "§7[§cDebug§7] ";
+
     private static final Logger logger = Main.plugin().getLogger();
     
     private Logging() { throw new IllegalAccessError( "Static utility class."); }
@@ -113,10 +116,18 @@ public class Logging {
         if (player.isOnline()) player.sendMessage(messagePrefix + "§c" + message);
 
     }
-
+    
+    /**
+     * Send a warning message to server.
+     * @param message The message to be sent.
+     */
     public static void debugToConsole(String message) {
 
-        //IF DEBUG ENABLED
+        if (GeneralConfig.debug) {
+
+            infoToConsole(messagePrefix + debugPrefix + message);
+
+        }
 
     }
 
