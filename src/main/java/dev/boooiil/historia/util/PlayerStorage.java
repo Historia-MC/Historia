@@ -7,7 +7,7 @@ import dev.boooiil.historia.classes.HistoriaPlayer;
 
 public class PlayerStorage {
 
-    public static HashMap<UUID, HistoriaPlayer> players;
+    public static HashMap<UUID, HistoriaPlayer> players = new HashMap<UUID, HistoriaPlayer>();
 
     /**
      * Add a player to our storage.
