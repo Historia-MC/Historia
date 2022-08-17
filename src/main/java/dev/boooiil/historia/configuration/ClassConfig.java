@@ -8,7 +8,7 @@ import dev.boooiil.historia.util.FileGetter;
 
 public class ClassConfig {
 
-    private static FileConfiguration configuration = FileGetter.get("class.yml");
+    private static FileConfiguration configuration = FileGetter.get("classes.yml");
 
     //These are here for testing purposes.
     //Static reference will use less memory than creating a new instance in each HistoriaPlayer
