@@ -302,12 +302,12 @@ public class MySQLHandler {
             while (results.next()) {
 
                 map.put("UUID", results.getString("UUID"));
-                map.put("Username", results.getString("Username"));
-                map.put("Class", results.getString("Class"));
-                map.put("Level", results.getString("Level"));
-                map.put("Experience", results.getString("Experience"));
-                map.put("Login", results.getString("Login"));
-                map.put("Logout", results.getString("Logout"));
+                map.put("username", results.getString("Username"));
+                map.put("class", results.getString("Class"));
+                map.put("level", results.getString("Level"));
+                map.put("experience", results.getString("Experience"));
+                map.put("login", results.getString("Login"));
+                map.put("logout", results.getString("Logout"));
 
             }
 
