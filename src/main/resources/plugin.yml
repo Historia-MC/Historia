@@ -8,8 +8,4 @@ version: 0.6
 depend: [WorldGuard, Towny, Vault]
 
 commands:
-  ignite:
-  item:
-  debugitems:
-  stats:
-  class:
+  checkPlayers:
