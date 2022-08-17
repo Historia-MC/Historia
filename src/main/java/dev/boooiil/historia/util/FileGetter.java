@@ -27,11 +27,11 @@ public class FileGetter {
 
     public static FileConfiguration get(String check) {
 
-        Logging.infoToConsole("Obtained file from external directory: " + check);
-
         FileConfiguration config;
 
         if (find(Main.plugin().getDataFolder().listFiles(), check)) {
+
+            Logging.infoToConsole("Obtained file from external directory: " + check);
 
             File file = new File(Main.plugin().getDataFolder().getPath(), check);
 
