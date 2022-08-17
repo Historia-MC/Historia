@@ -9,12 +9,16 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.events.PlayerHit;
+import dev.boooiil.historia.events.PlayerJoin;
 import dev.boooiil.historia.events.PlayerKilled;
+import dev.boooiil.historia.events.PlayerLeave;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.timers.SpawnKillTimer;
 import dev.boooiil.historia.util.Logging;
@@ -61,6 +65,10 @@ public class Main extends JavaPlugin {
         
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
+        registerEvent(new PlayerJoin());
+        registerEvent(new PlayerLeave());
+
+        registerCommand("CheckPlayers", new CommandPlayers());
 
         Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();
@@ -98,6 +106,12 @@ public class Main extends JavaPlugin {
     private void registerEvent(Listener event) {
 
         this.getServer().getPluginManager().registerEvents(event, this);
+
+    }
+
+    private void registerCommand(String commandName, CommandExecutor command) {
+
+        this.getCommand(commandName).setExecutor(command);
 
     }
 
