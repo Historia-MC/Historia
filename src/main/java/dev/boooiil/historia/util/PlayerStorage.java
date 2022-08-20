@@ -4,33 +4,60 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import dev.boooiil.historia.classes.HistoriaPlayer;
+import dev.boooiil.historia.mysql.MySQLHandler;
 
 public class PlayerStorage {
 
     public static HashMap<UUID, HistoriaPlayer> players = new HashMap<UUID, HistoriaPlayer>();
+    public static HashMap<String, UUID> usernameMap = new HashMap<String, UUID>();
 
     /**
      * Add a player to our storage.
      * 
-     * @param uuid - UUID of the player.
+     * @param uuid           - UUID of the player.
      * @param historiaPlayer - {@link HistoriaPlayer} - Player object.
      */
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
 
         players.put(uuid, historiaPlayer);
+        usernameMap.put(historiaPlayer.username, uuid);
 
     }
 
     /**
      * Get a player from our stored player list.
      * 
-     * @param uuid - UUID of the player.
+     * @param uuid           - UUID of the player.
+     * @param useSQLFallback - Fallback to SQL if the user is not currently on.
      * @return {@link HistoriaPlayer} - The player you are requesting.
      */
-    public static HistoriaPlayer getPlayer(UUID uuid) {
+    public static HistoriaPlayer getPlayer(UUID uuid, boolean useSQLFallback) {
 
         if (players.containsKey(uuid))
             return players.get(uuid);
+
+        else if (useSQLFallback)
+            return new HistoriaPlayer(uuid);
+
+        else
+            return null;
+
+    }
+
+    /**
+     * Get a player from our stored player list.
+     * 
+     * @param username       - Username of the player.
+     * @param useSQLFallback - Fallback to SQL if the user is not currently on.
+     * @return {@link HistoriaPlayer} - The player you are requesting.
+     */
+    public static HistoriaPlayer getPlayer(String username, boolean useSQLFallback) {
+
+        if (usernameMap.containsKey(username))
+            return players.get(usernameMap.get(username));
+
+        else if (useSQLFallback)
+            return new HistoriaPlayer(MySQLHandler.getUUID(username));
 
         else
             return null;
