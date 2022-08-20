@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.PlayerHit;
 import dev.boooiil.historia.events.PlayerJoin;
 import dev.boooiil.historia.events.PlayerKilled;
@@ -75,6 +76,7 @@ public class Main extends JavaPlugin {
         Logging.infoToConsole("MySQL Loaded.");
 
         SpawnKillTimer.timer();
+        HistoriaDiscord.init();
 
         Logging.infoToConsole("Plugin Enabled.");
 
@@ -82,6 +84,9 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+
+        HistoriaDiscord.destroy();
+
         getLogger().info("Plugin disabled.");
     }
 
