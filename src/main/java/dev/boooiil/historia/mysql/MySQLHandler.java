@@ -370,13 +370,19 @@ public class MySQLHandler {
     public static UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
+        
+        Logging.debugToConsole("Query String: " + string);
 
         try {
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
 
+            Logging.debugToConsole("SQL Result: " + results);
+
             results.next();
+
+            Logging.debugToConsole("Next SQL Result: " + results);
 
             return UUID.fromString(results.getString(1));
 
