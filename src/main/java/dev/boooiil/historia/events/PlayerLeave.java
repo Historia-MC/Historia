@@ -12,7 +12,7 @@ public class PlayerLeave implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerKickEvent event) {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
         historiaPlayer.saveCharacter();
         
