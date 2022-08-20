@@ -12,6 +12,7 @@ import dev.boooiil.historia.mysql.MySQLHandler;
 public class HistoriaPlayer {
 
     public UUID uuid;
+    public String username;
 
     public String className;
 
@@ -33,7 +34,12 @@ public class HistoriaPlayer {
         //Base health and multiplier will get determined when we finish the class config.
         //Experience max will just be experience * multiplier.
 
+        Player player = Bukkit.getPlayer(uuid);
+
+        if (player == null) player = (Player) Bukkit.getOfflinePlayer(uuid);
+
         this.uuid = uuid;
+        this.username = player.getName();
 
         //Get an object where the key is a string and the value is also a string.
         //IE: { "key": "value" }, where "key" can be accessed using the .get() method.
