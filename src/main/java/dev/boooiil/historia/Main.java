@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.events.PlayerBreakBlock;
 import dev.boooiil.historia.events.PlayerHit;
 import dev.boooiil.historia.events.PlayerJoin;
 import dev.boooiil.historia.events.PlayerKilled;
@@ -69,6 +70,7 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
+        registerEvent(new PlayerBreakBlock());
 
         registerCommand("CheckPlayers", new CommandPlayers());
 
