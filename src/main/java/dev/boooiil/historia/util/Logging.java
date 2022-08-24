@@ -19,12 +19,20 @@ public class Logging {
     private Logging() { throw new IllegalAccessError( "Static utility class."); }
 
     /**
-     * Send an info message to console.
-     * @param message The message to be sent.
+     * Send an info message to the console.
+     * @param messages The message to be sent.
      */
-    public static void infoToConsole(String message) {
+    public static void infoToConsole(String... messages) {
+       
+        String built = "";
 
-        logger.info(message);
+        for (String message : messages) {
+
+            built += message + " ";
+
+        }
+
+        logger.info(built);
 
     }
 
@@ -53,11 +61,19 @@ public class Logging {
 
     /**
      * Send a warning message to the console.
-     * @param message The message to be sent.
+     * @param messages The message to be sent.
      */
-    public static void warnToConsole(String message) {
+    public static void warnToConsole(String... messages) {
+        
+        String built = "";
 
-        logger.warning(message);
+        for (String message : messages) {
+
+            built += message + " ";
+
+        }
+
+        logger.warning(built);
 
     }
 
@@ -86,11 +102,19 @@ public class Logging {
 
     /**
      * Send an error message to the console.
-     * @param message The message to be sent.
+     * @param messages The message to be sent.
      */
-    public static void errorToConsole(String message) {
+    public static void errorToConsole(String... messages) {
 
-        logger.severe(message);
+        String built = "";
+
+        for (String message : messages) {
+
+            built += message + " ";
+
+        }
+
+        logger.severe(built);
 
     }
 
