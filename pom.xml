@@ -58,6 +58,7 @@
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
       <version>0.98.3.0</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -65,6 +66,12 @@
       <artifactId>VaultAPI</artifactId>
       <version>1.7.1</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.discord4j</groupId>
+      <artifactId>discord4j-core</artifactId>
+      <version>3.2.2</version>
     </dependency>
 
   </dependencies>
@@ -84,6 +91,36 @@
         </configuration>
 
       </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <configuration>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+              <mainClass>java.dev.boooiil.historia.Main</mainClass> <!-- You have to replace this with a path to your main class like me.myname.mybotproject.Main -->
+            </transformer>
+          </transformers>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
 
     <resources>
