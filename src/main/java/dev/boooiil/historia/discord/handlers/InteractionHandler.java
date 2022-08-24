@@ -23,7 +23,9 @@ public class InteractionHandler {
 
             if (event.getCommandName().equals("player")) {
 
-                return GetPlayer.run(event);
+                GetPlayer getPlayer = new GetPlayer();
+
+                return getPlayer.run(event);
 
             }
 
@@ -48,24 +50,20 @@ public class InteractionHandler {
 
         Flux<Guild> fluxGuilds = CLIENT.getGuilds();
 
-        fluxGuilds.collectList().flatMap(guilds -> {
+        fluxGuilds.collectList().block().forEach(guild -> {
 
-            for (Guild guild : guilds) {
+            for (ApplicationCommandRequest interaction : getInteractions()) {
 
-                for (ApplicationCommandRequest interaction : getInteractions()) {
+                Logging.infoToConsole("Creating interaction (" + interaction.name() + ") in Guild: " + guild.getName()
+                        + "(" + guild.getId() + ")");
 
-                    Logging.infoToConsole("Creating interaction (" + interaction.name() + ") in Guild: " + guild.getName() + "(" + guild.getId() + ")");
-
-                    CLIENT.getRestClient().getApplicationService()
-                            .createGuildApplicationCommand(CLIENT.getRestClient().getApplicationId().block(), guild.getId().asLong(),
-                                    interaction)
-                            .subscribe();
-
-                }
+                CLIENT.getRestClient().getApplicationService()
+                        .createGuildApplicationCommand(CLIENT.getRestClient().getApplicationId().block(),
+                                guild.getId().asLong(),
+                                interaction)
+                        .subscribe();
 
             }
-
-            return null;
 
         });
 
@@ -75,12 +73,13 @@ public class InteractionHandler {
 
         for (ApplicationCommandRequest interaction : getInteractions()) {
 
-            Logging.infoToConsole("Creating single interaction (" + interaction.name() + ") in Guild (" + guildID + ")");
+            Logging.infoToConsole(
+                    "Creating single interaction (" + interaction.name() + ") in Guild (" + guildID + ")");
 
             CLIENT.getRestClient().getApplicationService()
-                            .createGuildApplicationCommand(CLIENT.getRestClient().getApplicationId().block(), guildID,
-                                    interaction)
-                            .subscribe();
+                    .createGuildApplicationCommand(CLIENT.getRestClient().getApplicationId().block(), guildID,
+                            interaction)
+                    .subscribe();
 
         }
 
