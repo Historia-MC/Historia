@@ -4,10 +4,17 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+
 import dev.boooiil.historia.configuration.ClassConfig;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
+import dev.boooiil.historia.util.Logging;
 
 public class HistoriaPlayer {
 
@@ -20,6 +27,10 @@ public class HistoriaPlayer {
 
     public int baseHealth;
     public int modifiedHealth;
+    public int playtime;
+
+    public long lastLogin;
+    public long lastLogout;
 
     public float baseExperience;
     public float experienceTotal;
@@ -27,19 +38,22 @@ public class HistoriaPlayer {
 
     public ClassConfig classConfig;
 
-    public Player player;
+    public Player onlinePlayer;
+    public OfflinePlayer offlinePlayer;
+
+    public Resident resident;
+    public Town town;
+    public Nation nation;
     
     public HistoriaPlayer(UUID uuid) {
+
+        //TODO: GET TOWN AND NATION VALUES
+        //TODO: SET PLAYTIME IN HISTORIA TABLE
 
         //Base health and multiplier will get determined when we finish the class config.
         //Experience max will just be experience * multiplier.
 
-        Player player = Bukkit.getPlayer(uuid);
-
-        if (player == null) player = (Player) Bukkit.getOfflinePlayer(uuid);
-
         this.uuid = uuid;
-        this.username = player.getName();
 
         //Get an object where the key is a string and the value is also a string.
         //IE: { "key": "value" }, where "key" can be accessed using the .get() method.
@@ -53,12 +67,33 @@ public class HistoriaPlayer {
 
         this.baseHealth = this.classConfig.baseHealth;
 
+        this.lastLogin = Long.parseLong(user.get("login"));
+        this.lastLogout = Long.parseLong(user.get("logout"));
+
         //Set this explicitly in the config
         this.modifiedHealth = 0;
 
         //TODO: Calculate experience gain
 
-        this.player = Bukkit.getPlayer(uuid);
+        this.onlinePlayer = Bukkit.getPlayer(uuid);
+        this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+        
+        this.username = getUsername();
+        this.playtime = 0;
+
+        this.resident = TownyHandler.getResident(uuid);
+        this.town = TownyHandler.getTown(uuid);
+        this.nation = TownyHandler.getNation(uuid);
+
+    }
+
+    public String getUsername() {
+
+        Logging.infoToConsole(this.onlinePlayer + " " + this.offlinePlayer);
+
+        if (this.onlinePlayer != null) return this.onlinePlayer.getName();
+        else if (this.offlinePlayer.getName() != null) return this.offlinePlayer.getName();
+        else return "Invalid Username";
 
     }
 
@@ -79,6 +114,27 @@ public class HistoriaPlayer {
         //TODO: Create method for adding experience
 
         MySQLHandler.setClassLevel(uuid, level);
+
+    }
+
+    public String toString() {
+
+        String string = "";
+
+        string += "<(" + this.uuid + ") UN:";
+        string += this.username + " CN:";
+        string += this.className + " LV:";
+        string += this.level + " BH:";
+        string += this.baseHealth + " MH:";
+        string += this.modifiedHealth + " PT:";
+        string += this.playtime + " LI:";
+        string += this.lastLogin + " LO:";
+        string += this.lastLogout + " BE:";
+        string += this.baseExperience + " ET:";
+        string += this.experienceTotal + " EM:";
+        string += this.experienceMax + ">";
+
+        return string;
 
     }
 }
