@@ -32,7 +32,7 @@ public class MySQLHandler {
 
     // Create a URL that we will use to connect to the MySQL database.
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
-            + "?allowPublicKeyRetrieval=true&useSSL=false";
+            + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true";
 
     private static Connection connection;
 
@@ -369,6 +369,8 @@ public class MySQLHandler {
 
     public static UUID getUUID(String playerName) {
 
+        //TODO: ACCOUNT FOR NULL RESULT OR CHECK IF NAME EXISTS
+
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
         
         Logging.debugToConsole("Query String: " + string);
@@ -379,12 +381,20 @@ public class MySQLHandler {
             ResultSet results = statement.executeQuery(string);
 
             Logging.debugToConsole("SQL Result: " + results);
+            
+            if (!results.next()) {
 
-            results.next();
+                return getUUID("null");
 
-            Logging.debugToConsole("Next SQL Result: " + results);
+            }
 
-            return UUID.fromString(results.getString(1));
+            else {
+
+                Logging.debugToConsole("Next SQL Result: " + results);
+
+                return UUID.fromString(results.getString(1));
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
