@@ -4,6 +4,8 @@ import dev.boooiil.historia.discord.handlers.InteractionHandler;
 import dev.boooiil.historia.util.Logging;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
+import discord4j.core.object.presence.ClientActivity;
+import discord4j.core.object.presence.ClientPresence;
 
 public class HistoriaDiscord {
 
@@ -19,7 +21,15 @@ public class HistoriaDiscord {
 
     public static void init() {
 
+        setActivity("Online: 0/64");
+
         InteractionHandler.init();
+
+    }
+
+    public static void setActivity(String activity) {
+
+        getClient().updatePresence(ClientPresence.online(ClientActivity.playing(activity))).subscribe();
 
     }
 
