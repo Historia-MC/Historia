@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
     public void onLoad() {
 
         Logging.infoToConsole("Plugin has loaded.");
+        HistoriaDiscord.init();
 
     }
 
@@ -76,7 +77,6 @@ public class Main extends JavaPlugin {
         Logging.infoToConsole("MySQL Loaded.");
 
         SpawnKillTimer.timer();
-        HistoriaDiscord.init();
 
         Logging.infoToConsole("Plugin Enabled.");
 
