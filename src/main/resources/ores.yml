@@ -35,7 +35,7 @@ IRON_ORE:
       chance: 80
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §cIron Chunk
         loc-name: LOW_LIGHT_IRON_CHUNK
@@ -46,7 +46,7 @@ IRON_ORE:
       chance: 15
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §2Iron Chunk
         loc-name: MEDIUM_LIGHT_IRON_CHUNK
@@ -57,7 +57,7 @@ IRON_ORE:
       chance: 5
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §6Iron Chunk
         loc-name: HIGH_LIGHT_IRON_CHUNK
@@ -71,7 +71,7 @@ IRON_ORE:
       chance: 80
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §cTin Chunk
         loc-name: LOW_LIGHT_TIN_CHUNK
@@ -82,7 +82,7 @@ IRON_ORE:
       chance: 15
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §2Tin Chunk
         loc-name: MEDIUM_LIGHT_TIN_CHUNK
@@ -93,7 +93,7 @@ IRON_ORE:
       chance: 5
 
       item:
-        type: IRON_ORE
+        type: RAW_IRON
         amount: 1
         display-name: §6Tin Chunk
         loc-name: HIGH_LIGHT_TIN_CHUNK
@@ -108,7 +108,7 @@ GOLD_ORE:
       chance: 80
 
       item:
-        type: GOLD_ORE
+        type: RAW_GOLD
         amount: 1
         display-name: §cGold Chunk
         loc-name: LOW_LIGHT_GOLD_CHUNK
@@ -119,7 +119,7 @@ GOLD_ORE:
       chance: 15
 
       item:
-        type: GOLD_ORE
+        type: RAW_GOLD
         amount: 1
         display-name: §2Gold Chunk
         loc-name: MEDIUM_LIGHT_GOLD_CHUNK
@@ -130,7 +130,7 @@ GOLD_ORE:
       chance: 5
 
       item:
-        type: GOLD_ORE
+        type: RAW_GOLD
         amount: 1
         display-name: §6Gold Chunk
         loc-name: HIGH_LIGHT_GOLD_CHUNK
