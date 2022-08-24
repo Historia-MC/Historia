@@ -97,6 +97,12 @@ public class HistoriaPlayer {
 
     }
 
+    public String getClassName() {
+
+        return this.className;
+
+    }
+
     public ClassConfig getClassConfig() {
 
         return this.classConfig;
