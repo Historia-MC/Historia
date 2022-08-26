@@ -369,8 +369,6 @@ public class MySQLHandler {
 
     public static UUID getUUID(String playerName) {
 
-        //TODO: ACCOUNT FOR NULL RESULT OR CHECK IF NAME EXISTS
-
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
         
         Logging.debugToConsole("Query String: " + string);
