@@ -17,25 +17,36 @@ public class OreConfig {
 
     private static FileConfiguration configuration = FileGetter.get("ores.yml");
 
-    static final Set<String> oreSet = configuration.getKeys(false);
+    private static final Set<String> oreSet = configuration.getKeys(false);
+
+    private static final HashMap<String, OreManager> oreMap = new HashMap<>();
 
     /**
      * 
-     *  SEE IF WE CNA MOVE THIS TO A STATIC LIST SO THAT WE CAN JUIST CHECK AGAINST 
-     *  BLOCKS THAT ARE BROKEN INSTEAD OF LOADING A NEW INSTANCE EACH BREAK
+     * SEE IF WE CNA MOVE THIS TO A STATIC LIST SO THAT WE CAN JUIST CHECK AGAINST
+     * BLOCKS THAT ARE BROKEN INSTEAD OF LOADING A NEW INSTANCE EACH BREAK
      * 
      */
+
+    public static void init() {
+
+        for (String ore : oreSet) {
+
+            oreMap.put(ore, new OreManager(ore));
+
+        }
+
+    }
 
     public static class OreManager {
 
         private String name;
-        private String userClass;
 
         private boolean validOre = true;
 
         private List<Ore> ores = new ArrayList<Ore>();
 
-        public OreManager(String oreName, String className) {
+        public OreManager(String oreName) {
 
             if (isValidOre(oreName)) {
 
@@ -43,7 +54,6 @@ public class OreConfig {
                 Set<String> oreSet = configuration.getConfigurationSection(root).getKeys(false);
 
                 this.name = oreName;
-                this.userClass = className;
 
                 for (String ore : oreSet) {
 
@@ -63,6 +73,7 @@ public class OreConfig {
 
         /**
          * Check if the current ore is listed in the config.
+         * 
          * @return boolean
          */
         public boolean isValid() {
@@ -73,6 +84,7 @@ public class OreConfig {
 
         /**
          * Get the name of the ore.
+         * 
          * @return The name of the ore.
          */
         public String getName() {
@@ -83,6 +95,7 @@ public class OreConfig {
 
         /**
          * Get a random ore from the block the player mined.
+         * 
          * @return Random ore.
          */
         public Ore getOreFromChance() {
@@ -92,10 +105,10 @@ public class OreConfig {
             List<Integer> chances = new ArrayList<>();
             HashMap<Integer, Ore> map = new HashMap<Integer, Ore>();
 
-            for (int i = 0; i < this.ores.size(); i ++) {
+            for (int i = 0; i < this.ores.size(); i++) {
 
                 Ore ore = this.ores.get(i);
-                
+
                 map.put(i, ore);
 
                 for (int j = 0; j < ore.getChance(); j++) {
@@ -109,12 +122,6 @@ public class OreConfig {
             Logging.infoToConsole(chances.toString());
 
             return map.get(chances.get(random));
-
-        }
-
-        public Drop getDropFromChance() {
-
-            return getOreFromChance().getDropFromChance(this.userClass);
 
         }
 
@@ -149,6 +156,7 @@ public class OreConfig {
 
         /**
          * Get a random drop.
+         * 
          * @param className The user's class.
          * @return The random drop this player could mine.
          */
@@ -159,18 +167,18 @@ public class OreConfig {
             List<Integer> chances = new ArrayList<>();
             HashMap<Integer, Drop> map = new HashMap<Integer, Drop>();
 
-            for (int i = 0; i < this.drops.size(); i ++) {
+            for (int i = 0; i < this.drops.size(); i++) {
 
                 Drop drop = this.drops.get(i);
-                
+
                 if (className.equals(drop.getRequiredClass()) || drop.getRequiredClass().equals("Any")) {
 
                     map.put(i, drop);
 
                     for (int j = 0; j < drop.getChance(); j++) {
-    
+
                         chances.add(i);
-    
+
                     }
 
                 }
@@ -185,6 +193,7 @@ public class OreConfig {
 
         /**
          * Get the name of the current ore.
+         * 
          * @return The name of the ore.
          */
         public String getName() {
@@ -192,9 +201,10 @@ public class OreConfig {
             return this.name;
 
         }
-    
+
         /**
          * Get the chance this ore has of dropping.
+         * 
          * @return Chance of the ore dropping.
          */
         public int getChance() {
@@ -204,7 +214,7 @@ public class OreConfig {
         }
 
     }
-    
+
     /**
      * This class should not be initialized outside of {@link OreConfig}.
      */
@@ -233,6 +243,7 @@ public class OreConfig {
 
         /**
          * Get the name of the class this ore is required to mine.
+         * 
          * @return Name of the user's class.
          */
         public String getRequiredClass() {
@@ -243,6 +254,7 @@ public class OreConfig {
 
         /**
          * Get the chance this drop has of dropping.
+         * 
          * @return Chance of the drop.
          */
         public int getChance() {
@@ -253,6 +265,7 @@ public class OreConfig {
 
         /**
          * Get the item stack of this drop.
+         * 
          * @return The item stack of this drop.
          */
         public ItemStack getItemStack() {
@@ -263,6 +276,43 @@ public class OreConfig {
 
     }
 
+    public static OreManager getOreManager(String oreName) {
+
+        if (isValidOre(oreName)) {
+
+            return oreMap.get(oreName);
+
+        }
+        else return null;
+
+    }
+
+    public static Ore getOreFromChance(String oreName) {
+
+        OreManager oreManager = getOreManager(oreName);
+
+        if (oreManager != null) {
+
+            return oreManager.getOreFromChance();
+
+        }
+        else return null;
+
+    }
+
+    public static Drop getDropFromChance(String oreName, String className) {
+
+        Ore ore = getOreFromChance(oreName);
+
+        if (ore != null) {
+
+            return ore.getDropFromChance(className);
+
+        }
+
+        else return null;
+
+    }
     public static List<Material> getOreBlocks() {
 
         Set<String> blocks = oreSet;
