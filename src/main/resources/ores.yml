@@ -148,4 +148,4 @@ GOLD_ORE:
         amount: 1
         display-name: §cCopper Chunk
         loc-name: LOW_LIGHT_COPPER_CHUNK
-        lore: ["", §7Quality - Standerd]
+        lore: ["", §7Quality - Standard]
