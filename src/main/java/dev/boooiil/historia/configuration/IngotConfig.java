@@ -19,6 +19,20 @@ public class IngotConfig {
 
     private static final HashMap<String, Ingot> ingotMap = new HashMap<>();
 
+    public static void init() {
+
+        for (String ingot : ingotSet) {
+
+            if (!ingot.equals("version")) {
+
+                ingotMap.put(ingot, new Ingot(ingot));
+                
+            }
+
+        }
+
+    }
+
     /**
      *
      * Constructs specific information from a given ingot.
