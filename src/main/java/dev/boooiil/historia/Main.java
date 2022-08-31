@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.PlayerBreakBlock;
 import dev.boooiil.historia.events.PlayerHit;
@@ -46,6 +47,7 @@ public class Main extends JavaPlugin {
     public void onLoad() {
 
         Logging.infoToConsole("Plugin has loaded.");
+
         HistoriaDiscord.init();
 
     }
@@ -65,6 +67,8 @@ public class Main extends JavaPlugin {
 
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
+        
+        OreConfig.init();
         
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
