@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.PlayerBreakBlock;
@@ -69,6 +70,7 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         
         OreConfig.init();
+        IngotConfig.init();
         
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
