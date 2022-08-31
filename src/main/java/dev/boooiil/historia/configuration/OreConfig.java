@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.FileGetter;
-import dev.boooiil.historia.util.Logging;
 
 public class OreConfig {
 
@@ -124,8 +123,6 @@ public class OreConfig {
 
             }
 
-            Logging.infoToConsole(chances.toString());
-
             return map.get(chances.get(random));
 
         }
@@ -145,8 +142,6 @@ public class OreConfig {
         public Ore(String currentRoot, String oreName) {
 
             String root = currentRoot + "." + oreName;
-
-            Logging.infoToConsole(root, currentRoot, oreName);
 
             Set<String> dropSet = configuration.getConfigurationSection(root).getKeys(false);
 
@@ -192,8 +187,6 @@ public class OreConfig {
                 }
 
             }
-
-            Logging.infoToConsole(chances.toString(), "Class:", className);
 
             return map.get(chances.get(random));
 
@@ -299,8 +292,6 @@ public class OreConfig {
 
         OreManager oreManager = getOreManager(oreName);
 
-        Logging.infoToConsole("[Ore Config] OreManager: " + (oreManager == null ? "Null" : oreManager.toString()));
-
         if (oreManager != null) {
 
             return oreManager.getOreFromChance();
@@ -313,8 +304,6 @@ public class OreConfig {
     public static Drop getDropFromChance(String oreName, String className) {
 
         Ore ore = getOreFromChance(oreName);
-
-        Logging.infoToConsole("[Ore Config] Ore: " + (ore == null ? "Null" : ore.toString()));
 
         if (ore != null) {
 
