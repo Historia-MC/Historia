@@ -14,13 +14,13 @@ public class PlayerLeave implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerKickEvent event) {
         
-        HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
-
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
         historiaPlayer.saveCharacter();
         
         PlayerStorage.removePlayer(event.getPlayer().getUniqueId());
+        
+        HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
 
     }
 
