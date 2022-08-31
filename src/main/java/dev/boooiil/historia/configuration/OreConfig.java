@@ -32,7 +32,11 @@ public class OreConfig {
 
         for (String ore : oreSet) {
 
-            oreMap.put(ore, new OreManager(ore));
+            if (!ore.equals("version")) {
+
+                oreMap.put(ore, new OreManager(ore));
+                
+            }
 
         }
 
@@ -50,12 +54,13 @@ public class OreConfig {
 
             if (isValidOre(oreName)) {
 
-                String root = oreName + ".";
-                Set<String> oreSet = configuration.getConfigurationSection(root).getKeys(false);
+                String root = oreName;
+
+                Set<String> blockSet = configuration.getConfigurationSection(root).getKeys(false);
 
                 this.name = oreName;
 
-                for (String ore : oreSet) {
+                for (String ore : blockSet) {
 
                     if (!ore.equals("chance"))
                         this.ores.add(new Ore(root, ore));
@@ -140,6 +145,9 @@ public class OreConfig {
         public Ore(String currentRoot, String oreName) {
 
             String root = currentRoot + "." + oreName;
+
+            Logging.infoToConsole(root, currentRoot, oreName);
+
             Set<String> dropSet = configuration.getConfigurationSection(root).getKeys(false);
 
             this.name = oreName;
@@ -291,6 +299,8 @@ public class OreConfig {
 
         OreManager oreManager = getOreManager(oreName);
 
+        Logging.infoToConsole("[Ore Config] OreManager: " + (oreManager == null ? "Null" : oreManager.toString()));
+
         if (oreManager != null) {
 
             return oreManager.getOreFromChance();
@@ -303,6 +313,8 @@ public class OreConfig {
     public static Drop getDropFromChance(String oreName, String className) {
 
         Ore ore = getOreFromChance(oreName);
+
+        Logging.infoToConsole("[Ore Config] Ore: " + (ore == null ? "Null" : ore.toString()));
 
         if (ore != null) {
 
