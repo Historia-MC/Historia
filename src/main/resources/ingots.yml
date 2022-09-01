@@ -1,5 +1,18 @@
 version: 1
 
+LOW_LIGHT_IRON_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §cIron
+    loc-name: LOW_LIGHT_IRON_CHUNK
+    lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+  smelt_into: LOW_LIGHT_IRON_INGOT
+  time: 30
+  fail: 15
+  smelt_times: 1
+
 LOW_LIGHT_IRON_INGOT:
   item:
     type: IRON_INGOT
@@ -7,6 +20,14 @@ LOW_LIGHT_IRON_INGOT:
     display-name: §cIron
     loc-name: LOW_LIGHT_IRON_INGOT
     lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+MEDIUM_LIGHT_IRON_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §2Iron
+    loc-name: MEDIUM_LIGHT_IRON_CHUNK
+    lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
   smelt_into: MEDIUM_LIGHT_IRON_INGOT
   time: 30
@@ -21,9 +42,17 @@ MEDIUM_LIGHT_IRON_INGOT:
     loc-name: MEDIUM_LIGHT_IRON_INGOT
     lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
+HIGH_LIGHT_IRON_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §6Iron
+    loc-name: HIGH_LIGHT_IRON_CHUNK
+    lore: ["", §7Quality - §6High, §7Tier - §9Light]
+  
   smelt_into: HIGH_LIGHT_IRON_INGOT
-  time: 180
-  fail: 10
+  time: 30
+  fail: 15
   smelt_times: 1
 
 HIGH_LIGHT_IRON_INGOT:
