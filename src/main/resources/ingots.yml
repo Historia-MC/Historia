@@ -144,7 +144,7 @@ LOW_SHEEP_LEATHER:
     loc-name: LOW_SHEEP_LEATHER
     lore: ["", §7Quality - §cLow]
 
-  smelt_into: MEDIUM_IRON
+  #smelt_into: MEDIUM_IRON
   time: 30
   fail: 15
   smelt_times: 1
@@ -157,7 +157,7 @@ LOW_COW_LEATHER:
     loc-name: LOW_COW_LEATHER
     lore: ["", §7Quality - §cLow]
 
-  smelt_into: MEDIUM_IRON
+  #smelt_into: MEDIUM_IRON
   time: 30
   fail: 15
   smelt_times: 1
@@ -170,7 +170,7 @@ LOW_PIG_LEATHER:
     loc-name: LOW_PIG_LEATHER
     lore: ["", §7Quality - §cLow]
 
-  smelt_into: MEDIUM_IRON
+  #smelt_into: MEDIUM_IRON
   time: 30
   fail: 15
   smelt_times: 1
@@ -183,7 +183,7 @@ LOW_HORSE_LEATHER:
     loc-name: LOW_HORSE_LEATHER
     lore: ["", §7Quality - §cLow]
 
-  smelt_into: MEDIUM_IRON
+  #smelt_into: MEDIUM_IRON
   time: 30
   fail: 15
   smelt_times: 1
