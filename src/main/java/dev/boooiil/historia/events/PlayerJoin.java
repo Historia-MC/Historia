@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.PlayerStorage;
 
 public class PlayerJoin implements Listener {
@@ -14,6 +15,8 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
+        MySQLHandler.setLogin(event.getPlayer().getUniqueId());
+        
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
 
         HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
