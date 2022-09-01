@@ -24,7 +24,7 @@ public class CommandPlayers implements CommandExecutor {
 
             HistoriaPlayer historiaPlayer = storedPlayer.getValue();
 
-            message += "Player: " + historiaPlayer.getUsername() + " Level: " + historiaPlayer.level + " Class: " + historiaPlayer.className + "\n";
+            message += "Player: " + historiaPlayer.getUsername() + " Level: " + historiaPlayer.getLevel() + " Class: " + historiaPlayer.getClassName() + "\n";
 
         }
 

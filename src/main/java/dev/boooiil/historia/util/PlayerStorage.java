@@ -20,7 +20,7 @@ public class PlayerStorage {
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
 
         players.put(uuid, historiaPlayer);
-        usernameMap.put(historiaPlayer.username, uuid);
+        usernameMap.put(historiaPlayer.getUsername(), uuid);
 
     }
 

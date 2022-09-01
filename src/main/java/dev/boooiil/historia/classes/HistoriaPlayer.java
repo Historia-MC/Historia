@@ -18,32 +18,32 @@ import dev.boooiil.historia.util.Logging;
 
 public class HistoriaPlayer {
 
-    public UUID uuid;
-    public String username;
+    private UUID uuid;
+    private String username;
 
-    public String className;
+    private String className;
 
-    public int level;
+    private int level;
 
-    public int baseHealth;
-    public int modifiedHealth;
-    public int playtime;
+    private int baseHealth;
+    private int modifiedHealth;
 
-    public long lastLogin;
-    public long lastLogout;
+    private long lastLogin;
+    private long lastLogout;
+    private long playtime;
 
-    public float baseExperience;
-    public float experienceTotal;
-    public float experienceMax;
+    private float baseExperience;
+    private float experienceTotal;
+    private float experienceMax;
 
-    public ClassConfig classConfig;
+    private ClassConfig classConfig;
 
-    public Player onlinePlayer;
-    public OfflinePlayer offlinePlayer;
+    private Player onlinePlayer;
+    private OfflinePlayer offlinePlayer;
 
-    public Resident resident;
-    public Town town;
-    public Nation nation;
+    private Resident resident;
+    private Town town;
+    private Nation nation;
     
     public HistoriaPlayer(UUID uuid) {
 
@@ -79,11 +79,17 @@ public class HistoriaPlayer {
         this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         
         this.username = getUsername();
-        this.playtime = 0;
+        this.playtime = Long.parseLong(user.get("playtime"));
 
         this.resident = TownyHandler.getResident(uuid);
         this.town = TownyHandler.getTown(uuid);
         this.nation = TownyHandler.getNation(uuid);
+
+    }
+
+    public UUID getUUID() {
+
+        return this.uuid;
 
     }
 
@@ -97,9 +103,51 @@ public class HistoriaPlayer {
 
     }
 
+    public int getLevel() {
+
+        return this.level;
+
+    }
+
     public String getClassName() {
 
         return this.className;
+
+    }
+
+    public Resident getResident() {
+
+        return this.resident;
+
+    }
+
+    public Town getTown() {
+
+        return this.town;
+
+    }
+
+    public Nation getNation() {
+
+        return this.nation;
+
+    }
+
+    public long getLastLogin() {
+
+        return this.lastLogin;
+
+    }
+
+    public long getLastLogout() {
+
+        return this.lastLogout;
+
+    }
+
+    public long getPlaytime() {
+
+        return this.playtime;
 
     }
 
@@ -141,6 +189,12 @@ public class HistoriaPlayer {
         string += this.experienceMax + ">";
 
         return string;
+
+    }
+
+    public String printPlayer() {
+
+        return "";
 
     }
 }

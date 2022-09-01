@@ -26,21 +26,21 @@ public class GetPlayer {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(username, true);
         
-        if (historiaPlayer != null && historiaPlayer.resident != null) {
+        if (historiaPlayer != null && historiaPlayer.getResident() != null) {
             
             Logging.infoToConsole(historiaPlayer.toString());
 
             EmbedCreateSpec embed = EmbedCreateSpec.builder()
                 .color(Color.BLUE)
-                .title(historiaPlayer.username.replaceAll("_", "\\_"))
-                .addField("Town", historiaPlayer.town == null ? "Wilderness" : historiaPlayer.town.getName(), true)
-                .addField("Town Rank", historiaPlayer.resident.getTownRanks().toString(), true)
-                .addField("Nation Rank", historiaPlayer.resident.getNationRanks().toString(), true)
+                .title(historiaPlayer.getUsername().replaceAll("_", "\\_"))
+                .addField("Town", historiaPlayer.getTown() == null ? "Wilderness" : historiaPlayer.getTown().getName(), true)
+                .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
+                .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
                 .addField("Jobs", "TODO", true)
-                .addField("Class", historiaPlayer.className, true)
-                .addField("Level", String.valueOf(historiaPlayer.level), true)
-                .thumbnail("https://minotar.net/avatar/" + historiaPlayer.uuid)
-                .timestamp(Instant.ofEpochMilli(historiaPlayer.lastLogin > historiaPlayer.lastLogout ? historiaPlayer.lastLogin : historiaPlayer.lastLogout))
+                .addField("Class", historiaPlayer.getClassName(), true)
+                .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
+                .thumbnail("https://minotar.net/avatar/" + historiaPlayer.getUUID())
+                .timestamp(Instant.ofEpochMilli(historiaPlayer.getLastLogin() > historiaPlayer.getLastLogout() ? historiaPlayer.getLastLogin() : historiaPlayer.getLastLogout()))
                 .footer("Last Seen", "")
                 .build();
             
