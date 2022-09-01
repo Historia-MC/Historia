@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.GeneralConfig;
 import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
@@ -20,8 +22,8 @@ import dev.boooiil.historia.util.Logging;
 public class MySQLHandler {
 
     // Assign variables that we will use to connect to the database.
-    //private static GeneralConfig generalConfig = new GeneralConfig();
-    
+    // private static GeneralConfig generalConfig = new GeneralConfig();
+
     private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
 
     private static final String DATABASE = MYSQLCONFIG.database;
@@ -51,7 +53,16 @@ public class MySQLHandler {
 
             // Issue the statement that we will use to create the table if it does not
             // exist.
-            String createTable = "CREATE TABLE IF NOT EXISTS historia(UUID varchar(36), Username varchar(16), Class varchar(30), Level int, Experience int, Login bigint, Logout bigint, PRIMARY KEY (UUID))";
+            String createTable = "CREATE TABLE IF NOT EXISTS " + 
+                "historia(UUID varchar(36), " +
+                "Username varchar(16), " +
+                "Class varchar(30), " +
+                "Level int, " + 
+                "Experience int, " +
+                "Login bigint, " + 
+                "Logout bigint, " +
+                "Playtime bigint, " +
+                "PRIMARY KEY (UUID))";
 
             try {
 
@@ -82,13 +93,22 @@ public class MySQLHandler {
         try {
 
             String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
-                    + new Date().getTime() + ", 0)";
+                    + new Date().getTime() + ", 0, 0)";
 
             Statement statement = connection.createStatement();
             statement.execute(createUser);
 
-        } catch (SQLException e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
     }
@@ -175,7 +195,14 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
-        } catch (SQLException e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -185,13 +212,21 @@ public class MySQLHandler {
      * Set the logout time for the given user.
      * 
      * @param uuid - UUID of the player.
+     * @param lastLogin - Provided last login of the player.
+     * @param previousPlaytime - Provided playtime of the player.
      */
 
-    public static void setLogout(UUID uuid) {
+    public static void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
         try {
 
-            String string = ("UPDATE historia SET Logout = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
+            long time = new Date().getTime();
+
+            String string = (
+                            "UPDATE historia " +
+                            "SET Logout = '" + time + "', " +
+                            "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
+                            "WHERE UUID = '" + uuid + "'");
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -227,7 +262,14 @@ public class MySQLHandler {
 
             }
 
-        } catch (Exception e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -255,7 +297,14 @@ public class MySQLHandler {
 
             return results.getString(1);
 
-        } catch (Exception e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -308,12 +357,20 @@ public class MySQLHandler {
                 map.put("experience", results.getString("Experience"));
                 map.put("login", results.getString("Login"));
                 map.put("logout", results.getString("Logout"));
+                map.put("playtime", results.getString("Playtime"));
 
             }
 
             return map;
 
-        } catch (Exception e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -348,7 +405,14 @@ public class MySQLHandler {
 
             }
 
-        } catch (Exception e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -370,7 +434,7 @@ public class MySQLHandler {
     public static UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
-        
+
         Logging.debugToConsole("Query String: " + string);
 
         try {
@@ -379,7 +443,7 @@ public class MySQLHandler {
             ResultSet results = statement.executeQuery(string);
 
             Logging.debugToConsole("SQL Result: " + results);
-            
+
             if (!results.next()) {
 
                 return getUUID("null");
@@ -394,7 +458,14 @@ public class MySQLHandler {
 
             }
 
-        } catch (Exception e) {
+        } 
+        catch(CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+            cE.printStackTrace();
+
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -402,6 +473,7 @@ public class MySQLHandler {
 
     }
 
+    @Deprecated
     private static boolean validateFields() {
 
         int caught = 0;
@@ -457,4 +529,21 @@ public class MySQLHandler {
 
     }
 
+    /*
+     * Reconnects the client on a stale request.
+     */
+    private static void reconnectOnStale() {
+
+        try {
+
+            connection.close();
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        } catch (SQLException sqlE) {
+
+            Logging.warnToConsole("Could not reconnect on stale connection.");
+            sqlE.printStackTrace();
+
+        }
+    }
 }
