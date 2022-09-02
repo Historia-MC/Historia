@@ -72,8 +72,7 @@ public class Main extends JavaPlugin {
         
         OreConfig.init();
 
-        //TODO: Uncomment when unholy finishes his work.
-        //IngotConfig.init();
+        IngotConfig.init();
 
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
