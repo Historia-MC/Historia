@@ -63,6 +63,19 @@ HIGH_LIGHT_IRON_INGOT:
     loc-name: HIGH_LIGHT_IRON_INGOT
     lore: ["", §7Quality - §6High, §7Tier - §9Light]
 
+LOW_LIGHT_TIN_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §cTin
+    loc-name: LOW_LIGHT_TIN_CHUNK
+    lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+  smelt_into: LOW_LIGHT_TIN_INGOT
+  time: 30
+  fail: 15
+  smelt_times: 1
+
 LOW_LIGHT_TIN_INGOT:
   item:
     type: IRON_INGOT
@@ -70,6 +83,14 @@ LOW_LIGHT_TIN_INGOT:
     display-name: §cTin
     loc-name: LOW_LIGHT_TIN_INGOT
     lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+MEDIUM_LIGHT_TIN_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §2Tin
+    loc-name: MEDIUM_LIGHT_TIN_CHUNK
+    lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
   smelt_into: MEDIUM_LIGHT_TIN_INGOT
   time: 30
@@ -84,9 +105,17 @@ MEDIUM_LIGHT_TIN_INGOT:
     loc-name: MEDIUM_LIGHT_TIN_INGOT
     lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
+HIGH_LIGHT_TIN_CHUNK:
+  item:
+    type: IRON_CHUNK
+    amount: 1
+    display-name: §6Tin
+    loc-name: HIGH_LIGHT_TIN_CHUNK
+    lore: ["", §7Quality - §6High, §7Tier - §9Light]
+
   smelt_into: HIGH_LIGHT_TIN_INGOT
-  time: 180
-  fail: 10
+  time: 30
+  fail: 15
   smelt_times: 1
 
 HIGH_LIGHT_TIN_INGOT:
@@ -97,6 +126,19 @@ HIGH_LIGHT_TIN_INGOT:
     loc-name: HIGH_LIGHT_TIN_INGOT
     lore: ["", §7Quality - §6High, §7Tier - §9Light]
 
+LOW_LIGHT_BRONZE_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §cBronze
+    loc-name: LOW_LIGHT_BRONZE_CHUNK
+    lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+  smelt_into: LOW_LIGHT_BRONZE_INGOT
+  time: 30
+  fail: 15
+  smelt_times: 1
+
 LOW_LIGHT_BRONZE_INGOT:
   item:
     type: GOLD_INGOT
@@ -104,6 +146,14 @@ LOW_LIGHT_BRONZE_INGOT:
     display-name: §cBronze
     loc-name: LOW_LIGHT_BRONZE_INGOT
     lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+MEDIUM_LIGHT_BRONZE_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §2Bronze
+    loc-name: MEDIUM_LIGHT_BRONZE_CHUNK
+    lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
   smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
   time: 30
@@ -118,9 +168,16 @@ MEDIUM_LIGHT_BRONZE_INGOT:
     loc-name: MEDIUM_LIGHT_BRONZE_INGOT
     lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
+HIGH_LIGHT_BRONZE_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §6Bronze
+    loc-name: HIGH_LIGHT_BRONZE_CHUNK
+    lore: ["", §7Quality - §6High, §7Tier - §9Light]
   smelt_into: HIGH_LIGHT_BRONZE_INGOT
-  time: 180
-  fail: 10
+  time: 30
+  fail: 15
   smelt_times: 1
 
 HIGH_LIGHT_BRONZE_INGOT:
@@ -131,6 +188,19 @@ HIGH_LIGHT_BRONZE_INGOT:
     loc-name: HIGH_LIGHT_BRONZE_INGOT
     lore: ["", §7Quality - §6High, §7Tier - §9Light]
 
+LOW_LIGHT_GOLD_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §cGold
+    loc-name: LOW_LIGHT_GOLD_CHUNK
+    lore: ["", §7Quality - §cLow, §7Tier - §9Light]
+
+  smelt_into: LOW_LIGHT_GOLD_INGOT
+  time: 30
+  fail: 15
+  smelt_times: 1
+
 LOW_LIGHT_GOLD_INGOT:
   item:
     type: GOLD_INGOT
@@ -139,7 +209,15 @@ LOW_LIGHT_GOLD_INGOT:
     loc-name: LOW_LIGHT_GOLD_INGOT
     lore: ["", §7Quality - §cLow, §7Tier - §9Light]
 
-  smelt_into: MEDIUM_LIGHT_BRONZE_INGOT
+MEDIUM_LIGHT_GOLD_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §2Gold
+    loc-name: MEDIUM_LIGHT_GOLD_CHUNK
+    lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
+
+  smelt_into: MEDIUM_LIGHT_GOLD_INGOT
   time: 30
   fail: 15
   smelt_times: 1
@@ -152,10 +230,19 @@ MEDIUM_LIGHT_GOLD_INGOT:
     loc-name: MEDIUM_LIGHT_GOLD_INGOT
     lore: ["", §7Quality - §2Medium, §7Tier - §9Light]
 
-  smelt_into: HIGH_LIGHT_BRONZE_INGOT
-  time: 180
-  fail: 10
+HIGH_LIGHT_GOLD_CHUNK:
+  item:
+    type: GOLD_CHUNK
+    amount: 1
+    display-name: §6Gold
+    loc-name: HIGH_LIGHT_GOLD_CHUNK
+    lore: ["", §7Quality - §6High, §7Tier - §9Light]
+
+  smelt_into: HIGH_LIGHT_GOLD_INGOT
+  time: 30
+  fail: 15
   smelt_times: 1
+
 
 HIGH_LIGHT_GOLD_INGOT:
   item:
