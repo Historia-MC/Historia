@@ -18,6 +18,7 @@ import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.events.FurnaceInteraction;
 import dev.boooiil.historia.events.PlayerBreakBlock;
 import dev.boooiil.historia.events.PlayerHit;
 import dev.boooiil.historia.events.PlayerJoin;
@@ -70,13 +71,16 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         
         OreConfig.init();
-        IngotConfig.init();
-        
+
+        //TODO: Uncomment when unholy finishes his work.
+        //IngotConfig.init();
+
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerBreakBlock());
+        registerEvent(new FurnaceInteraction());
 
         registerCommand("CheckPlayers", new CommandPlayers());
 
