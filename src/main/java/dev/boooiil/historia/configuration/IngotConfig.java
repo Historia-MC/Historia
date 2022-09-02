@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.FileGetter;
+import dev.boooiil.historia.util.Logging;
 
 public class IngotConfig {
 
@@ -170,6 +171,12 @@ public class IngotConfig {
      */
     public static boolean isValidIngot(String ingotName) {
 
+        for (String ingot : ingotSet) {
+
+            Logging.infoToConsole(ingotName, ingot);
+
+        }
+        
         return ingotSet.contains(ingotName);
 
     }
