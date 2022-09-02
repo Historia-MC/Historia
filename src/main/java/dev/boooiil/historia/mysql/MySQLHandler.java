@@ -462,7 +462,19 @@ public class MySQLHandler {
         catch(CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
+
             cE.printStackTrace();
+            
+            try {
+
+                return UUID.fromString(reconnectOnStale(string).getString(1));
+
+            }
+            catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
 
         }
         catch (Exception e) {
@@ -532,18 +544,27 @@ public class MySQLHandler {
     /*
      * Reconnects the client on a stale request.
      */
-    private static void reconnectOnStale() {
+    private static ResultSet reconnectOnStale(String query) {
 
         try {
 
+            Logging.warnToConsole("Attempting to close the connection...");
             connection.close();
+            Logging.warnToConsole("Connection closed.");
+
+            Logging.warnToConsole("Attempting to reconnect...");
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            Logging.warnToConsole("Reconnected to SQL Server.");
+
+            Logging.warnToConsole("Resending query...");
+            return connection.createStatement().executeQuery(query);
 
         } catch (SQLException sqlE) {
 
-            Logging.warnToConsole("Could not reconnect on stale connection.");
+            Logging.errorToConsole("Could not reconnect on stale connection.");
             sqlE.printStackTrace();
 
+            return null;
         }
     }
 }
