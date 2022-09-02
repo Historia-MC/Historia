@@ -21,8 +21,8 @@ import dev.boooiil.historia.util.Logging;
 
 public class MySQLHandler {
 
-    // Assign variables that we will use to connect to the database.
-    // private static GeneralConfig generalConfig = new GeneralConfig();
+    // TODO: Do below
+    // We could create a user cache that loads when we first connect to the database so we are not fetching users every time they connect.
 
     private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
 
@@ -89,6 +89,8 @@ public class MySQLHandler {
      */
 
     public static void createUser(UUID uuid, String playerName) {
+
+        if (userExists(uuid)) return;
 
         try {
 
@@ -538,6 +540,24 @@ public class MySQLHandler {
         }
 
         return true;
+
+    }
+
+    private static boolean userExists(UUID uuid) {
+
+        String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
+
+        try {
+
+            return connection.createStatement().executeQuery(statement).next();
+
+        } catch (SQLException sqlE) {
+
+            sqlE.printStackTrace();
+
+        }
+    
+        return false;
 
     }
 

@@ -15,6 +15,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
+        MySQLHandler.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getDisplayName());
         MySQLHandler.setLogin(event.getPlayer().getUniqueId());
         
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
