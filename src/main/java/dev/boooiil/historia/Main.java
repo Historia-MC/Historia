@@ -71,8 +71,8 @@ public class Main extends JavaPlugin {
         this.saveDefaultConfig();
         
         OreConfig.init();
-
-        IngotConfig.init();
+        //TODO: Unholy Changes
+        //IngotConfig.init();
 
         registerEvent(new PlayerKilled());
         registerEvent(new PlayerHit());
