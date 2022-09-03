@@ -19,10 +19,10 @@ public class PlayerJoin implements Listener {
         MySQLHandler.setLogin(event.getPlayer().getUniqueId());
         
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
+        PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
 
         HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
 
-        PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
 
     }
 
