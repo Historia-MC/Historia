@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.OreConfig;
@@ -81,7 +82,8 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerBreakBlock());
         registerEvent(new FurnaceInteraction());
 
-        registerCommand("CheckPlayers", new CommandPlayers());
+        registerCommand("checkplayers", new CommandPlayers());
+        registerCommand("debug", new CommandDebug());
 
         Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();

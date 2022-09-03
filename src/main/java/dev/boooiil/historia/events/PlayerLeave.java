@@ -23,7 +23,7 @@ public class PlayerLeave implements Listener {
 
         PlayerStorage.markOffline(event.getPlayer().getUniqueId());
         
-        HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
+        HistoriaDiscord.setActivity("Online: " + (Bukkit.getOnlinePlayers().size() - 1) + "/" + Bukkit.getMaxPlayers());
 
     }
 
