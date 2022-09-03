@@ -21,7 +21,7 @@ public class PlayerLeave implements Listener {
         
         MySQLHandler.setLogout(historiaPlayer.getUUID(), historiaPlayer.getLastLogin(), historiaPlayer.getPlaytime());
 
-        PlayerStorage.removePlayer(event.getPlayer().getUniqueId());
+        PlayerStorage.markOffline(event.getPlayer().getUniqueId());
         
         HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
 
