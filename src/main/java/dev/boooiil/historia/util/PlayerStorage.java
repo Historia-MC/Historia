@@ -19,8 +19,20 @@ public class PlayerStorage {
      */
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
 
-        players.put(uuid, historiaPlayer);
-        usernameMap.put(historiaPlayer.getUsername(), uuid);
+        // If the player has already been logged into the server.
+        if (players.containsKey(uuid)) {
+
+            players.get(uuid).setOnline();
+
+        }
+
+        // Else, create a new HistoriaPlayer and store it in the HashMap
+        else {
+
+            players.put(uuid, historiaPlayer);
+            usernameMap.put(historiaPlayer.getUsername(), uuid);
+
+        }
 
     }
 
@@ -71,11 +83,11 @@ public class PlayerStorage {
      * 
      * @param uuid UUID of the player.
      */
-    public static void removePlayer(UUID uuid) {
+    public static void markOffline(UUID uuid) {
 
         players.get(uuid).saveCharacter();
 
-        players.remove(uuid);
+        players.get(uuid).setOffline();
 
     }
 
