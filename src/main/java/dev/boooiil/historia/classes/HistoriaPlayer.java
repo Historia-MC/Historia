@@ -32,9 +32,6 @@ public class HistoriaPlayer {
 
     private int level;
 
-    private int baseHealth;
-    private int modifiedHealth;
-
     private long lastLogin;
     private long lastLogout;
     private long playtime;
@@ -43,6 +40,9 @@ public class HistoriaPlayer {
     private double armorAdjustment;
     private double environmentAdjustment;
     private double maxTemperature;
+
+    private float baseHealth;
+    private float modifiedHealth;
 
     private float baseExperience;
     private float experienceTotal;
@@ -140,6 +140,36 @@ public class HistoriaPlayer {
     public boolean isOnline() {
 
         return this.isOnline;
+
+    }
+
+    public float getBaseHealth() {
+
+        return this.baseHealth;
+
+    }
+
+    public float getModifiedHealth() {
+
+        return this.modifiedHealth;
+
+    }
+
+    public float getBaseExperience() {
+
+        return this.baseExperience;
+
+    }
+
+    public float getTotalExperience() {
+
+        return this.experienceTotal;
+
+    }
+
+    public float getMaxExperience() {
+
+        return this.experienceMax;
 
     }
 
