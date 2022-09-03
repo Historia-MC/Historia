@@ -32,7 +32,7 @@ public class GetPlayer {
 
             EmbedCreateSpec embed = EmbedCreateSpec.builder()
                 .color(Color.BLUE)
-                .title(historiaPlayer.getUsername().replaceAll("_", "\\_"))
+                .title(historiaPlayer.getUsername().replaceAll("_", "\\_") + " (" + (historiaPlayer.isOnline() ? "Online" : "Offline" ) + ")" )
                 .addField("Town", historiaPlayer.getTown() == null ? "Wilderness" : historiaPlayer.getTown().getName(), true)
                 .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
