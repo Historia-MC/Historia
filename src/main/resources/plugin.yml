@@ -8,4 +8,11 @@ version: 0.6
 depend: [WorldGuard, Towny, Vault]
 
 commands:
-  checkPlayers:
+  checkplayers:
+    description: Get class information from all users.
+    usage: /<command> <player>
+    permission: historia.checkplayers
+  debug:
+    description: Get debug information.
+    usage: /<command> [player] <args...>
+    permission: historia.debug
