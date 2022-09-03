@@ -3,7 +3,6 @@ package dev.boooiil.historia.commands;
 import java.util.Map;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,6 +19,8 @@ public class CommandPlayers implements CommandExecutor {
 
         String message = "";
 
+        if (!(sender instanceof Player)) return false;
+
         for (Map.Entry<UUID, HistoriaPlayer> storedPlayer : PlayerStorage.players.entrySet()) {
 
             HistoriaPlayer historiaPlayer = storedPlayer.getValue();
@@ -28,13 +29,9 @@ public class CommandPlayers implements CommandExecutor {
 
         }
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
 
-            Logging.infoToPlayer(message, player.getUniqueId());
-
-        }
-
-        return false;
+        return true;
 
     }
 
