@@ -1,9 +1,5 @@
 package dev.boooiil.historia.commands;
 
-import java.util.Map;
-import java.util.UUID;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,7 +35,7 @@ public class CommandDebug implements CommandExecutor {
                 message += "Armor Temp: " + player.getArmorAdjustment() + "\n";
                 message += "Env Temp: " + player.getEnvironmentAdjustment() + "\n";
 
-                Logging.infoToPlayer(message, ((Player) player).getUniqueId());
+                Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
 
                 return true;
 
