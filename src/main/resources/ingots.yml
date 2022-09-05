@@ -2,7 +2,7 @@ version: 1
 
 LOW_LIGHT_IRON_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §cIron
     loc-name: LOW_LIGHT_IRON_CHUNK
@@ -23,7 +23,7 @@ LOW_LIGHT_IRON_INGOT:
 
 MEDIUM_LIGHT_IRON_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §2Iron
     loc-name: MEDIUM_LIGHT_IRON_CHUNK
@@ -44,7 +44,7 @@ MEDIUM_LIGHT_IRON_INGOT:
 
 HIGH_LIGHT_IRON_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §6Iron
     loc-name: HIGH_LIGHT_IRON_CHUNK
@@ -65,7 +65,7 @@ HIGH_LIGHT_IRON_INGOT:
 
 LOW_LIGHT_TIN_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §cTin
     loc-name: LOW_LIGHT_TIN_CHUNK
@@ -86,7 +86,7 @@ LOW_LIGHT_TIN_INGOT:
 
 MEDIUM_LIGHT_TIN_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §2Tin
     loc-name: MEDIUM_LIGHT_TIN_CHUNK
@@ -107,7 +107,7 @@ MEDIUM_LIGHT_TIN_INGOT:
 
 HIGH_LIGHT_TIN_CHUNK:
   item:
-    type: IRON_CHUNK
+    type: RAW_IRON_CHUNK
     amount: 1
     display-name: §6Tin
     loc-name: HIGH_LIGHT_TIN_CHUNK
@@ -128,7 +128,7 @@ HIGH_LIGHT_TIN_INGOT:
 
 LOW_LIGHT_BRONZE_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §cBronze
     loc-name: LOW_LIGHT_BRONZE_CHUNK
@@ -149,7 +149,7 @@ LOW_LIGHT_BRONZE_INGOT:
 
 MEDIUM_LIGHT_BRONZE_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §2Bronze
     loc-name: MEDIUM_LIGHT_BRONZE_CHUNK
@@ -170,7 +170,7 @@ MEDIUM_LIGHT_BRONZE_INGOT:
 
 HIGH_LIGHT_BRONZE_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §6Bronze
     loc-name: HIGH_LIGHT_BRONZE_CHUNK
@@ -190,7 +190,7 @@ HIGH_LIGHT_BRONZE_INGOT:
 
 LOW_LIGHT_GOLD_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §cGold
     loc-name: LOW_LIGHT_GOLD_CHUNK
@@ -211,7 +211,7 @@ LOW_LIGHT_GOLD_INGOT:
 
 MEDIUM_LIGHT_GOLD_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §2Gold
     loc-name: MEDIUM_LIGHT_GOLD_CHUNK
@@ -232,7 +232,7 @@ MEDIUM_LIGHT_GOLD_INGOT:
 
 HIGH_LIGHT_GOLD_CHUNK:
   item:
-    type: GOLD_CHUNK
+    type: RAW_GOLD_CHUNK
     amount: 1
     display-name: §6Gold
     loc-name: HIGH_LIGHT_GOLD_CHUNK
