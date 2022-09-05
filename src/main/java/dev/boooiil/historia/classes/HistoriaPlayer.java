@@ -362,7 +362,7 @@ public class HistoriaPlayer {
 
     public double calculateEnvironmentAdjustment() {
 
-        if (this.onlinePlayer == null)
+        if (!isOnline())
             return 0;
 
         double currentTime = this.onlinePlayer.getWorld().getTime();
@@ -371,13 +371,11 @@ public class HistoriaPlayer {
         boolean[] environment = checkSurroundingArea();
 
         boolean inSkylight = checkInSkylight();
-        boolean isInside = inSkylight ? true : environment[0];
+        boolean isInside = !inSkylight; // inSkylight ? true : environment[0];
         boolean isNearHeatSource = environment[1];
 
         if (isNearHeatSource)
             mod += 3.2;
-        if (isInside)
-            mod += -1.2;
 
         // Sunrise
         if (currentTime > 23000 && currentTime < 2000) {
@@ -454,23 +452,25 @@ public class HistoriaPlayer {
      */
     private boolean checkInSkylight() {
 
-        if (this.onlinePlayer == null)
-            return true;
+        if (!isOnline())
+            return false;
 
         Block block = this.onlinePlayer.getLocation().getBlock();
-        boolean found = false;
+        boolean found = true;
 
         for (int i = 0; i < 255; i++) {
 
             if (!block.getType().equals(Material.AIR)) {
 
-                found = true;
+                found = false;
                 break;
 
             }
             ;
 
         }
+
+        Logging.infoToConsole("Player is in skylight: " + found);
 
         return found;
 
