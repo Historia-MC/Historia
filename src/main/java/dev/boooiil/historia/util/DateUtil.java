@@ -1,6 +1,7 @@
 package dev.boooiil.historia.util;
 
-import java.util.Date;
+import java.util.TimeZone;
+import java.util.Calendar;
 
 public class DateUtil {
 
@@ -9,16 +10,18 @@ public class DateUtil {
 
     public static String getFullTimeFromMilliseconds(long milliseconds) {
 
-        Date date = new Date(milliseconds);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+
+        calendar.setTimeInMillis(milliseconds);
 
         String string = "";
 
-        int month = date.getMonth() + 1;
-        int day = date.getDate();
-        int year = date.getYear() + 1900;
-        int hour = date.getHours() + 1;
-        int minute = date.getMinutes();
-        int second = date.getSeconds();
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
 
         string += month < 10 ? "0" + month + "-" : month + "-";
         string += day < 10 ? "0" + day + "-" : day + "-";
@@ -36,13 +39,15 @@ public class DateUtil {
 
     public static String getDateFromMilliseconds(long milliseconds) {
 
-        Date date = new Date(milliseconds);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+
+        calendar.setTimeInMillis(milliseconds);
 
         String string = "";
 
-        int month = date.getMonth() + 1;
-        int day = date.getDate();
-        int year = date.getYear() + 1900;
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
 
         string += month < 10 ? "0" + month + "-" : month + "-";
         string += day < 10 ? "0" + day + "-" : day + "-";
@@ -53,13 +58,15 @@ public class DateUtil {
 
     public static String getTimeFromMilliseconds(long milliseconds) {
 
-        Date date = new Date(milliseconds);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
+
+        calendar.setTimeInMillis(milliseconds);
 
         String string = "";
 
-        int hour = date.getHours() + 1;
-        int minute = date.getMinutes();
-        int second = date.getSeconds();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
 
         string += hour == 12 || (hour > 0 && hour < 12) ? hour + ":"
                 : hour > 12 ? hour - 12 > 9 ? hour - 12 + ":" : "0" + (hour - 12) + ":" : "0" + hour + ":";
