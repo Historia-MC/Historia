@@ -19,18 +19,18 @@ public class DateUtil {
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int year = calendar.get(Calendar.YEAR);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int hour = calendar.get(Calendar.HOUR) + 1;
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
+        String delim = calendar.get(Calendar.AM) == 0 ? "AM " : "PM ";
 
         string += month < 10 ? "0" + month + "-" : month + "-";
         string += day < 10 ? "0" + day + "-" : day + "-";
         string += year + " ";
-        string += hour == 12 || (hour > 0 && hour < 12) ? hour + ":"
-                : hour > 12 ? hour - 12 > 9 ? hour - 12 + ":" : "0" + (hour - 12) + ":" : "0" + hour + ":";
+        string += hour > 9 ? hour + ":" : "0" + hour + ":";
         string += minute < 10 ? "0" + minute + ":" : minute + ":";
         string += second < 10 ? "0" + second + "-" : second + "-";
-        string += hour <= 12 ? "AM " : "PM ";
+        string += delim;
         string += "EST";
 
         return string;
@@ -64,16 +64,15 @@ public class DateUtil {
 
         String string = "";
 
-        int hour = calendar.get(Calendar.HOUR_OF_DAY) + 1;
+        int hour = calendar.get(Calendar.HOUR) + 1;
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
+        String delim = calendar.get(Calendar.AM) == 0 ? "AM " : "PM ";
 
-        string += hour == 12 || (hour > 0 && hour < 12) ? hour + ":"
-                : hour > 12 ? hour - 12 > 9 ? hour - 12 + ":" : "0" + (hour - 12) + ":" : "0" + hour + ":";
+        string += hour > 9 ? hour + ":" : "0" + hour + ":";
         string += minute < 10 ? "0" + minute + ":" : minute + ":";
         string += second < 10 ? "0" + second + "-" : second + "-";
-        string += hour <= 12 ? "AM " : "PM ";
-        string += "EST";
+        string += delim;
 
         return string;
 
