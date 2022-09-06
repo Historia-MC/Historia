@@ -170,12 +170,6 @@ public class IngotConfig {
      * @return If the ingot provided is in ingots.yml.
      */
     public static boolean isValidIngot(String ingotName) {
-
-        for (String ingot : ingotSet) {
-
-            Logging.infoToConsole(ingotName, ingot);
-
-        }
         
         return ingotSet.contains(ingotName);
 
