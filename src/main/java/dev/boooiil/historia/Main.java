@@ -19,6 +19,7 @@ import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.events.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.FurnaceSmeltStart;
 import dev.boooiil.historia.events.PlayerBreakBlock;
 import dev.boooiil.historia.events.PlayerHit;
@@ -80,6 +81,7 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerBreakBlock());
         registerEvent(new FurnaceSmeltStart());
+        registerEvent(new FurnaceSmeltFinish());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
