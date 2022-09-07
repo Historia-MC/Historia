@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.FileGetter;
-import dev.boooiil.historia.util.Logging;
 
 public class IngotConfig {
 
@@ -58,13 +57,13 @@ public class IngotConfig {
         private String progression;
         //private String itemName;
 
-        public ItemStack itemStack;
-        public boolean validIngot;
-        public int smeltTime;
-        public int smeltAmount;
-        public int smeltFail;
+        private ItemStack itemStack;
+        private boolean validIngot;
+        private int smeltTime;
+        private int smeltAmount;
+        private int smeltFail;
 
-        public Ingot progressInto;
+        private Ingot progressInto;
 
         public Ingot(String ingotName) {
 
@@ -125,6 +124,12 @@ public class IngotConfig {
         public Ingot getProgression() {
 
             return this.progressInto;
+
+        }
+
+        public boolean hasProgression() {
+
+            return this.progressInto != null;
 
         }
 
