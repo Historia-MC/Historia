@@ -26,14 +26,14 @@ public class GetPlayer {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(username, true);
         
-        if (historiaPlayer != null && historiaPlayer.getResident() != null) {
+        if (historiaPlayer.isValid()) {
             
             Logging.infoToConsole(historiaPlayer.toString());
 
             EmbedCreateSpec embed = EmbedCreateSpec.builder()
                 .color(Color.BLUE)
                 .title(historiaPlayer.getUsername().replaceAll("_", "\\_") + " (" + (historiaPlayer.isOnline() ? "Online" : "Offline" ) + ")" )
-                .addField("Town", historiaPlayer.getTown() == null ? "Wilderness" : historiaPlayer.getTown().getName(), true)
+                .addField("Town", !historiaPlayer.hasTown() ? "Wilderness" : historiaPlayer.getTown().getName(), true)
                 .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
                 .addField("Jobs", "TODO", true)
