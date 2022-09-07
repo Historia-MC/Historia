@@ -6,7 +6,6 @@ import org.bukkit.event.inventory.FurnaceStartSmeltEvent;
 
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.IngotConfig.Ingot;
-import dev.boooiil.historia.util.Logging;
 
 public class FurnaceSmeltStart implements Listener {
 
@@ -14,9 +13,6 @@ public class FurnaceSmeltStart implements Listener {
     public void onPlayerKill(FurnaceStartSmeltEvent event) {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
-
-        Logging.debugToConsole("Localized Name " + localizedName);
-        Logging.debugToConsole("Is valid: " + IngotConfig.isValidIngot(localizedName));
 
         if (IngotConfig.isValidIngot(localizedName)) {
 
