@@ -52,7 +52,7 @@ public class PlayerStorage {
             return new HistoriaPlayer(uuid);
 
         else
-            return null;
+            return new HistoriaPlayer();
 
     }
 
@@ -72,7 +72,19 @@ public class PlayerStorage {
             return new HistoriaPlayer(MySQLHandler.getUUID(username));
 
         else
-            return null;
+            return new HistoriaPlayer();
+
+    }
+
+    public static boolean has(UUID uuid) {
+
+        return players.containsKey(uuid);
+
+    }
+
+    public static boolean has(String username) {
+
+        return usernameMap.containsKey(username);
 
     }
 
