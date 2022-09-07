@@ -8,7 +8,7 @@ import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.IngotConfig.Ingot;
 import dev.boooiil.historia.util.Logging;
 
-public class FurnaceInteraction implements Listener {
+public class FurnaceSmeltStart implements Listener {
 
     @EventHandler
     public void onPlayerKill(FurnaceStartSmeltEvent event) {
