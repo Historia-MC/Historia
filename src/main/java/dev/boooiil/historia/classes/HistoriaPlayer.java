@@ -28,7 +28,11 @@ public class HistoriaPlayer {
 
     private String className;
 
+    private boolean isValid;
     private boolean isOnline;
+    private boolean isResident;
+    private boolean hasTown;
+    private boolean hasNation;
 
     private int level;
 
@@ -57,6 +61,8 @@ public class HistoriaPlayer {
     private Town town;
     private Nation nation;
 
+    public HistoriaPlayer() { this.isValid = false; }
+
     public HistoriaPlayer(UUID uuid) {
 
         // TODO: GET TOWN AND NATION VALUES
@@ -77,6 +83,7 @@ public class HistoriaPlayer {
 
         this.className = user.get("class");
 
+        this.isValid = true;
         this.isOnline = this.onlinePlayer == null ? false : true;
 
         this.level = Integer.parseInt(user.get("level"));
@@ -103,6 +110,10 @@ public class HistoriaPlayer {
         this.resident = TownyHandler.getResident(uuid);
         this.town = TownyHandler.getTown(uuid);
         this.nation = TownyHandler.getNation(uuid);
+
+        this.isResident = this.resident == null ? false : true;
+        this.hasTown = this.town == null ? false : true;
+        this.hasNation = this.nation == null ? false : true;
 
     }
 
@@ -137,9 +148,33 @@ public class HistoriaPlayer {
 
     }
 
+    public boolean isValid() {
+
+        return this.isValid;
+
+    }
+
     public boolean isOnline() {
 
         return this.isOnline;
+
+    }
+
+    public boolean isResident() {
+
+        return this.isResident;
+
+    }
+
+    public boolean hasTown() {
+
+        return this.hasTown;
+
+    }
+    
+    public boolean hasNation() {
+
+        return this.hasNation;
 
     }
 
@@ -282,7 +317,7 @@ public class HistoriaPlayer {
 
     public double calculateArmorAdjustment() {
 
-        if (this.onlinePlayer == null)
+        if (!isOnline())
             return 0;
 
         PlayerInventory inventory = this.onlinePlayer.getInventory();
@@ -489,7 +524,7 @@ public class HistoriaPlayer {
         boolean found[] = { false, false };
         int radius = 10;
 
-        if (this.onlinePlayer == null) {
+        if (!isOnline()) {
 
             found[0] = found[1] = true;
 
