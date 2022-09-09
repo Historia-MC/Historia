@@ -3,6 +3,7 @@ package dev.boooiil.historia.discord.interactions;
 import java.time.Instant;
 
 import dev.boooiil.historia.classes.HistoriaPlayer;
+import dev.boooiil.historia.util.DateUtil;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
@@ -36,9 +37,9 @@ public class GetPlayer {
                 .addField("Town", !historiaPlayer.hasTown() ? "Wilderness" : historiaPlayer.getTown().getName(), true)
                 .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
-                .addField("Jobs", "TODO", true)
                 .addField("Class", historiaPlayer.getClassName(), true)
                 .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
+                .addField("Playtime", DateUtil.convertMillisecondsIntoStringTime(historiaPlayer.getPlaytime(), false), true)
                 .thumbnail("https://minotar.net/avatar/" + historiaPlayer.getUUID())
                 .timestamp(Instant.ofEpochMilli(historiaPlayer.getLastLogin() > historiaPlayer.getLastLogout() ? historiaPlayer.getLastLogin() : historiaPlayer.getLastLogout()))
                 .footer("Last Seen", "")
