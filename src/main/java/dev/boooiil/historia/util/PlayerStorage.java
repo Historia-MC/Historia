@@ -76,12 +76,22 @@ public class PlayerStorage {
 
     }
 
+    /**
+     * Check if the storage holds the given UUID.
+     * @param uuid - UUID of the player.
+     * @return - {@link Boolean}
+     */
     public static boolean has(UUID uuid) {
 
         return players.containsKey(uuid);
 
     }
 
+    /**
+     * Check if the storage holds the given username.
+     * @param username - Username  of the player.
+     * @return - {@link Boolean}
+     */
     public static boolean has(String username) {
 
         return usernameMap.containsKey(username);
