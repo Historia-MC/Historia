@@ -61,8 +61,18 @@ public class HistoriaPlayer {
     private Town town;
     private Nation nation;
 
-    public HistoriaPlayer() { this.isValid = false; }
+    /**
+     * Default constrctor, will return invalid player.
+     */
+    public HistoriaPlayer() {
+        this.isValid = false;
+    }
 
+    /**
+     * General constructor.
+     * 
+     * @param uuid - UUID of the player.
+     */
     public HistoriaPlayer(UUID uuid) {
 
         // TODO: GET TOWN AND NATION VALUES
@@ -117,12 +127,22 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Get the {@link UUID} of the player.
+     * 
+     * @return {@link UUID}
+     */
     public UUID getUUID() {
 
         return this.uuid;
 
     }
 
+    /**
+     * Get the username of the player.
+     * 
+     * @return {@link String} - Username of the player.
+     */
     public String getUsername() {
 
         Logging.infoToConsole(this.onlinePlayer + " " + this.offlinePlayer);
@@ -136,150 +156,273 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Get the player's class level.
+     * 
+     * @return {@link Integer} - Player's class level.
+     */
     public int getLevel() {
 
         return this.level;
 
     }
 
+    /**
+     * Get the player's class name.
+     * 
+     * @return {@link String} - The player's class name.
+     */
     public String getClassName() {
 
         return this.className;
 
     }
 
+    /**
+     * Check if the player is valid.
+     * 
+     * @return {@link Boolean}
+     */
     public boolean isValid() {
 
         return this.isValid;
 
     }
 
+    /**
+     * Check if the player is online.
+     * 
+     * @return {@link Boolean}
+     */
     public boolean isOnline() {
 
         return this.isOnline;
 
     }
 
+    /**
+     * Check if the player has a {@link Resident} object.
+     * 
+     * @return {@link Boolean}
+     */
     public boolean isResident() {
 
         return this.isResident;
 
     }
 
+    /**
+     * Check if the player has a {@link Town} object.
+     * 
+     * @return {@link Boolean}
+     */
     public boolean hasTown() {
 
         return this.hasTown;
 
     }
-    
+
+    /**
+     * Check if the player has a {@link Nation} object.
+     * 
+     * @return {@link Boolean}
+     */
     public boolean hasNation() {
 
         return this.hasNation;
 
     }
 
+    /**
+     * Get the class' base health.
+     * 
+     * @return {@link Float} The class' base health.
+     */
     public float getBaseHealth() {
 
         return this.baseHealth;
 
     }
 
+    /**
+     * Get the class' modified health.
+     * 
+     * @return {@link Float} The class' modified health.
+     */
     public float getModifiedHealth() {
 
         return this.modifiedHealth;
 
     }
 
+    /**
+     * Get the class' base experience.
+     * 
+     * @return {@link Float} The class' base experience.
+     */
     public float getBaseExperience() {
 
         return this.baseExperience;
 
     }
 
+    /**
+     * Get the class' current experience.
+     * 
+     * @return {@link Float} The class' current experience.
+     */
     public float getTotalExperience() {
 
         return this.experienceTotal;
 
     }
 
+    /**
+     * Get the class' calculated experience max.
+     * 
+     * @return {@link Float} The class' calculated experience max.
+     */
     public float getMaxExperience() {
 
         return this.experienceMax;
 
     }
 
+    /**
+     * Get the resident object of this player.
+     * 
+     * @return {@link Resident} - Towny Resident Object
+     */
     public Resident getResident() {
 
         return this.resident;
 
     }
 
+    /**
+     * Get the town object of this player.
+     * 
+     * @return {@link Town} - Towny Town Object
+     */
     public Town getTown() {
 
         return this.town;
 
     }
 
+    /**
+     * Get the nation object of this player.
+     * 
+     * @return {@link Nation} - Towny Nation Object
+     */
     public Nation getNation() {
 
         return this.nation;
 
     }
 
+    /**
+     * Get when the player has last logged in.
+     * 
+     * @return {@link Long} - Player's last login.
+     */
     public long getLastLogin() {
 
         return this.lastLogin;
 
     }
 
+    /**
+     * Get when the player has last logged out.
+     * 
+     * @return {@link Long} - Player's last logout.
+     */
     public long getLastLogout() {
 
         return this.lastLogout;
 
     }
 
+    /**
+     * Get the player's total playtime..
+     * 
+     * @return {@link Long} - Player's total playtime.
+     */
     public long getPlaytime() {
 
         return this.playtime;
 
     }
 
+    /**
+     * Get the player's current temperature.
+     * 
+     * @return {@link Double} - Player's current temperature.
+     */
     public double getCurrentTemperature() {
 
         return this.currentTemperature;
 
     }
 
+    /**
+     * Get the temperature adjustment for armor.
+     * 
+     * @return {@link Double} - Calculated armor adjustment.
+     */
     public double getArmorAdjustment() {
 
         return this.armorAdjustment;
 
     }
 
+    /**
+     * Get the temperature adjustment for the player's environment.
+     * 
+     * @return {@link Double} - Calculated environment adjustment.
+     */
     public double getEnvironmentAdjustment() {
 
         return this.environmentAdjustment;
 
     }
 
+    /**
+     * Get the max temperature the player can handle.
+     * 
+     * @return {@link Double} - Max temperature the player can handle.
+     */
     public double getMaxTemperature() {
 
         return this.maxTemperature;
 
     }
 
+    /**
+     * Get the class configuration of the player.
+     * 
+     * Genearally, you should not need to do this.
+     * 
+     * @return {@link ClassConfig} - Class configuration of the player.
+     */
     public ClassConfig getClassConfig() {
 
         return this.classConfig;
 
     }
 
+    /**
+     * Apply the given modifiers.
+     */
     public void applyClassStats() {
 
         return;
 
     }
 
+    /**
+     * Save the character to SQL.
+     */
     public void saveCharacter() {
 
         // TODO: Create method for adding experience
@@ -309,12 +452,22 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Print the player's information.
+     * 
+     * @return {@link String}
+     */
     public String printPlayer() {
 
         return "";
 
     }
 
+    /**
+     * Calculate the temperature adjustemnet for armor.
+     * 
+     * @return {@link Double}
+     */
     public double calculateArmorAdjustment() {
 
         if (!isOnline())
@@ -395,6 +548,11 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Calculate the temperature adjustemnet for the player's environment.
+     * 
+     * @return {@link Double}
+     */
     public double calculateEnvironmentAdjustment() {
 
         if (!isOnline())
@@ -464,6 +622,14 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Set the player as offline.
+     * 
+     * <p>
+     * This will set the {@link Player} to null.
+     * <p>
+     * This will set the {@link OfflinePlayer} to its designated object.
+     */
     public void setOffline() {
 
         this.isOnline = false;
@@ -472,6 +638,12 @@ public class HistoriaPlayer {
 
     }
 
+    /**
+     * Set the player as online.
+     * 
+     * This will set the {@link OnlinePlayer} to its designated object.
+     * This will set the {@link OfflinePlayer} to null.
+     */
     public void setOnline() {
 
         this.isOnline = true;
