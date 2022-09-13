@@ -10,7 +10,7 @@ import discord4j.core.object.presence.ClientPresence;
 public class HistoriaDiscord {
 
     private static final DiscordClient CLIENT = DiscordClient
-            .create("MzYxOTk2ODY4MjY1NDQzMzQw.GD9rLX.JL2GVRyDV8-BXc_dUxSW6QZpbR7jfq5gwAeU9I");
+            .create("MzYxOTk2ODY4MjY1NDQzMzQw.G4SKSu.51wSxeVIGhvOkiThmawJR0xZ2VxH0M0sSs6vMY");
     private static final GatewayDiscordClient GATEWAY_CLIENT = CLIENT.login().block();
     
     public static GatewayDiscordClient getClient() {
