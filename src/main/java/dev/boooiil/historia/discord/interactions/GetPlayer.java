@@ -39,6 +39,7 @@ public class GetPlayer {
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
                 .addField("Class", historiaPlayer.getClassName(), true)
                 .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
+                .addField("Experience", historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience(), true)
                 .addField("Playtime", DateUtil.convertMillisecondsIntoStringTime(historiaPlayer.getPlaytime(), false), true)
                 .thumbnail("https://minotar.net/avatar/" + historiaPlayer.getUUID())
                 .timestamp(Instant.ofEpochMilli(historiaPlayer.getLastLogin() > historiaPlayer.getLastLogout() ? historiaPlayer.getLastLogin() : historiaPlayer.getLastLogout()))
