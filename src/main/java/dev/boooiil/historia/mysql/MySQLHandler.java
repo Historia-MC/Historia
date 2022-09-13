@@ -577,7 +577,12 @@ public class MySQLHandler {
             Logging.warnToConsole("Reconnected to SQL Server.");
 
             Logging.warnToConsole("Resending query...");
-            return connection.createStatement().executeQuery(query);
+
+            ResultSet result = connection.createStatement().executeQuery(query);
+
+            result.next();
+            
+            return result;
 
         } catch (SQLException sqlE) {
 
