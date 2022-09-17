@@ -464,8 +464,6 @@ public class MySQLHandler {
         catch(CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-
-            cE.printStackTrace();
             
             try {
 
