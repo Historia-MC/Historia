@@ -46,11 +46,14 @@ public class HistoriaPlayer {
     private double maxTemperature;
 
     private float baseHealth;
+    private float maxHealth;
     private float modifiedHealth;
 
-    private float baseExperience;
-    private float experienceTotal;
-    private float experienceMax;
+    private float baseExperienceGain;
+
+    private double baseExperience;
+    private double experienceTotal;
+    private double experienceMax;
 
     private ClassConfig classConfig;
 
@@ -97,11 +100,18 @@ public class HistoriaPlayer {
         this.isOnline = this.onlinePlayer == null ? false : true;
 
         this.level = Integer.parseInt(user.get("level"));
+
+        this.baseExperience = Math.pow(this.level - 1, 1.68);
         this.experienceTotal = Float.parseFloat(user.get("experience"));
+        this.experienceMax = Math.pow(this.level, 1.68);
 
         this.classConfig = ClassConfig.getConfig(this.className);
 
+        this.baseExperienceGain = this.classConfig.baseExperienceGain;
+
         this.baseHealth = this.classConfig.baseHealth;
+        this.maxHealth = this.classConfig.maxHealth;
+        this.modifiedHealth = (this.baseHealth + ((this.maxHealth - this.baseHealth) / 100)) * this.level;
 
         this.lastLogin = Long.parseLong(user.get("login"));
         this.lastLogout = Long.parseLong(user.get("logout"));
@@ -244,6 +254,17 @@ public class HistoriaPlayer {
 
     }
 
+        /**
+     * Get the class' base health.
+     * 
+     * @return {@link Float} The class' base health.
+     */
+    public float getMaxHealth() {
+
+        return this.maxHealth;
+
+    }
+
     /**
      * Get the class' modified health.
      * 
@@ -260,7 +281,7 @@ public class HistoriaPlayer {
      * 
      * @return {@link Float} The class' base experience.
      */
-    public float getBaseExperience() {
+    public double getBaseExperience() {
 
         return this.baseExperience;
 
@@ -271,7 +292,7 @@ public class HistoriaPlayer {
      * 
      * @return {@link Float} The class' current experience.
      */
-    public float getTotalExperience() {
+    public double getTotalExperience() {
 
         return this.experienceTotal;
 
@@ -282,7 +303,7 @@ public class HistoriaPlayer {
      * 
      * @return {@link Float} The class' calculated experience max.
      */
-    public float getMaxExperience() {
+    public double getMaxExperience() {
 
         return this.experienceMax;
 
