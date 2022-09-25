@@ -22,12 +22,9 @@ import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.FurnaceSmeltStart;
 import dev.boooiil.historia.events.PlayerBreakBlock;
-import dev.boooiil.historia.events.PlayerHit;
 import dev.boooiil.historia.events.PlayerJoin;
-import dev.boooiil.historia.events.PlayerKilled;
 import dev.boooiil.historia.events.PlayerLeave;
 import dev.boooiil.historia.mysql.MySQLHandler;
-import dev.boooiil.historia.timers.SpawnKillTimer;
 import dev.boooiil.historia.util.Logging;
 
 public class Main extends JavaPlugin {
@@ -75,8 +72,6 @@ public class Main extends JavaPlugin {
         OreConfig.init();
         IngotConfig.init();
 
-        registerEvent(new PlayerKilled());
-        registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerBreakBlock());
@@ -89,8 +84,6 @@ public class Main extends JavaPlugin {
         Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();
         Logging.infoToConsole("MySQL Loaded.");
-
-        SpawnKillTimer.timer();
 
         Logging.infoToConsole("Plugin Enabled.");
 
