@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 
 import dev.boooiil.historia.configuration.IngotConfig;
-import dev.boooiil.historia.configuration.IngotConfig.Ingot;
+import dev.boooiil.historia.classes.Ingot;
 
 
 public class FurnaceSmeltFinish implements Listener {
