@@ -7,10 +7,12 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.FileGetter;
 
-public class WeaponConfig {
+public class WeaponConfig extends Configuration {
+    
     private static FileConfiguration configuration = FileGetter.get("ingots.yml");
 
     static final Set<String> weaponSet = configuration.getKeys(false);

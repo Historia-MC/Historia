@@ -8,12 +8,13 @@ import java.util.Set;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.classes.Ore;
 import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.classes.OreManager;
 import dev.boooiil.historia.util.FileGetter;
 
-public class OreConfig {
+public class OreConfig extends Configuration {
 
     private static FileConfiguration configuration = FileGetter.get("ores.yml");
 
@@ -42,12 +43,6 @@ public class OreConfig {
 
     }
 
-    public static FileConfiguration getConfiguration() {
-
-        return configuration;
-
-    }
-    
     public static OreManager getOreManager(String oreName) {
 
         if (isValidOre(oreName)) {

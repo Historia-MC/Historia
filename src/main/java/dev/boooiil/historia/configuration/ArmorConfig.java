@@ -11,9 +11,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.util.FileGetter;
+import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.util.Construct;
 
-public class ArmorConfig {
+public class ArmorConfig extends Configuration {
 
     private static FileConfiguration configuration = FileGetter.get("amror.yml");
 
