@@ -16,7 +16,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
-import dev.boooiil.historia.configuration.ClassConfig;
+import dev.boooiil.historia.abstractions.HistoriaClass;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
@@ -40,22 +40,19 @@ public class HistoriaPlayer {
     private long lastLogout;
     private long playtime;
 
+    private float maxHealth;
+    private float modifiedHealth;
+
     private double currentTemperature;
     private double armorAdjustment;
     private double environmentAdjustment;
     private double maxTemperature;
 
-    private float baseHealth;
-    private float maxHealth;
-    private float modifiedHealth;
-
-    private float baseExperienceGain;
-
     private double baseExperience;
     private double experienceTotal;
     private double experienceMax;
 
-    private ClassConfig classConfig;
+    private HistoriaClass historiaClass;
 
     private Player onlinePlayer;
     private OfflinePlayer offlinePlayer;
@@ -95,23 +92,16 @@ public class HistoriaPlayer {
         Map<String, String> user = MySQLHandler.getUser(uuid);
 
         this.className = user.get("class");
+        this.historiaClass = new HistoriaClass(this.className);
 
         this.isValid = true;
         this.isOnline = this.onlinePlayer == null ? false : true;
 
         this.level = Integer.parseInt(user.get("level"));
 
-        this.baseExperience = Math.pow(this.level - 1, 1.68);
+        this.baseExperience = Math.pow(this.level - 1, this.historiaClass.getBaseExperienceMod());
         this.experienceTotal = Float.parseFloat(user.get("experience"));
         this.experienceMax = Math.pow(this.level, 1.68);
-
-        this.classConfig = ClassConfig.getConfig(this.className);
-
-        this.baseExperienceGain = this.classConfig.baseExperienceGain;
-
-        this.baseHealth = this.classConfig.baseHealth;
-        this.maxHealth = this.classConfig.maxHealth;
-        this.modifiedHealth = (this.baseHealth + ((this.maxHealth - this.baseHealth) / 100)) * this.level;
 
         this.lastLogin = Long.parseLong(user.get("login"));
         this.lastLogout = Long.parseLong(user.get("logout"));
@@ -250,11 +240,11 @@ public class HistoriaPlayer {
      */
     public float getBaseHealth() {
 
-        return this.baseHealth;
+        return this.historiaClass.getBaseHealth();
 
     }
 
-        /**
+    /**
      * Get the class' base health.
      * 
      * @return {@link Float} The class' base health.
@@ -420,19 +410,6 @@ public class HistoriaPlayer {
     }
 
     /**
-     * Get the class configuration of the player.
-     * 
-     * Genearally, you should not need to do this.
-     * 
-     * @return {@link ClassConfig} - Class configuration of the player.
-     */
-    public ClassConfig getClassConfig() {
-
-        return this.classConfig;
-
-    }
-
-    /**
      * Apply the given modifiers.
      */
     public void applyClassStats() {
@@ -460,7 +437,7 @@ public class HistoriaPlayer {
         string += this.username + " CN:";
         string += this.className + " LV:";
         string += this.level + " BH:";
-        string += this.baseHealth + " MH:";
+        string += this.getBaseHealth() + " MH:";
         string += this.modifiedHealth + " PT:";
         string += this.playtime + " LI:";
         string += this.lastLogin + " LO:";
@@ -742,13 +719,13 @@ public class HistoriaPlayer {
 
             }
 
-            if (nBlock.getType().equals(Material.FIRE) || nBlock.getType().equals(Material.CAMPFIRE)
-                    || nBlock.getType().equals(Material.LAVA)) {
+            if (nBlock != null && (nBlock.getType().equals(Material.FIRE) || nBlock.getType().equals(Material.CAMPFIRE)
+                    || nBlock.getType().equals(Material.LAVA))) {
 
                 found[1] = true;
 
             }
-
+            
         }
 
         return found;
