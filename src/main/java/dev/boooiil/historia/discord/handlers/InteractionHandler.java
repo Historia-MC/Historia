@@ -34,6 +34,8 @@ public class InteractionHandler {
 
         }).subscribe();
 
+        // https://docs.discord4j.com/error-handling
+
     }
 
     public static ApplicationCommandRequest[] getInteractions() {
