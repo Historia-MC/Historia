@@ -106,7 +106,7 @@ public class ClassConfig extends Configuration {
             this.canIgniteOil = configuration.getBoolean(skillRoot + ".igniteOil");
 
         }
-
+ 
         this.weaponProficiency = configuration.getStringList(statsRoot + ".weaponProficiency");
         this.armorProficiency = configuration.getStringList(statsRoot + ".armorProficiency");
 
