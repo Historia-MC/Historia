@@ -5,5 +5,4 @@ target/
 .factorypath
 Maven/
 .vscode/
-historia.code-workspace
 pom.xml
