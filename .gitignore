@@ -3,5 +3,4 @@ target/
 .classpath
 .project
 .factorypath
-.vscode/
 pom.xml
