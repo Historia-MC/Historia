@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.classes.Ore;
@@ -16,9 +15,9 @@ import dev.boooiil.historia.util.FileGetter;
 
 public class OreConfig extends Configuration {
 
-    private static FileConfiguration configuration = FileGetter.get("ores.yml");
+    //private static FileConfiguration configuration = FileGetter.get("ores.yml");
 
-    private static final Set<String> oreSet = configuration.getKeys(false);
+    //private static final Set<String> oreSet = configuration.getKeys(false);
 
     private static final HashMap<String, OreManager> oreMap = new HashMap<>();
 
@@ -31,7 +30,10 @@ public class OreConfig extends Configuration {
 
     public static void init() {
 
-        for (String ore : oreSet) {
+        configuration = FileGetter.get("ores.yml");
+        keySet = configuration.getKeys(false);
+
+        for (String ore : keySet) {
 
             if (!ore.equals("version")) {
 
@@ -80,9 +82,10 @@ public class OreConfig extends Configuration {
         else return null;
 
     }
+    
     public static List<Material> getOreBlocks() {
 
-        Set<String> blocks = oreSet;
+        Set<String> blocks = keySet;
         List<Material> found = new ArrayList<>();
 
         for (String block : blocks) {
@@ -97,13 +100,13 @@ public class OreConfig extends Configuration {
 
     public static Set<String> getOreSet() {
 
-        return oreSet;
+        return keySet;
 
     }
 
     public static boolean isValidOre(String oreName) {
 
-        return oreSet.contains(oreName);
+        return keySet.contains(oreName);
 
     }
 }

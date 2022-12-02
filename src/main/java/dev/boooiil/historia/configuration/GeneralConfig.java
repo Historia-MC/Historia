@@ -2,10 +2,9 @@ package dev.boooiil.historia.configuration;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.util.FileGetter;
 
-public class GeneralConfig extends Configuration {
+public class GeneralConfig {
 
     private static FileConfiguration configuration = FileGetter.get("config.yml");
 

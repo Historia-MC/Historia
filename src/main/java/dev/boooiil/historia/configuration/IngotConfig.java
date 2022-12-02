@@ -3,22 +3,20 @@ package dev.boooiil.historia.configuration;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.classes.Ingot;
 import dev.boooiil.historia.util.FileGetter;
 
 public class IngotConfig extends Configuration {
 
-    private static FileConfiguration configuration = FileGetter.get("ingots.yml");
-
-    private static final Set<String> ingotSet = configuration.getKeys(false);
-
     private static final HashMap<String, Ingot> ingotMap = new HashMap<>();
 
     public static void init() {
 
-        for (String ingot : ingotSet) {
+        configuration = FileGetter.get("ingots.yml");
+        keySet = configuration.getKeys(false);
+
+        for (String ingot : keySet) {
 
             if (!ingot.equals("version")) {
 
@@ -58,7 +56,7 @@ public class IngotConfig extends Configuration {
      */
     public static Set<String> getIngotSet() {
 
-        return ingotSet;
+        return keySet;
 
     }
 
@@ -70,7 +68,7 @@ public class IngotConfig extends Configuration {
      */
     public static boolean isValidIngot(String ingotName) {
 
-        return ingotSet.contains(ingotName);
+        return keySet.contains(ingotName);
 
     }
 

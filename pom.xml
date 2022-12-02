@@ -74,6 +74,12 @@
       <version>3.2.2</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -87,7 +93,7 @@
         <version>3.2.0</version>
 
         <configuration>
-          <outputDirectory>E:\Non-AMP\1.19.2 Testing\plugins\</outputDirectory>
+          <outputDirectory>C:\Users\boooi\Desktop\Test Server\plugins\</outputDirectory>
         </configuration>
 
       </plugin>

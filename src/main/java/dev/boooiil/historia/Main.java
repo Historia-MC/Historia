@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.configuration.ArmorConfig;
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
@@ -71,6 +72,7 @@ public class Main extends JavaPlugin {
         
         OreConfig.init();
         IngotConfig.init();
+        ArmorConfig.init();
 
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());

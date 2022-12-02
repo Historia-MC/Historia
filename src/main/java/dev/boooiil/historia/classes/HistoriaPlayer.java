@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -16,6 +17,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
+import dev.boooiil.historia.Main;
 import dev.boooiil.historia.abstractions.HistoriaClass;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
@@ -57,6 +59,8 @@ public class HistoriaPlayer {
     private Player onlinePlayer;
     private OfflinePlayer offlinePlayer;
 
+    protected Server server;
+
     private Resident resident;
     private Town town;
     private Nation nation;
@@ -84,8 +88,13 @@ public class HistoriaPlayer {
 
         this.uuid = uuid;
 
-        this.onlinePlayer = Bukkit.getPlayer(uuid);
-        this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+        if (Main.server() != null) {
+
+            this.onlinePlayer = Bukkit.getPlayer(uuid);
+            this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+        }
+
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.

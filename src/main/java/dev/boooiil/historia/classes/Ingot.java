@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.Logging;
 
 /**
  *
@@ -53,6 +54,11 @@ public class Ingot {
 
             String root = ingotName;
             String itemRoot = ingotName + ".item";
+
+            Logging.infoToConsole(root, itemRoot);
+            Logging.infoToConsole(configuration.toString());
+
+            Logging.infoToConsole(configuration.getString(itemRoot + ".loc-name"));
 
             this.type = configuration.getString(itemRoot + ".type");
             this.localizedName = configuration.getString(itemRoot + ".loc-name");

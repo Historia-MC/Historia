@@ -1,10 +1,14 @@
 package dev.boooiil.historia.abstractions;
 
+import java.util.Set;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
-public abstract class Configuration {
+public class Configuration {
     
-    private static FileConfiguration configuration;
+    protected static FileConfiguration configuration;
+
+    protected static Set<String> keySet;
 
     public static FileConfiguration getConfiguration() {
 
