@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.Logging;
 
 /**
  *
@@ -25,7 +26,9 @@ import dev.boooiil.historia.util.Construct;
  */
 public class Ingot {
 
-    private FileConfiguration configuration = IngotConfig.getConfiguration();
+    public static IngotConfig ingotConfig = new IngotConfig();
+
+    private FileConfiguration configuration = ingotConfig.getConfiguration();
 
     private String type;
     private String localizedName;
@@ -47,7 +50,7 @@ public class Ingot {
     public Ingot(String ingotName) {
 
         // this.itemName = ingotName;
-        this.validIngot = IngotConfig.isValidIngot(ingotName);
+        this.validIngot = ingotConfig.isValidIngot(ingotName);
 
         if (validIngot) {
 
@@ -59,6 +62,8 @@ public class Ingot {
             this.displayName = configuration.getString(itemRoot + ".display-name");
             this.lore = configuration.getStringList(itemRoot + ".lore");
             this.amount = configuration.getInt(itemRoot + ".amount");
+
+            Logging.infoToConsole(ingotName, this.type, this.localizedName, this.displayName, this.lore.toString(), "" + this.amount, configuration.saveToString());
 
             this.itemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
             this.progression = configuration.getString(root + ".smelt_into");
