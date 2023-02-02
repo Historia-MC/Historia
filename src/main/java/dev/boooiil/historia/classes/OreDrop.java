@@ -12,7 +12,7 @@ import dev.boooiil.historia.util.Construct;
  */
 public class OreDrop {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
+    private FileConfiguration configuration = OreManager.oreConfig.getConfiguration();
 
     private String requiredClass;
 
