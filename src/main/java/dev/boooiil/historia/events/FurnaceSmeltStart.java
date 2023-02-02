@@ -4,7 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceStartSmeltEvent;
 
-import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.classes.Ingot;
 
 public class FurnaceSmeltStart implements Listener {
@@ -14,9 +13,9 @@ public class FurnaceSmeltStart implements Listener {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 
-        if (IngotConfig.isValidIngot(localizedName)) {
+        if (Ingot.ingotConfig.isValidIngot(localizedName)) {
 
-            Ingot ingot = IngotConfig.getIngot(localizedName);
+            Ingot ingot = Ingot.ingotConfig.getIngot(localizedName);
 
             event.setTotalCookTime(ingot.getSmeltTime());
             

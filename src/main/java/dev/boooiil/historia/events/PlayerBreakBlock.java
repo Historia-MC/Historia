@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import dev.boooiil.historia.classes.HistoriaPlayer;
-import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.classes.OreDrop;
+import dev.boooiil.historia.classes.OreManager;
 import dev.boooiil.historia.util.PlayerStorage;
 
 public class PlayerBreakBlock implements Listener {
@@ -21,9 +21,9 @@ public class PlayerBreakBlock implements Listener {
         Block block = event.getBlock();
         Material material = block.getType();
 
-        if (OreConfig.isValidOre(material.toString())) {
+        if (OreManager.oreConfig.isValidOre(material.toString())) {
 
-            OreDrop drop = OreConfig.getDropFromChance(material.toString(), historiaPlayer.getClassName());
+            OreDrop drop = OreManager.oreConfig.getDropFromChance(material.toString(), historiaPlayer.getClassName());
 
             if (drop != null) {
                 
