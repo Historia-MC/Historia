@@ -11,7 +11,9 @@ import dev.boooiil.historia.configuration.OreConfig;
 
 public class OreManager {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
+    public static OreConfig oreConfig = new OreConfig();
+
+    private FileConfiguration configuration = oreConfig.getConfiguration();
     
     private String name;
 
@@ -19,9 +21,10 @@ public class OreManager {
 
     private List<Ore> ores = new ArrayList<Ore>();
 
+    //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
     public OreManager(String oreName) {
 
-        if (OreConfig.isValidOre(oreName)) {
+        if (oreConfig.isValidOre(oreName)) {
 
             String root = oreName;
 
