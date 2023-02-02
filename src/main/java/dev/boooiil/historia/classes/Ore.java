@@ -14,7 +14,7 @@ import dev.boooiil.historia.configuration.OreConfig;
  */
 public class Ore {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
+    private FileConfiguration configuration = OreManager.oreConfig.getConfiguration();
     
     public String name;
     public int chance;
