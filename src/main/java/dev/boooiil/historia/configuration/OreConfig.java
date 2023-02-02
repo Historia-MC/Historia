@@ -1,26 +1,23 @@
 package dev.boooiil.historia.configuration;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.classes.Ore;
 import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.classes.OreManager;
-import dev.boooiil.historia.util.FileGetter;
 
 public class OreConfig extends Configuration {
 
-    private static FileConfiguration configuration = FileGetter.get("ores.yml");
+    //private static FileConfiguration configuration = FileGetter.get("ores.yml");
 
-    private static final Set<String> oreSet = configuration.getKeys(false);
+    //private static final Set<String> oreSet = configuration.getKeys(false);
 
-    private static final HashMap<String, OreManager> oreMap = new HashMap<>();
+    //private static final HashMap<String, OreManager> oreMap = new HashMap<>();
 
     /**
      * 
@@ -29,32 +26,24 @@ public class OreConfig extends Configuration {
      * 
      */
 
-    public static void init() {
+    public OreConfig() {
 
-        for (String ore : oreSet) {
-
-            if (!ore.equals("version")) {
-
-                oreMap.put(ore, new OreManager(ore));
-                
-            }
-
-        }
+        super("ores.yml", OreManager.class);
 
     }
 
-    public static OreManager getOreManager(String oreName) {
+    public OreManager getOreManager(String oreName) {
 
         if (isValidOre(oreName)) {
 
-            return oreMap.get(oreName);
+            return (OreManager) map.get(oreName);
 
         }
         else return null;
 
     }
 
-    public static Ore getOreFromChance(String oreName) {
+    public Ore getOreFromChance(String oreName) {
 
         OreManager oreManager = getOreManager(oreName);
 
@@ -67,7 +56,7 @@ public class OreConfig extends Configuration {
 
     }
 
-    public static OreDrop getDropFromChance(String oreName, String className) {
+    public OreDrop getDropFromChance(String oreName, String className) {
 
         Ore ore = getOreFromChance(oreName);
 
@@ -80,9 +69,10 @@ public class OreConfig extends Configuration {
         else return null;
 
     }
-    public static List<Material> getOreBlocks() {
+    
+    public List<Material> getOreBlocks() {
 
-        Set<String> blocks = oreSet;
+        Set<String> blocks = set;
         List<Material> found = new ArrayList<>();
 
         for (String block : blocks) {
@@ -95,15 +85,9 @@ public class OreConfig extends Configuration {
 
     }
 
-    public static Set<String> getOreSet() {
+    public boolean isValidOre(String oreName) {
 
-        return oreSet;
-
-    }
-
-    public static boolean isValidOre(String oreName) {
-
-        return oreSet.contains(oreName);
+        return set.contains(oreName);
 
     }
 }
