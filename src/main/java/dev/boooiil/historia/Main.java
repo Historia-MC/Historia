@@ -16,8 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
-import dev.boooiil.historia.configuration.IngotConfig;
-import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.FurnaceSmeltStart;
@@ -68,9 +66,6 @@ public class Main extends JavaPlugin {
 
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
-        
-        OreConfig.init();
-        IngotConfig.init();
 
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
