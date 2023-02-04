@@ -13,20 +13,12 @@ import dev.boooiil.historia.util.Construct;
 /**
  *
  * Constructs specific information from a given armor.
- * 
- * To access the constructor in Armor:
- * 
- * <pre>
- * {
- *     ArmorConfig armorConfig = new ArmorConfig();
- *     ArmorConfig.Armor armor = armorConfig.new Armor(armorName);
- * }
- * </pre>
  *
  */
 public class Armor {
 
-    private FileConfiguration configuration = ArmorConfig.getConfiguration();
+    private ArmorConfig armorConfig = new ArmorConfig();
+    private FileConfiguration configuration = armorConfig.getConfiguration();
 
     private String type;
 
@@ -43,7 +35,7 @@ public class Armor {
 
     public Armor(String armorName) {
 
-        this.valid = ArmorConfig.validArmor(armorName);
+        this.valid = armorConfig.validArmor(armorName);
 
         if (this.valid) {
 
