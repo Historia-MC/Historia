@@ -1,4 +1,4 @@
-package dev.boooiil.historia.abstractions;
+package dev.boooiil.historia.classes;
 
 import dev.boooiil.historia.configuration.ClassConfig;
 

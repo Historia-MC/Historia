@@ -1,4 +1,4 @@
-package dev.boooiil.historia.abstractions;
+package dev.boooiil.historia.classes;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
