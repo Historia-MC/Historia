@@ -16,7 +16,6 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
-import dev.boooiil.historia.abstractions.HistoriaClass;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;

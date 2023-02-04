@@ -7,7 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import dev.boooiil.historia.abstractions.Configuration;
+import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.FileGetter;
 

@@ -1,6 +1,6 @@
 package dev.boooiil.historia.configuration;
 
-import dev.boooiil.historia.abstractions.Configuration;
+import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.Ingot;
 
 public class IngotConfig extends Configuration {

@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.util.FileGetter;
 
-public class ClassConfig extends Configuration {
+public class ClassConfig {
 
     private static FileConfiguration configuration = FileGetter.get("classes.yml");
 
