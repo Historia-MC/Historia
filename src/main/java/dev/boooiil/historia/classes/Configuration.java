@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.util.FileGetter;
 
-public abstract class Configuration {
+public class Configuration {
 
     protected FileConfiguration configuration;
     protected Set<String> set;

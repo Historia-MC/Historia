@@ -22,5 +22,6 @@
         "java.dependency.packagePresentation": "hierarchical",
         "editor.codeLens": false,
         "maven.executable.path": "./Maven/bin/mvn.cmd",
+        "java.compile.nullAnalysis.mode": "automatic",
     }
 }
