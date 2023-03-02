@@ -14,19 +14,11 @@ public class ArmorConfig extends Configuration {
 
     }
 
-    public boolean validArmor(String armorName) {
-
-        return set.contains(armorName);
-
-    }
-
     public Armor getArmor(List<String> inputItems, List<String> inputShape) {
 
         Armor armor = null;
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-
-            
 
             boolean armorValid = ((Armor) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
@@ -40,7 +32,7 @@ public class ArmorConfig extends Configuration {
 
     public Armor getArmor(String armorName) {
 
-        if (validArmor(armorName)) return (Armor) map.get(armorName);
+        if (isValid(armorName)) return (Armor) map.get(armorName);
         else return null;
 
     }
