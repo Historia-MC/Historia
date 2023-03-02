@@ -35,7 +35,7 @@ public class Armor {
 
     public Armor(String armorName) {
 
-        this.valid = armorConfig.validArmor(armorName);
+        this.valid = armorConfig.isValid(armorName);
 
         if (this.valid) {
 
