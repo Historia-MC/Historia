@@ -4,7 +4,7 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -14,7 +14,7 @@
   </properties>
 
   <scm>
-    <developerConnection>scm:svn:file://${project.directory}/tags/Historia-1.0.0</developerConnection>
+    <developerConnection>scm:git:git://github.com/Historia-MC/Historia</developerConnection>
   </scm>
 
   <repositories>
