@@ -4,7 +4,7 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -12,6 +12,10 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
+
+  <scm>
+    <developerConnection>scm:svn:file://${project.directory}/tags/Historia-1.0.0</developerConnection>
+  </scm>
 
   <repositories>
 
@@ -127,17 +131,10 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-release-plugin</artifactId>
         <version>2.5.3</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-invoker</artifactId>
-            <version>3.2.0</version>
-          </dependency>
-        </dependencies>
         <configuration>
-          <stagingRepository>
-            localforme::default::file://C:/Users/boooi/.m2/repository
-          </stagingRepository>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
         </configuration>
       </plugin>
 
