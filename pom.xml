@@ -4,7 +4,7 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.19.2-R0.1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.19.2-R0.1-SNAPSHOT</version>
+      <version>1.19.4-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
-      <version>0.98.3.0</version>
+      <version>0.98.6.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -71,7 +71,7 @@
     <dependency>
       <groupId>com.discord4j</groupId>
       <artifactId>discord4j-core</artifactId>
-      <version>3.2.2</version>
+      <version>3.2.4</version>
     </dependency>
 
   </dependencies>
@@ -80,6 +80,7 @@
     <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 
     <plugins>
+
       <plugin>
 
         <groupId>org.apache.maven.plugins</groupId>
@@ -87,7 +88,7 @@
         <version>3.2.0</version>
 
         <configuration>
-          <outputDirectory>E:\Non-AMP\1.19.2 Testing\plugins\</outputDirectory>
+          <outputDirectory>C:\Users\boooi\Desktop\Plugin Test Server\plugins\</outputDirectory>
         </configuration>
 
       </plugin>
@@ -100,6 +101,7 @@
           <target>17</target>
         </configuration>
       </plugin>
+
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.4</version>
@@ -119,6 +121,24 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-invoker</artifactId>
+            <version>3.2.0</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <stagingRepository>
+            localforme::default::file://C:/Users/boooi/.m2/repository
+          </stagingRepository>
+        </configuration>
       </plugin>
 
     </plugins>
