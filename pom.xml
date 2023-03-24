@@ -20,7 +20,7 @@
 
   <distributionManagement>
     <repository>
-      <uniqueVersion>true</uniqueVersion>
+      <uniqueVersion>false</uniqueVersion>
       <id>boooiil</id>
       <name>Historia Base Plugin</name>
       <url>file://C:\Users\boooi\Desktop\Repos\Historia\Release\</url>
