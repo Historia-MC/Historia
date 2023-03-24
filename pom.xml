@@ -18,6 +18,16 @@
     <tag>HEAD</tag>
   </scm>
 
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>boooiil</id>
+      <name>Historia Base Plugin</name>
+      <url>file://${project.basedir}/</url>
+      <layout>default</layout>
+    </repository>
+  </distributionManagement>
+
   <repositories>
 
     <repository>
