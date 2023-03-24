@@ -23,7 +23,7 @@
       <uniqueVersion>true</uniqueVersion>
       <id>boooiil</id>
       <name>Historia Base Plugin</name>
-      <url>file://${project.basedir}/</url>
+      <url>file://C:\Users\boooi\Desktop\Repos\Historia\Release\</url>
       <layout>default</layout>
     </repository>
   </distributionManagement>
