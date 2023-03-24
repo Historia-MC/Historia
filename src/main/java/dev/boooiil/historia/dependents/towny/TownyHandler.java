@@ -212,7 +212,7 @@ public class TownyHandler {
     /**
      * Get the player's current spawn block location.
      * 
-     * @param playerName
+     * @param uuid
      * @return The player's spawn block location.
      * 
      * @see <a href=

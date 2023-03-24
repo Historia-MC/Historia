@@ -38,14 +38,9 @@ public class MySQLHandler {
 
     private static Connection connection;
 
-    private MySQLHandler() {
-        throw new IllegalStateException("This class should not be initialized.");
-    }
-
     /**
      * Create the table in the database if it does not exist.
      * 
-     * @throws SQLException Generally, if the plugin can't connect to the database.
      */
     public static void createTable() {
 
@@ -321,19 +316,19 @@ public class MySQLHandler {
      *
      * @return
      *         <p>
-     *         <"UUID", {@link java.lang.String String}>
+     *         "UUID", {@link java.lang.String String}
      *         <p>
-     *         <"Username", {@link java.lang.String String}>
+     *         "Username", {@link java.lang.String String}
      *         <p>
-     *         <"Class", {@link java.lang.String String}>
+     *         "Class", {@link java.lang.String String}
      *         <p>
-     *         <"Level", {@link java.lang.String String}>
+     *         "Level", {@link java.lang.String String}
      *         <p>
-     *         <"Experience", {@link java.lang.String String}>
+     *         "Experience", {@link java.lang.String String}
      *         <p>
-     *         <"Login", {@link java.lang.String String}>
+     *         "Login", {@link java.lang.String String}
      *         <p>
-     *         <"Logout", {@link java.lang.String String}>
+     *         "Logout", {@link java.lang.String String}
      * 
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
@@ -589,5 +584,9 @@ public class MySQLHandler {
 
             return null;
         }
+    }
+
+    private MySQLHandler() {
+        throw new IllegalStateException("This class should not be initialized.");
     }
 }

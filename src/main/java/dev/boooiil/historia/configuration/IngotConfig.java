@@ -31,7 +31,7 @@ public class IngotConfig extends Configuration {
     /**
      * If the ingot provided is in ingots.yml.
      * 
-     * @param blockName - Name of the ingot to check.
+     * @param ingotName - Name of the ingot to check.
      * @return If the ingot provided is in ingots.yml.
      */
     public boolean isValidIngot(String ingotName) {

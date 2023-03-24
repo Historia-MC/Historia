@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.ArmorConfig;
+import dev.boooiil.historia.definitions.ArmorTypes;
 import dev.boooiil.historia.util.Construct;
 
 /**
@@ -20,7 +21,7 @@ public class Armor {
     private ArmorConfig armorConfig = new ArmorConfig();
     private FileConfiguration configuration = armorConfig.getConfiguration();
 
-    private String type;
+    private ArmorTypes type;
 
     private Integer weight;
 
@@ -33,6 +34,10 @@ public class Armor {
 
     private boolean valid;
 
+    /**
+     * Class constructor
+     * @param armorName - Name of the armor
+     */
     public Armor(String armorName) {
 
         this.valid = armorConfig.isValid(armorName);
@@ -41,7 +46,7 @@ public class Armor {
 
             String itemRoot = armorName + ".item";
 
-            this.type = configuration.getString(itemRoot + ".type");
+            this.type = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type"));
 
             this.weight = configuration.getInt(itemRoot + ".weight");
 
@@ -64,18 +69,30 @@ public class Armor {
 
     }
 
-    public String getType() {
+    /**
+     * Get the type (weight class) of armor.
+     * @return Type of armor.
+     */
+    public ArmorTypes getType() {
 
         return this.type;
 
     }
 
+    /**
+     * Get the weight of the armor.
+     * @return Weight of the armor.
+     */
     public Integer getWeight() {
 
         return this.weight;
 
     }
 
+    /**
+     * Get the randomized defense value of the armor.
+     * @return Defence value.
+     */
     public Double getRandomDefenseValue() {
 
         Random random = new Random();
@@ -85,6 +102,10 @@ public class Armor {
 
     }
 
+    /**
+     * Get the randomized durability value of the armor.
+     * @return Durability value.
+     */
     public Integer getRandomDurabilityValue() {
 
         Random random = new Random();
@@ -95,48 +116,88 @@ public class Armor {
 
     }
 
+    /**
+     * Get the recipe items needed to complete this recipe.
+     * @return List of recipe items.
+     */
     public List<String> getRecipeItems() {
 
         return this.recipeItems;
 
     }
 
+    /**
+     * Get the recipe shape needed to complete this recipe.
+     * <p>List is denoted as:
+     * 
+     *   <p>| X  X  X|
+     *   <p>| X  X  X|
+     *   <p>| X  X  X|
+     * 
+     * <p>... where each row is a corresponding list item.
+     * @return Recipe shape.
+     */
     public List<String> getRecipeShape() {
 
         return this.recipeShape;
 
     }
 
+    /**
+     * Get the minimum base defense value of the armor.
+     * @return Defense value.
+     */
     public Double getMinDefenceValue() {
 
         return this.defense.get(0);
 
     }
 
+    /**
+     * Get the maximum base defense value of the armor.
+     * @return Defence value.
+     */
     public Double getMaxDefenceValue() {
 
         return this.defense.get(1);
 
     }
 
+    /**
+     * Get the minimum base durability value of the armor.
+     * @return Durability value.
+     */
     public Integer getMinDurabilityValue() {
 
         return this.durability.get(0);
 
     }
 
+    /**
+     * Get the minimum base durability value of the armor.
+     * @return Durability value.
+     */
     public Integer getMaxDurabilityValue() {
 
         return this.durability.get(1);
 
     }
 
+    /**
+     * Get the item corresponding to this armor.
+     * @return {@link ItemStack}
+     */
     public ItemStack getItemStack() {
 
         return this.itemStack;
 
     }
 
+    /**
+     * Validate recipe of items to see if it matches an armor.
+     * @param inputItems List of recipe items.
+     * @param inputShape Recipe shape.
+     */
     public Boolean isValidRecipe(List<String> inputItems, List<String> inputShape) {
 
         boolean validItems = this.recipeItems.equals(inputItems);

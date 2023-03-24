@@ -26,29 +26,6 @@ public class Configuration {
 
     }
 
-    private <T> void populateMap(Class<T> TargetObject, Object... args) {
-
-        for (String key : set) {
-
-            if (!key.equals("version")) {
-
-                try {
-
-                    map.put(key, TargetObject.getDeclaredConstructor().newInstance(args));
-
-                } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-
-
-        }
-
-    }
-
     public FileConfiguration getConfiguration() {
 
         return configuration;
@@ -79,12 +56,35 @@ public class Configuration {
     /**
      * If the key is in the configuration.
      * 
-     * @param blockName - Name of the ingot to check.
+     * @param key - Name of the ingot to check.
      * @return If the ingot provided is in ingots.yml.
      */
     public boolean isValid(String key) {
 
         return set.contains(key);
+
+    }
+
+    private <T> void populateMap(Class<T> TargetObject, Object... args) {
+
+        for (String key : set) {
+
+            if (!key.equals("version")) {
+
+                try {
+
+                    map.put(key, TargetObject.getDeclaredConstructor().newInstance(args));
+
+                } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+                        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+
+
+        }
 
     }
 }
