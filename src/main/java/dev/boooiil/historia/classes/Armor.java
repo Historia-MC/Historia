@@ -197,6 +197,8 @@ public class Armor {
      * Validate recipe of items to see if it matches an armor.
      * @param inputItems List of recipe items.
      * @param inputShape Recipe shape.
+     * 
+     * @return If the recipe is valid.
      */
     public Boolean isValidRecipe(List<String> inputItems, List<String> inputShape) {
 

@@ -8,12 +8,21 @@ import dev.boooiil.historia.classes.Configuration;
 
 public class ArmorConfig extends Configuration {
 
+    /**
+     * Public constructor.
+     */
     public ArmorConfig() {
 
         super("armor.yml", Armor.class);
 
     }
 
+    /**
+     * Get armor based on recipe items and shape.
+     * @param inputItems List of recipe items.
+     * @param inputShape Recipe shape.
+     * @return Armor object.
+     */
     public Armor getArmor(List<String> inputItems, List<String> inputShape) {
 
         Armor armor = null;
@@ -29,7 +38,12 @@ public class ArmorConfig extends Configuration {
         return armor;
         
     }
-
+    
+    /**
+     * Get armor based on armor name.
+     * @param armorName Armor name.
+     * @return Armor object.
+     */
     public Armor getArmor(String armorName) {
 
         if (isValid(armorName)) return (Armor) map.get(armorName);

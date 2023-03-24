@@ -9,4 +9,8 @@ public class ChannelMap {
      * I might not need this.
      */
 
+    public ChannelMap() {
+        
+    }
+
 }

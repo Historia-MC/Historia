@@ -18,11 +18,11 @@ public class HistoriaClass {
 
             this.classConfig = ClassConfig.getConfig(className); 
 
-            this.baseExperienceGain = classConfig.baseExperienceGain;
+            this.baseExperienceGain = classConfig.getBaseExperienceGain();
             this.baseExperienceMod = 1.68f;
 
-            this.baseHealth = classConfig.baseHealth;
-            this.maxHealth = classConfig.maxHealth;
+            this.baseHealth = classConfig.getBaseHealth();
+            this.maxHealth = classConfig.getMaxHealth();
                   
       }
 
