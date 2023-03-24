@@ -641,8 +641,8 @@ public class HistoriaPlayer {
     /**
      * Set the player as online.
      * 
-     * This will set the {@link OnlinePlayer} to its designated object.
-     * This will set the {@link OfflinePlayer} to null.
+     * This will set the OnlinePlayer to its designated object.
+     * This will set the OfflinePlayer to null.
      */
     public void setOnline() {
 
