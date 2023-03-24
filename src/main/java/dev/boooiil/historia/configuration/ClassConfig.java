@@ -157,8 +157,10 @@ public class ClassConfig {
     public boolean specialItems;
     // ** END MODIFIERS ** //
 
+    // Creating a list of strings called weaponProficiency.
     public List<String> weaponProficiency;
 
+    // Creating a list of strings called armorProficiency.
     public List<String> armorProficiency;
 
     /**

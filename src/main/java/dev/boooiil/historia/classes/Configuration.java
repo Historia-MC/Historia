@@ -8,6 +8,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.util.FileGetter;
 
+/**
+ * It takes a class and a variable number of arguments and creates a new instance of the class for each
+ * key in the set and puts it in the map
+ */
 public class Configuration {
 
     protected FileConfiguration configuration;
@@ -26,6 +30,11 @@ public class Configuration {
 
     }
 
+    /**
+     * It returns the configuration file
+     * 
+     * @return The configuration.
+     */
     public FileConfiguration getConfiguration() {
 
         return configuration;
@@ -47,6 +56,11 @@ public class Configuration {
 
     }
 
+    /**
+     * This function returns a HashMap of String keys and Object values
+     * 
+     * @return A HashMap
+     */
     public HashMap<String, Object> getMap() {
 
         return map;
@@ -65,6 +79,12 @@ public class Configuration {
 
     }
 
+    /**
+     * It takes a class and a variable number of arguments and creates a new instance of the class for
+     * each key in the set and puts it in the map
+     * 
+     * @param TargetObject The class of the object you want to create.
+     */
     private <T> void populateMap(Class<T> TargetObject, Object... args) {
 
         for (String key : set) {

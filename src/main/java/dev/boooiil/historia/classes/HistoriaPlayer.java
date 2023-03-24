@@ -20,6 +20,9 @@ import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
+/**
+ * It's a class that holds all the information about a player
+ */
 public class HistoriaPlayer {
 
     private UUID uuid;

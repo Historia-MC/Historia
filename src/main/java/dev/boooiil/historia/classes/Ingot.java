@@ -26,6 +26,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class Ingot {
 
+    // A static variable that is used to access the ingotConfig class.
     public static IngotConfig ingotConfig = new IngotConfig();
 
     private FileConfiguration configuration = ingotConfig.getConfiguration();
@@ -47,6 +48,7 @@ public class Ingot {
 
     private Ingot progressInto;
 
+    // A constructor.
     public Ingot(String ingotName) {
 
         // this.itemName = ingotName;
@@ -81,36 +83,67 @@ public class Ingot {
 
     }
 
+    /**
+     * It returns the item stack
+     * 
+     * @return The itemStack variable.
+     */
     public ItemStack getItemStack() {
 
         return this.itemStack;
 
     }
 
+    /**
+     * This function returns the smeltTime variable.
+     * 
+     * @return The smeltTime variable.
+     */
     public int getSmeltTime() {
 
         return this.smeltTime;
 
     }
 
+    /**
+     * It returns the amount of items that can be smelted
+     * 
+     * @return The amount of items that are being smelted.
+     */
     public int getSmeltAmount() {
 
         return this.smeltAmount;
 
     }
 
+    /**
+     * This function returns the smeltFail variable.
+     * 
+     * @return The smeltFail variable.
+     */
     public int getFailChance() {
 
         return this.smeltFail;
 
     }
 
+    /**
+     * It returns the Ingot that this Ingot progresses into
+     * 
+     * @return The Ingot object that is being returned is the Ingot object that is being created in the
+     * constructor.
+     */
     public Ingot getProgression() {
 
         return this.progressInto;
 
     }
 
+    /**
+     * This function returns true if the current object has a progression, and false if it does not.
+     * 
+     * @return The method is returning a boolean value.
+     */
     public boolean hasProgression() {
 
         return this.progressInto != null;

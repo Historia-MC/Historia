@@ -19,6 +19,9 @@ import dev.boooiil.historia.configuration.GeneralConfig;
 import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 import dev.boooiil.historia.util.Logging;
 
+/**
+ * It's a class that handles all of the MySQL queries for the plugin.
+ */
 public class MySQLHandler {
 
     // TODO: Do below
@@ -481,6 +484,7 @@ public class MySQLHandler {
     }
 
     @Deprecated
+    // Checking if the fields are empty.
     private static boolean validateFields() {
 
         int caught = 0;
@@ -536,6 +540,12 @@ public class MySQLHandler {
 
     }
 
+    /**
+     * It checks if the user exists in the database
+     * 
+     * @param uuid The UUID of the player
+     * @return A boolean value.
+     */
     private static boolean userExists(UUID uuid) {
 
         String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
@@ -586,6 +596,7 @@ public class MySQLHandler {
         }
     }
 
+    // A private constructor.
     private MySQLHandler() {
         throw new IllegalStateException("This class should not be initialized.");
     }

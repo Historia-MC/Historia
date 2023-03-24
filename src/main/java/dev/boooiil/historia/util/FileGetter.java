@@ -11,8 +11,20 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 
+/**
+ * It checks if a file exists in the plugin's data folder, and if it does, it loads it from there. If
+ * it doesn't, it loads it from the jar.
+ */
 public class FileGetter {
 
+    /**
+     * It takes an array of files and a string, and returns true if the string is the name of one of
+     * the files in the array
+     * 
+     * @param files The array of files to check
+     * @param check The name of the file you want to check for.
+     * @return A boolean value.
+     */
     public static boolean find(File[] files, String check) {
 
         for (File file : files) {
@@ -25,6 +37,13 @@ public class FileGetter {
 
     }
 
+    /**
+     * If the file exists in the external directory, load it from there. If it doesn't, load it from
+     * the internal directory
+     * 
+     * @param check The file name to check for.
+     * @return A FileConfiguration object.
+     */
     public static FileConfiguration get(String check) {
 
         FileConfiguration config;

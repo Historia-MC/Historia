@@ -9,9 +9,13 @@ import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
+/**
+ * It's a command that allows a player to view the debug information of another player
+ */
 public class CommandDebug implements CommandExecutor {
     
     @Override
+    // It's a method that is called when a command is executed.
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         args[0] = args[0].toLowerCase();

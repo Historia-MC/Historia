@@ -6,6 +6,10 @@ import java.util.Map;
 import dev.boooiil.historia.classes.Armor;
 import dev.boooiil.historia.classes.Configuration;
 
+/**
+ * It's a configuration class that extends the Configuration class and adds a method to get armor based
+ * on recipe items and shape.
+ */
 public class ArmorConfig extends Configuration {
 
     /**

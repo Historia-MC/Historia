@@ -20,6 +20,7 @@ public class OreDrop {
 
     private ItemStack item;
 
+    // It's a constructor.
     public OreDrop(String currentRoot, String dropName) {
 
         String root = currentRoot + "." + dropName;

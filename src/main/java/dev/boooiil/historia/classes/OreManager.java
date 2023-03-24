@@ -9,8 +9,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.configuration.OreConfig;
 
+/**
+ * It's a class that manages the ores
+ */
 public class OreManager {
 
+    // Creating a new instance of the OreConfig class.
     public static OreConfig oreConfig = new OreConfig();
 
     private FileConfiguration configuration = oreConfig.getConfiguration();

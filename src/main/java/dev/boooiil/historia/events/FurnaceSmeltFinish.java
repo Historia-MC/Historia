@@ -7,9 +7,14 @@ import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import dev.boooiil.historia.classes.Ingot;
 
 
+/**
+ * I'm trying to get the FurnaceSmeltEvent to fire when a player smelts an item in a furnace.
+ * </code>
+ */
 public class FurnaceSmeltFinish implements Listener {
     
     @EventHandler
+    // It's a method that is called when a player kills another player.
     public void onPlayerKill(FurnaceSmeltEvent event) {
 
         //Not being fired, ??

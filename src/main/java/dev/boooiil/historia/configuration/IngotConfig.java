@@ -3,8 +3,12 @@ package dev.boooiil.historia.configuration;
 import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.Ingot;
 
+/**
+ * It's a configuration class that loads ingots.yml and allows you to get an ingot from it
+ */
 public class IngotConfig extends Configuration {
 
+    // Calling the constructor of the super class.
     public IngotConfig() {
 
         super("ingots.yml", Ingot.class);

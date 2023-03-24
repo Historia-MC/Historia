@@ -5,8 +5,11 @@ package dev.boooiil.historia.definitions;
  */
 public enum ArmorTypes { 
     
+    //Type heavy
     HEAVY("Heavy"), 
+    //Type medium
     MEDIUM("Medium"), 
+    //Type light
     LIGHT("Light"); 
     
     private final String type;

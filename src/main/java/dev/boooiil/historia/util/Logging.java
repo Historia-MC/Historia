@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.GeneralConfig;
 
+/**
+ * It's a class that sends messages to the console, server, or a player
+ */
 public class Logging {
 
     private static final String messagePrefix = "§7[§9Historia§7] ";
@@ -16,6 +19,7 @@ public class Logging {
 
     private static final Logger logger = Main.plugin().getLogger();
     
+    // It's a private constructor that throws an error if someone tries to instantiate the class.
     private Logging() { throw new IllegalAccessError( "Static utility class."); }
 
     /**

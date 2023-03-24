@@ -12,9 +12,13 @@ import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
+/**
+ * It's a command that lists all the players in the game
+ */
 public class CommandPlayers implements CommandExecutor {
     
     @Override
+    // It's a method that is called when a command is executed.
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         String message = "";

@@ -14,8 +14,12 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+/**
+ * It's a class that handles all of the Towny related methods
+ */
 public class TownyHandler {
 
+    // It's a private constructor that throws an exception.
     private TownyHandler() {
         throw new IllegalStateException("Static utility class.");
     }

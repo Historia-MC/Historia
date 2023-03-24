@@ -16,11 +16,12 @@ public class Ore {
 
     private FileConfiguration configuration = OreManager.oreConfig.getConfiguration();
     
-    public String name;
-    public int chance;
+    private String name;
+    private int chance;
 
-    public List<OreDrop> drops = new ArrayList<OreDrop>();
+    private List<OreDrop> drops = new ArrayList<OreDrop>();
 
+    // Creating a new Ore object.
     public Ore(String currentRoot, String oreName) {
 
         String root = currentRoot + "." + oreName;

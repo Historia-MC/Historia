@@ -11,9 +11,15 @@ import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.classes.OreManager;
 import dev.boooiil.historia.util.PlayerStorage;
 
+/**
+ * It's a listener that listens for a player to break a block, and if the block is a valid ore, it
+ * drops the item that the ore is supposed to drop.
+ */
 public class PlayerBreakBlock implements Listener {
 
     @EventHandler
+    // It's a method that listens for a player to break a block, and if the block is a valid ore, it
+    // drops the item that the ore is supposed to drop.
     public void onPlayerKill(BlockBreakEvent event) {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
@@ -36,8 +42,5 @@ public class PlayerBreakBlock implements Listener {
         }
 
     }
-
-    
-
 
 }

@@ -11,6 +11,9 @@ import dev.boooiil.historia.classes.Ore;
 import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.classes.OreManager;
 
+/**
+ * It's a configuration class that loads a configuration file and stores the data in a HashMap
+ */
 public class OreConfig extends Configuration {
 
     //private static FileConfiguration configuration = FileGetter.get("ores.yml");
@@ -32,6 +35,12 @@ public class OreConfig extends Configuration {
 
     }
 
+    /**
+     * If the ore name is valid, return the OreManager object associated with the ore name
+     * 
+     * @param oreName The name of the ore you want to get the OreManager for.
+     * @return The OreManager object.
+     */
     public OreManager getOreManager(String oreName) {
 
         if (isValidOre(oreName)) {
@@ -43,6 +52,13 @@ public class OreConfig extends Configuration {
 
     }
 
+    /**
+     * It gets an ore from a chance
+     * 
+     * @param oreName The name of the ore you want to get the ore from.
+     * @return The Ore object that is being returned is the one that is being returned from the
+     * OreManager class.
+     */
     public Ore getOreFromChance(String oreName) {
 
         OreManager oreManager = getOreManager(oreName);
@@ -56,6 +72,13 @@ public class OreConfig extends Configuration {
 
     }
 
+    /**
+     * It gets the OreDrop from the Ore
+     * 
+     * @param oreName The name of the ore.
+     * @param className The name of the class.
+     * @return The drop from the chance.
+     */
     public OreDrop getDropFromChance(String oreName, String className) {
 
         Ore ore = getOreFromChance(oreName);
@@ -70,6 +93,11 @@ public class OreConfig extends Configuration {
 
     }
     
+    /**
+     * It takes a set of strings, and returns a list of materials
+     * 
+     * @return A list of materials.
+     */
     public List<Material> getOreBlocks() {
 
         Set<String> blocks = set;
@@ -85,6 +113,12 @@ public class OreConfig extends Configuration {
 
     }
 
+    /**
+     * This function checks if the oreName is in the set
+     * 
+     * @param oreName The name of the ore to check.
+     * @return A boolean value.
+     */
     public boolean isValidOre(String oreName) {
 
         return set.contains(oreName);

@@ -25,24 +25,13 @@ import dev.boooiil.historia.events.PlayerLeave;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
+/**
+ * It's a plugin that loads, enables, and disables.
+ */
 public class Main extends JavaPlugin {
 
-    /**
-     * 
-     * 
-     * Server starts => Config loaded => passed to respective handler => other
-     * classes can access the object
-     * 
-     * Config section (class, expiry, etc) passed to respective handler that parses
-     * that infromation into an accessable object.
-     * 
-     * Player logs in and is applied stats based on the configuration stored.
-     * 
-     * Player respawns and is applied stats based on the configuration stored.
-     * 
-     */
-
     @Override
+    // It's a method that is called when the plugin is loaded.
     public void onLoad() {
 
         Logging.infoToConsole("Plugin has loaded.");
@@ -52,6 +41,7 @@ public class Main extends JavaPlugin {
     }
 
     @Override
+    // It's a method that is called when the plugin is enabled.
     public void onEnable() {
 
         Logging.infoToConsole("Checking configs...");
@@ -85,6 +75,7 @@ public class Main extends JavaPlugin {
     }
 
     @Override
+    // It's a method that is called when the plugin is disabled.
     public void onDisable() {
 
         HistoriaDiscord.destroy();
@@ -92,36 +83,68 @@ public class Main extends JavaPlugin {
         getLogger().info("Plugin disabled.");
     }
 
+    /**
+     * It returns the plugin instance
+     * 
+     * @return The plugin object.
+     */
     public static Plugin plugin() {
 
         return Bukkit.getPluginManager().getPlugin("Historia");
 
     }
 
+    /**
+     * It returns the server instance
+     * 
+     * @return The server.
+     */
     public static Server server() {
 
         return plugin().getServer();
 
     }
 
+    /**
+     * It disables the plugin
+     * 
+     * @param plugin The plugin you want to disable.
+     */
     public static void disable(Plugin plugin) {
 
         plugin.getServer().getPluginManager().disablePlugin(plugin);
 
     }
 
+    /**
+     * It registers an event
+     * 
+     * @param event The event you want to register.
+     */
     private void registerEvent(Listener event) {
 
         this.getServer().getPluginManager().registerEvents(event, this);
 
     }
 
+    /**
+     * It registers a command to the server
+     * 
+     * @param commandName The name of the command you want to register.
+     * @param command The command to register
+     */
     private void registerCommand(String commandName, CommandExecutor command) {
 
         this.getCommand(commandName).setExecutor(command);
 
     }
 
+    /**
+     * If the files array is not null, return the length of the array is not equal to 7. If the files
+     * array is null, return true
+     * 
+     * @return The length of the files in the data folder.
+     */
     private boolean isMissingConfig() {
 
         File[] files = this.getDataFolder().listFiles();
@@ -131,6 +154,12 @@ public class Main extends JavaPlugin {
 
     }
 
+    /**
+     * It checks if the config files are missing, and if they are, it returns a list of the missing
+     * config files
+     * 
+     * @return A list of strings.
+     */
     private List<String> missingConfig() {
 
         List<String> check = new ArrayList<>();
@@ -156,6 +185,13 @@ public class Main extends JavaPlugin {
 
     }
 
+    /**
+     * It takes a list of strings, and for each string, it reads the file from the jar, and saves it to
+     * the plugin's data folder
+     * 
+     * @param missingConfig A list of the missing config files.
+     * @return The method is returning a boolean value.
+     */
     private boolean saveConfig(List<String> missingConfig) {
 
         try {
