@@ -42,6 +42,7 @@ public class Main extends JavaPlugin {
 
     @Override
     // It's a method that is called when the plugin is enabled.
+    // Test
     public void onEnable() {
 
         Logging.infoToConsole("Checking configs...");
