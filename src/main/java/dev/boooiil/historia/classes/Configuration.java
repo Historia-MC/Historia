@@ -16,7 +16,7 @@ public abstract class Configuration<T> {
 
     protected FileConfiguration configuration;
     protected Set<String> set;
-    protected HashMap<String, Object> map;
+    protected HashMap<String, T> map;
 
     public void loadConfiguration(String file) {
 
@@ -59,7 +59,7 @@ public abstract class Configuration<T> {
      * 
      * @return A HashMap
      */
-    public HashMap<String, Object> getMap() {
+    public HashMap<String, T> getMap() {
 
         return map;
 
