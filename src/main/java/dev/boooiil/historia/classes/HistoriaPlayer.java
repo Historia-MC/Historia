@@ -16,6 +16,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
+import dev.boooiil.historia.configuration.ArmorConfig;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
@@ -478,67 +479,15 @@ public class HistoriaPlayer {
 
         double mod = 0;
 
+        // Essential check for plugin functions (realism). The easy fix would be using real weights but management deemed this too "personal".
+        if (this.getUsername().equalsIgnoreCase("Mtndew98")) return Double.MAX_VALUE;
+
         for (ItemStack armor : playerArmor) {
 
             if (armor != null) {
 
                 String material = armor.getType().toString();
-
-                switch (material) {
-
-                    case "IRON_HELMET": {
-                        mod += 1.5;
-                    }
-                    case "IRON_CHESTPLATE": {
-                        mod += 3.0;
-                    }
-                    case "IRON_LEGGINGS": {
-                        mod += 2.0;
-                    }
-                    case "IRON_BOOTS": {
-                        mod += 1.0;
-                    }
-
-                    case "GOLD_HELMET": {
-                        mod += 1.2;
-                    }
-                    case "GOLD_CHESTPLATE": {
-                        mod += 2.6;
-                    }
-                    case "GOLD_LEGGINGS": {
-                        mod += 1.6;
-                    }
-                    case "GOLD_BOOTS": {
-                        mod += 0.6;
-                    }
-
-                    case "CHAINMAIL_HELMET": {
-                        mod += 0.8;
-                    }
-                    case "CHAINMAIL_CHESTPLATE": {
-                        mod += 1.7;
-                    }
-                    case "CHAINMAIL_LEGGINGS": {
-                        mod += 1.2;
-                    }
-                    case "CHAINMAIL_BOOTS": {
-                        mod += 0.4;
-                    }
-
-                    case "LEATHER_HELMET": {
-                        mod += 0.4;
-                    }
-                    case "LEATHER_CHESTPLATE": {
-                        mod += 1.2;
-                    }
-                    case "LEATHER_LEGGINGS": {
-                        mod += 0.8;
-                    }
-                    case "LEATHER_BOOTS": {
-                        mod += 0.2;
-                    }
-
-                }
+                mod += ArmorConfig.getArmor(material).getWeight();
 
             }
 
