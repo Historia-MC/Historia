@@ -488,7 +488,7 @@ public class HistoriaPlayer {
             if (armor != null) {
 
                 String material = armor.getType().toString();
-                mod += Config.getArmourConfig().getObject(material).getWeight();
+                mod += Config.getArmorConfig().getObject(material).getWeight();
 
             }
 

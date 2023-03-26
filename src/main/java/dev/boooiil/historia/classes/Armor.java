@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.ArmorConfig;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.definitions.ArmorTypes;
 import dev.boooiil.historia.util.Construct;
 
@@ -18,8 +19,7 @@ import dev.boooiil.historia.util.Construct;
  */
 public class Armor {
 
-    private ArmorConfig armorConfig = new ArmorConfig();
-    private FileConfiguration configuration = armorConfig.getConfiguration();
+    private FileConfiguration configuration = Config.getArmorConfig().getConfiguration();
 
     private ArmorTypes type;
 
@@ -40,7 +40,7 @@ public class Armor {
      */
     public Armor(String armorName) {
 
-        this.valid = armorConfig.isValid(armorName);
+        this.valid = Config.getArmorConfig().isValid(armorName);
 
         if (this.valid) {
 
