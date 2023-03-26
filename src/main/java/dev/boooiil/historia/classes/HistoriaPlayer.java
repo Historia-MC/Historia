@@ -17,6 +17,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
 import dev.boooiil.historia.configuration.ArmorConfig;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
@@ -487,7 +488,7 @@ public class HistoriaPlayer {
             if (armor != null) {
 
                 String material = armor.getType().toString();
-                mod += ArmorConfig.getArmor(material).getWeight();
+                mod += Config.getArmourConfig().getObject(material).getWeight();
 
             }
 
