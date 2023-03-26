@@ -59,6 +59,8 @@ public class Main extends JavaPlugin {
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
 
+        Config.init();
+
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerBreakBlock());
@@ -67,8 +69,6 @@ public class Main extends JavaPlugin {
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
-        
-        Config.init();
 
         Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();
