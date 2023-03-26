@@ -96,4 +96,5 @@ public abstract class Configuration<T> {
     }
 
     public abstract T createNew(String name);
+    public abstract T getObject(String objectName);
 }
