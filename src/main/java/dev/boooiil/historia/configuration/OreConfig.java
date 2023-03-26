@@ -23,17 +23,6 @@ public class OreConfig extends Configuration<OreManager> {
     //private static final HashMap<String, OreManager> oreMap = new HashMap<>();
 
     /**
-     * 
-     * SEE IF WE CNA MOVE THIS TO A STATIC LIST SO THAT WE CAN JUIST CHECK AGAINST
-     * BLOCKS THAT ARE BROKEN INSTEAD OF LOADING A NEW INSTANCE EACH BREAK
-     * 
-     */
-
-    public OreConfig() {
-        super("ores.yml");
-    }
-
-    /**
      * Used to create a new instance of OreManager.
      * 
      * @param oreName - Name of the oreManager to check.

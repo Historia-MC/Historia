@@ -2,14 +2,15 @@ package dev.boooiil.historia.configuration;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.util.FileGetter;
 
 /**
  * It's a class that grabs the configuration file and stores it in a variable.
  */
-public class GeneralConfig extends Configuration<Object> {
+public class GeneralConfig {
     
+    public static FileConfiguration configuration = FileGetter.get("config.yml");
+
     public static boolean debug;
 
     public String username;
@@ -19,8 +20,6 @@ public class GeneralConfig extends Configuration<Object> {
     public String port;
 
     public GeneralConfig() {
-
-        super("config.yml");
 
         System.out.print(configuration.toString());
 
@@ -32,18 +31,6 @@ public class GeneralConfig extends Configuration<Object> {
         
         debug = configuration.getBoolean("debug");
 
-    }
-
-    @Override
-    public Object createNew(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createNew'");
-    }
-
-    @Override
-    public Object getObject(String objectName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getObject'");
     }
 
 }

@@ -8,13 +8,6 @@ import dev.boooiil.historia.classes.Ingot;
  */
 public class IngotConfig extends Configuration<Ingot> {
 
-    // Calling the constructor of the super class.
-    public IngotConfig() {
-
-        super("ingots.yml");
-
-    }
-
     /**
      * Used to create a new instance of Ingot.
      * 

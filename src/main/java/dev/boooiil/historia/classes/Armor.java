@@ -44,9 +44,9 @@ public class Armor {
 
         if (this.valid) {
 
-            String itemRoot = armorName + ".item";
+            String itemRoot = armorName;
 
-            this.type = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type"));
+            this.type = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type").toUpperCase());
 
             this.weight = configuration.getInt(itemRoot + ".weight");
 

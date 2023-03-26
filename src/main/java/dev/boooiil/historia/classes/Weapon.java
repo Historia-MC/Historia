@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.WeaponConfig;
 import dev.boooiil.historia.util.Construct;
 
@@ -15,8 +16,7 @@ import dev.boooiil.historia.util.Construct;
  */
 public class Weapon {
 
-    private WeaponConfig weaponConfig = new WeaponConfig();
-    private FileConfiguration configuration = weaponConfig.getConfiguration();
+    private FileConfiguration configuration = Config.getWeaponConfig().getConfiguration();
         
     private String type;
     private String localizedName;
@@ -47,7 +47,7 @@ public class Weapon {
     // It's a constructor.
     public Weapon(String weaponName) {
 
-        this.valid = weaponConfig.isValid(weaponName);
+        this.valid = Config.getWeaponConfig().isValid(weaponName);
 
         if (valid) {
 
@@ -60,15 +60,15 @@ public class Weapon {
             this.lore = configuration.getStringList(itemRoot + ".lore");
             this.amount = configuration.getInt(itemRoot + ".amount");
 
+            this.type = configuration.getString(root + ".type");
+            this.recipeItems = configuration.getStringList(root + ".recipe-shape");
+            this.recipeShape = configuration.getStringList(root + ".recipe-items");
+
             this.itemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
             this.damageRange = configuration.getDoubleList(root + ".damage");
             this.knockbackRange = configuration.getDoubleList(root + ".knockback");
             this.sweepRange = configuration.getDoubleList(root + ".sweeping");
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
-
-            this.type = configuration.getString(root + ".type");
-            this.recipeItems = configuration.getStringList(root + ".recipe-shape");
-            this.recipeShape = configuration.getStringList(root + ".recipe-items");
 
         }
 

@@ -14,18 +14,6 @@ public class WeaponConfig extends Configuration<Weapon> {
     // private static FileConfiguration configuration = FileGetter.get("ingots.yml");
 
     // static final Set<String> weaponSet = configuration.getKeys(false);
-    
-    /**
-     *
-     * Constructs specific information from a given weapon.
-     *
-     */
-
-    public WeaponConfig() {
-
-        super("weapons.yml");
-
-    }
 
     /**
      * Used to create a new instance of Weapon.

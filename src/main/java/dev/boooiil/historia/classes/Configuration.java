@@ -18,12 +18,6 @@ public abstract class Configuration<T> {
     protected Set<String> set;
     protected HashMap<String, Object> map;
 
-    // Abstracts aren't technically supposed to have constructors
-    // I think, oh well.
-    public Configuration(String file) {
-
-    }
-
     public void loadConfiguration(String file) {
 
         this.configuration = FileGetter.get(file);

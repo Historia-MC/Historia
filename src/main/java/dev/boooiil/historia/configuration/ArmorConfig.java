@@ -13,10 +13,6 @@ import dev.boooiil.historia.classes.Configuration;
  */
 public class ArmorConfig extends Configuration<Armor> {
 
-    public ArmorConfig() {
-        super("armor.yml");
-    }
-
     public Armor createNew(String armourName) {
         return new Armor(armourName);
     }
