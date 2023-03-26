@@ -14,7 +14,7 @@ import dev.boooiil.historia.classes.OreManager;
 /**
  * It's a configuration class that loads a configuration file and stores the data in a HashMap
  */
-public class OreConfig extends Configuration {
+public class OreConfig extends Configuration<OreManager> {
 
     //private static FileConfiguration configuration = FileGetter.get("ores.yml");
 
@@ -30,9 +30,7 @@ public class OreConfig extends Configuration {
      */
 
     public OreConfig() {
-
         super("ores.yml");
-
     }
 
     /**
@@ -53,7 +51,7 @@ public class OreConfig extends Configuration {
      * @param oreName The name of the ore you want to get the OreManager for.
      * @return The OreManager object.
      */
-    public OreManager getOreManager(String oreName) {
+    public OreManager getObject(String oreName) {
 
         if (isValidOre(oreName)) {
 
@@ -73,7 +71,7 @@ public class OreConfig extends Configuration {
      */
     public Ore getOreFromChance(String oreName) {
 
-        OreManager oreManager = getOreManager(oreName);
+        OreManager oreManager = getObject(oreName);
 
         if (oreManager != null) {
 

@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.IngotConfig;
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.Logging;
@@ -26,10 +27,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class Ingot {
 
-    // A static variable that is used to access the ingotConfig class.
-    public static IngotConfig ingotConfig = new IngotConfig();
-
-    private FileConfiguration configuration = ingotConfig.getConfiguration();
+    private FileConfiguration configuration = Config.getIngotConfig().getConfiguration();
 
     private String type;
     private String localizedName;
@@ -52,7 +50,7 @@ public class Ingot {
     public Ingot(String ingotName) {
 
         // this.itemName = ingotName;
-        this.validIngot = ingotConfig.isValidIngot(ingotName);
+        this.validIngot = Config.getIngotConfig().isValidIngot(ingotName);
 
         if (validIngot) {
 

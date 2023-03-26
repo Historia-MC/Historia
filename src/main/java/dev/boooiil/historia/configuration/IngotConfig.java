@@ -32,7 +32,7 @@ public class IngotConfig extends Configuration<Ingot> {
      * ************************** STATIC METHODS **************************
      */
 
-    public Ingot getIngot(String ingotLocName) {
+    public Ingot getObject(String ingotLocName) {
 
         if (isValidIngot(ingotLocName)) {
 

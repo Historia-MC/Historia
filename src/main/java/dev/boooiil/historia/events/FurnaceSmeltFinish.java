@@ -5,6 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 
 import dev.boooiil.historia.classes.Ingot;
+import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.IngotConfig;
 
 
 /**
@@ -13,6 +15,8 @@ import dev.boooiil.historia.classes.Ingot;
  */
 public class FurnaceSmeltFinish implements Listener {
     
+    IngotConfig ingotConfig = Config.getIngotConfig();
+
     @EventHandler
     // It's a method that is called when the FurnaceSmeltEvent is fired.
     public void onFurnaceSmelt(FurnaceSmeltEvent event) {
@@ -21,9 +25,9 @@ public class FurnaceSmeltFinish implements Listener {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 
-        if (Ingot.ingotConfig.isValidIngot(localizedName)) {
+        if (ingotConfig.isValidIngot(localizedName)) {
 
-            Ingot ingot = Ingot.ingotConfig.getIngot(localizedName);
+            Ingot ingot = ingotConfig.getObject(localizedName);
             
             if (ingot.hasProgression()) {
 

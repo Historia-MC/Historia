@@ -15,8 +15,8 @@ import java.util.UUID;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.GeneralConfig;
-import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 import dev.boooiil.historia.util.Logging;
 
 /**
@@ -27,7 +27,7 @@ public class MySQLHandler {
     // TODO: Do below
     // We could create a user cache that loads when we first connect to the database so we are not fetching users every time they connect.
 
-    private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
+    private static GeneralConfig MYSQLCONFIG = Config.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;

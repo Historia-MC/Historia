@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
 
 /**
@@ -14,7 +15,7 @@ import dev.boooiil.historia.configuration.OreConfig;
  */
 public class Ore {
 
-    private FileConfiguration configuration = OreManager.oreConfig.getConfiguration();
+    private FileConfiguration configuration =  Config.getOreConfig().getConfiguration();
     
     private String name;
     private int chance;

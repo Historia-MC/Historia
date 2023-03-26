@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.util.Construct;
 
@@ -12,7 +13,7 @@ import dev.boooiil.historia.util.Construct;
  */
 public class OreDrop {
 
-    private FileConfiguration configuration = OreManager.oreConfig.getConfiguration();
+    private FileConfiguration configuration = Config.getOreConfig().getConfiguration();
 
     private String requiredClass;
 

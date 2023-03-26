@@ -49,7 +49,7 @@ public class WeaponConfig extends Configuration<Weapon> {
      * @param inputShape A list of strings that represent the shape of the weapon.
      * @return A Weapon object.
      */
-    public Weapon getWeapon(List<String> inputItems, List<String> inputShape) {
+    public Weapon getObject(List<String> inputItems, List<String> inputShape) {
 
         Weapon weapon = null;
 
@@ -71,7 +71,7 @@ public class WeaponConfig extends Configuration<Weapon> {
      * @param weaponName The name of the weapon you want to get.
      * @return A Weapon object.
      */
-    public Weapon getWeapon(String weaponName) {
+    public Weapon getObject(String weaponName) {
 
         if (isValid(weaponName)) return (Weapon) map.get(weaponName);
         else return null;
