@@ -9,10 +9,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import dev.boooiil.historia.util.FileGetter;
 
 /**
- * It takes a class and a variable number of arguments and creates a new instance of the class for each
+ * It takes a class and a variable number of arguments and creates a new
+ * instance of the class for each
  * key in the set and puts it in the map
  */
-public class Configuration {
+public abstract class Configuration<T> {
 
     protected FileConfiguration configuration;
     protected Set<String> set;
@@ -20,13 +21,13 @@ public class Configuration {
 
     // Abstracts aren't technically supposed to have constructors
     // I think, oh well.
-    public <T> Configuration(String file, Class<T> targetObject) {
+    public Configuration(String file) {
 
         this.configuration = FileGetter.get(file);
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
 
-        this.populateMap(targetObject);
+        this.populateMap();
 
     }
 
@@ -80,31 +81,19 @@ public class Configuration {
     }
 
     /**
-     * It takes a class and a variable number of arguments and creates a new instance of the class for
+     * It takes a class and a variable number of arguments and creates a new
+     * instance of the class for
      * each key in the set and puts it in the map
      * 
      * @param TargetObject The class of the object you want to create.
      */
-    private <T> void populateMap(Class<T> TargetObject, Object... args) {
+    private void populateMap(Object... args) {
 
-        for (String key : set) {
-
-            if (!key.equals("version")) {
-
-                try {
-
-                    map.put(key, TargetObject.getDeclaredConstructor().newInstance(args));
-
-                } catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-                        | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-
-
-        }
+        for (String key : set)
+            if (!key.equals("version"))
+                map.put(key, createNew(key));
 
     }
+
+    public abstract T createNew(String name);
 }
