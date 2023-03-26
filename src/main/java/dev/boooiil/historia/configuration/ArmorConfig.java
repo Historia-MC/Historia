@@ -1,5 +1,6 @@
 package dev.boooiil.historia.configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +80,24 @@ public class ArmorConfig extends Configuration<Armor> {
         }
 
         return found;
+
+    }
+
+    /**
+     * It returns a list of all the recipes for the armor
+     * 
+     * @return A list of lists of strings.
+     */
+    public List<List<String>> getAllShapes() {
+
+        List<List<String>> set = new ArrayList<>();
+
+        for(Armor armor : map.values()) {
+
+            set.add(armor.getRecipeShape());
+        }
+
+        return set;
 
     }
 }
