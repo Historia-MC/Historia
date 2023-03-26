@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.FurnaceSmeltStart;
@@ -66,6 +67,8 @@ public class Main extends JavaPlugin {
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
+        
+        Config.init();
 
         Logging.infoToConsole("Loading MySQL...");
         MySQLHandler.createTable();
