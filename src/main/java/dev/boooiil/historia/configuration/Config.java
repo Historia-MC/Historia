@@ -1,14 +1,14 @@
 package dev.boooiil.historia.configuration;
 
 public class Config {
-    private static ArmorConfig armourConfig;
+    private static ArmorConfig armorConfig;
     private static IngotConfig ingotConfig;
     private static OreConfig oreConfig;
     private static WeaponConfig weaponConfig;
     private static GeneralConfig generalConfig;
 
     public static ArmorConfig getArmorConfig() {
-        return armourConfig;
+        return armorConfig;
     }
 
     public static IngotConfig getIngotConfig() {
@@ -29,7 +29,8 @@ public class Config {
 
     public static void init() {
 
-        armourConfig = new ArmorConfig();
+        armorConfig = new ArmorConfig();
+        armorConfig.loadConfiguration("armor.yml");
         ingotConfig = new IngotConfig();
         oreConfig = new OreConfig();
         weaponConfig = new WeaponConfig();
@@ -39,7 +40,7 @@ public class Config {
 
     public static void reload() {
 
-        armourConfig = new ArmorConfig();
+        armorConfig = new ArmorConfig();
         ingotConfig = new IngotConfig();
         oreConfig = new OreConfig();
         weaponConfig = new WeaponConfig();

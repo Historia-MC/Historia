@@ -1,6 +1,5 @@
 package dev.boooiil.historia.classes;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -22,6 +21,10 @@ public abstract class Configuration<T> {
     // Abstracts aren't technically supposed to have constructors
     // I think, oh well.
     public Configuration(String file) {
+
+    }
+
+    public void loadConfiguration(String file) {
 
         this.configuration = FileGetter.get(file);
         this.set = configuration.getKeys(false);
