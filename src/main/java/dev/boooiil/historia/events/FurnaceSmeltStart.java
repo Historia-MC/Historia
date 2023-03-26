@@ -5,11 +5,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceStartSmeltEvent;
 
 import dev.boooiil.historia.classes.Ingot;
+import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.IngotConfig;
 
 /**
  * This class is used to set the smelt time of an ingot when it is placed in a furnace.
  */
 public class FurnaceSmeltStart implements Listener {
+    
+    IngotConfig ingotConfig = Config.getIngotConfig();
 
     @EventHandler
     // A method that is called when a furnace starts smelting an item.
@@ -17,9 +21,9 @@ public class FurnaceSmeltStart implements Listener {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 
-        if (Ingot.ingotConfig.isValidIngot(localizedName)) {
+        if (ingotConfig.isValidIngot(localizedName)) {
 
-            Ingot ingot = Ingot.ingotConfig.getIngot(localizedName);
+            Ingot ingot = ingotConfig.getObject(localizedName);
 
             event.setTotalCookTime(ingot.getSmeltTime());
             
