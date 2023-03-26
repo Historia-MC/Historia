@@ -41,7 +41,7 @@ public class WeaponConfig extends Configuration<Weapon> {
 
         Weapon weapon = null;
 
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
+        for (Map.Entry<String, Weapon> entry : map.entrySet()) {
 
             boolean armorValid = ((Weapon) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
@@ -65,6 +65,28 @@ public class WeaponConfig extends Configuration<Weapon> {
         else return null;
 
     }
-    
-    
+
+        /**
+     * It checks if the shape of the recipe is valid
+     * 
+     * @param shape The shape of the recipe.
+     * @return A boolean value.
+     */
+    public boolean validShape(List<String> shape) {
+
+        boolean found = false;
+
+        for(Weapon weapon : map.values()) {
+
+            if (weapon.getRecipeShape().equals(shape)) {
+
+                found = true;
+                break;
+
+            }
+        }
+
+        return found;
+
+    }
 }

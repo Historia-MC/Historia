@@ -28,7 +28,7 @@ public class ArmorConfig extends Configuration<Armor> {
 
         Armor armor = null;
 
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
+        for (Map.Entry<String, Armor> entry : map.entrySet()) {
 
             boolean armorValid = ((Armor) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
@@ -58,4 +58,27 @@ public class ArmorConfig extends Configuration<Armor> {
 
     }
 
+    /**
+     * It checks if the shape of the recipe is valid
+     * 
+     * @param shape The shape of the recipe.
+     * @return A boolean value.
+     */
+    public boolean validShape(List<String> shape) {
+
+        boolean found = false;
+
+        for(Armor armor : map.values()) {
+
+            if (armor.getRecipeShape().equals(shape)) {
+
+                found = true;
+                break;
+
+            }
+        }
+
+        return found;
+
+    }
 }
