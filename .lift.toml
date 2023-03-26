@@ -1,2 +1,1 @@
 jdkVersion="18"
-build="./mvn install"
