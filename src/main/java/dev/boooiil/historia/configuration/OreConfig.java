@@ -31,7 +31,19 @@ public class OreConfig extends Configuration {
 
     public OreConfig() {
 
-        super("ores.yml", OreManager.class);
+        super("ores.yml");
+
+    }
+
+    /**
+     * Used to create a new instance of OreManager.
+     * 
+     * @param oreName - Name of the oreManager to check.
+     * @return Returns an OreManager object.
+     */
+    public OreManager createNew(String oreName) {
+
+        return new OreManager(oreName);
 
     }
 

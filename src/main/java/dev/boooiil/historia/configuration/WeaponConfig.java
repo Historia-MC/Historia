@@ -9,7 +9,7 @@ import dev.boooiil.historia.classes.Weapon;
 /**
  * It's a class that gets information from a configuration file.
  */
-public class WeaponConfig extends Configuration {
+public class WeaponConfig extends Configuration<Weapon> {
     
     // private static FileConfiguration configuration = FileGetter.get("ingots.yml");
 
@@ -23,9 +23,23 @@ public class WeaponConfig extends Configuration {
 
     public WeaponConfig() {
 
-        super("ores.yml", Weapon.class);
+        super("weapons.yml");
 
     }
+
+    /**
+     * Used to create a new instance of Weapon.
+     * 
+     * @param weaponName - Name of the weapon to create.
+     * @return Returns an Weapon object.
+     */
+    public Weapon createNew(String weaponName) {
+
+        return new Weapon(weaponName);
+
+    }
+
+
 
     /**
      * It takes a list of items and a list of shapes, and returns a weapon if the items and shapes

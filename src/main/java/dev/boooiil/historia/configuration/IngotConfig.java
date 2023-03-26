@@ -6,12 +6,25 @@ import dev.boooiil.historia.classes.Ingot;
 /**
  * It's a configuration class that loads ingots.yml and allows you to get an ingot from it
  */
-public class IngotConfig extends Configuration {
+public class IngotConfig extends Configuration<Ingot> {
 
     // Calling the constructor of the super class.
     public IngotConfig() {
 
-        super("ingots.yml", Ingot.class);
+        super("ingots.yml");
+
+    }
+
+    /**
+     * Used to create a new instance of Ingot.
+     * 
+     * @param ingotName - Name of the ingot to check.
+     * @return Returns an Ingot object.
+     */
+    @Override
+    public Ingot createNew(String ingotName) {
+
+        return new Ingot(ingotName);
 
     }
 
