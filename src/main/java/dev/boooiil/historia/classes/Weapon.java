@@ -8,8 +8,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.WeaponConfig;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that represents a weapon in the game.
@@ -17,7 +17,7 @@ import dev.boooiil.historia.util.Construct;
 public class Weapon {
 
     private FileConfiguration configuration = Config.getWeaponConfig().getConfiguration();
-        
+
     private String type;
     private String localizedName;
     private String displayName;
@@ -64,7 +64,15 @@ public class Weapon {
             this.recipeItems = configuration.getStringList(root + ".recipe-shape");
             this.recipeShape = configuration.getStringList(root + ".recipe-items");
 
-            this.itemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
+            Logging.infoToConsole(itemRoot, itemRoot);
+
+            this.itemStack = Construct.itemStack(
+                    Material.getMaterial(
+                            configuration.getString(itemRoot + ".type")),
+                    amount,
+                    displayName,
+                    localizedName,
+                    lore);
             this.damageRange = configuration.getDoubleList(root + ".damage");
             this.knockbackRange = configuration.getDoubleList(root + ".knockback");
             this.sweepRange = configuration.getDoubleList(root + ".sweeping");
@@ -91,6 +99,7 @@ public class Weapon {
     public String getDisplayName() {
         return displayName;
     }
+
     /**
      * It returns the lore of the item
      * 
@@ -110,14 +119,15 @@ public class Weapon {
     }
 
     /**
-     * This function returns a boolean value that indicates whether the object is valid or not
+     * This function returns a boolean value that indicates whether the object is
+     * valid or not
      * 
      * @return The boolean value of valid.
      */
     public boolean isValid() {
         return valid;
     }
-    
+
     /**
      * This function returns the damage range of the weapon.
      * 
@@ -126,7 +136,7 @@ public class Weapon {
     public List<Double> getDamageRange() {
         return damageRange;
     }
-    
+
     /**
      * This function returns the speed range of the car
      * 
@@ -135,7 +145,7 @@ public class Weapon {
     public List<Double> getSpeedRange() {
         return speedRange;
     }
-    
+
     /**
      * It returns a list of doubles
      * 
@@ -155,7 +165,8 @@ public class Weapon {
     }
 
     /**
-     * This function returns a list of integers that represent the durability range of the item
+     * This function returns a list of integers that represent the durability range
+     * of the item
      * 
      * @return The durabilityRange variable is being returned.
      */
@@ -186,7 +197,8 @@ public class Weapon {
     }
 
     /**
-     * This function returns a random double value between the minimum and maximum damage values
+     * This function returns a random double value between the minimum and maximum
+     * damage values
      * 
      * @return A random double value between the min and max damage values.
      */
@@ -292,10 +304,12 @@ public class Weapon {
     }
 
     /**
-     * "If the input items and input shape are equal to the recipe items and recipe shape, then return
+     * "If the input items and input shape are equal to the recipe items and recipe
+     * shape, then return
      * true, otherwise return false."
      * 
-     * @param inputItems A list of strings that represent the items in the crafting grid.
+     * @param inputItems A list of strings that represent the items in the crafting
+     *                   grid.
      * @param inputShape The shape of the recipe.
      * @return A boolean value.
      */
