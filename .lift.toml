@@ -1,0 +1,2 @@
+jdkVersion="18"
+build=./maven install
