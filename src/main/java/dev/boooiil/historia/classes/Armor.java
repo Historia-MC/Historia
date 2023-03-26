@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import dev.boooiil.historia.configuration.ArmorConfig;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.definitions.ArmorTypes;
 import dev.boooiil.historia.util.Construct;

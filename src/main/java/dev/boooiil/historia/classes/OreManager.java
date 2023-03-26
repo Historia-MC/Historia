@@ -8,7 +8,6 @@ import java.util.Set;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
 
 /**
  * It's a class that manages the ores
