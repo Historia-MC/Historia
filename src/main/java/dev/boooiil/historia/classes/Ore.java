@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
 
 /**
@@ -14,13 +15,14 @@ import dev.boooiil.historia.configuration.OreConfig;
  */
 public class Ore {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
+    private FileConfiguration configuration =  Config.getOreConfig().getConfiguration();
     
-    public String name;
-    public int chance;
+    private String name;
+    private int chance;
 
-    public List<OreDrop> drops = new ArrayList<OreDrop>();
+    private List<OreDrop> drops = new ArrayList<OreDrop>();
 
+    // Creating a new Ore object.
     public Ore(String currentRoot, String oreName) {
 
         String root = currentRoot + "." + oreName;

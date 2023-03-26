@@ -10,9 +10,13 @@ import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.mysql.MySQLHandler;
 import dev.boooiil.historia.util.PlayerStorage;
 
+/**
+ * It saves the player's data, sets the player as offline, and updates the Discord bot's activity.
+ */
 public class PlayerLeave implements Listener {
     
     @EventHandler
+    // A method that is called when a player leaves the server.
     public void onPlayerJoin(PlayerQuitEvent event) {
         
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);

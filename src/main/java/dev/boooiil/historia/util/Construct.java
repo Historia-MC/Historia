@@ -16,19 +16,20 @@ import com.sk89q.worldedit.entity.Player;
  */
 public class Construct {
 
+    // A private constructor that throws an exception if it is called.
     private Construct() {
         throw new IllegalCallerException("Static utility class.");
     }
 
     /**
-     * Construct an ItemStack (single item or multiple) based on given parameters.
+     * It creates an ItemStack with the given parameters
      * 
-     * @param type          The Material <reference> of the item.
-     * @param amount        The amount of the item.
-     * @param displayName   The display name of the item.
-     * @param localizedName The (hidden to player) name of the item.
-     * @param lore          Any flavor text added to the item.
-     * @return Constructed item stack.
+     * @param material The material of the item.
+     * @param amount The amount of the item
+     * @param displayName The name that will be displayed on the item.
+     * @param localizedName The name of the item in the language file.
+     * @param lore The lore of the item.
+     * @return An ItemStack
      */
     public static ItemStack itemStack(Material material, int amount, String displayName, String localizedName,
             List<String> lore) {
@@ -55,6 +56,16 @@ public class Construct {
 
     }
 
+    /**
+     * It takes a list of items, and replaces the drops of a block with those items
+     * 
+     * @param player The player who broke the block
+     * @param brokenBlock The block that was broken
+     * @param newBlock The material of the block that will replace the broken block
+     * @param sound The sound to be played when the block is broken
+     * @param givenItems A list of HashMaps that contain the following keys:
+     * @return A boolean value.
+     */
     public static boolean blockReplacement(Player player, Block brokenBlock, Material newBlock, Sound sound,
             List<HashMap<String, String>> givenItems) {
 

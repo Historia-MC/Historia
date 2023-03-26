@@ -7,11 +7,15 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.configuration.Config;
 
+/**
+ * It's a class that manages the ores
+ */
 public class OreManager {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
+    // Creating a new instance of the OreConfig class.
+    private FileConfiguration configuration = Config.getOreConfig().getConfiguration();
     
     private String name;
 
@@ -19,9 +23,10 @@ public class OreManager {
 
     private List<Ore> ores = new ArrayList<Ore>();
 
+    //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
     public OreManager(String oreName) {
 
-        if (OreConfig.isValidOre(oreName)) {
+        if (Config.getOreConfig().isValidOre(oreName)) {
 
             String root = oreName;
 

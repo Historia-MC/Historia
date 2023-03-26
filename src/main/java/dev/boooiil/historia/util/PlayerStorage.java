@@ -6,9 +6,14 @@ import java.util.UUID;
 import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.mysql.MySQLHandler;
 
+/**
+ * It's a HashMap that stores all the players that are currently online
+ */
 public class PlayerStorage {
 
+    // It's a HashMap that stores all the players that are currently online
     public static HashMap<UUID, HistoriaPlayer> players = new HashMap<UUID, HistoriaPlayer>();
+    // It's a HashMap that stores all the players that are currently online
     public static HashMap<String, UUID> usernameMap = new HashMap<String, UUID>();
 
     /**

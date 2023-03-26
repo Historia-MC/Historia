@@ -9,10 +9,16 @@ import discord4j.core.object.entity.Guild;
 import discord4j.discordjson.json.ApplicationCommandRequest;
 import reactor.core.publisher.Flux;
 
+/**
+ * It's a class that handles all the interactions that the bot can do
+ */
 public class InteractionHandler {
 
     private static final GatewayDiscordClient CLIENT = HistoriaDiscord.getClient();
 
+    /**
+     * It initializes all the commands in the guilds
+     */
     public static void init() {
 
         Logging.infoToConsole("Initializing commands in guilds...");
@@ -38,6 +44,11 @@ public class InteractionHandler {
 
     }
 
+    /**
+     * This function returns an array of ApplicationCommandRequest objects
+     * 
+     * @return An array of ApplicationCommandRequest objects.
+     */
     public static ApplicationCommandRequest[] getInteractions() {
 
         ApplicationCommandRequest interactions[] = new ApplicationCommandRequest[1];
@@ -48,6 +59,10 @@ public class InteractionHandler {
 
     }
 
+    /**
+     * It creates a list of all the guilds the bot is in, and then creates a list of all the
+     * interactions the bot has, and then creates an interaction for each guild
+     */
     public static void initializeAllGuilds() {
 
         Flux<Guild> fluxGuilds = CLIENT.getGuilds();
@@ -71,6 +86,11 @@ public class InteractionHandler {
 
     }
 
+    /**
+     * It creates a single interaction for a single guild
+     * 
+     * @param guildID The ID of the guild you want to add the interaction to.
+     */
     public static void singleGuildInteraction(long guildID) {
 
         for (ApplicationCommandRequest interaction : getInteractions()) {

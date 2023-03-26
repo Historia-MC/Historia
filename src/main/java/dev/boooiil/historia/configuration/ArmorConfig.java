@@ -1,56 +1,60 @@
 package dev.boooiil.historia.configuration;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
-
-import dev.boooiil.historia.util.FileGetter;
-import dev.boooiil.historia.abstractions.Configuration;
 import dev.boooiil.historia.classes.Armor;
+import dev.boooiil.historia.classes.Configuration;
 
-public class ArmorConfig extends Configuration {
+/**
+ * It's a configuration class that extends the Configuration class and adds a
+ * method to get armor based
+ * on recipe items and shape.
+ */
+public class ArmorConfig extends Configuration<Armor> {
 
-    private static FileConfiguration configuration = FileGetter.get("amror.yml");
-
-    private static final Set<String> armorSet = configuration.getKeys(false);
-    private static final HashMap<String, Armor> armorMap = new HashMap<>();
-
-    public static Set<String> getArmorSet() {
-
-        return armorSet;
-
+    public Armor createNew(String armourName) {
+        return new Armor(armourName);
     }
 
-    public static boolean validArmor(String armorName) {
-
-        return armorSet.contains(armorName);
-
-    }
-
-    // O(n^2) - cound be problematic as we increase the amount of armors
-    public static Armor getArmor(List<String> inputItems, List<String> inputShape) {
+    /**
+     * Get armor based on recipe items and shape.
+     * 
+     * @param inputItems List of recipe items.
+     * @param inputShape Recipe shape.
+     * @return Armor object.
+     */
+    public Armor getArmor(List<String> inputItems, List<String> inputShape) {
 
         Armor armor = null;
 
-        for (Map.Entry<String, Armor> entry : armorMap.entrySet()) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
 
-            boolean armorValid = entry.getValue().isValidRecipe(inputItems, inputShape);
+            boolean armorValid = ((Armor) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
-            if (armorValid) { armor = entry.getValue(); break; }
+            if (armorValid) {
+                armor = (Armor) entry.getValue();
+                break;
+            }
 
         }
 
         return armor;
-        
+
     }
 
-    public static Armor getArmor(String armorName) {
+    /**
+     * Get armor based on armor name.
+     * 
+     * @param armorName Armor name.
+     * @return Armor object.
+     */
+    public Armor getObject(String armorName) {
 
-        if (validArmor(armorName)) return armorMap.get(armorName);
-        else return null;
+        if (isValid(armorName))
+            return (Armor) map.get(armorName);
+        else
+            return null;
 
     }
 

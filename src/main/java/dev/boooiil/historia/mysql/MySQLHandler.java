@@ -15,16 +15,19 @@ import java.util.UUID;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.GeneralConfig;
-import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 import dev.boooiil.historia.util.Logging;
 
+/**
+ * It's a class that handles all of the MySQL queries for the plugin.
+ */
 public class MySQLHandler {
 
     // TODO: Do below
     // We could create a user cache that loads when we first connect to the database so we are not fetching users every time they connect.
 
-    private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
+    private static GeneralConfig MYSQLCONFIG = Config.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;
@@ -38,14 +41,9 @@ public class MySQLHandler {
 
     private static Connection connection;
 
-    private MySQLHandler() {
-        throw new IllegalStateException("This class should not be initialized.");
-    }
-
     /**
      * Create the table in the database if it does not exist.
      * 
-     * @throws SQLException Generally, if the plugin can't connect to the database.
      */
     public static void createTable() {
 
@@ -321,19 +319,19 @@ public class MySQLHandler {
      *
      * @return
      *         <p>
-     *         <"UUID", {@link java.lang.String String}>
+     *         "UUID", {@link java.lang.String String}
      *         <p>
-     *         <"Username", {@link java.lang.String String}>
+     *         "Username", {@link java.lang.String String}
      *         <p>
-     *         <"Class", {@link java.lang.String String}>
+     *         "Class", {@link java.lang.String String}
      *         <p>
-     *         <"Level", {@link java.lang.String String}>
+     *         "Level", {@link java.lang.String String}
      *         <p>
-     *         <"Experience", {@link java.lang.String String}>
+     *         "Experience", {@link java.lang.String String}
      *         <p>
-     *         <"Login", {@link java.lang.String String}>
+     *         "Login", {@link java.lang.String String}
      *         <p>
-     *         <"Logout", {@link java.lang.String String}>
+     *         "Logout", {@link java.lang.String String}
      * 
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
@@ -486,6 +484,7 @@ public class MySQLHandler {
     }
 
     @Deprecated
+    // Checking if the fields are empty.
     private static boolean validateFields() {
 
         int caught = 0;
@@ -541,6 +540,12 @@ public class MySQLHandler {
 
     }
 
+    /**
+     * It checks if the user exists in the database
+     * 
+     * @param uuid The UUID of the player
+     * @return A boolean value.
+     */
     private static boolean userExists(UUID uuid) {
 
         String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
@@ -589,5 +594,10 @@ public class MySQLHandler {
 
             return null;
         }
+    }
+
+    // A private constructor.
+    private MySQLHandler() {
+        throw new IllegalStateException("This class should not be initialized.");
     }
 }
