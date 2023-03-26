@@ -16,7 +16,9 @@
             "**/.project": true,
             "**/.settings": true,
             "**/.factorypath": true,
-            "**/target": true
+            "**/target": true,
+            "**/.lift*": true
+            
         },
         "java.configuration.updateBuildConfiguration": "automatic",
         "java.dependency.packagePresentation": "hierarchical",
