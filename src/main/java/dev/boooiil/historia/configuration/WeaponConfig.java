@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.CraftedItem;
 import dev.boooiil.historia.classes.Weapon;
 
 /**
@@ -110,21 +111,20 @@ public class WeaponConfig extends Configuration<Weapon> {
     }
 
     /**
-     * It takes a list of strings, and returns a list of weapons that have the same recipe shape as the
-     * list of strings
+     * It returns a list of all the items that have the same recipe shape as the one passed in
      * 
-     * @param shape List<String>
-     * @return A list of weapons that match the shape.
+     * @param shape A list of strings that represent the shape of the recipe.
+     * @return A list of all the weapon items that match the shape.
      */
-    public List<Weapon> getAllMatchingShape(List<String> shape) {
+    public List<CraftedItem> getAllMatchingShape(List<String> shape) {
 
-        List<Weapon> set = new ArrayList<>();
+        List<CraftedItem> set = new ArrayList<>();
 
-        for(Weapon armor : map.values()) {
+        for(Weapon weapon : map.values()) {
 
-            if (armor.getRecipeShape().equals(shape)) {
+            if (weapon.getRecipeShape().equals(shape)) {
 
-                set.add(armor);
+                set.add(weapon);
 
             }
         }

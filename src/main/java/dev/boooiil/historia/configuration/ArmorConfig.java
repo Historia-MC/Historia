@@ -6,6 +6,7 @@ import java.util.Map;
 
 import dev.boooiil.historia.classes.Armor;
 import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.CraftedItem;
 
 /**
  * It's a configuration class that extends the Configuration class and adds a
@@ -102,14 +103,14 @@ public class ArmorConfig extends Configuration<Armor> {
     }
 
     /**
-     * It returns a list of all armor pieces that have the same recipe shape as the one passed in
+     * It returns a list of all the items that have the same recipe shape as the one passed in
      * 
-     * @param shape The shape of the recipe.
-     * @return A list of armor objects.
+     * @param shape A list of strings that represent the shape of the recipe.
+     * @return A list of all the armor items that match the shape.
      */
-    public List<Armor> getAllMatchingShape(List<String> shape) {
+    public List<CraftedItem> getAllMatchingShape(List<String> shape) {
 
-        List<Armor> set = new ArrayList<>();
+        List<CraftedItem> set = new ArrayList<>();
 
         for(Armor armor : map.values()) {
 
@@ -123,4 +124,21 @@ public class ArmorConfig extends Configuration<Armor> {
         return set;
 
     }
+    
+    // public List<Armor> getAllMatchingShape(List<String> shape) {
+
+    //     List<Armor> set = new ArrayList<>();
+
+    //     for(Armor armor : map.values()) {
+
+    //         if (armor.getRecipeShape().equals(shape)) {
+
+    //             set.add(armor);
+
+    //         }
+    //     }
+
+    //     return set;
+
+    // }
 }
