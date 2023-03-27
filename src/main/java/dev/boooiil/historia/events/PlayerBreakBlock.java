@@ -37,7 +37,7 @@ public class PlayerBreakBlock implements Listener {
             if (drop != null) {
                 
                 event.setCancelled(true);
-                block.getWorld().dropItemNaturally(block.getLocation(), drop.getItemStack());
+                block.getWorld().dropItemNaturally(block.getLocation(), drop);
                 block.setType(Material.AIR);
 
             }
