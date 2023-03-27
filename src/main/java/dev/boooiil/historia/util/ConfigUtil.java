@@ -56,7 +56,7 @@ public class ConfigUtil {
     }
 
     public static YamlConfiguration yamlFromSource(InputStream is) {
-        Reader reader = new InputStreamReader(is);
+        Reader reader = new InputStreamReader(is, Charset.defaultCharset());
         return YamlConfiguration.loadConfiguration(reader);
     }
 
