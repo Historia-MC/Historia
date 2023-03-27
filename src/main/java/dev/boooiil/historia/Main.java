@@ -134,6 +134,8 @@ public class Main extends JavaPlugin {
      */
     private void registerCommand(String commandName, CommandExecutor command) {
 
+        if (commandName == null || command == null) return;
+
         this.getCommand(commandName).setExecutor(command);
 
     }
