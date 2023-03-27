@@ -16,6 +16,8 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.classes.Armor;
+import dev.boooiil.historia.classes.Weapon;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.WeaponConfig;
 
@@ -30,11 +32,19 @@ public class CraftingTableManager {
         Map<Integer, ItemStack> input = inspectTable(inventory.getMatrix());
         Map<String, List<String>> pattern = constructPattern(input);
 
+        /**
+         * Patterns that match weapons and or armors.
+         */
+        List<Armor> matchingArmors = Config.getArmorConfig().getAllMatchingShape(pattern.get("PATTERN"));
+        List<Weapon> matchingWeapons = Config.getWeaponConfig().getAllMatchingShape(pattern.get("PATTERN"));
+
         List<String> shape = pattern.get("PATTERN");
         List<String> materials = pattern.get("MATERIALS");
 
         log.info(prefix + "[craftItem] " + shape);
         log.info(prefix + "[craftItem] " + materials);
+
+        
 
         if (hasRecipe(shape)) {
 
@@ -64,17 +74,6 @@ public class CraftingTableManager {
         log.info(prefix + "[inspectTable] " + found);
 
         return found;
-
-    }
-
-    private float getQualityModifier(int complexity) {
-
-        int medium = 0;
-        int high = 0;
-        float mediumWeight = 50 / (float) complexity;
-        float highWeight = 100 / (float) complexity;
-
-        return (medium * mediumWeight) + (high * highWeight);
 
     }
 
@@ -175,10 +174,14 @@ public class CraftingTableManager {
 
     }
 
-    private boolean hasRecipe(List<String> pattern) {
+    private float getQualityModifier(int complexity) {
 
-        return Config.getArmorConfig().validShape(pattern) ? Config.getWeaponConfig().validShape(pattern) : false;
+        int medium = 0;
+        int high = 0;
+        float mediumWeight = 50 / (float) complexity;
+        float highWeight = 100 / (float) complexity;
 
+        return (medium * mediumWeight) + (high * highWeight);
 
     }
 
