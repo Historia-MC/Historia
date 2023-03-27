@@ -1,13 +1,5 @@
 package dev.boooiil.historia;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
@@ -130,14 +122,15 @@ public class Main extends JavaPlugin {
      * It registers a command to the server
      * 
      * @param commandName The name of the command you want to register.
-     * @param command The command to register
+     * @param command     The command to register
      */
     private void registerCommand(String commandName, CommandExecutor command) {
 
-        if (commandName == null || command == null) return;
+        if (commandName == null || command == null)
+            return;
 
         this.getCommand(commandName).setExecutor(command);
 
     }
-    
+
 }
