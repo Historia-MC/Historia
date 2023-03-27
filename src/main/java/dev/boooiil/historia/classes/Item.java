@@ -23,7 +23,6 @@ public class Item extends ItemStack {
     protected void initItemStack(ItemStack itemStack) {
 
         this.setAmount(itemStack.getAmount());
-        this.setData(itemStack.getData());
         this.setItemMeta(itemStack.getItemMeta());
         this.setType(itemStack.getType());
 
