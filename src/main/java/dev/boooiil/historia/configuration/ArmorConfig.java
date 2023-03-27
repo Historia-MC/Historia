@@ -100,4 +100,27 @@ public class ArmorConfig extends Configuration<Armor> {
         return set;
 
     }
+
+    /**
+     * It returns a list of all armor pieces that have the same recipe shape as the one passed in
+     * 
+     * @param shape The shape of the recipe.
+     * @return A list of armor objects.
+     */
+    public List<Armor> getAllMatchingShape(List<String> shape) {
+
+        List<Armor> set = new ArrayList<>();
+
+        for(Armor armor : map.values()) {
+
+            if (armor.getRecipeShape().equals(shape)) {
+
+                set.add(armor);
+
+            }
+        }
+
+        return set;
+
+    }
 }
