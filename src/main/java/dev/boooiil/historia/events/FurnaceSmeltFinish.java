@@ -8,34 +8,33 @@ import dev.boooiil.historia.classes.Ingot;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.IngotConfig;
 
-
 /**
- * I'm trying to get the FurnaceSmeltEvent to fire when a player smelts an item in a furnace.
+ * I'm trying to get the FurnaceSmeltEvent to fire when a player smelts an item
+ * in a furnace.
  * 
  */
 public class FurnaceSmeltFinish implements Listener {
-    
+
     IngotConfig ingotConfig = Config.getIngotConfig();
 
-    @EventHandler
     // It's a method that is called when the FurnaceSmeltEvent is fired.
+    @EventHandler
     public void onFurnaceSmelt(FurnaceSmeltEvent event) {
 
-        //Not being fired, ??
+        // Not being fired, ??
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 
         if (ingotConfig.isValidIngot(localizedName)) {
 
             Ingot ingot = ingotConfig.getObject(localizedName);
-            
+
             if (ingot.hasProgression()) {
 
                 event.setResult(ingot.getProgression().getItemStack());
 
             }
 
-            
         }
 
     }
