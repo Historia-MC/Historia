@@ -31,15 +31,15 @@ public class Construct {
      * @param lore The lore of the item.
      * @return An ItemStack
      */
-    public static ItemStack itemStack(Material material, int amount, String displayName, String localizedName,
+    public static ItemStack itemStack(String material, int amount, String displayName, String localizedName,
             List<String> lore) {
 
         // LOGGING TO BE REMOVED AFTER PUBLISH
-        Logging.infoToConsole("material: " + material.toString() + " amount: " + amount + " display-name: " + displayName
+        Logging.infoToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
                 + " loc-name: "
                 + localizedName + " lore: " + lore);
 
-        ItemStack item = new ItemStack(material, amount);
+        ItemStack item = new ItemStack(Material.getMaterial(material, false), amount);
 
         ItemMeta meta = item.getItemMeta();
 
@@ -78,13 +78,12 @@ public class Construct {
             // Iterate through the given item list
             for (HashMap<String, String> item : givenItems) {
 
-                Material material = Material.matchMaterial(item.get("material"));
                 Integer amount = Integer.getInteger(item.get("amount"));
                 String displayName = item.get("display-name");
                 String localizedName = item.get("localized-name");
                 List<String> lore = null;
 
-                ItemStack droppedItem = Construct.itemStack(material, amount, displayName, localizedName, lore);
+                ItemStack droppedItem = Construct.itemStack(item.get("material"), amount, displayName, localizedName, lore);
 
                 brokenBlock.getDrops().add(droppedItem);
 
