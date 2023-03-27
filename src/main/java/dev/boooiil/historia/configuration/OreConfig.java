@@ -104,7 +104,7 @@ public class OreConfig extends Configuration<OreManager> {
 
         for (String block : blocks) {
 
-            found.add(Material.getMaterial(block));
+            found.add(Material.getMaterial(block, false));
 
         }
 
