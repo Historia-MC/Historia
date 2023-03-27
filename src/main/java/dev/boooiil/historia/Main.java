@@ -89,7 +89,7 @@ public class Main extends JavaPlugin {
      */
     public static Plugin plugin() {
 
-        return Bukkit.getPluginManager().getPlugin("Historia");
+        return getPlugin(Main.class);
 
     }
 
@@ -109,9 +109,9 @@ public class Main extends JavaPlugin {
      * 
      * @param plugin The plugin you want to disable.
      */
-    public static void disable(Plugin plugin) {
+    public static void disable() {
 
-        plugin.getServer().getPluginManager().disablePlugin(plugin);
+        plugin().getPluginLoader().disablePlugin(plugin());
 
     }
 
