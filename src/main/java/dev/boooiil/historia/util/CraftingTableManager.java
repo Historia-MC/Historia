@@ -16,11 +16,12 @@ import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.classes.Armor;
-import dev.boooiil.historia.classes.Weapon;
+import dev.boooiil.historia.classes.CraftedItem;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.WeaponConfig;
 
+/**
+ * It takes an inventory, and returns an item.
+ */
 public class CraftingTableManager {
 
     Logger log = Bukkit.getLogger();
@@ -32,29 +33,32 @@ public class CraftingTableManager {
         Map<Integer, ItemStack> input = inspectTable(inventory.getMatrix());
         Map<String, List<String>> pattern = constructPattern(input);
 
-        /**
-         * Patterns that match weapons and or armors.
-         */
-        List<Armor> matchingArmors = Config.getArmorConfig().getAllMatchingShape(pattern.get("PATTERN"));
-        List<Weapon> matchingWeapons = Config.getWeaponConfig().getAllMatchingShape(pattern.get("PATTERN"));
+        List<CraftedItem> matchingItems;
 
-        List<String> shape = pattern.get("PATTERN");
+        // Getting all the items that match the pattern.
+        matchingItems = Config.getArmorConfig().getAllMatchingShape(pattern.get("PATTERN"));
+        matchingItems.addAll(Config.getWeaponConfig().getAllMatchingShape(pattern.get("PATTERN")));
+
         List<String> materials = pattern.get("MATERIALS");
 
-        log.info(prefix + "[craftItem] " + shape);
+        log.info(prefix + "[craftItem] " + matchingItems);
         log.info(prefix + "[craftItem] " + materials);
 
         
 
-        if (hasRecipe(shape)) {
+        if (matchingItems.size() > 0) {
 
-            Map<String, Object> itemsBasedOnPattern = getItemsBasedOnPattern(shape);
-
-            inventory.setResult(getItemBasedOnIngot(itemsBasedOnPattern, materials));
+            inventory.setResult(getItemBasedOnIngot(matchingItems, materials));
 
         }
     }
 
+    /**
+     * It takes an array of ItemStacks and returns a map of the slot number and the item in that slot
+     * 
+     * @param contents The contents of the inventory
+     * @return A map of integers and itemstacks.
+     */
     private Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
 
         Map<Integer, ItemStack> found = new HashMap<>();
@@ -77,6 +81,12 @@ public class CraftingTableManager {
 
     }
 
+    /**
+     * It takes a map of integers and itemstacks, and returns a map of strings and lists of strings
+     * 
+     * @param input The input map
+     * @return A map with two keys, PATTERN and MATERIALS.
+     */
     private Map<String, List<String>> constructPattern(Map<Integer, ItemStack> input) {
 
         Map<String, List<String>> map = new HashMap<>();
@@ -174,6 +184,13 @@ public class CraftingTableManager {
 
     }
 
+    /**
+     * It takes a number, and returns a number
+     * 
+     * @param complexity The number of questions in the survey
+     * @return The return value is the sum of the medium and high values multiplied by their respective
+     * weights.
+     */
     private float getQualityModifier(int complexity) {
 
         int medium = 0;
@@ -185,69 +202,33 @@ public class CraftingTableManager {
 
     }
 
-    private Map<String, Object> getItemsBasedOnPattern(List<String> pattern) {
+    /**
+     * It loops through a list of items that match a pattern, and returns the item that matches the
+     * pattern and has the same materials as the list of materials
+     * 
+     * @param items List of items that match the pattern.
+     * @param materials Materials used in the 
+     * @return A CraftedItem object.
+     */
+    private ItemStack getItemBasedOnIngot(List<CraftedItem> items, List<String> materials) {
 
-        Map<String, Object> itemList = new HashMap<>();
+        // Looping through the list of items that match the pattern.
+        for (CraftedItem item : items) {
 
-        for (Entry<String, List<String>> item : Config.getPatterns().entrySet()) {
-
-            String itemName = item.getKey();
-            List<String> itemPattern = item.getValue();
-
-            if (itemPattern.equals(pattern)) {
-
-                Config config = new Config();
-
-                WeaponConfig weaponConfig = new WeaponConfig();
-                WeaponConfig.Weapon weapon = weaponConfig.new Weapon(itemName);
-
-                // PROBLEM IS HERE.
-                // LAST KEY PUT INTO THE LIST IS OVERWRITING THE WEAPON INFO.
-                // IT IS 8AM AND HAVE BEEN UP ALL NIGHT.
-                // NO IDEA WHAT TO DO.
-
-                if (weapon.valid)
-                    itemList.put(itemName, config.iWeaponInfo(itemName));
-                else
-                    itemList.put(itemName, config.iArmorInfo(itemName));
-
-                log.severe(prefix + "[getItemsBasedOnPattern] Map:" + itemList);
-
-            }
-        }
-
-        // log.info(prefix + "[getItemsBasedOnPattern] " + itemList);
-
-        log.info(prefix + "[getItemsBasedOnPattern] Item List:" + itemList);
-
-        return itemList;
-    }
-
-    private ItemStack getItemBasedOnIngot(Map<String, Object> items, List<String> materials) {
-
-        for (Entry<String, Object> item : items.entrySet()) {
-
-            String itemName = item.getKey();
-
-            @SuppressWarnings("unchecked")
-            Map<String, Object> itemInfo = (Map<String, Object>) item.getValue();
-
-            @SuppressWarnings("unchecked")
-            List<String> itemMaterials = (List<String>) itemInfo.get("RECIPE");
             int need = materials.size();
             int matched = 0;
 
-            log.warning(prefix + "[getItemBasedOnIngot] Item: " + itemInfo);
-            log.info(prefix + "[getItemBasedOnIngot] Item Name: " + itemName);
-            log.info(prefix + "[getItemBasedOnIngot] Materials: " + itemMaterials);
+            log.warning(prefix + "[getItemBasedOnIngot] Item: " + item);
+            log.info(prefix + "[getItemBasedOnIngot] Item Name: " + item.getItemMeta().getLocalizedName());
+            log.info(prefix + "[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
             log.info(prefix + "[getItemBasedOnIngot] need: " + need);
             log.info(prefix + "[getItemBasedOnIngot] matched: " + matched);
 
-            if (materials.size() == itemMaterials.size()) {
+            if (materials.size() == item.getRecipeItems().size()) {
 
                 for (String material : materials) {
 
-                    if (itemMaterials.contains(material.replaceFirst(replace, "")))
+                    if (item.getRecipeItems().contains(material.replaceFirst(replace, "")))
                         matched++;
 
                 }
@@ -255,12 +236,12 @@ public class CraftingTableManager {
                 log.info(prefix + "[getItemBasedOnIngot] " + item);
 
                 if (matched == need)
-                    return (ItemStack) itemInfo.get("ITEM");
+                    return item;
 
             }
         }
 
-        return new ItemStack(Material.AIR);
+        return new CraftedItem();
 
     }
 
