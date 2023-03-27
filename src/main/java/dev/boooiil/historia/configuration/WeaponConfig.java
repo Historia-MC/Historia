@@ -108,4 +108,28 @@ public class WeaponConfig extends Configuration<Weapon> {
         return set;
 
     }
+
+    /**
+     * It takes a list of strings, and returns a list of weapons that have the same recipe shape as the
+     * list of strings
+     * 
+     * @param shape List<String>
+     * @return A list of weapons that match the shape.
+     */
+    public List<Weapon> getAllMatchingShape(List<String> shape) {
+
+        List<Weapon> set = new ArrayList<>();
+
+        for(Weapon armor : map.values()) {
+
+            if (armor.getRecipeShape().equals(shape)) {
+
+                set.add(armor);
+
+            }
+        }
+
+        return set;
+
+    }
 }
