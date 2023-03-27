@@ -74,7 +74,7 @@ public class MySQLHandler {
             } catch (SQLException e) {
                 Logging.infoToConsole("Failed to load MySQL.");
                 e.printStackTrace();
-                Main.disable(Main.plugin());
+                Main.disable();
             }
         }
     }
@@ -531,7 +531,7 @@ public class MySQLHandler {
 
         if (caught > 0) {
 
-            Main.disable(Main.plugin());
+            Main.disable();
 
             return false;
         }
