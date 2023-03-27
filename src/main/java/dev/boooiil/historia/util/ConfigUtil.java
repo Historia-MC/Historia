@@ -15,6 +15,7 @@ public class ConfigUtil {
     private static List<String> configFileNames = new ArrayList<>();
 
     static {
+
         configFileNames.add("armor.yml");
         configFileNames.add("classes.yml");
         configFileNames.add("expiry.yml");
@@ -54,12 +55,12 @@ public class ConfigUtil {
 
     }
 
-    private static YamlConfiguration yamlFromSource(InputStream is) {
+    public static YamlConfiguration yamlFromSource(InputStream is) {
         Reader reader = new InputStreamReader(is);
         return YamlConfiguration.loadConfiguration(reader);
     }
 
-    private static YamlConfiguration yamlFromSource(File file) {
+    public static YamlConfiguration yamlFromSource(File file) {
         return YamlConfiguration.loadConfiguration(file);
     }
 
