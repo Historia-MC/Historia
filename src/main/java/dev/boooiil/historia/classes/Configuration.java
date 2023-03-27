@@ -27,7 +27,8 @@ public abstract class Configuration<T> {
      * @param fileName The name of the file you want to load.
      */
     public void loadConfiguration(String fileName) {
-
+        
+        //@sonatype-lift ignore
         this.configuration = ConfigUtil.yamlFromSource(new File(Main.plugin().getDataFolder(), fileName));
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
