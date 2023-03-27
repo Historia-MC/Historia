@@ -1,11 +1,13 @@
 package dev.boooiil.historia.classes;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.util.FileGetter;
+import dev.boooiil.historia.Main;
+import dev.boooiil.historia.util.ConfigUtil;
 
 /**
  * It takes a class and a variable number of arguments and creates a new
@@ -14,13 +16,19 @@ import dev.boooiil.historia.util.FileGetter;
  */
 public abstract class Configuration<T> {
 
-    protected FileConfiguration configuration;
+    protected YamlConfiguration configuration;
     protected Set<String> set;
     protected HashMap<String, Object> map;
 
-    public void loadConfiguration(String file) {
+    /**
+     * It loads a YAML file from the plugin's data folder, and then populates a HashMap with the keys
+     * and values from the YAML file
+     * 
+     * @param fileName The name of the file you want to load.
+     */
+    public void loadConfiguration(String fileName) {
 
-        this.configuration = FileGetter.get(file);
+        this.configuration = ConfigUtil.yamlFromSource(new File(Main.plugin().getDataFolder(), fileName));
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
 
@@ -33,7 +41,7 @@ public abstract class Configuration<T> {
      * 
      * @return The configuration.
      */
-    public FileConfiguration getConfiguration() {
+    public YamlConfiguration getConfiguration() {
 
         return configuration;
 
