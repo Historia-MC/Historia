@@ -1,7 +1,5 @@
 package dev.boooiil.historia.classes;
 
-import org.bukkit.Material;
-
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.util.Construct;
 
@@ -41,7 +39,7 @@ public class Ingot extends Item {
         if (validIngot) {
 
             initItemStack(Construct.itemStack(
-                Material.getMaterial(configuration.getString(ingotName + ".item.type")),
+                configuration.getString(ingotName + ".item.type"),
                 configuration.getInt(ingotName + ".item.amount"),
                 configuration.getString(ingotName + ".item.display-name"),
                 configuration.getString(ingotName + ".item.loc-name"),

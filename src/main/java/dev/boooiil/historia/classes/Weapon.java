@@ -43,7 +43,7 @@ public class Weapon extends CraftedItem {
 
             // It's calling the parent class's constructor.
             initItemStack(Construct.itemStack(
-                    Material.getMaterial(configuration.getString(weaponName + ".item.type")),
+                    configuration.getString(weaponName + ".item.type"),
                     configuration.getInt(weaponName + ".item.amount"),
                     configuration.getString(weaponName + ".item.display-name"),
                     configuration.getString(weaponName + ".item.loc-name"),

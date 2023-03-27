@@ -3,8 +3,6 @@ package dev.boooiil.historia.classes;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Material;
-
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.definitions.ArmorTypes;
 import dev.boooiil.historia.util.Construct;
@@ -38,7 +36,7 @@ public class Armor extends CraftedItem {
 
             // Calling the parent class's constructor.
             initItemStack(Construct.itemStack(
-                    Material.getMaterial(configuration.getString(armorName + ".item.type")),
+                    configuration.getString(armorName + ".item.type"),
                     configuration.getInt(armorName + ".item.amount"),
                     configuration.getString(armorName + ".item.display-name"),
                     configuration.getString(armorName + ".item.loc-name"),
