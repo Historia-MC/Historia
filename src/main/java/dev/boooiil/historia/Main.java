@@ -107,7 +107,7 @@ public class Main extends JavaPlugin {
     /**
      * It disables the plugin
      * 
-     * @param plugin The plugin you want to disable.
+     *
      */
     public static void disable() {
 
