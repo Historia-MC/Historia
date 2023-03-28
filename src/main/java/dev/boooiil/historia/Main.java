@@ -13,6 +13,7 @@ import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.FurnaceSmeltStart;
 import dev.boooiil.historia.events.PlayerBreakBlock;
+import dev.boooiil.historia.events.PlayerCraft;
 import dev.boooiil.historia.events.PlayerJoin;
 import dev.boooiil.historia.events.PlayerLeave;
 import dev.boooiil.historia.mysql.MySQLHandler;
@@ -47,6 +48,7 @@ public class Main extends JavaPlugin {
 
         Config.init();
 
+        registerEvent(new PlayerCraft());        
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerBreakBlock());
