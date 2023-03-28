@@ -147,16 +147,24 @@ public class Logging {
     
     /**
      * Send a warning message to server.
-     * @param message The message to be sent.
+     * @param messages The messages to be sent.
      */
-    public static void debugToConsole(String message) {
-
+    public static void debugToConsole(String... messages) {
+        
         if (GeneralConfig.debug) {
 
-            infoToConsole(messagePrefix + debugPrefix + message);
+            String built = "";
+
+            for (String message : messages) {
+    
+                built += message + " ";
+    
+            }
+
+            infoToConsole(messagePrefix + debugPrefix + built);
 
         }
-
+        
     }
 
 }
