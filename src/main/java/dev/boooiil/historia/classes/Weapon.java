@@ -47,8 +47,8 @@ public class Weapon extends CraftedItem {
                     configuration.getString(weaponName + ".item.loc-name"),
                     configuration.getStringList(weaponName + ".item.lore"));
 
-            this.recipeItems = configuration.getStringList(root + ".recipe-shape");
-            this.recipeShape = configuration.getStringList(root + ".recipe-items");
+            this.recipeItems = configuration.getStringList(root + ".recipe-items");
+            this.recipeShape = configuration.getStringList(root + ".recipe-shape");
 
             this.weightClass = configuration.getString(root + ".type");
             this.damageRange = configuration.getDoubleList(root + ".damage");
