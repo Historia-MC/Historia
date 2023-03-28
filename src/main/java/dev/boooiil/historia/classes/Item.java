@@ -1,10 +1,9 @@
 package dev.boooiil.historia.classes;
 
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-public class Item extends ItemStack {
+public class Item {
 
     /**
      * INTENDED GENERIC TO EXTEND CLASSES THAT HOLD ITEMS.
@@ -14,29 +13,16 @@ public class Item extends ItemStack {
     protected FileConfiguration configuration;
     protected boolean valid;
 
-    protected Item() {
-
-        initItemStack(new ItemStack(Material.AIR));
-
-    }
-
-    protected void initItemStack(ItemStack itemStack) {
-
-        this.setAmount(itemStack.getAmount());
-        this.setItemMeta(itemStack.getItemMeta());
-        this.setType(itemStack.getType());
-
-    }
+    protected ItemStack itemStack;
 
     /**
      * It returns the item stack
      * 
      * @return The itemStack variable.
      */
-    @Deprecated
     public ItemStack getItemStack() {
 
-        return this;
+        return itemStack;
 
     }
 
