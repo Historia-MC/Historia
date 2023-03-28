@@ -230,7 +230,7 @@ public class CraftingTableManager {
 
                 }
 
-                Logging.debugToConsole(null);(prefix + "[getItemBasedOnIngot] " + item);
+                Logging.debugToConsole(prefix + "[getItemBasedOnIngot] " + item);
 
                 if (matched == need)
                     return item.getItemStack();
