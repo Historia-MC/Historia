@@ -10,7 +10,6 @@ import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
-import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
 /**
@@ -33,8 +32,6 @@ public class PlayerBreakBlock implements Listener {
         Block block = event.getBlock();
         Material material = block.getType();
 
-        Logging.infoToConsole(material.toString());
-
         if (oreConfig.isValidOre(material.toString())) {
 
             OreDrop drop = oreConfig.getDropFromChance(material.toString(), historiaPlayer.getClassName());
@@ -42,7 +39,7 @@ public class PlayerBreakBlock implements Listener {
             if (drop != null) {
 
                 event.setCancelled(true);
-                block.getWorld().dropItemNaturally(block.getLocation(), drop);
+                block.getWorld().dropItemNaturally(block.getLocation(), drop.getItemStack());
                 block.setType(Material.AIR);
 
             }
