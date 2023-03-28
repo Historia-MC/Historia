@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 COAL_ORE:
   sulphur:
@@ -25,6 +25,9 @@ COAL_ORE:
       item:
         type: COAL
         amount: 1
+        display-name: Coal
+        loc-name: COAL
+        lore: [""]
 
 DEEPSLATE_COAL_ORE:
   sulphur:
@@ -51,6 +54,9 @@ DEEPSLATE_COAL_ORE:
       item:
         type: COAL
         amount: 1
+        display-name: Coal
+        loc-name: COAL
+        lore: [""]
 
 IRON_ORE:
   iron:

@@ -4,35 +4,19 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.util.Construct;
-import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that represents a weapon in the game.
  */
-public class Weapon {
+public class Weapon extends CraftedItem {
 
-    private FileConfiguration configuration = Config.getWeaponConfig().getConfiguration();
-
-    private String type;
-    private String localizedName;
-    private String displayName;
-    private List<String> lore;
-    private int amount;
+    private String weightClass;
 
     private String weight;
-
-    private ItemStack itemStack;
-
-    private List<String> recipeShape;
-
-    private List<String> recipeItems;
-
-    private boolean valid;
 
     private List<Double> damageRange;
 
@@ -47,85 +31,34 @@ public class Weapon {
     // It's a constructor.
     public Weapon(String weaponName) {
 
-        this.valid = Config.getWeaponConfig().isValid(weaponName);
+        configuration = Config.getWeaponConfig().getConfiguration();
+
+        valid = Config.getWeaponConfig().isValid(weaponName);
 
         if (valid) {
 
             String root = weaponName;
-            String itemRoot = weaponName + ".item";
 
-            this.weight = configuration.getString(itemRoot + ".type");
-            this.localizedName = configuration.getString(itemRoot + ".loc-name");
-            this.displayName = configuration.getString(itemRoot + ".display-name");
-            this.lore = configuration.getStringList(itemRoot + ".lore");
-            this.amount = configuration.getInt(itemRoot + ".amount");
+            // It's calling the parent class's constructor.
+            itemStack = Construct.itemStack(
+                    configuration.getString(weaponName + ".item.type"),
+                    configuration.getInt(weaponName + ".item.amount"),
+                    configuration.getString(weaponName + ".item.display-name"),
+                    configuration.getString(weaponName + ".item.loc-name"),
+                    configuration.getStringList(weaponName + ".item.lore"));
 
-            this.type = configuration.getString(root + ".type");
-            this.recipeItems = configuration.getStringList(root + ".recipe-shape");
-            this.recipeShape = configuration.getStringList(root + ".recipe-items");
+            this.recipeItems = configuration.getStringList(root + ".recipe-items");
+            this.recipeShape = configuration.getStringList(root + ".recipe-shape");
 
-            Logging.infoToConsole(itemRoot, itemRoot);
-
-            this.itemStack = Construct.itemStack(
-                    Material.getMaterial(
-                            configuration.getString(itemRoot + ".type")),
-                    amount,
-                    displayName,
-                    localizedName,
-                    lore);
+            this.weightClass = configuration.getString(root + ".type");
             this.damageRange = configuration.getDoubleList(root + ".damage");
             this.knockbackRange = configuration.getDoubleList(root + ".knockback");
             this.sweepRange = configuration.getDoubleList(root + ".sweeping");
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
+        } else {
+            itemStack = new ItemStack(Material.AIR);
         }
-
-    }
-
-    /**
-     * This function returns the localized name of the item
-     * 
-     * @return The localized name of the item.
-     */
-    public String getLocalizedName() {
-        return localizedName;
-    }
-
-    /**
-     * This function returns the display name of the user
-     * 
-     * @return The displayName is being returned.
-     */
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    /**
-     * It returns the lore of the item
-     * 
-     * @return The lore of the item.
-     */
-    public List<String> getLore() {
-        return lore;
-    }
-
-    /**
-     * This function returns the amount of money in the account
-     * 
-     * @return The amount of the item.
-     */
-    public int getAmount() {
-        return amount;
-    }
-
-    /**
-     * This function returns a boolean value that indicates whether the object is
-     * valid or not
-     * 
-     * @return The boolean value of valid.
-     */
-    public boolean isValid() {
-        return valid;
     }
 
     /**
@@ -179,9 +112,9 @@ public class Weapon {
      * 
      * @return The type of the object.
      */
-    public String getType() {
+    public String getWeightClass() {
 
-        return this.type;
+        return this.weightClass;
 
     }
 
@@ -223,28 +156,6 @@ public class Weapon {
                 + getMinDurabilityValue();
 
         return result;
-
-    }
-
-    /**
-     * This function returns the list of items that are required to craft the item
-     * 
-     * @return The list of recipe items.
-     */
-    public List<String> getRecipeItems() {
-
-        return this.recipeItems;
-
-    }
-
-    /**
-     * It returns the recipe shape
-     * 
-     * @return The recipe shape.
-     */
-    public List<String> getRecipeShape() {
-
-        return this.recipeShape;
 
     }
 
@@ -292,33 +203,4 @@ public class Weapon {
 
     }
 
-    /**
-     * It returns the item stack
-     * 
-     * @return The itemStack variable.
-     */
-    public ItemStack getItemStack() {
-
-        return this.itemStack;
-
-    }
-
-    /**
-     * "If the input items and input shape are equal to the recipe items and recipe
-     * shape, then return
-     * true, otherwise return false."
-     * 
-     * @param inputItems A list of strings that represent the items in the crafting
-     *                   grid.
-     * @param inputShape The shape of the recipe.
-     * @return A boolean value.
-     */
-    public Boolean isValidRecipe(List<String> inputItems, List<String> inputShape) {
-
-        boolean validItems = this.recipeItems.equals(inputItems);
-        boolean validShape = this.recipeShape.equals(inputShape);
-
-        return validItems && validShape;
-
-    }
 }

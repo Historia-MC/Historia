@@ -1,10 +1,13 @@
 package dev.boooiil.historia.configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.CraftedItem;
 import dev.boooiil.historia.classes.Weapon;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that gets information from a configuration file.
@@ -41,7 +44,7 @@ public class WeaponConfig extends Configuration<Weapon> {
 
         Weapon weapon = null;
 
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
+        for (Map.Entry<String, Weapon> entry : map.entrySet()) {
 
             boolean armorValid = ((Weapon) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
@@ -65,6 +68,75 @@ public class WeaponConfig extends Configuration<Weapon> {
         else return null;
 
     }
-    
-    
+
+        /**
+     * It checks if the shape of the recipe is valid
+     * 
+     * @param shape The shape of the recipe.
+     * @return A boolean value.
+     */
+    public boolean validShape(List<String> shape) {
+
+        boolean found = false;
+
+        for(Weapon weapon : map.values()) {
+
+            if (weapon.getRecipeShape().equals(shape)) {
+
+                found = true;
+                break;
+
+            }
+        }
+
+        return found;
+
+    }
+
+    /**
+     * It returns a list of all the recipes for the weapons
+     * 
+     * @return A list of lists of strings.
+     */
+    public List<List<String>> getAllShapes() {
+
+        List<List<String>> set = new ArrayList<>();
+
+        for(Weapon weapon : map.values()) {
+
+            set.add(weapon.getRecipeShape());
+        }
+
+        return set;
+
+    }
+
+    /**
+     * It returns a list of all the items that have the same recipe shape as the one passed in
+     * 
+     * @param shape A list of strings that represent the shape of the recipe.
+     * @return A list of all the weapon items that match the shape.
+     */
+    public List<CraftedItem> getAllMatchingShape(List<String> shape) {
+
+        List<CraftedItem> set = new ArrayList<>();
+        
+        for(Weapon weapon : map.values()) {
+
+            Logging.debugToConsole("--- WEAPON EQUALITY ---");
+            Logging.debugToConsole("W-ISHAPE:", shape.toString());
+            Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
+            Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
+            Logging.debugToConsole("--- --------------- ---");
+
+            if (weapon.getRecipeShape().equals(shape)) {
+
+                set.add(weapon);
+
+            }
+        }
+
+        return set;
+
+    }
 }

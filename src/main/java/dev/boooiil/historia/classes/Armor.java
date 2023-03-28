@@ -3,10 +3,6 @@ package dev.boooiil.historia.classes;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.ItemStack;
-
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.definitions.ArmorTypes;
 import dev.boooiil.historia.util.Construct;
@@ -16,70 +12,72 @@ import dev.boooiil.historia.util.Construct;
  * Constructs specific information from a given armor.
  *
  */
-public class Armor {
+public class Armor extends CraftedItem {
 
-    private FileConfiguration configuration = Config.getArmorConfig().getConfiguration();
-
-    private ArmorTypes type;
+    private ArmorTypes weightClass;
 
     private Integer weight;
 
     private List<Double> defense;
     private List<Integer> durability;
-    private List<String> recipeItems;
-    private List<String> recipeShape;
-
-    private ItemStack itemStack;
 
     private boolean valid;
 
-    /**
-     * Class constructor
-     * @param armorName - Name of the armor
-     */
+    // Getting the armor's information from the config.
     public Armor(String armorName) {
 
-        this.valid = Config.getArmorConfig().isValid(armorName);
+        configuration = Config.getArmorConfig().getConfiguration();
 
-        if (this.valid) {
+        valid = Config.getArmorConfig().isValid(armorName);
+
+        if (valid) {
 
             String itemRoot = armorName;
 
-            this.type = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type").toUpperCase());
+            // Calling the parent class's constructor.
+            itemStack = Construct.itemStack(
+                    configuration.getString(armorName + ".item.type"),
+                    configuration.getInt(armorName + ".item.amount"),
+                    configuration.getString(armorName + ".item.display-name"),
+                    configuration.getString(armorName + ".item.loc-name"),
+                    configuration.getStringList(armorName + ".item.lore"));
 
+            // Getting the weight class of the armor.
+            this.weightClass = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type").toUpperCase());
+
+            // Getting the weight of the armor.
             this.weight = configuration.getInt(itemRoot + ".weight");
 
+            // Getting the defense value of the armor.
             this.defense = configuration.getDoubleList(itemRoot + ".defense");
+
+            // Getting the durability of the armor.
             this.durability = configuration.getIntegerList(itemRoot + ".durability");
+
+            // Getting the recipe items from the config.
             this.recipeItems = configuration.getStringList(itemRoot + ".recipe-items");
+
+            // Getting the recipe shape from the config.
             this.recipeShape = configuration.getStringList(itemRoot + ".recipe-shape");
 
-            this.itemStack = Construct.itemStack(
-                    Material.getMaterial(configuration.getString(itemRoot + ".item.type")),
-                    configuration.getInt(itemRoot + ".item.amount"),
-                    configuration.getString(itemRoot + ".item.display-name"),
-                    configuration.getString(itemRoot + ".item.loc-name"),
-                    configuration.getStringList(itemRoot + ".item.lore"));
-
         }
-
-        else
-            this.valid = false;
 
     }
 
     /**
      * Get the type (weight class) of armor.
+     * 
      * @return Type of armor.
      */
-    public ArmorTypes getType() {
+    public ArmorTypes getWeightClass() {
 
-        return this.type;
+        return this.weightClass;
 
     }
 
     /**
      * Get the weight of the armor.
+     * 
      * @return Weight of the armor.
      */
     public Integer getWeight() {
@@ -90,6 +88,7 @@ public class Armor {
 
     /**
      * Get the randomized defense value of the armor.
+     * 
      * @return Defence value.
      */
     public Double getRandomDefenseValue() {
@@ -103,6 +102,7 @@ public class Armor {
 
     /**
      * Get the randomized durability value of the armor.
+     * 
      * @return Durability value.
      */
     public Integer getRandomDurabilityValue() {
@@ -116,34 +116,8 @@ public class Armor {
     }
 
     /**
-     * Get the recipe items needed to complete this recipe.
-     * @return List of recipe items.
-     */
-    public List<String> getRecipeItems() {
-
-        return this.recipeItems;
-
-    }
-
-    /**
-     * Get the recipe shape needed to complete this recipe.
-     * <p>List is denoted as:
-     * 
-     *   <p>| X  X  X|
-     *   <p>| X  X  X|
-     *   <p>| X  X  X|
-     * 
-     * <p>... where each row is a corresponding list item.
-     * @return Recipe shape.
-     */
-    public List<String> getRecipeShape() {
-
-        return this.recipeShape;
-
-    }
-
-    /**
      * Get the minimum base defense value of the armor.
+     * 
      * @return Defense value.
      */
     public Double getMinDefenceValue() {
@@ -154,6 +128,7 @@ public class Armor {
 
     /**
      * Get the maximum base defense value of the armor.
+     * 
      * @return Defence value.
      */
     public Double getMaxDefenceValue() {
@@ -164,6 +139,7 @@ public class Armor {
 
     /**
      * Get the minimum base durability value of the armor.
+     * 
      * @return Durability value.
      */
     public Integer getMinDurabilityValue() {
@@ -174,6 +150,7 @@ public class Armor {
 
     /**
      * Get the minimum base durability value of the armor.
+     * 
      * @return Durability value.
      */
     public Integer getMaxDurabilityValue() {
@@ -182,29 +159,4 @@ public class Armor {
 
     }
 
-    /**
-     * Get the item corresponding to this armor.
-     * @return {@link ItemStack}
-     */
-    public ItemStack getItemStack() {
-
-        return this.itemStack;
-
-    }
-
-    /**
-     * Validate recipe of items to see if it matches an armor.
-     * @param inputItems List of recipe items.
-     * @param inputShape Recipe shape.
-     * 
-     * @return If the recipe is valid.
-     */
-    public Boolean isValidRecipe(List<String> inputItems, List<String> inputShape) {
-
-        boolean validItems = this.recipeItems.equals(inputItems);
-        boolean validShape = this.recipeShape.equals(inputShape);
-
-        return validItems && validShape;
-
-    }
 }
