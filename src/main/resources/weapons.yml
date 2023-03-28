@@ -14,6 +14,8 @@ Light_Wooden_Sword:
       - "§7Damage - §k?"
       - "§7Knockback - §k?"
       - "§7Speed - §k?"
+      - "§7Sweeping - §k?"
+      - "§7Durability - §k?"
       - ""
 
   damage: [1.0, 2.0]
@@ -39,6 +41,8 @@ Light_Wooden_Axe:
       - "§7Damage - §k?"
       - "§7Knockback - §k?"
       - "§7Speed - §k?"
+      - "§7Sweeping - §k?"
+      - "§7Durability - §k?"
       - ""
 
   damage: [2.0, 3.0]
@@ -58,12 +62,16 @@ Light_Tin_Sword:
     loc-name: Light_Tin_Sword
     lore:
       - ""
-      - "§7A light, tin sword. Doesn't hit hard but swings faster than most daggers."
+      - "§7A light, tin sword."
+      - "Doesn't hit hard but" 
+      - "swings faster than most daggers."
       - ""
       - "§9-----------------"
       - "§7Damage - §k?"
       - "§7Knockback - §k?"
       - "§7Speed - §k?"
+      - "§7Sweeping - §k?"
+      - "§7Durability - §k?"
       - ""
 
   damage: [2.0, 3.0]
@@ -199,7 +207,9 @@ Light_Bronze_Axe:
     lore:
       [
         "",
-        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
       ]
 
   damage: [3.0, 6.0]
@@ -254,11 +264,13 @@ Light_Iron_Sword:
     type: IRON_SWORD
     amount: 1
     display-name: §7Iron Dagger
-    loc-name: Light_Bronze_Sword
+    loc-name: Light_Iron_Sword
     lore:
       [
         "",
-        "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword.",
+        "§7Daggers utilize a quick attack speed",
+        "and little to no knockback, but are generally",
+        "weaker than the average sword."
       ]
 
   damage: [3.5, 5.5]
@@ -293,7 +305,12 @@ Heavy_Iron_Sword:
     amount: 1
     display-name: §7Iron Greatsword
     loc-name: Heavy_Iron_Sword
-    lore: [Greatswords deal strong damage with a slower swing speed.]
+    lore:
+      [
+        "", 
+        "§7Greatswords deal strong damage", 
+        "with a slower swing speed. "
+      ]
 
   damage: [5.0, 7.0]
   speed: [0.8, 1.2]
@@ -313,7 +330,9 @@ Light_Iron_Axe:
     lore:
       [
         "",
-        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
       ]
 
   damage: [4.0, 7.0]
@@ -351,7 +370,9 @@ Heavy_Iron_Axe:
     lore:
       [
         "",
-        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+        "§7Bardiches have a slower swing",
+        "due to their long handle, but deal",
+        "more damage than the average axe. ",
       ]
 
   damage: [5.0, 8.0]
@@ -372,7 +393,9 @@ Light_Steel_Sword:
     lore:
       [
         "",
-        "§7A steel dagger. Fast speed with weak damage, and little knockback. ",
+        "§7A steel dagger.",
+        "Fast speed with weak damage", 
+        "and little knockback. ",
       ]
 
   damage: [4.5, 6.0]
@@ -407,7 +430,12 @@ Heavy_Steel_Sword:
     amount: 1
     display-name: §7Steel Greatsword
     loc-name: Heavy_Steel_Sword
-    lore: ["", "§7Greatswords deal strong damage with a slower swing speed. "]
+    lore: 
+      [
+        "", 
+        "§7Greatswords deal strong damage", 
+        "with a slower swing speed. "
+      ]
 
   damage: [6.5, 9.0]
   speed: [0.8, 1.0]
@@ -427,7 +455,9 @@ Light_Steel_Axe:
     lore:
       [
         "",
-        "§7Hatchets generally deal less damage than an average axe, but with a faster swing and low knockback. ",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
       ]
 
   damage: [7.0, 9.0]
@@ -465,7 +495,9 @@ Heavy_Steel_Axe:
     lore:
       [
         "",
-        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+        "§7Bardiches have a slower swing",
+        "due to their long handle, but deal",
+        "more damage than the average axe. ",
       ]
 
   damage: [5.0, 8.0]
