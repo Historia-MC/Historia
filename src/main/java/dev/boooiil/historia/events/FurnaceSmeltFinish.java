@@ -25,7 +25,7 @@ public class FurnaceSmeltFinish implements Listener {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 
-        if (ingotConfig.isValidIngot(localizedName)) {
+        if (ingotConfig.isValid(localizedName)) {
 
             Ingot ingot = ingotConfig.getObject(localizedName);
 
