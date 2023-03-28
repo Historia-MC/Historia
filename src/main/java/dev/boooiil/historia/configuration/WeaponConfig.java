@@ -1,102 +1,142 @@
 package dev.boooiil.historia.configuration;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.ItemStack;
+import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.CraftedItem;
+import dev.boooiil.historia.classes.Weapon;
+import dev.boooiil.historia.util.Logging;
 
-import dev.boooiil.historia.abstractions.Configuration;
-import dev.boooiil.historia.util.Construct;
-import dev.boooiil.historia.util.FileGetter;
-
-public class WeaponConfig extends Configuration {
+/**
+ * It's a class that gets information from a configuration file.
+ */
+public class WeaponConfig extends Configuration<Weapon> {
     
-    private static FileConfiguration configuration = FileGetter.get("ingots.yml");
+    // private static FileConfiguration configuration = FileGetter.get("ingots.yml");
 
-    static final Set<String> weaponSet = configuration.getKeys(false);
-    
+    // static final Set<String> weaponSet = configuration.getKeys(false);
+
     /**
-     *
-     * Constructs specific information from a given weapon.
+     * Used to create a new instance of Weapon.
      * 
-     * To access the constructor in Weapon:
-     * 
-     * <pre>
-     * {
-     *   WeaponConfig weaponConfig = new WeaponConfig();
-     *   WeaponConfig.Weapon weapon = weaponConfig.new Weapon(weaponName);
-     * }
-     * </pre>
-     *
+     * @param weaponName - Name of the weapon to create.
+     * @return Returns an Weapon object.
      */
-    public class Weapon {
-        
-        private String type;
-        private String localizedName;
-        private String displayName;
-        private List<String> lore;
-        private int amount;
+    public Weapon createNew(String weaponName) {
 
-        public String weaponType;
+        return new Weapon(weaponName);
 
-        public ItemStack weaponItemStack;
-
-        public List<String> weaponCraftingShape;
-        public List<String> weaponCreaftingRecipe;
-
-        public boolean valid;
-
-        public List<Double> weaponDamageRange;
-        public List<Double> weaponSpeedRange;
-        public List<Double> weaponKnockbackRange;
-        public List<Double> weaponSweepRange;
-
-        public List<Integer> weaponDurabilityRange;
+    }
 
 
-        public Weapon(String weaponName) {
 
-            this.valid = validWeapon(weaponName);
+    /**
+     * It takes a list of items and a list of shapes, and returns a weapon if the items and shapes
+     * match a weapon recipe
+     * 
+     * @param inputItems A list of strings that represent the items used to craft the weapon.
+     * @param inputShape A list of strings that represent the shape of the weapon.
+     * @return A Weapon object.
+     */
+    public Weapon getObject(List<String> inputItems, List<String> inputShape) {
 
-            if (valid) {
+        Weapon weapon = null;
 
-                String root = weaponName;
-                String itemRoot = weaponName + ".item";
+        for (Map.Entry<String, Weapon> entry : map.entrySet()) {
 
-                this.type = configuration.getString(itemRoot + ".type");
-                this.localizedName = configuration.getString(itemRoot + ".loc-name");
-                this.displayName = configuration.getString(itemRoot + ".display-name");
-                this.lore = configuration.getStringList(itemRoot + ".lore");
-                this.amount = configuration.getInt(itemRoot + ".amount");
+            boolean armorValid = ((Weapon) entry.getValue()).isValidRecipe(inputItems, inputShape);
 
-                this.weaponItemStack = Construct.itemStack(Material.getMaterial(type), amount, displayName, localizedName, lore);
-                this.weaponDamageRange = configuration.getDoubleList(root + ".damage");
-                this.weaponKnockbackRange = configuration.getDoubleList(root + ".knockback");
-                this.weaponSweepRange = configuration.getDoubleList(root + ".sweeping");
-                this.weaponDurabilityRange = configuration.getIntegerList(root + ".durability");
-
-                this.weaponType = configuration.getString(root + ".type");
-                this.weaponCraftingShape = configuration.getStringList(root + ".recipe-shape");
-                this.weaponCreaftingRecipe = configuration.getStringList(root + ".recipe-items");
-
-            }
-
+            if (armorValid) { weapon = (Weapon) entry.getValue(); break; }
 
         }
+
+        return weapon;
+        
     }
 
-    public static Set<String> getWeaponSet() {
+    /**
+     * If the weapon name is valid, return the weapon object from the map. Otherwise, return null
+     * 
+     * @param weaponName The name of the weapon you want to get.
+     * @return A Weapon object.
+     */
+    public Weapon getObject(String weaponName) {
 
-        return weaponSet;
+        if (isValid(weaponName)) return (Weapon) map.get(weaponName);
+        else return null;
 
     }
 
-    public static boolean validWeapon(String weaponName) {
+        /**
+     * It checks if the shape of the recipe is valid
+     * 
+     * @param shape The shape of the recipe.
+     * @return A boolean value.
+     */
+    public boolean validShape(List<String> shape) {
 
-        return weaponSet.contains(weaponName);
+        boolean found = false;
+
+        for(Weapon weapon : map.values()) {
+
+            if (weapon.getRecipeShape().equals(shape)) {
+
+                found = true;
+                break;
+
+            }
+        }
+
+        return found;
 
     }
-    
+
+    /**
+     * It returns a list of all the recipes for the weapons
+     * 
+     * @return A list of lists of strings.
+     */
+    public List<List<String>> getAllShapes() {
+
+        List<List<String>> set = new ArrayList<>();
+
+        for(Weapon weapon : map.values()) {
+
+            set.add(weapon.getRecipeShape());
+        }
+
+        return set;
+
+    }
+
+    /**
+     * It returns a list of all the items that have the same recipe shape as the one passed in
+     * 
+     * @param shape A list of strings that represent the shape of the recipe.
+     * @return A list of all the weapon items that match the shape.
+     */
+    public List<CraftedItem> getAllMatchingShape(List<String> shape) {
+
+        List<CraftedItem> set = new ArrayList<>();
+        
+        for(Weapon weapon : map.values()) {
+
+            Logging.debugToConsole("--- WEAPON EQUALITY ---");
+            Logging.debugToConsole("W-ISHAPE:", shape.toString());
+            Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
+            Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
+            Logging.debugToConsole("--- --------------- ---");
+
+            if (weapon.getRecipeShape().equals(shape)) {
+
+                set.add(weapon);
+
+            }
+        }
+
+        return set;
+
+    }
 }

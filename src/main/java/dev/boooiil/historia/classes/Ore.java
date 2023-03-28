@@ -7,20 +7,23 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * This class should not be initialized outside of {@link OreConfig}.
  */
 public class Ore {
 
-    private FileConfiguration configuration = OreConfig.getConfiguration();
-    
-    public String name;
-    public int chance;
+    private FileConfiguration configuration = Config.getOreConfig().getConfiguration();
 
-    public List<OreDrop> drops = new ArrayList<OreDrop>();
+    private String name;
+    private int chance;
 
+    private List<OreDrop> drops = new ArrayList<OreDrop>();
+
+    // Creating a new Ore object.
     public Ore(String currentRoot, String oreName) {
 
         String root = currentRoot + "." + oreName;
@@ -55,6 +58,8 @@ public class Ore {
         for (int i = 0; i < this.drops.size(); i++) {
 
             OreDrop drop = this.drops.get(i);
+
+            Logging.debugToConsole("[ORE] DROP:", drop.getItemStack().getItemMeta().getAsString());
 
             if (className.equals(drop.getRequiredClass()) || drop.getRequiredClass().equals("Any")) {
 

@@ -11,11 +11,17 @@ import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * It checks if the player has permissions to break in the specific location.
+ */
 public class WorldGuardHandler {
 
-    /*
-     * Check if the player has permissions to break in the specific location.
-     *
+    /**
+     * It checks if a player has permission to build at a location
+     * 
+     * @param player The player who is trying to place the block
+     * @param location The location of the block you want to check.
+     * @return A boolean value.
      */
     public static boolean getPermissions(Player player, Location location) {
         try {

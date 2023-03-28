@@ -4,14 +4,29 @@
 
   <groupId>dev.boooiil.historia</groupId>
   <artifactId>Historia</artifactId>
-  <version>1.19.2-R0.1-SNAPSHOT</version>
+  <version>1.0.8-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>18</maven.compiler.source>
+    <maven.compiler.target>18</maven.compiler.target>
   </properties>
+
+  <scm>
+    <developerConnection>scm:git:git://github.com/Historia-MC/Historia</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>boooiil</id>
+      <name>Historia Base Plugin</name>
+      <url>file://C:\Users\boooi\Desktop\Repos\Historia\Release\</url>
+      <layout>default</layout>
+    </repository>
+  </distributionManagement>
 
   <repositories>
 
@@ -43,7 +58,7 @@
     <dependency>
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
-      <version>1.19.2-R0.1-SNAPSHOT</version>
+      <version>1.19.4-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 
@@ -57,7 +72,7 @@
     <dependency>
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
-      <version>0.98.3.0</version>
+      <version>0.98.6.0</version>
       <scope>provided</scope>
     </dependency>
 
@@ -71,7 +86,13 @@
     <dependency>
       <groupId>com.discord4j</groupId>
       <artifactId>discord4j-core</artifactId>
-      <version>3.2.2</version>
+      <version>3.2.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.1</version>
     </dependency>
 
     <dependency>
@@ -86,6 +107,17 @@
     <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 
     <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+            <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+            <doclint>none</doclint>
+        </configuration>
+    </plugin>
+
       <plugin>
 
         <groupId>org.apache.maven.plugins</groupId>
@@ -93,7 +125,7 @@
         <version>3.2.0</version>
 
         <configuration>
-          <outputDirectory>C:\Users\boooi\Desktop\Test Server\plugins\</outputDirectory>
+          <outputDirectory>C:\Users\boooi\Desktop\Plugin Test Server\plugins\</outputDirectory>
         </configuration>
 
       </plugin>
@@ -106,6 +138,7 @@
           <target>17</target>
         </configuration>
       </plugin>
+
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.4</version>
@@ -125,6 +158,23 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <pushChanges>false</pushChanges>
+          <localCheckout>true</localCheckout>
+          <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>3.1.0</version>
       </plugin>
 
     </plugins>

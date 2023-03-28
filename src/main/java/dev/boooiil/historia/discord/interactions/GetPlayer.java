@@ -16,8 +16,18 @@ import discord4j.discordjson.json.ApplicationCommandOptionData;
 import discord4j.discordjson.json.ApplicationCommandRequest;
 import discord4j.rest.util.Color;
 
+/**
+ * It's a command that allows you to view a player's information
+ */
 public class GetPlayer {
     
+    /**
+     * It takes a ChatInputInteractionEvent, gets the username from the event, gets the HistoriaPlayer
+     * object from the username, and then sends an embed with the player's information
+     * 
+     * @param event The event that triggered the command.
+     * @return A Discord4J InteractionApplicationCommandCallbackReplyMono object.
+     */
     public InteractionApplicationCommandCallbackReplyMono run(ChatInputInteractionEvent event) {
 
         String username = event.getOption("username")
@@ -27,6 +37,7 @@ public class GetPlayer {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(username, true);
         
+        // It's checking if the HistoriaPlayer object is valid.
         if (historiaPlayer.isValid()) {
             
             Logging.infoToConsole(historiaPlayer.toString());
@@ -54,6 +65,13 @@ public class GetPlayer {
 
     }
 
+    /**
+     * It returns an ApplicationCommandRequest object that contains a command named "player" with a
+     * description of "View a player's information." and an option named "username" with a description
+     * of "The username of the user you would like to view." that is required and of type string
+     * 
+     * @return An ApplicationCommandRequest object.
+     */
     public static ApplicationCommandRequest getApplicationCommandRequest() {
 
         return ApplicationCommandRequest.builder()

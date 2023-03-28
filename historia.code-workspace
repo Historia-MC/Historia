@@ -16,11 +16,14 @@
             "**/.project": true,
             "**/.settings": true,
             "**/.factorypath": true,
-            "**/target": true
+            "**/target": true,
+            "**/.lift*": true
+            
         },
         "java.configuration.updateBuildConfiguration": "automatic",
         "java.dependency.packagePresentation": "hierarchical",
         "editor.codeLens": false,
         "maven.executable.path": "./Maven/bin/mvn.cmd",
+        "java.compile.nullAnalysis.mode": "automatic",
     }
 }

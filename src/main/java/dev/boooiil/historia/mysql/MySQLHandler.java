@@ -15,16 +15,20 @@ import java.util.UUID;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.GeneralConfig;
-import dev.boooiil.historia.configuration.GeneralConfig.MySQL;
 import dev.boooiil.historia.util.Logging;
 
+/**
+ * It's a class that handles all of the MySQL queries for the plugin.
+ */
 public class MySQLHandler {
 
     // TODO: Do below
-    // We could create a user cache that loads when we first connect to the database so we are not fetching users every time they connect.
+    // We could create a user cache that loads when we first connect to the database
+    // so we are not fetching users every time they connect.
 
-    private static final MySQL MYSQLCONFIG = new GeneralConfig.MySQL();
+    private static GeneralConfig MYSQLCONFIG = Config.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;
@@ -38,14 +42,9 @@ public class MySQLHandler {
 
     private static Connection connection;
 
-    private MySQLHandler() {
-        throw new IllegalStateException("This class should not be initialized.");
-    }
-
     /**
      * Create the table in the database if it does not exist.
      * 
-     * @throws SQLException Generally, if the plugin can't connect to the database.
      */
     public static void createTable() {
 
@@ -53,16 +52,16 @@ public class MySQLHandler {
 
             // Issue the statement that we will use to create the table if it does not
             // exist.
-            String createTable = "CREATE TABLE IF NOT EXISTS " + 
-                "historia(UUID varchar(36), " +
-                "Username varchar(16), " +
-                "Class varchar(30), " +
-                "Level int, " + 
-                "Experience int, " +
-                "Login bigint, " + 
-                "Logout bigint, " +
-                "Playtime bigint, " +
-                "PRIMARY KEY (UUID))";
+            String createTable = "CREATE TABLE IF NOT EXISTS " +
+                    "historia(UUID varchar(36), " +
+                    "Username varchar(16), " +
+                    "Class varchar(30), " +
+                    "Level int, " +
+                    "Experience int, " +
+                    "Login bigint, " +
+                    "Logout bigint, " +
+                    "Playtime bigint, " +
+                    "PRIMARY KEY (UUID))";
 
             try {
 
@@ -76,7 +75,7 @@ public class MySQLHandler {
             } catch (SQLException e) {
                 Logging.infoToConsole("Failed to load MySQL.");
                 e.printStackTrace();
-                Main.disable(Main.plugin());
+                Main.disable();
             }
         }
     }
@@ -90,7 +89,8 @@ public class MySQLHandler {
 
     public static void createUser(UUID uuid, String playerName) {
 
-        if (userExists(uuid)) return;
+        if (userExists(uuid))
+            return;
 
         try {
 
@@ -100,14 +100,14 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(createUser);
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (SQLException e) {
+            reconnectOnStale();
+            createUser(uuid, playerName);
+
+        } catch (SQLException e) {
 
             e.printStackTrace();
 
@@ -132,6 +132,13 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Created user: " + playerName + " in the Database.");
 
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            reconnectOnStale();
+            setUsername(uuid, playerName);
+
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -155,6 +162,13 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            reconnectOnStale();
+            setClass(uuid, className);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,6 +189,13 @@ public class MySQLHandler {
 
             Statement statement = connection.createStatement();
             statement.execute(string);
+
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            reconnectOnStale();
+            setClassLevel(uuid, classLevel);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -197,14 +218,14 @@ public class MySQLHandler {
             Statement statement = connection.createStatement();
             statement.execute(string);
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (SQLException e) {
+            reconnectOnStale();
+            setLogin(uuid);;
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -213,8 +234,8 @@ public class MySQLHandler {
     /**
      * Set the logout time for the given user.
      * 
-     * @param uuid - UUID of the player.
-     * @param lastLogin - Provided last login of the player.
+     * @param uuid             - UUID of the player.
+     * @param lastLogin        - Provided last login of the player.
      * @param previousPlaytime - Provided playtime of the player.
      */
 
@@ -224,14 +245,20 @@ public class MySQLHandler {
 
             long time = new Date().getTime();
 
-            String string = (
-                            "UPDATE historia " +
-                            "SET Logout = '" + time + "', " +
-                            "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
-                            "WHERE UUID = '" + uuid + "'");
+            String string = ("UPDATE historia " +
+                    "SET Logout = '" + time + "', " +
+                    "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
+                    "WHERE UUID = '" + uuid + "'");
 
             Statement statement = connection.createStatement();
             statement.execute(string);
+
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            reconnectOnStale();
+            setLogout(uuid, lastLogin, previousPlaytime);;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -264,14 +291,14 @@ public class MySQLHandler {
 
             }
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (Exception e) {
+            reconnectOnStale();
+            return getUsernames();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -299,14 +326,14 @@ public class MySQLHandler {
 
             return results.getString(1);
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (Exception e) {
+            reconnectOnStale();
+            return getUsername(uuid);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -321,19 +348,19 @@ public class MySQLHandler {
      *
      * @return
      *         <p>
-     *         <"UUID", {@link java.lang.String String}>
+     *         "UUID", {@link java.lang.String String}
      *         <p>
-     *         <"Username", {@link java.lang.String String}>
+     *         "Username", {@link java.lang.String String}
      *         <p>
-     *         <"Class", {@link java.lang.String String}>
+     *         "Class", {@link java.lang.String String}
      *         <p>
-     *         <"Level", {@link java.lang.String String}>
+     *         "Level", {@link java.lang.String String}
      *         <p>
-     *         <"Experience", {@link java.lang.String String}>
+     *         "Experience", {@link java.lang.String String}
      *         <p>
-     *         <"Login", {@link java.lang.String String}>
+     *         "Login", {@link java.lang.String String}
      *         <p>
-     *         <"Logout", {@link java.lang.String String}>
+     *         "Logout", {@link java.lang.String String}
      * 
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
@@ -365,14 +392,14 @@ public class MySQLHandler {
 
             return map;
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (Exception e) {
+            reconnectOnStale();
+            return getUser(uuid);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -407,14 +434,14 @@ public class MySQLHandler {
 
             }
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            cE.printStackTrace();
 
-        }
-        catch (Exception e) {
+            reconnectOnStale();
+            return getUUIDs();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -460,24 +487,14 @@ public class MySQLHandler {
 
             }
 
-        } 
-        catch(CommunicationsException cE) {
+        } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
-            
-            try {
 
-                return UUID.fromString(reconnectOnStale(string).getString(1));
+            reconnectOnStale();
+            return getUUID(playerName);
 
-            }
-            catch (Exception e) {
-
-                e.printStackTrace();
-
-            }
-
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -486,6 +503,7 @@ public class MySQLHandler {
     }
 
     @Deprecated
+    // Checking if the fields are empty.
     private static boolean validateFields() {
 
         int caught = 0;
@@ -532,7 +550,7 @@ public class MySQLHandler {
 
         if (caught > 0) {
 
-            Main.disable(Main.plugin());
+            Main.disable();
 
             return false;
         }
@@ -541,6 +559,12 @@ public class MySQLHandler {
 
     }
 
+    /**
+     * It checks if the user exists in the database
+     * 
+     * @param uuid The UUID of the player
+     * @return A boolean value.
+     */
     private static boolean userExists(UUID uuid) {
 
         String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
@@ -549,12 +573,19 @@ public class MySQLHandler {
 
             return connection.createStatement().executeQuery(statement).next();
 
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            reconnectOnStale();
+            return userExists(uuid);
+
         } catch (SQLException sqlE) {
 
             sqlE.printStackTrace();
 
         }
-    
+
         return false;
 
     }
@@ -562,7 +593,7 @@ public class MySQLHandler {
     /*
      * Reconnects the client on a stale request.
      */
-    private static ResultSet reconnectOnStale(String query) {
+    private static void reconnectOnStale() {
 
         try {
 
@@ -574,20 +605,25 @@ public class MySQLHandler {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Logging.warnToConsole("Reconnected to SQL Server.");
 
-            Logging.warnToConsole("Resending query...");
+            // Logging.warnToConsole("Resending query...");
 
-            ResultSet result = connection.createStatement().executeQuery(query);
+            // ResultSet result = connection.createStatement().executeQuery(query);
 
-            result.next();
-            
-            return result;
+            // result.next();
+
+            // return result;
 
         } catch (SQLException sqlE) {
 
             Logging.errorToConsole("Could not reconnect on stale connection.");
             sqlE.printStackTrace();
 
-            return null;
+            // return null;
         }
+    }
+
+    // A private constructor.
+    private MySQLHandler() {
+        throw new IllegalStateException("This class should not be initialized.");
     }
 }

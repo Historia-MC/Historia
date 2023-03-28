@@ -3,11 +3,21 @@ package dev.boooiil.historia.util;
 import java.util.TimeZone;
 import java.util.Calendar;
 
+/**
+ * It converts milliseconds into a date, time, or both
+ */
 public class DateUtil {
 
     private static String months[] = { "January", "Febuary", "March", "April", "May", "June", "July", "August",
             "September", "October", "November", "December" };
 
+    /**
+     * It takes a long value in milliseconds and returns a string in the format of "MM-DD-YYYY HH:MM:SS
+     * AM/PM EST"
+     * 
+     * @param milliseconds The time in milliseconds to convert to a string.
+     * @return A string of the date and time in the format of MM-DD-YYYY HH:MM:SS AM/PM EST
+     */
     public static String getFullTimeFromMilliseconds(long milliseconds) {
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
@@ -37,6 +47,13 @@ public class DateUtil {
 
     }
 
+    /**
+     * It takes a long value representing milliseconds since the epoch, and returns a string
+     * representing the date in the format MM-DD-YYYY
+     * 
+     * @param milliseconds The time in milliseconds to convert to a date.
+     * @return A string of the date in the format MM-DD-YYYY
+     */
     public static String getDateFromMilliseconds(long milliseconds) {
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
@@ -56,6 +73,13 @@ public class DateUtil {
         return string;
     }
 
+    /**
+     * It takes a long value in milliseconds, converts it to a Calendar object, and then returns a
+     * String in the format of "HH:MM:SS-AM/PM"
+     * 
+     * @param milliseconds The time in milliseconds to convert to a string.
+     * @return The time in milliseconds.
+     */
     public static String getTimeFromMilliseconds(long milliseconds) {
 
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("EST"));
@@ -78,6 +102,14 @@ public class DateUtil {
 
     }
 
+    /**
+     * It takes a long value in milliseconds and returns a string in the format of "1 year, 2 months, 3
+     * weeks, 4 days, 5 hours, 6 minutes, 7 seconds" or "1:2:3:4:5:6:7" (if colonFormat is true)
+     * 
+     * @param milliseconds The amount of milliseconds you want to convert.
+     * @param colonFormat true/false
+     * @return The string is being returned.
+     */
     public static String convertMillisecondsIntoStringTime(long milliseconds, boolean colonFormat) {
 
         long second = milliseconds / 1000;

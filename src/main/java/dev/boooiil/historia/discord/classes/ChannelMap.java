@@ -1,5 +1,8 @@
 package dev.boooiil.historia.discord.classes;
 
+/**
+ * This class will be used to track all of the channels that are created.
+ */
 public class ChannelMap {
     
     /**
@@ -8,5 +11,9 @@ public class ChannelMap {
      * 
      * I might not need this.
      */
+
+    public ChannelMap() {
+
+    }
 
 }

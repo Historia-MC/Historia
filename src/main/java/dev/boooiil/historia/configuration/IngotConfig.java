@@ -1,30 +1,23 @@
 package dev.boooiil.historia.configuration;
 
-import java.util.HashMap;
-import java.util.Set;
-
-import dev.boooiil.historia.abstractions.Configuration;
+import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.Ingot;
-import dev.boooiil.historia.util.FileGetter;
 
-public class IngotConfig extends Configuration {
+/**
+ * It's a configuration class that loads ingots.yml and allows you to get an ingot from it
+ */
+public class IngotConfig extends Configuration<Ingot> {
 
-    private static final HashMap<String, Ingot> ingotMap = new HashMap<>();
+    /**
+     * Used to create a new instance of Ingot.
+     * 
+     * @param ingotName - Name of the ingot to check.
+     * @return Returns an Ingot object.
+     */
+    @Override
+    public Ingot createNew(String ingotName) {
 
-    public static void init() {
-
-        configuration = FileGetter.get("ingots.yml");
-        keySet = configuration.getKeys(false);
-
-        for (String ingot : keySet) {
-
-            if (!ingot.equals("version")) {
-
-                ingotMap.put(ingot, new Ingot(ingot));
-
-            }
-
-        }
+        return new Ingot(ingotName);
 
     }
 
@@ -32,11 +25,11 @@ public class IngotConfig extends Configuration {
      * ************************** STATIC METHODS **************************
      */
 
-    public static Ingot getIngot(String ingotLocName) {
+    public Ingot getObject(String ingotLocName) {
 
         if (isValidIngot(ingotLocName)) {
 
-            return ingotMap.get(ingotLocName);
+            return (Ingot) map.get(ingotLocName);
 
         }
 
@@ -46,29 +39,14 @@ public class IngotConfig extends Configuration {
     }
 
     /**
-     * Get a set (unordered list) of all items described in ingots.yml.
-     * 
-     * 
-     * @return Set of all ingots described in ingots.yml.
-     * 
-     * @see <a href=
-     *      "https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">Set</a>
-     */
-    public static Set<String> getIngotSet() {
-
-        return keySet;
-
-    }
-
-    /**
      * If the ingot provided is in ingots.yml.
      * 
-     * @param blockName - Name of the ingot to check.
+     * @param ingotName - Name of the ingot to check.
      * @return If the ingot provided is in ingots.yml.
      */
-    public static boolean isValidIngot(String ingotName) {
+    public boolean isValidIngot(String ingotName) {
 
-        return keySet.contains(ingotName);
+        return set.contains(ingotName);
 
     }
 
