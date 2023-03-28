@@ -7,6 +7,7 @@ import java.util.Map;
 import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.CraftedItem;
 import dev.boooiil.historia.classes.Weapon;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that gets information from a configuration file.
@@ -119,8 +120,14 @@ public class WeaponConfig extends Configuration<Weapon> {
     public List<CraftedItem> getAllMatchingShape(List<String> shape) {
 
         List<CraftedItem> set = new ArrayList<>();
-
+        
         for(Weapon weapon : map.values()) {
+
+            Logging.debugToConsole("--- WEAPON EQUALITY ---");
+            Logging.debugToConsole("W-ISHAPE:", shape.toString());
+            Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
+            Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
+            Logging.debugToConsole("--- --------------- ---");
 
             if (weapon.getRecipeShape().equals(shape)) {
 

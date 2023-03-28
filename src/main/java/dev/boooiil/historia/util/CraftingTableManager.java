@@ -22,10 +22,10 @@ import dev.boooiil.historia.configuration.Config;
  */
 public class CraftingTableManager {
 
-    String prefix = "[CTM.java] ";
-    String replace = "LOW_|MEDIUM_|HIGH_";
+    private static String prefix = "[CTM.java] ";
+    private static String replace = "LOW_|MEDIUM_|HIGH_";
 
-    public void craftItem(CraftingInventory inventory) {
+    public static void craftItem(CraftingInventory inventory) {
 
         Map<Integer, ItemStack> input = inspectTable(inventory.getMatrix());
         Map<String, List<String>> pattern = constructPattern(input);
@@ -38,10 +38,8 @@ public class CraftingTableManager {
 
         List<String> materials = pattern.get("MATERIALS");
 
-        Logging.debugToConsole(prefix + "[craftItem] " + matchingItems);
+        Logging.debugToConsole(prefix + "[craftItem] " + matchingItems.toString());
         Logging.debugToConsole(prefix + "[craftItem] " + materials);
-
-        
 
         if (matchingItems.size() > 0) {
 
@@ -56,7 +54,7 @@ public class CraftingTableManager {
      * @param contents The contents of the inventory
      * @return A map of integers and itemstacks.
      */
-    private Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
+    private static Map<Integer, ItemStack> inspectTable(ItemStack[] contents) {
 
         Map<Integer, ItemStack> found = new HashMap<>();
 
@@ -84,7 +82,7 @@ public class CraftingTableManager {
      * @param input The input map
      * @return A map with two keys, PATTERN and MATERIALS.
      */
-    private Map<String, List<String>> constructPattern(Map<Integer, ItemStack> input) {
+    private static Map<String, List<String>> constructPattern(Map<Integer, ItemStack> input) {
 
         Map<String, List<String>> map = new HashMap<>();
         List<String> pattern = new ArrayList<>();
@@ -188,7 +186,7 @@ public class CraftingTableManager {
      * @return The return value is the sum of the medium and high values multiplied by their respective
      * weights.
      */
-    private float getQualityModifier(int complexity) {
+    private static float getQualityModifier(int complexity) {
 
         int medium = 0;
         int high = 0;
@@ -207,7 +205,7 @@ public class CraftingTableManager {
      * @param materials Materials used in the 
      * @return A CraftedItem object.
      */
-    private ItemStack getItemBasedOnIngot(List<CraftedItem> items, List<String> materials) {
+    private static ItemStack getItemBasedOnIngot(List<CraftedItem> items, List<String> materials) {
 
         // Looping through the list of items that match the pattern.
         for (CraftedItem item : items) {
@@ -224,6 +222,8 @@ public class CraftingTableManager {
             if (materials.size() == item.getRecipeItems().size()) {
 
                 for (String material : materials) {
+
+                    Logging.debugToConsole("" + item.getRecipeItems().contains(material.replaceFirst(replace, "")));
 
                     if (item.getRecipeItems().contains(material.replaceFirst(replace, "")))
                         matched++;
