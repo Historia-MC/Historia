@@ -35,12 +35,12 @@ public class Armor extends CraftedItem {
             String itemRoot = armorName;
 
             // Calling the parent class's constructor.
-            initItemStack(Construct.itemStack(
+            itemStack = Construct.itemStack(
                     configuration.getString(armorName + ".item.type"),
                     configuration.getInt(armorName + ".item.amount"),
                     configuration.getString(armorName + ".item.display-name"),
                     configuration.getString(armorName + ".item.loc-name"),
-                    configuration.getStringList(armorName + ".item.lore")));
+                    configuration.getStringList(armorName + ".item.lore"));
 
             // Getting the weight class of the armor.
             this.weightClass = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type").toUpperCase());

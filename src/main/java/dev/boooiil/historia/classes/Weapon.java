@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.util.Construct;
-import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that represents a weapon in the game.
@@ -39,20 +38,17 @@ public class Weapon extends CraftedItem {
         if (valid) {
 
             String root = weaponName;
-            String itemRoot = weaponName + ".item";
 
             // It's calling the parent class's constructor.
-            initItemStack(Construct.itemStack(
+            itemStack = Construct.itemStack(
                     configuration.getString(weaponName + ".item.type"),
                     configuration.getInt(weaponName + ".item.amount"),
                     configuration.getString(weaponName + ".item.display-name"),
                     configuration.getString(weaponName + ".item.loc-name"),
-                    configuration.getStringList(weaponName + ".item.lore")));
+                    configuration.getStringList(weaponName + ".item.lore"));
 
             this.recipeItems = configuration.getStringList(root + ".recipe-shape");
             this.recipeShape = configuration.getStringList(root + ".recipe-items");
-
-            Logging.infoToConsole(itemRoot, itemRoot);
 
             this.weightClass = configuration.getString(root + ".type");
             this.damageRange = configuration.getDoubleList(root + ".damage");
@@ -61,7 +57,7 @@ public class Weapon extends CraftedItem {
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
         } else {
-            initItemStack(new ItemStack(Material.AIR));
+            itemStack = new ItemStack(Material.AIR);
         }
     }
 

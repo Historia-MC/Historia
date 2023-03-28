@@ -3,7 +3,6 @@ package dev.boooiil.historia.classes;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
 import dev.boooiil.historia.util.Construct;
-import dev.boooiil.historia.util.Logging;
 
 /**
  * This class should not be initialized outside of {@link OreConfig}.
@@ -21,14 +20,12 @@ public class OreDrop extends Item {
 
         String root = currentRoot + "." + dropName;
 
-        Logging.infoToConsole(root);
-
-        initItemStack(Construct.itemStack(
-            configuration.getString(root + ".item.type"),
-            configuration.getInt(root + ".item.amount"),
-            configuration.getString(root + ".item.display-name"),
-            configuration.getString(root + ".item.loc-name"),
-            configuration.getStringList(root + ".item.lore")));
+        itemStack = Construct.itemStack(
+                configuration.getString(root + ".item.type"),
+                configuration.getInt(root + ".item.amount"),
+                configuration.getString(root + ".item.display-name"),
+                configuration.getString(root + ".item.loc-name"),
+                configuration.getStringList(root + ".item.lore"));
 
         this.requiredClass = configuration.getString(root + ".class");
         this.chance = configuration.getInt(root + ".chance");

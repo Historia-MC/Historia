@@ -38,12 +38,12 @@ public class Ingot extends Item {
 
         if (validIngot) {
 
-            initItemStack(Construct.itemStack(
-                configuration.getString(ingotName + ".item.type"),
-                configuration.getInt(ingotName + ".item.amount"),
-                configuration.getString(ingotName + ".item.display-name"),
-                configuration.getString(ingotName + ".item.loc-name"),
-                configuration.getStringList(ingotName + ".item.lore")));
+            itemStack = Construct.itemStack(
+                    configuration.getString(ingotName + ".item.type"),
+                    configuration.getInt(ingotName + ".item.amount"),
+                    configuration.getString(ingotName + ".item.display-name"),
+                    configuration.getString(ingotName + ".item.loc-name"),
+                    configuration.getStringList(ingotName + ".item.lore"));
 
             this.progression = configuration.getString(ingotName + ".smelt_into");
             this.smeltTime = configuration.getInt(ingotName + ".time");
@@ -96,8 +96,9 @@ public class Ingot extends Item {
     /**
      * It returns the Ingot that this Ingot progresses into
      * 
-     * @return The Ingot object that is being returned is the Ingot object that is being created in the
-     * constructor.
+     * @return The Ingot object that is being returned is the Ingot object that is
+     *         being created in the
+     *         constructor.
      */
     public Ingot getProgression() {
 
@@ -106,7 +107,8 @@ public class Ingot extends Item {
     }
 
     /**
-     * This function returns true if the current object has a progression, and false if it does not.
+     * This function returns true if the current object has a progression, and false
+     * if it does not.
      * 
      * @return The method is returning a boolean value.
      */
