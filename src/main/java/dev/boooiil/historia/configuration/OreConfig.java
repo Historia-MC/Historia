@@ -10,6 +10,7 @@ import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.Ore;
 import dev.boooiil.historia.classes.OreDrop;
 import dev.boooiil.historia.classes.OreManager;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a configuration class that loads a configuration file and stores the data in a HashMap
@@ -64,7 +65,9 @@ public class OreConfig extends Configuration<OreManager> {
 
         if (oreManager != null) {
 
-            return oreManager.getOreFromChance();
+            Ore ore = oreManager.getOreFromChance();
+
+            return ore;
 
         }
         else return null;
@@ -83,8 +86,10 @@ public class OreConfig extends Configuration<OreManager> {
         Ore ore = getOreFromChance(oreName);
 
         if (ore != null) {
+            
+            OreDrop oreDrop = ore.getDropFromChance(className);
 
-            return ore.getDropFromChance(className);
+            return oreDrop;
 
         }
 
@@ -119,6 +124,8 @@ public class OreConfig extends Configuration<OreManager> {
      * @return A boolean value.
      */
     public boolean isValidOre(String oreName) {
+
+        Logging.debugToConsole("[OreConfig] VALID:", set.toString(), oreName);
 
         return set.contains(oreName);
 

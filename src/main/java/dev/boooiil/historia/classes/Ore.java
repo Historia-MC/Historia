@@ -9,14 +9,15 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * This class should not be initialized outside of {@link OreConfig}.
  */
 public class Ore {
 
-    private FileConfiguration configuration =  Config.getOreConfig().getConfiguration();
-    
+    private FileConfiguration configuration = Config.getOreConfig().getConfiguration();
+
     private String name;
     private int chance;
 
@@ -57,6 +58,8 @@ public class Ore {
         for (int i = 0; i < this.drops.size(); i++) {
 
             OreDrop drop = this.drops.get(i);
+
+            Logging.debugToConsole("[ORE] DROP:", drop.getItemStack().getItemMeta().getAsString());
 
             if (className.equals(drop.getRequiredClass()) || drop.getRequiredClass().equals("Any")) {
 

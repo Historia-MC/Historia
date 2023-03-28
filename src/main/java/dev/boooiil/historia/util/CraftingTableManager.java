@@ -7,9 +7,7 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.CraftingInventory;
@@ -24,7 +22,6 @@ import dev.boooiil.historia.configuration.Config;
  */
 public class CraftingTableManager {
 
-    Logger log = Bukkit.getLogger();
     String prefix = "[CTM.java] ";
     String replace = "LOW_|MEDIUM_|HIGH_";
 
@@ -41,8 +38,8 @@ public class CraftingTableManager {
 
         List<String> materials = pattern.get("MATERIALS");
 
-        log.info(prefix + "[craftItem] " + matchingItems);
-        log.info(prefix + "[craftItem] " + materials);
+        Logging.debugToConsole(prefix + "[craftItem] " + matchingItems);
+        Logging.debugToConsole(prefix + "[craftItem] " + materials);
 
         
 
@@ -75,7 +72,7 @@ public class CraftingTableManager {
 
         }
 
-        log.info(prefix + "[inspectTable] " + found);
+        Logging.debugToConsole(prefix + "[inspectTable] " + found);
 
         return found;
 
@@ -168,7 +165,7 @@ public class CraftingTableManager {
 
             }
 
-            log.info(prefix + "[constructPattern] Type: " + type);
+            Logging.debugToConsole(prefix + "[constructPattern] Type: " + type);
         }
 
         pattern.add(first);
@@ -178,7 +175,7 @@ public class CraftingTableManager {
         map.put("PATTERN", pattern);
         map.put("MATERIALS", knownItems);
 
-        log.info(prefix + "[constructPattern] " + map);
+        Logging.debugToConsole(prefix + "[constructPattern] " + map);
 
         return map;
 
@@ -218,11 +215,11 @@ public class CraftingTableManager {
             int need = materials.size();
             int matched = 0;
 
-            log.warning(prefix + "[getItemBasedOnIngot] Item: " + item);
-            log.info(prefix + "[getItemBasedOnIngot] Item Name: " + item.getItemMeta().getLocalizedName());
-            log.info(prefix + "[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
-            log.info(prefix + "[getItemBasedOnIngot] need: " + need);
-            log.info(prefix + "[getItemBasedOnIngot] matched: " + matched);
+            Logging.debugToConsole(prefix + "[getItemBasedOnIngot] Item: " + item);
+            Logging.debugToConsole(prefix + "[getItemBasedOnIngot] Item Name: " + item.getItemStack().getItemMeta().getLocalizedName());
+            Logging.debugToConsole(prefix + "[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
+            Logging.debugToConsole(prefix + "[getItemBasedOnIngot] need: " + need);
+            Logging.debugToConsole(prefix + "[getItemBasedOnIngot] matched: " + matched);
 
             if (materials.size() == item.getRecipeItems().size()) {
 
@@ -233,15 +230,15 @@ public class CraftingTableManager {
 
                 }
 
-                log.info(prefix + "[getItemBasedOnIngot] " + item);
+                Logging.debugToConsole(null);(prefix + "[getItemBasedOnIngot] " + item);
 
                 if (matched == need)
-                    return item;
+                    return item.getItemStack();
 
             }
         }
 
-        return new CraftedItem();
+        return new CraftedItem().getItemStack();
 
     }
 
