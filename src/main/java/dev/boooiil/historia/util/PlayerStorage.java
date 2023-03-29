@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import dev.boooiil.historia.classes.HistoriaPlayer;
 import dev.boooiil.historia.mysql.MySQLHandler;
+import dev.boooiil.historia.HistoriaPlugin;
 
 /**
  * It's a HashMap that stores all the players that are currently online
@@ -54,7 +55,7 @@ public class PlayerStorage {
             return players.get(uuid);
 
         else if (useSQLFallback)
-            return new HistoriaPlayer(uuid);
+            return new HistoriaPlayer(uuid, HistoriaPlugin.server());
 
         else
             return new HistoriaPlayer();
@@ -74,7 +75,7 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
 
         else if (useSQLFallback)
-            return new HistoriaPlayer(MySQLHandler.getUUID(username));
+            return new HistoriaPlayer(MySQLHandler.getUUID(username), HistoriaPlugin.server());
 
         else
             return new HistoriaPlayer();

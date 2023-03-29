@@ -1,14 +1,13 @@
 package dev.boooiil.historia.util;
 
-import dev.boooiil.historia.Main;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import dev.boooiil.historia.HistoriaPlugin;
 
 
 /**
@@ -42,17 +41,17 @@ public class FileGetter {
      * the internal directory
      * 
      * @param check The file name to check for.
-     * @return A FileConfiguration object.
+     * @return A YamlConfiguration object.
      */
-    public static FileConfiguration get(String check) {
+    public static YamlConfiguration get(String check) {
 
-        FileConfiguration config;
+        YamlConfiguration config;
 
-        if (find(Main.plugin().getDataFolder().listFiles(), check)) {
+        if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
 
             Logging.infoToConsole("Obtained file from external directory: " + check);
 
-            File file = new File(Main.plugin().getDataFolder().getPath(), check);
+            File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check);
 
             config = YamlConfiguration.loadConfiguration(file);
         }
@@ -61,7 +60,7 @@ public class FileGetter {
 
             Logging.errorToConsole("Obtained file from internal directory: " + check);
 
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream(check);
+            InputStream is = HistoriaPlugin.plugin().getClass().getClassLoader().getResourceAsStream(check);
 
             Reader reader = new InputStreamReader(is);
 

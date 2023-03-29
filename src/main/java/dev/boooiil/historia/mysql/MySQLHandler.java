@@ -14,10 +14,10 @@ import java.util.UUID;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
-import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.GeneralConfig;
 import dev.boooiil.historia.util.Logging;
+import dev.boooiil.historia.HistoriaPlugin;
 
 /**
  * It's a class that handles all of the MySQL queries for the plugin.
@@ -75,7 +75,7 @@ public class MySQLHandler {
             } catch (SQLException e) {
                 Logging.infoToConsole("Failed to load MySQL.");
                 e.printStackTrace();
-                Main.disable();
+                HistoriaPlugin.disable();
             }
         }
     }
@@ -550,7 +550,7 @@ public class MySQLHandler {
 
         if (caught > 0) {
 
-            Main.disable();
+            HistoriaPlugin.disable();
 
             return false;
         }

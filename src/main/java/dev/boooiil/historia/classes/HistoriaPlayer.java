@@ -17,7 +17,6 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
-import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.mysql.MySQLHandler;
@@ -80,7 +79,7 @@ public class HistoriaPlayer {
      * 
      * @param uuid - UUID of the player.
      */
-    public HistoriaPlayer(UUID uuid) {
+    public HistoriaPlayer(UUID uuid, Server server) {
 
         // TODO: GET TOWN AND NATION VALUES
         // TODO: SET PLAYTIME IN HISTORIA TABLE
@@ -91,13 +90,8 @@ public class HistoriaPlayer {
 
         this.uuid = uuid;
 
-        if (Main.server() != null) {
-
-            this.onlinePlayer = Bukkit.getPlayer(uuid);
-            this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-
-        }
-
+        this.onlinePlayer = server.getPlayer(uuid);
+        this.offlinePlayer = server.getOfflinePlayer(uuid);
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
