@@ -1,10 +1,10 @@
-main: dev.boooiil.historia.Main
+main: dev.boooiil.historia.HistoriaPlugin
 name: Historia
-description: Something simple, I guess!
-api-version: 1.19
+description: "Something simple, I guess!"
+api: ["1.19", "1.19.2", "1.19.4"]
 author: boooiil
 load: STARTUP
-version: 0.6
+version: "0.6"
 depend: [WorldGuard, Towny, Vault]
 
 commands:
