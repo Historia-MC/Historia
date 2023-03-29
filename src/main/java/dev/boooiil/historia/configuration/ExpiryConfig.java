@@ -2,7 +2,7 @@ package dev.boooiil.historia.configuration;
 
 import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.potion.PotionEffect;
 
 import dev.boooiil.historia.util.FileGetter;
@@ -13,7 +13,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class ExpiryConfig {
 
-    private static FileConfiguration configuration = FileGetter.get("expiry.yml");
+    private static YamlConfiguration configuration = FileGetter.get("expiry.yml");
 
     // It's getting all the keys in the config file.
     static final Set<String> foodSet = configuration.getKeys(false);

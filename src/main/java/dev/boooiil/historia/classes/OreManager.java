@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.configuration.Config;
 
@@ -15,7 +15,7 @@ import dev.boooiil.historia.configuration.Config;
 public class OreManager {
 
     // Creating a new instance of the OreConfig class.
-    private FileConfiguration configuration = Config.getOreConfig().getConfiguration();
+    private YamlConfiguration configuration = Config.getOreConfig().getConfiguration();
     
     private String name;
 

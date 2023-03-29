@@ -1,6 +1,6 @@
 package dev.boooiil.historia.classes;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 public class Item {
@@ -10,7 +10,7 @@ public class Item {
      * TODO: IMPLEMENT
      */
 
-    protected FileConfiguration configuration;
+    protected YamlConfiguration configuration;
     protected boolean valid;
 
     protected ItemStack itemStack;

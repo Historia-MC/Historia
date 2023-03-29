@@ -17,7 +17,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class OreConfig extends Configuration<OreManager> {
 
-    //private static FileConfiguration configuration = FileGetter.get("ores.yml");
+    //private static YamlConfiguration configuration = FileGetter.get("ores.yml");
 
     //private static final Set<String> oreSet = configuration.getKeys(false);
 

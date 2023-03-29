@@ -2,13 +2,13 @@ package dev.boooiil.historia.configuration;
 
 import java.util.List;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.util.FileGetter;
 
 public class ClassConfig {
 
-    private static FileConfiguration configuration = FileGetter.get("classes.yml");
+    private static YamlConfiguration configuration = FileGetter.get("classes.yml");
 
     //These are here for testing purposes.
     //Static reference will use less memory than creating a new instance in each HistoriaPlayer

@@ -14,7 +14,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class WeaponConfig extends Configuration<Weapon> {
     
-    // private static FileConfiguration configuration = FileGetter.get("ingots.yml");
+    // private static YamlConfiguration configuration = FileGetter.get("ingots.yml");
 
     // static final Set<String> weaponSet = configuration.getKeys(false);
 

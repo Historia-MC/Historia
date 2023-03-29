@@ -1,6 +1,6 @@
 package dev.boooiil.historia.configuration;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.util.FileGetter;
 
@@ -9,7 +9,7 @@ import dev.boooiil.historia.util.FileGetter;
  */
 public class GeneralConfig {
     
-    public static FileConfiguration configuration = FileGetter.get("config.yml");
+    public static YamlConfiguration configuration = FileGetter.get("config.yml");
 
     public static boolean debug;
 
