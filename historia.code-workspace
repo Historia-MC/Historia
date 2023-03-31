@@ -24,5 +24,8 @@
         "java.dependency.packagePresentation": "hierarchical",
         "editor.codeLens": false,
         "java.compile.nullAnalysis.mode": "automatic",
+        "yaml.schemas": {
+            "https://json.schemastore.org/bukkit-plugin.json": "file:///c%3A/Users/boooi/Desktop/Repos/Historia/src/main/resources/plugin.yml"
+        },
     }
 }
