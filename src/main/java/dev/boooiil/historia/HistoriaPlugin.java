@@ -15,13 +15,14 @@ import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.discord.HistoriaDiscord;
-import dev.boooiil.historia.events.FurnaceSmeltFinish;
-import dev.boooiil.historia.events.FurnaceSmeltStart;
-import dev.boooiil.historia.events.PlayerBreakBlock;
-import dev.boooiil.historia.events.PlayerCraft;
-import dev.boooiil.historia.events.PlayerJoin;
-import dev.boooiil.historia.events.PlayerLeave;
-import dev.boooiil.historia.mysql.MySQLHandler;
+import dev.boooiil.historia.events.breaking.PlayerBreakBlock;
+import dev.boooiil.historia.events.connection.PlayerJoin;
+import dev.boooiil.historia.events.connection.PlayerLeave;
+import dev.boooiil.historia.events.crafting.PlayerCraft;
+import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
+import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
+import dev.boooiil.historia.sql.mysql.MySQLConnection;
+import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -34,6 +35,14 @@ public class HistoriaPlugin extends JavaPlugin {
         super();
     }
 
+    /**
+     * It's a constructor that is called when the plugin is loaded.
+     * 
+     * @param loader        - The plugin loader responsible for this plugin, can be null
+     * @param description   - The plugin.yml file for this plugin
+     * @param dataFolder    - The folder that contains the plugin's data
+     * @param file          - The plugin's file
+     */
     protected HistoriaPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
         super(loader, description, dataFolder, file);
     }
@@ -42,19 +51,19 @@ public class HistoriaPlugin extends JavaPlugin {
     // It's a method that is called when the plugin is loaded.
     public void onLoad() {
 
-    }
-
-    @Override
-    // It's a method that is called when the plugin is enabled.
-    // Test
-    public void onEnable() {
-
         Logging.infoToConsole("Plugin has loaded.");
 
         HistoriaDiscord.init();
 
         // Check config files
         ConfigUtil.checkFiles();
+
+    }
+
+    @Override
+    // It's a method that is called when the plugin is enabled.
+    // Test
+    public void onEnable() {
 
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
@@ -71,10 +80,8 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
 
-        // Test
-        Logging.infoToConsole("Loading MySQL...");
+        MySQLConnection.connect();
         MySQLHandler.createTable();
-        Logging.infoToConsole("MySQL Loaded.");
 
         Logging.infoToConsole("Plugin Enabled.");
 

@@ -7,9 +7,9 @@ import java.util.Set;
 import org.bukkit.Material;
 
 import dev.boooiil.historia.classes.Configuration;
-import dev.boooiil.historia.classes.Ore;
-import dev.boooiil.historia.classes.OreDrop;
-import dev.boooiil.historia.classes.OreManager;
+import dev.boooiil.historia.classes.items.generic.Ore;
+import dev.boooiil.historia.classes.items.generic.OreDrop;
+import dev.boooiil.historia.classes.items.generic.OreManager;
 import dev.boooiil.historia.util.Logging;
 
 /**
