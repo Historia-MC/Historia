@@ -1,0 +1,10 @@
+version: 2
+
+MySQL:
+    user: User
+    password: Titaniumsilky26
+    database: historia-dev
+    ip: boooiil.sytes.net
+    port: "3306"
+
+debug: false

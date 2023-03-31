@@ -1,0 +1,796 @@
+version: 1
+
+Light_Leather_Helmet:
+  item:
+    type: LEATHER_HELMET
+    amount: 1
+    display-name: §7Leather Helmet
+    loc-name: Light_Leather_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.0]
+  weight: 15
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["LIGHT_LEATHER"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Medium_Leather_Helmet:
+  item:
+    type: LEATHER_HELMET
+    amount: 1
+    display-name: §7Leather Helmet
+    loc-name: Medium_Leather_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 1.5]
+  weight: 25
+  durability: [40, 60]
+  type: Medium
+  recipe-items: ["MEDIUM_LEATHER"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Heavy_Leather_Helmet:
+  item:
+    type: LEATHER_HELMET
+    amount: 1
+    display-name: §7Leather Helmet
+    loc-name: Heavy_Leather_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.0]
+  weight: 30
+  durability: [40, 60]
+  type: Heavy
+  recipe-items: ["HEAVY_LEATHER"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Light_Leather_Chestplate:
+  item:
+    type: LEATHER_CHESTPLATE
+    amount: 1
+    display-name: §7Leather Chestplate
+    loc-name: Light_Leather_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 25
+  durability: [40, 80]
+  type: Light
+  recipe-items: ["LIGHT_LEATHER"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Medium_Leather_Chestplate:
+  item:
+    type: LEATHER_CHESTPLATE
+    amount: 1
+    display-name: §7Leather Chestplate
+    loc-name: Medium_Leather_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 35
+  durability: [50, 90]
+  type: Medium
+  recipe-items: ["MEDIUM_LEATHER"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Heavy_Leather_Chestplate:
+  item:
+    type: LEATHER_CHESTPLATE
+    amount: 1
+    display-name: §7Leather Chestplate
+    loc-name: Heavy_Leather_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 45
+  durability: [60, 100]
+  type: Heavy
+  recipe-items: ["HEAVY_LEATHER"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Light_Leather_Leggings:
+  item:
+    type: LEATHER_LEGGINGS
+    amount: 1
+    display-name: §7Leather Leggings
+    loc-name: Light_Leather_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.0]
+  weight: 15
+  durability: [30, 60]
+  type: Light
+  recipe-items: ["LIGHT_LEATHER"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Medium_Leather_Leggings:
+  item:
+    type: LEATHER_LEGGINGS
+    amount: 1
+    display-name: §7Leather Leggings
+    loc-name: Medium_Leather_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 25
+  durability: [30, 60]
+  type: Medium
+  recipe-items: ["MEDIUM_LEATHER"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Heavy_Leather_Leggings:
+  item:
+    type: LEATHER_LEGGINGS
+    amount: 1
+    display-name: §7Leather Leggings
+    loc-name: Heavy_Leather_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 35
+  durability: [40, 70]
+  type: Heavy
+  recipe-items: ["HEAVY_LEATHER"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Light_Leather_Boots:
+  item:
+    type: LEATHER_BOOTS
+    amount: 1
+    display-name: §7Leather Boots
+    loc-name: Light_Leather_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.0]
+  weight: 15
+  durability: [30, 60]
+  type: Light
+  recipe-items: ["LIGHT_LEATHER"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Medium_Leather_Boots:
+  item:
+    type: LEATHER_BOOTS
+    amount: 1
+    display-name: §7Leather Boots
+    loc-name: Medium_Leather_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 1.5]
+  weight: 25
+  durability: [40, 70]
+  type: Medium
+  recipe-items: ["MEDIUM_LEATHER"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Heavy_Leather_Boots:
+  item:
+    type: LEATHER_BOOTS
+    amount: 1
+    display-name: §7Leather Boots
+    loc-name: Heavy_Leather_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.0]
+  weight: 35
+  durability: [50, 80]
+  type: Heavy
+  recipe-items: ["HEAVY_LEATHER"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Light_Tin_Helmet:
+  item:
+    type: IRON_HELMET
+    amount: 1
+    display-name: §7Tin Helmet
+    loc-name: Light_Tin_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.5]
+  weight: 15
+  durability: [60, 90]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Light_Tin_Chestplate:
+  item:
+    type: IRON_CHESTPLATE
+    amount: 1
+    display-name: §7Tin Chestplate
+    loc-name: Light_Tin_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.0, 3.0]
+  weight: 25
+  durability: [70, 125]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Light_Tin_Leggings:
+  item:
+    type: IRON_LEGGINGS
+    amount: 1
+    display-name: §7Tin Leggings
+    loc-name: Light_Tin_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 3.0]
+  weight: 25
+  durability: [70, 125]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Light_Tin_Boots:
+  item:
+    type: IRON_BOOTS
+    amount: 1
+    display-name: §7Tin Boots
+    loc-name: Light_Tin_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.5]
+  weight: 15
+  durability: [60, 90]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Light_Bronze_Helmet:
+  item:
+    type: GOLDEN_HELMET
+    amount: 1
+    display-name: §7Bronze Helmet
+    loc-name: Light_Bronze_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.5]
+  weight: 20
+  durability: [75, 110]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Medium_Bronze_Helmet:
+  item:
+    type: GOLDEN_HELMET
+    amount: 1
+    display-name: §7Bronze Helmet
+    loc-name: Medium_Bronze_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 1.5]
+  weight: 25
+  durability: [80, 120]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Heavy_Bronze_Helmet:
+  item:
+    type: GOLDEN_HELMET
+    amount: 1
+    display-name: §7Bronze Helmet
+    loc-name: Heavy_Bronze_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 35
+  durability: [85, 130]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Light_Bronze_Chestplate:
+  item:
+    type: GOLDEN_CHESTPLATE
+    amount: 1
+    display-name: §7Bronze Chestplate
+    loc-name: Light_Bronze_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.0]
+  weight: 25
+  durability: [70, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Medium_Bronze_Chestplate:
+  item:
+    type: GOLDEN_CHESTPLATE
+    amount: 1
+    display-name: §7Bronze Chestplate
+    loc-name: Medium_Bronze_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 35
+  durability: [75, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Heavy_Bronze_Chestplate:
+  item:
+    type: GOLDEN_CHESTPLATE
+    amount: 1
+    display-name: §7Bronze Chestplate
+    loc-name: Heavy_Bronze_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 4.0]
+  weight: 45
+  durability: [90, 175]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Light_Bronze_Leggings:
+  item:
+    type: GOLDEN_LEGGINGS
+    amount: 1
+    display-name: §7Bronze Leggings
+    loc-name: Light_Bronze_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.0, 3.0]
+  weight: 25
+  durability: [70, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Medium_Bronze_Leggings:
+  item:
+    type: GOLDEN_LEGGINGS
+    amount: 1
+    display-name: §7Bronze Leggings
+    loc-name: Medium_Bronze_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 35
+  durability: [80, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Heavy_Bronze_Leggings:
+  item:
+    type: GOLDEN_LEGGINGS
+    amount: 1
+    display-name: §7Bronze Leggings
+    loc-name: Heavy_Bronze_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.0, 4.0]
+  weight: 45
+  durability: [90, 175]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Light_Bronze_Boots:
+  item:
+    type: GOLDEN_BOOTS
+    amount: 1
+    display-name: §7Bronze Boots
+    loc-name: Light_Bronze_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [0.5, 1.5]
+  weight: 15
+  durability: [70, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Medium_Bronze_Boots:
+  item:
+    type: GOLDEN_BOOTS
+    amount: 1
+    display-name: §7Bronze Boots
+    loc-name: Medium_Bronze_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.0]
+  weight: 25
+  durability: [80, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Heavy_Bronze_Boots:
+  item:
+    type: GOLDEN_BOOTS
+    amount: 1
+    display-name: §7Bronze Boots
+    loc-name: Heavy_Bronze_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 35
+  durability: [90, 175]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Light_Iron_Helmet:
+  item:
+    type: CHAINMAIL_HELMET
+    amount: 1
+    display-name: §7Chainmail Helmet
+    loc-name: Light_Iron_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 1.5]
+  weight: 20
+  durability: [100, 160]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Medium_Iron_Helmet:
+  item:
+    type: IRON_HELMET
+    amount: 1
+    display-name: §7Iron Helmet
+    loc-name: Medium_Iron_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 25
+  durability: [110, 175]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Heavy_Iron_Helmet:
+  item:
+    type: IRON_HELMET
+    amount: 1
+    display-name: §7Iron Helmet
+    loc-name: Heavy_Iron_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 35
+  durability: [120, 200]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Light_Iron_Chestplate:
+  item:
+    type: CHAINMAIL_CHESTPLATE
+    amount: 1
+    display-name: §7Chainmail Chestplate
+    loc-name: Light_Iron_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 4.0]
+  weight: 25
+  durability: [140, 240]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Medium_Iron_Chestplate:
+  item:
+    type: IRON_CHESTPLATE
+    amount: 1
+    display-name: §7Iron Chestplate
+    loc-name: Medium_Iron_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.0, 5.0]
+  weight: 35
+  durability: [150, 275]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Heavy_Iron_Chestplate:
+  item:
+    type: IRON_CHESTPLATE
+    amount: 1
+    display-name: §7Iron Chestplate
+    loc-name: Heavy_Iron_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.5, 6.0]
+  weight: 45
+  durability: [175, 300]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Light_Iron_Leggings:
+  item:
+    type: CHAINMAIL_LEGGINGS
+    amount: 1
+    display-name: §7Chainmail Leggings
+    loc-name: Light_Iron_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 25
+  durability: [125, 200]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Medium_Iron_Leggings:
+  item:
+    type: IRON_LEGGINGS
+    amount: 1
+    display-name: §7Iron Leggings
+    loc-name: Medium_Iron_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.0, 4.5]
+  weight: 35
+  durability: [150, 250]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Heavy_Iron_Leggings:
+  item:
+    type: IRON_LEGGINGS
+    amount: 1
+    display-name: §7Iron Leggings
+    loc-name: Heavy_Iron_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.5, 5.0]
+  weight: 45
+  durability: [175, 275]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Light_Iron_Boots:
+  item:
+    type: CHAINMAIL_BOOTS
+    amount: 1
+    display-name: §7Chainmail Boots
+    loc-name: Light_Iron_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 15
+  durability: [100, 150]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Medium_Iron_Boots:
+  item:
+    type: IRON_BOOTS
+    amount: 1
+    display-name: §7Iron Boots
+    loc-name: Medium_Iron_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 25
+  durability: [115, 175]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Heavy_Iron_Boots:
+  item:
+    type: IRON_BOOTS
+    amount: 1
+    display-name: §7Iron Boots
+    loc-name: Heavy_Iron_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.0, 3.0]
+  weight: 35
+  durability: [125, 200]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Light_Steel_Helmet:
+  item:
+    type: NETHERITE_HELMET
+    amount: 1
+    display-name: §7Steel Helmet
+    loc-name: Light_Steel_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.0]
+  weight: 20
+  durability: [200, 350]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Medium_Steel_Helmet:
+  item:
+    type: NETHERITE_HELMET
+    amount: 1
+    display-name: §7Steel Helmet
+    loc-name: Medium_Steel_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.0, 3.0]
+  weight: 25
+  durability: [225, 375]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Heavy_Steel_Helmet:
+  item:
+    type: NETHERITE_HELMET
+    amount: 1
+    display-name: §7Steel Helmet
+    loc-name: Heavy_Steel_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 35
+  durability: [250, 400]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "   "]
+
+Light_Steel_Chestplate:
+  item:
+    type: NETHERITE_CHESTPLATE
+    amount: 1
+    display-name: §7Steel Chestplate
+    loc-name: Light_Steel_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.5, 6.0]
+  weight: 25
+  durability: [300, 450]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Medium_Steel_Chestplate:
+  item:
+    type: NETHERITE_CHESTPLATE
+    amount: 1
+    display-name: §7Steel Chestplate
+    loc-name: Medium_Steel_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [4.0, 7.0]
+  weight: 35
+  durability: [350, 475]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Heavy_Steel_Chestplate:
+  item:
+    type: NETHERITE_CHESTPLATE
+    amount: 1
+    display-name: §7Steel Chestplate
+    loc-name: Heavy_Steel_Chestplate
+    lore: ["", "§7Placeholder"]
+
+  defense: [4.5, 8.0]
+  weight: 45
+  durability: [375, 550]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT"]
+  recipe-shape: ["A A", "AAA", "AAA"]
+
+Light_Steel_Leggings:
+  item:
+    type: NETHERITE_LEGGINGS
+    amount: 1
+    display-name: §7Steel Leggings
+    loc-name: Light_Steel_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [3.5, 5.0]
+  weight: 25
+  durability: [250, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Medium_Steel_Leggings:
+  item:
+    type: NETHERITE_LEGGINGS
+    amount: 1
+    display-name: §7Steel Leggings
+    loc-name: Medium_Steel_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [4.0, 5.5]
+  weight: 35
+  durability: [300, 425]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Heavy_Steel_Leggings:
+  item:
+    type: NETHERITE_LEGGINGS
+    amount: 1
+    display-name: §7Steel Leggings
+    loc-name: Heavy_Steel_Leggings
+    lore: ["", "§7Placeholder"]
+
+  defense: [4.5, 6.0]
+  weight: 45
+  durability: [375, 500]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT"]
+  recipe-shape: ["AAA", "A A", "A A"]
+
+Light_Steel_Boots:
+  item:
+    type: NETHERITE_BOOTS
+    amount: 1
+    display-name: §7Steel Boots
+    loc-name: Light_Steel_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.5, 2.5]
+  weight: 15
+  durability: [250, 350]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Medium_Steel_Boots:
+  item:
+    type: NETHERITE_BOOTS
+    amount: 1
+    display-name: §7Steel Boots
+    loc-name: Medium_Steel_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.0, 3.0]
+  weight: 25
+  durability: [300, 385]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Heavy_Steel_Boots:
+  item:
+    type: NETHERITE_BOOTS
+    amount: 1
+    display-name: §7Steel Boots
+    loc-name: Heavy_Steel_Boots
+    lore: ["", "§7Placeholder"]
+
+  defense: [2.5, 3.5]
+  weight: 35
+  durability: [350, 450]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT"]
+  recipe-shape: ["A A", "A A", "   "]
+
+Heavy_Turtle_Helmet:
+  item:
+    type: TURTLE_HELMET
+    amount: 1
+    display-name: §7Turtle Shell
+    loc-name: Heavy_Turtle_Helmet
+    lore: ["", "§7Placeholder"]
+
+  defense: [1.0, 2.0]
+  weight: 25
+  durability: [175, 300]
+  type: Heavy
+  recipe-items: ["SCUTE"]
+  recipe-shape: ["AAA", "A A", "   "]
