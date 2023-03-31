@@ -49,7 +49,7 @@ public class FileGetter {
 
         if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.infoToConsole("Obtained file from external directory: " + check);
+            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check);
 
             File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check);
 
@@ -60,13 +60,15 @@ public class FileGetter {
 
             Logging.errorToConsole("Obtained file from internal directory: " + check);
 
-            InputStream is = HistoriaPlugin.plugin().getClass().getClassLoader().getResourceAsStream(check);
+            InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check);
 
             Reader reader = new InputStreamReader(is);
 
             config = YamlConfiguration.loadConfiguration(reader);
 
         }
+
+        System.out.println(config);
 
         return config;
 
