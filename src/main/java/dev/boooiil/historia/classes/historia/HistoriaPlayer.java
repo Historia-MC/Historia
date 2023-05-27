@@ -58,11 +58,6 @@ public class HistoriaPlayer {
 
     private HistoriaClass historiaClass;
 
-    private Player onlinePlayer;
-    private OfflinePlayer offlinePlayer;
-
-    protected Server server;
-
     private Resident resident;
     private Town town;
     private Nation nation;
@@ -90,9 +85,6 @@ public class HistoriaPlayer {
 
         this.uuid = uuid;
 
-        this.onlinePlayer = server.getPlayer(uuid);
-        this.offlinePlayer = server.getOfflinePlayer(uuid);
-
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
         Map<String, String> user = MySQLHandler.getUser(uuid);
@@ -101,7 +93,7 @@ public class HistoriaPlayer {
         this.historiaClass = new HistoriaClass(this.className);
 
         this.isValid = true;
-        this.isOnline = this.onlinePlayer == null ? false : true;
+        this.isOnline = true; //Should always init true because we're only creating this object if the player is online.
 
         this.level = Integer.parseInt(user.get("level"));
 
@@ -151,15 +143,45 @@ public class HistoriaPlayer {
      */
     public String getUsername() {
 
-        Logging.infoToConsole(this.onlinePlayer + " " + this.offlinePlayer);
+        if (isOnline) {
 
-        if (this.onlinePlayer != null)
-            return this.onlinePlayer.getName();
-        else if (this.offlinePlayer.getName() != null)
-            return this.offlinePlayer.getName();
-        else
-            return "Invalid Username";
+            Player onlinePlayer = Bukkit.getPlayer(this.uuid);
 
+            Logging.infoToConsole(onlinePlayer.getName());
+
+            return onlinePlayer.getName();
+
+        } else {
+                
+                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(this.uuid);
+    
+                Logging.infoToConsole(offlinePlayer.getName());
+    
+                return offlinePlayer.getName();
+        }
+
+    }
+
+    /**
+     * Get the {@link Player} object of the player.
+     * 
+     * @return {@link Player} - Player object.
+     */
+    public Player getOnlinePlayer(UUID uuid) {
+            
+            return Bukkit.getPlayer(uuid);
+        
+    }
+
+    /**
+     * Get the {@link OfflinePlayer} object of the player.
+     * 
+     * @return {@link OfflinePlayer} - Player object.
+     */
+    public OfflinePlayer getOfflinePlayer(UUID uuid) {
+            
+            return Bukkit.getOfflinePlayer(uuid);
+        
     }
 
     /**
@@ -477,7 +499,7 @@ public class HistoriaPlayer {
         if (!isOnline())
             return 0;
 
-        PlayerInventory inventory = this.onlinePlayer.getInventory();
+        PlayerInventory inventory = this.getOnlinePlayer(uuid).getInventory();
         ItemStack[] playerArmor = inventory.getArmorContents();
 
         double mod = 0;
@@ -510,7 +532,7 @@ public class HistoriaPlayer {
         if (!isOnline())
             return 0;
 
-        double currentTime = this.onlinePlayer.getWorld().getTime();
+        double currentTime = this.getOnlinePlayer(uuid).getWorld().getTime();
         double mod = 0;
 
         boolean[] environment = checkSurroundingArea();
@@ -585,8 +607,6 @@ public class HistoriaPlayer {
     public void setOffline() {
 
         this.isOnline = false;
-        this.onlinePlayer = null;
-        this.offlinePlayer = Bukkit.getOfflinePlayer(this.uuid);
 
     }
 
@@ -599,8 +619,6 @@ public class HistoriaPlayer {
     public void setOnline() {
 
         this.isOnline = true;
-        this.onlinePlayer = Bukkit.getPlayer(this.uuid);
-        this.offlinePlayer = null;
 
     }
 
@@ -614,7 +632,7 @@ public class HistoriaPlayer {
         if (!isOnline())
             return false;
 
-        Block block = this.onlinePlayer.getLocation().getBlock();
+        Block block = this.getOnlinePlayer(uuid).getLocation().getBlock();
         boolean found = true;
 
         for (int i = 0; i < 255; i++) {
@@ -655,7 +673,7 @@ public class HistoriaPlayer {
             return found;
         }
 
-        Block block = this.onlinePlayer.getLocation().getBlock();
+        Block block = this.getOnlinePlayer(uuid).getLocation().getBlock();
 
         for (int i = 0; i < 180; i++) {
 
