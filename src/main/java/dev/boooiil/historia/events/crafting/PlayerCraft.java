@@ -6,12 +6,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 
 import dev.boooiil.historia.classes.historia.HistoriaPlayer;
-import dev.boooiil.historia.handlers.crafting.CraftingTableManager;
+import dev.boooiil.historia.handlers.crafting.CustomCraftingManager;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
 public class PlayerCraft implements Listener {
-    
+
     @EventHandler
     public void onCraftItem(PrepareItemCraftEvent event) {
 
@@ -20,7 +20,9 @@ public class PlayerCraft implements Listener {
 
         Logging.infoToConsole(player.getName());
 
-        CraftingTableManager.craftItem(event.getInventory());
+        CustomCraftingManager ccm = new CustomCraftingManager(event.getInventory());
+
+        event.getInventory().setResult(ccm.getResult());
 
     }
 
