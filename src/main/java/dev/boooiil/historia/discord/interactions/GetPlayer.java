@@ -3,6 +3,7 @@ package dev.boooiil.historia.discord.interactions;
 import java.time.Instant;
 
 import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.util.DateUtil;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
@@ -45,7 +46,7 @@ public class GetPlayer {
             EmbedCreateSpec embed = EmbedCreateSpec.builder()
                 .color(Color.BLUE)
                 .title(historiaPlayer.getUsername().replaceAll("_", "\\_") + " (" + (historiaPlayer.isOnline() ? "Online" : "Offline" ) + ")" )
-                .addField("Town", !historiaPlayer.hasTown() ? "Wilderness" : historiaPlayer.getTown().getName(), true)
+                .addField("Town", !TownyHandler.hasTown(historiaPlayer.getUUID()) ? "Wilderness" : historiaPlayer.getTown().getName(), true)
                 .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
                 .addField("Class", historiaPlayer.getClassName(), true)

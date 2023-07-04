@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.util.DateUtil;
 import dev.boooiil.historia.util.Logging;
@@ -18,6 +19,8 @@ import discord4j.core.spec.MessageCreateSpec;
 import discord4j.rest.util.Color;
 
 public class PlayerBan implements Listener {
+
+    
 
     @EventHandler
     public void onPlayerBan(PlayerQuitEvent event) {
@@ -35,7 +38,7 @@ public class PlayerBan implements Listener {
                         .color(Color.BLUE)
                         .title(historiaPlayer.getUsername().replaceAll("_", "\\_") + " ("
                                 + (historiaPlayer.isOnline() ? "Online" : "Offline") + ")")
-                        .addField("Town", !historiaPlayer.hasTown() ? "Wilderness" : historiaPlayer.getTown().getName(),
+                        .addField("Town", !TownyHandler.hasTown(historiaPlayer.getUUID()) ? "Wilderness" : historiaPlayer.getTown().getName(),
                                 true)
                         .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                         .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
