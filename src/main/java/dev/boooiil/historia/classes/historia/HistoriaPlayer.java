@@ -6,37 +6,24 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import com.palmergames.bukkit.towny.object.Nation;
-import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
-
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that holds all the information about a player
  */
-public class HistoriaPlayer {
-
-    private UUID uuid;
-    private String username;
+public class HistoriaPlayer extends BasePlayer {
 
     private String className;
 
     private boolean isValid;
-    private boolean isOnline;
-    private boolean isResident;
-    private boolean hasTown;
-    private boolean hasNation;
 
     private int level;
 
@@ -58,14 +45,14 @@ public class HistoriaPlayer {
 
     private HistoriaClass historiaClass;
 
-    private Resident resident;
-    private Town town;
-    private Nation nation;
+    protected Server server;
+
 
     /**
      * Default constrctor, will return invalid player.
      */
     public HistoriaPlayer() {
+        super(null);
         this.isValid = false;
     }
 
@@ -76,14 +63,14 @@ public class HistoriaPlayer {
      */
     public HistoriaPlayer(UUID uuid, Server server) {
 
+        super(uuid);
+
         // TODO: GET TOWN AND NATION VALUES
         // TODO: SET PLAYTIME IN HISTORIA TABLE
 
         // Base health and multiplier will get determined when we finish the class
         // config.
         // Experience max will just be experience * multiplier.
-
-        this.uuid = uuid;
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
@@ -93,7 +80,6 @@ public class HistoriaPlayer {
         this.historiaClass = new HistoriaClass(this.className);
 
         this.isValid = true;
-        this.isOnline = true; //Should always init true because we're only creating this object if the player is online.
 
         this.level = Integer.parseInt(user.get("level"));
 
@@ -113,75 +99,6 @@ public class HistoriaPlayer {
 
         // TODO: Calculate experience gain
 
-        this.username = getUsername();
-
-        this.resident = TownyHandler.getResident(uuid);
-        this.town = TownyHandler.getTown(uuid);
-        this.nation = TownyHandler.getNation(uuid);
-
-        this.isResident = this.resident == null ? false : true;
-        this.hasTown = this.town == null ? false : true;
-        this.hasNation = this.nation == null ? false : true;
-
-    }
-
-    /**
-     * Get the {@link UUID} of the player.
-     * 
-     * @return {@link UUID}
-     */
-    public UUID getUUID() {
-
-        return this.uuid;
-
-    }
-
-    /**
-     * Get the username of the player.
-     * 
-     * @return {@link String} - Username of the player.
-     */
-    public String getUsername() {
-
-        if (isOnline) {
-
-            Player onlinePlayer = Bukkit.getPlayer(this.uuid);
-
-            Logging.infoToConsole(onlinePlayer.getName());
-
-            return onlinePlayer.getName();
-
-        } else {
-                
-                OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(this.uuid);
-    
-                Logging.infoToConsole(offlinePlayer.getName());
-    
-                return offlinePlayer.getName();
-        }
-
-    }
-
-    /**
-     * Get the {@link Player} object of the player.
-     * 
-     * @return {@link Player} - Player object.
-     */
-    public Player getOnlinePlayer(UUID uuid) {
-            
-            return Bukkit.getPlayer(uuid);
-        
-    }
-
-    /**
-     * Get the {@link OfflinePlayer} object of the player.
-     * 
-     * @return {@link OfflinePlayer} - Player object.
-     */
-    public OfflinePlayer getOfflinePlayer(UUID uuid) {
-            
-            return Bukkit.getOfflinePlayer(uuid);
-        
     }
 
     /**
@@ -214,50 +131,6 @@ public class HistoriaPlayer {
     public boolean isValid() {
 
         return this.isValid;
-
-    }
-
-    /**
-     * Check if the player is online.
-     * 
-     * @return {@link Boolean}
-     */
-    public boolean isOnline() {
-
-        return this.isOnline;
-
-    }
-
-    /**
-     * Check if the player has a {@link Resident} object.
-     * 
-     * @return {@link Boolean}
-     */
-    public boolean isResident() {
-
-        return this.isResident;
-
-    }
-
-    /**
-     * Check if the player has a {@link Town} object.
-     * 
-     * @return {@link Boolean}
-     */
-    public boolean hasTown() {
-
-        return this.hasTown;
-
-    }
-
-    /**
-     * Check if the player has a {@link Nation} object.
-     * 
-     * @return {@link Boolean}
-     */
-    public boolean hasNation() {
-
-        return this.hasNation;
 
     }
 
@@ -324,39 +197,6 @@ public class HistoriaPlayer {
     public double getMaxExperience() {
 
         return this.experienceMax;
-
-    }
-
-    /**
-     * Get the resident object of this player.
-     * 
-     * @return {@link Resident} - Towny Resident Object
-     */
-    public Resident getResident() {
-
-        return this.resident;
-
-    }
-
-    /**
-     * Get the town object of this player.
-     * 
-     * @return {@link Town} - Towny Town Object
-     */
-    public Town getTown() {
-
-        return this.town;
-
-    }
-
-    /**
-     * Get the nation object of this player.
-     * 
-     * @return {@link Nation} - Towny Nation Object
-     */
-    public Nation getNation() {
-
-        return this.nation;
 
     }
 
@@ -453,7 +293,7 @@ public class HistoriaPlayer {
 
         // TODO: Create method for adding experience
 
-        MySQLHandler.setClassLevel(uuid, level);
+        MySQLHandler.setClassLevel(this.getUUID(), level);
 
     }
 
@@ -461,8 +301,8 @@ public class HistoriaPlayer {
 
         String string = "";
 
-        string += "<(" + this.uuid + ") UN:";
-        string += this.username + " CN:";
+        string += "<(" + this.getUUID() + ") UN:";
+        string += this.getUsername() + " CN:";
         string += this.className + " LV:";
         string += this.level + " BH:";
         string += this.getBaseHealth() + " MH:";
@@ -496,10 +336,12 @@ public class HistoriaPlayer {
      */
     public double calculateArmorAdjustment() {
 
-        if (!isOnline())
+        if (!this.isOnline())
             return 0;
 
-        PlayerInventory inventory = this.getOnlinePlayer(uuid).getInventory();
+        Player player = Bukkit.getPlayer(this.getUUID());
+
+        PlayerInventory inventory = player.getInventory();
         ItemStack[] playerArmor = inventory.getArmorContents();
 
         double mod = 0;
@@ -532,7 +374,9 @@ public class HistoriaPlayer {
         if (!isOnline())
             return 0;
 
-        double currentTime = this.getOnlinePlayer(uuid).getWorld().getTime();
+        Player player = Bukkit.getPlayer(this.getUUID());
+
+        double currentTime = player.getWorld().getTime();
         double mod = 0;
 
         boolean[] environment = checkSurroundingArea();
@@ -597,32 +441,6 @@ public class HistoriaPlayer {
     }
 
     /**
-     * Set the player as offline.
-     * 
-     * <p>
-     * This will set the {@link Player} to null.
-     * <p>
-     * This will set the {@link OfflinePlayer} to its designated object.
-     */
-    public void setOffline() {
-
-        this.isOnline = false;
-
-    }
-
-    /**
-     * Set the player as online.
-     * 
-     * This will set the OnlinePlayer to its designated object.
-     * This will set the OfflinePlayer to null.
-     */
-    public void setOnline() {
-
-        this.isOnline = true;
-
-    }
-
-    /**
      * Check if the player has the sun above them.
      * 
      * @return true if there is no block above the player.
@@ -632,7 +450,9 @@ public class HistoriaPlayer {
         if (!isOnline())
             return false;
 
-        Block block = this.getOnlinePlayer(uuid).getLocation().getBlock();
+        Player player = Bukkit.getPlayer(this.getUUID());
+
+        Block block = player.getLocation().getBlock();
         boolean found = true;
 
         for (int i = 0; i < 255; i++) {
@@ -673,7 +493,9 @@ public class HistoriaPlayer {
             return found;
         }
 
-        Block block = this.getOnlinePlayer(uuid).getLocation().getBlock();
+        Player player = Bukkit.getPlayer(this.getUUID());
+
+        Block block = player.getLocation().getBlock();
 
         for (int i = 0; i < 180; i++) {
 
