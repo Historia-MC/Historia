@@ -28,7 +28,7 @@ public class PlayerStorage {
         // If the player has already been logged into the server.
         if (players.containsKey(uuid)) {
 
-            players.get(uuid).setOnline();
+            players.get(uuid).setOnline(true);
 
         }
 
@@ -115,7 +115,7 @@ public class PlayerStorage {
 
         players.get(uuid).saveCharacter();
 
-        players.get(uuid).setOffline();
+        players.get(uuid).setOnline(false);
 
     }
 
