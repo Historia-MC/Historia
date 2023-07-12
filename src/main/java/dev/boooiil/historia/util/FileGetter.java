@@ -68,9 +68,7 @@ public class FileGetter {
             config = YamlConfiguration.loadConfiguration(reader);
 
         }
-
-        System.out.println(config);
-
+        
         return config;
 
     }
