@@ -1,7 +1,7 @@
 package dev.boooiil.historia.configuration;
 
 import dev.boooiil.historia.classes.Configuration;
-import dev.boooiil.historia.classes.Ingot;
+import dev.boooiil.historia.classes.items.generic.Ingot;
 
 /**
  * It's a configuration class that loads ingots.yml and allows you to get an ingot from it

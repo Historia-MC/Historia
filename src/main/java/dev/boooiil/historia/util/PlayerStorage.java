@@ -3,8 +3,8 @@ package dev.boooiil.historia.util;
 import java.util.HashMap;
 import java.util.UUID;
 
-import dev.boooiil.historia.classes.HistoriaPlayer;
-import dev.boooiil.historia.mysql.MySQLHandler;
+import dev.boooiil.historia.sql.mysql.MySQLHandler;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 
 /**
  * It's a HashMap that stores all the players that are currently online
@@ -27,7 +27,7 @@ public class PlayerStorage {
         // If the player has already been logged into the server.
         if (players.containsKey(uuid)) {
 
-            players.get(uuid).setOnline();
+            players.get(uuid).setOnline(true);
 
         }
 
@@ -114,7 +114,7 @@ public class PlayerStorage {
 
         players.get(uuid).saveCharacter();
 
-        players.get(uuid).setOffline();
+        players.get(uuid).setOnline(false);
 
     }
 

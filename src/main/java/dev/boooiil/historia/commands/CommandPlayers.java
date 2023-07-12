@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.classes.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
@@ -29,7 +29,7 @@ public class CommandPlayers implements CommandExecutor {
 
             HistoriaPlayer historiaPlayer = storedPlayer.getValue();
 
-            message += "Player: " + historiaPlayer.getUsername() + " Level: " + historiaPlayer.getLevel() + " Class: " + historiaPlayer.getClassName() + "\n";
+            message += "Player: " + historiaPlayer.getUsername() + " Level: " + historiaPlayer.getLevel() + " Class: " + historiaPlayer.getProficiency().getName() + "\n";
 
         }
 

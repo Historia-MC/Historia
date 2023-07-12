@@ -1,10 +1,11 @@
-main: dev.boooiil.historia.Main
+main: dev.boooiil.historia.HistoriaPlugin
 name: Historia
+version: 0.6
 description: Something simple, I guess!
+authors: [boooiil, RedSkilZZ, UnholyRuby]
 api-version: 1.19
 author: boooiil
 load: STARTUP
-version: 0.6
 depend: [WorldGuard, Towny, Vault]
 
 commands:
@@ -16,3 +17,11 @@ commands:
     description: Get debug information.
     usage: /<command> [player] <args...>
     permission: historia.debug
+  stats:
+    description: Get the stats of a player.
+    usage: /<command> <player>
+    permission: historia.stats
+  set:
+    description: Adjust stuff.
+    usage: /<command> <number>
+    permission: historia.set

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.Main;
+import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.util.ConfigUtil;
 
 /**
@@ -21,15 +21,16 @@ public abstract class Configuration<T> {
     protected HashMap<String, T> map;
 
     /**
-     * It loads a YAML file from the plugin's data folder, and then populates a HashMap with the keys
+     * It loads a YAML file from the plugin's data folder, and then populates a
+     * HashMap with the keys
      * and values from the YAML file
      * 
      * @param fileName The name of the file you want to load.
      */
     public void loadConfiguration(String fileName) {
-        
-        //@sonatype-lift ignore
-        this.configuration = ConfigUtil.yamlFromSource(new File(Main.plugin().getDataFolder(), fileName));
+
+        // @sonatype-lift ignore
+        this.configuration = ConfigUtil.yamlFromSource(new File(HistoriaPlugin.plugin().getDataFolder(), fileName));
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
 
@@ -77,8 +78,8 @@ public abstract class Configuration<T> {
     /**
      * If the key is in the configuration.
      * 
-     * @param key - Name of the ingot to check.
-     * @return If the ingot provided is in ingots.yml.
+     * @param key - Name of the object to check.
+     * @return If the object is provided in the configuration.
      */
     public boolean isValid(String key) {
 
@@ -102,5 +103,6 @@ public abstract class Configuration<T> {
     }
 
     public abstract T createNew(String name);
+
     public abstract T getObject(String objectName);
 }

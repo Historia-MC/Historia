@@ -1,14 +1,14 @@
 package dev.boooiil.historia.util;
 
-import dev.boooiil.historia.Main;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.classes.enums.FileMap.ResourceKeys;
 
 
 /**
@@ -25,11 +25,11 @@ public class FileGetter {
      * @param check The name of the file you want to check for.
      * @return A boolean value.
      */
-    public static boolean find(File[] files, String check) {
+    public static boolean find(File[] files, ResourceKeys check) {
 
         for (File file : files) {
 
-            if (file.getName().equals(check)) return true;
+            if (file.getName().equals(check.getKey())) return true;
 
         }
 
@@ -42,33 +42,33 @@ public class FileGetter {
      * the internal directory
      * 
      * @param check The file name to check for.
-     * @return A FileConfiguration object.
+     * @return A YamlConfiguration object.
      */
-    public static FileConfiguration get(String check) {
+    public static YamlConfiguration get(ResourceKeys check) {
 
-        FileConfiguration config;
+        YamlConfiguration config;
 
-        if (find(Main.plugin().getDataFolder().listFiles(), check)) {
+        if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.infoToConsole("Obtained file from external directory: " + check);
+            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
-            File file = new File(Main.plugin().getDataFolder().getPath(), check);
+            File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check.getKey());
 
             config = YamlConfiguration.loadConfiguration(file);
         }
 
         else {
 
-            Logging.errorToConsole("Obtained file from internal directory: " + check);
+            Logging.errorToConsole("Obtained file from internal directory: " + check.getKey());
 
-            InputStream is = Main.plugin().getClass().getClassLoader().getResourceAsStream(check);
+            InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check.getKey());
 
             Reader reader = new InputStreamReader(is);
 
             config = YamlConfiguration.loadConfiguration(reader);
 
         }
-
+        
         return config;
 
     }

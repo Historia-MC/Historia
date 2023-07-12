@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.classes.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
@@ -30,7 +30,7 @@ public class CommandDebug implements CommandExecutor {
                 
                 message += "UUID: " + player.getUUID() + "\n";
                 message += "Online: " + player.isOnline() + "\n";
-                message += "Class: " + player.getClassName() + "\n";
+                message += "Class: " + player.getProficiency().getName() + "\n";
                 message += "Level: " + player.getLevel() + "\n";
                 message += "Base Health: " + player.getBaseHealth() + "\n";
                 message += "Mod Health: " + player.getModifiedHealth() + "\n";

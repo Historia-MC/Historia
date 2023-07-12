@@ -1,0 +1,278 @@
+version: 1
+
+None:
+
+  stats:
+    baseHealth: 14
+    maxHealth: 30
+    baseFood: 10
+    baseSpeed: 0.7
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+
+Warrior:
+
+  stats:
+    baseHealth: 26
+    maxHealth: 40
+    baseFood: 16
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
+
+    weaponProficiency: [ Light, Medium, Heavy ]
+    armorProficiency: [ Light, Medium, Heavy ]
+
+  skills:
+    nametag: true
+    sweepingEdge: true
+
+Archer:
+
+  stats:
+    baseHealth: 18
+    maxHealth: 36
+    baseFood: 26
+    baseSpeed: 1.3
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Bow, Crossbow, Light ]
+    armorProficiency: [ Light ]
+
+  skills:
+    nametag: true
+    quickCharge: true
+    igniteOil: true
+    
+Fisherman:
+
+  stats:
+    baseHealth: 18
+    maxHealth: 36
+    baseFood: 30
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Trident, Light ]
+    armorProficiency: [ Light ]
+
+  skills:
+    nametag: true
+    extractBones: true
+    extractOil: true
+
+Miner:
+
+  stats:
+    baseHealth: 22
+    maxHealth: 38
+    baseFood: 26
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+
+  skills:
+    nametag: true
+    extraOreChance: true
+    efficiencyPickaxe: true
+    specialItems: true
+
+Blacksmith:
+
+  stats:
+    baseHealth: 24
+    maxHealth: 39
+    baseFood: 26
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium, Heavy ]
+
+  skills:
+    nametag: true
+    makeHighTierArmor: true
+    applyUnbreaking: true
+    craftSaddle: true
+    chanceNoAnvilDamage: true
+
+Huntsman:
+
+  stats:
+    baseHealth: 16
+    maxHealth: 34
+    baseFood: 24
+    baseSpeed: 1.5
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.07
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Bow, Light ]
+
+  skills:
+    nametag: false
+    bonesFromAnimals: true
+    tameAnimals: true
+    extraWool: true
+    extraFeathers: true
+    craftSaddle: true
+
+Apothecary:
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 22
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+
+  skills:
+    nametag: true
+    extractOil: true
+    craftGunpowder: true
+    makeKnowledgeBook: true
+
+Architect:
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 28
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+
+  skills:
+    nametag: true
+    chanceNoConsumeBlock: true
+    featherFall: true
+    incomeMultiplier: 1.2
+
+Lumberjack:
+
+  stats:
+    baseHealth: 26
+    maxHealth: 40
+    baseFood: 18
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.08
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+
+  skills:
+    nametag: true
+    chanceExtraWood: true
+    efficiencyAxe: true
+
+Farmer:
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 20
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.6
+    doubleHarvestChance: 0.05
+    instantGrowChance: 0.3
+    beheadChance: 0.10
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light, Medium ]
+            
+  skills:
+    nametag: true
+    breakBeehive: true
+    breakGrass: true
