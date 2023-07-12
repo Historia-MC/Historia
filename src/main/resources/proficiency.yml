@@ -12,6 +12,10 @@ None:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
@@ -28,14 +32,16 @@ Warrior:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
 
     weaponProficiency: [ Light, Medium, Heavy ]
     armorProficiency: [ Light, Medium, Heavy ]
 
   skills:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.10
     sweepingEdge: true
 
 Archer:
@@ -50,14 +56,16 @@ Archer:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Bow, Crossbow, Light ]
     armorProficiency: [ Light ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     quickCharge: true
     igniteOil: true
     
@@ -73,14 +81,16 @@ Fisherman:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     extractBones: true
     extractOil: true
 
@@ -96,14 +106,16 @@ Miner:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     extraOreChance: true
     efficiencyPickaxe: true
     specialItems: true
@@ -120,14 +132,16 @@ Blacksmith:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium, Heavy ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     highTierArmor: true
     applyUnbreaking: true
     craftSaddle: true
@@ -145,13 +159,16 @@ Huntsman:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 1.0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.07
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Bow, Light ]
 
   extra:
     nametag: false
-    beheadChance: 0.07
     bonesFromAnimals: true
     tameAnimals: true
     extraWool: true
@@ -170,14 +187,16 @@ Apothecary:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     extractOil: true
     craftGunpowder: true
     knowledgeBook: true
@@ -194,14 +213,16 @@ Architect:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.05
     chanceNoConsumeBlock: true
     featherfall: true
     incomeMultiplier: 1.2
@@ -218,14 +239,16 @@ Lumberjack:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.08
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
 
   extra:
     nametag: true
-    harvestChance: 0.2
-    beheadChance: 0.08
     chanceExtraWood: true
     efficiencyAxe: true
 
@@ -241,15 +264,15 @@ Farmer:
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.25
+    harvestChance: 0.6
+    doubleHarvestChance: 0.05
+    instantGrowChance: 0.3
+    beheadChance: 0.10
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light, Medium ]
             
   extra:
     nametag: true
-    harvestChance: 0.6
-    beheadChance: 0.10
-    doubleHarvestChance: 0.05
     breakBeehive: true
     breakGrass: true
-    instantGrowChance: 0.3
