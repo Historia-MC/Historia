@@ -9,7 +9,7 @@ import dev.boooiil.historia.util.FileGetter;
 
 public class BaseProficiency {
     
-    private static YamlConfiguration configuration = FileGetter.get(ResourceKeys.CLASSES);
+    private static YamlConfiguration configuration = FileGetter.get(ResourceKeys.PROFICIENCY);
     
     private int baseHealth;
 
