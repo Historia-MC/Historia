@@ -19,7 +19,7 @@ public class ConfigUtil {
     static {
 
         configFileNames.add("armor.yml");
-        configFileNames.add("classes.yml");
+        configFileNames.add("proficiency.yml");
         configFileNames.add("expiry.yml");
         configFileNames.add("ingots.yml");
         configFileNames.add("ores.yml");
@@ -36,6 +36,7 @@ public class ConfigUtil {
 
             if (!diskFile.exists()) {
                 Logging.infoToConsole("Missing config file: " + fileName + " has been saved to disk from resources.");
+                Logging.infoToConsole("Location: " + diskFile.getAbsolutePath());
                 HistoriaPlugin.plugin().saveResource(fileName, false);
                 continue;
             }
