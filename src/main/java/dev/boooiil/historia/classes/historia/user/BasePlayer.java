@@ -12,7 +12,7 @@ import com.palmergames.bukkit.towny.object.Town;
 
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 
-public class BasePlayer {
+public abstract class BasePlayer {
 
     private UUID uuid;
     private String username;
