@@ -217,7 +217,7 @@
         <includes>
           <include>plugin.yml</include>
           <include>armor.yml</include>
-          <include>classes.yml</include>
+          <include>proficiency.yml</include>
           <include>config.yml</include>
           <include>expiry.yml</include>
           <include>ingots.yml</include>
