@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
