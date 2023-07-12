@@ -78,8 +78,8 @@ public abstract class Configuration<T> {
     /**
      * If the key is in the configuration.
      * 
-     * @param key - Name of the ingot to check.
-     * @return If the ingot provided is in ingots.yml.
+     * @param key - Name of the object to check.
+     * @return If the object is provided in the configuration.
      */
     public boolean isValid(String key) {
 
