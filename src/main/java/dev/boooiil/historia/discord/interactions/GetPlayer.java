@@ -2,7 +2,7 @@ package dev.boooiil.historia.discord.interactions;
 
 import java.time.Instant;
 
-import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.util.DateUtil;
 import dev.boooiil.historia.util.Logging;

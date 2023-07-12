@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import dev.boooiil.historia.HistoriaPlugin;
-import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.PlayerStorage;

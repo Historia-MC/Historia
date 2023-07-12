@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.util.DateUtil;

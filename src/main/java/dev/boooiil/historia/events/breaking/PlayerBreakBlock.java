@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-import dev.boooiil.historia.classes.historia.HistoriaPlayer;
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.configuration.OreConfig;
