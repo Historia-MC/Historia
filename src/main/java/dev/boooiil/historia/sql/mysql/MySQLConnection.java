@@ -84,6 +84,23 @@ public class MySQLConnection {
         }
     }
 
+    public static void closeConnection() {
+            
+            try {
+    
+                connection.close();
+    
+                Logging.infoToConsole("MySQL connection closed.");
+    
+            } catch (SQLException e) {
+    
+                Logging.errorToConsole("MySQL connection could not be closed.");
+    
+                e.printStackTrace();
+    
+            }
+    }
+
     /**
      * @return the connection
      */
