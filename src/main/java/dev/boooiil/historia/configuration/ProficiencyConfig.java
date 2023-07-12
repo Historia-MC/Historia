@@ -3,35 +3,31 @@ package dev.boooiil.historia.configuration;
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.boooiil.historia.classes.historia.proficiency.BaseProficiency;
+import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 
 public class ProficiencyConfig {
 
-
-    //These are here for testing purposes.
-    //Static reference will use less memory than creating a new instance in each HistoriaPlayer
-
-    private static Map<String, BaseProficiency> classConfigMap = new HashMap<String, BaseProficiency>();
+    private static Map<String, Proficiency> proficiencyMap = new HashMap<String, Proficiency>();
 
     /**
      * Return a preloaded configuration.
-     * @param className Provided class name.
+     * @param proficiencyName Provided proficiency name.
      * @return BaseClass associated with the class.
      */
-    public static BaseProficiency getConfig(String className) {
+    public static Proficiency getConfig(String proficiencyName) {
 
-        if (classConfigMap.containsKey(className)) return classConfigMap.get(className);
+        if (proficiencyMap.containsKey(proficiencyName)) return proficiencyMap.get(proficiencyName);
         else {
             
-            classConfigMap.put(className, new BaseProficiency(className));
-            return classConfigMap.get(className);
+            proficiencyMap.put(proficiencyName, new Proficiency(proficiencyName));
+            return proficiencyMap.get(proficiencyName);
 
         }
     }
 
     public static void reloadConfig() {
 
-        classConfigMap.clear();
+        proficiencyMap.clear();
 
     }
 }
