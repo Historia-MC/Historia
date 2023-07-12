@@ -95,6 +95,7 @@ public class HistoriaPlugin extends JavaPlugin {
     // It's a method that is called when the plugin is disabled.
     public void onDisable() {
 
+        MySQLConnection.closeConnection();
         HistoriaDiscord.destroy();
 
         getLogger().info("Plugin disabled.");
