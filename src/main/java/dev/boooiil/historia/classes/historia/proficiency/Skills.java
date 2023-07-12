@@ -4,42 +4,64 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class Skills {
 
-    private boolean hasNameTag;
+    private boolean hasNameTag = false;
 
-    private boolean hasFeatherFall;
-    private boolean hasQuickCharge;
+    private boolean hasFeatherFall = false;
+    private boolean hasQuickCharge = false;
 
-    private boolean hasEfficiencyPickaxe;
-    private boolean hasEfficiencyAxe;
-    private boolean hasChanceExtraOre;
-    private boolean hasChanceExtraWood;
-    private boolean hasChanceExtraFeathers;
+    private boolean hasEfficiencyPickaxe = false;
+    private boolean hasEfficiencyAxe = false;
+    private boolean hasChanceExtraOre = false;
+    private boolean hasChanceExtraWood = false;
+    private boolean hasChanceExtraFeathers = false;
 
-    private boolean hasChanceNoAnvilDamage;
-    private boolean hasChanceNoConsumeBlock;
-    private boolean canIgniteOil;
-    private boolean canExtractOil;
-    private boolean canBreakGlass;
-    private boolean canCraftSaddle;
-    private boolean canTameAnimals;
-    private boolean canSweepingEdge;
-    private boolean canExtractBones;
-    private boolean canBreakBeehive;
+    private boolean hasChanceNoAnvilDamage = false;
+    private boolean hasChanceNoConsumeBlock = false;
+    private boolean canIgniteOil = false;
+    private boolean canExtractOil = false;
+    private boolean canBreakGrass = false;
+    private boolean canCraftSaddle = false;
+    private boolean canTameAnimals = false;
+    private boolean canSweepingEdge = false;
+    private boolean canExtractBones = false;
+    private boolean canBreakBeehive = false;
 
-    private boolean canCraftGunpowder;
-    private boolean canApplyUnbreaking;
+    private boolean canCraftGunpowder = false;
+    private boolean canApplyUnbreaking = false;
 
-    private boolean canMakeHighTierArmor;
+    private boolean canMakeHighTierArmor = false;
 
-    private boolean canMakeKnowledgeBook;
+    private boolean canMakeKnowledgeBook = false;
     /**
      * Don't know what this is for yet.
      */
-    private boolean specialItems;
+    private boolean specialItems = false;
 
     public Skills(FileConfiguration config, String root) {
         
-        
+        this.hasNameTag = config.getBoolean(root + ".nametag");
+        this.hasFeatherFall = config.getBoolean(root + ".featherFall");
+        this.hasQuickCharge = config.getBoolean(root + ".quickCharge");
+        this.hasEfficiencyPickaxe = config.getBoolean(root + ".efficiencyPickaxe");
+        this.hasEfficiencyAxe = config.getBoolean(root + ".efficiencyAxe");
+        this.hasChanceExtraOre = config.getBoolean(root + ".chanceExtraOre");
+        this.hasChanceExtraWood = config.getBoolean(root + ".chanceExtraWood");
+        this.hasChanceExtraFeathers = config.getBoolean(root + ".chanceExtraFeathers");
+        this.hasChanceNoAnvilDamage = config.getBoolean(root + ".chanceNoAnvilDamage");
+        this.hasChanceNoConsumeBlock = config.getBoolean(root + ".chanceNoConsumeBlock");
+        this.canIgniteOil = config.getBoolean(root + ".igniteOil");
+        this.canExtractOil = config.getBoolean(root + ".extractOil");
+        this.canBreakGrass = config.getBoolean(root + ".breakGrass");
+        this.canCraftSaddle = config.getBoolean(root + ".craftSaddle");
+        this.canTameAnimals = config.getBoolean(root + ".tameAnimals");
+        this.canSweepingEdge = config.getBoolean(root + ".sweepingEdge");
+        this.canExtractBones = config.getBoolean(root + ".extractBones");
+        this.canBreakBeehive = config.getBoolean(root + ".breakBeehive");
+        this.canCraftGunpowder = config.getBoolean(root + ".craftGunpowder");
+        this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
+        this.canMakeHighTierArmor = config.getBoolean(root + ".makeHighTierArmor");
+        this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
+        this.specialItems = config.getBoolean(root + ".specialItems");
         
     }
     
@@ -285,8 +307,8 @@ public class Skills {
      * 
      * @return The boolean value of canBreakGlass.
      */
-    public boolean isCanBreakGlass() {
-        return canBreakGlass;
+    public boolean isCanBreakGrass() {
+        return canBreakGrass;
     }
 
     /**
@@ -295,8 +317,8 @@ public class Skills {
      * 
      * @param canBreakGlass Whether or not the player can break glass with this tool.
      */
-    public void setCanBreakGlass(boolean canBreakGlass) {
-        this.canBreakGlass = canBreakGlass;
+    public void setCanBreakGrass(boolean canBreakGlass) {
+        this.canBreakGrass = canBreakGlass;
     }
 
     /**
