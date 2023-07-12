@@ -7,7 +7,7 @@ import dev.boooiil.historia.util.FileGetter;
 
 public class Proficiency {
     
-    private String proficiencyName;
+    private String name;
 
     private Stats stats;
     private Skills skills;
@@ -16,17 +16,17 @@ public class Proficiency {
 
         FileConfiguration config = FileGetter.get(ResourceKeys.PROFICIENCY);
 
-        this.proficiencyName = proficiencyName;
+        this.name = proficiencyName;
         this.stats = new Stats(config, proficiencyName + ".stats");
         this.skills = new Skills(config, proficiencyName + ".skills");
     }
 
-    public String getProficiencyName() {
-        return proficiencyName;
+    public String getName() {
+        return name;
     }
 
-    public void setProficiencyName(String proficiencyName) {
-        this.proficiencyName = proficiencyName;
+    public void setName(String proficiencyName) {
+        this.name = proficiencyName;
     }
 
     public Stats getStats() {

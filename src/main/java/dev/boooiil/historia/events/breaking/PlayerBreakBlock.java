@@ -34,7 +34,7 @@ public class PlayerBreakBlock implements Listener {
 
         if (oreConfig.isValidOre(material.toString())) {
 
-            OreDrop drop = oreConfig.getDropFromChance(material.toString(), historiaPlayer.getProficiency().getProficiencyName());
+            OreDrop drop = oreConfig.getDropFromChance(material.toString(), historiaPlayer.getProficiency().getName());
 
             if (drop != null) {
 

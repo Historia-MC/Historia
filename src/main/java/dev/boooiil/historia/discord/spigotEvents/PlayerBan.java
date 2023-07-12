@@ -42,7 +42,7 @@ public class PlayerBan implements Listener {
                                 true)
                         .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                         .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
-                        .addField("Class", historiaPlayer.getProficiency().getProficiencyName(), true)
+                        .addField("Class", historiaPlayer.getProficiency().getName(), true)
                         .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
                         .addField("Experience",
                                 historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience(), true)

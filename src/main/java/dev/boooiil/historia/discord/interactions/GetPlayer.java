@@ -49,7 +49,7 @@ public class GetPlayer {
                 .addField("Town", !TownyHandler.hasTown(historiaPlayer.getUUID()) ? "Wilderness" : historiaPlayer.getTown().getName(), true)
                 .addField("Town Rank", historiaPlayer.getResident().getTownRanks().toString(), true)
                 .addField("Nation Rank", historiaPlayer.getResident().getNationRanks().toString(), true)
-                .addField("Class", historiaPlayer.getProficiency().getProficiencyName(), true)
+                .addField("Class", historiaPlayer.getProficiency().getName(), true)
                 .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
                 .addField("Experience", historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience(), true)
                 .addField("Playtime", DateUtil.convertMillisecondsIntoStringTime(historiaPlayer.getPlaytime(), false), true)

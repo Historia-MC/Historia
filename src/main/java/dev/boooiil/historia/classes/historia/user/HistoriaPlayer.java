@@ -283,7 +283,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         string += "<(" + this.getUUID() + ") UN:";
         string += this.getUsername() + " PN:";
-        string += this.getProficiency().getProficiencyName() + " LV:";
+        string += this.getProficiency().getName() + " LV:";
         string += this.level + " BH:";
         string += this.getBaseHealth() + " MH:";
         string += this.modifiedHealth + " PT:";
