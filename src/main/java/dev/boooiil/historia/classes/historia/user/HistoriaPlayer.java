@@ -23,8 +23,6 @@ import dev.boooiil.historia.util.Logging;
  */
 public class HistoriaPlayer extends BasePlayer {
 
-    private String className;
-
     private boolean isValid;
 
     private int level;
@@ -76,8 +74,7 @@ public class HistoriaPlayer extends BasePlayer {
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
         Map<String, String> user = MySQLHandler.getUser(uuid);
 
-        this.className = user.get(HistoriaUserKeys.CLASS.getKey());
-        this.proficiency = new Proficiency(this.className);
+        this.proficiency = new Proficiency(user.get(HistoriaUserKeys.CLASS.getKey()));
 
         this.isValid = true;
 
@@ -111,14 +108,9 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    /**
-     * Get the player's class name.
-     * 
-     * @return {@link String} - The player's class name.
-     */
-    public String getClassName() {
+    public Proficiency getProficiency() {
 
-        return this.className;
+        return this.proficiency;
 
     }
 
@@ -290,8 +282,8 @@ public class HistoriaPlayer extends BasePlayer {
         String string = "";
 
         string += "<(" + this.getUUID() + ") UN:";
-        string += this.getUsername() + " CN:";
-        string += this.className + " LV:";
+        string += this.getUsername() + " PN:";
+        string += this.getProficiency().getProficiencyName() + " LV:";
         string += this.level + " BH:";
         string += this.getBaseHealth() + " MH:";
         string += this.modifiedHealth + " PT:";
