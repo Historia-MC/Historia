@@ -11,8 +11,10 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
+import dev.boooiil.historia.commands.CommandSet;
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.commands.CommandStats;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.breaking.PlayerBreakBlock;
@@ -79,6 +81,8 @@ public class HistoriaPlugin extends JavaPlugin {
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
+        registerCommand("stats", new CommandStats());
+        registerCommand("set", new CommandSet());
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
