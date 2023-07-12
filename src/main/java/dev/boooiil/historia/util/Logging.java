@@ -64,6 +64,20 @@ public class Logging {
     }
 
     /**
+     * Send an info message to a player.
+     * @param message The message to be sent.
+     * @param uuid The UUID of the player.
+     */
+    public static void infoToPlayerNoPrefix(String message, UUID uuid) {
+
+        Player player = HistoriaPlugin.server().getPlayer(uuid);
+
+        if (player.isOnline()) player.sendMessage("§7" + message);
+
+    }
+
+
+    /**
      * Send a warning message to the console.
      * @param messages The message to be sent.
      */
