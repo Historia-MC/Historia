@@ -61,7 +61,7 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @param uuid - UUID of the player.
      */
-    public HistoriaPlayer(UUID uuid, Server server) {
+    public HistoriaPlayer(UUID uuid) {
 
         super(uuid);
 
