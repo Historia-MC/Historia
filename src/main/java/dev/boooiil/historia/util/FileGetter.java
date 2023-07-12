@@ -8,6 +8,7 @@ import java.io.Reader;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.classes.enums.FileMap.ResourceKeys;
 
 
 /**
@@ -24,11 +25,11 @@ public class FileGetter {
      * @param check The name of the file you want to check for.
      * @return A boolean value.
      */
-    public static boolean find(File[] files, String check) {
+    public static boolean find(File[] files, ResourceKeys check) {
 
         for (File file : files) {
 
-            if (file.getName().equals(check)) return true;
+            if (file.getName().equals(check.getKey())) return true;
 
         }
 
@@ -43,24 +44,24 @@ public class FileGetter {
      * @param check The file name to check for.
      * @return A YamlConfiguration object.
      */
-    public static YamlConfiguration get(String check) {
+    public static YamlConfiguration get(ResourceKeys check) {
 
         YamlConfiguration config;
 
         if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check);
+            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
-            File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check);
+            File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check.getKey());
 
             config = YamlConfiguration.loadConfiguration(file);
         }
 
         else {
 
-            Logging.errorToConsole("Obtained file from internal directory: " + check);
+            Logging.errorToConsole("Obtained file from internal directory: " + check.getKey());
 
-            InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check);
+            InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check.getKey());
 
             Reader reader = new InputStreamReader(is);
 
