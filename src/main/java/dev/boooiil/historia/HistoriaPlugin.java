@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.commands.CommandSet;
 import dev.boooiil.historia.commands.CommandDebug;
@@ -25,6 +26,8 @@ import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
 import dev.boooiil.historia.sql.mysql.MySQLConnection;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
+import dev.boooiil.historia.timers.ClassEnchants;
+import dev.boooiil.historia.timers.Expiry;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -83,6 +86,9 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("debug", new CommandDebug());
         registerCommand("stats", new CommandStats());
         registerCommand("set", new CommandSet());
+
+        registerRunnable(new ClassEnchants(this));
+        registerRunnable(new Expiry(this));
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
@@ -161,4 +167,14 @@ public class HistoriaPlugin extends JavaPlugin {
 
     }
 
+    /**
+     * It registers a runnable
+     * 
+     * @param runnable The runnable you want to register.
+     */
+    private void registerRunnable(BukkitRunnable runnable) {
+
+        runnable.runTaskTimer(this, 0, 20);
+
+    }
 }
