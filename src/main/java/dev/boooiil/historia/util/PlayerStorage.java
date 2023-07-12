@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
-import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 
 /**
@@ -55,7 +54,7 @@ public class PlayerStorage {
             return players.get(uuid);
 
         else if (useSQLFallback)
-            return new HistoriaPlayer(uuid, HistoriaPlugin.server());
+            return new HistoriaPlayer(uuid);
 
         else
             return new HistoriaPlayer();
@@ -75,7 +74,7 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
 
         else if (useSQLFallback)
-            return new HistoriaPlayer(MySQLHandler.getUUID(username), HistoriaPlugin.server());
+            return new HistoriaPlayer(MySQLHandler.getUUID(username));
 
         else
             return new HistoriaPlayer();

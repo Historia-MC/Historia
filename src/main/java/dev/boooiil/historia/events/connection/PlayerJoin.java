@@ -9,6 +9,7 @@ import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
+import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
 
 /**
@@ -28,7 +29,7 @@ public class PlayerJoin implements Listener {
         MySQLHandler.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getDisplayName());
         MySQLHandler.setLogin(event.getPlayer().getUniqueId());
 
-        HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId(), HistoriaPlugin.server());
+        HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
         PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
 
         HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
