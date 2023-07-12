@@ -52,6 +52,8 @@ public class HistoriaPlayer extends BasePlayer {
     public HistoriaPlayer() {
         super(null);
         this.isValid = false;
+
+        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
 
     /**
@@ -62,6 +64,8 @@ public class HistoriaPlayer extends BasePlayer {
     public HistoriaPlayer(UUID uuid) {
 
         super(uuid);
+
+        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid.toString() + ".");
 
         // TODO: GET TOWN AND NATION VALUES
         // TODO: SET PLAYTIME IN HISTORIA TABLE
