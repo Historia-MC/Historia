@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
-import dev.boooiil.historia.classes.historia.proficiency.HistoriaProficiency;
+import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
@@ -41,11 +41,10 @@ public class HistoriaPlayer extends BasePlayer {
     private double environmentAdjustment;
     private double maxTemperature;
 
-    private double baseExperience;
-    private double experienceTotal;
+    private double currentExperience;
     private double experienceMax;
 
-    private HistoriaProficiency historiaClass;
+    private Proficiency proficiency;
 
     protected Server server;
 
@@ -78,14 +77,13 @@ public class HistoriaPlayer extends BasePlayer {
         Map<String, String> user = MySQLHandler.getUser(uuid);
 
         this.className = user.get(HistoriaUserKeys.CLASS.getKey());
-        this.historiaClass = new HistoriaProficiency(this.className);
+        this.proficiency = new Proficiency(this.className);
 
         this.isValid = true;
 
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
-        this.baseExperience = Math.pow(this.level - 1, this.historiaClass.getBaseExperienceMod());
-        this.experienceTotal = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
+        this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
         this.experienceMax = Math.pow(this.level, 1.68);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
@@ -142,7 +140,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public float getBaseHealth() {
 
-        return this.historiaClass.getBaseHealth();
+        return this.proficiency.getStats().getBaseHealth();
 
     }
 
@@ -169,24 +167,13 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * Get the class' base experience.
-     * 
-     * @return {@link Float} The class' base experience.
-     */
-    public double getBaseExperience() {
-
-        return this.baseExperience;
-
-    }
-
-    /**
      * Get the class' current experience.
      * 
      * @return {@link Float} The class' current experience.
      */
     public double getTotalExperience() {
 
-        return this.experienceTotal;
+        return this.currentExperience;
 
     }
 
@@ -311,8 +298,7 @@ public class HistoriaPlayer extends BasePlayer {
         string += this.playtime + " LI:";
         string += this.lastLogin + " LO:";
         string += this.lastLogout + " BE:";
-        string += this.baseExperience + " ET:";
-        string += this.experienceTotal + " EM:";
+        string += this.currentExperience + " EM:";
         string += this.experienceMax + ">";
 
         return string;
