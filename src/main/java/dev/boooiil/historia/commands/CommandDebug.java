@@ -30,7 +30,7 @@ public class CommandDebug implements CommandExecutor {
                 
                 message += "UUID: " + player.getUUID() + "\n";
                 message += "Online: " + player.isOnline() + "\n";
-                message += "Class: " + player.getClassName() + "\n";
+                message += "Class: " + player.getProficiency().getProficiencyName() + "\n";
                 message += "Level: " + player.getLevel() + "\n";
                 message += "Base Health: " + player.getBaseHealth() + "\n";
                 message += "Mod Health: " + player.getModifiedHealth() + "\n";
