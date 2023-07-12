@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.PlayerStorage;
@@ -33,6 +34,25 @@ public class PlayerJoin implements Listener {
         PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
 
         HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
+
+        Logging.debugToConsole("************* INITIAL STATS *************");
+        Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
+        Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
+        Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
+        Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
+        Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+        Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
+
+        InitialStatLoader initialStatLoader = new InitialStatLoader(event.getPlayer());
+        initialStatLoader.apply();
+
+        Logging.debugToConsole("************* ADJUSTED STATS *************");
+        Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
+        Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
+        Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
+        Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
+        Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+        Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
 
     }
 
