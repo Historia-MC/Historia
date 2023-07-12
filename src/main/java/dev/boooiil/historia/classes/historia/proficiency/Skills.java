@@ -70,7 +70,7 @@ public class Skills {
      * 
      * @return The boolean value of hasNameTag.
      */
-    public boolean isHasNameTag() {
+    public boolean hasNameTag() {
         return hasNameTag;
     }
 
@@ -79,7 +79,7 @@ public class Skills {
      * 
      * @param hasNameTag Whether or not the player has a name tag.
      */
-    public void setHasNameTag(boolean hasNameTag) {
+    public void hasNameTag(boolean hasNameTag) {
         this.hasNameTag = hasNameTag;
     }
 
@@ -89,7 +89,7 @@ public class Skills {
      * 
      * @return The boolean value of hasFeatherFall.
      */
-    public boolean isHasFeatherFall() {
+    public boolean hasFeatherFall() {
         return hasFeatherFall;
     }
 
@@ -99,7 +99,7 @@ public class Skills {
      * 
      * @param hasFeatherFall Whether or not the player has the feather fall effect.
      */
-    public void setHasFeatherFall(boolean hasFeatherFall) {
+    public void hasFeatherFall(boolean hasFeatherFall) {
         this.hasFeatherFall = hasFeatherFall;
     }
 
@@ -108,7 +108,7 @@ public class Skills {
      * 
      * @return The value of the hasQuickCharge variable.
      */
-    public boolean isHasQuickCharge() {
+    public boolean hasQuickCharge() {
         return hasQuickCharge;
     }
 
@@ -118,7 +118,7 @@ public class Skills {
      * 
      * @param hasQuickCharge boolean
      */
-    public void setHasQuickCharge(boolean hasQuickCharge) {
+    public void hasQuickCharge(boolean hasQuickCharge) {
         this.hasQuickCharge = hasQuickCharge;
     }
 
@@ -128,7 +128,7 @@ public class Skills {
      * 
      * @return The boolean value of hasEfficiencyPickaxe.
      */
-    public boolean isHasEfficiencyPickaxe() {
+    public boolean hasEfficiencyPickaxe() {
         return hasEfficiencyPickaxe;
     }
 
@@ -138,7 +138,7 @@ public class Skills {
      * 
      * @param hasEfficiencyPickaxe Whether or not the player has an Efficiency pickaxe
      */
-    public void setHasEfficiencyPickaxe(boolean hasEfficiencyPickaxe) {
+    public void hasEfficiencyPickaxe(boolean hasEfficiencyPickaxe) {
         this.hasEfficiencyPickaxe = hasEfficiencyPickaxe;
     }
 
@@ -147,7 +147,7 @@ public class Skills {
      * 
      * @return The boolean value of hasEfficiencyAxe.
      */
-    public boolean isHasEfficiencyAxe() {
+    public boolean hasEfficiencyAxe() {
         return hasEfficiencyAxe;
     }
 
@@ -157,7 +157,7 @@ public class Skills {
      * 
      * @param hasEfficiencyAxe If the player has an efficiency axe
      */
-    public void setHasEfficiencyAxe(boolean hasEfficiencyAxe) {
+    public void hasEfficiencyAxe(boolean hasEfficiencyAxe) {
         this.hasEfficiencyAxe = hasEfficiencyAxe;
     }
 
@@ -167,7 +167,7 @@ public class Skills {
      * 
      * @return The boolean value of hasChanceExtraOre.
      */
-    public boolean isHasChanceExtraOre() {
+    public boolean hasChanceExtraOre() {
         return hasChanceExtraOre;
     }
 
@@ -177,7 +177,7 @@ public class Skills {
      * 
      * @param hasChanceExtraOre If the ore has a chance to drop an extra ore.
      */
-    public void setHasChanceExtraOre(boolean hasChanceExtraOre) {
+    public void hasChanceExtraOre(boolean hasChanceExtraOre) {
         this.hasChanceExtraOre = hasChanceExtraOre;
     }
 
@@ -187,7 +187,7 @@ public class Skills {
      * 
      * @return The boolean value of hasChanceExtraWood.
      */
-    public boolean isHasChanceExtraWood() {
+    public boolean hasChanceExtraWood() {
         return hasChanceExtraWood;
     }
 
@@ -198,7 +198,7 @@ public class Skills {
      * @param hasChanceExtraWood If true, the player has a chance to get extra wood when chopping down
      * a tree.
      */
-    public void setHasChanceExtraWood(boolean hasChanceExtraWood) {
+    public void hasChanceExtraWood(boolean hasChanceExtraWood) {
         this.hasChanceExtraWood = hasChanceExtraWood;
     }
 
@@ -208,7 +208,7 @@ public class Skills {
      * 
      * @return The boolean value of hasChanceExtraFeathers.
      */
-    public boolean isHasChanceExtraFeathers() {
+    public boolean hasChanceExtraFeathers() {
         return hasChanceExtraFeathers;
     }
 
@@ -219,7 +219,7 @@ public class Skills {
      * @param hasChanceExtraFeathers If true, the player has a chance to get extra feathers when
      * killing a chicken.
      */
-    public void setHasChanceExtraFeathers(boolean hasChanceExtraFeathers) {
+    public void hasChanceExtraFeathers(boolean hasChanceExtraFeathers) {
         this.hasChanceExtraFeathers = hasChanceExtraFeathers;
     }
 
@@ -229,7 +229,7 @@ public class Skills {
      * 
      * @return The boolean value of hasChanceNoAnvilDamage.
      */
-    public boolean isHasChanceNoAnvilDamage() {
+    public boolean hasChanceNoAnvilDamage() {
         return hasChanceNoAnvilDamage;
     }
 
@@ -240,7 +240,7 @@ public class Skills {
      * @param hasChanceNoAnvilDamage If true, the item will have a chance to not take damage when used
      * in an anvil.
      */
-    public void setHasChanceNoAnvilDamage(boolean hasChanceNoAnvilDamage) {
+    public void hasChanceNoAnvilDamage(boolean hasChanceNoAnvilDamage) {
         this.hasChanceNoAnvilDamage = hasChanceNoAnvilDamage;
     }
 
@@ -250,7 +250,7 @@ public class Skills {
      * 
      * @return The value of the variable hasChanceNoConsumeBlock.
      */
-    public boolean isHasChanceNoConsumeBlock() {
+    public boolean hasChanceNoConsumeBlock() {
         return hasChanceNoConsumeBlock;
     }
 
@@ -260,7 +260,7 @@ public class Skills {
      * 
      * @param hasChanceNoConsumeBlock If true, the block will have a chance to not consume the item.
      */
-    public void setHasChanceNoConsumeBlock(boolean hasChanceNoConsumeBlock) {
+    public void hasChanceNoConsumeBlock(boolean hasChanceNoConsumeBlock) {
         this.hasChanceNoConsumeBlock = hasChanceNoConsumeBlock;
     }
 
@@ -269,7 +269,7 @@ public class Skills {
      * 
      * @return The boolean value of canIgniteOil.
      */
-    public boolean isCanIgniteOil() {
+    public boolean canIgniteOil() {
         return canIgniteOil;
     }
 
@@ -288,7 +288,7 @@ public class Skills {
      * 
      * @return The value of the variable canExtractOil.
      */
-    public boolean isCanExtractOil() {
+    public boolean canExtractOil() {
         return canExtractOil;
     }
 
@@ -307,7 +307,7 @@ public class Skills {
      * 
      * @return The boolean value of canBreakGlass.
      */
-    public boolean isCanBreakGrass() {
+    public boolean canBreakGrass() {
         return canBreakGrass;
     }
 
@@ -327,7 +327,7 @@ public class Skills {
      * 
      * @return The boolean value of canCraftSaddle.
      */
-    public boolean isCanCraftSaddle() {
+    public boolean canCraftSaddle() {
         return canCraftSaddle;
     }
 
@@ -346,7 +346,7 @@ public class Skills {
      * 
      * @return The boolean value of canTameAnimals.
      */
-    public boolean isCanTameAnimals() {
+    public boolean canTameAnimals() {
         return canTameAnimals;
     }
 
@@ -365,7 +365,7 @@ public class Skills {
      * 
      * @return The value of the variable canSweepingEdge.
      */
-    public boolean isCanSweepingEdge() {
+    public boolean canSweepingEdge() {
         return canSweepingEdge;
     }
 
@@ -385,7 +385,7 @@ public class Skills {
      * 
      * @return The method is returning a boolean value.
      */
-    public boolean isCanExtractBones() {
+    public boolean canExtractBones() {
         return canExtractBones;
     }
 
@@ -405,7 +405,7 @@ public class Skills {
      * 
      * @return The boolean value of canBreakBeehive.
      */
-    public boolean isCanBreakBeehive() {
+    public boolean canBreakBeehive() {
         return canBreakBeehive;
     }
 
@@ -425,7 +425,7 @@ public class Skills {
      * 
      * @return The boolean value of canCraftGunpowder.
      */
-    public boolean isCanCraftGunpowder() {
+    public boolean canCraftGunpowder() {
         return canCraftGunpowder;
     }
 
@@ -444,7 +444,7 @@ public class Skills {
      * 
      * @return The boolean value of canApplyUnbreaking.
      */
-    public boolean isCanApplyUnbreaking() {
+    public boolean canApplyUnbreaking() {
         return canApplyUnbreaking;
     }
 
@@ -464,7 +464,7 @@ public class Skills {
      * 
      * @return The boolean value of canMakeHighTierArmor.
      */
-    public boolean isCanMakeHighTierArmor() {
+    public boolean canMakeHighTierArmor() {
         return canMakeHighTierArmor;
     }
 
@@ -484,7 +484,7 @@ public class Skills {
      * 
      * @return The boolean value of canMakeKnowledgeBook.
      */
-    public boolean isCanMakeKnowledgeBook() {
+    public boolean canMakeKnowledgeBook() {
         return canMakeKnowledgeBook;
     }
 
@@ -503,7 +503,7 @@ public class Skills {
      * 
      * @return The boolean value of specialItems.
      */
-    public boolean isSpecialItems() {
+    public boolean specialItems() {
         return specialItems;
     }
 
