@@ -18,14 +18,14 @@ public class CommandSet implements CommandExecutor {
 
         }
 
-        if (arguments[0] == "health") {
+        if (arguments[0].equals("health")) {
 
             AttributeInstance attribute = ( (Player) sender ).getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH);
             attribute.setBaseValue(Double.parseDouble(arguments[1]));
 
         }
 
-        if (arguments[0] == "speed") {
+        if (arguments[0].equals("speed")) {
 
             ( (Player) sender ).setWalkSpeed(Float.parseFloat(arguments[1]));
 
