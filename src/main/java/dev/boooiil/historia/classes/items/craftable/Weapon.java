@@ -19,14 +19,21 @@ public class Weapon extends CraftedItem {
     private String weight;
 
     private List<Double> damageRange;
+    private double damage;
 
     private List<Double> speedRange;
+    private double speed;
 
     private List<Double> knockbackRange;
+    private double knockback;
 
     private List<Double> sweepRange;
+    private double sweep;
 
     private List<Integer> durabilityRange;
+    private int durability;
+
+    private ItemStack itemStack;
 
     // It's a constructor.
     public Weapon(String weaponName) {
@@ -61,6 +68,13 @@ public class Weapon extends CraftedItem {
         }
     }
 
+    
+    public void updateWeaponStats(List<String> lore) {
+
+        
+
+    }
+
     /**
      * This function returns the damage range of the weapon.
      * 
@@ -68,6 +82,26 @@ public class Weapon extends CraftedItem {
      */
     public List<Double> getDamageRange() {
         return damageRange;
+    }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getKnockback() {
+        return knockback;
+    }
+
+    public double getSweep() {
+        return sweep;
+    }
+
+    public int getDurability() {
+        return durability;
     }
 
     /**
