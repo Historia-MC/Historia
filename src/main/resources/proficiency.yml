@@ -64,7 +64,7 @@ Archer:
     weaponProficiency: [ Bow, Crossbow, Light ]
     armorProficiency: [ Light ]
 
-  extra:
+  skills:
     nametag: true
     quickCharge: true
     igniteOil: true
@@ -89,7 +89,7 @@ Fisherman:
     weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light ]
 
-  extra:
+  skills:
     nametag: true
     extractBones: true
     extractOil: true
@@ -114,7 +114,7 @@ Miner:
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
 
-  extra:
+  skills:
     nametag: true
     extraOreChance: true
     efficiencyPickaxe: true
@@ -140,12 +140,12 @@ Blacksmith:
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium, Heavy ]
 
-  extra:
+  skills:
     nametag: true
-    highTierArmor: true
+    makeHighTierArmor: true
     applyUnbreaking: true
     craftSaddle: true
-    chanceAnvilNoDamage: true
+    chanceNoAnvilDamage: true
 
 Huntsman:
 
@@ -167,7 +167,7 @@ Huntsman:
     weaponProficiency: [ Light ]
     armorProficiency: [ Bow, Light ]
 
-  extra:
+  skills:
     nametag: false
     bonesFromAnimals: true
     tameAnimals: true
@@ -195,11 +195,11 @@ Apothecary:
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
 
-  extra:
+  skills:
     nametag: true
     extractOil: true
     craftGunpowder: true
-    knowledgeBook: true
+    makeKnowledgeBook: true
 
 Architect:
 
@@ -221,10 +221,10 @@ Architect:
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
 
-  extra:
+  skills:
     nametag: true
     chanceNoConsumeBlock: true
-    featherfall: true
+    featherFall: true
     incomeMultiplier: 1.2
 
 Lumberjack:
@@ -247,7 +247,7 @@ Lumberjack:
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
 
-  extra:
+  skills:
     nametag: true
     chanceExtraWood: true
     efficiencyAxe: true
@@ -272,7 +272,7 @@ Farmer:
     weaponProficiency: [ Light ]
     armorProficiency: [ Light, Medium ]
             
-  extra:
+  skills:
     nametag: true
     breakBeehive: true
     breakGrass: true
