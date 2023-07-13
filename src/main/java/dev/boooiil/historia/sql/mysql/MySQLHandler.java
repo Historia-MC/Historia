@@ -129,7 +129,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setClass(UUID uuid, String className) {
+    public static void setProficiency(UUID uuid, String className) {
 
         try {
 
@@ -143,7 +143,7 @@ public class MySQLHandler {
             Logging.infoToConsole("Communication Exception");
 
             MySQLConnection.reconnectOnStale();
-            setClass(uuid, className);
+            setProficiency(uuid, className);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setClassLevel(UUID uuid, int classLevel) {
+    public static void setProficiencyLevel(UUID uuid, int classLevel) {
 
         try {
 
@@ -171,7 +171,7 @@ public class MySQLHandler {
             Logging.infoToConsole("Communication Exception");
 
             MySQLConnection.reconnectOnStale();
-            setClassLevel(uuid, classLevel);
+            setProficiencyLevel(uuid, classLevel);
 
         } catch (SQLException e) {
             e.printStackTrace();
