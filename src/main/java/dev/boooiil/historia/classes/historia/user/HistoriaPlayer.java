@@ -277,7 +277,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         // TODO: Create method for adding experience
 
-        MySQLHandler.setClassLevel(this.getUUID(), level);
+        MySQLHandler.setProficiencyLevel(this.getUUID(), level);
 
     }
 
