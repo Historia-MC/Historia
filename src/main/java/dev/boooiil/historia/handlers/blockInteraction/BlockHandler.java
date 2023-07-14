@@ -55,9 +55,41 @@ public class BlockHandler extends BaseBlockHandler {
 
         }
 
+        else if (breakEvent.getBlock().getType().toString().contains("LOG")) {
+
+            if (historiaPlayer.getProficiency().getSkills().hasChanceExtraWood()) {
+
+                Float doulbeDropChance = 0.05f;
+                Float dropChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
+
+                boolean didDouble = dropChanceRoll <= doulbeDropChance;
+
+                if (didDouble) {
+
+                    breakEvent.setCancelled(true);
+                    breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), breakEvent.getBlock().getDrops().iterator().next());
+                    breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), breakEvent.getBlock().getDrops().iterator().next());
+                    Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
+
+                }
+
+            }
+
+        }
+
     }
 
     public void doPlace() {
+
+        //TODO: check for ores
+
+        if (historiaPlayer.getProficiency().getSkills().hasChanceNoConsumeBlock()) {
+
+            placeEvent.setCancelled(true);
+            placeEvent.getBlockPlaced().setType(placeEvent.getBlockPlaced().getType());
+            Logging.infoToPlayer("You did not consume any resources for this block!", historiaPlayer.getUUID());
+
+        }
 
     }
 
