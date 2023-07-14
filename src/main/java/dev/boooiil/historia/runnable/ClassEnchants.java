@@ -1,16 +1,16 @@
 package dev.boooiil.historia.runnable;
 
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 
 public class ClassEnchants {
 
     private HistoriaPlayer historiaPlayer;
-    private Inventory inventory;
+    private PlayerInventory inventory;
 
-    public ClassEnchants(HistoriaPlayer historiaPlayer, Inventory inventory) {
+    public ClassEnchants(HistoriaPlayer historiaPlayer, PlayerInventory inventory) {
         this.historiaPlayer = historiaPlayer;
         this.inventory = inventory;
     }
