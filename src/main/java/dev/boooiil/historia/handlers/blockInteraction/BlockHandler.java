@@ -77,6 +77,17 @@ public class BlockHandler extends BaseBlockHandler {
 
         }
 
+        else if (breakEvent.getBlock().getType().toString().contains("BEEHIVE")) {
+
+            if (!historiaPlayer.getProficiency().getSkills().canBreakBeehive()) {
+
+                breakEvent.setCancelled(true);
+                Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+
+
+            }
+
+        }
     }
 
     public void doPlace() {
