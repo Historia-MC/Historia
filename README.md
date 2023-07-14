@@ -4,6 +4,8 @@
 To be considered as a release, the following requirements must be met:
 ```
 
+# It is imperative that we create an item.yml for custom items so that I don't have to hardcode them into the plugin.
+
 ## [Proficiency]
 
 ### [Stats]
@@ -105,9 +107,38 @@ To be considered as a release, the following requirements must be met:
 
 ## [Configuration]
 
+- [x] Validate existence of files against resource folder.
+- [x] Create missing files on disk if not found.
+- [x] Validate resource version files against files on disk.
+- [ ] Apply or overwrite missing values in files on disk.
+- [ ] Create a configuration factory.
+
 ## [Items]
 
+### [Weapons]
 
+- [x] Create object for each weapon.
+- [x] Preload weapon objects on init into hashmap.
+- [x] Getter for weapon object.
+
+### [Armor]
+
+- [x] Create object for each armor.
+- [x] Preload armor objects on init into hashmap.
+- [x] Getter for armor object.
+
+### [Expiry]
+
+- [ ] Create object for each food item.
+- [ ] Preload food objects on init into hashmap.
+- [ ] Getter for food object.
+
+### [Other]
+
+- [ ] Create object for each item.
+- [ ] Validate if they are limited to a specific pattern.
+- [ ] Preload item objects on init into hashmap.
+- [ ] Getter for item object.
 
 ## [Experience]
 
