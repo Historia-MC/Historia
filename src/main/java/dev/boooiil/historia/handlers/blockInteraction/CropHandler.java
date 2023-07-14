@@ -59,7 +59,10 @@ public class CropHandler extends BaseBlockHandler {
                 breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), item);
 
             });
+            
             Logging.infoToPlayer("You harvested the crop and doubled the harvest!", historiaPlayer.getUUID());
+
+            historiaPlayer.increaseExperience();
 
         }
 
