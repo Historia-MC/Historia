@@ -18,16 +18,18 @@ import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.commands.CommandStats;
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.discord.HistoriaDiscord;
-import dev.boooiil.historia.events.breaking.PlayerBreakBlock;
+import dev.boooiil.historia.events.blockInteraction.PlayerBreakBlock;
 import dev.boooiil.historia.events.connection.PlayerJoin;
 import dev.boooiil.historia.events.connection.PlayerLeave;
 import dev.boooiil.historia.events.crafting.PlayerCraft;
+import dev.boooiil.historia.events.food.FoodLevelChange;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
+import dev.boooiil.historia.events.pvp.PlayerDeath;
+import dev.boooiil.historia.events.pvp.PlayerHit;
+import dev.boooiil.historia.runnable.PlayerIterator;
 import dev.boooiil.historia.sql.mysql.MySQLConnection;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
-import dev.boooiil.historia.timers.ClassEnchants;
-import dev.boooiil.historia.timers.Expiry;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -75,20 +77,23 @@ public class HistoriaPlugin extends JavaPlugin {
 
         Config.init();
 
+        registerEvent(new FoodLevelChange());
+        registerEvent(new FurnaceSmeltFinish());
+        registerEvent(new FurnaceSmeltStart());
+        registerEvent(new PlayerBreakBlock());
         registerEvent(new PlayerCraft());
+        registerEvent(new PlayerCraft());
+        registerEvent(new PlayerDeath());
+        registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
-        registerEvent(new PlayerBreakBlock());
-        registerEvent(new FurnaceSmeltStart());
-        registerEvent(new FurnaceSmeltFinish());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
         registerCommand("stats", new CommandStats());
         registerCommand("set", new CommandSet());
 
-        registerRunnable(new ClassEnchants(this));
-        registerRunnable(new Expiry(this));
+        registerRunnable(new PlayerIterator(this));
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
