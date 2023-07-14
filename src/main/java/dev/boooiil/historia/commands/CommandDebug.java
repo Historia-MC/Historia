@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 
 /**
  * It's a command that allows a player to view the debug information of another player
@@ -34,7 +34,7 @@ public class CommandDebug implements CommandExecutor {
                 message += "Level: " + player.getLevel() + "\n";
                 message += "Base Health: " + player.getBaseHealth() + "\n";
                 message += "Mod Health: " + player.getModifiedHealth() + "\n";
-                message += "Experience: " + player.getTotalExperience() + "\n";
+                message += "Experience: " + player.getCurrentExperience() + "\n";
                 message += "Temperature: " + player.getCurrentTemperature() + "\n";
                 message += "Armor Temp: " + player.getArmorAdjustment() + "\n";
                 message += "Env Temp: " + player.getEnvironmentAdjustment() + "\n";

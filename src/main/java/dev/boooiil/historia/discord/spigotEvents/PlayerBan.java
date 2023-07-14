@@ -7,11 +7,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.util.DateUtil;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.channel.GuildMessageChannel;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -45,7 +45,7 @@ public class PlayerBan implements Listener {
                         .addField("Class", historiaPlayer.getProficiency().getName(), true)
                         .addField("Level", String.valueOf(historiaPlayer.getLevel()), true)
                         .addField("Experience",
-                                historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience(), true)
+                                historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience(), true)
                         .addField("Playtime",
                                 DateUtil.convertMillisecondsIntoStringTime(historiaPlayer.getPlaytime(), false), true)
                         .thumbnail("https://minotar.net/avatar/" + historiaPlayer.getUUID())

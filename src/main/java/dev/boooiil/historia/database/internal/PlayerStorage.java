@@ -1,10 +1,10 @@
-package dev.boooiil.historia.util;
+package dev.boooiil.historia.database.internal;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.mysql.MySQLHandler;
 
 /**
  * It's a HashMap that stores all the players that are currently online
