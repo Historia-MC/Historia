@@ -42,6 +42,7 @@ public class ClassEnchants {
             }
 
             if (item.getType().toString().contains("AXE")) {
+
                 if (historiaPlayer.getProficiency().getSkills().hasEfficiencyAxe()) {
 
                     if (!item.getItemMeta().hasEnchant(Enchantment.DIG_SPEED)) {
@@ -59,6 +60,28 @@ public class ClassEnchants {
                     }
 
                 }
+            }
+
+            if (item.getType().toString().contains("BOOTS")) {
+
+                if (historiaPlayer.getProficiency().getSkills().hasFeatherFall()) {
+
+                    if (!item.getItemMeta().hasEnchant(Enchantment.PROTECTION_FALL)) {
+
+                        item.getItemMeta().addEnchant(Enchantment.PROTECTION_FALL, 3, true);
+
+                    }
+
+                } else {
+
+                    if (item.getItemMeta().hasEnchant(Enchantment.PROTECTION_FALL)) {
+
+                        item.getItemMeta().removeEnchant(Enchantment.PROTECTION_FALL);
+
+                    }
+
+                }
+
             }
 
         });
