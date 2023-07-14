@@ -5,13 +5,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
+import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.handlers.connection.InitialStatLoader;
-import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 
 /**
  * It creates a new user in the database if they don't exist, sets their login

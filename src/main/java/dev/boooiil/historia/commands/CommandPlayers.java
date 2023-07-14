@@ -9,8 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 
 /**
  * It's a command that lists all the players in the game

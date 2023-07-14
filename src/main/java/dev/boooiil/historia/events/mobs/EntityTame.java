@@ -5,8 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityTameEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.handlers.mobs.TameAnimal;
-import dev.boooiil.historia.util.PlayerStorage;
 
 public class EntityTame implements Listener {
 

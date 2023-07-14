@@ -5,7 +5,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.util.PlayerStorage;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 
 public class PlayerIterator extends BukkitRunnable {
 

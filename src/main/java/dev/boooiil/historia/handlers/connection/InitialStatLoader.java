@@ -5,7 +5,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.util.PlayerStorage;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 
 public class InitialStatLoader {
 

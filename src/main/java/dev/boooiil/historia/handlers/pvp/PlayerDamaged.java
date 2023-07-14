@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 
 public class PlayerDamaged {
 
