@@ -70,6 +70,7 @@ public class BlockHandler extends BaseBlockHandler {
                     breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), breakEvent.getBlock().getDrops().iterator().next());
                     breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), breakEvent.getBlock().getDrops().iterator().next());
                     Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
+                    historiaPlayer.increaseExperience();
 
                 }
 
