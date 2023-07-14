@@ -142,10 +142,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>3.5.0</version>
         <configuration>
           <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-          <doclint>none</doclint>
+          <doclint>none</doclint>          
+          <show>private</show>
+          <nohelp>true</nohelp>
         </configuration>
       </plugin>
 
@@ -228,4 +230,5 @@
     </resources>
 
   </build>
+
 </project>
