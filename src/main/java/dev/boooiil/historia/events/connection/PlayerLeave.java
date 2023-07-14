@@ -6,9 +6,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
+import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
-import dev.boooiil.historia.sql.mysql.MySQLHandler;
-import dev.boooiil.historia.util.PlayerStorage;
 
 /**
  * It saves the player's data, sets the player as offline, and updates the
