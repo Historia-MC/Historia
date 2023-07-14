@@ -84,6 +84,28 @@ public class ClassEnchants {
 
             }
 
+            if (item.getType().toString().contains("CROSSBOW")) {
+
+                if (historiaPlayer.getProficiency().getSkills().hasQuickCharge()) {
+
+                    if (!item.getItemMeta().hasEnchant(Enchantment.QUICK_CHARGE)) {
+
+                        item.getItemMeta().addEnchant(Enchantment.QUICK_CHARGE, 1, true);
+
+                    }
+
+                } else {
+
+                    if (item.getItemMeta().hasEnchant(Enchantment.QUICK_CHARGE)) {
+
+                        item.getItemMeta().removeEnchant(Enchantment.QUICK_CHARGE);
+
+                    }
+
+                }
+
+            }
+
         });
 
     }
