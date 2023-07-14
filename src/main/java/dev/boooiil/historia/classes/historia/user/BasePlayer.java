@@ -156,6 +156,16 @@ public abstract class BasePlayer {
         this.nation = nation;
     }
 
-    
+    public String toString() {
+
+        String output = "*** BASE PLAYER *** \n";
+        output += "UUID: " + uuid.toString() + "\n";
+        output += "Username: " + username + "\n";
+        output += "Online: " + isOnline + "\n";
+        output += "******************* \n";
+
+        return output;
+
+    }
 
 }

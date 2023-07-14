@@ -45,4 +45,16 @@ public class Proficiency {
         this.skills = skills;
     }
 
+    public String toString() {
+
+        String output = "*** PROFICIENCY ***\n";
+
+        output += "Name: " + name + "\n";
+        output += stats.toString();
+        output += skills.toString();
+
+        return output;
+
+    }
+
 }

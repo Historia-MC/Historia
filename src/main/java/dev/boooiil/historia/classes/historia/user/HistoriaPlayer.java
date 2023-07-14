@@ -308,26 +308,6 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    public String toString() {
-
-        String string = "";
-
-        string += "<(" + this.getUUID() + ") UN:";
-        string += this.getUsername() + " PN:";
-        string += this.getProficiency().getName() + " LV:";
-        string += this.level + " BH:";
-        string += this.getBaseHealth() + " MH:";
-        string += this.modifiedHealth + " PT:";
-        string += this.playtime + " LI:";
-        string += this.lastLogin + " LO:";
-        string += this.lastLogout + " BE:";
-        string += this.currentExperience + " EM:";
-        string += this.maxExperience + ">";
-
-        return string;
-
-    }
-
     /**
      * Print the player's information.
      * 
@@ -584,4 +564,23 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    public String toString() {
+
+        String output = super.toString();
+
+        output += "*** HISTORIA PLAYER *** \n";
+        output += "Level: " + this.getLevel() + "\n";
+        output += "Current Experience: " + this.getCurrentExperience() + "\n";
+        output += "Max Experience: " + this.getMaxExperience() + "\n";
+        output += "Last Login: " + this.getLastLogin() + "\n";
+        output += "Last Logout: " + this.getLastLogout() + "\n";
+        output += "Playtime: " + this.getPlaytime() + "\n";
+        output += "Armor Adjustment: " + this.calculateArmorAdjustment() + "\n";
+        output += "Environment Adjustment: " + this.calculateEnvironmentAdjustment() + "\n";
+        output += "*********************** \n";
+        output += proficiency.toString();
+
+        return output;
+
+    }
 }

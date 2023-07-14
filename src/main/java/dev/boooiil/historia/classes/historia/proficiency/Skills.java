@@ -518,6 +518,37 @@ public class Skills {
         this.specialItems = specialItems;
     }
 
-    
+    public String toString() {
+
+        String output = "*** SKILLS *** \n";
+
+        output += "Has Nametag: " + hasNameTag + "\n";
+        output += "Has Feather Falling: " + hasFeatherFall + "\n";
+        output += "Has Quick Charge: " + hasQuickCharge + "\n";
+        output += "Has Efficiency Pickaxe: " + hasEfficiencyPickaxe + "\n";
+        output += "Has Efficiency Axe: " + hasEfficiencyAxe + "\n";
+        output += "Has Chance Extra Ore: " + hasChanceExtraOre + "\n";
+        output += "Has Chance Extra Wood: " + hasChanceExtraWood + "\n";
+        output += "Has Chance Extra Feathers: " + hasChanceExtraFeathers + "\n";
+        output += "Has Chance No Anvil Damage: " + hasChanceNoAnvilDamage + "\n";
+        output += "Has Chance No Consume Block: " + hasChanceNoConsumeBlock + "\n";
+        output += "Can Ignite Oil: " + canIgniteOil + "\n";
+        output += "Can Extract Oil: " + canExtractOil + "\n";
+        output += "Can Break Grass: " + canBreakGrass + "\n";
+        output += "Can Craft Saddle: " + canCraftSaddle + "\n";
+        output += "Can Tame Animals: " + canTameAnimals + "\n";
+        output += "Can Sweeping Edge: " + canSweepingEdge + "\n";
+        output += "Can Extract Bones: " + canExtractBones + "\n";
+        output += "Can Break Beehive: " + canBreakBeehive + "\n";
+        output += "Can Craft Gunpowder: " + canCraftGunpowder + "\n";
+        output += "Can Apply Unbreaking: " + canApplyUnbreaking + "\n";
+        output += "Can Make High Tier Armor: " + canMakeHighTierArmor + "\n";
+        output += "Can Make Knowledge Book: " + canMakeKnowledgeBook + "\n";
+        output += "Special Items: " + specialItems + "\n";
+        output += "************** \n";
+
+        return output;
+
+    }
 
 }

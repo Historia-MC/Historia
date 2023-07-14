@@ -19,16 +19,15 @@ public class Stats {
     private float instantGrowthChance;
     private float beheadChance;
 
-
     private float baseSwordProficiency;
     private float baseBowProficiency;
     private float baseCrossbowProficiency;
 
     private List<String> weaponProficiency;
     private List<String> armorProficiency;
-    
+
     public Stats(FileConfiguration config, String root) {
-        
+
         this.baseHealth = config.getInt(root + ".baseHealth");
         this.maxHealth = config.getInt(root + ".maxHealth");
         this.baseFood = config.getInt(root + ".baseFood");
@@ -39,10 +38,15 @@ public class Stats {
         this.baseBowProficiency = config.getLong(root + ".baseBowProficiency");
         this.baseCrossbowProficiency = config.getLong(root + ".baseCrossbowProficiency");
         this.baseExperienceGain = config.getLong(root + ".baseExperienceGain");
- 
+
+        this.harvestChance = config.getLong(root + ".harvestChance");
+        this.doubleHarvestChance = config.getLong(root + ".doubleHarvestChance");
+        this.instantGrowthChance = config.getLong(root + ".instantGrowChance");
+        this.beheadChance = config.getLong(root + ".beheadChance");
+
         this.weaponProficiency = config.getStringList(root + ".weaponProficiency");
         this.armorProficiency = config.getStringList(root + ".armorProficiency");
-        
+
     }
 
     /**
@@ -73,7 +77,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the maxHealth variable to the value of the maxHealth parameter
+     * This function sets the maxHealth variable to the value of the maxHealth
+     * parameter
      * 
      * @param maxHealth The maximum health of the player.
      */
@@ -127,7 +132,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the baseEvasion variable to the value of the parameter baseEvasion
+     * This function sets the baseEvasion variable to the value of the parameter
+     * baseEvasion
      * 
      * @param baseEvasion The base evasion of the character.
      */
@@ -135,7 +141,6 @@ public class Stats {
         this.baseEvasion = baseEvasion;
     }
 
-    
     /**
      * This function returns the harvest chance of the crop
      * 
@@ -146,7 +151,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the harvest chance of the crop to the value of the parameter harvestChance
+     * This function sets the harvest chance of the crop to the value of the
+     * parameter harvestChance
      * 
      * @param harvestChance The chance that the block will drop an item when broken.
      */
@@ -166,7 +172,8 @@ public class Stats {
     /**
      * This function sets the double harvest chance to the value of the parameter
      * 
-     * @param doubleHarvestChance The chance that a crop will drop two items instead of one.
+     * @param doubleHarvestChance The chance that a crop will drop two items instead
+     *                            of one.
      */
     public void setDoubleHarvestChance(float doubleHarvestChance) {
         this.doubleHarvestChance = doubleHarvestChance;
@@ -182,7 +189,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the instantGrowthChance variable to the value of the instantGrowthChance
+     * This function sets the instantGrowthChance variable to the value of the
+     * instantGrowthChance
      * parameter
      * 
      * @param instantGrowthChance The chance that a plant will grow instantly.
@@ -201,14 +209,14 @@ public class Stats {
     }
 
     /**
-     * This function sets the beheadChance variable to the value of the beheadChance parameter
+     * This function sets the beheadChance variable to the value of the beheadChance
+     * parameter
      * 
      * @param beheadChance The chance that the player will behead the player.
      */
     public void setBeheadChance(float beheadChance) {
         this.beheadChance = beheadChance;
     }
-
 
     /**
      * This function returns the baseSwordProficiency variable
@@ -220,7 +228,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the baseSwordProficiency variable to the value of the parameter passed in
+     * This function sets the baseSwordProficiency variable to the value of the
+     * parameter passed in
      * 
      * @param baseSwordProficiency The base proficiency of the sword.
      */
@@ -238,7 +247,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the baseBowProficiency variable to the value of the parameter passed in
+     * This function sets the baseBowProficiency variable to the value of the
+     * parameter passed in
      * 
      * @param baseBowProficiency The base proficiency of the bow.
      */
@@ -256,7 +266,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the baseCrossbowProficiency variable to the value of the parameter passed in
+     * This function sets the baseCrossbowProficiency variable to the value of the
+     * parameter passed in
      * 
      * @param baseCrossbowProficiency The base proficiency of the crossbow.
      */
@@ -283,7 +294,8 @@ public class Stats {
     }
 
     /**
-     * This function returns a list of strings that represent the weapon proficiency of the character
+     * This function returns a list of strings that represent the weapon proficiency
+     * of the character
      * 
      * @return The weaponProficiency list.
      */
@@ -301,7 +313,8 @@ public class Stats {
     }
 
     /**
-     * This function returns a list of strings that represent the armor proficiency of the class
+     * This function returns a list of strings that represent the armor proficiency
+     * of the class
      * 
      * @return A list of strings.
      */
@@ -310,12 +323,33 @@ public class Stats {
     }
 
     /**
-     * This function sets the armorProficiency variable to the value of the parameter armorProficiency
+     * This function sets the armorProficiency variable to the value of the
+     * parameter armorProficiency
      * 
      * @param armorProficiency List of armor types the character is proficient with.
      */
     public void setArmorProficiency(List<String> armorProficiency) {
         this.armorProficiency = armorProficiency;
     }
-    
+
+    public String toString() {
+
+        return "*** STATS *** \n" +
+                "Base Health: " + this.baseHealth + "\n" +
+                "Base Speed: " + this.baseSpeed + "\n" +
+                "Base Evasion: " + this.baseEvasion + "\n" +
+                "Harvest Chance: " + this.harvestChance + "\n" +
+                "Double Harvest Chance: " + this.doubleHarvestChance + "\n" +
+                "Instant Growth Chance: " + this.instantGrowthChance + "\n" +
+                "Behead Chance: " + this.beheadChance + "\n" +
+                "Base Sword Proficiency: " + this.baseSwordProficiency + "\n" +
+                "Base Bow Proficiency: " + this.baseBowProficiency + "\n" +
+                "Base Crossbow Proficiency: " + this.baseCrossbowProficiency + "\n" +
+                "Base Experience Gain: " + this.baseExperienceGain + "\n" +
+                "Weapon Proficiency: " + this.weaponProficiency + "\n" +
+                "Armor Proficiency: " + this.armorProficiency + "\n" +
+                "************* \n";
+
+    }
+
 }
