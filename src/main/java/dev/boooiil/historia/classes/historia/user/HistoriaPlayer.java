@@ -18,6 +18,8 @@ import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.sql.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
+//TODO: Add a method to check the player's armor level and attack level.
+
 /**
  * It's a class that holds all the information about a player
  */
