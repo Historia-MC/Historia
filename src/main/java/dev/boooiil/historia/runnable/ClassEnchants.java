@@ -1,13 +1,13 @@
-package dev.boooiil.historia.timers;
+package dev.boooiil.historia.runnable;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Expiry extends BukkitRunnable {
+public class ClassEnchants extends BukkitRunnable {
 
     private final JavaPlugin plugin;
 
-    public Expiry(JavaPlugin plugin) {
+    public ClassEnchants(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
