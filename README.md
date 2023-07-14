@@ -14,37 +14,37 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply modified experience.
 - [x] Apply chance for attack evasion.
 - [x] Apply weapon proficiency check for attack.
-- [ ] Apply chance for unsuccessful harvest.
-- [ ] Apply chance for double harvest.
-- [ ] Apply chance for instant growth.
-- [ ] Apply chance to behead player on death.
-- [ ] Apply sword proficiency damage bonus/debuff.
+- [x] Apply chance for unsuccessful harvest.
+- [x] Apply chance for double harvest.
+- [x] Apply chance for instant growth.
+- [x] Apply chance to behead player on death.
+- [x] Apply sword proficiency damage bonus/debuff.
 - [ ] Apply bow proficiency damage bonus/debuff.
 - [ ] Apply crossbow proficiency damage bonus/debuff.
 - [x] Display proficiency level as player experience level.
-- [ ] Restrict food intake to maximum for proficiency.
+- [x] Restrict food intake to maximum for proficiency.
 
 ### [Skills]
 
 - [ ] (Cant use without NMS) Prevent player from displaying nametag.
-- [ ] Apply feather falling to boots for builders.
-- [ ] Apply quick charge to crossbow for hunters.
-- [ ] Apply efficiency pickaxe to miners.
+- [x] Apply feather falling to boots for builders.
+- [x] Apply quick charge to crossbow for hunters.
+- [x] Apply efficiency pickaxe to miners.
 - [ ] Apply efficiency shovel to miners.
-- [ ] Apply efficiency axe to woodcutters.
-- [ ] Apply chance for double ore drop for miners.
-- [ ] Apply chance for double wood drop for woodcutters.
+- [x] Apply efficiency axe to woodcutters.
+- [x] Apply chance for double ore drop for miners.
+- [x] Apply chance for double wood drop for woodcutters.
 - [ ] Apply chance for double feather drop for hunters.
 - [ ] Apply chance for no anvil damage for blacksmiths.
-- [ ] Apply chance to not consume the block for builders.
+- [x] Apply chance to not consume the block for builders.
 - [ ] Check if player can ignite oil on bow.
 - [ ] Check if player can harvest oil from sources.
 - [ ] Check if player can harvest grass?
-- [ ] Chekc if player can craft saddles.
-- [ ] Check if player can tame animals.
+- [ ] Check if player can craft saddles.
+- [x] Check if player can tame animals.
 - [ ] Check if player can use sweeping edge?
 - [ ] Check if player can extract bones from sources.
-- [ ] Check if player can break beehives.
+- [x] Check if player can break beehives.
 - [ ] Check if player can craft gunpowder.
 - [ ] Check if player can apply unbreaking.
 - [ ] Check if player can make high tier armor.
@@ -52,9 +52,9 @@ To be considered as a release, the following requirements must be met:
 
 ## [HistoriaPlayer]
 
-- [ ] Get experience increase for successful proficiency action.
-- [ ] Check level up condition and apply level up.
-- [ ] Calculate dealth pentalty to experience and level down where necessary.
+- [x] Get experience increase for successful proficiency action.
+- [x] Check level up condition and apply level up.
+- [x] Calculate dealth pentalty to experience and level down where necessary.
 - [ ] Calculate ambient temperature.
 - [ ] Calculate armor weight and temperature.
 - [ ] Check exhaustion condition and apply debuffs.
