@@ -1,4 +1,4 @@
-package dev.boooiil.historia.sql.mysql;
+package dev.boooiil.historia.database.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

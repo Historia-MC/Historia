@@ -1,4 +1,4 @@
-package dev.boooiil.historia.sql.mysql;
+package dev.boooiil.historia.database.mysql;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -204,6 +204,38 @@ public class MySQLHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+
+    /**
+     * Set the current experience for the given user.
+     * 
+     * @param uuid       - UUID of the player.
+     * @param experience - Provided experience of the player.
+     */
+
+    public static void setCurrentExperience(UUID uuid, double experience) {
+
+        try {
+
+            String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
+
+            Statement statement = connection.createStatement();
+            statement.execute(string);
+
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            MySQLConnection.reconnectOnStale();
+            setCurrentExperience(uuid, experience);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO CREATE USER.");
+        }
+
 
     }
 
