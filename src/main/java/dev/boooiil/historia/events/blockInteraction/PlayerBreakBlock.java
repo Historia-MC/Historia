@@ -1,15 +1,15 @@
-package dev.boooiil.historia.events.breaking;
+package dev.boooiil.historia.events.blockInteraction;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Ageable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.classes.items.generic.OreDrop;
-import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.handlers.blockInteraction.BlockHandler;
+import dev.boooiil.historia.handlers.blockInteraction.CropHandler;
 import dev.boooiil.historia.util.PlayerStorage;
 
 /**
@@ -18,8 +18,6 @@ import dev.boooiil.historia.util.PlayerStorage;
  * drops the item that the ore is supposed to drop.
  */
 public class PlayerBreakBlock implements Listener {
-
-    OreConfig oreConfig = Config.getOreConfig();
 
     // It's a method that listens for a player to break a block, and if the block is
     // a valid ore, it
@@ -30,19 +28,20 @@ public class PlayerBreakBlock implements Listener {
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
         Block block = event.getBlock();
-        Material material = block.getType();
 
-        if (oreConfig.isValidOre(material.toString())) {
+        if (block.getBlockData() instanceof Ageable) {
 
-            OreDrop drop = oreConfig.getDropFromChance(material.toString(), historiaPlayer.getProficiency().getName());
+            CropHandler cropHandler = new CropHandler(event, historiaPlayer);
 
-            if (drop != null) {
+            cropHandler.doBreak();
 
-                event.setCancelled(true);
-                block.getWorld().dropItemNaturally(block.getLocation(), drop.getItemStack());
-                block.setType(Material.AIR);
+        }
 
-            }
+        else {
+
+            BlockHandler blockHandler = new BlockHandler(event, historiaPlayer);
+
+            blockHandler.doBreak();
 
         }
 
