@@ -575,6 +575,7 @@ public class HistoriaPlayer extends BasePlayer {
     
 
     }
+    
     public void save() {
 
         MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
