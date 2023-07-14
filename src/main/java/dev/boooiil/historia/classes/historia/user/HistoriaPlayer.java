@@ -15,10 +15,11 @@ import org.bukkit.inventory.PlayerInventory;
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.sql.mysql.MySQLHandler;
+import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
 //TODO: Add a method to check the player's armor level and attack level.
+//TODO: Add methods to track xp gain and loss.
 
 /**
  * It's a class that holds all the information about a player
@@ -42,7 +43,7 @@ public class HistoriaPlayer extends BasePlayer {
     private double maxTemperature;
 
     private double currentExperience;
-    private double experienceMax;
+    private double maxExperience;
 
     private Proficiency proficiency;
 
@@ -87,7 +88,7 @@ public class HistoriaPlayer extends BasePlayer {
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
-        this.experienceMax = Math.pow(this.level, 1.68);
+        this.maxExperience = Math.pow(this.level, 1.68);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
         this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT.getKey()));
@@ -101,6 +102,30 @@ public class HistoriaPlayer extends BasePlayer {
 
         // TODO: Calculate experience gain
 
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setLastLogin(long lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setLastLogout(long lastLogout) {
+        this.lastLogout = lastLogout;
+    }
+
+    public void setModifiedHealth(float modifiedHealth) {
+        this.modifiedHealth = modifiedHealth;
+    }
+
+    public void setCurrentExperience(double currentExperience) {
+        this.currentExperience = currentExperience;
+    }
+
+    public void setMaxExperience(double experienceMax) {
+        this.maxExperience = experienceMax;
     }
 
     /**
@@ -169,7 +194,7 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @return {@link Float} The class' current experience.
      */
-    public double getTotalExperience() {
+    public double getCurrentExperience() {
 
         return this.currentExperience;
 
@@ -182,7 +207,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getMaxExperience() {
 
-        return this.experienceMax;
+        return this.maxExperience;
 
     }
 
@@ -297,7 +322,7 @@ public class HistoriaPlayer extends BasePlayer {
         string += this.lastLogin + " LO:";
         string += this.lastLogout + " BE:";
         string += this.currentExperience + " EM:";
-        string += this.experienceMax + ">";
+        string += this.maxExperience + ">";
 
         return string;
 
@@ -510,4 +535,52 @@ public class HistoriaPlayer extends BasePlayer {
         return found;
 
     }
+
+    /**
+     * Get the player's current experience.
+     * 
+     * @return {@link Double}
+     */
+    public void increaseExperience() {
+
+        if ((getCurrentExperience()) + 1 >= getMaxExperience()) {
+
+            setLevel(getLevel() + 1);
+            setCurrentExperience(0);
+            setMaxExperience(Math.pow(getLevel(), 1.68));
+            save();
+
+        } else {
+
+            setCurrentExperience(getCurrentExperience() + 1);
+
+        }
+    
+    }
+
+    public void decreaseExperience() {
+
+        if ((getCurrentExperience()) - 2 <= 0) {
+
+            setLevel(getLevel() - 1);
+            setCurrentExperience(getMaxExperience() - 1);
+            setMaxExperience(Math.pow(getLevel(), 1.68));
+            save();
+
+        } else {
+
+            setCurrentExperience(getCurrentExperience() - 1);
+
+        }
+    
+
+    }
+    public void save() {
+
+        MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
+        MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
+        MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+
+    }
+
 }
