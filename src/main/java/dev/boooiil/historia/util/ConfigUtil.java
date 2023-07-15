@@ -24,6 +24,9 @@ public class ConfigUtil {
         configFileNames.add("ingots.yml");
         configFileNames.add("ores.yml");
         configFileNames.add("weapons.yml");
+        configFileNames.add("customitems.yml");
+        configFileNames.add("crops.yml");
+
         
     }
 
