@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.Config;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.NumberUtils;
 
 /**
  * It's a class that represents a weapon in the game.
@@ -59,6 +60,7 @@ public class Weapon extends CraftedItem {
 
             this.weightClass = configuration.getString(root + ".type");
             this.damageRange = configuration.getDoubleList(root + ".damage");
+            this.speedRange = configuration.getDoubleList(root + ".speed");
             this.knockbackRange = configuration.getDoubleList(root + ".knockback");
             this.sweepRange = configuration.getDoubleList(root + ".sweeping");
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
@@ -255,9 +257,7 @@ public class Weapon extends CraftedItem {
      */
     public Integer getRandomDurabilityValue() {
 
-        Random random = new Random();
-        Integer result = random.nextInt() * (getMinDurabilityValue() - getMaxDurabilityValue())
-                + getMinDurabilityValue();
+        Integer result = (int) NumberUtils.random(getMinDurabilityValue(), getMaxDurabilityValue());
 
         return result;
 
