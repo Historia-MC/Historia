@@ -67,7 +67,6 @@ public class Weapon extends CraftedItem {
             itemStack = new ItemStack(Material.AIR);
         }
     }
-
     
     public void updateWeaponStats(List<String> lore) {
 
@@ -83,25 +82,42 @@ public class Weapon extends CraftedItem {
     public List<Double> getDamageRange() {
         return damageRange;
     }
+    
+    /**
+     * This function returns the first element of the damageRange ArrayList
+     * 
+     * @return The first element of the damageRange array.
+     */
+    public Double getMinDamageValue() {
 
-    public double getDamage() {
-        return damage;
+        return this.damageRange.get(0);
+
     }
 
-    public double getSpeed() {
-        return speed;
+    /**
+     * It returns the maximum damage value of the damage range
+     * 
+     * @return The second value in the damageRange array.
+     */
+    public Double getMaxDamageValue() {
+
+        return this.damageRange.get(1);
+
     }
 
-    public double getKnockback() {
-        return knockback;
-    }
+    /**
+     * It returns a random integer between the minimum and maximum damage values
+     * 
+     * @return A random number between the min and max damage values.
+     */
+    public double getDamageRandomValue() {
 
-    public double getSweep() {
-        return sweep;
-    }
+        Random random = new Random();
+        double result = random.nextDouble() * (getMinDamageValue() - getMaxDamageValue())
+                + getMaxDamageValue();
 
-    public int getDurability() {
-        return durability;
+        return result;
+
     }
 
     /**
@@ -113,6 +129,29 @@ public class Weapon extends CraftedItem {
         return speedRange;
     }
 
+    public double getMinSpeedValue() {
+        return speedRange.get(0);
+    }
+
+    public double getMaxSpeedValue() {
+        return speedRange.get(1);
+    }
+
+    /**
+     * It returns a random integer between the minimum and maximum durability values
+     * 
+     * @return A random number between the min and max durability values.
+     */
+    public double getSpeedRandomValue() {
+
+        Random random = new Random();
+        double result = random.nextDouble() * (getMinSpeedValue() - getMaxSpeedValue())
+                + getMaxSpeedValue();
+
+        return result;
+
+    }
+
     /**
      * It returns a list of doubles
      * 
@@ -120,6 +159,29 @@ public class Weapon extends CraftedItem {
      */
     public List<Double> getKnockbackRange() {
         return knockbackRange;
+    }
+
+    public double getMinKnockbackValue() {
+        return knockbackRange.get(0);
+    }
+
+    public double getMaxKnockbackValue() {
+        return knockbackRange.get(1);
+    }
+
+    /**
+     * It returns a random integer between the minimum and maximum durability values
+     * 
+     * @return A random number between the min and max durability values.
+     */
+    public double getKnockbackRandomValue() {
+
+        Random random = new Random();
+        double result = random.nextDouble() * (getMinKnockbackValue() - getMaxKnockbackValue())
+                + getMaxKnockbackValue();
+
+        return result;
+
     }
 
     /**
@@ -131,6 +193,29 @@ public class Weapon extends CraftedItem {
         return sweepRange;
     }
 
+    public double getMinSweepValue() {
+        return sweepRange.get(0);
+    }
+
+    public double getMaxSweepValue() {
+        return sweepRange.get(1);
+    }
+
+    /**
+     * It returns a random integer between the minimum and maximum durability values
+     * 
+     * @return A random number between the min and max durability values.
+     */
+    public double getSweepRandomValue() {
+
+        Random random = new Random();
+        double result = random.nextDouble() * (getMinSweepValue() - getMaxSweepValue())
+                + getMaxSweepValue();
+
+        return result;
+
+    }
+
     /**
      * This function returns a list of integers that represent the durability range
      * of the item
@@ -139,6 +224,43 @@ public class Weapon extends CraftedItem {
      */
     public List<Integer> getDurabilityRange() {
         return durabilityRange;
+    }
+    
+    /**
+     * This function returns the first value in the durabilityRange array
+     * 
+     * @return The first value in the durabilityRange array.
+     */
+    public Integer getMinDurabilityValue() {
+
+        return this.durabilityRange.get(0);
+
+    }
+
+    /**
+     * This function returns the maximum durability value of the item
+     * 
+     * @return The second value in the durabilityRange array.
+     */
+    public Integer getMaxDurabilityValue() {
+
+        return this.durabilityRange.get(1);
+
+    }
+
+    /**
+     * It returns a random integer between the minimum and maximum durability values
+     * 
+     * @return A random number between the min and max durability values.
+     */
+    public Integer getRandomDurabilityValue() {
+
+        Random random = new Random();
+        Integer result = random.nextInt() * (getMinDurabilityValue() - getMaxDurabilityValue())
+                + getMinDurabilityValue();
+
+        return result;
+
     }
 
     /**
@@ -163,81 +285,28 @@ public class Weapon extends CraftedItem {
 
     }
 
-    /**
-     * This function returns a random double value between the minimum and maximum
-     * damage values
-     * 
-     * @return A random double value between the min and max damage values.
-     */
-    public Double getRandomDefenseValue() {
-
-        Random random = new Random();
-        Double result = random.nextDouble() * (getMinDamageValue() - getMaxDamageValue()) + getMinDamageValue();
-
-        return result;
-
-    }
-
-    /**
-     * It returns a random integer between the minimum and maximum durability values
-     * 
-     * @return A random number between the min and max durability values.
-     */
-    public Integer getRandomDurabilityValue() {
-
-        Random random = new Random();
-        Integer result = random.nextInt() * (getMinDurabilityValue() - getMaxDurabilityValue())
-                + getMinDurabilityValue();
-
-        return result;
-
-    }
-
-    /**
-     * This function returns the first element of the damageRange ArrayList
-     * 
-     * @return The first element of the damageRange array.
-     */
-    public Double getMinDamageValue() {
-
-        return this.damageRange.get(0);
-
-    }
-
-    /**
-     * It returns the maximum damage value of the damage range
-     * 
-     * @return The second value in the damageRange array.
-     */
-    public Double getMaxDamageValue() {
-
-        return this.damageRange.get(1);
-
-    }
-
-    /**
-     * This function returns the first value in the durabilityRange array
-     * 
-     * @return The first value in the durabilityRange array.
-     */
-    public Integer getMinDurabilityValue() {
-
-        return this.durabilityRange.get(0);
-
-    }
-
-    /**
-     * This function returns the maximum durability value of the item
-     * 
-     * @return The second value in the durabilityRange array.
-     */
-    public Integer getMaxDurabilityValue() {
-
-        return this.durabilityRange.get(1);
-
-    }
-
     public ItemStack getItemStack() {
         return itemStack;
     }
+
+    public double getDamage() {
+        return damage;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getKnockback() {
+        return knockback;
+    }
+
+    public double getSweep() {
+        return sweep;
+    }
+
+    public int getDurability() {
+        return durability;
+    }
+    
 }
