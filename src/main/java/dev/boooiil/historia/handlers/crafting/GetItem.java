@@ -27,11 +27,11 @@ public class GetItem {
             int need = materials.size();
             int matched = 0;
 
-            Logging.debugToConsole("[getItemBasedOnIngot] Item: " + item.getItemStack().getType());
-            Logging.debugToConsole("[getItemBasedOnIngot] Item Name: " + item.getItemStack().getItemMeta().getLocalizedName());
-            Logging.debugToConsole("[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
-            Logging.debugToConsole("[getItemBasedOnIngot] Recipe Item Size: " + item.getRecipeItems().size());
-            Logging.debugToConsole("[getItemBasedOnIngot] Materials Size: " + materials.size());
+            // Logging.debugToConsole("[getItemBasedOnIngot] Item: " + item.getItemStack().getType());
+            // Logging.debugToConsole("[getItemBasedOnIngot] Item Name: " + item.getItemStack().getItemMeta().getLocalizedName());
+            // Logging.debugToConsole("[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
+            // Logging.debugToConsole("[getItemBasedOnIngot] Recipe Item Size: " + item.getRecipeItems().size());
+            // Logging.debugToConsole("[getItemBasedOnIngot] Materials Size: " + materials.size());
 
             if (materials.size() == item.getRecipeItems().size()) {
 
