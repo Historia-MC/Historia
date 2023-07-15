@@ -9,8 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import dev.boooiil.historia.handlers.crafting.ArmorAndWeaponManager;
 import dev.boooiil.historia.handlers.crafting.CraftingCustomItemManager;
 import dev.boooiil.historia.handlers.crafting.TableInspector;
+import dev.boooiil.historia.util.Logging;
 
-public class PlayerCraft implements Listener {
+public class PlayerCraftingPepare implements Listener {
 
     @EventHandler
     public void onCraftItem(PrepareItemCraftEvent event) {
@@ -22,10 +23,17 @@ public class PlayerCraft implements Listener {
         ArmorAndWeaponManager ccm = new ArmorAndWeaponManager(inspector);
         CraftingCustomItemManager ccim = new CraftingCustomItemManager(inspector);
 
+        
+
 
         if (ccm.getResult() != null) resultItem = ccm.getResult();
         else if (ccim.getResult() != null) resultItem = ccim.getResult();
-        else resultItem = event.getRecipe().getResult();
+        else if (event.getRecipe() != null) resultItem = event.getRecipe().getResult();
+        else resultItem = null;
+
+        if (resultItem != null) Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
+        else Logging.debugToConsole("Result: null");
+
 
 
         event.getInventory().setResult(resultItem);
