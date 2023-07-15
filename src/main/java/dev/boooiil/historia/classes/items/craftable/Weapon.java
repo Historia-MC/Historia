@@ -237,4 +237,7 @@ public class Weapon extends CraftedItem {
 
     }
 
+    public ItemStack getItemStack() {
+        return itemStack;
+    }
 }
