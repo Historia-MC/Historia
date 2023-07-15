@@ -4,8 +4,6 @@
 To be considered as a release, the following requirements must be met:
 ```
 
-# It is imperative that we create an item.yml for custom items so that I don't have to hardcode them into the plugin.
-
 ## [Proficiency]
 
 ### [Stats]
