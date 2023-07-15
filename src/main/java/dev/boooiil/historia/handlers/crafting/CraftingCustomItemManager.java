@@ -11,6 +11,7 @@ import dev.boooiil.historia.configuration.Config;
 public class CraftingCustomItemManager {
 
     ItemStack result;
+    CraftedItem customItem;
 
     public CraftingCustomItemManager(TableInspector inspector) {
 
@@ -27,7 +28,10 @@ public class CraftingCustomItemManager {
 
         if (matchingItems.size() > 0) {
 
-            result = new GetItem(matchingItems, materials).getItem();
+            GetItem getItem = new GetItem(matchingItems, materials);
+
+            result = getItem.getItem();
+            customItem = getItem.getCraftedItem();
 
         }
 
@@ -35,6 +39,10 @@ public class CraftingCustomItemManager {
 
     public ItemStack getResult() {
         return result;
+    }
+
+    public CraftedItem getCustomItem() {
+        return customItem;
     }
 
 }
