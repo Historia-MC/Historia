@@ -11,7 +11,7 @@ import dev.boooiil.historia.handlers.crafting.CraftingCustomItemManager;
 import dev.boooiil.historia.handlers.crafting.TableInspector;
 import dev.boooiil.historia.util.Logging;
 
-public class PlayerCraftingPepare implements Listener {
+public class PlayerCraftingPrepare implements Listener {
 
     @EventHandler
     public void onCraftItem(PrepareItemCraftEvent event) {
