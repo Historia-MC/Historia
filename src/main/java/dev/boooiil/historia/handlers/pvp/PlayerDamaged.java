@@ -80,7 +80,7 @@ public class PlayerDamaged {
             return;
         }
 
-        float evasionRoll = Math.round(Math.random() * 100) / 100;
+        double evasionRoll = (double) Math.round(Math.random() * 100) / 100;
 
         if (evasionRoll < historiaDefender.getProficiency().getStats().getBaseEvasion()) {
 

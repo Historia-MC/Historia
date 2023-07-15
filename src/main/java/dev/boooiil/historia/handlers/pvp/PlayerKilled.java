@@ -34,7 +34,7 @@ public class PlayerKilled {
         if (validBeheadWeapon) {
 
             double beheadChance = historiaPlayer.getProficiency().getStats().getBeheadChance();
-            double beheadRoll = Math.round(Math.random() * 100) / 100;
+            double beheadRoll = (double) Math.round(Math.random() * 100) / 100;
 
             if (beheadRoll <= beheadChance) {
 
