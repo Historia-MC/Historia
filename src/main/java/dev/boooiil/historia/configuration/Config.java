@@ -91,9 +91,9 @@ public class Config {
         weaponConfig.loadConfiguration("weapons.yml");
         customItemConfig.loadConfiguration("customitems.yml");
         cropConfig.loadConfiguration("crops.yml");
-
+        
     }
-
+    
     /**
      * It's a function that reloads the config file
      */
