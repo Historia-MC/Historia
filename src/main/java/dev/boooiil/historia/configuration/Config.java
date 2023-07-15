@@ -1,5 +1,13 @@
 package dev.boooiil.historia.configuration;
 
+import dev.boooiil.historia.configuration.specific.ArmorConfig;
+import dev.boooiil.historia.configuration.specific.CropConfig;
+import dev.boooiil.historia.configuration.specific.CustomItemConfig;
+import dev.boooiil.historia.configuration.specific.GeneralConfig;
+import dev.boooiil.historia.configuration.specific.IngotConfig;
+import dev.boooiil.historia.configuration.specific.OreConfig;
+import dev.boooiil.historia.configuration.specific.WeaponConfig;
+
 /**
  * It loads the configuration files.
  */
@@ -10,6 +18,8 @@ public class Config {
     private static OreConfig oreConfig = new OreConfig();
     private static WeaponConfig weaponConfig = new WeaponConfig();
     private static GeneralConfig generalConfig = new GeneralConfig();
+    private static CustomItemConfig customItemConfig = new CustomItemConfig();
+    private static CropConfig cropConfig = new CropConfig();
 
     /**
      * It returns the armorConfig variable
@@ -57,6 +67,20 @@ public class Config {
     }
 
     /**
+     * It returns the customItemConfig variable
+     * 
+     * @return The customItemConfig variable.
+     */
+    public static CustomItemConfig getCustomItemConfig() {
+        return customItemConfig;
+    }
+
+    public static CropConfig getCropConfig() {
+
+        return cropConfig;
+    }
+
+    /**
      * It loads the configuration files
      */
     public static void init() {
@@ -65,6 +89,8 @@ public class Config {
         ingotConfig.loadConfiguration("ingots.yml");
         oreConfig.loadConfiguration("ores.yml");
         weaponConfig.loadConfiguration("weapons.yml");
+        customItemConfig.loadConfiguration("customitems.yml");
+        cropConfig.loadConfiguration("crops.yml");
 
     }
 
