@@ -115,11 +115,11 @@ public class ArmorConfig extends Configuration<Armor> {
 
         for(Armor armor : map.values()) {
 
-            Logging.debugToConsole("--- ARMOR EQUALITY ---");
-            Logging.debugToConsole("A-ISHAPE:", shape.toString());
-            Logging.debugToConsole("A-RSHAPE:", armor.getRecipeShape().toString());
-            Logging.debugToConsole("A-MATCH: " + shape.equals(armor.getRecipeShape()));
-            Logging.debugToConsole("--- -------------- ---");
+            // Logging.debugToConsole("--- ARMOR EQUALITY ---");
+            // Logging.debugToConsole("A-ISHAPE:", shape.toString());
+            // Logging.debugToConsole("A-RSHAPE:", armor.getRecipeShape().toString());
+            // Logging.debugToConsole("A-MATCH: " + shape.equals(armor.getRecipeShape()));
+            // Logging.debugToConsole("--- -------------- ---");
 
             if (armor.getRecipeShape().equals(shape)) {
 

@@ -123,11 +123,11 @@ public class WeaponConfig extends Configuration<Weapon> {
         
         for(Weapon weapon : map.values()) {
 
-            Logging.debugToConsole("--- WEAPON EQUALITY ---");
-            Logging.debugToConsole("W-ISHAPE:", shape.toString());
-            Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
-            Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
-            Logging.debugToConsole("--- --------------- ---");
+            // Logging.debugToConsole("--- WEAPON EQUALITY ---");
+            // Logging.debugToConsole("W-ISHAPE:", shape.toString());
+            // Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
+            // Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
+            // Logging.debugToConsole("--- --------------- ---");
 
             if (weapon.getRecipeShape().equals(shape)) {
 

@@ -133,11 +133,11 @@ public class CustomItemConfig extends Configuration<CustomItem> {
 
         for(CustomItem customItem : map.values()) {
 
-            Logging.debugToConsole("--- ARMOR EQUALITY ---");
-            Logging.debugToConsole("A-ISHAPE:", materials.toString());
-            Logging.debugToConsole("A-RSHAPE:", customItem.getRecipeShape().toString());
-            Logging.debugToConsole("A-MATCH: " + customItem.getRecipeItems().containsAll(materials));
-            Logging.debugToConsole("--- -------------- ---");
+            // Logging.debugToConsole("--- ARMOR EQUALITY ---");
+            // Logging.debugToConsole("A-ISHAPE:", materials.toString());
+            // Logging.debugToConsole("A-RSHAPE:", customItem.getRecipeShape().toString());
+            // Logging.debugToConsole("A-MATCH: " + customItem.getRecipeItems().containsAll(materials));
+            // Logging.debugToConsole("--- -------------- ---");
 
             if (customItem.getRecipeItems().containsAll(materials)) {
 
