@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Logging;
 
 public class BlockHandler extends BaseBlockHandler {

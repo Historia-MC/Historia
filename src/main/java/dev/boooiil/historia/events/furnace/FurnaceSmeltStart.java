@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.FurnaceStartSmeltEvent;
 
 import dev.boooiil.historia.classes.items.generic.Ingot;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.IngotConfig;
+import dev.boooiil.historia.configuration.specific.IngotConfig;
 
 /**
  * This class is used to set the smelt time of an ingot when it is placed in a

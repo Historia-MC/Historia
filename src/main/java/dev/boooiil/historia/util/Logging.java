@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.configuration.GeneralConfig;
 import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.configuration.specific.GeneralConfig;
 
 /**
  * It's a class that sends messages to the console, server, or a player

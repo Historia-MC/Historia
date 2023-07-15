@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import dev.boooiil.historia.HistoriaPlugin;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.GeneralConfig;
+import dev.boooiil.historia.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.util.Logging;
 
 public class MySQLConnection {

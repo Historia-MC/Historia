@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.FurnaceSmeltEvent;
 
 import dev.boooiil.historia.classes.items.generic.Ingot;
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.IngotConfig;
+import dev.boooiil.historia.configuration.specific.IngotConfig;
 
 /**
  * I'm trying to get the FurnaceSmeltEvent to fire when a player smelts an item
