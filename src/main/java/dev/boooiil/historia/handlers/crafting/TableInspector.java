@@ -10,8 +10,11 @@ public class TableInspector {
     
     private ArrayList<String> pattern = new ArrayList<>();
     private ArrayList<String> materials = new ArrayList<>();
+    private ArrayList<String> fullMaterials = new ArrayList<>();
 
     public TableInspector(ItemStack[] craftingTableInventory) {
+
+        Logging.debugToConsole("[CCIM] Table Size: " + craftingTableInventory.length);
 
         String[] options = { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
 
@@ -19,16 +22,43 @@ public class TableInspector {
         String second = "";
         String third = "";
 
-        for (int i = 0; i < craftingTableInventory.length; i++) {
+        // result is now in slot 0
+        // so matlab rules apply on this array
+        for (int i = 1; i < craftingTableInventory.length; i++) {
 
-            if (i >= 0 && i <= 2) {
+            Logging.debugToConsole("[CCIM] Item: (" + i + ") " + craftingTableInventory[i]);
 
-                if (craftingTableInventory[i] == null)
-                    first += " ";
+            boolean invalidItem = (craftingTableInventory[i] == null || craftingTableInventory[i].getItemMeta() == null);
 
-                else if (materials.contains(craftingTableInventory[i].getType().toString())) {
+            if (!invalidItem) {
 
-                    first += options[materials.indexOf(craftingTableInventory[i].getType().toString())];
+                if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
+
+                    fullMaterials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
+
+                }
+
+                else {
+                    
+                    fullMaterials.add(craftingTableInventory[i].getType().toString());
+
+                }
+            }
+
+            if (i >= 1 && i <= 3) {
+
+                if (invalidItem) first += " ";
+
+                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
+
+                    first += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
+
+                }
+
+                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
+
+                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
+                    first += options[materials.size() - 1];
 
                 }
 
@@ -41,14 +71,20 @@ public class TableInspector {
 
             }
 
-            if (i >= 3 && i <= 5) {
+            if (i >= 4 && i <= 6) {
 
-                if (craftingTableInventory[i] == null)
-                    second += " ";
+                if (invalidItem) second += " ";
 
-                else if (materials.contains(craftingTableInventory[i].getType().toString())) {
+                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
 
-                    second += options[materials.indexOf(craftingTableInventory[i].getType().toString())];
+                    second += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
+
+                }
+
+                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
+
+                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
+                    second += options[materials.size() - 1];
 
                 }
 
@@ -61,14 +97,20 @@ public class TableInspector {
 
             }
 
-            if (i >= 6 && i <= 8) {
+            if (i >= 7 && i <= 9) {
 
-                if (craftingTableInventory[i] == null)
-                    third += " ";
+                if (invalidItem) third += " ";
 
-                else if (materials.contains(craftingTableInventory[i].getType().toString())) {
+                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
 
-                    third += options[materials.indexOf(craftingTableInventory[i].getType().toString())];
+                    third += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
+
+                }
+
+                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
+
+                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
+                    third += options[materials.size() - 1];
 
                 }
 
@@ -87,7 +129,6 @@ public class TableInspector {
         pattern.add(second);
         pattern.add(third);
 
-
         Logging.infoToConsole("Pattern: " + pattern.toString());
         Logging.infoToConsole("Materials: " + materials.toString());
 
@@ -99,6 +140,10 @@ public class TableInspector {
 
     public ArrayList<String> getMaterials() {
         return materials;
+    }
+
+    public ArrayList<String> getFullMaterials() {
+        return fullMaterials;
     }
 
 }
