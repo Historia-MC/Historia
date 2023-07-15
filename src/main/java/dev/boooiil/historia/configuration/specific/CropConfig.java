@@ -1,6 +1,7 @@
 package dev.boooiil.historia.configuration.specific;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -12,8 +13,8 @@ import dev.boooiil.historia.util.ConfigUtil;
 public class CropConfig {
 
     private YamlConfiguration configuration;
-    private List<Material> standard;
-    private List<Material> tall;
+    private List<Material> standard = new ArrayList<Material>();
+    private List<Material> tall = new ArrayList<Material>();
 
     /**
      * It loads a YAML file from the plugin's data folder, and then populates a
