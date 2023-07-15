@@ -43,6 +43,11 @@ public class CropHandler extends BaseBlockHandler {
         Float doubleHarvestChance = historiaPlayer.getProficiency().getStats().getDoubleHarvestChance();
         Float harvestChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
 
+        Logging.debugToConsole("Harvest Chance: " + harvestChance);
+        Logging.debugToConsole("Harvest Chance Roll: " + harvestChanceRoll);
+        Logging.debugToConsole("Double Harvest Chance: " + doubleHarvestChance);
+        Logging.debugToConsole(historiaPlayer.toString());
+
         // if the player has failed to harvest the crop
         if (harvestChanceRoll >= harvestChance) {
 
