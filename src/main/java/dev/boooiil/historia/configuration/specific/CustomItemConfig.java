@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Material;
+
 import dev.boooiil.historia.classes.Configuration;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.CustomItem;
@@ -125,5 +127,29 @@ public class CustomItemConfig extends Configuration<CustomItem> {
 
     }
     
+    public List<CraftedItem> getAllMatchingMaterials(List<String> materials) {
+
+        List<CraftedItem> set = new ArrayList<>();
+
+        for(CustomItem customItem : map.values()) {
+
+            Logging.debugToConsole("--- ARMOR EQUALITY ---");
+            Logging.debugToConsole("A-ISHAPE:", materials.toString());
+            Logging.debugToConsole("A-RSHAPE:", customItem.getRecipeShape().toString());
+            Logging.debugToConsole("A-MATCH: " + customItem.getRecipeItems().containsAll(materials));
+            Logging.debugToConsole("--- -------------- ---");
+
+            if (customItem.getRecipeItems().containsAll(materials)) {
+
+                Logging.debugToConsole(customItem.getItemStack().getItemMeta().getAsString());
+
+                set.add(customItem);
+
+            }
+        }
+
+        return set;
+
+    }
 
 }
