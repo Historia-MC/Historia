@@ -11,7 +11,7 @@ public class TableInspector {
     private ArrayList<String> pattern = new ArrayList<>();
     private ArrayList<String> materials = new ArrayList<>();
 
-    TableInspector(ItemStack[] craftingTableInventory) {
+    public TableInspector(ItemStack[] craftingTableInventory) {
 
         String[] options = { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
 
