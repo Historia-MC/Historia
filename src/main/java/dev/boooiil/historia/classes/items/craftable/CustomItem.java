@@ -7,6 +7,7 @@ public class CustomItem extends CraftedItem {
 
     private String itemName;
     private boolean valid;
+    private boolean shapeDependent;
 
     public CustomItem(String itemName) {
 
@@ -31,6 +32,8 @@ public class CustomItem extends CraftedItem {
             // Getting the recipe shape from the config.
             this.recipeShape = configuration.getStringList(itemName + ".recipe-shape");
 
+            this.shapeDependent = configuration.getBoolean(itemName + ".requireShape");
+
 
         }
     }
@@ -44,5 +47,9 @@ public class CustomItem extends CraftedItem {
         
         return this.itemName;
 
+    }
+
+    public boolean isShapeDependent() {
+        return shapeDependent;
     }
 }
