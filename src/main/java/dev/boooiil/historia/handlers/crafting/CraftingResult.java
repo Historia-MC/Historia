@@ -1,7 +1,11 @@
 package dev.boooiil.historia.handlers.crafting;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -12,6 +16,7 @@ import dev.boooiil.historia.classes.items.craftable.Armor;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.util.Logging;
+import dev.boooiil.historia.util.NumberUtils;
 
 public class CraftingResult {
 
@@ -63,13 +68,25 @@ public class CraftingResult {
 
         ItemMeta meta = result.getItemMeta();
         Damageable damageable = (Damageable) meta;
-        List<String> lore = List.of(
-                "Armor - " + rolledArmor,
-                "Class - " + armor.getWeightClass(),
-                "Weight - " + armor.getWeight());
+        AttributeModifier armorModifier = new AttributeModifier(
+                UUID.randomUUID(), "Attack Speed", rolledArmor, AttributeModifier.Operation.ADD_NUMBER,
+                result.getType().getEquipmentSlot());
 
-        damageable.setDamage(rolledDurability);
+        int adjustedDurability = result.getType().getMaxDurability() - rolledDurability;
+
+        List<String> lore = List.of(
+                "",
+                "§7Class - " + armor.getWeightClass(),
+                "",
+                "§7Armor - " + NumberUtils.round((float) rolledArmor, 2),
+                "§7Weight - " + armor.getWeight());
+
+        damageable.setDamage(adjustedDurability);
         meta.setLore(lore);
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, armorModifier);
+
+        Logging.debugToConsole("[generateArmorModifiers] Durability: " + rolledDurability);
+        Logging.debugToConsole("[generateArmorModifiers] Durability: " + adjustedDurability);
 
         result.setItemMeta(meta);
 
@@ -91,14 +108,30 @@ public class CraftingResult {
 
         ItemMeta meta = result.getItemMeta();
         Damageable damageable = (Damageable) meta;
-        List<String> lore = List.of(
-                "Damage - " + rolledDamage,
-                "Attack Speed - " + rolledAttackSpeed,
-                "Knockback - " + rolledKnockback,
-                "Sweeping - " + rolledSweeping);
+        AttributeModifier damageModifier = new AttributeModifier(UUID.randomUUID(), "Damage", rolledDamage,
+                AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
+        AttributeModifier attackSpeedModifier = new AttributeModifier(UUID.randomUUID(), "Attack Speed",
+                rolledAttackSpeed, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND);
 
-        damageable.setDamage(rolledDurability);
+        int adjustedDurability = result.getType().getMaxDurability() - rolledDurability;
+
+        List<String> lore = List.of(
+                "",
+                "§7Class - " + weapon.getWeightClass(),
+                "",
+                "§7Damage - " + NumberUtils.round((float) rolledDamage, 2),
+                "§7Attack Speed - " + NumberUtils.round((float) rolledAttackSpeed, 2),
+                "§7Knockback - " + NumberUtils.round((float) rolledKnockback, 2),
+                "§7Sweeping - " + NumberUtils.round((float) rolledSweeping, 2),
+                "§7Weight - " + weapon.getWeight());
+
+        damageable.setDamage(adjustedDurability);
         meta.setLore(lore);
+        meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, damageModifier);
+        meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED, attackSpeedModifier);
+
+        Logging.debugToConsole("[generateArmorModifiers] Durability: " + rolledDurability);
+        Logging.debugToConsole("[generateArmorModifiers] Adjusted Durability: " + adjustedDurability);
 
         result.setItemMeta(meta);
 
