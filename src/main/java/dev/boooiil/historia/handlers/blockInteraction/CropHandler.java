@@ -240,6 +240,13 @@ public class CropHandler extends BaseBlockHandler {
 
     }
 
+    /**
+     * Gets the height of a crop starting from the given source block.
+     * 
+     * @param source the source block to start from
+     * @param crop the crop material to check for
+     * @return the height of the crop
+     */
     private static int getCropHeight(Block source, Material crop) {
 
         int height = 0;
@@ -269,6 +276,12 @@ public class CropHandler extends BaseBlockHandler {
 
     }
 
+    /**
+     * Destroys a crop from the top down, starting from the given source block and going down to the specified height.
+     * 
+     * @param source the source block to start from
+     * @param height the height to destroy the crop down to
+     */
     private static void destroyCropFromTop(Block source, double height) {
 
         Logging.debugToConsole("[Crop Destroy From Top] Crop Height: " + height);
