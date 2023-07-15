@@ -175,7 +175,7 @@ public class Logging {
     
             }
 
-            infoToConsole(messagePrefix + debugPrefix + built);
+            warnToConsole("[DEBUG] " + built);
 
         }
         
