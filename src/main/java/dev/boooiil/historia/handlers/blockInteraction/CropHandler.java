@@ -1,15 +1,14 @@
 package dev.boooiil.historia.handlers.blockInteraction;
 
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import dev.boooiil.historia.classes.enums.Items;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.specific.CropConfig;
 import dev.boooiil.historia.util.Logging;
 
 /**
@@ -52,6 +51,7 @@ public class CropHandler extends BaseBlockHandler {
 
         // TODO: add farmer XP gain
 
+        CropConfig cropConfig = Config.getCropConfig();
         double harvestChance = historiaPlayer.getProficiency().getStats().getHarvestChance();
         double doubleHarvestChance = historiaPlayer.getProficiency().getStats().getDoubleHarvestChance();
         double harvestChanceRoll = (double) Math.round((Math.random() * 100)) / 100;
@@ -65,7 +65,7 @@ public class CropHandler extends BaseBlockHandler {
 
             breakEvent.setCancelled(true);
 
-            if (Items.getTallCrops().contains(breakEvent.getBlock().getType())) {
+            if (cropConfig.getTall().contains(breakEvent.getBlock().getType())) {
 
                 Logging.debugToConsole("Block broken is a tall crop.");
 
@@ -131,8 +131,7 @@ public class CropHandler extends BaseBlockHandler {
      */
     public static void safetyCheckBlockBrokenHoldsCrop(Block block) {
 
-        List<Material> crops = Items.getCrops();
-        List<Material> tallCrops = Items.getTallCrops();
+        CropConfig cropConfig = Config.getCropConfig();
 
         Block blockAbove = block.getLocation().add(0, 1, 0).getBlock();
 
@@ -141,18 +140,18 @@ public class CropHandler extends BaseBlockHandler {
 
         // check above block so that we can skip the rest of the checks if it's not a
         // crop
-        if (!blockAbove.getType().hasGravity() && !crops.contains(blockAbove.getType()))
+        if (!blockAbove.getType().hasGravity() && !cropConfig.getAll().contains(blockAbove.getType()))
             return;
 
         // so now we know that the block above has gravity or is a crop
 
         // if the block above is a crop
-        if (crops.contains(blockAbove.getType())) {
+        if (cropConfig.getAll().contains(blockAbove.getType())) {
 
             Logging.debugToConsole("[Crop Safety] Block Above Is Crop");
 
             // if it's a tall crop, check the blocks above it and set them to air
-            if (tallCrops.contains(blockAbove.getType())) {
+            if (cropConfig.getTall().contains(blockAbove.getType())) {
 
                 Logging.debugToConsole("[Crop Safety] Block Above Is Tall Crop");
 
@@ -178,7 +177,7 @@ public class CropHandler extends BaseBlockHandler {
 
             Block gravityHoldsCrop = checkGravityBlockTrailBreaksCrop(blockAbove);
 
-            Logging.debugToConsole("[Crop Safety] Gravity Holds Crop: " + gravityHoldsCrop.getType());
+            Logging.debugToConsole("[Crop Safety] Gravity Holds Crop: " + (gravityHoldsCrop != null));
 
             if (gravityHoldsCrop != null) {
 
@@ -203,6 +202,7 @@ public class CropHandler extends BaseBlockHandler {
      */
     private static Block checkGravityBlockTrailBreaksCrop(Block source) {
 
+        CropConfig cropConfig = Config.getCropConfig();
         Block gravityBlock = null;
 
         // check world height for block so since players can just keep placing the block
@@ -221,7 +221,7 @@ public class CropHandler extends BaseBlockHandler {
                 Logging.debugToConsole("[Crop Gravity] Gravity Block (" + newBlock.getType() + ") Found");
 
             }
-            else if (Items.getCrops().contains(newBlock.getType())) {
+            else if (cropConfig.getAll().contains(newBlock.getType())) {
 
                 Logging.debugToConsole("[Crop Gravity] Gravity Block (" + newBlock.getType() + ") Breaks Crop");
 
