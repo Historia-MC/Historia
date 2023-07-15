@@ -224,6 +224,9 @@
           <include>expiry.yml</include>
           <include>ingots.yml</include>
           <include>ores.yml</include>
+          <include>crops.yml</include>
+          <include>customitems.yml</include>
+
           <include>weapons.yml</include>
         </includes>
       </resource>
