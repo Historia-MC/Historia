@@ -39,9 +39,9 @@ public class CropHandler extends BaseBlockHandler {
 
         //TODO: add farmer XP gain
 
-        Float harvestChance = historiaPlayer.getProficiency().getStats().getHarvestChance();
-        Float doubleHarvestChance = historiaPlayer.getProficiency().getStats().getDoubleHarvestChance();
-        Float harvestChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
+        double harvestChance = historiaPlayer.getProficiency().getStats().getHarvestChance();
+        double doubleHarvestChance = historiaPlayer.getProficiency().getStats().getDoubleHarvestChance();
+        double harvestChanceRoll = Math.round((Math.random() * 100)) / 100;
 
         Logging.debugToConsole("Harvest Chance: " + harvestChance);
         Logging.debugToConsole("Harvest Chance Roll: " + harvestChanceRoll);
@@ -79,8 +79,8 @@ public class CropHandler extends BaseBlockHandler {
      */
     public void doPlace() {
 
-        Float instantGrowthChance = historiaPlayer.getProficiency().getStats().getInstantGrowthChance();
-        Float harvestChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
+        double instantGrowthChance = historiaPlayer.getProficiency().getStats().getInstantGrowthChance();
+        double harvestChanceRoll = Math.round((Math.random() * 100)) / 100;
 
         if (instantGrowthChance >= harvestChanceRoll) {
 

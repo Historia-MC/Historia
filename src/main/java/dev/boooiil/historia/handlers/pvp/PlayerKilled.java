@@ -33,8 +33,8 @@ public class PlayerKilled {
 
         if (validBeheadWeapon) {
 
-            Float beheadChance = historiaPlayer.getProficiency().getStats().getBeheadChance();
-            Float beheadRoll = (float) Math.round(Math.random() * 100) / 100;
+            double beheadChance = historiaPlayer.getProficiency().getStats().getBeheadChance();
+            double beheadRoll = Math.round(Math.random() * 100) / 100;
 
             if (beheadRoll <= beheadChance) {
 

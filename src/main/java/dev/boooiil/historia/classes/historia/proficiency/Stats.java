@@ -9,19 +9,19 @@ public class Stats {
     private float baseHealth;
     private float maxHealth;
     private int baseFood;
-    private float baseSpeed;
-    private float baseExperienceGain;
+    private double baseSpeed;
+    private double baseExperienceGain;
 
-    private float baseEvasion;
+    private double baseEvasion;
 
-    private float harvestChance;
-    private float doubleHarvestChance;
-    private float instantGrowthChance;
-    private float beheadChance;
+    private double harvestChance;
+    private double doubleHarvestChance;
+    private double instantGrowthChance;
+    private double beheadChance;
 
-    private float baseSwordProficiency;
-    private float baseBowProficiency;
-    private float baseCrossbowProficiency;
+    private double baseSwordProficiency;
+    private double baseBowProficiency;
+    private double baseCrossbowProficiency;
 
     private List<String> weaponProficiency;
     private List<String> armorProficiency;
@@ -32,17 +32,17 @@ public class Stats {
         this.maxHealth = config.getInt(root + ".maxHealth");
         this.baseFood = config.getInt(root + ".baseFood");
 
-        this.baseSpeed = config.getLong(root + ".baseSpeed");
-        this.baseEvasion = config.getLong(root + ".baseEvasion");
-        this.baseSwordProficiency = config.getLong(root + ".baseSwordProficiency");
-        this.baseBowProficiency = config.getLong(root + ".baseBowProficiency");
-        this.baseCrossbowProficiency = config.getLong(root + ".baseCrossbowProficiency");
-        this.baseExperienceGain = config.getLong(root + ".baseExperienceGain");
+        this.baseSpeed = config.getDouble(root + ".baseSpeed");
+        this.baseEvasion = config.getDouble(root + ".baseEvasion");
+        this.baseSwordProficiency = config.getDouble(root + ".baseSwordProficiency");
+        this.baseBowProficiency = config.getDouble(root + ".baseBowProficiency");
+        this.baseCrossbowProficiency = config.getDouble(root + ".baseCrossbowProficiency");
+        this.baseExperienceGain = config.getDouble(root + ".baseExperienceGain");
 
-        this.harvestChance = config.getLong(root + ".harvestChance");
-        this.doubleHarvestChance = config.getLong(root + ".doubleHarvestChance");
-        this.instantGrowthChance = config.getLong(root + ".instantGrowChance");
-        this.beheadChance = config.getLong(root + ".beheadChance");
+        this.harvestChance = config.getDouble(root + ".harvestChance");
+        this.doubleHarvestChance = config.getDouble(root + ".doubleHarvestChance");
+        this.instantGrowthChance = config.getDouble(root + ".instantGrowChance");
+        this.beheadChance = config.getDouble(root + ".beheadChance");
 
         this.weaponProficiency = config.getStringList(root + ".weaponProficiency");
         this.armorProficiency = config.getStringList(root + ".armorProficiency");
@@ -109,7 +109,7 @@ public class Stats {
      * 
      * @return The baseSpeed variable is being returned.
      */
-    public float getBaseSpeed() {
+    public double getBaseSpeed() {
         return baseSpeed;
     }
 
@@ -118,7 +118,7 @@ public class Stats {
      * 
      * @param baseSpeed The speed of the enemy.
      */
-    public void setBaseSpeed(float baseSpeed) {
+    public void setBaseSpeed(double baseSpeed) {
         this.baseSpeed = baseSpeed;
     }
 
@@ -127,7 +127,7 @@ public class Stats {
      * 
      * @return The baseEvasion variable is being returned.
      */
-    public float getBaseEvasion() {
+    public double getBaseEvasion() {
         return baseEvasion;
     }
 
@@ -146,7 +146,7 @@ public class Stats {
      * 
      * @return The harvestChance variable is being returned.
      */
-    public float getHarvestChance() {
+    public double getHarvestChance() {
         return harvestChance;
     }
 
@@ -165,7 +165,7 @@ public class Stats {
      * 
      * @return The doubleHarvestChance variable is being returned.
      */
-    public float getDoubleHarvestChance() {
+    public double getDoubleHarvestChance() {
         return doubleHarvestChance;
     }
 
@@ -184,7 +184,7 @@ public class Stats {
      * 
      * @return The instantGrowthChance variable is being returned.
      */
-    public float getInstantGrowthChance() {
+    public double getInstantGrowthChance() {
         return instantGrowthChance;
     }
 
@@ -204,7 +204,7 @@ public class Stats {
      * 
      * @return The beheadChance variable is being returned.
      */
-    public float getBeheadChance() {
+    public double getBeheadChance() {
         return beheadChance;
     }
 
@@ -223,7 +223,7 @@ public class Stats {
      * 
      * @return The baseSwordProficiency variable is being returned.
      */
-    public float getBaseSwordProficiency() {
+    public double getBaseSwordProficiency() {
         return baseSwordProficiency;
     }
 
@@ -242,7 +242,7 @@ public class Stats {
      * 
      * @return The baseBowProficiency variable is being returned.
      */
-    public float getBaseBowProficiency() {
+    public double getBaseBowProficiency() {
         return baseBowProficiency;
     }
 
@@ -261,7 +261,7 @@ public class Stats {
      * 
      * @return The baseCrossbowProficiency variable is being returned.
      */
-    public float getBaseCrossbowProficiency() {
+    public double getBaseCrossbowProficiency() {
         return baseCrossbowProficiency;
     }
 
@@ -280,7 +280,7 @@ public class Stats {
      * 
      * @return The baseExperienceGain variable is being returned.
      */
-    public float getBaseExperienceGain() {
+    public double getBaseExperienceGain() {
         return baseExperienceGain;
     }
 

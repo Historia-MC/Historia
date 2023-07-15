@@ -33,7 +33,7 @@ public class InitialStatLoader {
 
         }
 
-        player.setWalkSpeed(0.2f * historiaPlayer.getProficiency().getStats().getBaseSpeed());
+        player.setWalkSpeed(0.2f * (float) historiaPlayer.getProficiency().getStats().getBaseSpeed());
 
         player.setLevel(historiaPlayer.getLevel());
         
