@@ -4,8 +4,6 @@
 To be considered as a release, the following requirements must be met:
 ```
 
-# It is imperative that we create an item.yml for custom items so that I don't have to hardcode them into the plugin.
-
 ## [Proficiency]
 
 ### [Stats]
@@ -87,8 +85,8 @@ To be considered as a release, the following requirements must be met:
 
 ### [Other]
 
-- [ ] Apply crafting table pattern match for gunpowder recipe.
-- [ ] Apply crafting table pattern match for oil-tipped arrow recipe.
+- [x] Apply crafting table pattern match for gunpowder recipe.
+- [x] Apply crafting table pattern match for oil-tipped arrow recipe.
 - [ ] Apply crafting table pattern match for salted foods.
 
 ## [MySQL]
@@ -111,7 +109,7 @@ To be considered as a release, the following requirements must be met:
 - [x] Create missing files on disk if not found.
 - [x] Validate resource version files against files on disk.
 - [ ] Apply or overwrite missing values in files on disk.
-- [ ] Create a configuration factory.
+- [x] Create a configuration factory.
 
 ## [Items]
 
@@ -135,10 +133,10 @@ To be considered as a release, the following requirements must be met:
 
 ### [Other]
 
-- [ ] Create object for each item.
-- [ ] Validate if they are limited to a specific pattern.
-- [ ] Preload item objects on init into hashmap.
-- [ ] Getter for item object.
+- [x] Create object for each item.
+- [x] Validate if they are limited to a specific pattern.
+- [x] Preload item objects on init into hashmap.
+- [x] Getter for item object.
 
 ## [Experience]
 
