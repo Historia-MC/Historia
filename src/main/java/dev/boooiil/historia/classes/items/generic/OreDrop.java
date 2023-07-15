@@ -1,7 +1,7 @@
 package dev.boooiil.historia.classes.items.generic;
 
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Construct;
 
 /**

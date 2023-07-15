@@ -8,7 +8,7 @@ import java.util.Set;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
+import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Logging;
 
 /**
