@@ -2,9 +2,9 @@ package dev.boooiil.historia.classes.items.craftable;
 
 import java.util.List;
 
-import dev.boooiil.historia.classes.items.generic.Item;
+import dev.boooiil.historia.classes.items.generic.GenericItem;
 
-public class CraftedItem extends Item {
+public class CraftedItem extends GenericItem {
     
     protected List<String> recipeShape;
     protected List<String> recipeItems;
