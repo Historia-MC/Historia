@@ -14,7 +14,7 @@ import dev.boooiil.historia.util.ConfigUtil;
  * instance of the class for each
  * key in the set and puts it in the map
  */
-public abstract class Configuration<T> {
+public abstract class BaseConfiguration<T> {
 
     protected YamlConfiguration configuration;
     protected Set<String> set;
