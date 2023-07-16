@@ -35,6 +35,7 @@ To be considered as a release, the following requirements must be met:
 - [ ] Apply chance for double feather drop for hunters.
 - [ ] Apply chance for no anvil damage for blacksmiths.
 - [x] Apply chance to not consume the block for builders.
+- [ ] Apply custom fishing loot for fishermen.
 - [ ] Check if player can ignite oil on bow.
 - [ ] Check if player can harvest oil from sources.
 - [ ] Check if player can harvest grass?
@@ -47,6 +48,13 @@ To be considered as a release, the following requirements must be met:
 - [ ] Check if player can apply unbreaking.
 - [ ] Check if player can make high tier armor.
 - [ ] Check if player can generate a knowledge book.
+- [ ] Increase breath underwater for fishermen?
+- [ ] Allow building of tridents for fishermen and farmers.
+- [ ] Allow holding bonemeal for farmers.
+- [ ] Allow for increased yields for farmers based on level.
+- [ ] Allow for greater leather drops for hunters.
+- [ ] Allow for architects to place ladders and scaffolding in other towns.
+- [ ] Allow for apothecaries to apply poison to arrows.
 
 ## [HistoriaPlayer]
 
@@ -146,4 +154,8 @@ To be considered as a release, the following requirements must be met:
 - [ ] Can eat large fish / meat multiple times (?)
 - [ ] Boil water in cauldron to get salt.
 - Possible to use bottles gathered in an ocean biome on a campfire.
-- [ ] Toggle PvP on/off for settlements that have been raided or are attacking after being raided. 
+- [ ] Toggle PvP on/off for settlements that have been raided or are attacking after being raided.
+- [ ] Right click stonecutter to increase sharpness.
+- [ ] Can shear chickens for feathers.
+- [ ] Limited use for sharpness.
+- [ ] Allow dulling of weapons (decrease base stats).
