@@ -1,3 +1,19 @@
+/**
+ * The ConfigurationLoader class loads and provides access to various configuration files for the Historia plugin.
+ * It contains static methods to retrieve instances of specific configuration classes, such as ArmorConfig,
+ * IngotConfig, OreConfig, WeaponConfig, GeneralConfig, CustomItemConfig, and CropConfig. It also provides
+ * methods to initialize and reload the configuration files.
+ * 
+ * The configuration files are loaded from the plugin's resources folder and are in YAML format.
+ * 
+ * @see ArmorConfig
+ * @see IngotConfig
+ * @see OreConfig
+ * @see WeaponConfig
+ * @see GeneralConfig
+ * @see CustomItemConfig
+ * @see CropConfig
+ */
 package dev.boooiil.historia.configuration;
 
 import dev.boooiil.historia.configuration.specific.ArmorConfig;
@@ -11,7 +27,7 @@ import dev.boooiil.historia.configuration.specific.WeaponConfig;
 /**
  * It loads the configuration files.
  */
-public class Config {
+public class ConfigurationLoader {
     
     private static ArmorConfig armorConfig = new ArmorConfig();
     private static IngotConfig ingotConfig = new IngotConfig();
