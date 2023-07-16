@@ -6,10 +6,10 @@ import java.util.Set;
 
 import org.bukkit.Material;
 
-import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.generic.Ore;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.classes.items.generic.OreManager;
+import dev.boooiil.historia.configuration.BaseConfiguration;
 import dev.boooiil.historia.util.Logging;
 
 /**

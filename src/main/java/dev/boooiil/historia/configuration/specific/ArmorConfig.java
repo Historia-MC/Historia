@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.craftable.Armor;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
+import dev.boooiil.historia.configuration.BaseConfiguration;
 import dev.boooiil.historia.util.Logging;
 
 /**
