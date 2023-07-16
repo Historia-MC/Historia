@@ -97,10 +97,12 @@ public class CropHandler extends BaseBlockHandler {
             });
 
             Logging.infoToPlayer("You harvested the crop and doubled the harvest!", historiaPlayer.getUUID());
-
+            
             historiaPlayer.increaseExperience();
 
         }
+
+        historiaPlayer.increaseExperience();
 
     }
 
