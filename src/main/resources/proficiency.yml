@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 None:
 
@@ -258,13 +258,13 @@ Farmer:
     baseHealth: 20
     maxHealth: 35
     baseFood: 20
-    baseSpeed: 1
+    baseSpeed: 1.1
     baseEvasion: 0.03
     baseSwordProficiency: 1.0
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.25
-    harvestChance: 0.6
+    harvestChance: 0.85
     doubleHarvestChance: 0.05
     instantGrowChance: 0.3
     beheadChance: 0.10
