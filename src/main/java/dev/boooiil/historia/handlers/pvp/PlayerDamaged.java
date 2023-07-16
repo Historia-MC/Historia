@@ -1,5 +1,6 @@
 package dev.boooiil.historia.handlers.pvp;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -36,6 +37,8 @@ public class PlayerDamaged {
         }
 
         ItemStack weapon = attacker.getInventory().getItemInMainHand();
+
+        if (weapon.getItemMeta() == null) weapon = new ItemStack(Material.STICK);
 
         // if it is a valid weapon from the config
         if (Config.getWeaponConfig().isValid(weapon.getItemMeta().getLocalizedName())) {
@@ -84,9 +87,9 @@ public class PlayerDamaged {
 
         if (evasionRoll < historiaDefender.getProficiency().getStats().getBaseEvasion()) {
 
-            Logging.infoToPlayer(defender.getCustomName() + " has evaded the attack!",
+            Logging.infoToPlayer(defender.getDisplayName() + " has evaded the attack!",
                     attacker.getUniqueId());
-            Logging.infoToPlayer("You evaded an attack from " + attacker.getCustomName() + "!",
+            Logging.infoToPlayer("You evaded an attack from " + attacker.getDisplayName() + "!",
                     defender.getUniqueId());
 
             event.setCancelled(true);
@@ -96,4 +99,9 @@ public class PlayerDamaged {
 
     }
 
+    public void doEvade() {
+
+
+
+    }
 }
