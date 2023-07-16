@@ -2,6 +2,10 @@ package dev.boooiil.historia.classes.historia.proficiency;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+/**
+ * This class represents the skills of a player in the game. It contains boolean variables that represent
+ * whether or not the player has certain skills or abilities.
+ */
 public class Skills {
 
     private boolean hasNameTag = false;
@@ -29,7 +33,7 @@ public class Skills {
     private boolean canCraftGunpowder = false;
     private boolean canApplyUnbreaking = false;
 
-    private boolean canMakeHighTierArmor = false;
+    private boolean canCraftHighTier = false;
 
     private boolean canMakeKnowledgeBook = false;
     /**
@@ -59,7 +63,7 @@ public class Skills {
         this.canBreakBeehive = config.getBoolean(root + ".breakBeehive");
         this.canCraftGunpowder = config.getBoolean(root + ".craftGunpowder");
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
-        this.canMakeHighTierArmor = config.getBoolean(root + ".makeHighTierArmor");
+        this.canCraftHighTier = config.getBoolean(root + ".makeHighTierArmor");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
         this.specialItems = config.getBoolean(root + ".specialItems");
         
@@ -464,8 +468,8 @@ public class Skills {
      * 
      * @return The boolean value of canMakeHighTierArmor.
      */
-    public boolean canMakeHighTierArmor() {
-        return canMakeHighTierArmor;
+    public boolean canCraftHighTier() {
+        return canCraftHighTier;
     }
 
     /**
@@ -475,7 +479,7 @@ public class Skills {
      * @param canMakeHighTierArmor Whether or not the player can make high tier armor.
      */
     public void setCanMakeHighTierArmor(boolean canMakeHighTierArmor) {
-        this.canMakeHighTierArmor = canMakeHighTierArmor;
+        this.canCraftHighTier = canMakeHighTierArmor;
     }
 
     /**
@@ -542,7 +546,7 @@ public class Skills {
         output += "Can Break Beehive: " + canBreakBeehive + "\n";
         output += "Can Craft Gunpowder: " + canCraftGunpowder + "\n";
         output += "Can Apply Unbreaking: " + canApplyUnbreaking + "\n";
-        output += "Can Make High Tier Armor: " + canMakeHighTierArmor + "\n";
+        output += "Can Make High Tier Armor: " + canCraftHighTier + "\n";
         output += "Can Make Knowledge Book: " + canMakeKnowledgeBook + "\n";
         output += "Special Items: " + specialItems + "\n";
         output += "************** \n";
