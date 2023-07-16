@@ -1,4 +1,4 @@
-package dev.boooiil.historia.classes;
+package dev.boooiil.historia.configuration;
 
 import java.io.File;
 import java.util.HashMap;
