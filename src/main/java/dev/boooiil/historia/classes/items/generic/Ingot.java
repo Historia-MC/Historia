@@ -17,7 +17,7 @@ import dev.boooiil.historia.util.Construct;
  * }
  * </pre>
  */
-public class Ingot extends Item {
+public class Ingot extends GenericItem {
 
     private String progression;
     // private String itemName;

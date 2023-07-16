@@ -7,7 +7,7 @@ import dev.boooiil.historia.util.Construct;
 /**
  * This class should not be initialized outside of {@link OreConfig}.
  */
-public class OreDrop extends Item {
+public class OreDrop extends GenericItem {
 
     private String requiredClass;
 
