@@ -1,12 +1,12 @@
 package dev.boooiil.historia.configuration.specific;
 
-import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.generic.Ingot;
 
 /**
  * It's a configuration class that loads ingots.yml and allows you to get an ingot from it
  */
-public class IngotConfig extends Configuration<Ingot> {
+public class IngotConfig extends BaseConfiguration<Ingot> {
 
     /**
      * Used to create a new instance of Ingot.

@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.handlers.crafting.ArmorAndWeaponManager;
 import dev.boooiil.historia.handlers.crafting.CraftingCustomItemManager;
-import dev.boooiil.historia.handlers.crafting.TableInspector;
+import dev.boooiil.historia.handlers.crafting.CraftingTableInspector;
 import dev.boooiil.historia.util.Logging;
 
 public class PlayerCraftingPrepare implements Listener {
@@ -17,7 +17,7 @@ public class PlayerCraftingPrepare implements Listener {
     public void onCraftItem(PrepareItemCraftEvent event) {
 
         Player player = (Player) event.getViewers().get(0);
-        TableInspector inspector = new TableInspector(event.getInventory().getContents());
+        CraftingTableInspector inspector = new CraftingTableInspector(event.getInventory().getContents());
         ItemStack resultItem;
 
         ArmorAndWeaponManager ccm = new ArmorAndWeaponManager(inspector);

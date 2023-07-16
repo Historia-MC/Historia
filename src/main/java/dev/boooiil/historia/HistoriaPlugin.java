@@ -16,7 +16,7 @@ import dev.boooiil.historia.commands.CommandSet;
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.commands.CommandStats;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
@@ -76,7 +76,7 @@ public class HistoriaPlugin extends JavaPlugin {
         // Save / Load the config in the Historia plugins folder.
         this.saveDefaultConfig();
 
-        Config.init();
+        ConfigurationLoader.init();
 
         registerEvent(new FoodLevelChange());
         registerEvent(new FurnaceSmeltFinish());

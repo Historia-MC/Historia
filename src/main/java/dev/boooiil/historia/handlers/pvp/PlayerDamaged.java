@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
 
@@ -41,9 +41,9 @@ public class PlayerDamaged {
         if (weapon.getItemMeta() == null) weapon = new ItemStack(Material.STICK);
 
         // if it is a valid weapon from the config
-        if (Config.getWeaponConfig().isValid(weapon.getItemMeta().getLocalizedName())) {
+        if (ConfigurationLoader.getWeaponConfig().isValid(weapon.getItemMeta().getLocalizedName())) {
 
-            Weapon historiaWeapon = Config.getWeaponConfig().getObject(weapon.getItemMeta().getLocalizedName());
+            Weapon historiaWeapon = ConfigurationLoader.getWeaponConfig().getObject(weapon.getItemMeta().getLocalizedName());
 
             // if the player is proficient with the weapon
             if (historiaAttacker.getProficiency().getStats().getWeaponProficiency()

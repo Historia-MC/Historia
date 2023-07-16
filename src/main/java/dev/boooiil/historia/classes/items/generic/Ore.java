@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Logging;
 
@@ -16,7 +16,7 @@ import dev.boooiil.historia.util.Logging;
  */
 public class Ore {
 
-    private YamlConfiguration configuration = Config.getOreConfig().getConfiguration();
+    private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
 
     private String name;
     private int chance;

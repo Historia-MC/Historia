@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceStartSmeltEvent;
 
 import dev.boooiil.historia.classes.items.generic.Ingot;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
 
 /**
@@ -14,7 +14,7 @@ import dev.boooiil.historia.configuration.specific.IngotConfig;
  */
 public class FurnaceSmeltStart implements Listener {
 
-    IngotConfig ingotConfig = Config.getIngotConfig();
+    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
 
     // A method that is called when a furnace starts smelting an item.
     @EventHandler

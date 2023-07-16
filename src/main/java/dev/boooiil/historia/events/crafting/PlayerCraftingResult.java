@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.ArmorConfig;
 import dev.boooiil.historia.configuration.specific.CustomItemConfig;
 import dev.boooiil.historia.configuration.specific.WeaponConfig;
@@ -20,9 +20,9 @@ public class PlayerCraftingResult implements Listener {
     public void onCraftResult(CraftItemEvent event) {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId(), false);
-        WeaponConfig weaponConfig = Config.getWeaponConfig();
-        ArmorConfig armorConfig = Config.getArmorConfig();
-        CustomItemConfig customItemConfig = Config.getCustomItemConfig();
+        WeaponConfig weaponConfig = ConfigurationLoader.getWeaponConfig();
+        ArmorConfig armorConfig = ConfigurationLoader.getArmorConfig();
+        CustomItemConfig customItemConfig = ConfigurationLoader.getCustomItemConfig();
         CraftingResult craftingResult;
 
         ItemStack item = event.getClickedInventory().getItem(0);

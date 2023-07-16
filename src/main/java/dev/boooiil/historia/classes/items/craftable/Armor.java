@@ -3,7 +3,7 @@ package dev.boooiil.historia.classes.items.craftable;
 import java.util.List;
 import java.util.Random;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
 /**
@@ -25,9 +25,9 @@ public class Armor extends CraftedItem {
     // Getting the armor's information from the config.
     public Armor(String armorName) {
 
-        configuration = Config.getArmorConfig().getConfiguration();
+        configuration = ConfigurationLoader.getArmorConfig().getConfiguration();
 
-        valid = Config.getArmorConfig().isValid(armorName);
+        valid = ConfigurationLoader.getArmorConfig().isValid(armorName);
 
         if (valid) {
 

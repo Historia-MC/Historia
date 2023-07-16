@@ -6,13 +6,13 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Logging;
 
 public class BlockHandler extends BaseBlockHandler {
 
-    private OreConfig oreConfig = Config.getOreConfig();
+    private OreConfig oreConfig = ConfigurationLoader.getOreConfig();
 
     /**
      * Constructor for BlockHandler class that takes a BlockBreakEvent and a HistoriaPlayer as parameters.

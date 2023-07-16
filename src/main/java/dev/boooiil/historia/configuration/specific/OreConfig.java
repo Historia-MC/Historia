@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.bukkit.Material;
 
-import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.generic.Ore;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.classes.items.generic.OreManager;
@@ -15,7 +15,7 @@ import dev.boooiil.historia.util.Logging;
 /**
  * It's a configuration class that loads a configuration file and stores the data in a HashMap
  */
-public class OreConfig extends Configuration<OreManager> {
+public class OreConfig extends BaseConfiguration<OreManager> {
 
     //private static YamlConfiguration configuration = FileGetter.get("ores.yml");
 

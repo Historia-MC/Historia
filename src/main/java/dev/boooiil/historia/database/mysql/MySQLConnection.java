@@ -5,13 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import dev.boooiil.historia.HistoriaPlugin;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.util.Logging;
 
 public class MySQLConnection {
     
-    private static GeneralConfig MYSQLCONFIG = Config.getGeneralConfig();
+    private static GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.craftable.Armor;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.util.Logging;
@@ -14,7 +14,7 @@ import dev.boooiil.historia.util.Logging;
  * method to get armor based
  * on recipe items and shape.
  */
-public class ArmorConfig extends Configuration<Armor> {
+public class ArmorConfig extends BaseConfiguration<Armor> {
 
     public Armor createNew(String armourName) {
         return new Armor(armourName);

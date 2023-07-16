@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.util.Logging;
@@ -12,7 +12,7 @@ import dev.boooiil.historia.util.Logging;
 /**
  * It's a class that gets information from a configuration file.
  */
-public class WeaponConfig extends Configuration<Weapon> {
+public class WeaponConfig extends BaseConfiguration<Weapon> {
     
     // private static YamlConfiguration configuration = FileGetter.get("ingots.yml");
 

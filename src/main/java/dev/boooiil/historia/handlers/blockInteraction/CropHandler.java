@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.CropConfig;
 import dev.boooiil.historia.util.Logging;
 
@@ -51,7 +51,7 @@ public class CropHandler extends BaseBlockHandler {
 
         // TODO: add farmer XP gain
 
-        CropConfig cropConfig = Config.getCropConfig();
+        CropConfig cropConfig = ConfigurationLoader.getCropConfig();
         double harvestChance = historiaPlayer.getProficiency().getStats().getHarvestChance();
         double doubleHarvestChance = historiaPlayer.getProficiency().getStats().getDoubleHarvestChance();
         double harvestChanceRoll = (double) Math.round((Math.random() * 100)) / 100;
@@ -133,7 +133,7 @@ public class CropHandler extends BaseBlockHandler {
      */
     public static void safetyCheckBlockBrokenHoldsCrop(Block block) {
 
-        CropConfig cropConfig = Config.getCropConfig();
+        CropConfig cropConfig = ConfigurationLoader.getCropConfig();
 
         Block blockAbove = block.getLocation().add(0, 1, 0).getBlock();
 
@@ -204,7 +204,7 @@ public class CropHandler extends BaseBlockHandler {
      */
     private static Block checkGravityBlockTrailBreaksCrop(Block source) {
 
-        CropConfig cropConfig = Config.getCropConfig();
+        CropConfig cropConfig = ConfigurationLoader.getCropConfig();
         Block gravityBlock = null;
 
         // check world height for block so since players can just keep placing the block

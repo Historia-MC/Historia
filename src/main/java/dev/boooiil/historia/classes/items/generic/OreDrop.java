@@ -1,6 +1,6 @@
 package dev.boooiil.historia.classes.items.generic;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Construct;
 
@@ -16,7 +16,7 @@ public class OreDrop extends Item {
     // It's a constructor.
     public OreDrop(String currentRoot, String dropName) {
 
-        configuration = Config.getOreConfig().getConfiguration();
+        configuration = ConfigurationLoader.getOreConfig().getConfiguration();
 
         String root = currentRoot + "." + dropName;
 

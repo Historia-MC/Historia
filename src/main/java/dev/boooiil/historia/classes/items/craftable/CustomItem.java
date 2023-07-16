@@ -1,6 +1,6 @@
 package dev.boooiil.historia.classes.items.craftable;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
 public class CustomItem extends CraftedItem {
@@ -11,8 +11,8 @@ public class CustomItem extends CraftedItem {
 
     public CustomItem(String itemName) {
 
-        configuration = Config.getCustomItemConfig().getConfiguration();
-        this.valid = Config.getCustomItemConfig().isValid(itemName);
+        configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
+        this.valid = ConfigurationLoader.getCustomItemConfig().isValid(itemName);
 
         if (this.valid) {
 

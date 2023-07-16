@@ -6,12 +6,12 @@ import java.util.Map;
 
 import org.bukkit.Material;
 
-import dev.boooiil.historia.classes.Configuration;
+import dev.boooiil.historia.classes.BaseConfiguration;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.CustomItem;
 import dev.boooiil.historia.util.Logging;
 
-public class CustomItemConfig extends Configuration<CustomItem> {
+public class CustomItemConfig extends BaseConfiguration<CustomItem> {
 
     @Override
     public CustomItem createNew(String itemName) {

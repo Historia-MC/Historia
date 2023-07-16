@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 
 /**
  * It's a class that manages the ores
@@ -15,7 +15,7 @@ import dev.boooiil.historia.configuration.Config;
 public class OreManager {
 
     // Creating a new instance of the OreConfig class.
-    private YamlConfiguration configuration = Config.getOreConfig().getConfiguration();
+    private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
     
     private String name;
 
@@ -26,7 +26,7 @@ public class OreManager {
     //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
     public OreManager(String oreName) {
 
-        if (Config.getOreConfig().isValidOre(oreName)) {
+        if (ConfigurationLoader.getOreConfig().isValidOre(oreName)) {
 
             String root = oreName;
 

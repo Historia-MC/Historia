@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 
 import dev.boooiil.historia.classes.items.generic.Ingot;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
 
 /**
@@ -15,7 +15,7 @@ import dev.boooiil.historia.configuration.specific.IngotConfig;
  */
 public class FurnaceSmeltFinish implements Listener {
 
-    IngotConfig ingotConfig = Config.getIngotConfig();
+    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
 
     // It's a method that is called when the FurnaceSmeltEvent is fired.
     @EventHandler

@@ -14,7 +14,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 
@@ -344,7 +344,7 @@ public class HistoriaPlayer extends BasePlayer {
             if (armor != null) {
 
                 String material = armor.getType().toString();
-                mod += Config.getArmorConfig().getObject(material).getWeight();
+                mod += ConfigurationLoader.getArmorConfig().getObject(material).getWeight();
 
             }
 

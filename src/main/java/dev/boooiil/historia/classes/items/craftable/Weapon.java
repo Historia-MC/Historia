@@ -6,7 +6,7 @@ import java.util.Random;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 import dev.boooiil.historia.util.NumberUtils;
 
@@ -39,9 +39,9 @@ public class Weapon extends CraftedItem {
     // It's a constructor.
     public Weapon(String weaponName) {
 
-        configuration = Config.getWeaponConfig().getConfiguration();
+        configuration = ConfigurationLoader.getWeaponConfig().getConfiguration();
 
-        valid = Config.getWeaponConfig().isValid(weaponName);
+        valid = ConfigurationLoader.getWeaponConfig().isValid(weaponName);
 
         if (valid) {
 
