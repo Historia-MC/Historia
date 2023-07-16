@@ -6,13 +6,13 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.util.Logging;
 
-public class TableInspector {
+public class CraftingTableInspector {
     
     private ArrayList<String> pattern = new ArrayList<>();
     private ArrayList<String> materials = new ArrayList<>();
     private ArrayList<String> fullMaterials = new ArrayList<>();
 
-    public TableInspector(ItemStack[] craftingTableInventory) {
+    public CraftingTableInspector(ItemStack[] craftingTableInventory) {
 
         Logging.debugToConsole("[CCIM] Table Size: " + craftingTableInventory.length);
 
