@@ -21,7 +21,7 @@ public class OreBlockLoader {
 
     private boolean validOre = true;
 
-    private List<OreDropLoader> ores = new ArrayList<OreDropLoader>();
+    private List<OreBlock> ores = new ArrayList<OreBlock>();
 
     //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
     public OreBlockLoader(String oreName) {
@@ -37,7 +37,7 @@ public class OreBlockLoader {
             for (String ore : blockSet) {
 
                 if (!ore.equals("chance"))
-                    this.ores.add(new OreDropLoader(root, ore));
+                    this.ores.add(new OreBlock(root, ore));
 
             }
 
@@ -77,16 +77,16 @@ public class OreBlockLoader {
      * 
      * @return Random ore.
      */
-    public OreDropLoader getOreFromChance() {
+    public OreBlock getOreFromChance() {
 
         int random = (int) Math.round(Math.random() * 100);
 
         List<Integer> chances = new ArrayList<>();
-        HashMap<Integer, OreDropLoader> map = new HashMap<Integer, OreDropLoader>();
+        HashMap<Integer, OreBlock> map = new HashMap<Integer, OreBlock>();
 
         for (int i = 0; i < this.ores.size(); i++) {
 
-            OreDropLoader ore = this.ores.get(i);
+            OreBlock ore = this.ores.get(i);
 
             map.put(i, ore);
 

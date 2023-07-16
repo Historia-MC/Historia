@@ -14,7 +14,7 @@ import dev.boooiil.historia.util.Logging;
 /**
  * This class should not be initialized outside of {@link OreConfig}.
  */
-public class OreDropLoader {
+public class OreBlock {
 
     private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
 
@@ -24,7 +24,7 @@ public class OreDropLoader {
     private List<OreDrop> drops = new ArrayList<OreDrop>();
 
     // Creating a new Ore object.
-    public OreDropLoader(String currentRoot, String oreName) {
+    public OreBlock(String currentRoot, String oreName) {
 
         String root = currentRoot + "." + oreName;
 

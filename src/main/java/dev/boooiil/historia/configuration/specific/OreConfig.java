@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.bukkit.Material;
 
-import dev.boooiil.historia.classes.items.generic.OreDropLoader;
+import dev.boooiil.historia.classes.items.generic.OreBlock;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.classes.items.generic.OreBlockLoader;
 import dev.boooiil.historia.configuration.BaseConfiguration;
@@ -59,13 +59,13 @@ public class OreConfig extends BaseConfiguration<OreBlockLoader> {
      * @return The Ore object that is being returned is the one that is being returned from the
      * OreManager class.
      */
-    public OreDropLoader getOreFromChance(String oreName) {
+    public OreBlock getOreFromChance(String oreName) {
 
         OreBlockLoader oreManager = getObject(oreName);
 
         if (oreManager != null) {
 
-            OreDropLoader ore = oreManager.getOreFromChance();
+            OreBlock ore = oreManager.getOreFromChance();
 
             return ore;
 
@@ -83,7 +83,7 @@ public class OreConfig extends BaseConfiguration<OreBlockLoader> {
      */
     public OreDrop getDropFromChance(String oreName, String className) {
 
-        OreDropLoader ore = getOreFromChance(oreName);
+        OreBlock ore = getOreFromChance(oreName);
 
         if (ore != null) {
             
