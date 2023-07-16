@@ -70,18 +70,18 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply crafting table pattern match for weapon recipes.
 - [ ] Apply damage to player on hit after armor and proficiency modifier.
 - [ ] Bypass modifiers if other entity.
-- [ ] Apply randomized damage value based on range and level.
-- [ ] Apply randomized durability value based on range and level.
-- [ ] Apply randomized attack speed value based on range and level.
-- [ ] Apply randomized knockback value based on range and level.
+- [x] Apply randomized damage value based on range and level.
+- [x] Apply randomized durability value based on range and level.
+- [x] Apply randomized attack speed value based on range and level.
+- [x] Apply randomized knockback value based on range and level.
 - [ ] Apply randomized critical chance value based on range and level (?).
-- [ ] Apply randomized sweeping edge damage value based on range and level.
+- [x] Apply randomized sweeping edge damage value based on range and level.
 
 ### [Armor]
 
 - [x] Apply crafting table pattern match for armor recipes.
-- [ ] Apply armor defence value based on range and level.
-- [ ] Apply durability value based on range and level.
+- [x] Apply armor defence value based on range and level.
+- [x] Apply durability value based on range and level.
 
 ### [Other]
 
