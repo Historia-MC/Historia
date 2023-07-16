@@ -6,16 +6,16 @@ import java.util.Set;
 
 import org.bukkit.Material;
 
-import dev.boooiil.historia.classes.items.generic.Ore;
+import dev.boooiil.historia.classes.items.generic.OreDropLoader;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
-import dev.boooiil.historia.classes.items.generic.OreManager;
+import dev.boooiil.historia.classes.items.generic.OreBlockLoader;
 import dev.boooiil.historia.configuration.BaseConfiguration;
 import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a configuration class that loads a configuration file and stores the data in a HashMap
  */
-public class OreConfig extends BaseConfiguration<OreManager> {
+public class OreConfig extends BaseConfiguration<OreBlockLoader> {
 
     //private static YamlConfiguration configuration = FileGetter.get("ores.yml");
 
@@ -29,9 +29,9 @@ public class OreConfig extends BaseConfiguration<OreManager> {
      * @param oreName - Name of the oreManager to check.
      * @return Returns an OreManager object.
      */
-    public OreManager createNew(String oreName) {
+    public OreBlockLoader createNew(String oreName) {
 
-        return new OreManager(oreName);
+        return new OreBlockLoader(oreName);
 
     }
 
@@ -41,11 +41,11 @@ public class OreConfig extends BaseConfiguration<OreManager> {
      * @param oreName The name of the ore you want to get the OreManager for.
      * @return The OreManager object.
      */
-    public OreManager getObject(String oreName) {
+    public OreBlockLoader getObject(String oreName) {
 
         if (isValidOre(oreName)) {
 
-            return (OreManager) map.get(oreName);
+            return (OreBlockLoader) map.get(oreName);
 
         }
         else return null;
@@ -59,13 +59,13 @@ public class OreConfig extends BaseConfiguration<OreManager> {
      * @return The Ore object that is being returned is the one that is being returned from the
      * OreManager class.
      */
-    public Ore getOreFromChance(String oreName) {
+    public OreDropLoader getOreFromChance(String oreName) {
 
-        OreManager oreManager = getObject(oreName);
+        OreBlockLoader oreManager = getObject(oreName);
 
         if (oreManager != null) {
 
-            Ore ore = oreManager.getOreFromChance();
+            OreDropLoader ore = oreManager.getOreFromChance();
 
             return ore;
 
@@ -83,7 +83,7 @@ public class OreConfig extends BaseConfiguration<OreManager> {
      */
     public OreDrop getDropFromChance(String oreName, String className) {
 
-        Ore ore = getOreFromChance(oreName);
+        OreDropLoader ore = getOreFromChance(oreName);
 
         if (ore != null) {
             

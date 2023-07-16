@@ -12,7 +12,7 @@ import dev.boooiil.historia.configuration.ConfigurationLoader;
 /**
  * It's a class that manages the ores
  */
-public class OreManager {
+public class OreBlockLoader {
 
     // Creating a new instance of the OreConfig class.
     private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
@@ -21,10 +21,10 @@ public class OreManager {
 
     private boolean validOre = true;
 
-    private List<Ore> ores = new ArrayList<Ore>();
+    private List<OreDropLoader> ores = new ArrayList<OreDropLoader>();
 
     //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
-    public OreManager(String oreName) {
+    public OreBlockLoader(String oreName) {
 
         if (ConfigurationLoader.getOreConfig().isValidOre(oreName)) {
 
@@ -37,7 +37,7 @@ public class OreManager {
             for (String ore : blockSet) {
 
                 if (!ore.equals("chance"))
-                    this.ores.add(new Ore(root, ore));
+                    this.ores.add(new OreDropLoader(root, ore));
 
             }
 
@@ -77,16 +77,16 @@ public class OreManager {
      * 
      * @return Random ore.
      */
-    public Ore getOreFromChance() {
+    public OreDropLoader getOreFromChance() {
 
         int random = (int) Math.round(Math.random() * 100);
 
         List<Integer> chances = new ArrayList<>();
-        HashMap<Integer, Ore> map = new HashMap<Integer, Ore>();
+        HashMap<Integer, OreDropLoader> map = new HashMap<Integer, OreDropLoader>();
 
         for (int i = 0; i < this.ores.size(); i++) {
 
-            Ore ore = this.ores.get(i);
+            OreDropLoader ore = this.ores.get(i);
 
             map.put(i, ore);
 
