@@ -302,9 +302,9 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        // TODO: Create method for adding experience
-
-        MySQLHandler.setProficiencyLevel(this.getUUID(), level);
+        MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
+        MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
+        MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
 
     }
 
@@ -523,16 +523,18 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void increaseExperience() {
 
-        if ((getCurrentExperience()) + 1 >= getMaxExperience()) {
+        if ((getCurrentExperience()) + this.proficiency.getStats().getBaseExperienceGain() >= getMaxExperience()) {
 
             setLevel(getLevel() + 1);
             setCurrentExperience(0);
             setMaxExperience(Math.pow(getLevel(), 1.68));
-            save();
+            saveCharacter();
+
+            Logging.infoToPlayer("You have leveled up to level " + getLevel() + "!", this.getUUID());
 
         } else {
 
-            setCurrentExperience(getCurrentExperience() + 1);
+            setCurrentExperience(getCurrentExperience() + this.proficiency.getStats().getBaseExperienceGain());
 
         }
     
@@ -545,7 +547,9 @@ public class HistoriaPlayer extends BasePlayer {
             setLevel(getLevel() - 1);
             setCurrentExperience(getMaxExperience() - 1);
             setMaxExperience(Math.pow(getLevel(), 1.68));
-            save();
+            saveCharacter();
+
+            Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
 
         } else {
 
@@ -556,14 +560,6 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
     
-    public void save() {
-
-        MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
-        MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
-        MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
-
-    }
-
     public String toString() {
 
         String output = super.toString();
