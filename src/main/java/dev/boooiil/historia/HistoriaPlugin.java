@@ -38,6 +38,7 @@ import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
 import dev.boooiil.historia.events.pvp.PlayerDeath;
 import dev.boooiil.historia.events.pvp.PlayerHit;
 import dev.boooiil.historia.runnable.PlayerIterator;
+import dev.boooiil.historia.runnable.SaveProgress;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -107,6 +108,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("set", new CommandSet());
 
         registerRunnable(new PlayerIterator());
+        registerRunnable(new SaveProgress(), 6000l);
 
         registerFurnaceRecipes();
 
@@ -196,6 +198,16 @@ public class HistoriaPlugin extends JavaPlugin {
 
         runnable.runTaskTimer(this, 0, 20);
 
+    }
+
+    /**
+     * Registers a BukkitRunnable to be executed on a timer.
+     * 
+     * @param runnable The BukkitRunnable to be executed.
+     * @param time     The time in ticks between each execution of the runnable.
+     */
+    private void registerRunnable(BukkitRunnable runnable, long time) {
+        runnable.runTaskTimer(this, 0, time);
     }
 
     private void deregisterRecipes() {
