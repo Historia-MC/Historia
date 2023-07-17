@@ -7,7 +7,6 @@ import java.util.Map;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.configuration.BaseConfiguration;
-import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that gets information from a configuration file.

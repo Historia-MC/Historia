@@ -1,7 +1,6 @@
 package dev.boooiil.historia;
 
 import java.io.File;
-import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -107,7 +106,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("stats", new CommandStats());
         registerCommand("set", new CommandSet());
 
-        registerRunnable(new PlayerIterator(this));
+        registerRunnable(new PlayerIterator());
 
         registerFurnaceRecipes();
 

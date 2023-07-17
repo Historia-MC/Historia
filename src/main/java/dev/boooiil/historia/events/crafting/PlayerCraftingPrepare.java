@@ -1,6 +1,5 @@
 package dev.boooiil.historia.events.crafting;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -16,7 +15,6 @@ public class PlayerCraftingPrepare implements Listener {
     @EventHandler
     public void onCraftItem(PrepareItemCraftEvent event) {
 
-        Player player = (Player) event.getViewers().get(0);
         CraftingTableInspector inspector = new CraftingTableInspector(event.getInventory().getContents());
         ItemStack resultItem;
 
