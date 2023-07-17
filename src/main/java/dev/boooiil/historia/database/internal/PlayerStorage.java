@@ -123,9 +123,15 @@ public class PlayerStorage {
      */
     public static void saveStates() {
 
-        for (UUID uuid : players.keySet()) {
+        for (HistoriaPlayer player : players.values()) {
 
-            players.get(uuid).saveCharacter();
+            // shouldn't need last logout in theory
+            // it is handled by the logout event
+            if (player.getLastSaved() < player.getLastLogin()) {
+
+                player.saveCharacter();
+
+            }
 
         }
 
