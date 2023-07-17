@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 Light_Wooden_Sword:
   item:
@@ -11,11 +11,6 @@ Light_Wooden_Sword:
       - "§7Woody. "
       - ""
       - "§9-----------------"
-      - "§7Damage - §k?"
-      - "§7Knockback - §k?"
-      - "§7Speed - §k?"
-      - "§7Sweeping - §k?"
-      - "§7Durability - §k?"
       - ""
 
   damage: [1.0, 2.0]
@@ -38,11 +33,6 @@ Light_Wooden_Axe:
       - "§7Woody. "
       - ""
       - "§9-----------------"
-      - "§7Damage - §k?"
-      - "§7Knockback - §k?"
-      - "§7Speed - §k?"
-      - "§7Sweeping - §k?"
-      - "§7Durability - §k?"
       - ""
 
   damage: [2.0, 3.0]
@@ -67,11 +57,6 @@ Light_Tin_Sword:
       - "swings faster than most daggers."
       - ""
       - "§9-----------------"
-      - "§7Damage - §k?"
-      - "§7Knockback - §k?"
-      - "§7Speed - §k?"
-      - "§7Sweeping - §k?"
-      - "§7Durability - §k?"
       - ""
 
   damage: [2.0, 3.0]
