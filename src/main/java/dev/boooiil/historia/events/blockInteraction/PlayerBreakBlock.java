@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
+import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.handlers.blockInteraction.BlockHandler;
 import dev.boooiil.historia.handlers.blockInteraction.CropHandler;
 
@@ -23,6 +24,15 @@ public class PlayerBreakBlock implements Listener {
     // drops the item that the ore is supposed to drop.
     @EventHandler
     public void onBreakBlock(BlockBreakEvent event) {
+
+        // if the player can't break the block, cancel the event.
+        if (!TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getBlock().getType())) {
+
+            event.setCancelled(true);
+
+            return;
+
+        }
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
