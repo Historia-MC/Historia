@@ -103,7 +103,7 @@ public class Proficiency {
      * @return true if the character can use light armor, false otherwise
      */
     public boolean canUseLightArmor() {
-        return getStats().getArmorProficiency().contains("Light");
+        return getStats().getUsableArmorTypes().contains("Light");
     }
 
     /**
@@ -113,7 +113,7 @@ public class Proficiency {
      * @return true if the character can use medium armor, false otherwise
      */
     public boolean canUseMediumArmor() {
-        return getStats().getArmorProficiency().contains("Medium");
+        return getStats().getUsableArmorTypes().contains("Medium");
     }
 
     /**
@@ -123,7 +123,7 @@ public class Proficiency {
      * @return true if the character can use heavy armor, false otherwise
      */
     public boolean canUseHeavyArmor() {
-        return getStats().getArmorProficiency().contains("Heavy");
+        return getStats().getUsableArmorTypes().contains("Heavy");
     }
 
     /**
@@ -133,7 +133,7 @@ public class Proficiency {
      * @return true if the character can use light weapons, false otherwise
      */
     public boolean canUseLightWeapon() {
-        return getStats().getWeaponProficiency().contains("Light");
+        return getStats().getUsableWeaponTypes().contains("Light");
     }
 
     /**
@@ -143,7 +143,7 @@ public class Proficiency {
      * @return true if the character can use medium weapons, false otherwise
      */
     public boolean canUseMediumWeapon() {
-        return getStats().getWeaponProficiency().contains("Medium");
+        return getStats().getUsableWeaponTypes().contains("Medium");
     }
 
     /**
@@ -153,7 +153,7 @@ public class Proficiency {
      * @return true if the character can use heavy weapons, false otherwise.
      */
     public boolean canUseHeavyWeapon() {
-        return getStats().getWeaponProficiency().contains("Heavy");
+        return getStats().getUsableWeaponTypes().contains("Heavy");
     }
 
     /**
@@ -163,7 +163,7 @@ public class Proficiency {
      * @return true if the character can use bows, false otherwise.
      */
     public boolean canUseBow() {
-        return getStats().getWeaponProficiency().contains("Bow");
+        return getStats().getUsableWeaponTypes().contains("Bow");
     }
 
     /**
@@ -173,7 +173,7 @@ public class Proficiency {
      * @return true if the character can use crossbows, false otherwise.
      */
     public boolean canUseCrossbow() {
-        return getStats().getWeaponProficiency().contains("Crossbow");
+        return getStats().getUsableWeaponTypes().contains("Crossbow");
     }
 
     /**
@@ -190,7 +190,7 @@ public class Proficiency {
 
         if (matcher.matches()) {
 
-            return getStats().getWeaponProficiency().contains(localizedName);
+            return getStats().getUsableWeaponTypes().contains(localizedName);
 
         }
 
@@ -216,7 +216,7 @@ public class Proficiency {
 
         if (matcher.matches()) {
 
-            return getStats().getArmorProficiency().contains(localizedName);
+            return getStats().getUsableArmorTypes().contains(localizedName);
 
         }
 
