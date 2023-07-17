@@ -93,4 +93,15 @@ public class CropConfig {
 
     }
     
+    public boolean isStandardCrop(Material material) {
+        
+        return standard.contains(material);
+        
+    }
+
+    public boolean isTallCrop(Material material) {
+
+        return tall.contains(material);
+
+    }
 }
