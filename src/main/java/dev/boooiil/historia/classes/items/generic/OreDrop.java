@@ -3,7 +3,6 @@ package dev.boooiil.historia.classes.items.generic;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.classes.items.BaseItem;
-import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Construct;
 
