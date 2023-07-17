@@ -1,9 +1,9 @@
-package dev.boooiil.historia.classes.items.generic;
+package dev.boooiil.historia.classes.items;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-public class GenericItem {
+public abstract class BaseItem {
 
     /**
      * INTENDED GENERIC TO EXTEND CLASSES THAT HOLD ITEMS.
