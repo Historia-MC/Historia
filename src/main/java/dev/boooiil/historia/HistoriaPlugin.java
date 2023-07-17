@@ -27,10 +27,12 @@ import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.blockInteraction.PlayerBreakBlock;
+import dev.boooiil.historia.events.blockInteraction.WaterBreakBlock;
 import dev.boooiil.historia.events.connection.PlayerJoin;
 import dev.boooiil.historia.events.connection.PlayerLeave;
 import dev.boooiil.historia.events.crafting.PlayerCraftingPrepare;
 import dev.boooiil.historia.events.crafting.PlayerCraftingResult;
+import dev.boooiil.historia.events.experience.ExperienceGain;
 import dev.boooiil.historia.events.food.FoodLevelChange;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
@@ -87,6 +89,7 @@ public class HistoriaPlugin extends JavaPlugin {
 
         ConfigurationLoader.init();
 
+        registerEvent(new ExperienceGain());
         registerEvent(new FoodLevelChange());
         registerEvent(new FurnaceSmeltFinish());
         registerEvent(new FurnaceSmeltStart());
@@ -97,6 +100,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
+        registerEvent(new WaterBreakBlock());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
