@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +70,7 @@ public class MySQLHandler {
         try {
 
             String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
-                    + new Date().getTime() + ", 0, 0)";
+                    + System.currentTimeMillis() + ", 0, 0)";
 
             Statement statement = connection.createStatement();
             statement.execute(createUser);
@@ -189,7 +188,7 @@ public class MySQLHandler {
 
         try {
 
-            String string = ("UPDATE historia SET Login = '" + new Date().getTime() + "' WHERE UUID = '" + uuid + "'");
+            String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid + "'");
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -251,7 +250,7 @@ public class MySQLHandler {
 
         try {
 
-            long time = new Date().getTime();
+            long time = System.currentTimeMillis();
 
             String string = ("UPDATE historia " +
                     "SET Logout = '" + time + "', " +
