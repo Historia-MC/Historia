@@ -6,14 +6,13 @@ import dev.boooiil.historia.util.Construct;
 public class CustomItem extends CraftedItem {
 
     private String itemName;
-    private boolean valid;
 
     public CustomItem(String itemName) {
 
         configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
-        this.valid = ConfigurationLoader.getCustomItemConfig().isValid(itemName);
+        valid = ConfigurationLoader.getCustomItemConfig().isValid(itemName);
 
-        if (this.valid) {
+        if (valid) {
 
             this.itemName = itemName;
 

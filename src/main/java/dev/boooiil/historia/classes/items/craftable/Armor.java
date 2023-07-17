@@ -20,8 +20,6 @@ public class Armor extends CraftedItem {
     private List<Double> defense;
     private List<Integer> durability;
 
-    private boolean valid;
-
     // Getting the armor's information from the config.
     public Armor(String armorName) {
 
