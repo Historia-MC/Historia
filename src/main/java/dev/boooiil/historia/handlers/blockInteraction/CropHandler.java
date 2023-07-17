@@ -65,13 +65,13 @@ public class CropHandler extends BaseBlockHandler {
 
             breakEvent.setCancelled(true);
 
-            if (cropConfig.getTall().contains(breakEvent.getBlock().getType())) {
+            if (cropConfig.isTallCrop(getBlock().getType())) {
 
                 Logging.debugToConsole("Block broken is a tall crop.");
 
-                int cropHeight = getCropHeight(breakEvent.getBlock(), breakEvent.getBlock().getType());
+                int cropHeight = getCropHeight(getBlock(), getBlock().getType());
 
-                destroyCropFromTop(breakEvent.getBlock(), cropHeight);
+                destroyCropFromTop(getBlock(), cropHeight);
 
             }
 
@@ -79,7 +79,7 @@ public class CropHandler extends BaseBlockHandler {
 
                 Logging.debugToConsole("Block broken is not a tall crop.");
 
-                breakEvent.getBlock().setType(Material.AIR);
+                getBlock().setType(Material.AIR);
 
             }
 
@@ -90,9 +90,9 @@ public class CropHandler extends BaseBlockHandler {
         // if the player is able to double the harvest
         else if (harvestChanceRoll <= doubleHarvestChance) {
 
-            breakEvent.getBlock().getDrops().forEach(item -> {
+            getBlock().getDrops().forEach(item -> {
 
-                breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(), item);
+                getBlock().getWorld().dropItemNaturally(getBlock().getLocation(), item);
 
             });
 
@@ -142,18 +142,18 @@ public class CropHandler extends BaseBlockHandler {
 
         // check above block so that we can skip the rest of the checks if it's not a
         // crop
-        if (!blockAbove.getType().hasGravity() && !cropConfig.getAll().contains(blockAbove.getType()))
+        if (!blockAbove.getType().hasGravity() && !cropConfig.isCrop(blockAbove.getType()))
             return;
 
         // so now we know that the block above has gravity or is a crop
 
         // if the block above is a crop
-        if (cropConfig.getAll().contains(blockAbove.getType())) {
+        if (cropConfig.isCrop(blockAbove.getType())) {
 
             Logging.debugToConsole("[Crop Safety] Block Above Is Crop");
 
             // if it's a tall crop, check the blocks above it and set them to air
-            if (cropConfig.getTall().contains(blockAbove.getType())) {
+            if (cropConfig.isTallCrop(blockAbove.getType())) {
 
                 Logging.debugToConsole("[Crop Safety] Block Above Is Tall Crop");
 
@@ -223,7 +223,7 @@ public class CropHandler extends BaseBlockHandler {
                 Logging.debugToConsole("[Crop Gravity] Gravity Block (" + newBlock.getType() + ") Found");
 
             }
-            else if (cropConfig.getAll().contains(newBlock.getType())) {
+            else if (cropConfig.isCrop(newBlock.getType())) {
 
                 Logging.debugToConsole("[Crop Gravity] Gravity Block (" + newBlock.getType() + ") Breaks Crop");
 
