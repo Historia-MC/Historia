@@ -23,8 +23,8 @@ public class Stats {
     private double baseBowProficiency;
     private double baseCrossbowProficiency;
 
-    private List<String> weaponProficiency;
-    private List<String> armorProficiency;
+    private List<String> usableWeaponTypes;
+    private List<String> usableArmorTypes;
 
     public Stats(FileConfiguration config, String root) {
 
@@ -44,8 +44,8 @@ public class Stats {
         this.instantGrowthChance = config.getDouble(root + ".instantGrowChance");
         this.beheadChance = config.getDouble(root + ".beheadChance");
 
-        this.weaponProficiency = config.getStringList(root + ".weaponProficiency");
-        this.armorProficiency = config.getStringList(root + ".armorProficiency");
+        this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
+        this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
 
     }
 
@@ -299,8 +299,8 @@ public class Stats {
      * 
      * @return The weaponProficiency list.
      */
-    public List<String> getWeaponProficiency() {
-        return weaponProficiency;
+    public List<String> getUsableWeaponTypes() {
+        return usableWeaponTypes;
     }
 
     /**
@@ -308,8 +308,8 @@ public class Stats {
      * 
      * @param weaponProficiency List of Strings
      */
-    public void setWeaponProficiency(List<String> weaponProficiency) {
-        this.weaponProficiency = weaponProficiency;
+    public void setUsableWeaponTypes(List<String> weaponProficiency) {
+        this.usableWeaponTypes = weaponProficiency;
     }
 
     /**
@@ -318,8 +318,8 @@ public class Stats {
      * 
      * @return A list of strings.
      */
-    public List<String> getArmorProficiency() {
-        return armorProficiency;
+    public List<String> getUsableArmorTypes() {
+        return usableArmorTypes;
     }
 
     /**
@@ -328,8 +328,8 @@ public class Stats {
      * 
      * @param armorProficiency List of armor types the character is proficient with.
      */
-    public void setArmorProficiency(List<String> armorProficiency) {
-        this.armorProficiency = armorProficiency;
+    public void setUsableArmorTypes(List<String> armorProficiency) {
+        this.usableArmorTypes = armorProficiency;
     }
 
     public String toString() {
@@ -346,8 +346,8 @@ public class Stats {
                 "Base Bow Proficiency: " + this.baseBowProficiency + "\n" +
                 "Base Crossbow Proficiency: " + this.baseCrossbowProficiency + "\n" +
                 "Base Experience Gain: " + this.baseExperienceGain + "\n" +
-                "Weapon Proficiency: " + this.weaponProficiency + "\n" +
-                "Armor Proficiency: " + this.armorProficiency + "\n" +
+                "Weapon Proficiency: " + this.usableWeaponTypes + "\n" +
+                "Armor Proficiency: " + this.usableArmorTypes + "\n" +
                 "************* \n";
 
     }
