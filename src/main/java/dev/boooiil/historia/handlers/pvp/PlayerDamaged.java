@@ -46,7 +46,7 @@ public class PlayerDamaged {
             Weapon historiaWeapon = ConfigurationLoader.getWeaponConfig().getObject(weapon.getItemMeta().getLocalizedName());
 
             // if the player is proficient with the weapon
-            if (historiaAttacker.getProficiency().getStats().getWeaponProficiency()
+            if (historiaAttacker.getProficiency().getStats().getUsableWeaponTypes()
                     .contains(historiaWeapon.getWeightClass())) {
 
                 // update the weapon stats from the given lore
