@@ -139,6 +139,13 @@ To be considered as a release, the following requirements must be met:
 - [ ] Preload food objects on init into hashmap.
 - [ ] Getter for food object.
 
+### [Tools]
+
+- [ ] Create tools that match custom resource types.
+- [ ] Create object for each tool.
+- [ ] Preload tool objects on init into hashmap.
+- [ ] Getter for tool object.
+
 ### [Other]
 
 - [x] Create object for each item.
