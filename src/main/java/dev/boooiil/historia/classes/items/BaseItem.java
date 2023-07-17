@@ -13,6 +13,21 @@ public abstract class BaseItem {
     protected YamlConfiguration configuration;
     protected boolean valid;
 
+    /**
+     * Constructor for the BaseItem class that takes an ItemStack as a parameter.
+     * 
+     * @param itemStack The ItemStack to be set as the itemStack variable.
+     */
+    public BaseItem(ItemStack itemStack) {
+
+        this.itemStack = itemStack;
+        this.valid = true;
+
+    }
+
+    public BaseItem() {
+    };
+
     protected ItemStack itemStack;
 
     /**
