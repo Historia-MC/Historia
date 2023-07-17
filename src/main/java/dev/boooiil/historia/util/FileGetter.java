@@ -50,7 +50,7 @@ public class FileGetter {
 
         if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check.getKey());
+            Logging.debugToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
             File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check.getKey());
 
@@ -59,7 +59,7 @@ public class FileGetter {
 
         else {
 
-            Logging.errorToConsole("Obtained file from internal directory: " + check.getKey());
+            Logging.debugToConsole("Obtained file from internal directory: " + check.getKey());
 
             InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check.getKey());
 
