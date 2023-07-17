@@ -1,6 +1,9 @@
 package dev.boooiil.historia.handlers.blockInteraction;
 
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
@@ -18,6 +21,7 @@ public abstract class BaseBlockHandler {
      */
     protected BlockPlaceEvent placeEvent;
     
+    protected BlockEvent event;
     /**
      * The HistoriaPlayer object that represents the player who triggered the block interaction event.
      */
@@ -47,4 +51,22 @@ public abstract class BaseBlockHandler {
 
     }
 
+    public Player getPlayer() {
+
+        if (this.breakEvent != null) {
+            return this.breakEvent.getPlayer();
+        } else {
+            return this.placeEvent.getPlayer();
+        }
+
+    }
+
+    public Block getBlock() {
+            
+            if (this.breakEvent != null) {
+                return this.breakEvent.getBlock();
+            } else {
+                return this.placeEvent.getBlock();
+            }
+    }
 }
