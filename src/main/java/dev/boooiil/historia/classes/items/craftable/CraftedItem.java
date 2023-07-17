@@ -8,6 +8,7 @@ public class CraftedItem extends GenericItem {
     
     protected List<String> recipeShape;
     protected List<String> recipeItems;
+    protected boolean isShaped;
 
     /**
      * This function returns the list of items that are required to craft the item
