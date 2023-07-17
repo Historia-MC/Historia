@@ -15,7 +15,7 @@ public class Logging {
 
     private static final String messagePrefix = "§7[§9Historia§7] ";
     private static final String announcePrefix = "§7[§9Announcement§7] ";
-    private static final String debugPrefix = "§7[§cDebug§7] ";
+    // private static final String debugPrefix = "§7[§cDebug§7] ";
 
     private static final Logger logger = HistoriaPlugin.plugin().getLogger();
     
