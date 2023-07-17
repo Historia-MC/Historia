@@ -36,8 +36,8 @@ public class CommandStats implements CommandExecutor {
                     message += "Temperature: " + historiaPlayer.getCurrentTemperature() + "\n";
                     message += "Armor Temp: " + historiaPlayer.getArmorAdjustment() + "\n";
                     message += "Env Temp: " + historiaPlayer.getEnvironmentAdjustment() + "\n";
-                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getWeaponProficiency() + "\n";
-                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getArmorProficiency() + "\n";
+                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
+                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
 
                 }
 
@@ -48,8 +48,8 @@ public class CommandStats implements CommandExecutor {
                     message += "Level: " + historiaPlayer.getLevel() + "\n";
                     message += "Health: ??/" + historiaPlayer.getBaseHealth() + "\n";
                     message += "Experience: " + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
-                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getWeaponProficiency() + "\n";
-                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getArmorProficiency() + "\n";
+                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
+                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
 
                 }
 
