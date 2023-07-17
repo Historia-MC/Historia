@@ -15,29 +15,36 @@ import dev.boooiil.historia.configuration.ConfigurationLoader;
 public class OreBlockLoader {
 
     // Creating a new instance of the OreConfig class.
-    private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
-    
     private String name;
 
     private boolean validOre = true;
 
-    private List<OreBlock> ores = new ArrayList<OreBlock>();
+    private List<OreBlock> blocks = new ArrayList<OreBlock>();
 
     //TODO: This throws the error when breaking a block. populateMap does not have any arguments.
-    public OreBlockLoader(String oreName) {
+    public OreBlockLoader(String oreBlockName, YamlConfiguration configuration) {
 
-        if (ConfigurationLoader.getOreConfig().isValidOre(oreName)) {
+        // THIS IS HOW THE LOADING WORKS:
+        // ------ *** ITERATION 1 *** ------
+        // BLOCK_NAME_1: <- this is the provided name
+        //     drop_category_1: <- putting into oreDropCategorySet
+        //          chance: <- ignoring this
+        //          DROP_NAME_1: <- call the OreBlock constructor
+        //                       <- passed will be (BLOCK_NAME_1, drop_category_1)
+        //
+        // OreBlockLoader contains a list of OreBlock objects
+        // associated with the provided name.
 
-            String root = oreName;
+        if (ConfigurationLoader.getOreConfig().isValidOre(oreBlockName)) {
 
-            Set<String> blockSet = configuration.getConfigurationSection(root).getKeys(false);
+            Set<String> oreDropCategorySet = configuration.getConfigurationSection(oreBlockName).getKeys(false);
 
-            this.name = oreName;
+            this.name = oreBlockName;
 
-            for (String ore : blockSet) {
+            for (String oreDropCategory : oreDropCategorySet) {
 
-                if (!ore.equals("chance"))
-                    this.ores.add(new OreBlock(root, ore));
+                if (!oreDropCategory.equals("chance"))
+                    this.blocks.add(new OreBlock(oreBlockName, oreDropCategory, configuration));
 
             }
 
@@ -84,9 +91,9 @@ public class OreBlockLoader {
         List<Integer> chances = new ArrayList<>();
         HashMap<Integer, OreBlock> map = new HashMap<Integer, OreBlock>();
 
-        for (int i = 0; i < this.ores.size(); i++) {
+        for (int i = 0; i < this.blocks.size(); i++) {
 
-            OreBlock ore = this.ores.get(i);
+            OreBlock ore = this.blocks.get(i);
 
             map.put(i, ore);
 

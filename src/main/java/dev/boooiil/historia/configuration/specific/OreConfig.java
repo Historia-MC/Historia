@@ -26,12 +26,12 @@ public class OreConfig extends BaseConfiguration<OreBlockLoader> {
     /**
      * Used to create a new instance of OreManager.
      * 
-     * @param oreName - Name of the oreManager to check.
-     * @return Returns an OreManager object.
+     * @param blockName - Name of the block to check.
+     * @return Returns an oreBlockLoader object.
      */
-    public OreBlockLoader createNew(String oreName) {
+    public OreBlockLoader createNew(String blockName) {
 
-        return new OreBlockLoader(oreName);
+        return new OreBlockLoader(blockName, this.configuration);
 
     }
 

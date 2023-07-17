@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Logging;
 
@@ -16,7 +15,18 @@ import dev.boooiil.historia.util.Logging;
  */
 public class OreBlock {
 
-    private YamlConfiguration configuration = ConfigurationLoader.getOreConfig().getConfiguration();
+    /**
+     * THIS IS HOW THE LOADING WORKS:
+     * ------ *** ITERATION 1 *** ------
+     * ORE_NAME_1: (blockName)
+     *     drop_name_1: (oreDropCategory)
+     *     chance: <- setting to this.chance
+     *         DROP_NAME_1: <- call the OreBlock constructor
+     *                      <- passed will be (BLOCK_NAME_1.drop_category_1, DROP_NAME_1)
+     *
+     * OreBlock contains a list of OreDrop objects
+     * associated with the provided block name and drop category.
+     */
 
     private String name;
     private int chance;
@@ -24,19 +34,23 @@ public class OreBlock {
     private List<OreDrop> drops = new ArrayList<OreDrop>();
 
     // Creating a new Ore object.
-    public OreBlock(String currentRoot, String oreName) {
+    public OreBlock(String blockName, String oreDropCategory, YamlConfiguration configuration) {
 
-        String root = currentRoot + "." + oreName;
+        String root = blockName + "." + oreDropCategory;
 
+        // Accessing BLOCK_NAME_1.drop_category_1
         Set<String> dropSet = configuration.getConfigurationSection(root).getKeys(false);
 
-        this.name = oreName;
+        // Set the name to the drop category.
+        this.name = oreDropCategory;
+
+        // Set the chance to the chance of the category being selected.
         this.chance = configuration.getInt(root + ".chance");
 
         for (String drop : dropSet) {
 
             if (!drop.equals("chance"))
-                this.drops.add(new OreDrop(root, drop));
+                this.drops.add(new OreDrop(root, drop, configuration));
 
         }
 
