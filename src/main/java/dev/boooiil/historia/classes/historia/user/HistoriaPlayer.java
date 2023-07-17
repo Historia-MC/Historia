@@ -47,6 +47,8 @@ public class HistoriaPlayer extends BasePlayer {
 
     private Proficiency proficiency;
 
+    private long lastSaved;
+
     protected Server server;
 
     /**
@@ -305,6 +307,14 @@ public class HistoriaPlayer extends BasePlayer {
         MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
         MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
         MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+
+        this.lastSaved = System.currentTimeMillis();
+
+    }
+
+    public long getLastSaved() {
+
+        return this.lastSaved;
 
     }
 
