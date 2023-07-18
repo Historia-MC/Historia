@@ -41,6 +41,7 @@ import dev.boooiil.historia.events.mobs.EntityBreed;
 import dev.boooiil.historia.events.mobs.EntityKill;
 import dev.boooiil.historia.events.mobs.EntityTame;
 import dev.boooiil.historia.events.playerInteraction.PlayerRightClickBlock;
+import dev.boooiil.historia.events.playerInteraction.PlayerRightClickEntity;
 import dev.boooiil.historia.events.pvp.PlayerDeath;
 import dev.boooiil.historia.events.pvp.PlayerHit;
 import dev.boooiil.historia.runnable.PlayerIterator;
@@ -76,7 +77,7 @@ public class HistoriaPlugin extends JavaPlugin {
 
         Logging.infoToConsole("Plugin has loaded.");
 
-        deregisterRecipes();
+        //deregisterRecipes();
 
         HistoriaDiscord.init();
 
@@ -110,6 +111,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerRightClickBlock());
+        registerEvent(new PlayerRightClickEntity());
         registerEvent(new WaterBreakBlock());
 
         registerCommand("checkplayers", new CommandPlayers());
