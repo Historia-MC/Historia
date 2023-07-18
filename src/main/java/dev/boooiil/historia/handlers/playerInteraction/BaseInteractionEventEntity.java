@@ -32,7 +32,7 @@ public class BaseInteractionEventEntity {
     }
 
     public ItemStack getHeldItem() {
-        return event.getPlayer().getItemInUse();
+        return event.getPlayer().getInventory().getItemInMainHand();
     }
 
     public void doInteraction() {
@@ -40,7 +40,7 @@ public class BaseInteractionEventEntity {
     }
 
     public boolean entityIsType(EntityType entityType) {
-        return getEntity().getType() == entityType;
+        return getEntity().getType().equals(entityType);
     }
 
     public World getWorld() {
