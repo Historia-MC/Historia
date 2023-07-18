@@ -6,6 +6,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import dev.boooiil.historia.handlers.playerInteraction.RightClickAnvil;
+import dev.boooiil.historia.handlers.playerInteraction.RightClickStonecutter;
 
 public class PlayerRightClickBlock implements Listener {
 
@@ -17,6 +18,9 @@ public class PlayerRightClickBlock implements Listener {
 
             RightClickAnvil rightClickAnvil = new RightClickAnvil(event);
             rightClickAnvil.doInteraction();
+
+            RightClickStonecutter rightClickStonecutter = new RightClickStonecutter(event);
+            rightClickStonecutter.doInteraction();
 
         }
 
