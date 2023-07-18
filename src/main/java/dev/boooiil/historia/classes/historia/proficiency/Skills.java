@@ -34,6 +34,8 @@ public class Skills {
     private boolean canApplyUnbreaking = false;
     private boolean canApplySharpness = false;
 
+    private boolean canShearChickens = false;
+
     private boolean canCraftHighTier = false;
 
     private boolean canMakeKnowledgeBook = false;
@@ -66,6 +68,7 @@ public class Skills {
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
         this.canApplySharpness = config.getBoolean(root + ".applySharpness");
         this.canCraftHighTier = config.getBoolean(root + ".makeHighTierArmor");
+        this.canShearChickens = config.getBoolean(root + ".shearChicken");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
         this.specialItems = config.getBoolean(root + ".specialItems");
         
@@ -482,6 +485,10 @@ public class Skills {
      */
     public boolean canCraftHighTier() {
         return canCraftHighTier;
+    }
+
+    public boolean canShearChickens() {
+        return canShearChickens;
     }
 
     /**
