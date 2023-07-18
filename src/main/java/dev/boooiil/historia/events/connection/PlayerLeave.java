@@ -9,6 +9,7 @@ import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 
 /**
  * It saves the player's data, sets the player as offline, and updates the
@@ -29,6 +30,9 @@ public class PlayerLeave implements Listener {
         PlayerStorage.markOffline(event.getPlayer().getUniqueId());
 
         HistoriaDiscord.setActivity("Online: " + (Bukkit.getOnlinePlayers().size() - 1) + "/" + Bukkit.getMaxPlayers());
+
+        
+        ScoreboardHandler.destroyPlayerBoard(event.getPlayer());
 
     }
 
