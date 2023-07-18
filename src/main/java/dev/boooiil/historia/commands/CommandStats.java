@@ -38,6 +38,7 @@ public class CommandStats implements CommandExecutor {
                     message += "Env Temp: " + historiaPlayer.getEnvironmentAdjustment() + "\n";
                     message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
                     message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
+                    message += "Experience Sources: " + historiaPlayer.getProficiency().getStats().getExperienceSources() + "\n";
 
                 }
 
