@@ -13,36 +13,36 @@ public class ExperienceTypes {
 
     public enum AllSources {
 
-        ATTACK(1l),
-        DEFEND(2l),
-        EVADE(2l),
-        KILL(3l),
-        DEATH(-2l),
-        CROP_PLACE(1l),
-        WEAPON_CRAFT(1l),
-        TOOL_CRAFT(1l),
-        ARMOR_CRAFT(1l),
-        OTHER_CRAFT(1l),
-        CROP_BREAK(1l),
-        ORE_BREAK(1l),
-        BLOCK_PLACE(1l),
-        BLOCK_BREAK(1l),
-        BLOCK_INTERACT(1l),
-        BREED_ANIMAL(1l),
-        TAME_ANIMAL(1l),
-        FISH(1l),
-        FISH_TRASH(-1l),
-        FISH_TREASURE(3l),
-        RANGED_HIT(1l),
-        RANGED_KILL(2l);
+        ATTACK(1d),
+        DEFEND(2d),
+        EVADE(2d),
+        KILL(3d),
+        DEATH(-2d),
+        CROP_PLACE(1d),
+        WEAPON_CRAFT(1d),
+        TOOL_CRAFT(1d),
+        ARMOR_CRAFT(1d),
+        OTHER_CRAFT(1d),
+        CROP_BREAK(1d),
+        ORE_BREAK(1d),
+        BLOCK_PLACE(1d),
+        BLOCK_BREAK(1d),
+        BLOCK_INTERACT(1d),
+        BREED_ANIMAL(1d),
+        TAME_ANIMAL(1d),
+        FISH(1d),
+        FISH_TRASH(-1d),
+        FISH_TREASURE(3d),
+        RANGED_HIT(1d),
+        RANGED_KILL(2d);
 
-        private long key;
+        private double key;
 
-        private AllSources(long key) {
+        private AllSources(double key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public double getKey() {
             return key;
         }
 
