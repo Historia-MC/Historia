@@ -25,7 +25,7 @@ public class Stats {
     private double baseBowProficiency;
     private double baseCrossbowProficiency;
 
-    private AllSources incomeSources;
+    private AllSources experienceSources;
 
     private List<String> usableWeaponTypes;
     private List<String> usableArmorTypes;
@@ -51,9 +51,9 @@ public class Stats {
         this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
         this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
 
-        for (String key : config.getStringList(root + ".incomeSources")) {
+        for (String key : config.getStringList(root + ".experienceSources")) {
 
-            this.incomeSources = AllSources.valueOf(key);
+            this.experienceSources = AllSources.valueOf(key);
 
         }
 
@@ -343,27 +343,27 @@ public class Stats {
     }
 
     /**
-     * This function returns the incomeSources variable
+     * This function returns the experienceSources variable
      * 
-     * @return The incomeSources variable is being returned.
+     * @return The experienceSources variable is being returned.
      */
-    public AllSources getIncomeSources() {
-        return incomeSources;
+    public AllSources getExperienceSources() {
+        return experienceSources;
     }
 
     /**
-     * This function sets the incomeSources variable to the value of the parameter
-     * incomeSources
+     * This function sets the experienceSources variable to the value of the parameter
+     * experienceSources
      * 
-     * @param incomeSources The income sources of the character.
+     * @param experienceSources The income sources of the character.
      */
-    public void setIncomeSources(AllSources incomeSources) {
-        this.incomeSources = incomeSources;
+    public void setExperienceSources(AllSources experienceSources) {
+        this.experienceSources = experienceSources;
     }
 
     public boolean hasIncomeSource(AllSources source) {
 
-        return this.incomeSources.equals(source);
+        return this.experienceSources.equals(source);
 
     }
 
