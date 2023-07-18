@@ -1,10 +1,12 @@
 package dev.boooiil.historia.classes.historia.proficiency;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
 import dev.boooiil.historia.classes.enums.ExperienceTypes.AllSources;
+import dev.boooiil.historia.util.Logging;
 
 public class Stats {
 
@@ -25,7 +27,7 @@ public class Stats {
     private double baseBowProficiency;
     private double baseCrossbowProficiency;
 
-    private AllSources experienceSources;
+    private List<AllSources> experienceSources;
 
     private List<String> usableWeaponTypes;
     private List<String> usableArmorTypes;
@@ -50,10 +52,12 @@ public class Stats {
 
         this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
         this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
+        this.experienceSources = new ArrayList<AllSources>();
 
         for (String key : config.getStringList(root + ".experienceSources")) {
 
-            this.experienceSources = AllSources.valueOf(key);
+            Logging.debugToConsole("Experience Source: " + key);
+            this.experienceSources.add(AllSources.valueOf(key));
 
         }
 
@@ -347,7 +351,7 @@ public class Stats {
      * 
      * @return The experienceSources variable is being returned.
      */
-    public AllSources getExperienceSources() {
+    public List<AllSources> getExperienceSources() {
         return experienceSources;
     }
 
@@ -357,13 +361,13 @@ public class Stats {
      * 
      * @param experienceSources The income sources of the character.
      */
-    public void setExperienceSources(AllSources experienceSources) {
+    public void setExperienceSources(List<AllSources> experienceSources) {
         this.experienceSources = experienceSources;
     }
 
     public boolean hasIncomeSource(AllSources source) {
 
-        return this.experienceSources.equals(source);
+        return this.experienceSources.contains(source);
 
     }
 
