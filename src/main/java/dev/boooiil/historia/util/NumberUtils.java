@@ -14,6 +14,10 @@ public class NumberUtils {
         return (float) (Math.round(Math.random() * (max - min + 1) + min) * 100) / 100;
     }
 
+    public static int randomInt(int min, int max) {
+        return (int) (Math.random() * (max - min + 1) + min);
+    }
+
     public static float round(float value, int places) {
         return (float) (Math.round(value * Math.pow(10, places)) / Math.pow(10, places));
     }
