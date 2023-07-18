@@ -5,7 +5,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import dev.boooiil.historia.util.Logging;
 
-public class RightClickAnvil extends BaseInteractionEvent {
+public class RightClickAnvil extends BaseInteractionEventBlock {
 
     public RightClickAnvil(PlayerInteractEvent event) {
         super(event);

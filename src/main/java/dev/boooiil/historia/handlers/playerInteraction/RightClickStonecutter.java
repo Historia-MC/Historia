@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.util.Logging;
 
-public class RightClickStonecutter extends BaseInteractionEvent {
+public class RightClickStonecutter extends BaseInteractionEventBlock {
 
     public RightClickStonecutter(PlayerInteractEvent event) {
         super(event);
