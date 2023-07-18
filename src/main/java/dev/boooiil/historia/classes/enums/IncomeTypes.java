@@ -22,6 +22,7 @@ public class IncomeTypes {
         WEAPON_CRAFT(1l),
         TOOL_CRAFT(1l),
         ARMOR_CRAFT(1l),
+        OTHER_CRAFT(1l),
         CROP_BREAK(1l),
         ORE_BREAK(1l),
         BLOCK_PLACE(1l),
@@ -147,7 +148,8 @@ public class IncomeTypes {
 
         WEAPON_CRAFT(AllSources.valueOf("WEAPON_CRAFT")),
         TOOL_CRAFT(AllSources.valueOf("TOOL_CRAFT")),
-        ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT"));
+        ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT")),
+        OTHER_CRAFT(AllSources.valueOf("OTHER_CRAFT"));
 
         private AllSources key;
 
