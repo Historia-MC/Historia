@@ -84,6 +84,7 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply randomized knockback value based on range and level.
 - [ ] Apply randomized critical chance value based on range and level (?).
 - [x] Apply randomized sweeping edge damage value based on range and level.
+- [ ] Add trident recipe and weights in the weapons yml.
 
 ### [Armor]
 
@@ -162,7 +163,7 @@ To be considered as a release, the following requirements must be met:
 - [ ] Boil water in cauldron to get salt.
 - Possible to use bottles gathered in an ocean biome on a campfire.
 - [ ] Toggle PvP on/off for settlements that have been raided or are attacking after being raided.
-- [ ] Right click stonecutter to increase sharpness.
-- [ ] Can shear chickens for feathers.
+- [x] Right click stonecutter to increase sharpness.
+- [x] Can shear chickens for feathers.
 - [ ] Limited use for sharpness.
 - [ ] Allow dulling of weapons (decrease base stats).
