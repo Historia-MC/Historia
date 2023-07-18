@@ -53,7 +53,7 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
                         "You sharpened your " + this.getHeldItem().getType().toString().toLowerCase() + "!",
                         this.getPlayer().getUniqueId());
             } else {
-                Logging.infoToPlayer("Your " + this.getHeldItem().getType().toString().toLowerCase()
+                Logging.infoToPlayer("Your " + this.getHeldItem().getItemMeta().getDisplayName()
                         + " is already as sharp as it can be!", this.getPlayer().getUniqueId());
             }
 
@@ -78,9 +78,21 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
 
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             itemMeta.addEnchant(Enchantment.DAMAGE_ALL, increasedSharpnessLevel, true);
-            currentLore.add("");
-            currentLore.add("Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
+            
+            if (currentSharpnessLevel > 0) {
+
+                currentLore.set(currentLore.size() - 1, "Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
                     + "/" + adjustedSharpnessUses);
+
+            }
+
+            else {
+
+                currentLore.add("");
+                currentLore.add("Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
+                    + "/" + adjustedSharpnessUses);
+
+            }
 
             itemMeta.setLore(currentLore);
             this.getHeldItem().setItemMeta(itemMeta);
