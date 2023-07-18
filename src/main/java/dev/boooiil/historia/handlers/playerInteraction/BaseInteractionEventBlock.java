@@ -11,11 +11,11 @@ import dev.boooiil.historia.database.internal.PlayerStorage;
 
 import org.bukkit.event.block.Action;
 
-public class BaseInteractionEvent {
+public class BaseInteractionEventBlock {
 
     protected PlayerInteractEvent event;
 
-    public BaseInteractionEvent(PlayerInteractEvent event) {
+    public BaseInteractionEventBlock(PlayerInteractEvent event) {
         this.event = event;
     }
 
