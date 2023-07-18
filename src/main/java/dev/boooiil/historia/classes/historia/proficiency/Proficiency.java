@@ -37,9 +37,17 @@ public class Proficiency {
     public Proficiency(String proficiencyName) {
         FileConfiguration config = FileGetter.get(ResourceKeys.PROFICIENCY);
 
-        this.name = proficiencyName;
-        this.stats = new Stats(config, proficiencyName + ".stats");
-        this.skills = new Skills(config, proficiencyName + ".skills");
+        if (config.contains(proficiencyName)) {
+            this.name = proficiencyName;
+            this.stats = new Stats(config, proficiencyName + ".stats");
+            this.skills = new Skills(config, proficiencyName + ".skills");
+        }
+
+        else {
+            this.name = "None";
+            this.stats = new Stats(config, "None.stats");
+            this.skills = new Skills(config, "None.skills");
+        }
     }
 
     /**
