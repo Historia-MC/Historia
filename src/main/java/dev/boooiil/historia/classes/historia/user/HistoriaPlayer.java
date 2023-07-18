@@ -200,7 +200,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getCurrentExperience() {
 
-        return this.currentExperience;
+        return NumberUtils.roundDouble(this.currentExperience, 2);
 
     }
 
@@ -544,12 +544,12 @@ public class HistoriaPlayer extends BasePlayer {
         if (source == null) return;
         if (!this.proficiency.getStats().hasIncomeSource(source)) return;
 
-        long incomeValue = this.proficiency.getStats().getIncomeValue(source);
-        long incomeModified = incomeValue * this.level / 10;
+        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeModified = incomeValue * this.level / 10;
 
         if ((getCurrentExperience()) + incomeModified >= getMaxExperience()) {
 
-            long overflow = (long) ((getCurrentExperience() + incomeModified) - getMaxExperience());
+            double overflow = (getCurrentExperience() + incomeModified) - getMaxExperience();
 
             setLevel(getLevel() + 1);
             setCurrentExperience(overflow);
@@ -571,15 +571,15 @@ public class HistoriaPlayer extends BasePlayer {
         if (source == null) return;
         if (!this.proficiency.getStats().hasIncomeSource(source)) return;
 
-        long incomeValue = this.proficiency.getStats().getIncomeValue(source);
-        long incomeModified = (long) Math.pow(incomeValue * this.level / 10, 2);
+        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
 
         if ((getCurrentExperience()) - incomeModified <= 0) {
 
             setLevel(getLevel() - 1);
             setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
 
-            long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
+            double overflow =(getCurrentExperience() - incomeModified) - getMaxExperience();
 
             if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
             else setCurrentExperience(0);

@@ -371,7 +371,7 @@ public class Stats {
 
     }
 
-    public long getIncomeValue(AllSources source) {
+    public double getIncomeValue(AllSources source) {
 
         return source.getKey();
 
