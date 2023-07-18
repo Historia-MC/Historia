@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.BlockSources;
+import dev.boooiil.historia.classes.enums.IncomeTypes.FarmingSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
@@ -66,6 +68,7 @@ public class BlockHandler extends BaseBlockHandler {
                     breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(),
                             drop.getItemStack());
                     Logging.infoToPlayer("You have doubled your ore drop!", historiaPlayer.getUUID());
+                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
 
                 }
 
@@ -94,7 +97,7 @@ public class BlockHandler extends BaseBlockHandler {
                     breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(),
                             breakEvent.getBlock().getDrops().iterator().next());
                     Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
-                    historiaPlayer.increaseExperience();
+                    historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
                 }
 
@@ -127,6 +130,7 @@ public class BlockHandler extends BaseBlockHandler {
             placeEvent.setCancelled(true);
             placeEvent.getBlockPlaced().setType(placeEvent.getBlockPlaced().getType());
             Logging.infoToPlayer("You did not consume any resources for this block!", historiaPlayer.getUUID());
+            historiaPlayer.increaseExperience(BlockSources.BLOCK_PLACE.getKey());
 
         }
 

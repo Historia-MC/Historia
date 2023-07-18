@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.CraftingSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.craftable.Armor;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
@@ -41,17 +42,23 @@ public class CraftingResult {
 
             generateArmorModifiers();
 
+            historiaPlayer.increaseExperience(CraftingSources.ARMOR_CRAFT.getKey());
+
         } else if (craftedItem instanceof Weapon) {
 
             Logging.debugToConsole("[generateRandomModifiers] Generating Weapon Modifiers");
 
             generateWeaponModifiers();
+            
+            historiaPlayer.increaseExperience(CraftingSources.WEAPON_CRAFT.getKey());
 
         }
 
         else {
-        }
-        ;
+
+            historiaPlayer.increaseExperience(CraftingSources.OTHER_CRAFT.getKey());
+
+        };
 
     }
 

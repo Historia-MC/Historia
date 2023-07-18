@@ -2,6 +2,7 @@ package dev.boooiil.historia.handlers.mobs;
 
 import org.bukkit.event.entity.EntityTameEvent;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.AnimalSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 
@@ -19,13 +20,12 @@ public class TameAnimal {
 
         if (historiaPlayer.getProficiency().getSkills().canTameAnimals()) {
 
-            event.setCancelled(false);
-            Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+            historiaPlayer.increaseExperience(AnimalSources.TAME_ANIMAL.getKey());
 
         } else {
 
+            Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
             event.setCancelled(true);
-            //TODO: xp on tame
 
         }
         

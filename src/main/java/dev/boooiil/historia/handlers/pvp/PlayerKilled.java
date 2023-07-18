@@ -9,6 +9,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.CombatSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 
 public class PlayerKilled {
@@ -26,6 +27,7 @@ public class PlayerKilled {
     public void doDeath() {
 
         Player killer = event.getEntity().getKiller();
+        HistoriaPlayer killerHistoriaPlayer = new HistoriaPlayer(killer.getUniqueId());
 
         Pattern beheadWeaponRegex = Pattern.compile("sword|axe", Pattern.CASE_INSENSITIVE);
         Matcher beheadWeaponMatch = beheadWeaponRegex.matcher(killer.getInventory().getItemInMainHand().getType().toString());
@@ -50,6 +52,9 @@ public class PlayerKilled {
             }
 
         }
+
+        killerHistoriaPlayer.increaseExperience(CombatSources.KILL.getKey());
+        historiaPlayer.decreaseExperience(CombatSources.DEATH.getKey());
 
     }
 

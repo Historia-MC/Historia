@@ -6,6 +6,7 @@ import org.bukkit.block.data.Ageable;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.FarmingSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.CropConfig;
@@ -98,11 +99,11 @@ public class CropHandler extends BaseBlockHandler {
 
             Logging.infoToPlayer("You harvested the crop and doubled the harvest!", historiaPlayer.getUUID());
             
-            historiaPlayer.increaseExperience();
+            historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
         }
 
-        historiaPlayer.increaseExperience();
+        if (!breakEvent.isCancelled()) historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
     }
 
@@ -121,8 +122,11 @@ public class CropHandler extends BaseBlockHandler {
 
             crop.setAge(crop.getMaximumAge());
             Logging.infoToPlayer("You instantly grew the crop!", historiaPlayer.getUUID());
+            historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
 
         }
+
+        historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
 
     }
 
