@@ -441,6 +441,12 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    public void changeProficiency(String proficiency) {
+
+        this.proficiency = new Proficiency(proficiency);
+
+    }
+
     /**
      * Check if the player has the sun above them.
      * 
