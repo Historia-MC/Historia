@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.AllSources;
+
 public class Stats {
 
     private float baseHealth;
@@ -22,6 +24,8 @@ public class Stats {
     private double baseSwordProficiency;
     private double baseBowProficiency;
     private double baseCrossbowProficiency;
+
+    private AllSources incomeSources;
 
     private List<String> usableWeaponTypes;
     private List<String> usableArmorTypes;
@@ -46,6 +50,12 @@ public class Stats {
 
         this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
         this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
+
+        for (String key : config.getStringList(root + ".incomeSources")) {
+
+            this.incomeSources = AllSources.valueOf(key);
+
+        }
 
     }
 
@@ -330,6 +340,37 @@ public class Stats {
      */
     public void setUsableArmorTypes(List<String> armorProficiency) {
         this.usableArmorTypes = armorProficiency;
+    }
+
+    /**
+     * This function returns the incomeSources variable
+     * 
+     * @return The incomeSources variable is being returned.
+     */
+    public AllSources getIncomeSources() {
+        return incomeSources;
+    }
+
+    /**
+     * This function sets the incomeSources variable to the value of the parameter
+     * incomeSources
+     * 
+     * @param incomeSources The income sources of the character.
+     */
+    public void setIncomeSources(AllSources incomeSources) {
+        this.incomeSources = incomeSources;
+    }
+
+    public boolean hasIncomeSource(AllSources source) {
+
+        return this.incomeSources.equals(source);
+
+    }
+
+    public long getIncomeValue(AllSources source) {
+
+        return source.getKey();
+
     }
 
     public String toString() {
