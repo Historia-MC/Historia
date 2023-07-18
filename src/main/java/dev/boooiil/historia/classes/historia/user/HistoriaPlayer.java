@@ -17,6 +17,7 @@ import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
+import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 import dev.boooiil.historia.util.Logging;
 
 //TODO: Add a method to check the player's armor level and attack level.
@@ -562,6 +563,9 @@ public class HistoriaPlayer extends BasePlayer {
             setCurrentExperience(getCurrentExperience() + incomeModified);
 
         }
+        
+        ScoreboardHandler.destroyPlayerBoard(Bukkit.getPlayer(this.getUUID()));
+        ScoreboardHandler.initializePlayerBoard(Bukkit.getPlayer(this.getUUID()));
     
     }
 
@@ -579,7 +583,7 @@ public class HistoriaPlayer extends BasePlayer {
             setMaxExperience(Math.pow(getLevel(), 1.68));
 
             long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
-            
+
             if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
             else setCurrentExperience(0);
 
@@ -593,6 +597,8 @@ public class HistoriaPlayer extends BasePlayer {
 
         }
     
+        ScoreboardHandler.destroyPlayerBoard(Bukkit.getPlayer(this.getUUID()));
+        ScoreboardHandler.initializePlayerBoard(Bukkit.getPlayer(this.getUUID()));
 
     }
     
