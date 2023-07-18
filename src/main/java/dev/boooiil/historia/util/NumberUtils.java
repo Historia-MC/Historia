@@ -18,8 +18,12 @@ public class NumberUtils {
         return (int) (Math.random() * (max - min + 1) + min);
     }
 
-    public static float round(float value, int places) {
+    public static float roundFloat(float value, int places) {
         return (float) (Math.round(value * Math.pow(10, places)) / Math.pow(10, places));
+    }
+
+    public static double roundDouble(double value, int places) {
+        return (Math.round(value * Math.pow(10, places)) / Math.pow(10, places));
     }
 
 }

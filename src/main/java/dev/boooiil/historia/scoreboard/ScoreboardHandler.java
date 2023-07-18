@@ -14,6 +14,8 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
+import dev.boooiil.historia.util.NumberUtils;
+import net.md_5.bungee.api.ChatColor;
 
 public class ScoreboardHandler {
 
@@ -32,20 +34,20 @@ public class ScoreboardHandler {
 
         Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
-        Objective objective = scoreboard.registerNewObjective(player.getUniqueId().toString(), Criteria.create("HISTORIA_PROFICIENCY") , "-- PROFICIENCY --");
+        Objective objective = scoreboard.registerNewObjective(player.getUniqueId().toString(), Criteria.create("HISTORIA_PROFICIENCY") , ChatColor.BLUE + "" + ChatColor.BOLD + "HISTORIA");
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.getScore("Proficiency: " + historiaPlayer.getProficiency().getName()).setScore(11);
-        objective.getScore("Level: " + historiaPlayer.getLevel()).setScore(10);;
-        objective.getScore("Health: " + player.getHealth() + "/" + historiaPlayer.getBaseHealth()).setScore(9);;
-        objective.getScore("Hunger: " + player.getFoodLevel() + "/" + historiaPlayer.getProficiency().getStats().getBaseFood()).setScore(8);
-        objective.getScore("Experience: " + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience()).setScore(7);
-        objective.getScore("Temperature: " + historiaPlayer.getCurrentTemperature()).setScore(6);
-        objective.getScore("Weight: " + null).setScore(5);
-        objective.getScore("Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes()).setScore(4);
-        objective.getScore("Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes()).setScore(3);
+        objective.getScore("").setScore(12);
+        objective.getScore(ChatColor.BLUE + "Proficiency: " + ChatColor.GRAY + historiaPlayer.getProficiency().getName()).setScore(11);
+        objective.getScore(ChatColor.BLUE + "Level: " + ChatColor.GRAY + historiaPlayer.getLevel()).setScore(10);;
+        objective.getScore(ChatColor.BLUE + "Health: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getHealth(), 2) + "/" + historiaPlayer.getBaseHealth()).setScore(9);;
+        objective.getScore(ChatColor.BLUE + "Hunger: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getFoodLevel(), 2) + "/" + historiaPlayer.getProficiency().getStats().getBaseFood()).setScore(8);
+        objective.getScore(ChatColor.BLUE + "Experience: " + ChatColor.GRAY + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience()).setScore(7);
+        objective.getScore(ChatColor.BLUE + "Temperature: " + ChatColor.GRAY + historiaPlayer.getCurrentTemperature()).setScore(6);
+        objective.getScore(ChatColor.BLUE + "Weight: " + ChatColor.GRAY + null).setScore(5);
+        objective.getScore(ChatColor.BLUE + "Weapon Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes()).setScore(4);
+        objective.getScore(ChatColor.BLUE + "Armor Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableArmorTypes()).setScore(3);
 
-        scoreboards.put(player.getUniqueId(), scoreboard);
         player.setScoreboard(scoreboard);
 
     }
@@ -54,8 +56,10 @@ public class ScoreboardHandler {
 
         Scoreboard board = scoreboards.remove(player.getUniqueId());
 
-        if (board != null)
+        if (board != null) {
             Logging.debugToConsole("Scoreboard for " + player.getName() + " has been destroyed.");
+        }
+
 
     }
 }

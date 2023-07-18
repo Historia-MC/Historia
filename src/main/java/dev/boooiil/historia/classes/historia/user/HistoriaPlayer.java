@@ -92,7 +92,7 @@ public class HistoriaPlayer extends BasePlayer {
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
-        this.maxExperience = Math.pow(this.level, 1.68);
+        this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
         this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT.getKey()));
@@ -553,7 +553,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             setLevel(getLevel() + 1);
             setCurrentExperience(overflow);
-            setMaxExperience(NumberUtils.round((float) Math.pow(getLevel(), 1.68), 2));
+            setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
             saveCharacter();
 
             Logging.infoToPlayer("You have leveled up to level " + getLevel() + "!", this.getUUID());
@@ -577,7 +577,7 @@ public class HistoriaPlayer extends BasePlayer {
         if ((getCurrentExperience()) - incomeModified <= 0) {
 
             setLevel(getLevel() - 1);
-            setMaxExperience(NumberUtils.round((float) Math.pow(getLevel(), 1.68), 2));
+            setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
 
             long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
 

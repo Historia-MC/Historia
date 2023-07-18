@@ -87,7 +87,7 @@ public class CraftingResult {
                 "",
                 "§7Class - " + armor.getWeightClass(),
                 "",
-                "§7Armor - " + NumberUtils.round((float) rolledArmor, 2),
+                "§7Armor - " + NumberUtils.roundDouble(rolledArmor, 2),
                 "§7Weight - " + armor.getWeight());
 
         damageable.setDamage(adjustedDurability);
@@ -128,10 +128,10 @@ public class CraftingResult {
                 "",
                 "§7Class - " + weapon.getWeightClass(),
                 "",
-                "§7Damage - " + NumberUtils.round((float) rolledDamage, 2),
-                "§7Attack Speed - " + NumberUtils.round((float) rolledAttackSpeed, 2),
-                "§7Knockback - " + NumberUtils.round((float) rolledKnockback, 2),
-                "§7Sweeping - " + NumberUtils.round((float) rolledSweeping, 2),
+                "§7Damage - " + NumberUtils.roundDouble( rolledDamage, 2),
+                "§7Attack Speed - " + NumberUtils.roundDouble( rolledAttackSpeed, 2),
+                "§7Knockback - " + NumberUtils.roundDouble( rolledKnockback, 2),
+                "§7Sweeping - " + NumberUtils.roundDouble( rolledSweeping, 2),
                 "§7Weight - " + weapon.getWeight());
 
         damageable.setDamage(adjustedDurability);
