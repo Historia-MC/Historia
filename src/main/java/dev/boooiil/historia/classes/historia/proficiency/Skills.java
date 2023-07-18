@@ -32,6 +32,7 @@ public class Skills {
 
     private boolean canCraftGunpowder = false;
     private boolean canApplyUnbreaking = false;
+    private boolean canApplySharpness = false;
 
     private boolean canCraftHighTier = false;
 
@@ -63,6 +64,7 @@ public class Skills {
         this.canBreakBeehive = config.getBoolean(root + ".breakBeehive");
         this.canCraftGunpowder = config.getBoolean(root + ".craftGunpowder");
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
+        this.canApplySharpness = config.getBoolean(root + ".applySharpness");
         this.canCraftHighTier = config.getBoolean(root + ".makeHighTierArmor");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
         this.specialItems = config.getBoolean(root + ".specialItems");
@@ -460,6 +462,16 @@ public class Skills {
      */
     public void setCanApplyUnbreaking(boolean canApplyUnbreaking) {
         this.canApplyUnbreaking = canApplyUnbreaking;
+    }
+
+    /**
+     * This function returns a boolean value that represents whether or not the player can apply the
+     * sharpness enchantment to the item.
+     * 
+     * @return The boolean value of canApplySharpness.
+     */
+    public boolean canApplySharpness() {
+        return canApplySharpness;
     }
 
     /**

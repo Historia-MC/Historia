@@ -1,4 +1,4 @@
-version: 3
+version: 4
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -52,6 +52,7 @@ Warrior:
   skills:
     nametag: true
     sweepingEdge: true
+    applySharpness: true
 
 Archer:
 
@@ -160,6 +161,7 @@ Blacksmith:
     applyUnbreaking: true
     craftSaddle: true
     chanceNoAnvilDamage: true
+    applySharpness: true
 
 Huntsman:
 
@@ -265,6 +267,7 @@ Lumberjack:
     nametag: true
     chanceExtraWood: true
     efficiencyAxe: true
+    applySharpness: true
 
 Farmer:
 
