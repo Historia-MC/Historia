@@ -26,11 +26,11 @@ public class CraftingTableInspector {
         // so matlab rules apply on this array
         for (int i = 1; i < craftingTableInventory.length; i++) {
 
-            Logging.debugToConsole("[CCIM] Item: (" + i + ") " + craftingTableInventory[i]);
-
             boolean invalidItem = (craftingTableInventory[i] == null || craftingTableInventory[i].getItemMeta() == null);
 
             if (!invalidItem) {
+
+                Logging.debugToConsole("[CCIM] Item: (" + i + ") " + craftingTableInventory[i].getItemMeta().getLocalizedName());
 
                 if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
 
