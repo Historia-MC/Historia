@@ -189,6 +189,7 @@ Huntsman:
     tameAnimals: true
     extraWool: true
     extraFeathers: true
+    shearChicken: true
     craftSaddle: true
 
 Apothecary:
@@ -294,3 +295,4 @@ Farmer:
     nametag: true
     breakBeehive: true
     breakGrass: true
+    shearChicken: true
