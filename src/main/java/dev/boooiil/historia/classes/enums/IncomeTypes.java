@@ -49,21 +49,21 @@ public class IncomeTypes {
 
     public enum CombatSources {
 
-        ATTACK(AllSources.valueOf("ATTACK").getKey()),
-        DEFEND(AllSources.valueOf("DEFEND").getKey()),
-        EVADE(AllSources.valueOf("EVADE").getKey()),
-        KILL(AllSources.valueOf("KILL").getKey()),
-        DEATH(AllSources.valueOf("DEATH").getKey()),
-        RANGED_HIT(AllSources.valueOf("RANGED_HIT").getKey()),
-        RANGED_KILL(AllSources.valueOf("RANGED_KILL").getKey());
+        ATTACK(AllSources.valueOf("ATTACK")),
+        DEFEND(AllSources.valueOf("DEFEND")),
+        EVADE(AllSources.valueOf("EVADE")),
+        KILL(AllSources.valueOf("KILL")),
+        DEATH(AllSources.valueOf("DEATH")),
+        RANGED_HIT(AllSources.valueOf("RANGED_HIT")),
+        RANGED_KILL(AllSources.valueOf("RANGED_KILL"));
 
-        private long key;
+        private AllSources key;
 
-        private CombatSources(long key) {
+        private CombatSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
@@ -71,20 +71,20 @@ public class IncomeTypes {
 
     public enum BlockSources {
 
-        CROP_PLACE(AllSources.valueOf("CROP_PLACE").getKey()),
-        CROP_BREAK(AllSources.valueOf("CROP_BREAK").getKey()),
-        ORE_BREAK(AllSources.valueOf("ORE_BREAK").getKey()),
-        BLOCK_PLACE(AllSources.valueOf("BLOCK_PLACE").getKey()),
-        BLOCK_BREAK(AllSources.valueOf("BLOCK_BREAK").getKey()),
-        BLOCK_INTERACT(AllSources.valueOf("BLOCK_INTERACT").getKey());
+        CROP_PLACE(AllSources.valueOf("CROP_PLACE")),
+        CROP_BREAK(AllSources.valueOf("CROP_BREAK")),
+        ORE_BREAK(AllSources.valueOf("ORE_BREAK")),
+        BLOCK_PLACE(AllSources.valueOf("BLOCK_PLACE")),
+        BLOCK_BREAK(AllSources.valueOf("BLOCK_BREAK")),
+        BLOCK_INTERACT(AllSources.valueOf("BLOCK_INTERACT"));
 
-        private long key;
+        private AllSources key;
 
-        private BlockSources(long key) {
+        private BlockSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
@@ -92,17 +92,17 @@ public class IncomeTypes {
  
     public enum FishingSources {
 
-        FISH(AllSources.valueOf("FISH").getKey()),
-        FISH_TRASH(AllSources.valueOf("FISH_TRASH").getKey()),
-        FISH_TREASURE(AllSources.valueOf("FISH_TREASURE").getKey());
+        FISH(AllSources.valueOf("FISH")),
+        FISH_TRASH(AllSources.valueOf("FISH_TRASH")),
+        FISH_TREASURE(AllSources.valueOf("FISH_TREASURE"));
 
-        private long key;
+        private AllSources key;
 
-        private FishingSources(long key) {
+        private FishingSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
@@ -110,16 +110,16 @@ public class IncomeTypes {
 
     public enum AnimalSources {
 
-        BREED_ANIMAL(AllSources.valueOf("BREED_ANIMAL").getKey()),
-        TAME_ANIMAL(AllSources.valueOf("TAME_ANIMAL").getKey());
+        BREED_ANIMAL(AllSources.valueOf("BREED_ANIMAL")),
+        TAME_ANIMAL(AllSources.valueOf("TAME_ANIMAL"));
 
-        private long key;
+        private AllSources key;
 
-        private AnimalSources(long key) {
+        private AnimalSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
@@ -127,16 +127,16 @@ public class IncomeTypes {
 
     public enum FarmingSources {
 
-        CROP_PLACE(AllSources.valueOf("CROP_PLACE").getKey()),
-        CROP_BREAK(AllSources.valueOf("CROP_BREAK").getKey());
+        CROP_PLACE(AllSources.valueOf("CROP_PLACE")),
+        CROP_BREAK(AllSources.valueOf("CROP_BREAK"));
 
-        private long key;
+        private AllSources key;
 
-        private FarmingSources(long key) {
+        private FarmingSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
@@ -145,17 +145,17 @@ public class IncomeTypes {
 
     public enum CraftingSources {
 
-        WEAPON_CRAFT(AllSources.valueOf("WEAPON_CRAFT").getKey()),
-        TOOL_CRAFT(AllSources.valueOf("TOOL_CRAFT").getKey()),
-        ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT").getKey());
+        WEAPON_CRAFT(AllSources.valueOf("WEAPON_CRAFT")),
+        TOOL_CRAFT(AllSources.valueOf("TOOL_CRAFT")),
+        ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT"));
 
-        private long key;
+        private AllSources key;
 
-        private CraftingSources(long key) {
+        private CraftingSources(AllSources key) {
             this.key = key;
         }
 
-        public long getKey() {
+        public AllSources getKey() {
             return key;
         }
 
