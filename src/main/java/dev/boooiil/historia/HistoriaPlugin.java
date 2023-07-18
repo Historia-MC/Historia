@@ -18,7 +18,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import dev.boooiil.historia.commands.CommandSet;
 import dev.boooiil.historia.classes.items.generic.Ingot;
 import dev.boooiil.historia.commands.CommandDebug;
+import dev.boooiil.historia.commands.CommandGive;
 import dev.boooiil.historia.commands.CommandPlayers;
+import dev.boooiil.historia.commands.CommandProficiency;
 import dev.boooiil.historia.commands.CommandStats;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
@@ -114,6 +116,8 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("debug", new CommandDebug());
         registerCommand("stats", new CommandStats());
         registerCommand("set", new CommandSet());
+        registerCommand("give", new CommandGive());
+        registerCommand("proficiency", new CommandProficiency());
 
         registerRunnable(new PlayerIterator());
         registerRunnable(new SaveProgress(), 6000l);
