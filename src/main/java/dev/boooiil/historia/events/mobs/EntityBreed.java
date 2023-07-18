@@ -1,5 +1,6 @@
 package dev.boooiil.historia.events.mobs;
 
+import org.bukkit.entity.Breedable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +25,12 @@ public class EntityBreed implements Listener {
             historiaPlayer.increaseExperience(AnimalSources.BREED_ANIMAL.getKey());
         }
         else {
+
             event.setCancelled(true);
+            
+            ((Breedable) event.getFather()).setBreed(false);
+            ((Breedable) event.getMother()).setBreed(false);
+
             Logging.infoToPlayer("Maybe there is someone else that can do this...", historiaPlayer.getUUID());
         }
     }
