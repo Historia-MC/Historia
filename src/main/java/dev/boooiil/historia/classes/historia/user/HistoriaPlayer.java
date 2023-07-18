@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.AllSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.AllSources;
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 import dev.boooiil.historia.configuration.ConfigurationLoader;

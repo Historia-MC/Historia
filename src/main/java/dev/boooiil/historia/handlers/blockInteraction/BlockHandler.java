@@ -4,8 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.BlockSources;
-import dev.boooiil.historia.classes.enums.IncomeTypes.FarmingSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.BlockSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.FarmingSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.generic.OreDrop;
 import dev.boooiil.historia.configuration.ConfigurationLoader;

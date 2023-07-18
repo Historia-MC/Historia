@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.CraftingSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.CraftingSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.craftable.Armor;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;

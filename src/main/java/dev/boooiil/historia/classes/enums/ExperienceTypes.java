@@ -1,6 +1,6 @@
 package dev.boooiil.historia.classes.enums;
 
-public class IncomeTypes {
+public class ExperienceTypes {
 
     // MAKE THIS INTO ITS OWN YAML
     // COULD CHANGE THE PROFICIENCY.YML

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.AllSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.AllSources;
 
 public class Stats {
 

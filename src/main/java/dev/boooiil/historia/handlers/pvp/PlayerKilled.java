@@ -9,7 +9,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.CombatSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.CombatSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 
 public class PlayerKilled {

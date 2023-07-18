@@ -2,7 +2,7 @@ package dev.boooiil.historia.handlers.mobs;
 
 import org.bukkit.event.entity.EntityTameEvent;
 
-import dev.boooiil.historia.classes.enums.IncomeTypes.AnimalSources;
+import dev.boooiil.historia.classes.enums.ExperienceTypes.AnimalSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.util.Logging;
 
