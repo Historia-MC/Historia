@@ -35,6 +35,9 @@ import dev.boooiil.historia.events.experience.ExperienceGain;
 import dev.boooiil.historia.events.food.FoodLevelChange;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
+import dev.boooiil.historia.events.mobs.EntityBreed;
+import dev.boooiil.historia.events.mobs.EntityKill;
+import dev.boooiil.historia.events.mobs.EntityTame;
 import dev.boooiil.historia.events.pvp.PlayerDeath;
 import dev.boooiil.historia.events.pvp.PlayerHit;
 import dev.boooiil.historia.runnable.PlayerIterator;
@@ -89,6 +92,9 @@ public class HistoriaPlugin extends JavaPlugin {
 
         ConfigurationLoader.init();
 
+        registerEvent(new EntityBreed());
+        registerEvent(new EntityKill());
+        registerEvent(new EntityTame());
         registerEvent(new ExperienceGain());
         registerEvent(new FoodLevelChange());
         registerEvent(new FurnaceSmeltFinish());
