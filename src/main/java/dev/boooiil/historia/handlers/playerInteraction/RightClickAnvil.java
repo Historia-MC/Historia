@@ -11,9 +11,10 @@ public class RightClickAnvil extends BaseInteractionEvent {
         super(event);
     }
 
+    @Override
     public void doInteraction() {
 
-        if (this.getBlock().getType() == Material.ANVIL) {
+        if (this.blockIsType(Material.ANVIL)) {
 
             if (!this.getHistoriaPlayer().getProficiency().getSkills().hasChanceNoAnvilDamage()) {
 
