@@ -1,4 +1,12 @@
-version: 2
+version: 3
+
+# XP SOURCES:
+# COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
+# BLOCK: BLOCK_BREAK, BLOCK_PLACE, BLOCK_INTERACT, ORE_BREAK
+# FISHING: FISH, FISH_TRASH, FISH_TREASURE
+# ANIMAL: BREED_ANIMAL, TAME_ANIMAL
+# FARMING: CROP_PLACE, CROP_BREAK
+# CRAFTING: WEAPON_CRAFT, TOOL_CRAFT, ARMOR_CRAFT
 
 None:
 
@@ -39,6 +47,7 @@ Warrior:
 
     weaponProficiency: [ Light, Medium, Heavy ]
     armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ ATTACK, DEFEND, EVADE, KILL, DEATH ]
 
   skills:
     nametag: true
@@ -63,6 +72,7 @@ Archer:
 
     weaponProficiency: [ Bow, Crossbow, Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: true
@@ -88,6 +98,7 @@ Fisherman:
 
     weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE ]
 
   skills:
     nametag: true
@@ -113,6 +124,7 @@ Miner:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, ORE_BREAK ]
 
   skills:
     nametag: true
@@ -139,6 +151,8 @@ Blacksmith:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT ]
+
 
   skills:
     nametag: true
@@ -271,6 +285,7 @@ Farmer:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
             
   skills:
     nametag: true
