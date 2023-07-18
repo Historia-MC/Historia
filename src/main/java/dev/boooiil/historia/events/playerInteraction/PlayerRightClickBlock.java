@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 import dev.boooiil.historia.handlers.playerInteraction.RightClickAnvil;
 
-public class PlayerRightClick implements Listener {
+public class PlayerRightClickBlock implements Listener {
 
 
     @EventHandler
