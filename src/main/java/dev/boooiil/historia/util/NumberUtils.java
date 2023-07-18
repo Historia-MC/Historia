@@ -1,5 +1,8 @@
 package dev.boooiil.historia.util;
 
+import java.math.RoundingMode;
+import java.math.BigDecimal;
+
 public class NumberUtils {
     
     public static float random(int min, int max) {
@@ -23,7 +26,7 @@ public class NumberUtils {
     }
 
     public static double roundDouble(double value, int places) {
-        return (Math.round(value * Math.pow(10, places)) / Math.pow(10, places));
+        return Double.parseDouble(new BigDecimal(value).setScale(places, RoundingMode.HALF_UP).stripTrailingZeros().toPlainString());
     }
 
 }
