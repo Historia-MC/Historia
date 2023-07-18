@@ -1,4 +1,4 @@
-version: 6
+version: 7
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -291,7 +291,7 @@ Farmer:
     instantGrowChance: 0.3
     beheadChance: 0.10
 
-    weaponProficiency: [ Light ]
+    weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light, Medium ]
     experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
             
