@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import dev.boooiil.historia.handlers.pvp.PlayerDamaged;
-import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 
 public class PlayerHit implements Listener {
     
@@ -23,10 +22,6 @@ public class PlayerHit implements Listener {
             playerDamaged.doAttack();
             playerDamaged.doDefend();
 
-            
-            ScoreboardHandler.destroyPlayerBoard((Player) defender);
-            ScoreboardHandler.initializePlayerBoard((Player) defender);
-        
         }
 
 

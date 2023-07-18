@@ -10,7 +10,6 @@ import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.handlers.connection.InitialStatLoader;
-import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 import dev.boooiil.historia.util.Logging;
 
 /**
@@ -53,8 +52,6 @@ public class PlayerJoin implements Listener {
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
         Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
-
-        ScoreboardHandler.initializePlayerBoard(event.getPlayer());
 
     }
 

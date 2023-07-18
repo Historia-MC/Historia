@@ -44,8 +44,10 @@ import dev.boooiil.historia.events.playerInteraction.PlayerRightClickBlock;
 import dev.boooiil.historia.events.playerInteraction.PlayerRightClickEntity;
 import dev.boooiil.historia.events.pvp.PlayerDeath;
 import dev.boooiil.historia.events.pvp.PlayerHit;
+import dev.boooiil.historia.events.pvp.PlayerRespawn;
 import dev.boooiil.historia.runnable.PlayerIterator;
 import dev.boooiil.historia.runnable.SaveProgress;
+import dev.boooiil.historia.runnable.UpdateScoreboard;
 import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
@@ -111,6 +113,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerEvent(new PlayerHit());
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
+        registerEvent(new PlayerRespawn());
         registerEvent(new PlayerRightClickBlock());
         registerEvent(new PlayerRightClickEntity());
         registerEvent(new WaterBreakBlock());
@@ -123,13 +126,14 @@ public class HistoriaPlugin extends JavaPlugin {
         registerCommand("proficiency", new CommandProficiency());
 
         registerRunnable(new PlayerIterator());
+        registerRunnable(new UpdateScoreboard());
         registerRunnable(new SaveProgress(), 6000l);
 
         registerFurnaceRecipes();
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
-        
+
         ScoreboardHandler.init();
 
         Logging.infoToConsole("Plugin Enabled.");
