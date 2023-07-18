@@ -1,8 +1,10 @@
 package dev.boooiil.historia.handlers.playerInteraction;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
@@ -31,6 +33,18 @@ public class BaseInteractionEvent {
 
     public Block getBlock() {
         return event.getClickedBlock();
+    }
+
+    public ItemStack getHeldItem() {
+        return event.getItem();
+    }
+
+    public void doInteraction() {
+
+    }
+
+    public boolean blockIsType(Material material) {
+        return getBlock().getType() == material;
     }
     
 }
