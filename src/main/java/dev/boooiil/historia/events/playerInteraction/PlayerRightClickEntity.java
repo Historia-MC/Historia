@@ -12,6 +12,7 @@ public class PlayerRightClickEntity implements Listener {
     public void onPlayerRightClickEntity(PlayerInteractEntityEvent event) {
 
         RightClickChicken rightClickChicken = new RightClickChicken(event);
+        rightClickChicken.doInteraction();
 
     }
     
