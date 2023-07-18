@@ -17,7 +17,7 @@ public class CommandProficiency implements CommandExecutor {
 
         if (!(sender instanceof Player))
             return false;
-        if (args.length != 1)
+        if (args.length == 0)
             return false;
 
         if (args[0].equals("set")) {
@@ -51,7 +51,7 @@ public class CommandProficiency implements CommandExecutor {
                 return true;
 
             }
-            
+
         } else {
 
             sender.sendMessage("Syntax: /proficiency set <proficiency>.");
