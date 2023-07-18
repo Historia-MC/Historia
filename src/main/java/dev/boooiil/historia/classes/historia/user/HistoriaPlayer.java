@@ -575,11 +575,14 @@ public class HistoriaPlayer extends BasePlayer {
 
         if ((getCurrentExperience()) - incomeModified <= 0) {
 
-            long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
-
             setLevel(getLevel() - 1);
-            setCurrentExperience(getMaxExperience() - overflow);
             setMaxExperience(Math.pow(getLevel(), 1.68));
+
+            long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
+            
+            if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
+            else setCurrentExperience(0);
+
             saveCharacter();
 
             Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
