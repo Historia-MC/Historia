@@ -1,4 +1,4 @@
-version: 5
+version: 6
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -182,6 +182,7 @@ Huntsman:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Bow, Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: false
@@ -211,6 +212,7 @@ Apothecary:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE ]
 
   skills:
     nametag: true
@@ -237,6 +239,7 @@ Architect:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_PLACE ]
 
   skills:
     nametag: true
@@ -263,6 +266,7 @@ Lumberjack:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_BREAK ]
 
   skills:
     nametag: true
