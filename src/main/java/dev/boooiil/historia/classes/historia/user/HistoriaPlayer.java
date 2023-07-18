@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import dev.boooiil.historia.classes.enums.IncomeTypes.AllSources;
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
@@ -531,12 +532,20 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @return {@link Double}
      */
-    public void increaseExperience() {
+    public void increaseExperience(AllSources source) {
 
-        if ((getCurrentExperience()) + this.proficiency.getStats().getBaseExperienceGain() >= getMaxExperience()) {
+        if (source == null) return;
+        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
+
+        long incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        long incomeModified = incomeValue * this.level / 10;
+
+        if ((getCurrentExperience()) + incomeModified >= getMaxExperience()) {
+
+            long overflow = (long) ((getCurrentExperience() + incomeModified) - getMaxExperience());
 
             setLevel(getLevel() + 1);
-            setCurrentExperience(0);
+            setCurrentExperience(overflow);
             setMaxExperience(Math.pow(getLevel(), 1.68));
             saveCharacter();
 
@@ -544,18 +553,26 @@ public class HistoriaPlayer extends BasePlayer {
 
         } else {
 
-            setCurrentExperience(getCurrentExperience() + this.proficiency.getStats().getBaseExperienceGain());
+            setCurrentExperience(getCurrentExperience() + incomeModified);
 
         }
     
     }
 
-    public void decreaseExperience() {
+    public void decreaseExperience(AllSources source) {
+        
+        if (source == null) return;
+        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
 
-        if ((getCurrentExperience()) - 2 <= 0) {
+        long incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        long incomeModified = (long) Math.pow(incomeValue * this.level / 10, 2);
+
+        if ((getCurrentExperience()) - incomeModified <= 0) {
+
+            long overflow = (long) ((getCurrentExperience() - incomeModified) - getMaxExperience());
 
             setLevel(getLevel() - 1);
-            setCurrentExperience(getMaxExperience() - 1);
+            setCurrentExperience(getMaxExperience() - overflow);
             setMaxExperience(Math.pow(getLevel(), 1.68));
             saveCharacter();
 
@@ -563,7 +580,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         } else {
 
-            setCurrentExperience(getCurrentExperience() - 1);
+            setCurrentExperience(getCurrentExperience() - incomeModified);
 
         }
     
