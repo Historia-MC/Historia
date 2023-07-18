@@ -180,8 +180,8 @@ Huntsman:
     instantGrowChance: 0
     beheadChance: 0.07
 
-    weaponProficiency: [ Light ]
-    armorProficiency: [ Bow, Light ]
+    weaponProficiency: [ Bow, Light ]
+    armorProficiency: [ Light ]
     experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
