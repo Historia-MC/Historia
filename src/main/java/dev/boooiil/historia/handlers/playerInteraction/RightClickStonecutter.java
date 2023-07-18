@@ -1,5 +1,9 @@
 package dev.boooiil.historia.handlers.playerInteraction;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -17,32 +21,41 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
     @Override
     public void doInteraction() {
 
-        if (this.blockIsType(Material.STONECUTTER)) {
+        if (!this.blockIsType(Material.STONECUTTER))
+            return;
+        if (this.getHeldItem() == null)
+            return;
 
-            // if not sword or axe
-            if (!this.getHeldItem().getType().toString().toLowerCase().matches("sword|axe")) {
-                
-                event.setCancelled(true);
-                Logging.infoToPlayer("This item can't be sharpened.", this.getPlayer().getUniqueId());
-                
-            } 
+        Pattern pattern = Pattern.compile(".*_sword|.*_axe", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(this.getHeldItem().getType().toString());
 
-            // if player can apply sharpness
-            else if (this.getHistoriaPlayer().getProficiency().getSkills().canApplySharpness()) {
+        Logging.debugToConsole(
+                "[RightClickStonecutter] Player " + this.getPlayer().getName() + " right clicked a stonecutter.");
+        Logging.debugToConsole("[RightClickStonecutter] Player " + this.getPlayer().getName() + " has proficiency "
+                + this.getHistoriaPlayer().getProficiency().getName() + ".");
+        Logging.debugToConsole(
+                "[RightClickStonecutter] Held Item: " + this.getHeldItem().getType().toString().toLowerCase() + ".");
+        Logging.debugToConsole("[RightClickStonecutter] Held Item Enchantments: "
+                + this.getHeldItem().getEnchantments().toString() + ".");
+        Logging.debugToConsole("[RightClickStonecutter] Held Item Matches: " + matcher.matches());
 
-                event.setCancelled(true);
-                if (increaseSharpness()) {
-                    Logging.infoToPlayer("You sharpened your " + this.getHeldItem().getType().toString().toLowerCase() + "!", this.getPlayer().getUniqueId());
-                } else {
-                    Logging.infoToPlayer("Your " + this.getHeldItem().getType().toString().toLowerCase() + " is already as sharp as it can be!", this.getPlayer().getUniqueId());
-                }
+        // if not sword or axe
+        if (!matcher.matches()) return;
 
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().canApplySharpness()) {
+            Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
+            return;
+        } else {
+
+            event.setCancelled(true);
+            if (increaseSharpness()) {
+                Logging.infoToPlayer(
+                        "You sharpened your " + this.getHeldItem().getType().toString().toLowerCase() + "!",
+                        this.getPlayer().getUniqueId());
+            } else {
+                Logging.infoToPlayer("Your " + this.getHeldItem().getType().toString().toLowerCase()
+                        + " is already as sharp as it can be!", this.getPlayer().getUniqueId());
             }
-            else {
-                Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
-            }
-
-            
 
         }
 
@@ -50,27 +63,37 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
 
     private boolean increaseSharpness() {
 
-
         if (!this.isMaxSharpness()) {
 
             int currentSharpnessLevel = this.getHeldItem().getEnchantmentLevel(Enchantment.DAMAGE_ALL);
             int increasedSharpnessLevel = currentSharpnessLevel + 1;
-            int adjustedSharpnessUses = (int) Math.round(currentSharpnessLevel * 1.5);
+            int adjustedSharpnessUses = (int) Math.round(increasedSharpnessLevel * 1.5);
+
+            Logging.debugToConsole("[RightClickStonecutter] Current Sharpness Level: " + currentSharpnessLevel);
+            Logging.debugToConsole("[RightClickStonecutter] Increased Sharpness Level: " + increasedSharpnessLevel);
+            Logging.debugToConsole("[RightClickStonecutter] Adjusted Sharpness Uses: " + adjustedSharpnessUses);
 
             ItemMeta itemMeta = this.getHeldItem().getItemMeta();
-            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); 
+            List<String> currentLore = itemMeta.getLore();
+
+            itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             itemMeta.addEnchant(Enchantment.DAMAGE_ALL, increasedSharpnessLevel, true);
-            itemMeta.getLore().add("");
-            itemMeta.getLore().add("Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses + "/" + adjustedSharpnessUses);
-            
+            currentLore.add("");
+            currentLore.add("Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
+                    + "/" + adjustedSharpnessUses);
+
+            itemMeta.setLore(currentLore);
+            this.getHeldItem().setItemMeta(itemMeta);
+
             return true;
-            
+
         }
 
-        else return false;
+        else
+            return false;
     }
 
     private boolean isMaxSharpness() {
-        return this.getHeldItem().getEnchantmentLevel(Enchantment.DAMAGE_ALL) == 3;    
+        return this.getHeldItem().getEnchantmentLevel(Enchantment.DAMAGE_ALL) >= 3;
     }
 }
