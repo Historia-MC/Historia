@@ -56,6 +56,8 @@ public class CraftingResult {
 
         else {
 
+            Logging.debugToConsole("[generateRandomModifiers] Was other item.");
+
             historiaPlayer.increaseExperience(CraftingSources.OTHER_CRAFT.getKey());
 
         };
