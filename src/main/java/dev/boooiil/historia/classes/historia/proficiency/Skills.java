@@ -3,7 +3,8 @@ package dev.boooiil.historia.classes.historia.proficiency;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
- * This class represents the skills of a player in the game. It contains boolean variables that represent
+ * This class represents the skills of a player in the game. It contains boolean
+ * variables that represent
  * whether or not the player has certain skills or abilities.
  */
 public class Skills {
@@ -14,6 +15,7 @@ public class Skills {
     private boolean hasQuickCharge = false;
 
     private boolean hasEfficiencyPickaxe = false;
+    private boolean hasEfficiencyShovel = false;
     private boolean hasEfficiencyAxe = false;
     private boolean hasChanceExtraOre = false;
     private boolean hasChanceExtraWood = false;
@@ -45,11 +47,12 @@ public class Skills {
     private boolean specialItems = false;
 
     public Skills(FileConfiguration config, String root) {
-        
+
         this.hasNameTag = config.getBoolean(root + ".nametag");
         this.hasFeatherFall = config.getBoolean(root + ".featherFall");
         this.hasQuickCharge = config.getBoolean(root + ".quickCharge");
         this.hasEfficiencyPickaxe = config.getBoolean(root + ".efficiencyPickaxe");
+        this.hasEfficiencyShovel = config.getBoolean(root + ".efficiencyShovel");
         this.hasEfficiencyAxe = config.getBoolean(root + ".efficiencyAxe");
         this.hasChanceExtraOre = config.getBoolean(root + ".chanceExtraOre");
         this.hasChanceExtraWood = config.getBoolean(root + ".chanceExtraWood");
@@ -71,11 +74,12 @@ public class Skills {
         this.canShearChickens = config.getBoolean(root + ".shearChicken");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
         this.specialItems = config.getBoolean(root + ".specialItems");
-        
+
     }
-    
+
     /**
-     * This function returns a boolean value that represents whether or not the player has a name tag
+     * This function returns a boolean value that represents whether or not the
+     * player has a name tag
      * 
      * @return The boolean value of hasNameTag.
      */
@@ -84,7 +88,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasNameTag to the value of the parameter hasNameTag
+     * This function sets the value of the variable hasNameTag to the value of the
+     * parameter hasNameTag
      * 
      * @param hasNameTag Whether or not the player has a name tag.
      */
@@ -93,7 +98,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that represents whether or not the player has the feather
+     * This function returns a boolean value that represents whether or not the
+     * player has the feather
      * fall enchantment
      * 
      * @return The boolean value of hasFeatherFall.
@@ -103,7 +109,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of the variable hasFeatherFall to the boolean value of the
+     * This function sets the boolean value of the variable hasFeatherFall to the
+     * boolean value of the
      * parameter hasFeatherFall
      * 
      * @param hasFeatherFall Whether or not the player has the feather fall effect.
@@ -113,7 +120,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that indicates whether the device has quick charge or not
+     * This function returns a boolean value that indicates whether the device has
+     * quick charge or not
      * 
      * @return The value of the hasQuickCharge variable.
      */
@@ -122,7 +130,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasQuickCharge to the value of the parameter
+     * This function sets the value of the variable hasQuickCharge to the value of
+     * the parameter
      * hasQuickCharge
      * 
      * @param hasQuickCharge boolean
@@ -132,7 +141,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that represents whether or not the player has an
+     * This function returns a boolean value that represents whether or not the
+     * player has an
      * Efficiency pickaxe.
      * 
      * @return The boolean value of hasEfficiencyPickaxe.
@@ -142,13 +152,38 @@ public class Skills {
     }
 
     /**
-     * It sets the value of the variable hasEfficiencyPickaxe to the value of the parameter
+     * It sets the value of the variable hasEfficiencyPickaxe to the value of the
+     * parameter
      * hasEfficiencyPickaxe
      * 
-     * @param hasEfficiencyPickaxe Whether or not the player has an Efficiency pickaxe
+     * @param hasEfficiencyPickaxe Whether or not the player has an Efficiency
+     *                             pickaxe
      */
     public void hasEfficiencyPickaxe(boolean hasEfficiencyPickaxe) {
         this.hasEfficiencyPickaxe = hasEfficiencyPickaxe;
+    }
+
+    /**
+     * This function returns a boolean value that represents whether or not the
+     * player has an
+     * Efficiency pickaxe.
+     * 
+     * @return The boolean value of hasEfficiencyPickaxe.
+     */
+    public boolean hasEfficiencyShovel() {
+        return hasEfficiencyShovel;
+    }
+
+    /**
+     * It sets the value of the variable hasEfficiencyPickaxe to the value of the
+     * parameter
+     * hasEfficiencyPickaxe
+     * 
+     * @param hasEfficiencyPickaxe Whether or not the player has an Efficiency
+     *                             pickaxe
+     */
+    public void hasEfficiencyShovel(boolean hasEfficiencyShovel) {
+        this.hasEfficiencyShovel = hasEfficiencyShovel;
     }
 
     /**
@@ -161,7 +196,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasEfficiencyAxe to the value of the parameter
+     * This function sets the value of the variable hasEfficiencyAxe to the value of
+     * the parameter
      * hasEfficiencyAxe
      * 
      * @param hasEfficiencyAxe If the player has an efficiency axe
@@ -171,7 +207,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that represents whether or not the player has a chance to
+     * This function returns a boolean value that represents whether or not the
+     * player has a chance to
      * get extra ore
      * 
      * @return The boolean value of hasChanceExtraOre.
@@ -181,7 +218,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasChanceExtraOre to the value of the parameter
+     * This function sets the value of the variable hasChanceExtraOre to the value
+     * of the parameter
      * hasChanceExtraOre
      * 
      * @param hasChanceExtraOre If the ore has a chance to drop an extra ore.
@@ -191,7 +229,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the player has a chance to
+     * This function returns a boolean value that indicates whether or not the
+     * player has a chance to
      * get extra wood
      * 
      * @return The boolean value of hasChanceExtraWood.
@@ -201,18 +240,21 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasChanceExtraWood to the value of the parameter
+     * This function sets the value of the variable hasChanceExtraWood to the value
+     * of the parameter
      * hasChanceExtraWood
      * 
-     * @param hasChanceExtraWood If true, the player has a chance to get extra wood when chopping down
-     * a tree.
+     * @param hasChanceExtraWood If true, the player has a chance to get extra wood
+     *                           when chopping down
+     *                           a tree.
      */
     public void hasChanceExtraWood(boolean hasChanceExtraWood) {
         this.hasChanceExtraWood = hasChanceExtraWood;
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the chicken has a chance to
+     * This function returns a boolean value that indicates whether or not the
+     * chicken has a chance to
      * drop extra feathers
      * 
      * @return The boolean value of hasChanceExtraFeathers.
@@ -222,18 +264,21 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of the variable hasChanceExtraFeathers to the boolean value
+     * This function sets the boolean value of the variable hasChanceExtraFeathers
+     * to the boolean value
      * of the parameter hasChanceExtraFeathers
      * 
-     * @param hasChanceExtraFeathers If true, the player has a chance to get extra feathers when
-     * killing a chicken.
+     * @param hasChanceExtraFeathers If true, the player has a chance to get extra
+     *                               feathers when
+     *                               killing a chicken.
      */
     public void hasChanceExtraFeathers(boolean hasChanceExtraFeathers) {
         this.hasChanceExtraFeathers = hasChanceExtraFeathers;
     }
 
     /**
-     * This function returns a boolean value that is true if the item has a chance to not take damage
+     * This function returns a boolean value that is true if the item has a chance
+     * to not take damage
      * when used in an anvil
      * 
      * @return The boolean value of hasChanceNoAnvilDamage.
@@ -243,18 +288,21 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of the variable hasChanceNoAnvilDamage to the boolean value
+     * This function sets the boolean value of the variable hasChanceNoAnvilDamage
+     * to the boolean value
      * of the variable hasChanceNoAnvilDamage
      * 
-     * @param hasChanceNoAnvilDamage If true, the item will have a chance to not take damage when used
-     * in an anvil.
+     * @param hasChanceNoAnvilDamage If true, the item will have a chance to not
+     *                               take damage when used
+     *                               in an anvil.
      */
     public void hasChanceNoAnvilDamage(boolean hasChanceNoAnvilDamage) {
         this.hasChanceNoAnvilDamage = hasChanceNoAnvilDamage;
     }
 
     /**
-     * This function returns a boolean value that indicates whether the player has a chance to not
+     * This function returns a boolean value that indicates whether the player has a
+     * chance to not
      * consume a block
      * 
      * @return The value of the variable hasChanceNoConsumeBlock.
@@ -264,17 +312,20 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable hasChanceNoConsumeBlock to the value of the
+     * This function sets the value of the variable hasChanceNoConsumeBlock to the
+     * value of the
      * parameter hasChanceNoConsumeBlock
      * 
-     * @param hasChanceNoConsumeBlock If true, the block will have a chance to not consume the item.
+     * @param hasChanceNoConsumeBlock If true, the block will have a chance to not
+     *                                consume the item.
      */
     public void hasChanceNoConsumeBlock(boolean hasChanceNoConsumeBlock) {
         this.hasChanceNoConsumeBlock = hasChanceNoConsumeBlock;
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the player can ignite oil.
+     * This function returns a boolean value that indicates whether or not the
+     * player can ignite oil.
      * 
      * @return The boolean value of canIgniteOil.
      */
@@ -283,7 +334,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of canIgniteOil to the boolean value of the parameter
+     * This function sets the boolean value of canIgniteOil to the boolean value of
+     * the parameter
      * canIgniteOil
      * 
      * @param canIgniteOil If true, the fire will ignite oil.
@@ -293,7 +345,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the country can extract oil
+     * This function returns a boolean value that indicates whether or not the
+     * country can extract oil
      * 
      * @return The value of the variable canExtractOil.
      */
@@ -302,7 +355,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the boolean variable canExtractOil to the value of the boolean
+     * This function sets the value of the boolean variable canExtractOil to the
+     * value of the boolean
      * parameter canExtractOil
      * 
      * @param canExtractOil If the block can extract oil from the ground.
@@ -312,7 +366,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that determines whether or not the player can break glass
+     * This function returns a boolean value that determines whether or not the
+     * player can break glass
      * 
      * @return The boolean value of canBreakGlass.
      */
@@ -321,17 +376,20 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canBreakGlass to the value of the parameter
+     * This function sets the value of the variable canBreakGlass to the value of
+     * the parameter
      * canBreakGlass
      * 
-     * @param canBreakGlass Whether or not the player can break glass with this tool.
+     * @param canBreakGlass Whether or not the player can break glass with this
+     *                      tool.
      */
     public void setCanBreakGrass(boolean canBreakGlass) {
         this.canBreakGrass = canBreakGlass;
     }
 
     /**
-     * This function returns a boolean value that is true if the horse can craft a saddle, and false if
+     * This function returns a boolean value that is true if the horse can craft a
+     * saddle, and false if
      * it cannot.
      * 
      * @return The boolean value of canCraftSaddle.
@@ -341,7 +399,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of canCraftSaddle to the boolean value of the parameter
+     * This function sets the boolean value of canCraftSaddle to the boolean value
+     * of the parameter
      * canCraftSaddle
      * 
      * @param canCraftSaddle Whether or not the player can craft a saddle.
@@ -351,7 +410,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that determines whether or not the player can tame animals
+     * This function returns a boolean value that determines whether or not the
+     * player can tame animals
      * 
      * @return The boolean value of canTameAnimals.
      */
@@ -360,7 +420,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canTameAnimals to the value of the parameter
+     * This function sets the value of the variable canTameAnimals to the value of
+     * the parameter
      * canTameAnimals
      * 
      * @param canTameAnimals Whether or not the player can tame animals.
@@ -370,7 +431,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that indicates whether the edge can be swept
+     * This function returns a boolean value that indicates whether the edge can be
+     * swept
      * 
      * @return The value of the variable canSweepingEdge.
      */
@@ -379,7 +441,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the boolean variable canSweepingEdge to the value of the
+     * This function sets the value of the boolean variable canSweepingEdge to the
+     * value of the
      * parameter canSweepingEdge
      * 
      * @param canSweepingEdge Whether the edge can be swept
@@ -389,7 +452,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that determines whether or not the player can extract
+     * This function returns a boolean value that determines whether or not the
+     * player can extract
      * bones from the bone pile
      * 
      * @return The method is returning a boolean value.
@@ -399,7 +463,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the boolean variable canExtractBones to the value of the boolean
+     * This function sets the value of the boolean variable canExtractBones to the
+     * value of the boolean
      * variable canExtractBones
      * 
      * @param canExtractBones If true, the mob can be extracted for bones.
@@ -409,7 +474,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that determines whether or not the player can break
+     * This function returns a boolean value that determines whether or not the
+     * player can break
      * beehives
      * 
      * @return The boolean value of canBreakBeehive.
@@ -419,7 +485,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canBreakBeehive to the value of the parameter
+     * This function sets the value of the variable canBreakBeehive to the value of
+     * the parameter
      * canBreakBeehive
      * 
      * @param canBreakBeehive Whether or not the player can break beehives.
@@ -429,7 +496,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that represents whether or not the player can craft
+     * This function returns a boolean value that represents whether or not the
+     * player can craft
      * gunpowder.
      * 
      * @return The boolean value of canCraftGunpowder.
@@ -439,7 +507,8 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canCraftGunpowder to the value of the parameter
+     * This function sets the value of the variable canCraftGunpowder to the value
+     * of the parameter
      * canCraftGunpowder
      * 
      * @param canCraftGunpowder Whether or not the player can craft gunpowder.
@@ -449,7 +518,8 @@ public class Skills {
     }
 
     /**
-     * Returns whether or not the item can have the unbreaking enchantment applied to it.
+     * Returns whether or not the item can have the unbreaking enchantment applied
+     * to it.
      * 
      * @return The boolean value of canApplyUnbreaking.
      */
@@ -458,17 +528,20 @@ public class Skills {
     }
 
     /**
-     * This function sets the boolean value of canApplyUnbreaking to the boolean value of the parameter
+     * This function sets the boolean value of canApplyUnbreaking to the boolean
+     * value of the parameter
      * canApplyUnbreaking.
      * 
-     * @param canApplyUnbreaking Whether or not the enchantment can be applied to the item.
+     * @param canApplyUnbreaking Whether or not the enchantment can be applied to
+     *                           the item.
      */
     public void setCanApplyUnbreaking(boolean canApplyUnbreaking) {
         this.canApplyUnbreaking = canApplyUnbreaking;
     }
 
     /**
-     * This function returns a boolean value that represents whether or not the player can apply the
+     * This function returns a boolean value that represents whether or not the
+     * player can apply the
      * sharpness enchantment to the item.
      * 
      * @return The boolean value of canApplySharpness.
@@ -478,7 +551,8 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that is true if the player can make high tier armor, and
+     * This function returns a boolean value that is true if the player can make
+     * high tier armor, and
      * false if they can't.
      * 
      * @return The boolean value of canMakeHighTierArmor.
@@ -492,17 +566,20 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canMakeHighTierArmor to the value of the parameter
+     * This function sets the value of the variable canMakeHighTierArmor to the
+     * value of the parameter
      * canMakeHighTierArmor
      * 
-     * @param canMakeHighTierArmor Whether or not the player can make high tier armor.
+     * @param canMakeHighTierArmor Whether or not the player can make high tier
+     *                             armor.
      */
     public void setCanMakeHighTierArmor(boolean canMakeHighTierArmor) {
         this.canCraftHighTier = canMakeHighTierArmor;
     }
 
     /**
-     * This function returns a boolean value that determines whether or not the player can make a
+     * This function returns a boolean value that determines whether or not the
+     * player can make a
      * knowledge book
      * 
      * @return The boolean value of canMakeKnowledgeBook.
@@ -512,17 +589,20 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the variable canMakeKnowledgeBook to the value of the parameter
+     * This function sets the value of the variable canMakeKnowledgeBook to the
+     * value of the parameter
      * canMakeKnowledgeBook
      * 
-     * @param canMakeKnowledgeBook Whether or not the player can make a knowledge book.
+     * @param canMakeKnowledgeBook Whether or not the player can make a knowledge
+     *                             book.
      */
     public void setCanMakeKnowledgeBook(boolean canMakeKnowledgeBook) {
         this.canMakeKnowledgeBook = canMakeKnowledgeBook;
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the item is special
+     * This function returns a boolean value that indicates whether or not the item
+     * is special
      * 
      * @return The boolean value of specialItems.
      */
@@ -531,11 +611,13 @@ public class Skills {
     }
 
     /**
-     * This function sets the value of the specialItems variable to the value of the specialItems
+     * This function sets the value of the specialItems variable to the value of the
+     * specialItems
      * parameter
      * 
-     * @param specialItems This is a boolean value that determines whether or not the special items are
-     * enabled.
+     * @param specialItems This is a boolean value that determines whether or not
+     *                     the special items are
+     *                     enabled.
      */
     public void setSpecialItems(boolean specialItems) {
         this.specialItems = specialItems;

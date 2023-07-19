@@ -1,4 +1,4 @@
-version: 7
+version: 8
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -131,6 +131,7 @@ Miner:
     nametag: true
     extraOreChance: true
     efficiencyPickaxe: true
+    efficiencyShovel: true
     specialItems: true
 
 Blacksmith:

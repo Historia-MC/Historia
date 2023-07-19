@@ -57,6 +57,36 @@ public class ClassEnchants {
 
             }
 
+            if (itemType.contains("_SHOVEL")) {
+
+                if (historiaPlayer.getProficiency().getSkills().hasEfficiencyShovel()) {
+
+                    if (!itemMeta.hasEnchant(Enchantment.DIG_SPEED)) {
+
+                        Logging.debugToConsole(historiaPlayer.getUsername()
+                                + " had a shovel in their inventory that wasn't enchanted.");
+
+                        itemMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+                        item.setItemMeta(itemMeta);
+
+                    }
+
+                } else {
+
+                    if (itemMeta.hasEnchant(Enchantment.DIG_SPEED)) {
+
+                        Logging.debugToConsole(historiaPlayer.getUsername()
+                                + " had a shovel in their inventory with an illegal enchant.");
+
+                        itemMeta.removeEnchant(Enchantment.DIG_SPEED);
+                        item.setItemMeta(itemMeta);
+
+                    }
+
+                }
+
+            }
+
             if (itemType.contains("_AXE")) {
 
                 if (historiaPlayer.getProficiency().getSkills().hasEfficiencyAxe()) {
