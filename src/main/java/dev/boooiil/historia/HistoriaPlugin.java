@@ -37,6 +37,7 @@ import dev.boooiil.historia.events.experience.ExperienceGain;
 import dev.boooiil.historia.events.food.FoodLevelChange;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltFinish;
 import dev.boooiil.historia.events.furnace.FurnaceSmeltStart;
+import dev.boooiil.historia.events.inventory.PlayerClickInventory;
 import dev.boooiil.historia.events.mobs.EntityBreed;
 import dev.boooiil.historia.events.mobs.EntityKill;
 import dev.boooiil.historia.events.mobs.EntityTame;
@@ -45,6 +46,7 @@ import dev.boooiil.historia.events.playerInteraction.PlayerRightClickEntity;
 import dev.boooiil.historia.events.pvp.PlayerDeath;
 import dev.boooiil.historia.events.pvp.PlayerHit;
 import dev.boooiil.historia.events.pvp.PlayerRespawn;
+import dev.boooiil.historia.events.pvp.ShootBow;
 import dev.boooiil.historia.runnable.PlayerIterator;
 import dev.boooiil.historia.runnable.SaveProgress;
 import dev.boooiil.historia.runnable.UpdateScoreboard;
@@ -106,6 +108,7 @@ public class HistoriaPlugin extends JavaPlugin {
         registerEvent(new FoodLevelChange());
         registerEvent(new FurnaceSmeltFinish());
         registerEvent(new FurnaceSmeltStart());
+        registerEvent(new PlayerClickInventory());
         registerEvent(new PlayerBreakBlock());
         registerEvent(new PlayerCraftingPrepare());
         registerEvent(new PlayerCraftingResult());
@@ -114,8 +117,10 @@ public class HistoriaPlugin extends JavaPlugin {
         registerEvent(new PlayerJoin());
         registerEvent(new PlayerLeave());
         registerEvent(new PlayerRespawn());
+        //registerEvent(new PlayerRightClickAir());
         registerEvent(new PlayerRightClickBlock());
         registerEvent(new PlayerRightClickEntity());
+        registerEvent(new ShootBow());
         registerEvent(new WaterBreakBlock());
 
         registerCommand("checkplayers", new CommandPlayers());
