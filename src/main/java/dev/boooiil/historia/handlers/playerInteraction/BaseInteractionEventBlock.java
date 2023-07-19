@@ -39,6 +39,10 @@ public class BaseInteractionEventBlock {
         return event.getItem();
     }
 
+    public ItemStack getOffHandItem() {
+        return getPlayer().getInventory().getItemInOffHand();
+    }
+
     public void doInteraction() {
 
     }
