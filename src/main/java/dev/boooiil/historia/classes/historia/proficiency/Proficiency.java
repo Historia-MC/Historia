@@ -170,8 +170,12 @@ public class Proficiency {
      * 
      * @return true if the character can use bows, false otherwise.
      */
-    public boolean canUseBow() {
-        return getStats().getUsableWeaponTypes().contains("Bow");
+    public boolean canUseRanged() {
+
+        boolean found = getStats().getUsableWeaponTypes().contains("Bow");
+        found = found ? found : getStats().getUsableWeaponTypes().contains("Crossbow"); 
+
+        return found;
     }
 
     /**
