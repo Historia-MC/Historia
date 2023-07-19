@@ -28,7 +28,7 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply feather falling to boots for builders.
 - [x] Apply quick charge to crossbow for hunters.
 - [x] Apply efficiency pickaxe to miners.
-- [ ] Apply efficiency shovel to miners.
+- [x] Apply efficiency shovel to miners.
 - [x] Apply efficiency axe to woodcutters.
 - [x] Apply chance for double ore drop for miners.
 - [x] Apply chance for double wood drop for woodcutters.
@@ -36,7 +36,7 @@ To be considered as a release, the following requirements must be met:
 - [ ] Apply chance for no anvil damage for blacksmiths.
 - [x] Apply chance to not consume the block for builders.
 - [ ] Apply custom fishing loot for fishermen.
-- [ ] Check if player can ignite oil on bow.
+- [x] Check if player can ignite oil on bow.
 - [ ] Check if player can harvest oil from sources.
 - [ ] Check if player can harvest grass?
 - [ ] Check if player can craft saddles.
@@ -156,7 +156,7 @@ To be considered as a release, the following requirements must be met:
 
 ## [Experience]
 
-- [ ] Player without custom weapon deals base item damage. 
+- [x] Player without custom weapon deals base item damage. 
 - [ ] Arrow landing has chance of igniting block if flamable.
 - [ ] Apply slowness debuff on damage.
 - [ ] Can eat large fish / meat multiple times (?)
