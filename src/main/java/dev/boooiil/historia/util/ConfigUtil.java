@@ -20,7 +20,7 @@ public class ConfigUtil {
     static {
 
         for (ResourceKeys key : ResourceKeys.values()) {
-            configFileNames.add(key.toString());
+            configFileNames.add(key.getKey());
         }
        
     }
