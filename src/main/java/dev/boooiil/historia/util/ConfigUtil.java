@@ -11,6 +11,7 @@ import java.util.List;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.classes.enums.FileMap.ResourceKeys;
 
 public class ConfigUtil {
     
@@ -18,16 +19,10 @@ public class ConfigUtil {
 
     static {
 
-        configFileNames.add("armor.yml");
-        configFileNames.add("proficiency.yml");
-        configFileNames.add("expiry.yml");
-        configFileNames.add("ingots.yml");
-        configFileNames.add("ores.yml");
-        configFileNames.add("weapons.yml");
-        configFileNames.add("customitems.yml");
-        configFileNames.add("crops.yml");
-
-        
+        for (ResourceKeys key : ResourceKeys.values()) {
+            configFileNames.add(key.toString());
+        }
+       
     }
 
     public static void checkFiles() {
