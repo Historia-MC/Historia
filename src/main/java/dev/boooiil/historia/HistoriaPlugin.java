@@ -50,7 +50,6 @@ import dev.boooiil.historia.events.pvp.ShootBow;
 import dev.boooiil.historia.runnable.PlayerIterator;
 import dev.boooiil.historia.runnable.SaveProgress;
 import dev.boooiil.historia.runnable.UpdateScoreboard;
-import dev.boooiil.historia.scoreboard.ScoreboardHandler;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -138,8 +137,6 @@ public class HistoriaPlugin extends JavaPlugin {
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
-
-        ScoreboardHandler.init();
 
         Logging.infoToConsole("Plugin Enabled.");
 
