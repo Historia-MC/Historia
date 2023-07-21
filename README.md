@@ -48,7 +48,7 @@ To be considered as a release, the following requirements must be met:
 - [ ] Check if player can apply unbreaking.
 - [ ] Check if player can make high tier armor.
 - [ ] Check if player can generate a knowledge book.
-- [ ] Increase breath underwater for fishermen?
+- [ ] Increase breath underwater for fishermen (enchant of respiration)
 - [ ] Allow building of tridents for fishermen and farmers.
 - [ ] Allow holding bonemeal for farmers.
 - [ ] Allow for increased yields for farmers based on level.
