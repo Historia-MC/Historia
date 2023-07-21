@@ -581,7 +581,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             double overflow = (getCurrentExperience() - incomeModified) - getMaxExperience();
 
-            if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
+            if (overflow < getMaxExperience() && getLevel() != 1) setCurrentExperience(getMaxExperience() - overflow);
             else setCurrentExperience(0);
 
             saveCharacter();
