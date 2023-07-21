@@ -34,7 +34,8 @@ public class ExperienceTypes {
         FISH_TRASH(-1d),
         FISH_TREASURE(3d),
         RANGED_HIT(1d),
-        RANGED_KILL(2d);
+        RANGED_KILL(2d),
+        NONE(0d);
 
         private double key;
 
@@ -50,6 +51,7 @@ public class ExperienceTypes {
 
     public enum CombatSources {
 
+        NONE(AllSources.valueOf("NONE")),
         ATTACK(AllSources.valueOf("ATTACK")),
         DEFEND(AllSources.valueOf("DEFEND")),
         EVADE(AllSources.valueOf("EVADE")),
@@ -72,6 +74,7 @@ public class ExperienceTypes {
 
     public enum BlockSources {
 
+        NONE(AllSources.valueOf("NONE")),
         CROP_PLACE(AllSources.valueOf("CROP_PLACE")),
         CROP_BREAK(AllSources.valueOf("CROP_BREAK")),
         ORE_BREAK(AllSources.valueOf("ORE_BREAK")),
@@ -93,6 +96,7 @@ public class ExperienceTypes {
  
     public enum FishingSources {
 
+        NONE(AllSources.valueOf("NONE")),
         FISH(AllSources.valueOf("FISH")),
         FISH_TRASH(AllSources.valueOf("FISH_TRASH")),
         FISH_TREASURE(AllSources.valueOf("FISH_TREASURE"));
@@ -111,6 +115,7 @@ public class ExperienceTypes {
 
     public enum AnimalSources {
 
+        NONE(AllSources.valueOf("NONE")),
         BREED_ANIMAL(AllSources.valueOf("BREED_ANIMAL")),
         TAME_ANIMAL(AllSources.valueOf("TAME_ANIMAL"));
 
@@ -128,6 +133,7 @@ public class ExperienceTypes {
 
     public enum FarmingSources {
 
+        NONE(AllSources.valueOf("NONE")),
         CROP_PLACE(AllSources.valueOf("CROP_PLACE")),
         CROP_BREAK(AllSources.valueOf("CROP_BREAK"));
 
@@ -146,6 +152,7 @@ public class ExperienceTypes {
 
     public enum CraftingSources {
 
+        NONE(AllSources.valueOf("NONE")),
         WEAPON_CRAFT(AllSources.valueOf("WEAPON_CRAFT")),
         TOOL_CRAFT(AllSources.valueOf("TOOL_CRAFT")),
         ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT")),
