@@ -1,4 +1,4 @@
-package dev.boooiil.historia.runnable;
+package dev.boooiil.historia.classes.historia.proficiency;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.PlayerInventory;
