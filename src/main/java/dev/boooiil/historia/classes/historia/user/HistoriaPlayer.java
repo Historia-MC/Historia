@@ -91,7 +91,12 @@ public class HistoriaPlayer extends BasePlayer {
 
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
+        this.level = this.level < 1 ? 1 : this.level;
+
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
+
+        this.currentExperience = this.currentExperience < 0 ? 0 : this.currentExperience;
+
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
