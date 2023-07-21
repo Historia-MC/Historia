@@ -38,30 +38,36 @@ public class PlayerDamaged {
 
         ItemStack weapon = attacker.getInventory().getItemInMainHand();
 
-        if (weapon.getItemMeta() == null) weapon = new ItemStack(Material.STICK);
+        if (weapon.getItemMeta() == null)
+            weapon = new ItemStack(Material.STICK);
 
         // if it is a valid weapon from the config
         if (ConfigurationLoader.getWeaponConfig().isValid(weapon.getItemMeta().getLocalizedName())) {
 
-            Weapon historiaWeapon = ConfigurationLoader.getWeaponConfig().getObject(weapon.getItemMeta().getLocalizedName());
+            Weapon historiaWeapon = ConfigurationLoader.getWeaponConfig()
+                    .getObject(weapon.getItemMeta().getLocalizedName());
 
             // if the player is proficient with the weapon
             if (historiaAttacker.getProficiency().getStats().getUsableWeaponTypes()
                     .contains(historiaWeapon.getWeightClass())) {
 
                 // update the weapon stats from the given lore
-                historiaWeapon.updateWeaponStats(weapon.getItemMeta().getLore());
+                // historiaWeapon.updateWeaponStats(weapon.getItemMeta().getLore())
 
                 // reduce damage based on the sword (generic attack) proficiency
-                double damage = historiaWeapon.getDamage()
-                        * historiaAttacker.getProficiency().getStats().getBaseSwordProficiency();
+                // double damage = historiaWeapon.getDamage()
+                // * historiaAttacker.getProficiency().getStats().getBaseSwordProficiency();
 
-                Logging.infoToPlayer("You hit " + defender.getCustomName() + " for " + damage + " damage!",
-                        attacker.getUniqueId());
-                Logging.infoToPlayer(attacker.getCustomName() + " hit you for " + damage + " damage!",
-                        defender.getUniqueId());
+                // Logging.infoToPlayer("You hit " + defender.getCustomName() + " for " + damage
+                // + " damage!",
+                // attacker.getUniqueId());
+                // Logging.infoToPlayer(attacker.getCustomName() + " hit you for " + damage + "
+                // damage!",
+                // defender.getUniqueId());
 
-                event.setDamage(damage);
+                // event.setDamage(damage);
+
+                Logging.debugToConsole("Player attacked with " + event.getDamage() + " damage.");
 
             } else {
 
@@ -100,8 +106,6 @@ public class PlayerDamaged {
     }
 
     public void doEvade() {
-
-
 
     }
 }
