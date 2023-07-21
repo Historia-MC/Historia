@@ -23,6 +23,8 @@ public class Skills {
 
     private boolean hasChanceNoAnvilDamage = false;
     private boolean hasChanceNoConsumeBlock = false;
+    private boolean hasLadderBypass = false;
+
     private boolean canIgniteOil = false;
     private boolean canExtractOil = false;
     private boolean canBreakGrass = false;
@@ -59,6 +61,7 @@ public class Skills {
         this.hasChanceExtraFeathers = config.getBoolean(root + ".chanceExtraFeathers");
         this.hasChanceNoAnvilDamage = config.getBoolean(root + ".chanceNoAnvilDamage");
         this.hasChanceNoConsumeBlock = config.getBoolean(root + ".chanceNoConsumeBlock");
+        this.hasLadderBypass = config.getBoolean(root + ".ladderBypass");
         this.canIgniteOil = config.getBoolean(root + ".igniteOil");
         this.canExtractOil = config.getBoolean(root + ".extractOil");
         this.canBreakGrass = config.getBoolean(root + ".breakGrass");
@@ -321,6 +324,17 @@ public class Skills {
      */
     public void hasChanceNoConsumeBlock(boolean hasChanceNoConsumeBlock) {
         this.hasChanceNoConsumeBlock = hasChanceNoConsumeBlock;
+    }
+
+    /**
+     * This function returns a boolean value that indicates whether or not the
+     * player has a ladder
+     * bypass
+     * 
+     * @return The boolean value of hasLadderBypass.
+     */
+    public boolean hasLadderBypass() {
+        return hasLadderBypass;
     }
 
     /**
