@@ -11,6 +11,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import dev.boooiil.historia.classes.enums.ExperienceTypes.CombatSources;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historiaspawnkill.classes.TimedUser;
+import dev.boooiil.historiaspawnkill.handlers.SpawnKillHandler;
 
 public class PlayerKilled {
 
@@ -29,7 +31,7 @@ public class PlayerKilled {
         Player killer = event.getEntity().getKiller();
         HistoriaPlayer killerHistoriaPlayer = new HistoriaPlayer(killer.getUniqueId());
 
-        Pattern beheadWeaponRegex = Pattern.compile("sword|axe", Pattern.CASE_INSENSITIVE);
+        Pattern beheadWeaponRegex = Pattern.compile(".*sword|.*axe", Pattern.CASE_INSENSITIVE);
         Matcher beheadWeaponMatch = beheadWeaponRegex.matcher(killer.getInventory().getItemInMainHand().getType().toString());
         boolean validBeheadWeapon = beheadWeaponMatch.find();
 
@@ -52,9 +54,31 @@ public class PlayerKilled {
             }
 
         }
+        
+        // if the player has been spawn killed
+        if (SpawnKillHandler.users.containsKey(event.getEntity().getUniqueId())) {
 
-        killerHistoriaPlayer.increaseExperience(CombatSources.KILL.getKey());
-        historiaPlayer.decreaseExperience(CombatSources.DEATH.getKey());
+            // get the spawnkilled user
+            TimedUser timedUser = SpawnKillHandler.users.get(event.getEntity().getUniqueId());
+
+            // if the killer is in the spawnkilled user's killers list
+            if (timedUser.getKillers().containsKey(killer.getUniqueId())) {
+
+                killerHistoriaPlayer.increaseExperience(CombatSources.NONE.getKey());
+
+            } else {
+
+                historiaPlayer.decreaseExperience(CombatSources.DEATH.getKey());
+
+            }
+
+        }
+        else {
+
+            killerHistoriaPlayer.increaseExperience(CombatSources.KILL.getKey());
+            historiaPlayer.decreaseExperience(CombatSources.DEATH.getKey());
+
+        }
 
     }
 
