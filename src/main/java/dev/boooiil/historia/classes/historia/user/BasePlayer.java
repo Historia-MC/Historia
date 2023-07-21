@@ -11,6 +11,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
 import dev.boooiil.historia.dependents.towny.TownyHandler;
+import dev.boooiil.historia.util.Logging;
 
 public abstract class BasePlayer {
 
@@ -27,6 +28,8 @@ public abstract class BasePlayer {
      * @param uuid the UUID of the player
      */
     public BasePlayer(UUID uuid) {
+
+        Logging.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
 
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         Player player = Bukkit.getPlayer(uuid);
@@ -153,6 +156,16 @@ public abstract class BasePlayer {
         this.nation = nation;
     }
 
-    
+    public String toString() {
+
+        String output = "*** BASE PLAYER *** \n";
+        output += "UUID: " + uuid.toString() + "\n";
+        output += "Username: " + username + "\n";
+        output += "Online: " + isOnline + "\n";
+        output += "******************* \n";
+
+        return output;
+
+    }
 
 }

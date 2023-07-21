@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 
 import org.bukkit.entity.Player;
 
-import dev.boooiil.historia.configuration.GeneralConfig;
-import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.Main;
+import dev.boooiil.historia.configuration.specific.GeneralConfig;
 
 /**
  * It's a class that sends messages to the console, server, or a player
@@ -15,9 +15,9 @@ public class Logging {
 
     private static final String messagePrefix = "§7[§9Historia§7] ";
     private static final String announcePrefix = "§7[§9Announcement§7] ";
-    private static final String debugPrefix = "§7[§cDebug§7] ";
+    // private static final String debugPrefix = "§7[§cDebug§7] ";
 
-    private static final Logger logger = HistoriaPlugin.plugin().getLogger();
+    private static final Logger logger = Main.plugin().getLogger();
     
     // It's a private constructor that throws an error if someone tries to instantiate the class.
     private Logging() { throw new IllegalAccessError( "Static utility class."); }
@@ -46,7 +46,7 @@ public class Logging {
      */
     public static void infoToServer(String message) {
 
-        HistoriaPlugin.server().broadcastMessage(announcePrefix + "§7" + message);
+        Main.server().broadcastMessage(announcePrefix + "§7" + message);
 
     }
 
@@ -57,7 +57,7 @@ public class Logging {
      */
     public static void infoToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaPlugin.server().getPlayer(uuid);
+        Player player = Main.server().getPlayer(uuid);
 
         if (player.isOnline()) player.sendMessage(messagePrefix + "§7" + message);
 
@@ -70,7 +70,7 @@ public class Logging {
      */
     public static void infoToPlayerNoPrefix(String message, UUID uuid) {
 
-        Player player = HistoriaPlugin.server().getPlayer(uuid);
+        Player player = Main.server().getPlayer(uuid);
 
         if (player.isOnline()) player.sendMessage("§7" + message);
 
@@ -101,7 +101,7 @@ public class Logging {
      */
     public static void warnToServer(String message) {
 
-        HistoriaPlugin.server().broadcastMessage(announcePrefix + "§6" + message);
+        Main.server().broadcastMessage(announcePrefix + "§6" + message);
 
     }
 
@@ -112,7 +112,7 @@ public class Logging {
      */
     public static void warnToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaPlugin.server().getPlayer(uuid);
+        Player player = Main.server().getPlayer(uuid);
 
         if (player.isOnline()) player.sendMessage(messagePrefix + "§6" + message);
 
@@ -142,7 +142,7 @@ public class Logging {
      */
     public static void errorToServer(String message) {
 
-        HistoriaPlugin.server().broadcastMessage(announcePrefix + "§c" + message);
+        Main.server().broadcastMessage(announcePrefix + "§c" + message);
 
     }
 
@@ -153,7 +153,7 @@ public class Logging {
      */
     public static void errorToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaPlugin.server().getPlayer(uuid);
+        Player player = Main.server().getPlayer(uuid);
 
         if (player.isOnline()) player.sendMessage(messagePrefix + "§c" + message);
 
@@ -175,7 +175,7 @@ public class Logging {
     
             }
 
-            infoToConsole(messagePrefix + debugPrefix + built);
+            warnToConsole("[DEBUG] " + built);
 
         }
         

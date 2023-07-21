@@ -56,6 +56,28 @@ public class Construct {
 
     }
 
+    public static ItemStack itemStack(String material, int amount, String displayName, String localizedName) {
+
+        // LOGGING TO BE REMOVED AFTER PUBLISH
+        Logging.debugToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
+                + " loc-name: "
+                + localizedName);
+
+        ItemStack item = new ItemStack(Material.getMaterial(material, false), amount);
+
+        ItemMeta meta = item.getItemMeta();
+
+        if (displayName != null)
+            meta.setDisplayName(displayName);
+        if (localizedName != null)
+            meta.setLocalizedName(localizedName);
+
+        item.setItemMeta(meta);
+
+        return item;
+
+    }
+
     /**
      * It takes a list of items, and replaces the drops of a block with those items
      * 

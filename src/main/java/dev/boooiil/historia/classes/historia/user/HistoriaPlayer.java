@@ -12,11 +12,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import dev.boooiil.historia.classes.enums.ExperienceTypes.AllSources;
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
-import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.sql.mysql.MySQLHandler;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
+import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
+import dev.boooiil.historia.util.NumberUtils;
+
+//TODO: Add a method to check the player's armor level and attack level.
+//TODO: Add methods to track xp gain and loss.
 
 /**
  * It's a class that holds all the information about a player
@@ -40,9 +45,11 @@ public class HistoriaPlayer extends BasePlayer {
     private double maxTemperature;
 
     private double currentExperience;
-    private double experienceMax;
+    private double maxExperience;
 
     private Proficiency proficiency;
+
+    private long lastSaved;
 
     protected Server server;
 
@@ -52,6 +59,8 @@ public class HistoriaPlayer extends BasePlayer {
     public HistoriaPlayer() {
         super(null);
         this.isValid = false;
+
+        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
 
     /**
@@ -62,6 +71,8 @@ public class HistoriaPlayer extends BasePlayer {
     public HistoriaPlayer(UUID uuid) {
 
         super(uuid);
+
+        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid.toString() + ".");
 
         // TODO: GET TOWN AND NATION VALUES
         // TODO: SET PLAYTIME IN HISTORIA TABLE
@@ -81,7 +92,7 @@ public class HistoriaPlayer extends BasePlayer {
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
-        this.experienceMax = Math.pow(this.level, 1.68);
+        this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
         this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT.getKey()));
@@ -95,6 +106,30 @@ public class HistoriaPlayer extends BasePlayer {
 
         // TODO: Calculate experience gain
 
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setLastLogin(long lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public void setLastLogout(long lastLogout) {
+        this.lastLogout = lastLogout;
+    }
+
+    public void setModifiedHealth(float modifiedHealth) {
+        this.modifiedHealth = modifiedHealth;
+    }
+
+    public void setCurrentExperience(double currentExperience) {
+        this.currentExperience = currentExperience;
+    }
+
+    public void setMaxExperience(double experienceMax) {
+        this.maxExperience = experienceMax;
     }
 
     /**
@@ -163,9 +198,9 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @return {@link Float} The class' current experience.
      */
-    public double getTotalExperience() {
+    public double getCurrentExperience() {
 
-        return this.currentExperience;
+        return NumberUtils.roundDouble(this.currentExperience, 2);
 
     }
 
@@ -176,7 +211,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getMaxExperience() {
 
-        return this.experienceMax;
+        return this.maxExperience;
 
     }
 
@@ -271,29 +306,17 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        // TODO: Create method for adding experience
+        MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
+        MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
+        MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
 
-        MySQLHandler.setClassLevel(this.getUUID(), level);
+        this.lastSaved = System.currentTimeMillis();
 
     }
 
-    public String toString() {
+    public long getLastSaved() {
 
-        String string = "";
-
-        string += "<(" + this.getUUID() + ") UN:";
-        string += this.getUsername() + " PN:";
-        string += this.getProficiency().getName() + " LV:";
-        string += this.level + " BH:";
-        string += this.getBaseHealth() + " MH:";
-        string += this.modifiedHealth + " PT:";
-        string += this.playtime + " LI:";
-        string += this.lastLogin + " LO:";
-        string += this.lastLogout + " BE:";
-        string += this.currentExperience + " EM:";
-        string += this.experienceMax + ">";
-
-        return string;
+        return this.lastSaved;
 
     }
 
@@ -333,7 +356,7 @@ public class HistoriaPlayer extends BasePlayer {
             if (armor != null) {
 
                 String material = armor.getType().toString();
-                mod += Config.getArmorConfig().getObject(material).getWeight();
+                mod += ConfigurationLoader.getArmorConfig().getObject(material).getWeight();
 
             }
 
@@ -416,6 +439,12 @@ public class HistoriaPlayer extends BasePlayer {
         }
 
         return mod;
+
+    }
+
+    public void changeProficiency(String proficiency) {
+
+        this.proficiency = new Proficiency(proficiency);
 
     }
 
@@ -502,6 +531,88 @@ public class HistoriaPlayer extends BasePlayer {
         }
 
         return found;
+
+    }
+
+    /**
+     * Get the player's current experience.
+     * 
+     * @return {@link Double}
+     */
+    public void increaseExperience(AllSources source) {
+
+        if (source == null) return;
+        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
+
+        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeModified = incomeValue * this.level / 10;
+
+        if ((getCurrentExperience()) + incomeModified >= getMaxExperience()) {
+
+            double overflow = (getCurrentExperience() + incomeModified) - getMaxExperience();
+
+            setLevel(getLevel() + 1);
+            setCurrentExperience(overflow);
+            setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
+            saveCharacter();
+
+            Logging.infoToPlayer("You have leveled up to level " + getLevel() + "!", this.getUUID());
+
+        } else {
+
+            setCurrentExperience(getCurrentExperience() + incomeModified);
+
+        }
+    
+    }
+
+    public void decreaseExperience(AllSources source) {
+        
+        if (source == null) return;
+        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
+
+        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
+
+        if ((getCurrentExperience()) - incomeModified <= 0) {
+
+            setLevel(getLevel() - 1);
+            setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
+
+            double overflow =(getCurrentExperience() - incomeModified) - getMaxExperience();
+
+            if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
+            else setCurrentExperience(0);
+
+            saveCharacter();
+
+            Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
+
+        } else {
+
+            setCurrentExperience(getCurrentExperience() - incomeModified);
+
+        }
+
+    }
+    
+    public String toString() {
+
+        String output = super.toString();
+
+        output += "*** HISTORIA PLAYER *** \n";
+        output += "Level: " + this.getLevel() + "\n";
+        output += "Current Experience: " + this.getCurrentExperience() + "\n";
+        output += "Max Experience: " + this.getMaxExperience() + "\n";
+        output += "Last Login: " + this.getLastLogin() + "\n";
+        output += "Last Logout: " + this.getLastLogout() + "\n";
+        output += "Playtime: " + this.getPlaytime() + "\n";
+        output += "Armor Adjustment: " + this.calculateArmorAdjustment() + "\n";
+        output += "Environment Adjustment: " + this.calculateEnvironmentAdjustment() + "\n";
+        output += "*********************** \n";
+        output += proficiency.toString();
+
+        return output;
 
     }
 }

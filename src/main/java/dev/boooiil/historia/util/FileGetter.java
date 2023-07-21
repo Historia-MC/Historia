@@ -7,7 +7,7 @@ import java.io.Reader;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.Main;
 import dev.boooiil.historia.classes.enums.FileMap.ResourceKeys;
 
 
@@ -48,18 +48,18 @@ public class FileGetter {
 
         YamlConfiguration config;
 
-        if (find(HistoriaPlugin.plugin().getDataFolder().listFiles(), check)) {
+        if (find(Main.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.infoToConsole("Obtained file from external directory: ", HistoriaPlugin.plugin().getDataFolder().getPath() + "\\" + check.getKey());
+            Logging.debugToConsole("Obtained file from external directory: ", Main.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
-            File file = new File(HistoriaPlugin.plugin().getDataFolder().getPath(), check.getKey());
+            File file = new File(Main.plugin().getDataFolder().getPath(), check.getKey());
 
             config = YamlConfiguration.loadConfiguration(file);
         }
 
         else {
 
-            Logging.errorToConsole("Obtained file from internal directory: " + check.getKey());
+            Logging.debugToConsole("Obtained file from internal directory: " + check.getKey());
 
             InputStream is = FileGetter.class.getClassLoader().getResourceAsStream(check.getKey());
 

@@ -2,12 +2,13 @@ package dev.boooiil.historia.classes.items.craftable;
 
 import java.util.List;
 
-import dev.boooiil.historia.classes.items.generic.Item;
+import dev.boooiil.historia.classes.items.BaseItem;
 
-public class CraftedItem extends Item {
+public class CraftedItem extends BaseItem {
     
     protected List<String> recipeShape;
     protected List<String> recipeItems;
+    protected boolean isShaped;
 
     /**
      * This function returns the list of items that are required to craft the item

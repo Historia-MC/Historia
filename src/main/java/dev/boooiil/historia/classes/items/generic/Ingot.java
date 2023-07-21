@@ -1,23 +1,10 @@
 package dev.boooiil.historia.classes.items.generic;
 
-import dev.boooiil.historia.configuration.Config;
+import dev.boooiil.historia.classes.items.BaseItem;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
-/**
- *
- * Constructs specific information from a given ingot.
- * 
- * <p>
- * To access the constructor in Ingot:
- * 
- * <pre>
- * {
- *     IngotConfig ingotConfig = new IngotConfig();
- *     IngotConfig.Ingot ingot = ingotConfig.new Ingot(ingotName);
- * }
- * </pre>
- */
-public class Ingot extends Item {
+public class Ingot extends BaseItem {
 
     private String progression;
     // private String itemName;
@@ -32,9 +19,9 @@ public class Ingot extends Item {
     // A constructor.
     public Ingot(String ingotName) {
 
-        configuration = Config.getIngotConfig().getConfiguration();
+        configuration = ConfigurationLoader.getIngotConfig().getConfiguration();
         // this.itemName = ingotName;
-        this.validIngot = Config.getIngotConfig().isValidIngot(ingotName);
+        this.validIngot = ConfigurationLoader.getIngotConfig().isValidIngot(ingotName);
 
         if (validIngot) {
 

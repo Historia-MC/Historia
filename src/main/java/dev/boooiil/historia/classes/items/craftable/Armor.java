@@ -3,8 +3,7 @@ package dev.boooiil.historia.classes.items.craftable;
 import java.util.List;
 import java.util.Random;
 
-import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.definitions.items.craftable.ArmorTypes;
+import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
 /**
@@ -14,21 +13,19 @@ import dev.boooiil.historia.util.Construct;
  */
 public class Armor extends CraftedItem {
 
-    private ArmorTypes weightClass;
+    private String weightClass;
 
     private Integer weight;
 
     private List<Double> defense;
     private List<Integer> durability;
 
-    private boolean valid;
-
     // Getting the armor's information from the config.
     public Armor(String armorName) {
 
-        configuration = Config.getArmorConfig().getConfiguration();
+        configuration = ConfigurationLoader.getArmorConfig().getConfiguration();
 
-        valid = Config.getArmorConfig().isValid(armorName);
+        valid = ConfigurationLoader.getArmorConfig().isValid(armorName);
 
         if (valid) {
 
@@ -43,7 +40,7 @@ public class Armor extends CraftedItem {
                     configuration.getStringList(armorName + ".item.lore"));
 
             // Getting the weight class of the armor.
-            this.weightClass = ArmorTypes.valueOf(configuration.getString(itemRoot + ".type").toUpperCase());
+            this.weightClass = configuration.getString(itemRoot + ".type");
 
             // Getting the weight of the armor.
             this.weight = configuration.getInt(itemRoot + ".weight");
@@ -69,7 +66,7 @@ public class Armor extends CraftedItem {
      * 
      * @return Type of armor.
      */
-    public ArmorTypes getWeightClass() {
+    public String getWeightClass() {
 
         return this.weightClass;
 

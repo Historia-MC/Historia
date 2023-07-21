@@ -1,4 +1,12 @@
-version: 1
+version: 8
+
+# XP SOURCES:
+# COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
+# BLOCK: BLOCK_BREAK, BLOCK_PLACE, BLOCK_INTERACT, ORE_BREAK
+# FISHING: FISH, FISH_TRASH, FISH_TREASURE
+# ANIMAL: BREED_ANIMAL, TAME_ANIMAL
+# FARMING: CROP_PLACE, CROP_BREAK
+# CRAFTING: WEAPON_CRAFT, TOOL_CRAFT, ARMOR_CRAFT
 
 None:
 
@@ -39,10 +47,12 @@ Warrior:
 
     weaponProficiency: [ Light, Medium, Heavy ]
     armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ ATTACK, DEFEND, EVADE, KILL, DEATH ]
 
   skills:
     nametag: true
     sweepingEdge: true
+    applySharpness: true
 
 Archer:
 
@@ -63,6 +73,7 @@ Archer:
 
     weaponProficiency: [ Bow, Crossbow, Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: true
@@ -88,6 +99,7 @@ Fisherman:
 
     weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE ]
 
   skills:
     nametag: true
@@ -113,11 +125,13 @@ Miner:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, ORE_BREAK ]
 
   skills:
     nametag: true
     extraOreChance: true
     efficiencyPickaxe: true
+    efficiencyShovel: true
     specialItems: true
 
 Blacksmith:
@@ -139,6 +153,8 @@ Blacksmith:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT ]
+
 
   skills:
     nametag: true
@@ -146,6 +162,7 @@ Blacksmith:
     applyUnbreaking: true
     craftSaddle: true
     chanceNoAnvilDamage: true
+    applySharpness: true
 
 Huntsman:
 
@@ -164,8 +181,9 @@ Huntsman:
     instantGrowChance: 0
     beheadChance: 0.07
 
-    weaponProficiency: [ Light ]
-    armorProficiency: [ Bow, Light ]
+    weaponProficiency: [ Bow, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: false
@@ -173,6 +191,7 @@ Huntsman:
     tameAnimals: true
     extraWool: true
     extraFeathers: true
+    shearChicken: true
     craftSaddle: true
 
 Apothecary:
@@ -194,6 +213,7 @@ Apothecary:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE ]
 
   skills:
     nametag: true
@@ -220,12 +240,13 @@ Architect:
 
     weaponProficiency: [ Light ]
     armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_PLACE ]
 
   skills:
     nametag: true
     chanceNoConsumeBlock: true
     featherFall: true
-    incomeMultiplier: 1.2
+    ladderBypass: true
 
 Lumberjack:
 
@@ -246,11 +267,13 @@ Lumberjack:
 
     weaponProficiency: [ Light, Medium ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_BREAK ]
 
   skills:
     nametag: true
     chanceExtraWood: true
     efficiencyAxe: true
+    applySharpness: true
 
 Farmer:
 
@@ -258,21 +281,23 @@ Farmer:
     baseHealth: 20
     maxHealth: 35
     baseFood: 20
-    baseSpeed: 1
+    baseSpeed: 1.1
     baseEvasion: 0.03
     baseSwordProficiency: 1.0
     baseBowProficiency: 0.5
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 0.25
-    harvestChance: 0.6
+    harvestChance: 0.85
     doubleHarvestChance: 0.05
     instantGrowChance: 0.3
     beheadChance: 0.10
 
-    weaponProficiency: [ Light ]
+    weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
             
   skills:
     nametag: true
     breakBeehive: true
     breakGrass: true
+    shearChicken: true

@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
-import dev.boooiil.historia.util.PlayerStorage;
 
 public class CommandStats implements CommandExecutor {
 
@@ -32,12 +32,13 @@ public class CommandStats implements CommandExecutor {
                     message += "Level: " + historiaPlayer.getLevel() + "\n";
                     message += "Health: " + bukkitPlayer.getHealth() + "/" + historiaPlayer.getBaseHealth() + "\n";
                     message += "Hunger: " + bukkitPlayer.getFoodLevel() + "/" + historiaPlayer.getProficiency().getStats().getBaseFood() + "\n";
-                    message += "Experience: " + historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
+                    message += "Experience: " + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
                     message += "Temperature: " + historiaPlayer.getCurrentTemperature() + "\n";
                     message += "Armor Temp: " + historiaPlayer.getArmorAdjustment() + "\n";
                     message += "Env Temp: " + historiaPlayer.getEnvironmentAdjustment() + "\n";
-                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getWeaponProficiency() + "\n";
-                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getArmorProficiency() + "\n";
+                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
+                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
+                    message += "Experience Sources: " + historiaPlayer.getProficiency().getStats().getExperienceSources() + "\n";
 
                 }
 
@@ -47,9 +48,9 @@ public class CommandStats implements CommandExecutor {
                     message += "Proficiency: " + historiaPlayer.getProficiency().getName() + "\n";
                     message += "Level: " + historiaPlayer.getLevel() + "\n";
                     message += "Health: ??/" + historiaPlayer.getBaseHealth() + "\n";
-                    message += "Experience: " + historiaPlayer.getTotalExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
-                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getWeaponProficiency() + "\n";
-                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getArmorProficiency() + "\n";
+                    message += "Experience: " + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
+                    message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
+                    message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
 
                 }
 

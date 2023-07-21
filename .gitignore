@@ -4,4 +4,4 @@ target/
 .project
 .factorypath
 pom.xml.*
-release.*
+release/*

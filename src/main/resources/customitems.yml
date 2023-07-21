@@ -1,0 +1,86 @@
+version: 1
+
+FISH_OIL:
+  item:
+    type: POTION
+    amount: 1
+    display-name: §7Oil
+    loc-name: FISH_OIL
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["INVALID"]
+  recipe-shape: ["A  ", "   ", "   "]
+
+COD_FISH_OIL:
+  item:
+    type: POTION
+    amount: 1
+    display-name: §7Oil
+    loc-name: FISH_OIL
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["COD"]
+  recipe-shape: ["A  ", "   ", "   "]
+
+SALMON_FISH_OIL:
+  item:
+    type: POTION
+    amount: 1
+    display-name: §7Oil
+    loc-name: FISH_OIL
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["SALMON"]
+  recipe-shape: ["A  ", "   ", "   "]
+
+PUFFERFISH_FISH_OIL:
+  item:
+    type: POTION
+    amount: 1
+    display-name: §7Oil
+    loc-name: FISH_OIL
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["PUFFERFISH"]
+  recipe-shape: ["A  ", "   ", "   "]
+
+TROPICAL_FISH_OIL:
+  item:
+    type: POTION
+    amount: 1
+    display-name: §7Oil
+    loc-name: FISH_OIL
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["TROPICAL_FISH"]
+  recipe-shape: ["A  ", "   ", "   "]
+
+FISH_OIL_TIPPED_ARROW:
+  item:
+    type: ARROW
+    amount: 4
+    display-name: §7Oil Tipped Arrow
+    loc-name: FISH_OIL_TIPPED_ARROW
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["FISH_OIL", "ARROW"]
+  recipe-shape: ["AB ", "   ", "   "]
+
+GUNPOWDER:
+  item:
+    type: GUNPOWDER
+    amount: 4
+    display-name: §7Gunpowder
+    loc-name: GUNPOWDER
+    lore: ["", "§7Placeholder"]
+
+  requireShape: false
+  recipe-items: ["SULPHUR", "CHARCOAL"]
+  recipe-shape: ["AB ", "   ", "   "]
+

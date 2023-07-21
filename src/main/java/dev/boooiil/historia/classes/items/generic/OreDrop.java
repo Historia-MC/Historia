@@ -1,23 +1,37 @@
 package dev.boooiil.historia.classes.items.generic;
 
-import dev.boooiil.historia.configuration.Config;
-import dev.boooiil.historia.configuration.OreConfig;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import dev.boooiil.historia.classes.items.BaseItem;
+import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.util.Construct;
 
 /**
  * This class should not be initialized outside of {@link OreConfig}.
  */
-public class OreDrop extends Item {
+public class OreDrop extends BaseItem {
+
+    /**
+     * THIS IS HOW THE LOADING WORKS:
+     * ------ *** ITERATION 1 *** ------
+     * ORE_NAME_1: (OreBlock)
+     *     drop_name_1: (OreBlock)
+     *     chance: (OreBlock)
+     *         DROP_NAME_1: (dropName)
+     *                      
+     *
+     * OreBlock contains a list of OreDrop objects
+     * associated with the provided block name and drop category.
+     */
 
     private String requiredClass;
 
     private int chance;
 
     // It's a constructor.
-    public OreDrop(String currentRoot, String dropName) {
+    public OreDrop(String currentRoot, String dropName, YamlConfiguration configuration) {
 
-        configuration = Config.getOreConfig().getConfiguration();
-
+        // Accessing BLOCK_NAME_1.drop_category_1.DROP_NAME_1
         String root = currentRoot + "." + dropName;
 
         itemStack = Construct.itemStack(
