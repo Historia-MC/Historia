@@ -20,6 +20,7 @@ public class PrepareItemCraftListener implements Listener {
         CraftingItemManager cim = new CraftingItemManager(inspector);
 
         if (cim.getResult() != null) resultItem = cim.getResult();
+        if (event.getRecipe() != null) resultItem = event.getRecipe().getResult();
         else resultItem = null;
 
         if (resultItem != null) Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
