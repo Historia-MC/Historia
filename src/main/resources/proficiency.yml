@@ -246,7 +246,7 @@ Architect:
     nametag: true
     chanceNoConsumeBlock: true
     featherFall: true
-    incomeMultiplier: 1.2
+    ladderBypass: true
 
 Lumberjack:
 
