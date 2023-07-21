@@ -27,6 +27,7 @@ import dev.boooiil.historia.configuration.specific.IngotConfig;
 import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.discord.HistoriaDiscord;
+import dev.boooiil.historia.events.blockInteraction.BlockPlace;
 import dev.boooiil.historia.events.blockInteraction.PlayerBreakBlock;
 import dev.boooiil.historia.events.blockInteraction.WaterBreakBlock;
 import dev.boooiil.historia.events.connection.PlayerJoin;
@@ -109,6 +110,7 @@ public class Main extends JavaPlugin {
         registerEvent(new FurnaceSmeltStart());
         registerEvent(new PlayerClickInventory());
         registerEvent(new PlayerBreakBlock());
+        registerEvent(new BlockPlace());
         registerEvent(new PlayerCraftingPrepare());
         registerEvent(new PlayerCraftingResult());
         registerEvent(new PlayerDeath());
