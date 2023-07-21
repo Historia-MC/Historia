@@ -11,7 +11,7 @@ import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.util.Logging;
 
-public class EntityBreed implements Listener {
+public class EntityBreedListener implements Listener {
 
     @EventHandler
     public void onBreedAnimal(EntityBreedEvent event) {

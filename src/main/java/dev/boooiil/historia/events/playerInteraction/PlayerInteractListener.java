@@ -5,14 +5,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import dev.boooiil.historia.handlers.playerInteraction.RightClickAir;
 import dev.boooiil.historia.handlers.playerInteraction.RightClickAnvil;
 import dev.boooiil.historia.handlers.playerInteraction.RightClickStonecutter;
 
-public class PlayerRightClickBlock implements Listener {
-
+public class PlayerInteractListener implements Listener {
 
     @EventHandler
-    public void onPlayerRightClick(PlayerInteractEvent event) {
+    public void onPlayerRightClickAir(PlayerInteractEvent event) {
+
+
+        if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+
+            RightClickAir rightClickAir = new RightClickAir(event);
+            rightClickAir.doInteraction();
+
+        }
 
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 
@@ -25,5 +33,6 @@ public class PlayerRightClickBlock implements Listener {
         }
 
     }
+
     
 }

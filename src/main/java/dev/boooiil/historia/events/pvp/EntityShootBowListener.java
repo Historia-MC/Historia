@@ -6,7 +6,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 
 import dev.boooiil.historia.handlers.pvp.PlayerShootBow;
 
-public class ShootBow implements Listener {
+public class EntityShootBowListener implements Listener {
     
     @EventHandler
     public void onShootBow(EntityShootBowEvent event) {

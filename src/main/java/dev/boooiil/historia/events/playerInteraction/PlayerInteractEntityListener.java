@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 
 import dev.boooiil.historia.handlers.playerInteraction.RightClickChicken;
 
-public class PlayerRightClickEntity implements Listener {
+public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
     public void onPlayerRightClickEntity(PlayerInteractEntityEvent event) {

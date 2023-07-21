@@ -14,7 +14,7 @@ import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.handlers.crafting.CraftingResult;
 import dev.boooiil.historia.util.Logging;
 
-public class PlayerCraftingResult implements Listener {
+public class CraftItemListener implements Listener {
 
     @EventHandler
     public void onCraftResult(CraftItemEvent event) {

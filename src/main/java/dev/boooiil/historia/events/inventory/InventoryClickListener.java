@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import dev.boooiil.historia.handlers.inventory.InventorySwapWithCursor;
 import dev.boooiil.historia.util.Logging;
 
-public class PlayerClickInventory implements Listener {
+public class InventoryClickListener implements Listener {
 
     @EventHandler
     public void onPlayerClickInventory(InventoryClickEvent event) {

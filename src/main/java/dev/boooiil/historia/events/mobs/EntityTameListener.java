@@ -8,7 +8,7 @@ import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.handlers.mobs.TameAnimal;
 
-public class EntityTame implements Listener {
+public class EntityTameListener implements Listener {
 
     @EventHandler
     public void onTameAnimal(EntityTameEvent event) {

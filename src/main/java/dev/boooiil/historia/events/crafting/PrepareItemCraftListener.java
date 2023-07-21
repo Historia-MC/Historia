@@ -10,7 +10,7 @@ import dev.boooiil.historia.handlers.crafting.CraftingCustomItemManager;
 import dev.boooiil.historia.handlers.crafting.CraftingTableInspector;
 import dev.boooiil.historia.util.Logging;
 
-public class PlayerCraftingPrepare implements Listener {
+public class PrepareItemCraftListener implements Listener {
 
     @EventHandler
     public void onCraftItem(PrepareItemCraftEvent event) {

@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import dev.boooiil.historia.handlers.blockInteraction.PlayerPlaceBlock;
 
-public class BlockPlace implements Listener {
+public class BlockPlaceListener implements Listener {
 
     @EventHandler
     public void onPlaceBlock(BlockPlaceEvent event) {

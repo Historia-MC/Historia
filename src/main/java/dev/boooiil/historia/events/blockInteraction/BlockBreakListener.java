@@ -17,7 +17,7 @@ import dev.boooiil.historia.handlers.blockInteraction.CropHandler;
  * is a valid ore, it
  * drops the item that the ore is supposed to drop.
  */
-public class PlayerBreakBlock implements Listener {
+public class BlockBreakListener implements Listener {
 
     // It's a method that listens for a player to break a block, and if the block is
     // a valid ore, it

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 
-public class EntityKill implements Listener {
+public class EntityDeathListener implements Listener {
 
     @EventHandler
     public void onKillEntity(EntityDeathEvent event) {

@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import dev.boooiil.historia.handlers.pvp.PlayerDamaged;
 import dev.boooiil.historia.util.Logging;
 
-public class PlayerHit implements Listener {
+public class EntityDamageByEntityListener implements Listener {
     
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent event) {

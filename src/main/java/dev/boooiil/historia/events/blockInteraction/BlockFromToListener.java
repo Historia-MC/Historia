@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockFromToEvent;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.CropConfig;
 
-public class WaterBreakBlock implements Listener {
+public class BlockFromToListener implements Listener {
 
     @EventHandler
     public void onWaterBreakBlock(BlockFromToEvent event) {

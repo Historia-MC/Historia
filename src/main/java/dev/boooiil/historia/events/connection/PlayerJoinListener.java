@@ -17,7 +17,7 @@ import dev.boooiil.historia.util.Logging;
  * status to true, creates
  * a new HistoriaPlayer object, and adds it to the PlayerStorage HashMap.
  */
-public class PlayerJoin implements Listener {
+public class PlayerJoinListener implements Listener {
 
     // Creating a new user in the database if they don't exist, sets their login
     // status to true,

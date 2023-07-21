@@ -10,7 +10,7 @@ import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.handlers.pvp.PlayerKilled;
 
-public class PlayerDeath implements Listener {
+public class PlayerDeathListener implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
