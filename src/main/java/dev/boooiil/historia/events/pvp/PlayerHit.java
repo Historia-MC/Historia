@@ -7,11 +7,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import dev.boooiil.historia.handlers.pvp.PlayerDamaged;
+import dev.boooiil.historia.util.Logging;
 
 public class PlayerHit implements Listener {
     
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent event) {
+
+        Logging.debugToConsole("PlayerDamaged event created.");
+        Logging.debugToConsole("Attacker: " + event.getDamager().getName());
+        Logging.debugToConsole("Defender: " + event.getEntity().getName());
 
         Entity attacker = event.getDamager();
         Entity defender = event.getEntity();
