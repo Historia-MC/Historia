@@ -10,7 +10,7 @@ loadbefore:
   - Historia-Spawnkill
   - Historia-RMushroom
   - Historia-Combat
-depend: [WorldGuard, Towny, Vault]
+depend: [WorldGuard, Towny, Vault, Historia-Spawnkill]
 
 commands:
   checkplayers:
