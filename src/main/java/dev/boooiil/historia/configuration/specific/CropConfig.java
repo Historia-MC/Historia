@@ -7,7 +7,7 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.Main;
 import dev.boooiil.historia.util.ConfigUtil;
 
 public class CropConfig {
@@ -26,7 +26,7 @@ public class CropConfig {
     public void loadConfiguration(String fileName) {
 
         // @sonatype-lift ignore
-        this.configuration = ConfigUtil.yamlFromSource(new File(HistoriaPlugin.plugin().getDataFolder(), fileName));
+        this.configuration = ConfigUtil.yamlFromSource(new File(Main.plugin().getDataFolder(), fileName));
 
         List<String> standardList = configuration.getStringList("standard");
         List<String> tallList = configuration.getStringList("tall");

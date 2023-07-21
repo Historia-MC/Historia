@@ -56,9 +56,9 @@ import dev.boooiil.historia.util.Logging;
 /**
  * It's a plugin that loads, enables, and disables.
  */
-public class HistoriaPlugin extends JavaPlugin {
+public class Main extends JavaPlugin {
 
-    public HistoriaPlugin() {
+    public Main() {
         super();
     }
 
@@ -71,7 +71,7 @@ public class HistoriaPlugin extends JavaPlugin {
      * @param dataFolder  - The folder that contains the plugin's data
      * @param file        - The plugin's file
      */
-    protected HistoriaPlugin(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+    protected Main(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
         super(loader, description, dataFolder, file);
     }
 

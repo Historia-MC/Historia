@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import dev.boooiil.historia.HistoriaPlugin;
+import dev.boooiil.historia.Main;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.util.Logging;
@@ -156,7 +156,7 @@ public class MySQLConnection {
 
         if (caught > 0) {
 
-            HistoriaPlugin.disable();
+            Main.disable();
 
             return false;
         }
