@@ -158,7 +158,7 @@
         <version>3.3.0</version>
 
         <configuration>
-          <outputDirectory>C:\Users\boooi\Desktop\Plugin Test Server\plugins\</outputDirectory>
+          <outputDirectory>${user.home}\Desktop\Plugin Test Server\plugins\</outputDirectory>
         </configuration>
 
       </plugin>
