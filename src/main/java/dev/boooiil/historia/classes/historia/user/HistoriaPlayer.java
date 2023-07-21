@@ -574,12 +574,12 @@ public class HistoriaPlayer extends BasePlayer {
         double incomeValue = this.proficiency.getStats().getIncomeValue(source);
         double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
 
-        if ((getCurrentExperience()) - incomeModified <= 0) {
+        if ((getCurrentExperience()) - incomeModified <= 0 && getLevel() > 1) {
 
             setLevel(getLevel() - 1);
             setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
 
-            double overflow =(getCurrentExperience() - incomeModified) - getMaxExperience();
+            double overflow = (getCurrentExperience() - incomeModified) - getMaxExperience();
 
             if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
             else setCurrentExperience(0);
