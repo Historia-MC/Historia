@@ -53,6 +53,7 @@ public class GetItem {
                     this.item = item.getItemStack();
                     this.craftedItem = item;
                     Logging.debugToConsole("[getItemBasedOnIngot] Item: " + this.item.getType());
+                    break;
 
                 }
 
