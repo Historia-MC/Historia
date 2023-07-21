@@ -588,7 +588,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
 
-        } else {
+        } else if (getLevel() > 1) {
 
             setCurrentExperience(getCurrentExperience() - incomeModified);
 
