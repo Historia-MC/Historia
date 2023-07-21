@@ -47,4 +47,13 @@ public class CraftedItem extends BaseItem {
         return validItems && validShape;
 
     }
+
+    /**
+     * It returns if the item is shape dependent.
+     * 
+     * @return If the item is shape dependent.
+     */
+    public boolean isShapeDependent() {
+        return isShaped;
+    }
 }
