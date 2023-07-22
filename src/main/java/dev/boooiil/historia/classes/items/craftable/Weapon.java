@@ -65,6 +65,8 @@ public class Weapon extends CraftedItem {
             this.sweepRange = configuration.getDoubleList(root + ".sweeping");
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
+            this.isShaped = configuration.getBoolean(root + ".requireShape");
+
         } else {
             itemStack = new ItemStack(Material.AIR);
         }

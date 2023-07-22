@@ -106,13 +106,8 @@ public class CustomItemConfig extends BaseConfiguration<CustomItem> {
 
         for(CustomItem customItem : map.values()) {
 
-            Logging.debugToConsole("--- ARMOR EQUALITY ---");
-            Logging.debugToConsole("A-ISHAPE:", shape.toString());
-            Logging.debugToConsole("A-RSHAPE:", customItem.getRecipeShape().toString());
-            Logging.debugToConsole("A-MATCH: " + shape.equals(customItem.getRecipeShape()));
-            Logging.debugToConsole("--- -------------- ---");
-
-            if (customItem.getRecipeShape().equals(shape)) {
+            if (!customItem.isShapeDependent()) set.add(customItem);
+            else if (customItem.getRecipeShape().equals(shape)) {
 
                 Logging.debugToConsole(customItem.getItemStack().getItemMeta().getAsString());
 

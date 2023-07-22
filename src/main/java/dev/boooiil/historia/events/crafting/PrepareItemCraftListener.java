@@ -5,8 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 
-import dev.boooiil.historia.handlers.crafting.ArmorAndWeaponManager;
-import dev.boooiil.historia.handlers.crafting.CraftingCustomItemManager;
+import dev.boooiil.historia.handlers.crafting.CraftingItemManager;
 import dev.boooiil.historia.handlers.crafting.CraftingTableInspector;
 import dev.boooiil.historia.util.Logging;
 
@@ -18,18 +17,29 @@ public class PrepareItemCraftListener implements Listener {
         CraftingTableInspector inspector = new CraftingTableInspector(event.getInventory().getContents());
         ItemStack resultItem;
 
-        ArmorAndWeaponManager ccm = new ArmorAndWeaponManager(inspector);
-        CraftingCustomItemManager ccim = new CraftingCustomItemManager(inspector);
+        Logging.debugToConsole("[PICE] Pattern: " + inspector.getPattern());
+        Logging.debugToConsole("[PICE] Materials: " + inspector.getMaterials());
+        Logging.debugToConsole("[PICE] Full Materials: " + inspector.getFullMaterials());
 
-        
+        CraftingItemManager cim = new CraftingItemManager(inspector);
+        cim.doMatch();
 
-
-        if (ccm.getResult() != null) resultItem = ccm.getResult();
-        else if (ccim.getResult() != null) resultItem = ccim.getResult();
+        if (cim.getResult() != null) resultItem = cim.getResult();
         else if (event.getRecipe() != null) resultItem = event.getRecipe().getResult();
         else resultItem = null;
 
-        if (resultItem != null) Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
+        if (resultItem != null) {
+            if (resultItem.getItemMeta() != null) {
+                
+                Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
+
+            }
+            else {
+                    
+                Logging.debugToConsole("Result: " + resultItem.getType().toString() + " " + resultItem.getAmount());
+            
+            }
+        }
         else Logging.debugToConsole("Result: null");
 
 
