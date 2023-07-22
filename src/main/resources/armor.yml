@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 Light_Leather_Helmet:
   item:
@@ -14,6 +14,7 @@ Light_Leather_Helmet:
   type: Light
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Medium_Leather_Helmet:
   item:
@@ -29,6 +30,7 @@ Medium_Leather_Helmet:
   type: Medium
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Heavy_Leather_Helmet:
   item:
@@ -44,6 +46,7 @@ Heavy_Leather_Helmet:
   type: Heavy
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Light_Leather_Chestplate:
   item:
@@ -59,6 +62,7 @@ Light_Leather_Chestplate:
   type: Light
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Medium_Leather_Chestplate:
   item:
@@ -74,6 +78,7 @@ Medium_Leather_Chestplate:
   type: Medium
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Heavy_Leather_Chestplate:
   item:
@@ -89,6 +94,7 @@ Heavy_Leather_Chestplate:
   type: Heavy
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Light_Leather_Leggings:
   item:
@@ -104,6 +110,7 @@ Light_Leather_Leggings:
   type: Light
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Medium_Leather_Leggings:
   item:
@@ -119,6 +126,7 @@ Medium_Leather_Leggings:
   type: Medium
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Heavy_Leather_Leggings:
   item:
@@ -134,6 +142,7 @@ Heavy_Leather_Leggings:
   type: Heavy
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Light_Leather_Boots:
   item:
@@ -149,6 +158,7 @@ Light_Leather_Boots:
   type: Light
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Medium_Leather_Boots:
   item:
@@ -164,6 +174,7 @@ Medium_Leather_Boots:
   type: Medium
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Heavy_Leather_Boots:
   item:
@@ -179,6 +190,7 @@ Heavy_Leather_Boots:
   type: Heavy
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Light_Tin_Helmet:
   item:
@@ -194,6 +206,7 @@ Light_Tin_Helmet:
   type: Light
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Light_Tin_Chestplate:
   item:
@@ -209,6 +222,7 @@ Light_Tin_Chestplate:
   type: Light
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Light_Tin_Leggings:
   item:
@@ -224,6 +238,7 @@ Light_Tin_Leggings:
   type: Light
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Light_Tin_Boots:
   item:
@@ -239,6 +254,7 @@ Light_Tin_Boots:
   type: Light
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Light_Bronze_Helmet:
   item:
@@ -254,6 +270,7 @@ Light_Bronze_Helmet:
   type: Light
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Medium_Bronze_Helmet:
   item:
@@ -269,6 +286,7 @@ Medium_Bronze_Helmet:
   type: Medium
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Heavy_Bronze_Helmet:
   item:
@@ -284,6 +302,7 @@ Heavy_Bronze_Helmet:
   type: Heavy
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Light_Bronze_Chestplate:
   item:
@@ -299,6 +318,7 @@ Light_Bronze_Chestplate:
   type: Light
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Medium_Bronze_Chestplate:
   item:
@@ -314,6 +334,7 @@ Medium_Bronze_Chestplate:
   type: Medium
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Heavy_Bronze_Chestplate:
   item:
@@ -329,6 +350,7 @@ Heavy_Bronze_Chestplate:
   type: Heavy
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Light_Bronze_Leggings:
   item:
@@ -344,6 +366,7 @@ Light_Bronze_Leggings:
   type: Light
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Medium_Bronze_Leggings:
   item:
@@ -359,6 +382,7 @@ Medium_Bronze_Leggings:
   type: Medium
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Heavy_Bronze_Leggings:
   item:
@@ -374,6 +398,7 @@ Heavy_Bronze_Leggings:
   type: Heavy
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Light_Bronze_Boots:
   item:
@@ -389,6 +414,7 @@ Light_Bronze_Boots:
   type: Light
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Medium_Bronze_Boots:
   item:
@@ -404,6 +430,7 @@ Medium_Bronze_Boots:
   type: Medium
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Heavy_Bronze_Boots:
   item:
@@ -419,6 +446,7 @@ Heavy_Bronze_Boots:
   type: Heavy
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Light_Iron_Helmet:
   item:
@@ -434,6 +462,7 @@ Light_Iron_Helmet:
   type: Light
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Medium_Iron_Helmet:
   item:
@@ -449,6 +478,7 @@ Medium_Iron_Helmet:
   type: Medium
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Heavy_Iron_Helmet:
   item:
@@ -464,6 +494,7 @@ Heavy_Iron_Helmet:
   type: Heavy
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Light_Iron_Chestplate:
   item:
@@ -479,6 +510,7 @@ Light_Iron_Chestplate:
   type: Light
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Medium_Iron_Chestplate:
   item:
@@ -494,6 +526,7 @@ Medium_Iron_Chestplate:
   type: Medium
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Heavy_Iron_Chestplate:
   item:
@@ -509,6 +542,7 @@ Heavy_Iron_Chestplate:
   type: Heavy
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Light_Iron_Leggings:
   item:
@@ -524,6 +558,7 @@ Light_Iron_Leggings:
   type: Light
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Medium_Iron_Leggings:
   item:
@@ -539,6 +574,7 @@ Medium_Iron_Leggings:
   type: Medium
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Heavy_Iron_Leggings:
   item:
@@ -554,6 +590,7 @@ Heavy_Iron_Leggings:
   type: Heavy
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Light_Iron_Boots:
   item:
@@ -569,6 +606,7 @@ Light_Iron_Boots:
   type: Light
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Medium_Iron_Boots:
   item:
@@ -584,6 +622,7 @@ Medium_Iron_Boots:
   type: Medium
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Heavy_Iron_Boots:
   item:
@@ -599,6 +638,7 @@ Heavy_Iron_Boots:
   type: Heavy
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Light_Steel_Helmet:
   item:
@@ -614,6 +654,7 @@ Light_Steel_Helmet:
   type: Light
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Medium_Steel_Helmet:
   item:
@@ -629,6 +670,7 @@ Medium_Steel_Helmet:
   type: Medium
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Heavy_Steel_Helmet:
   item:
@@ -644,6 +686,7 @@ Heavy_Steel_Helmet:
   type: Heavy
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
 
 Light_Steel_Chestplate:
   item:
@@ -659,6 +702,7 @@ Light_Steel_Chestplate:
   type: Light
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Medium_Steel_Chestplate:
   item:
@@ -674,6 +718,7 @@ Medium_Steel_Chestplate:
   type: Medium
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Heavy_Steel_Chestplate:
   item:
@@ -689,6 +734,7 @@ Heavy_Steel_Chestplate:
   type: Heavy
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
+  requireShape: true
 
 Light_Steel_Leggings:
   item:
@@ -704,6 +750,7 @@ Light_Steel_Leggings:
   type: Light
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Medium_Steel_Leggings:
   item:
@@ -719,6 +766,7 @@ Medium_Steel_Leggings:
   type: Medium
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Heavy_Steel_Leggings:
   item:
@@ -734,6 +782,7 @@ Heavy_Steel_Leggings:
   type: Heavy
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
+  requireShape: true
 
 Light_Steel_Boots:
   item:
@@ -749,6 +798,7 @@ Light_Steel_Boots:
   type: Light
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Medium_Steel_Boots:
   item:
@@ -764,6 +814,7 @@ Medium_Steel_Boots:
   type: Medium
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Heavy_Steel_Boots:
   item:
@@ -779,6 +830,7 @@ Heavy_Steel_Boots:
   type: Heavy
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
+  requireShape: true
 
 Heavy_Turtle_Helmet:
   item:
@@ -794,3 +846,4 @@ Heavy_Turtle_Helmet:
   type: Heavy
   recipe-items: ["SCUTE"]
   recipe-shape: ["AAA", "A A", "   "]
+  requireShape: true
