@@ -17,13 +17,29 @@ public class PrepareItemCraftListener implements Listener {
         CraftingTableInspector inspector = new CraftingTableInspector(event.getInventory().getContents());
         ItemStack resultItem;
 
+        Logging.debugToConsole("[PICE] Pattern: " + inspector.getPattern());
+        Logging.debugToConsole("[PICE] Materials: " + inspector.getMaterials());
+        Logging.debugToConsole("[PICE] Full Materials: " + inspector.getFullMaterials());
+
         CraftingItemManager cim = new CraftingItemManager(inspector);
+        cim.doMatch();
 
         if (cim.getResult() != null) resultItem = cim.getResult();
-        if (event.getRecipe() != null) resultItem = event.getRecipe().getResult();
+        else if (event.getRecipe() != null) resultItem = event.getRecipe().getResult();
         else resultItem = null;
 
-        if (resultItem != null) Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
+        if (resultItem != null) {
+            if (resultItem.getItemMeta() != null) {
+                
+                Logging.debugToConsole("Result: " + resultItem.getItemMeta().getLocalizedName() + " " + resultItem.getAmount());
+
+            }
+            else {
+                    
+                Logging.debugToConsole("Result: " + resultItem.getType().toString() + " " + resultItem.getAmount());
+            
+            }
+        }
         else Logging.debugToConsole("Result: null");
 
 
