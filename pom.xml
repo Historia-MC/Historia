@@ -21,16 +21,6 @@
     <tag>HEAD</tag>
   </scm>
 
-  <distributionManagement>
-    <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>boooiil</id>
-      <name>Historia Base Plugin</name>
-      <url>file://C:\Users\boooi\Desktop\Repos\Historia\Release\</url>
-      <layout>default</layout>
-    </repository>
-  </distributionManagement>
-
   <repositories>
 
     <repository>
