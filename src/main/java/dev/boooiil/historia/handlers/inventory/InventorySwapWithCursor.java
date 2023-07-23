@@ -17,7 +17,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class InventorySwapWithCursor {
 
-    InventoryClickEvent event;
+    private InventoryClickEvent event;
 
     public InventorySwapWithCursor(InventoryClickEvent event) {
 
