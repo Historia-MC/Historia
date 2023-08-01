@@ -63,7 +63,8 @@ public class CraftItemListener implements Listener {
 
         if (craftingResult != null) {
 
-            craftingResult.generateRandomModifiers();
+            if (!craftingResult.getCraftedItem().canCraft(historiaPlayer.getProficiency().getName())) event.setCancelled(true);
+            else craftingResult.generateRandomModifiers();
 
         }
     }
