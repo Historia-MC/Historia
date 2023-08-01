@@ -15,6 +15,7 @@ Light_Leather_Helmet:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Leather_Helmet:
   item:
@@ -31,6 +32,7 @@ Medium_Leather_Helmet:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Leather_Helmet:
   item:
@@ -47,6 +49,7 @@ Heavy_Leather_Helmet:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Leather_Chestplate:
   item:
@@ -63,6 +66,7 @@ Light_Leather_Chestplate:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Leather_Chestplate:
   item:
@@ -79,6 +83,7 @@ Medium_Leather_Chestplate:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Leather_Chestplate:
   item:
@@ -95,6 +100,7 @@ Heavy_Leather_Chestplate:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Leather_Leggings:
   item:
@@ -111,6 +117,7 @@ Light_Leather_Leggings:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Leather_Leggings:
   item:
@@ -127,6 +134,7 @@ Medium_Leather_Leggings:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Leather_Leggings:
   item:
@@ -143,6 +151,7 @@ Heavy_Leather_Leggings:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Leather_Boots:
   item:
@@ -159,6 +168,7 @@ Light_Leather_Boots:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Leather_Boots:
   item:
@@ -175,6 +185,7 @@ Medium_Leather_Boots:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Leather_Boots:
   item:
@@ -191,6 +202,7 @@ Heavy_Leather_Boots:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Tin_Helmet:
   item:
@@ -207,6 +219,7 @@ Light_Tin_Helmet:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Tin_Chestplate:
   item:
@@ -223,6 +236,7 @@ Light_Tin_Chestplate:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Tin_Leggings:
   item:
@@ -239,6 +253,7 @@ Light_Tin_Leggings:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Tin_Boots:
   item:
@@ -255,6 +270,7 @@ Light_Tin_Boots:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Bronze_Helmet:
   item:
@@ -271,6 +287,7 @@ Light_Bronze_Helmet:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Helmet:
   item:
@@ -287,6 +304,7 @@ Medium_Bronze_Helmet:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Helmet:
   item:
@@ -303,6 +321,7 @@ Heavy_Bronze_Helmet:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Bronze_Chestplate:
   item:
@@ -319,6 +338,7 @@ Light_Bronze_Chestplate:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Chestplate:
   item:
@@ -335,6 +355,7 @@ Medium_Bronze_Chestplate:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Chestplate:
   item:
@@ -351,6 +372,7 @@ Heavy_Bronze_Chestplate:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Bronze_Leggings:
   item:
@@ -367,6 +389,7 @@ Light_Bronze_Leggings:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Leggings:
   item:
@@ -383,6 +406,7 @@ Medium_Bronze_Leggings:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Leggings:
   item:
@@ -399,6 +423,7 @@ Heavy_Bronze_Leggings:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Bronze_Boots:
   item:
@@ -415,6 +440,7 @@ Light_Bronze_Boots:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Boots:
   item:
@@ -431,6 +457,7 @@ Medium_Bronze_Boots:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Boots:
   item:
@@ -447,6 +474,7 @@ Heavy_Bronze_Boots:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Helmet:
   item:
@@ -463,6 +491,7 @@ Light_Iron_Helmet:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Helmet:
   item:
@@ -479,6 +508,7 @@ Medium_Iron_Helmet:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Helmet:
   item:
@@ -495,6 +525,7 @@ Heavy_Iron_Helmet:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Chestplate:
   item:
@@ -511,6 +542,7 @@ Light_Iron_Chestplate:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Chestplate:
   item:
@@ -527,6 +559,7 @@ Medium_Iron_Chestplate:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Chestplate:
   item:
@@ -543,6 +576,7 @@ Heavy_Iron_Chestplate:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Leggings:
   item:
@@ -559,6 +593,7 @@ Light_Iron_Leggings:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Leggings:
   item:
@@ -575,6 +610,7 @@ Medium_Iron_Leggings:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Leggings:
   item:
@@ -591,6 +627,7 @@ Heavy_Iron_Leggings:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Boots:
   item:
@@ -607,6 +644,7 @@ Light_Iron_Boots:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Boots:
   item:
@@ -623,6 +661,7 @@ Medium_Iron_Boots:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Boots:
   item:
@@ -639,6 +678,7 @@ Heavy_Iron_Boots:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Helmet:
   item:
@@ -655,6 +695,7 @@ Light_Steel_Helmet:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Helmet:
   item:
@@ -671,6 +712,7 @@ Medium_Steel_Helmet:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Helmet:
   item:
@@ -687,6 +729,7 @@ Heavy_Steel_Helmet:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Chestplate:
   item:
@@ -703,6 +746,7 @@ Light_Steel_Chestplate:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Chestplate:
   item:
@@ -719,6 +763,7 @@ Medium_Steel_Chestplate:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Chestplate:
   item:
@@ -735,6 +780,7 @@ Heavy_Steel_Chestplate:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Leggings:
   item:
@@ -751,6 +797,7 @@ Light_Steel_Leggings:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Leggings:
   item:
@@ -767,6 +814,7 @@ Medium_Steel_Leggings:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Leggings:
   item:
@@ -783,6 +831,7 @@ Heavy_Steel_Leggings:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Boots:
   item:
@@ -799,6 +848,7 @@ Light_Steel_Boots:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Boots:
   item:
@@ -815,6 +865,7 @@ Medium_Steel_Boots:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Boots:
   item:
@@ -831,6 +882,7 @@ Heavy_Steel_Boots:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Turtle_Helmet:
   item:
@@ -847,3 +899,4 @@ Heavy_Turtle_Helmet:
   recipe-items: ["SCUTE"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
+  canCraft: [ Farmer, Fisherman ]

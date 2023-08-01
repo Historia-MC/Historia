@@ -66,6 +66,8 @@ public class Weapon extends CraftedItem {
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
             this.isShaped = configuration.getBoolean(root + ".requireShape");
+            
+            this.proficiencies = configuration.getStringList(root + ".proficiencies");
 
         } else {
             itemStack = new ItemStack(Material.AIR);
