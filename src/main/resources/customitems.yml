@@ -23,6 +23,7 @@ COD_FISH_OIL:
   requireShape: false
   recipe-items: ["COD"]
   recipe-shape: ["A  ", "   ", "   "]
+  canCraft: [ Fisherman, Apothecary ]
 
 SALMON_FISH_OIL:
   item:
@@ -35,6 +36,7 @@ SALMON_FISH_OIL:
   requireShape: false
   recipe-items: ["SALMON"]
   recipe-shape: ["A  ", "   ", "   "]
+  canCraft: [ Fisherman, Apothecary ]
 
 PUFFERFISH_FISH_OIL:
   item:
@@ -47,6 +49,7 @@ PUFFERFISH_FISH_OIL:
   requireShape: false
   recipe-items: ["PUFFERFISH"]
   recipe-shape: ["A  ", "   ", "   "]
+  canCraft: [ Fisherman, Apothecary ]
 
 TROPICAL_FISH_OIL:
   item:
@@ -59,6 +62,7 @@ TROPICAL_FISH_OIL:
   requireShape: false
   recipe-items: ["TROPICAL_FISH"]
   recipe-shape: ["A  ", "   ", "   "]
+  canCraft: [ Fisherman, Apothecary ]
 
 FISH_OIL_TIPPED_ARROW:
   item:
@@ -71,6 +75,7 @@ FISH_OIL_TIPPED_ARROW:
   requireShape: false
   recipe-items: ["FISH_OIL", "ARROW"]
   recipe-shape: ["AB ", "   ", "   "]
+  canCraft: [ Archer ]
 
 GUNPOWDER:
   item:
@@ -83,4 +88,18 @@ GUNPOWDER:
   requireShape: false
   recipe-items: ["SULPHUR", "CHARCOAL"]
   recipe-shape: ["AB ", "   ", "   "]
+  canCraft: [ Apothecary ]
+
+SADDLE:
+  item:
+    type: SADDLE
+    amount: 1
+    display-name: §7Saddle
+    loc-name: SADDLE
+    lore: ["", "§7Placeholder"]
+
+  requireShape: true
+  recipe-items: ["TANNED_LEATHER", "LEAD"]
+  recipe-shape: ["AAA", "B B", "   "]
+  canCraft: [ Huntsman ]
 

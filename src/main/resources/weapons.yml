@@ -22,6 +22,7 @@ Light_Wooden_Sword:
   recipe-items: ["WOOD", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Wooden_Axe:
   item:
@@ -45,6 +46,7 @@ Light_Wooden_Axe:
   recipe-items: ["WOOD", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Tin_Sword:
   item:
@@ -70,6 +72,7 @@ Light_Tin_Sword:
   recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Light_Tin_Axe:
   item:
@@ -92,6 +95,7 @@ Light_Tin_Axe:
   recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Heavy_Stone_Sword:
   item:
@@ -110,6 +114,7 @@ Heavy_Stone_Sword:
   recipe-items: ["STONE", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Stone_Axe:
   item:
@@ -128,6 +133,7 @@ Heavy_Stone_Axe:
   recipe-items: ["STONE", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Bronze_Sword:
   item:
@@ -150,6 +156,7 @@ Light_Bronze_Sword:
   recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Sword:
   item:
@@ -168,6 +175,7 @@ Medium_Bronze_Sword:
   recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Sword:
   item:
@@ -191,6 +199,7 @@ Heavy_Bronze_Sword:
   recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Bronze_Axe:
   item:
@@ -215,6 +224,7 @@ Light_Bronze_Axe:
   recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Bronze_Axe:
   item:
@@ -233,6 +243,7 @@ Medium_Bronze_Axe:
   recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Bronze_Axe:
   item:
@@ -255,6 +266,7 @@ Heavy_Bronze_Axe:
   recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Sword:
   item:
@@ -279,6 +291,7 @@ Light_Iron_Sword:
   recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Sword:
   item:
@@ -297,6 +310,7 @@ Medium_Iron_Sword:
   recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Sword:
   item:
@@ -320,6 +334,7 @@ Heavy_Iron_Sword:
   recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Iron_Axe:
   item:
@@ -344,6 +359,7 @@ Light_Iron_Axe:
   recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Iron_Axe:
   item:
@@ -362,6 +378,7 @@ Medium_Iron_Axe:
   recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Iron_Axe:
   item:
@@ -386,6 +403,7 @@ Heavy_Iron_Axe:
   recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Sword:
   item:
@@ -410,6 +428,7 @@ Light_Steel_Sword:
   recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Sword:
   item:
@@ -428,6 +447,7 @@ Medium_Steel_Sword:
   recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Sword:
   item:
@@ -451,6 +471,7 @@ Heavy_Steel_Sword:
   recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
   recipe-shape: [" A ", " A ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Light_Steel_Axe:
   item:
@@ -475,6 +496,7 @@ Light_Steel_Axe:
   recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ ALL ]
 
 Medium_Steel_Axe:
   item:
@@ -493,6 +515,7 @@ Medium_Steel_Axe:
   recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
 
 Heavy_Steel_Axe:
   item:
@@ -517,3 +540,4 @@ Heavy_Steel_Axe:
   recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
   recipe-shape: ["AA ", "AB ", " B "]
   requireShape: true
+  canCraft: [ Blacksmith ]
