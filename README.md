@@ -37,24 +37,24 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply chance to not consume the block for builders.
 - [ ] Apply custom fishing loot for fishermen.
 - [x] Check if player can ignite oil on bow.
-- [ ] Check if player can harvest oil from sources.
+- [x] Check if player can harvest oil from sources.
 - [ ] Check if player can harvest grass?
-- [ ] Check if player can craft saddles.
+- [x] Check if player can craft saddles.
 - [x] Check if player can tame animals.
 - [ ] Check if player can use sweeping edge?
-- [ ] Check if player can extract bones from sources.
+- [x] Check if player can extract bones from sources.
 - [x] Check if player can break beehives.
-- [ ] Check if player can craft gunpowder.
+- [x] Check if player can craft gunpowder.
 - [ ] Check if player can apply unbreaking.
-- [ ] Check if player can make high tier armor.
+- [x] Check if player can make high tier armor.
 - [ ] Check if player can generate a knowledge book.
 - [ ] Increase breath underwater for fishermen (enchant of respiration)
 - [ ] Allow building of tridents for fishermen and farmers.
 - [ ] Allow holding bonemeal for farmers.
 - [ ] Allow for increased yields for farmers based on level.
 - [ ] Allow for greater leather drops for hunters.
-- [ ] Allow for architects to place ladders and scaffolding in other towns.
-- [ ] Allow for apothecaries to apply poison to arrows.
+- [x] Allow for architects to place ladders and scaffolding in other towns.
+- [x] Allow for apothecaries to apply poison to arrows.
 
 ## [HistoriaPlayer]
 
@@ -64,12 +64,6 @@ To be considered as a release, the following requirements must be met:
 - [ ] Calculate ambient temperature.
 - [ ] Calculate armor weight and temperature.
 - [ ] Check exhaustion condition and apply debuffs.
-
-## [Expiry]
-
-- [ ] Apply standard date format to food items.
-- [ ] Check if food item has expired and apply debuff if eaten.
-- [ ] Salted foods do not expire.
 
 ## [Crafting]
 
@@ -96,7 +90,6 @@ To be considered as a release, the following requirements must be met:
 
 - [x] Apply crafting table pattern match for gunpowder recipe.
 - [x] Apply crafting table pattern match for oil-tipped arrow recipe.
-- [ ] Apply crafting table pattern match for salted foods.
 
 ## [MySQL]
 
@@ -134,12 +127,6 @@ To be considered as a release, the following requirements must be met:
 - [x] Preload armor objects on init into hashmap.
 - [x] Getter for armor object.
 
-### [Expiry]
-
-- [ ] Create object for each food item.
-- [ ] Preload food objects on init into hashmap.
-- [ ] Getter for food object.
-
 ### [Tools]
 
 - [ ] Create tools that match custom resource types.
@@ -160,8 +147,6 @@ To be considered as a release, the following requirements must be met:
 - [ ] Arrow landing has chance of igniting block if flamable.
 - [ ] Apply slowness debuff on damage.
 - [ ] Can eat large fish / meat multiple times (?)
-- [ ] Boil water in cauldron to get salt.
-- Possible to use bottles gathered in an ocean biome on a campfire.
 - [ ] Toggle PvP on/off for settlements that have been raided or are attacking after being raided.
 - [x] Right click stonecutter to increase sharpness.
 - [x] Can shear chickens for feathers.

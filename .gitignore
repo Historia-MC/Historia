@@ -5,3 +5,4 @@ target/
 .factorypath
 pom.xml.*
 release/*
+.vscode/settings.json

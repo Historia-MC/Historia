@@ -103,8 +103,6 @@ Fisherman:
 
   skills:
     nametag: true
-    extractBones: true
-    extractOil: true
 
 Miner:
 
@@ -132,7 +130,6 @@ Miner:
     extraOreChance: true
     efficiencyPickaxe: true
     efficiencyShovel: true
-    specialItems: true
 
 Blacksmith:
 
@@ -158,9 +155,7 @@ Blacksmith:
 
   skills:
     nametag: true
-    makeHighTierArmor: true
     applyUnbreaking: true
-    craftSaddle: true
     chanceNoAnvilDamage: true
     applySharpness: true
 
@@ -192,7 +187,6 @@ Huntsman:
     extraWool: true
     extraFeathers: true
     shearChicken: true
-    craftSaddle: true
 
 Apothecary:
 
@@ -217,8 +211,6 @@ Apothecary:
 
   skills:
     nametag: true
-    extractOil: true
-    craftGunpowder: true
     makeKnowledgeBook: true
 
 Architect:

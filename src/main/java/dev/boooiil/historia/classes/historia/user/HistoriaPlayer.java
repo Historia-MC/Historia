@@ -91,7 +91,12 @@ public class HistoriaPlayer extends BasePlayer {
 
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
+        this.level = this.level < 1 ? 1 : this.level;
+
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
+
+        this.currentExperience = this.currentExperience < 0 ? 0 : this.currentExperience;
+
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
@@ -574,21 +579,21 @@ public class HistoriaPlayer extends BasePlayer {
         double incomeValue = this.proficiency.getStats().getIncomeValue(source);
         double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
 
-        if ((getCurrentExperience()) - incomeModified <= 0) {
+        if ((getCurrentExperience()) - incomeModified <= 0 && getLevel() > 1) {
 
             setLevel(getLevel() - 1);
             setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
 
-            double overflow =(getCurrentExperience() - incomeModified) - getMaxExperience();
+            double overflow = (getCurrentExperience() - incomeModified) - getMaxExperience();
 
-            if (overflow < getMaxExperience()) setCurrentExperience(getMaxExperience() - overflow);
+            if (overflow < getMaxExperience() && getLevel() != 1) setCurrentExperience(getMaxExperience() - overflow);
             else setCurrentExperience(0);
 
             saveCharacter();
 
             Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
 
-        } else {
+        } else if (getLevel() > 1) {
 
             setCurrentExperience(getCurrentExperience() - incomeModified);
 

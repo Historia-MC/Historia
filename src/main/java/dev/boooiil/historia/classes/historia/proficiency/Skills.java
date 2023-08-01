@@ -26,27 +26,17 @@ public class Skills {
     private boolean hasLadderBypass = false;
 
     private boolean canIgniteOil = false;
-    private boolean canExtractOil = false;
     private boolean canBreakGrass = false;
-    private boolean canCraftSaddle = false;
     private boolean canTameAnimals = false;
     private boolean canSweepingEdge = false;
-    private boolean canExtractBones = false;
     private boolean canBreakBeehive = false;
 
-    private boolean canCraftGunpowder = false;
     private boolean canApplyUnbreaking = false;
     private boolean canApplySharpness = false;
 
     private boolean canShearChickens = false;
 
-    private boolean canCraftHighTier = false;
-
     private boolean canMakeKnowledgeBook = false;
-    /**
-     * Don't know what this is for yet.
-     */
-    private boolean specialItems = false;
 
     public Skills(FileConfiguration config, String root) {
 
@@ -63,20 +53,14 @@ public class Skills {
         this.hasChanceNoConsumeBlock = config.getBoolean(root + ".chanceNoConsumeBlock");
         this.hasLadderBypass = config.getBoolean(root + ".ladderBypass");
         this.canIgniteOil = config.getBoolean(root + ".igniteOil");
-        this.canExtractOil = config.getBoolean(root + ".extractOil");
         this.canBreakGrass = config.getBoolean(root + ".breakGrass");
-        this.canCraftSaddle = config.getBoolean(root + ".craftSaddle");
         this.canTameAnimals = config.getBoolean(root + ".tameAnimals");
         this.canSweepingEdge = config.getBoolean(root + ".sweepingEdge");
-        this.canExtractBones = config.getBoolean(root + ".extractBones");
         this.canBreakBeehive = config.getBoolean(root + ".breakBeehive");
-        this.canCraftGunpowder = config.getBoolean(root + ".craftGunpowder");
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
         this.canApplySharpness = config.getBoolean(root + ".applySharpness");
-        this.canCraftHighTier = config.getBoolean(root + ".makeHighTierArmor");
         this.canShearChickens = config.getBoolean(root + ".shearChicken");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
-        this.specialItems = config.getBoolean(root + ".specialItems");
 
     }
 
@@ -359,27 +343,6 @@ public class Skills {
     }
 
     /**
-     * This function returns a boolean value that indicates whether or not the
-     * country can extract oil
-     * 
-     * @return The value of the variable canExtractOil.
-     */
-    public boolean canExtractOil() {
-        return canExtractOil;
-    }
-
-    /**
-     * This function sets the value of the boolean variable canExtractOil to the
-     * value of the boolean
-     * parameter canExtractOil
-     * 
-     * @param canExtractOil If the block can extract oil from the ground.
-     */
-    public void setCanExtractOil(boolean canExtractOil) {
-        this.canExtractOil = canExtractOil;
-    }
-
-    /**
      * This function returns a boolean value that determines whether or not the
      * player can break glass
      * 
@@ -399,28 +362,6 @@ public class Skills {
      */
     public void setCanBreakGrass(boolean canBreakGlass) {
         this.canBreakGrass = canBreakGlass;
-    }
-
-    /**
-     * This function returns a boolean value that is true if the horse can craft a
-     * saddle, and false if
-     * it cannot.
-     * 
-     * @return The boolean value of canCraftSaddle.
-     */
-    public boolean canCraftSaddle() {
-        return canCraftSaddle;
-    }
-
-    /**
-     * This function sets the boolean value of canCraftSaddle to the boolean value
-     * of the parameter
-     * canCraftSaddle
-     * 
-     * @param canCraftSaddle Whether or not the player can craft a saddle.
-     */
-    public void setCanCraftSaddle(boolean canCraftSaddle) {
-        this.canCraftSaddle = canCraftSaddle;
     }
 
     /**
@@ -467,28 +408,6 @@ public class Skills {
 
     /**
      * This function returns a boolean value that determines whether or not the
-     * player can extract
-     * bones from the bone pile
-     * 
-     * @return The method is returning a boolean value.
-     */
-    public boolean canExtractBones() {
-        return canExtractBones;
-    }
-
-    /**
-     * This function sets the value of the boolean variable canExtractBones to the
-     * value of the boolean
-     * variable canExtractBones
-     * 
-     * @param canExtractBones If true, the mob can be extracted for bones.
-     */
-    public void setCanExtractBones(boolean canExtractBones) {
-        this.canExtractBones = canExtractBones;
-    }
-
-    /**
-     * This function returns a boolean value that determines whether or not the
      * player can break
      * beehives
      * 
@@ -507,28 +426,6 @@ public class Skills {
      */
     public void setCanBreakBeehive(boolean canBreakBeehive) {
         this.canBreakBeehive = canBreakBeehive;
-    }
-
-    /**
-     * This function returns a boolean value that represents whether or not the
-     * player can craft
-     * gunpowder.
-     * 
-     * @return The boolean value of canCraftGunpowder.
-     */
-    public boolean canCraftGunpowder() {
-        return canCraftGunpowder;
-    }
-
-    /**
-     * This function sets the value of the variable canCraftGunpowder to the value
-     * of the parameter
-     * canCraftGunpowder
-     * 
-     * @param canCraftGunpowder Whether or not the player can craft gunpowder.
-     */
-    public void setCanCraftGunpowder(boolean canCraftGunpowder) {
-        this.canCraftGunpowder = canCraftGunpowder;
     }
 
     /**
@@ -564,31 +461,8 @@ public class Skills {
         return canApplySharpness;
     }
 
-    /**
-     * This function returns a boolean value that is true if the player can make
-     * high tier armor, and
-     * false if they can't.
-     * 
-     * @return The boolean value of canMakeHighTierArmor.
-     */
-    public boolean canCraftHighTier() {
-        return canCraftHighTier;
-    }
-
     public boolean canShearChickens() {
         return canShearChickens;
-    }
-
-    /**
-     * This function sets the value of the variable canMakeHighTierArmor to the
-     * value of the parameter
-     * canMakeHighTierArmor
-     * 
-     * @param canMakeHighTierArmor Whether or not the player can make high tier
-     *                             armor.
-     */
-    public void setCanMakeHighTierArmor(boolean canMakeHighTierArmor) {
-        this.canCraftHighTier = canMakeHighTierArmor;
     }
 
     /**
@@ -614,29 +488,6 @@ public class Skills {
         this.canMakeKnowledgeBook = canMakeKnowledgeBook;
     }
 
-    /**
-     * This function returns a boolean value that indicates whether or not the item
-     * is special
-     * 
-     * @return The boolean value of specialItems.
-     */
-    public boolean specialItems() {
-        return specialItems;
-    }
-
-    /**
-     * This function sets the value of the specialItems variable to the value of the
-     * specialItems
-     * parameter
-     * 
-     * @param specialItems This is a boolean value that determines whether or not
-     *                     the special items are
-     *                     enabled.
-     */
-    public void setSpecialItems(boolean specialItems) {
-        this.specialItems = specialItems;
-    }
-
     public String toString() {
 
         String output = "*** SKILLS *** \n";
@@ -652,18 +503,12 @@ public class Skills {
         output += "Has Chance No Anvil Damage: " + hasChanceNoAnvilDamage + "\n";
         output += "Has Chance No Consume Block: " + hasChanceNoConsumeBlock + "\n";
         output += "Can Ignite Oil: " + canIgniteOil + "\n";
-        output += "Can Extract Oil: " + canExtractOil + "\n";
         output += "Can Break Grass: " + canBreakGrass + "\n";
-        output += "Can Craft Saddle: " + canCraftSaddle + "\n";
         output += "Can Tame Animals: " + canTameAnimals + "\n";
         output += "Can Sweeping Edge: " + canSweepingEdge + "\n";
-        output += "Can Extract Bones: " + canExtractBones + "\n";
         output += "Can Break Beehive: " + canBreakBeehive + "\n";
-        output += "Can Craft Gunpowder: " + canCraftGunpowder + "\n";
         output += "Can Apply Unbreaking: " + canApplyUnbreaking + "\n";
-        output += "Can Make High Tier Armor: " + canCraftHighTier + "\n";
         output += "Can Make Knowledge Book: " + canMakeKnowledgeBook + "\n";
-        output += "Special Items: " + specialItems + "\n";
         output += "************** \n";
 
         return output;

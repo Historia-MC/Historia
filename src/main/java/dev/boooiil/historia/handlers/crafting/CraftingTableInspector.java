@@ -14,7 +14,7 @@ public class CraftingTableInspector {
 
     public CraftingTableInspector(ItemStack[] craftingTableInventory) {
 
-        Logging.debugToConsole("[CCIM] Table Size: " + craftingTableInventory.length);
+        Logging.debugToConsole("[CTI] Table Size: " + craftingTableInventory.length);
 
         String[] options = { "A", "B", "C", "D", "E", "F", "G", "H", "I" };
 
@@ -26,45 +26,36 @@ public class CraftingTableInspector {
         // so matlab rules apply on this array
         for (int i = 1; i < craftingTableInventory.length; i++) {
 
-            boolean invalidItem = (craftingTableInventory[i] == null || craftingTableInventory[i].getItemMeta() == null);
+            ItemStack item = (craftingTableInventory[i] == null || craftingTableInventory[i].getItemMeta() == null) ? null : craftingTableInventory[i];
+            String materialName = null;
+            
+            if (item != null && item.getItemMeta() != null) {
 
-            if (!invalidItem) {
+                if (item.getItemMeta().getLocalizedName() != "") materialName = item.getItemMeta().getLocalizedName();
+                else materialName = item.getType().toString();
 
-                Logging.debugToConsole("[CCIM] Item: (" + i + ") " + craftingTableInventory[i].getItemMeta().getLocalizedName());
+            }
 
-                if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
+            if (item != null) {
 
-                    fullMaterials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
+                Logging.debugToConsole("[CTI] Item: (" + i + ") " + materialName);
 
-                }
-
-                else {
-                    
-                    fullMaterials.add(craftingTableInventory[i].getType().toString());
-
-                }
+                fullMaterials.add(materialName);
+                
             }
 
             if (i >= 1 && i <= 3) {
 
-                if (invalidItem) first += " ";
+                if (item == null) first += " ";
 
-                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
+                else if (materials.contains(materialName)) {
 
-                    first += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
-
-                }
-
-                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
-
-                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
-                    first += options[materials.size() - 1];
+                    first += options[materials.indexOf(materialName)];
 
                 }
-
                 else {
 
-                    materials.add(craftingTableInventory[i].getType().toString());
+                    materials.add(materialName);
                     first += options[materials.size() - 1];
 
                 }
@@ -73,24 +64,16 @@ public class CraftingTableInspector {
 
             if (i >= 4 && i <= 6) {
 
-                if (invalidItem) second += " ";
+                if (item == null) second += " ";
 
-                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
+                else if (materials.contains(materialName)) {
 
-                    second += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
-
-                }
-
-                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
-
-                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
-                    second += options[materials.size() - 1];
+                    second += options[materials.indexOf(materialName)];
 
                 }
-
                 else {
 
-                    materials.add(craftingTableInventory[i].getType().toString());
+                    materials.add(materialName);
                     second += options[materials.size() - 1];
 
                 }
@@ -99,24 +82,16 @@ public class CraftingTableInspector {
 
             if (i >= 7 && i <= 9) {
 
-                if (invalidItem) third += " ";
+                if (item == null) third += " ";
 
-                else if (materials.contains(craftingTableInventory[i].getItemMeta().getLocalizedName())) {
+                else if (materials.contains(materialName)) {
 
-                    third += options[materials.indexOf(craftingTableInventory[i].getItemMeta().getLocalizedName())];
-
-                }
-
-                else if (craftingTableInventory[i].getItemMeta().getLocalizedName() != "") {
-
-                    materials.add(craftingTableInventory[i].getItemMeta().getLocalizedName());
-                    third += options[materials.size() - 1];
+                    third += options[materials.indexOf(materialName)];
 
                 }
-
                 else {
 
-                    materials.add(craftingTableInventory[i].getType().toString());
+                    materials.add(materialName);
                     third += options[materials.size() - 1];
 
                 }

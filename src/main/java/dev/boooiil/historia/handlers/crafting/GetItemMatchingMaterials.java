@@ -36,22 +36,22 @@ public class GetItemMatchingMaterials {
             for (String material : materials) {
 
                 Logging.debugToConsole(
-                        "Contains Material? " + item.getRecipeItems() + " " + material.replaceFirst(replace, ""));
+                        "[GIMM] Contains Material? " + item.getRecipeItems() + " " + material.replaceFirst(replace, ""));
 
                 if (item.getRecipeItems().contains(material.replaceFirst(replace, "")))
                     matched++;
 
             }
 
-            Logging.debugToConsole("[getItemBasedOnIngot] " + item.getItemStack().getType());
-            Logging.debugToConsole("[getItemBasedOnIngot] need: " + need);
-            Logging.debugToConsole("[getItemBasedOnIngot] matched: " + matched);
+            Logging.debugToConsole("[GIMM] " + item.getItemStack().getType());
+            Logging.debugToConsole("[GIMM] need: " + need);
+            Logging.debugToConsole("[GIMM] matched: " + matched);
 
             if (matched == need) {
 
                 this.item = item.getItemStack();
                 this.craftedItem = item;
-                Logging.debugToConsole("[getItemBasedOnIngot] Item: " + this.item.getType());
+                Logging.debugToConsole("[GIMM] Item: " + this.item.getType());
 
             }
 

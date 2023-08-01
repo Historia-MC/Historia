@@ -189,4 +189,8 @@ public class CraftingResult {
         return (float) level / 100;
 
     }
+
+    public CraftedItem getCraftedItem() {
+        return craftedItem;
+    }
 }

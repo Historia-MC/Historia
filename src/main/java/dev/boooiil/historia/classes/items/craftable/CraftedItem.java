@@ -8,6 +8,7 @@ public class CraftedItem extends BaseItem {
     
     protected List<String> recipeShape;
     protected List<String> recipeItems;
+    protected List<String> proficiencies;
     protected boolean isShaped;
 
     /**
@@ -55,5 +56,16 @@ public class CraftedItem extends BaseItem {
      */
     public boolean isShapeDependent() {
         return isShaped;
+    }
+
+    /**
+     * It returns whether the given proficiency can craft this item.
+     * @param proficiency The proficiency to check.
+     * @return If the proficiency can craft the item.
+     */
+    public boolean canCraft(String proficiency) {
+
+        return this.proficiencies.contains(proficiency);
+
     }
 }
