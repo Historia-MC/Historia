@@ -226,7 +226,7 @@
           <include>ores.yml</include>
           <include>crops.yml</include>
           <include>customitems.yml</include>
-
+          <include>tools.yml</include>
           <include>weapons.yml</include>
         </includes>
       </resource>

@@ -22,7 +22,9 @@ public class FileMap {
         /** plugin.yml */
         PLUGIN("plugin.yml"),
         /** weapons.yml */
-        WEAPONS("weapons.yml");
+        WEAPONS("weapons.yml"),
+        /** tools.yml */
+        TOOL("tools.yml");
 
         private String key;
 
