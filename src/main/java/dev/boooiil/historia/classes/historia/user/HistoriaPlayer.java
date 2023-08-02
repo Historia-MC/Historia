@@ -326,17 +326,6 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * Print the player's information.
-     * 
-     * @return {@link String}
-     */
-    public String printPlayer() {
-
-        return "";
-
-    }
-
-    /**
      * Calculate the temperature adjustemnet for armor.
      * 
      * @return {@link Double}
@@ -360,8 +349,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             if (armor != null) {
 
-                String material = armor.getType().toString();
-                mod += ConfigurationLoader.getArmorConfig().getObject(material).getWeight();
+                mod += ConfigurationLoader.getArmorConfig().getObject(armor.getItemMeta().getLocalizedName()).getWeight();
 
             }
 
@@ -448,6 +436,8 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     public void changeProficiency(String proficiency) {
+
+        //TODO: Adjust player modifiers based on new proficiency.
 
         this.proficiency = new Proficiency(proficiency);
 
