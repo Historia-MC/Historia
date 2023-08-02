@@ -1,7 +1,5 @@
 package dev.boooiil.historia.handlers.pve;
 
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -10,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
+import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.NumberUtils;
 
 public class EntityDeathHandler {
@@ -24,49 +23,70 @@ public class EntityDeathHandler {
 
     public void doDeath() {
 
-        List<ItemStack> drops = event.getDrops();
         LivingEntity entity = event.getEntity();
-        // boolean dropContainsLeather = drops.stream().anyMatch(itemStack ->
-        // itemStack.getType() == Material.LEATHER);
 
         switch (entity.getType()) {
 
             case SHEEP: {
-                IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
-                ItemStack leather = ingotConfig.getObject("LOW_LIGHT_SHEEP_LEATHER").getItemStack();
-                drops.add(leather);
+                Logging.debugToConsole("Sheep died.");
+
+                if (historiaPlayer.getProficiency().getSkills().canHarvestLeather()) {
+                    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
+                    ItemStack leather = ingotConfig.getObject("LOW_LIGHT_SHEEP_LEATHER").getItemStack();
+                    event.getDrops().add(leather);
+                }
+
                 break;
             }
             case COW: {
-                List<ItemStack> newDrops = drops.stream().filter(itemStack -> itemStack.getType() != Material.LEATHER)
-                        .toList();
+                Logging.debugToConsole("Cow died.");
 
-                IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
+                if (historiaPlayer.getProficiency().getSkills().canHarvestLeather()) {
+                    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
+
                 ItemStack leather = ingotConfig.getObject("LOW_LIGHT_COW_LEATHER").getItemStack();
-                newDrops.add(leather);
+                event.getDrops().clear();
+                event.getDrops().add(leather);
+                event.getDrops().add(new ItemStack(Material.BEEF, 1 * NumberUtils.randomInt(1, 3)));
+                }
+                
                 break;
             }
             case PIG: {
-                IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
-                ItemStack leather = ingotConfig.getObject("LOW_LIGHT_PIG_LEATHER").getItemStack();
-                drops.add(leather);
+                Logging.debugToConsole("Pig died.");
+
+                if (historiaPlayer.getProficiency().getSkills().canHarvestLeather()) {
+                    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
+                    ItemStack leather = ingotConfig.getObject("LOW_LIGHT_PIG_LEATHER").getItemStack();
+                    event.getDrops().add(leather);
+                }
+
                 break;
             }
             case HORSE: {
-                IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
-                ItemStack leather = ingotConfig.getObject("LOW_LIGHT_HORSE_LEATHER").getItemStack();
-                drops.add(leather);
+                Logging.debugToConsole("Horse died.");
+
+                if (historiaPlayer.getProficiency().getSkills().canHarvestLeather()) {
+                    IngotConfig ingotConfig = ConfigurationLoader.getIngotConfig();
+                    ItemStack leather = ingotConfig.getObject("LOW_LIGHT_HORSE_LEATHER").getItemStack();
+                    event.getDrops().add(leather);
+                }
+
                 break;
             }
             case CHICKEN: {
+                Logging.debugToConsole("Chicken died.");
 
                 if (historiaPlayer.getProficiency().getSkills().hasChanceExtraFeathers()) {
                     ItemStack feather = new ItemStack(Material.FEATHER, 1);
-                    drops.add(feather);
+                    event.getDrops().add(feather);
                 }
+
+                break;
 
             }
             default: {
+                Logging.debugToConsole(entity.getType().toString() + " died.");
             }
 
         }
@@ -74,12 +94,9 @@ public class EntityDeathHandler {
         if (historiaPlayer.getProficiency().getSkills().canHarvestBones()) {
 
             ItemStack bones = new ItemStack(Material.BONE, 1 * NumberUtils.randomInt(1, 4));
-            drops.add(bones);
+            event.getDrops().add(bones);
 
         }
-
-        event.getDrops().clear();
-        event.getDrops().addAll(drops);
 
     }
 
