@@ -187,6 +187,7 @@ Huntsman:
     extraWool: true
     extraFeathers: true
     shearChicken: true
+    harvestLeather: true
 
 Apothecary:
 
@@ -293,3 +294,4 @@ Farmer:
     breakBeehive: true
     breakGrass: true
     shearChicken: true
+    harvestLeather: true

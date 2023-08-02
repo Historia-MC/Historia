@@ -40,9 +40,9 @@ import dev.boooiil.historia.events.furnace.FurnaceSmeltListener;
 import dev.boooiil.historia.events.furnace.FurnaceStartSmeltListener;
 import dev.boooiil.historia.events.inventory.InventoryClickListener;
 import dev.boooiil.historia.events.mobs.EntityBreedListener;
-import dev.boooiil.historia.events.mobs.EntityDeathListener;
 import dev.boooiil.historia.events.mobs.EntityTameListener;
 import dev.boooiil.historia.events.playerInteraction.PlayerInteractEntityListener;
+import dev.boooiil.historia.events.pve.EntityDeathListener;
 import dev.boooiil.historia.events.pvp.PlayerDeathListener;
 import dev.boooiil.historia.events.pvp.EntityDamageByEntityListener;
 import dev.boooiil.historia.events.pvp.PlayerRespawnListener;
@@ -101,7 +101,6 @@ public class Main extends JavaPlugin {
         ConfigurationLoader.init();
 
         registerEvent(new EntityBreedListener());
-        registerEvent(new EntityDeathListener());
         registerEvent(new EntityTameListener());
         registerEvent(new PlayerExpChangeListener());
         registerEvent(new FoodLevelChangeListener());
@@ -121,6 +120,7 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
+        registerEvent(new EntityDeathListener());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());

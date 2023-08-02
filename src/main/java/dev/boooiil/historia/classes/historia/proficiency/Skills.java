@@ -22,6 +22,7 @@ public class Skills {
     private boolean hasChanceExtraFeathers = false;
 
     private boolean hasChanceNoAnvilDamage = false;
+
     private boolean hasChanceNoConsumeBlock = false;
     private boolean hasLadderBypass = false;
 
@@ -35,6 +36,9 @@ public class Skills {
     private boolean canApplySharpness = false;
 
     private boolean canShearChickens = false;
+
+    private boolean canHarvestBones = false;
+    private boolean canHarvestLeather = false;
 
     private boolean canMakeKnowledgeBook = false;
 
@@ -60,6 +64,8 @@ public class Skills {
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
         this.canApplySharpness = config.getBoolean(root + ".applySharpness");
         this.canShearChickens = config.getBoolean(root + ".shearChicken");
+        this.canHarvestBones = config.getBoolean(root + ".bonesFromAnimals");
+        this.canHarvestLeather = config.getBoolean(root + ".harvestLeather");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
 
     }
@@ -463,6 +469,17 @@ public class Skills {
 
     public boolean canShearChickens() {
         return canShearChickens;
+    }
+
+    public boolean canHarvestBones() {
+        return canHarvestBones;
+    } 
+    
+    /**
+     * @return the canHarvestLeather
+     */
+    public boolean canHarvestLeather() {
+        return canHarvestLeather;
     }
 
     /**
