@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
-import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.NumberUtils;
 
 /**
