@@ -18,17 +18,17 @@ public class UpdateScoreboard extends BukkitRunnable {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
             ScoreboardAdapter scoreboardAdapter = new ScoreboardAdapter();
 
-            scoreboardAdapter.createHeader("HISTORIA");
+            scoreboardAdapter.createHeader(ChatColor.BOLD + "" + ChatColor.GOLD + "HISTORIA");
             scoreboardAdapter.addLine(12, "");
-            scoreboardAdapter.addLine(11, ChatColor.BLUE + "Proficiency: " + ChatColor.GRAY + historiaPlayer.getProficiency().getName());
-            scoreboardAdapter.addLine(10, ChatColor.DARK_BLUE + "Level: " + ChatColor.GRAY + historiaPlayer.getLevel());
-            scoreboardAdapter.addLine(9, ChatColor.BLUE + "Health: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getHealth(), 2) + "/" + historiaPlayer.getBaseHealth());
-            scoreboardAdapter.addLine(8, ChatColor.DARK_BLUE + "Hunger: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getFoodLevel(), 2) + "/" + historiaPlayer.getProficiency().getStats().getBaseFood());
-            scoreboardAdapter.addLine(7, ChatColor.BLUE + "Experience: " + ChatColor.GRAY + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience());
-            scoreboardAdapter.addLine(6, ChatColor.DARK_BLUE + "Temperature: " + ChatColor.GRAY + historiaPlayer.getCurrentTemperature());
-            scoreboardAdapter.addLine(5, ChatColor.BLUE + "Weight: " + ChatColor.GRAY + null);
-            scoreboardAdapter.addLine(4, ChatColor.DARK_BLUE + "Weapon Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes());
-            scoreboardAdapter.addLine(3, ChatColor.BLUE + "Armor Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableArmorTypes());
+            scoreboardAdapter.addLine(11, ChatColor.AQUA + "Proficiency: " + ChatColor.GRAY + historiaPlayer.getProficiency().getName());
+            scoreboardAdapter.addLine(10, ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + historiaPlayer.getLevel());
+            scoreboardAdapter.addLine(9, ChatColor.AQUA + "Health: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getHealth(), 2) + "/" + historiaPlayer.getBaseHealth());
+            scoreboardAdapter.addLine(8, ChatColor.DARK_AQUA + "Hunger: " + ChatColor.GRAY + NumberUtils.roundDouble(player.getFoodLevel(), 2) + "/" + historiaPlayer.getProficiency().getStats().getBaseFood());
+            scoreboardAdapter.addLine(7, ChatColor.AQUA + "Experience: " + ChatColor.GRAY + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience());
+            scoreboardAdapter.addLine(6, ChatColor.DARK_AQUA + "Temperature: " + ChatColor.GRAY + historiaPlayer.getCurrentTemperature());
+            scoreboardAdapter.addLine(5, ChatColor.AQUA + "Weight: " + ChatColor.GRAY + null);
+            scoreboardAdapter.addLine(4, ChatColor.DARK_AQUA + "Weapon Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes());
+            scoreboardAdapter.addLine(3, ChatColor.AQUA + "Armor Class: " + ChatColor.GRAY + historiaPlayer.getProficiency().getStats().getUsableArmorTypes());
 
             scoreboardAdapter.addToPlayer(player);
 
