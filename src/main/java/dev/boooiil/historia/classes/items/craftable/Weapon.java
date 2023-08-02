@@ -67,7 +67,7 @@ public class Weapon extends CraftedItem {
 
             this.isShaped = configuration.getBoolean(root + ".requireShape");
             
-            this.proficiencies = configuration.getStringList(root + ".proficiencies");
+            this.proficiencies = configuration.getStringList(root + ".canCraft");
 
         } else {
             itemStack = new ItemStack(Material.AIR);

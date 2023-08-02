@@ -57,7 +57,7 @@ public class Armor extends CraftedItem {
             // Getting the recipe shape from the config.
             this.recipeShape = configuration.getStringList(itemRoot + ".recipe-shape");
             
-            this.proficiencies = configuration.getStringList(itemRoot + ".proficiencies");
+            this.proficiencies = configuration.getStringList(itemRoot + ".canCraft");
 
         }
 

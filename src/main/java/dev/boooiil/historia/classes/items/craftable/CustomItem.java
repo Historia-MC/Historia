@@ -32,7 +32,7 @@ public class CustomItem extends CraftedItem {
 
             this.isShaped = configuration.getBoolean(itemName + ".requireShape");
 
-            this.proficiencies = configuration.getStringList(itemName + ".proficiencies");
+            this.proficiencies = configuration.getStringList(itemName + ".canCraft");
 
         }
     }
