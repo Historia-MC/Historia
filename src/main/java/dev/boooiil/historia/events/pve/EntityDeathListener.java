@@ -16,7 +16,7 @@ public class EntityDeathListener implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
 
         Logging.debugToConsole("EntityDeath event created.");
-        Logging.debugToConsole("Killer: " + event.getEntity().getKiller() != null ? event.getEntity().getKiller().getName() : "Falling");
+        Logging.debugToConsole("Killer: " + event.getEntity().getKiller().getName() != null ? event.getEntity().getKiller().getName() : "UNKNOWN");
         Logging.debugToConsole("Killed: " + event.getEntity().getName());
 
         if (event.getEntity() instanceof Player) return;
