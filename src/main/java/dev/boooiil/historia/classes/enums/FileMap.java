@@ -24,7 +24,7 @@ public class FileMap {
         /** weapons.yml */
         WEAPONS("weapons.yml"),
         /** tools.yml */
-        TOOL("tools.yml");
+        TOOLS("tools.yml");
 
         private String key;
 

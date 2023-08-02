@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.NumberUtils;
 
 /**
@@ -36,11 +37,13 @@ public class Tool extends CraftedItem {
     // It's a constructor.
     public Tool(String toolName) {
 
-        configuration = ConfigurationLoader.getWeaponConfig().getConfiguration();
+        configuration = ConfigurationLoader.getToolConfig().getConfiguration();
 
-        valid = ConfigurationLoader.getWeaponConfig().isValid(toolName);
+        valid = ConfigurationLoader.getToolConfig().isValid(toolName);
 
         if (valid) {
+
+            Logging.debugToConsole("No ERROR With Wooden Pickaxe! " + toolName);
 
             String root = toolName;
 
@@ -63,6 +66,7 @@ public class Tool extends CraftedItem {
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
         } else {
+            Logging.debugToConsole("Error WITH WOODEN PICKAXE! " + toolName);
             itemStack = new ItemStack(Material.AIR);
         }
 
@@ -265,10 +269,6 @@ public class Tool extends CraftedItem {
 
     public double getKnockback() {
         return knockback;
-    }
-
-    public double getSweep() {
-        return sweep;
     }
 
     public int getDurability() {
