@@ -6,10 +6,10 @@ Light_Leather_Helmet:
     amount: 1
     display-name: §7Leather Helmet
     loc-name: Light_Leather_Helmet
-    lore:   
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, leather helmet."
+      - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
       - ""
@@ -23,7 +23,7 @@ Light_Leather_Helmet:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Leather_Helmet:
   item:
@@ -31,10 +31,10 @@ Medium_Leather_Helmet:
     amount: 1
     display-name: §7Leather Helmet
     loc-name: Medium_Leather_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, leather helmet."
+      - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
       - ""
@@ -48,7 +48,7 @@ Medium_Leather_Helmet:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Leather_Helmet:
   item:
@@ -56,10 +56,10 @@ Heavy_Leather_Helmet:
     amount: 1
     display-name: §7Leather Helmet
     loc-name: Heavy_Leather_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, leather helmet."
+      - ""
       - "§oServes good protection"
       - "§oagainst the elements."
       - ""
@@ -73,7 +73,7 @@ Heavy_Leather_Helmet:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Leather_Chestplate:
   item:
@@ -81,10 +81,10 @@ Light_Leather_Chestplate:
     amount: 1
     display-name: §7Leather Chestplate
     loc-name: Light_Leather_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, leather chestplate."
+      - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
       - ""
@@ -98,7 +98,7 @@ Light_Leather_Chestplate:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Leather_Chestplate:
   item:
@@ -106,10 +106,10 @@ Medium_Leather_Chestplate:
     amount: 1
     display-name: §7Leather Chestplate
     loc-name: Medium_Leather_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, leather chestplate."
+      - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
       - ""
@@ -123,7 +123,7 @@ Medium_Leather_Chestplate:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Leather_Chestplate:
   item:
@@ -131,10 +131,10 @@ Heavy_Leather_Chestplate:
     amount: 1
     display-name: §7Leather Chestplate
     loc-name: Heavy_Leather_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, leather chestplate."
+      - ""
       - "§oServes good protection"
       - "§oagainst the elements."
       - ""
@@ -148,7 +148,7 @@ Heavy_Leather_Chestplate:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Leather_Leggings:
   item:
@@ -156,10 +156,10 @@ Light_Leather_Leggings:
     amount: 1
     display-name: §7Leather Leggings
     loc-name: Light_Leather_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, leather legging."
+      - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
       - ""
@@ -173,7 +173,7 @@ Light_Leather_Leggings:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Leather_Leggings:
   item:
@@ -181,10 +181,10 @@ Medium_Leather_Leggings:
     amount: 1
     display-name: §7Leather Leggings
     loc-name: Medium_Leather_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, leather legging."
+      - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
       - ""
@@ -198,7 +198,7 @@ Medium_Leather_Leggings:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Leather_Leggings:
   item:
@@ -206,10 +206,10 @@ Heavy_Leather_Leggings:
     amount: 1
     display-name: §7Leather Leggings
     loc-name: Heavy_Leather_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, leather legging."
+      - ""
       - "§oServes good protection"
       - "§oagainst the elements."
       - ""
@@ -223,7 +223,7 @@ Heavy_Leather_Leggings:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Leather_Boots:
   item:
@@ -231,10 +231,10 @@ Light_Leather_Boots:
     amount: 1
     display-name: §7Leather Boots
     loc-name: Light_Leather_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, leather boots."
+      - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
       - ""
@@ -248,7 +248,7 @@ Light_Leather_Boots:
   recipe-items: ["LIGHT_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Leather_Boots:
   item:
@@ -256,10 +256,10 @@ Medium_Leather_Boots:
     amount: 1
     display-name: §7Leather Boots
     loc-name: Medium_Leather_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, leather boots."
+      - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
       - ""
@@ -273,7 +273,7 @@ Medium_Leather_Boots:
   recipe-items: ["MEDIUM_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Leather_Boots:
   item:
@@ -281,10 +281,10 @@ Heavy_Leather_Boots:
     amount: 1
     display-name: §7Leather Boots
     loc-name: Heavy_Leather_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, leather boots."
+      - ""
       - "§oServes good protection"
       - "§oagainst the elements."
       - ""
@@ -298,7 +298,7 @@ Heavy_Leather_Boots:
   recipe-items: ["HEAVY_LEATHER"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Tin_Helmet:
   item:
@@ -306,10 +306,10 @@ Light_Tin_Helmet:
     amount: 1
     display-name: §7Tin Helmet
     loc-name: Light_Tin_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, tin helmet."
+      - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron."
       - ""
@@ -323,7 +323,7 @@ Light_Tin_Helmet:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Light_Tin_Chestplate:
   item:
@@ -331,10 +331,10 @@ Light_Tin_Chestplate:
     amount: 1
     display-name: §7Tin Chestplate
     loc-name: Light_Tin_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, tin chestplate."
+      - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron."
       - ""
@@ -348,7 +348,7 @@ Light_Tin_Chestplate:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Light_Tin_Leggings:
   item:
@@ -356,10 +356,10 @@ Light_Tin_Leggings:
     amount: 1
     display-name: §7Tin Leggings
     loc-name: Light_Tin_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, tin legging."
+      - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron."
       - ""
@@ -373,7 +373,7 @@ Light_Tin_Leggings:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Light_Tin_Boots:
   item:
@@ -381,10 +381,10 @@ Light_Tin_Boots:
     amount: 1
     display-name: §7Tin Boots
     loc-name: Light_Tin_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, tin boots."
+      - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron"
       - ""
@@ -398,7 +398,7 @@ Light_Tin_Boots:
   recipe-items: ["LIGHT_TIN_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Light_Bronze_Helmet:
   item:
@@ -406,10 +406,10 @@ Light_Bronze_Helmet:
     amount: 1
     display-name: §7Bronze Helmet
     loc-name: Light_Bronze_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, bronze helmet."
+      - ""
       - "§oMore reliable than tin"
       - "§oand more fashionable too."
       - ""
@@ -423,7 +423,7 @@ Light_Bronze_Helmet:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Bronze_Helmet:
   item:
@@ -431,15 +431,15 @@ Medium_Bronze_Helmet:
     amount: 1
     display-name: §7Bronze Helmet
     loc-name: Medium_Bronze_Helmet
-    lore: 
-       - "" 
-       - "§7A §c<weight class>§7, <material> <armor>."
-       - "",
-       - "§oFairly more reliable than tin"
-       - "§oand more fashionable too"
-       - ""
-       - "§9--------------------"
-       - ""
+    lore:
+      - ""
+      - "§7A §cmedium§7, bronze helmet."
+      - ""
+      - "§oFairly more reliable than tin"
+      - "§oand more fashionable too"
+      - ""
+      - "§9--------------------"
+      - ""
 
   defense: [1.0, 1.5]
   weight: 25
@@ -448,7 +448,7 @@ Medium_Bronze_Helmet:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Bronze_Helmet:
   item:
@@ -456,10 +456,10 @@ Heavy_Bronze_Helmet:
     amount: 1
     display-name: §7Bronze Helmet
     loc-name: Heavy_Bronze_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, bronze helmet."
+      - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
       - ""
@@ -473,7 +473,7 @@ Heavy_Bronze_Helmet:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Bronze_Chestplate:
   item:
@@ -481,10 +481,10 @@ Light_Bronze_Chestplate:
     amount: 1
     display-name: §7Bronze Chestplate
     loc-name: Light_Bronze_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, bronze chestplate."
+      - ""
       - "§oMore reliable than tin"
       - "§oand more fashionable too"
       - ""
@@ -498,7 +498,7 @@ Light_Bronze_Chestplate:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Bronze_Chestplate:
   item:
@@ -506,10 +506,10 @@ Medium_Bronze_Chestplate:
     amount: 1
     display-name: §7Bronze Chestplate
     loc-name: Medium_Bronze_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, bronze chestplate."
+      - ""
       - "§oFairly more reliable than tin"
       - "§oand more fashionable too"
       - ""
@@ -523,7 +523,7 @@ Medium_Bronze_Chestplate:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Bronze_Chestplate:
   item:
@@ -531,10 +531,10 @@ Heavy_Bronze_Chestplate:
     amount: 1
     display-name: §7Bronze Chestplate
     loc-name: Heavy_Bronze_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, bronze chestplate."
+      - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
       - ""
@@ -548,7 +548,7 @@ Heavy_Bronze_Chestplate:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Bronze_Leggings:
   item:
@@ -556,10 +556,10 @@ Light_Bronze_Leggings:
     amount: 1
     display-name: §7Bronze Leggings
     loc-name: Light_Bronze_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, bronze legging."
+      - ""
       - "§oMore resilient than tin"
       - "§oand more fashionable too."
       - ""
@@ -573,7 +573,7 @@ Light_Bronze_Leggings:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Bronze_Leggings:
   item:
@@ -581,10 +581,10 @@ Medium_Bronze_Leggings:
     amount: 1
     display-name: §7Bronze Leggings
     loc-name: Medium_Bronze_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, bronze legging."
+      - ""
       - "§oFairly more resilient than tin"
       - "§oand more fashionable too"
       - ""
@@ -598,7 +598,7 @@ Medium_Bronze_Leggings:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Bronze_Leggings:
   item:
@@ -606,10 +606,10 @@ Heavy_Bronze_Leggings:
     amount: 1
     display-name: §7Bronze Leggings
     loc-name: Heavy_Bronze_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, bronze legging."
+      - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
       - ""
@@ -623,7 +623,7 @@ Heavy_Bronze_Leggings:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Bronze_Boots:
   item:
@@ -631,10 +631,10 @@ Light_Bronze_Boots:
     amount: 1
     display-name: §7Bronze Boots
     loc-name: Light_Bronze_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, bronze boots."
+      - ""
       - "§oMore resilient than tin"
       - "§oand more fashionable too."
       - ""
@@ -648,7 +648,7 @@ Light_Bronze_Boots:
   recipe-items: ["LIGHT_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Bronze_Boots:
   item:
@@ -656,10 +656,10 @@ Medium_Bronze_Boots:
     amount: 1
     display-name: §7Bronze Boots
     loc-name: Medium_Bronze_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, bronze boots."
+      - ""
       - "§oFairly more resilient than tin"
       - "§oand more fashionable too"
       - ""
@@ -673,7 +673,7 @@ Medium_Bronze_Boots:
   recipe-items: ["MEDIUM_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Bronze_Boots:
   item:
@@ -681,10 +681,10 @@ Heavy_Bronze_Boots:
     amount: 1
     display-name: §7Bronze Boots
     loc-name: Heavy_Bronze_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, bronze boots."
+      - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
       - ""
@@ -698,7 +698,7 @@ Heavy_Bronze_Boots:
   recipe-items: ["HEAVY_BRONZE_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Iron_Helmet:
   item:
@@ -706,10 +706,10 @@ Light_Iron_Helmet:
     amount: 1
     display-name: §7Chainmail Helmet
     loc-name: Light_Iron_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, iron helmet."
+      - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable."
       - ""
@@ -723,7 +723,7 @@ Light_Iron_Helmet:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Iron_Helmet:
   item:
@@ -731,10 +731,10 @@ Medium_Iron_Helmet:
     amount: 1
     display-name: §7Iron Helmet
     loc-name: Medium_Iron_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, iron helmet."
+      - ""
       - "§oArmor worn by strong soldiers"
       - "§oForged with extra reliability"
       - ""
@@ -748,7 +748,7 @@ Medium_Iron_Helmet:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Iron_Helmet:
   item:
@@ -756,10 +756,10 @@ Heavy_Iron_Helmet:
     amount: 1
     display-name: §7Iron Helmet
     loc-name: Heavy_Iron_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, iron helmet."
+      - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability"
       - ""
@@ -773,7 +773,7 @@ Heavy_Iron_Helmet:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Iron_Chestplate:
   item:
@@ -781,10 +781,10 @@ Light_Iron_Chestplate:
     amount: 1
     display-name: §7Chainmail Chestplate
     loc-name: Light_Iron_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, iron chestplate."
+      - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable"
       - ""
@@ -798,7 +798,7 @@ Light_Iron_Chestplate:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Iron_Chestplate:
   item:
@@ -806,10 +806,10 @@ Medium_Iron_Chestplate:
     amount: 1
     display-name: §7Iron Chestplate
     loc-name: Medium_Iron_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, iron chestplate."
+      - ""
       - "§oArmor worn by strong soldiers"
       - "§oforged with extra reliability."
       - ""
@@ -823,7 +823,7 @@ Medium_Iron_Chestplate:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Iron_Chestplate:
   item:
@@ -831,10 +831,10 @@ Heavy_Iron_Chestplate:
     amount: 1
     display-name: §7Iron Chestplate
     loc-name: Heavy_Iron_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, iron chestplate."
+      - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability."
       - ""
@@ -848,7 +848,7 @@ Heavy_Iron_Chestplate:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Iron_Leggings:
   item:
@@ -856,10 +856,10 @@ Light_Iron_Leggings:
     amount: 1
     display-name: §7Chainmail Leggings
     loc-name: Light_Iron_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, iron legging."
+      - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable"
       - ""
@@ -873,7 +873,7 @@ Light_Iron_Leggings:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Iron_Leggings:
   item:
@@ -881,10 +881,10 @@ Medium_Iron_Leggings:
     amount: 1
     display-name: §7Iron Leggings
     loc-name: Medium_Iron_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, iron legging."
+      - ""
       - "§oArmor worn by strong soldiers"
       - "§oforged with extra reliability."
       - ""
@@ -898,7 +898,7 @@ Medium_Iron_Leggings:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Iron_Leggings:
   item:
@@ -906,10 +906,10 @@ Heavy_Iron_Leggings:
     amount: 1
     display-name: §7Iron Leggings
     loc-name: Heavy_Iron_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, iron legging."
+      - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability."
       - ""
@@ -923,7 +923,7 @@ Heavy_Iron_Leggings:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Iron_Boots:
   item:
@@ -931,10 +931,10 @@ Light_Iron_Boots:
     amount: 1
     display-name: §7Chainmail Boots
     loc-name: Light_Iron_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, iron boots."
+      - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable."
       - ""
@@ -948,7 +948,7 @@ Light_Iron_Boots:
   recipe-items: ["LIGHT_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Iron_Boots:
   item:
@@ -956,10 +956,10 @@ Medium_Iron_Boots:
     amount: 1
     display-name: §7Iron Boots
     loc-name: Medium_Iron_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, iron boots."
+      - ""
       - "§oArmor worn by strong soldiers"
       - "§oforged with extra reliability."
       - ""
@@ -973,7 +973,7 @@ Medium_Iron_Boots:
   recipe-items: ["MEDIUM_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Iron_Boots:
   item:
@@ -981,10 +981,10 @@ Heavy_Iron_Boots:
     amount: 1
     display-name: §7Iron Boots
     loc-name: Heavy_Iron_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, iron boots."
+      - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability."
       - ""
@@ -998,7 +998,7 @@ Heavy_Iron_Boots:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Steel_Helmet:
   item:
@@ -1006,10 +1006,10 @@ Light_Steel_Helmet:
     amount: 1
     display-name: §7Steel Helmet
     loc-name: Light_Steel_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, steel helmet."
+      - ""
       - "§oA recent invention"
       - "§oforged into a ligher form."
       - ""
@@ -1023,7 +1023,7 @@ Light_Steel_Helmet:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Steel_Helmet:
   item:
@@ -1031,10 +1031,10 @@ Medium_Steel_Helmet:
     amount: 1
     display-name: §7Steel Helmet
     loc-name: Medium_Steel_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, steel helmet."
+      - ""
       - "§oRecently invented alloy"
       - "§oForged into a powerful armor."
       - ""
@@ -1048,7 +1048,7 @@ Medium_Steel_Helmet:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Steel_Helmet:
   item:
@@ -1056,10 +1056,10 @@ Heavy_Steel_Helmet:
     amount: 1
     display-name: §7Steel Helmet
     loc-name: Heavy_Steel_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, steel helmet."
+      - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
       - ""
@@ -1073,7 +1073,7 @@ Heavy_Steel_Helmet:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Steel_Chestplate:
   item:
@@ -1081,10 +1081,10 @@ Light_Steel_Chestplate:
     amount: 1
     display-name: §7Steel Chestplate
     loc-name: Light_Steel_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, steel chestplate."
+      - ""
       - "§oA recent invention"
       - "§oforged into a lighter form."
       - ""
@@ -1098,7 +1098,7 @@ Light_Steel_Chestplate:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Steel_Chestplate:
   item:
@@ -1106,10 +1106,10 @@ Medium_Steel_Chestplate:
     amount: 1
     display-name: §7Steel Chestplate
     loc-name: Medium_Steel_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, steel chestplate."
+      - ""
       - "§oRecently invented alloy"
       - "§oforged into powerful armor."
       - ""
@@ -1123,7 +1123,7 @@ Medium_Steel_Chestplate:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Steel_Chestplate:
   item:
@@ -1131,10 +1131,10 @@ Heavy_Steel_Chestplate:
     amount: 1
     display-name: §7Steel Chestplate
     loc-name: Heavy_Steel_Chestplate
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, steel chestplate."
+      - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
       - ""
@@ -1148,7 +1148,7 @@ Heavy_Steel_Chestplate:
   recipe-items: ["HEAVY_IRON_INGOT"]
   recipe-shape: ["A A", "AAA", "AAA"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Steel_Leggings:
   item:
@@ -1156,10 +1156,10 @@ Light_Steel_Leggings:
     amount: 1
     display-name: §7Steel Leggings
     loc-name: Light_Steel_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, steel legging."
+      - ""
       - "§oA recent invention"
       - "§oforged into a lighter form."
       - ""
@@ -1173,7 +1173,7 @@ Light_Steel_Leggings:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Steel_Leggings:
   item:
@@ -1181,10 +1181,10 @@ Medium_Steel_Leggings:
     amount: 1
     display-name: §7Steel Leggings
     loc-name: Medium_Steel_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, steel legging."
+      - ""
       - "§oRecently invented alloy"
       - "§oforged into powerful armor."
       - ""
@@ -1198,7 +1198,7 @@ Medium_Steel_Leggings:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Steel_Leggings:
   item:
@@ -1206,10 +1206,10 @@ Heavy_Steel_Leggings:
     amount: 1
     display-name: §7Steel Leggings
     loc-name: Heavy_Steel_Leggings
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, steel legging."
+      - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
       - ""
@@ -1223,7 +1223,7 @@ Heavy_Steel_Leggings:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["AAA", "A A", "A A"]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Light_Steel_Boots:
   item:
@@ -1231,10 +1231,10 @@ Light_Steel_Boots:
     amount: 1
     display-name: §7Steel Boots
     loc-name: Light_Steel_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §clight§7, steel boots."
+      - ""
       - "§oA recent invention"
       - "§oForged into a lighter form"
       - ""
@@ -1248,7 +1248,7 @@ Light_Steel_Boots:
   recipe-items: ["LIGHT_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
 
 Medium_Steel_Boots:
   item:
@@ -1256,10 +1256,10 @@ Medium_Steel_Boots:
     amount: 1
     display-name: §7Steel Boots
     loc-name: Medium_Steel_Boots
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cmedium§7, steel boots."
+      - ""
       - "§oRecently invented alloy"
       - "§oforged into powerful armor."
       - ""
@@ -1273,7 +1273,7 @@ Medium_Steel_Boots:
   recipe-items: ["MEDIUM_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Steel_Boots:
   item:
@@ -1281,10 +1281,10 @@ Heavy_Steel_Boots:
     amount: 1
     display-name: §7Steel Boots
     loc-name: Heavy_Steel_Boots
-     lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, steel boots."
+      - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
       - ""
@@ -1298,7 +1298,7 @@ Heavy_Steel_Boots:
   recipe-items: ["HEAVY_STEEL_INGOT"]
   recipe-shape: ["A A", "A A", "   "]
   requireShape: true
-  canCraft: [ Blacksmith ]
+  canCraft: [Blacksmith]
 
 Heavy_Turtle_Helmet:
   item:
@@ -1306,10 +1306,10 @@ Heavy_Turtle_Helmet:
     amount: 1
     display-name: §7Turtle Shell
     loc-name: Heavy_Turtle_Helmet
-    lore: 
-      - "" 
-      - "§7A §c<weight class>§7, <material> <armor>."
-      - "",
+    lore:
+      - ""
+      - "§7A §cheavy§7, turtle helmet."
+      - ""
       - "§oRidiculed by some"
       - "§oloved by others"
       - "§othe turtle helm"
@@ -1317,7 +1317,7 @@ Heavy_Turtle_Helmet:
       - ""
       - "§9--------------------"
       - ""
-            
+
   defense: [1.0, 2.0]
   weight: 25
   durability: [175, 300]
@@ -1325,4 +1325,4 @@ Heavy_Turtle_Helmet:
   recipe-items: ["SCUTE"]
   recipe-shape: ["AAA", "A A", "   "]
   requireShape: true
-  canCraft: [ Farmer, Fisherman ]
+  canCraft: [Farmer, Fisherman]
