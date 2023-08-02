@@ -4,6 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
@@ -103,9 +105,12 @@ public class PlayerDamaged {
 
         }
 
+        defender.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 3, 1));
+
     }
 
     public void doEvade() {
 
     }
+
 }
