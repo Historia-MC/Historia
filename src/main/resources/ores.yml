@@ -58,7 +58,7 @@ DEEPSLATE_COAL_ORE:
         amount: 1
         display-name: Sulphur
         loc-name: SULPHUR
-                lore: 
+        lore: 
           - "" 
           - "§7A pile of sulfer"
           - ""
@@ -80,7 +80,7 @@ DEEPSLATE_COAL_ORE:
         amount: 1
         display-name: Coal
         loc-name: COAL
-                lore: 
+        lore: 
           - "" 
           - "§7A chunk of coal"
           - ""
