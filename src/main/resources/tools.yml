@@ -1,0 +1,24 @@
+version: 1
+
+Light_Wooden_Pickaxe:
+  item:
+    type: WOODEN_PICKAXE
+    amount: 1
+    display-name: §7Light Pickaxe
+    loc-name: Light_Wooden_Pickaxe
+    lore:
+      - ""
+      - "§7Woody. "
+      - ""
+      - "§9-----------------"
+      - ""
+
+  damage: [0.0, 1]
+  speed: [0.2, 0.5]
+  knockback: [0.0, 1.0]
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["WOOD", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [ ALL ]
