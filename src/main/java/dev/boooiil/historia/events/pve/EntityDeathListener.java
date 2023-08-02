@@ -8,11 +8,16 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.handlers.pve.EntityDeathHandler;
+import dev.boooiil.historia.util.Logging;
 
 public class EntityDeathListener implements Listener {
 
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
+
+        Logging.debugToConsole("EntityDeath event created.");
+        Logging.debugToConsole("Killer: " + event.getEntity().getKiller() != null ? event.getEntity().getKiller().getName() : "Falling");
+        Logging.debugToConsole("Killed: " + event.getEntity().getName());
 
         if (event.getEntity() instanceof Player) return;
         if (!(event.getEntity().getKiller() instanceof Player)) return;
