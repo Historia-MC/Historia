@@ -50,7 +50,7 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
             event.setCancelled(true);
             if (increaseSharpness()) {
                 Logging.infoToPlayer(
-                        "You sharpened your " + this.getHeldItem().getType().toString().toLowerCase() + "!",
+                        "You sharpened your " + this.getHeldItem().getItemMeta().getLocalizedName() + "!",
                         this.getPlayer().getUniqueId());
             } else {
                 Logging.infoToPlayer("Your " + this.getHeldItem().getItemMeta().getDisplayName()
