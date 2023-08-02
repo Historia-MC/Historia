@@ -6,7 +6,15 @@ FISH_OIL:
     amount: 1
     display-name: §7Oil
     loc-name: FISH_OIL
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A vial of fish oil."
+      - ""
+      - "§oSmells so strong"
+      - "§othat its dizzying."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["INVALID"]
@@ -18,7 +26,15 @@ COD_FISH_OIL:
     amount: 1
     display-name: §7Oil
     loc-name: FISH_OIL
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A vial of cod fish oil"
+      - ""
+      - "§oSmells so strong"
+      - "§othat its dizzying."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["COD"]
@@ -31,7 +47,15 @@ SALMON_FISH_OIL:
     amount: 1
     display-name: §7Oil
     loc-name: FISH_OIL
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A vial of salmon fish oil"
+      - ""
+      - "§oSmells so strong"
+      - "§othat its dizzying."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["SALMON"]
@@ -44,7 +68,15 @@ PUFFERFISH_FISH_OIL:
     amount: 1
     display-name: §7Oil
     loc-name: FISH_OIL
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A vial of pufferfish oil"
+      - ""
+      - "§oBetter hope it was"
+      - "§ogathered correctly."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["PUFFERFISH"]
@@ -57,7 +89,15 @@ TROPICAL_FISH_OIL:
     amount: 1
     display-name: §7Oil
     loc-name: FISH_OIL
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A vial of tropical fish oil"
+      - ""
+      - "§oUnlike tropical drinks"
+      - "§othis is not fruity."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["TROPICAL_FISH"]
@@ -70,7 +110,15 @@ FISH_OIL_TIPPED_ARROW:
     amount: 4
     display-name: §7Oil Tipped Arrow
     loc-name: FISH_OIL_TIPPED_ARROW
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7An oil tipped arrow"
+      - ""
+      - "§oCareful where"
+      - "§oyou put this."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["FISH_OIL", "ARROW"]
@@ -83,7 +131,15 @@ GUNPOWDER:
     amount: 4
     display-name: §7Gunpowder
     loc-name: GUNPOWDER
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A pile of gunpowder"
+      - ""
+      - "§oTo boom"
+      - "§oor not to boom."
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: false
   recipe-items: ["SULPHUR", "CHARCOAL"]
@@ -96,7 +152,15 @@ SADDLE:
     amount: 1
     display-name: §7Saddle
     loc-name: SADDLE
-    lore: ["", "§7Placeholder"]
+    lore: 
+      - "" 
+      - "§7A hardy leather saddle"
+      - ""
+      - "§oWhat will you ride?"
+      - "§oHorse? Pig? Or something else?"
+      - ""
+      - "§9--------------------"
+      - ""
 
   requireShape: true
   recipe-items: ["TANNED_LEATHER", "LEAD"]
