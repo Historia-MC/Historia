@@ -40,6 +40,7 @@ public class CommandDebug implements CommandExecutor {
                 message += "Env Temp: " + player.getEnvironmentAdjustment() + "\n";
 
                 Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
+                Logging.debugToConsole(player.toString());
 
                 return true;
 

@@ -42,6 +42,7 @@ import dev.boooiil.historia.events.inventory.InventoryClickListener;
 import dev.boooiil.historia.events.mobs.EntityBreedListener;
 import dev.boooiil.historia.events.mobs.EntityTameListener;
 import dev.boooiil.historia.events.playerInteraction.PlayerInteractEntityListener;
+import dev.boooiil.historia.events.playerInteraction.PlayerInteractListener;
 import dev.boooiil.historia.events.pve.EntityDeathListener;
 import dev.boooiil.historia.events.pvp.PlayerDeathListener;
 import dev.boooiil.historia.events.pvp.EntityDamageByEntityListener;
@@ -121,6 +122,7 @@ public class Main extends JavaPlugin {
         registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
         registerEvent(new EntityDeathListener());
+        registerEvent(new PlayerInteractListener());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());

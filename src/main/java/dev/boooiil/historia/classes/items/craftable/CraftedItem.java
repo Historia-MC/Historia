@@ -3,6 +3,7 @@ package dev.boooiil.historia.classes.items.craftable;
 import java.util.List;
 
 import dev.boooiil.historia.classes.items.BaseItem;
+import dev.boooiil.historia.util.Logging;
 
 public class CraftedItem extends BaseItem {
     
@@ -65,7 +66,10 @@ public class CraftedItem extends BaseItem {
      */
     public boolean canCraft(String proficiency) {
 
-        return this.proficiencies.contains(proficiency);
+        Logging.debugToConsole("[CraftedItem] Proficiencies: " + this.proficiencies.toString());
+
+        if (this.proficiencies.contains("ALL")) return true;
+        else return this.proficiencies.contains(proficiency);
 
     }
 }
