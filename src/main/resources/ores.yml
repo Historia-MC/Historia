@@ -13,7 +13,15 @@ COAL_ORE:
         amount: 1
         display-name: Sulphur
         loc-name: SULPHUR
-        lore: ["", §7What an unpleasant smell.]
+        lore: 
+          - "" 
+          - "§7A pile of sulfer"
+          - ""
+          - "§oSmells quite unpleasant"
+          - "§operhaps there is another use."
+          - ""
+          - "§9--------------------"
+          - ""
 
   coal:
     chance: 70
@@ -27,7 +35,15 @@ COAL_ORE:
         amount: 1
         display-name: Coal
         loc-name: COAL
-        lore: [""]
+        lore: 
+          - "" 
+          - "§7A chunk of coal"
+          - ""
+          - "§oThousands of years underground"
+          - "§ojust to burn in a furnace."
+          - ""
+          - "§9--------------------"
+          - ""
 
 DEEPSLATE_COAL_ORE:
   sulphur:
@@ -42,7 +58,15 @@ DEEPSLATE_COAL_ORE:
         amount: 1
         display-name: Sulphur
         loc-name: SULPHUR
-        lore: ["", §7What an unpleasant smell.]
+                lore: 
+          - "" 
+          - "§7A pile of sulfer"
+          - ""
+          - "§oSmells quite unpleasant"
+          - "§operhaps there is another use."
+          - ""
+          - "§9--------------------"
+          - ""
 
   coal:
     chance: 70
@@ -56,7 +80,15 @@ DEEPSLATE_COAL_ORE:
         amount: 1
         display-name: Coal
         loc-name: COAL
-        lore: [""]
+                lore: 
+          - "" 
+          - "§7A chunk of coal"
+          - ""
+          - "§oThousands of years underground"
+          - "§ojust to burn in a furnace."
+          - ""
+          - "§9--------------------"
+          - ""
 
 IRON_ORE:
   iron:
