@@ -43,8 +43,6 @@ public class Tool extends CraftedItem {
 
         if (valid) {
 
-            Logging.debugToConsole("No ERROR With Wooden Pickaxe! " + toolName);
-
             String root = toolName;
 
             // It's calling the parent class's constructor.
@@ -66,7 +64,6 @@ public class Tool extends CraftedItem {
             this.durabilityRange = configuration.getIntegerList(root + ".durability");
 
         } else {
-            Logging.debugToConsole("Error WITH WOODEN PICKAXE! " + toolName);
             itemStack = new ItemStack(Material.AIR);
         }
 
