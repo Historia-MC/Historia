@@ -36,6 +36,8 @@ public class Skills {
 
     private boolean canShearChickens = false;
 
+    private boolean canHarvestBones = false;
+
     private boolean canMakeKnowledgeBook = false;
 
     public Skills(FileConfiguration config, String root) {
@@ -60,6 +62,7 @@ public class Skills {
         this.canApplyUnbreaking = config.getBoolean(root + ".applyUnbreaking");
         this.canApplySharpness = config.getBoolean(root + ".applySharpness");
         this.canShearChickens = config.getBoolean(root + ".shearChicken");
+        this.canHarvestBones = config.getBoolean(root + ".bonesFromAnimals");
         this.canMakeKnowledgeBook = config.getBoolean(root + ".makeKnowledgeBook");
 
     }
@@ -463,6 +466,10 @@ public class Skills {
 
     public boolean canShearChickens() {
         return canShearChickens;
+    }
+
+    public boolean canHarvestBones() {
+        return canHarvestBones;
     }
 
     /**
