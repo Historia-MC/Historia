@@ -121,6 +121,7 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
+        registerEvent(new EntityDeathListener());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
