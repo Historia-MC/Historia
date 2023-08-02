@@ -101,7 +101,6 @@ public class Main extends JavaPlugin {
         ConfigurationLoader.init();
 
         registerEvent(new EntityBreedListener());
-        registerEvent(new EntityDeathListener());
         registerEvent(new EntityTameListener());
         registerEvent(new PlayerExpChangeListener());
         registerEvent(new FoodLevelChangeListener());
