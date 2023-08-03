@@ -9,7 +9,7 @@ import dev.boooiil.historia.scoreboard.ScoreboardAdapter;
 import dev.boooiil.historia.util.NumberUtils;
 import net.md_5.bungee.api.ChatColor;
 
-public class UpdateScoreboard extends BukkitRunnable {
+public class UpdateScoreboardRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
