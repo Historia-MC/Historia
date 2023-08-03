@@ -18,7 +18,7 @@ public class UpdateScoreboard extends BukkitRunnable {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
             ScoreboardAdapter scoreboardAdapter = new ScoreboardAdapter();
 
-            scoreboardAdapter.createHeader(ChatColor.BOLD + "" + ChatColor.GOLD + "HISTORIA");
+            scoreboardAdapter.createHeader(ChatColor.GOLD + "" + ChatColor.BOLD + "HISTORIA");
             scoreboardAdapter.addLine(12, "");
             scoreboardAdapter.addLine(11, ChatColor.AQUA + "Proficiency: " + ChatColor.GRAY + historiaPlayer.getProficiency().getName());
             scoreboardAdapter.addLine(10, ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + historiaPlayer.getLevel());
