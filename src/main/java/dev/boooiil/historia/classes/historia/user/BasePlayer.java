@@ -1,5 +1,6 @@
 package dev.boooiil.historia.classes.historia.user;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -115,6 +116,23 @@ public abstract class BasePlayer {
     public Resident getResident() {
         return resident;
     }
+
+    public List<String> getTownRanks() {
+
+        if (town == null) return List.of("None");
+
+        else return getResident().getTownRanks();
+
+    }
+
+    public List<String> getNationRanks() {
+
+        if (nation == null) return List.of("None");
+
+        else return getResident().getNationRanks();
+
+    }
+
 
     /**
      * Sets the resident object associated with the player.
