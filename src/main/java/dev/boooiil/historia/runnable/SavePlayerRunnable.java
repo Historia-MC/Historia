@@ -4,7 +4,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.database.internal.PlayerStorage;
 
-public class SaveProgress extends BukkitRunnable {
+public class SavePlayerRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
