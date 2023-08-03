@@ -48,9 +48,9 @@ import dev.boooiil.historia.events.pvp.PlayerDeathListener;
 import dev.boooiil.historia.events.pvp.EntityDamageByEntityListener;
 import dev.boooiil.historia.events.pvp.PlayerRespawnListener;
 import dev.boooiil.historia.events.pvp.EntityShootBowListener;
-import dev.boooiil.historia.runnable.PlayerIterator;
-import dev.boooiil.historia.runnable.SaveProgress;
-import dev.boooiil.historia.runnable.UpdateScoreboard;
+import dev.boooiil.historia.runnable.ClassEnchantsRunnable;
+import dev.boooiil.historia.runnable.SavePlayerRunnable;
+import dev.boooiil.historia.runnable.UpdateScoreboardRunnable;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -131,9 +131,9 @@ public class Main extends JavaPlugin {
         registerCommand("give", new CommandGive());
         registerCommand("proficiency", new CommandProficiency());
 
-        registerRunnable(new PlayerIterator());
-        registerRunnable(new UpdateScoreboard());
-        registerRunnable(new SaveProgress(), 6000l);
+        registerRunnable(new ClassEnchantsRunnable());
+        registerRunnable(new UpdateScoreboardRunnable());
+        registerRunnable(new SavePlayerRunnable(), 6000l);
 
         registerFurnaceRecipes();
 
