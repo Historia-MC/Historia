@@ -1,5 +1,7 @@
 package dev.boooiil.historia.classes.items.generic;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import dev.boooiil.historia.classes.items.BaseItem;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
@@ -19,7 +21,7 @@ public class Ingot extends BaseItem {
     // A constructor.
     public Ingot(String ingotName) {
 
-        configuration = ConfigurationLoader.getIngotConfig().getConfiguration();
+        YamlConfiguration configuration = ConfigurationLoader.getIngotConfig().getConfiguration();
         // this.itemName = ingotName;
         this.validIngot = ConfigurationLoader.getIngotConfig().isValidIngot(ingotName);
 

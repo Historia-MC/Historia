@@ -3,6 +3,8 @@ package dev.boooiil.historia.classes.items.craftable;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
@@ -23,7 +25,7 @@ public class Armor extends CraftedItem {
     // Getting the armor's information from the config.
     public Armor(String armorName) {
 
-        configuration = ConfigurationLoader.getArmorConfig().getConfiguration();
+        YamlConfiguration configuration = ConfigurationLoader.getArmorConfig().getConfiguration();
 
         valid = ConfigurationLoader.getArmorConfig().isValid(armorName);
 

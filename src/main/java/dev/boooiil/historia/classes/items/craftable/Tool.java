@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.configuration.ConfigurationLoader;
@@ -36,7 +37,7 @@ public class Tool extends CraftedItem {
     // It's a constructor.
     public Tool(String toolName) {
 
-        configuration = ConfigurationLoader.getToolConfig().getConfiguration();
+        YamlConfiguration configuration = ConfigurationLoader.getToolConfig().getConfiguration();
 
         valid = ConfigurationLoader.getToolConfig().isValid(toolName);
 

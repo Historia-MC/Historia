@@ -1,6 +1,5 @@
 package dev.boooiil.historia.classes.items;
 
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class BaseItem {
@@ -10,7 +9,6 @@ public abstract class BaseItem {
      * TODO: IMPLEMENT
      */
 
-    protected YamlConfiguration configuration;
     protected boolean valid;
 
     /**
