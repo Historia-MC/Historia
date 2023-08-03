@@ -1,6 +1,5 @@
 package dev.boooiil.historia.events.connection;
 
-import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -8,7 +7,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
-import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.util.Logging;
 
@@ -31,8 +29,6 @@ public class PlayerJoinListener implements Listener {
 
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
         PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
-
-        HistoriaDiscord.setActivity("Online: " + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
 
         Logging.debugToConsole("************* INITIAL STATS *************");
         Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());

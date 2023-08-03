@@ -26,7 +26,6 @@ import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
 import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
-import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.blockInteraction.BlockPlaceListener;
 import dev.boooiil.historia.events.blockInteraction.BlockBreakListener;
 import dev.boooiil.historia.events.blockInteraction.BlockFromToListener;
@@ -83,8 +82,6 @@ public class Main extends JavaPlugin {
         Logging.infoToConsole("Plugin has loaded.");
 
         deregisterRecipes();
-
-        HistoriaDiscord.init();
 
         // Check config files
         ConfigUtil.checkFiles();
@@ -149,7 +146,6 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
         MySQLConnection.closeConnection();
-        HistoriaDiscord.destroy();
 
         getLogger().info("Plugin disabled.");
     }

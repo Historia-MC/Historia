@@ -116,12 +116,6 @@
     </dependency>
 
     <dependency>
-      <groupId>com.discord4j</groupId>
-      <artifactId>discord4j-core</artifactId>
-      <version>3.3.0-M2</version>
-    </dependency>
-
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
@@ -169,7 +163,7 @@
         </configuration>
       </plugin>
 
-      <plugin>
+      <!-- <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.5.0</version>
         <configuration>
@@ -189,7 +183,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
