@@ -1,4 +1,4 @@
-version: 1
+version: 4
 
 Light_Wooden_Pickaxe:
   item:
@@ -13,12 +13,748 @@ Light_Wooden_Pickaxe:
       - "§9-----------------"
       - ""
 
-  damage: [0.0, 1]
-  speed: [0.2, 0.5]
-  knockback: [0.0, 1.0]
+  damage: [1.0, 2.0]
+  speed: [1.4, 1.6]
+  knockback: [0.0, 0.5]
   durability: [40, 60]
   type: Light
   recipe-items: ["WOOD", "STICK"]
   recipe-shape: ["AAA", " B ", " B "]
   requireShape: true
-  canCraft: [ ALL ]
+  canCraft: [ALL]
+
+Light_Wooden_Hoe:
+  item:
+    type: WOODEN_HOE
+    amount: 1
+    display-name: §7Light Wooden Hoe
+    loc-name: Light_Wooden_Hoe
+    lore:
+      - ""
+      - "§7Woody. "
+      - ""
+      - "§9-----------------"
+      - ""
+
+  damage: [1.0, 2.0]
+  speed: [1.4, 1.6]
+  knockback: [0.0, 0.5]
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["WOOD", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Wooden_Shovel:
+  item:
+    type: WOODEN_SHOVEL
+    amount: 1
+    display-name: §7Light Shovel
+    loc-name: Light_Wooden_Shovel
+    lore:
+      - ""
+      - "§7Woody. "
+      - ""
+      - "§9-----------------"
+      - ""
+
+  damage: [2.0, 3.0]
+  speed: [0.8, 1.2]
+  knockback: [0.0, 1.0]
+  durability: [40, 60]
+  type: Light
+  recipe-items: ["WOOD", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Tin_Pickaxe:
+  item:
+    type: IRON_PICKAXE
+    amount: 1
+    display-name: §7Tin Pickaxe
+    loc-name: Light_Tin_Pickaxe
+    lore:
+      - ""
+      - "§7A light, tin sword."
+      - "Doesn't hit hard but"
+      - "swings faster than most daggers."
+      - ""
+      - "§9-----------------"
+      - ""
+
+  damage: [2.0, 3.0]
+  speed: [1.4, 1.6]
+  knockback: [0.5, 1.0]
+  durability: [50, 75]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Tin_Hoe:
+  item:
+    type: IRON_HOE
+    amount: 1
+    display-name: §7Light Tin Hoe
+    loc-name: Light_Tin_Hoe
+    lore:
+      - ""
+      - "§7A light, tin sword."
+      - "Doesn't hit hard but"
+      - "swings faster than most daggers."
+      - ""
+      - "§9-----------------"
+      - ""
+
+  damage: [2.0, 3.0]
+  speed: [1.4, 1.6]
+  knockback: [0.5, 1.0]
+  durability: [50, 75]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Tin_Shovel:
+  item:
+    type: IRON_SHOVEL
+    amount: 1
+    display-name: §7Tin Shovel
+    loc-name: Light_Tin_Shovel
+    lore:
+      [
+        "",
+        "§7A light, tin axe. Doesn't hit hard but swings faster than most hatchets. ",
+      ]
+
+  damage: [2.0, 4.0]
+  speed: [0.8, 1.2]
+  knockback: [0.0, 1.0]
+  durability: [50, 75]
+  type: Light
+  recipe-items: ["LIGHT_TIN_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Heavy_Stone_Pickaxe:
+  item:
+    type: STONE_PICKAXE
+    amount: 1
+    display-name: §7Stone Club
+    loc-name: Heavy_Stone_Pickaxe
+    lore: ["", "§7A crude weapon. "]
+
+  damage: [2.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [2.0, 3.5]
+  durability: [100, 132]
+  type: Heavy
+  recipe-items: ["STONE", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Stone_Hoe:
+  item:
+    type: STONE_HOE
+    amount: 1
+    display-name: §7Heavy Stone Hoe
+    loc-name: Heavy_Stone_Hoe
+    lore: ["", "§7A crude weapon. "]
+
+  damage: [2.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [2.0, 3.5]
+  durability: [100, 132]
+  type: Heavy
+  recipe-items: ["STONE", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Stone_Shovel:
+  item:
+    type: STONE_SHOVEL
+    amount: 1
+    display-name: §7Stone Shovel
+    loc-name: Heavy_Stone_Pickaxe
+    lore: ["", "§7Slower than a club, but hits harder. "]
+
+  damage: [2.0, 6.0]
+  speed: [0.4, 0.7]
+  knockback: [3.0, 4.5]
+  durability: [100, 132]
+  type: Heavy
+  recipe-items: ["STONE", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Bronze_Pickaxe:
+  item:
+    type: GOLDEN_PICKAXE
+    amount: 1
+    display-name: §7Bronze Dagger
+    loc-name: Light_Bronze_Pickaxe
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword.",
+      ]
+
+  damage: [2.0, 4.5]
+  speed: [1.0, 1.4]
+  knockback: [0.0, 0.5]
+  durability: [75, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Bronze_Hoe:
+  item:
+    type: GOLDEN_HOE
+    amount: 1
+    display-name: §7Light Bronze Hoe
+    loc-name: Light_Bronze_Hoe
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed and little to no knockback, but are generally weaker than the average sword.",
+      ]
+
+  damage: [2.0, 4.5]
+  speed: [1.0, 1.4]
+  knockback: [0.0, 0.5]
+  durability: [75, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Bronze_Pickaxe:
+  item:
+    type: GOLDEN_PICKAXE
+    amount: 1
+    display-name: §7Bronze Pickaxe
+    loc-name: Medium_Bronze_Pickaxe
+    lore: ["", "§7An average sword. "]
+
+  damage: [3.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [0.5, 2.0]
+  durability: [100, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Medium_Bronze_Hoe:
+  item:
+    type: GOLDEN_HOE
+    amount: 1
+    display-name: §7Medium Bronze Hoe
+    loc-name: Medium_Bronze_Hoe
+    lore: ["", "§7An average sword. "]
+
+  damage: [3.0, 5.0]
+  speed: [1.0, 1.3]
+  knockback: [0.5, 2.0]
+  durability: [100, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Bronze_Pickaxe:
+  item:
+    type: GOLDEN_PICKAXE
+    amount: 1
+    display-name: §7Bronze Greatsword
+    loc-name: Heavy_Bronze_Pickaxe
+    lore:
+      [
+        "",
+        "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. ",
+      ]
+
+  damage: [3.0, 6.5]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  durability: [125, 160]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Bronze_Hoe:
+  item:
+    type: GOLDEN_HOE
+    amount: 1
+    display-name: §7Heavy Bronze Hoe
+    loc-name: Heavy_Bronze_Hoe
+    lore:
+      [
+        "",
+        "§7Greatswords deal strong blows with hefty knockback, with a reduced swing speed. ",
+      ]
+
+  damage: [3.0, 6.5]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  durability: [125, 160]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Bronze_Shovel:
+  item:
+    type: GOLDEN_SHOVEL
+    amount: 1
+    display-name: §7Bronze Hatchet
+    loc-name: Light_Bronze_Shovel
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
+      ]
+
+  damage: [3.0, 6.0]
+  speed: [0.6, 1.0]
+  knockback: [0.0, 0.5]
+  durability: [75, 125]
+  type: Light
+  recipe-items: ["LIGHT_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Bronze_Shovel:
+  item:
+    type: GOLDEN_SHOVEL
+    amount: 1
+    display-name: §7Bronze Shovel
+    loc-name: Medium_Bronze_Shovel
+    lore: ["", "§7An average bronze axe. "]
+
+  damage: [4.0, 6.5]
+  speed: [0.6, 0.9]
+  knockback: [1.5, 3.0]
+  durability: [100, 150]
+  type: Medium
+  recipe-items: ["MEDIUM_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Bronze_Shovel:
+  item:
+    type: GOLDEN_SHOVEL
+    amount: 1
+    display-name: §7Bronze Bardiche
+    loc-name: Heavy_Bronze_Shovel
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing due to their long handle, but deal more damage than the average axe. ",
+      ]
+
+  damage: [4.0, 7.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  durability: [125, 160]
+  type: Heavy
+  recipe-items: ["HEAVY_BRONZE_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Iron_Pickaxe:
+  item:
+    type: IRON_PICKAXE
+    amount: 1
+    display-name: §7Iron Dagger
+    loc-name: Light_Iron_Pickaxe
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed",
+        "and little to no knockback, but are generally",
+        "weaker than the average sword.",
+      ]
+
+  damage: [3.5, 5.5]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  durability: [145, 175]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Iron_Hoe:
+  item:
+    type: IRON_HOE
+    amount: 1
+    display-name: §7Light Iron Hoe
+    loc-name: Light_Iron_Hoe
+    lore:
+      [
+        "",
+        "§7Daggers utilize a quick attack speed",
+        "and little to no knockback, but are generally",
+        "weaker than the average sword.",
+      ]
+
+  damage: [3.5, 5.5]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  durability: [145, 175]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Iron_Pickaxe:
+  item:
+    type: IRON_PICKAXE
+    amount: 1
+    display-name: §7Iron Pickaxe
+    loc-name: Medium_Iron_Pickaxe
+    lore: [An average iron sword.]
+
+  damage: [4.5, 6.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  durability: [175, 225]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Medium_Iron_Hoe:
+  item:
+    type: IRON_HOE
+    amount: 1
+    display-name: §7Medium Iron Hoe
+    loc-name: Medium_Iron_Hoe
+    lore: [An average iron sword.]
+
+  damage: [4.5, 6.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  durability: [175, 225]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Iron_Pickaxe:
+  item:
+    type: IRON_PICKAXE
+    amount: 1
+    display-name: §7Iron Greatsword
+    loc-name: Heavy_Iron_Pickaxe
+    lore:
+      ["", "§7Greatswords deal strong damage", "with a slower swing speed. "]
+
+  damage: [5.0, 7.0]
+  speed: [0.8, 1.2]
+  knockback: [2.0, 3.5]
+  durability: [200, 250]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Iron_Hoe:
+  item:
+    type: IRON_HOE
+    amount: 1
+    display-name: §7Heavy Iron Hoe
+    loc-name: Heavy_Iron_Hoe
+    lore:
+      ["", "§7Greatswords deal strong damage", "with a slower swing speed. "]
+
+  damage: [5.0, 7.0]
+  speed: [0.8, 1.2]
+  knockback: [2.0, 3.5]
+  durability: [200, 250]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Iron_Shovel:
+  item:
+    type: IRON_SHOVEL
+    amount: 1
+    display-name: §7Iron Hatchet
+    loc-name: Light_Iron_Shovel
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
+      ]
+
+  damage: [4.0, 7.0]
+  speed: [0.6, 1.0]
+  knockback: [1.0, 1.5]
+  durability: [145, 175]
+  type: Light
+  recipe-items: ["LIGHT_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Iron_Shovel:
+  item:
+    type: IRON_SHOVEL
+    amount: 1
+    display-name: §7Iron Shovel
+    loc-name: Medium_Iron_Shovel
+    lore: ["", "§7An average iron axe. "]
+
+  damage: [4.5, 7.5]
+  speed: [0.6, 0.9]
+  knockback: [1.5, 3.0]
+  durability: [175, 225]
+  type: Medium
+  recipe-items: ["MEDIUM_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Iron_Shovel:
+  item:
+    type: IRON_SHOVEL
+    amount: 1
+    display-name: §7Iron Bardiche
+    loc-name: Heavy_Iron_Shovel
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing",
+        "due to their long handle, but deal",
+        "more damage than the average axe. ",
+      ]
+
+  damage: [5.0, 8.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  durability: [200, 275]
+  type: Heavy
+  recipe-items: ["HEAVY_IRON_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Steel_Pickaxe:
+  item:
+    type: NETHERITE_PICKAXE
+    amount: 1
+    display-name: §7Steel Dagger
+    loc-name: Light_Steel_Pickaxe
+    lore:
+      [
+        "",
+        "§7A steel dagger.",
+        "Fast speed with weak damage",
+        "and little knockback. ",
+      ]
+
+  damage: [4.5, 6.0]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  durability: [300, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Light_Steel_Hoe:
+  item:
+    type: NETHERITE_HOE
+    amount: 1
+    display-name: §7Light Steel Hoe
+    loc-name: Light_Steel_Hoe
+    lore:
+      [
+        "",
+        "§7A steel dagger.",
+        "Fast speed with weak damage",
+        "and little knockback. ",
+      ]
+
+  damage: [4.5, 6.0]
+  speed: [1.3, 1.6]
+  knockback: [0.0, 0.5]
+  durability: [300, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Steel_Pickaxe:
+  item:
+    type: NETHERITE_PICKAXE
+    amount: 1
+    display-name: §7Steel Pickaxe
+    loc-name: Medium_Steel_Pickaxe
+    lore: ["", "§7An average steel sword. "]
+
+  damage: [5.0, 7.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  durability: [350, 400]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Medium_Steel_Hoe:
+  item:
+    type: NETHERITE_HOE
+    amount: 1
+    display-name: §7Medium Steel Hoe
+    loc-name: Medium_Steel_Hoe
+    lore: ["", "§7An average steel sword. "]
+
+  damage: [5.0, 7.0]
+  speed: [1.0, 1.4]
+  knockback: [0.5, 2.0]
+  durability: [350, 400]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Steel_Pickaxe:
+  item:
+    type: NETHERITE_PICKAXE
+    amount: 1
+    display-name: §7Steel Greatsword
+    loc-name: Heavy_Steel_Pickaxe
+    lore:
+      ["", "§7Greatswords deal strong damage", "with a slower swing speed. "]
+
+  damage: [6.5, 9.0]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  durability: [450, 600]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
+  recipe-shape: ["AAA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Steel_Hoe:
+  item:
+    type: NETHERITE_HOE
+    amount: 1
+    display-name: §7Heavy Steel Hoe
+    loc-name: Heavy_Steel_Hoe
+    lore:
+      ["", "§7Greatswords deal strong damage", "with a slower swing speed. "]
+
+  damage: [6.5, 9.0]
+  speed: [0.8, 1.0]
+  knockback: [2.0, 3.5]
+  durability: [450, 600]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
+  recipe-shape: [" AA", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Light_Steel_Shovel:
+  item:
+    type: NETHERITE_SHOVEL
+    amount: 1
+    display-name: §7Iron Hatchet
+    loc-name: Light_Iron_Shovel
+    lore:
+      [
+        "",
+        "§7Hatchets generally deal less damage",
+        "than an average axe, but with a faster",
+        "swing and low knockback.",
+      ]
+
+  damage: [7.0, 9.0]
+  speed: [0.6, 1.0]
+  knockback: [1.5, 3.0]
+  durability: [300, 375]
+  type: Light
+  recipe-items: ["LIGHT_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [ALL]
+
+Medium_Steel_Shovel:
+  item:
+    type: NETHERITE_SHOVEL
+    amount: 1
+    display-name: §7Iron Shovel
+    loc-name: Medium_Iron_Shovel
+    lore: ["", "§7An average iron axe. "]
+
+  damage: [7.5, 10]
+  speed: [0.7, 0.9]
+  knockback: [1.5, 3.0]
+  durability: [350, 400]
+  type: Medium
+  recipe-items: ["MEDIUM_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
+
+Heavy_Steel_Shovel:
+  item:
+    type: NETHERITE_SHOVEL
+    amount: 1
+    display-name: §7Iron Mace
+    loc-name: Heavy_Iron_Shovel
+    lore:
+      [
+        "",
+        "§7Bardiches have a slower swing",
+        "due to their long handle, but deal",
+        "more damage than the average axe. ",
+      ]
+
+  damage: [5.0, 8.0]
+  speed: [0.5, 0.8]
+  knockback: [3.0, 4.5]
+  durability: [200, 275]
+  type: Heavy
+  recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
+  recipe-shape: [" A ", " B ", " B "]
+  requireShape: true
+  canCraft: [Blacksmith]
