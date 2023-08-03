@@ -7,7 +7,7 @@ import dev.boooiil.historia.classes.historia.proficiency.ClassEnchants;
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 
-public class PlayerIterator extends BukkitRunnable {
+public class ClassEnchantsRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
