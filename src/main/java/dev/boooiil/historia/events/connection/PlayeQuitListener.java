@@ -16,7 +16,7 @@ public class PlayeQuitListener implements Listener {
 
     // A method that is called when a player leaves the server.
     @EventHandler
-    public void onPlayerJoin(PlayerQuitEvent event) {
+    public void onPlayerQuit(PlayerQuitEvent event) {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 

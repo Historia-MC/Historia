@@ -13,7 +13,7 @@ import dev.boooiil.historia.util.Logging;
 public class EntityDamageByEntityListener implements Listener {
     
     @EventHandler
-    public void onPlayerHit(EntityDamageByEntityEvent event) {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
         Logging.debugToConsole("EntityDamagedByEntity event created.");
         Logging.debugToConsole("Attacker: " + event.getDamager().getName());

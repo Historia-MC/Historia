@@ -14,7 +14,7 @@ import dev.boooiil.historia.util.Logging;
 public class EntityBreedListener implements Listener {
 
     @EventHandler
-    public void onBreedAnimal(EntityBreedEvent event) {
+    public void onEntityBreed(EntityBreedEvent event) {
     
         // not sure what other entities can breed
         // shouldn't (TM) be a problem

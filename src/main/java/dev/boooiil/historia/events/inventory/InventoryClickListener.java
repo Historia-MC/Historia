@@ -11,7 +11,7 @@ import dev.boooiil.historia.util.Logging;
 public class InventoryClickListener implements Listener {
 
     @EventHandler
-    public void onPlayerClickInventory(InventoryClickEvent event) {
+    public void onInventoryClick(InventoryClickEvent event) {
 
         Logging.debugToConsole("Player interacted with their inventory");
         Logging.debugToConsole("Action: " + event.getAction().toString());

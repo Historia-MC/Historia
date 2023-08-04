@@ -12,7 +12,7 @@ import dev.boooiil.historia.util.Logging;
 public class PrepareItemCraftListener implements Listener {
 
     @EventHandler
-    public void onCraftItem(PrepareItemCraftEvent event) {
+    public void onPrepareItemCraft(PrepareItemCraftEvent event) {
 
         CraftingTableInspector inspector = new CraftingTableInspector(event.getInventory().getContents());
         ItemStack resultItem;

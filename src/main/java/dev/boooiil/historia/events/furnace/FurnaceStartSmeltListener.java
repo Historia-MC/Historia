@@ -18,7 +18,7 @@ public class FurnaceStartSmeltListener implements Listener {
 
     // A method that is called when a furnace starts smelting an item.
     @EventHandler
-    public void onSmeltStart(FurnaceStartSmeltEvent event) {
+    public void onFurnaceStartSmelt(FurnaceStartSmeltEvent event) {
 
         String localizedName = event.getSource().getItemMeta().getLocalizedName();
 

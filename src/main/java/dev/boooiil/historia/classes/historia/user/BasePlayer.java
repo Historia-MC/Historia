@@ -133,6 +133,13 @@ public abstract class BasePlayer {
 
     }
 
+    public String getTownName() {
+
+        if (town == null) return "Wilderness";
+
+        else return town.getName();
+
+    }
 
     /**
      * Sets the resident object associated with the player.
