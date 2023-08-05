@@ -359,6 +359,12 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    public void setTemperature(double temperature) {
+
+        this.currentTemperature = temperature;
+
+    }
+
     /**
      * Calculate the temperature adjustemnet for the player's environment.
      * 
