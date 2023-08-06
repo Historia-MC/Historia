@@ -134,8 +134,7 @@
         <version>3.3.0</version>
 
         <configuration>
-          <outputDirectory>${user.home}\Desktop\Plugin Test Server\plugins\</outputDirectory>
-          <outputDirectory>./target</outputDirectory>
+          <outputDirectory>${env.SERVER}/plugins</outputDirectory>
         </configuration>
 
       </plugin>
