@@ -134,9 +134,36 @@
         <version>3.3.0</version>
 
         <configuration>
-          <outputDirectory>${env.SERVER}/plugins</outputDirectory>
+          <outputDirectory>./target</outputDirectory>
         </configuration>
 
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>install</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${env.SERVER}/plugins</outputDirectory>
+              <resources>          
+                <resource>
+                  <directory>./target</directory>
+                  <filtering>false</filtering>
+                  <includes>
+                     <include>*.jar</include>
+                  </includes>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
       </plugin>
 
       <plugin>
@@ -147,28 +174,6 @@
           <target>18</target>
         </configuration>
       </plugin>
-
-      <!-- <plugin>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.5.0</version>
-        <configuration>
-          <transformers>
-            <transformer
-              implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <mainClass>java.dev.boooiil.historia.Main</mainClass>
-            </transformer>
-          </transformers>
-          <createDependencyReducedPom>false</createDependencyReducedPom>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>install</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin> -->
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
