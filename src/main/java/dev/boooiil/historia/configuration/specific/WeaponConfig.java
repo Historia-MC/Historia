@@ -7,6 +7,7 @@ import java.util.Map;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.configuration.BaseConfiguration;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that gets information from a configuration file.
@@ -128,7 +129,7 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
             // Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
             // Logging.debugToConsole("--- --------------- ---");
 
-            if (weapon.getRecipeShape().equals(shape)) {
+            if (weapon.getRecipeShape() != null && weapon.getRecipeShape().equals(shape)) {
 
                 set.add(weapon);
 
@@ -136,6 +137,32 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
         }
 
         return set;
+
+    }
+
+    public Weapon getWeaponMatchingMaterials(String type, List<String> materials) {
+
+        materials = materials.stream().map(material -> material.replaceFirst("(LOW|MEDIUM|HIGH)_", "")).toList();
+
+        Logging.debugToConsole("MATERIALS:", materials.toString());
+
+        Weapon weapon = null;
+
+        for(Weapon w : map.values()) {
+
+            Logging.debugToConsole("W-NAME:", w.getName().toUpperCase(), "TYPE:", type, "MATCH: " + w.getName().toUpperCase().contains(type));
+            Logging.debugToConsole("W-MATERIALS:", w.getRecipeItems().toString());
+
+            if (w.getName().toUpperCase().contains(type) && w.getRecipeItems().equals(materials)) {
+
+                weapon = w;
+                break;
+
+            }
+
+        }
+
+        return weapon;
 
     }
 }

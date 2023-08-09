@@ -121,7 +121,7 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
             // Logging.debugToConsole("A-MATCH: " + shape.equals(armor.getRecipeShape()));
             // Logging.debugToConsole("--- -------------- ---");
 
-            if (armor.getRecipeShape().equals(shape)) {
+            if (armor.getRecipeShape() != null && armor.getRecipeShape().equals(shape)) {
 
                 Logging.debugToConsole(armor.getItemStack().getItemMeta().getAsString());
 
@@ -134,20 +134,29 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
 
     }
     
-    // public List<Armor> getAllMatchingShape(List<String> shape) {
+    public Armor getArmorMatchingMaterials(String type, List<String> materials) {
 
-    //     List<Armor> set = new ArrayList<>();
+        materials = materials.stream().map(material -> material.replaceFirst("(LOW|MEDIUM|HIGH)_", "")).toList();
 
-    //     for(Armor armor : map.values()) {
+        Logging.debugToConsole("MATERIALS:", materials.toString());
 
-    //         if (armor.getRecipeShape().equals(shape)) {
+        Armor armor = null;
 
-    //             set.add(armor);
+        for(Armor a : map.values()) {
 
-    //         }
-    //     }
+            Logging.debugToConsole("A-NAME:", a.getName().toUpperCase(), "TYPE:", type, "MATCH: " + a.getName().toUpperCase().contains(type));
+            Logging.debugToConsole("A-MATERIALS:", a.getRecipeItems().toString());
 
-    //     return set;
+            if (a.getName().toUpperCase().contains(type) && a.getRecipeItems().equals(materials)) {
 
-    // }
+                armor = a;
+                break;
+
+            }
+
+        }
+
+        return armor;
+
+    }
 }

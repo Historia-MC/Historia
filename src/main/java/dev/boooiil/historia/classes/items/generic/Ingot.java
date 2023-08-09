@@ -27,6 +27,8 @@ public class Ingot extends BaseItem {
 
         if (validIngot) {
 
+            this.name = ingotName;
+
             itemStack = Construct.itemStack(
                     configuration.getString(ingotName + ".item.type"),
                     configuration.getInt(ingotName + ".item.amount"),

@@ -7,6 +7,7 @@ import java.util.Map;
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Tool;
 import dev.boooiil.historia.configuration.BaseConfiguration;
+import dev.boooiil.historia.util.Logging;
 
 /**
  * It's a class that gets information from a configuration file.
@@ -128,7 +129,7 @@ public class ToolConfig extends BaseConfiguration<Tool> {
             // Logging.debugToConsole("W-MATCH: " + shape.equals(tool.getRecipeShape()));
             // Logging.debugToConsole("--- --------------- ---");
 
-            if (tool.getRecipeShape().equals(shape)) {
+            if (tool.getRecipeShape() != null && tool.getRecipeShape().equals(shape)) {
 
                 set.add(tool);
 
@@ -136,6 +137,38 @@ public class ToolConfig extends BaseConfiguration<Tool> {
         }
 
         return set;
+
+    }
+
+    /**
+     * It returns a list of all the items that have the same recipe shape as the one passed in
+     * @param type 
+     * @param materials
+     * @return
+     */
+    public Tool getToolMatchingMaterials(String type, List<String> materials) {
+
+        materials = materials.stream().map(material -> material.replaceFirst("(LOW|MEDIUM|HIGH)_", "")).toList();
+
+        Logging.debugToConsole("MATERIALS:", materials.toString());
+
+        Tool tool = null;
+
+        for(Tool t : map.values()) {
+
+            Logging.debugToConsole("T-NAME:", t.getName().toUpperCase(), "TYPE:", type, "MATCH: " + t.getName().toUpperCase().contains(type));
+            Logging.debugToConsole("T-MATERIALS:", t.getRecipeItems().toString());
+
+            if (t.getName().toUpperCase().contains(type) && t.getRecipeItems().equals(materials)) {
+
+                tool = t;
+                break;
+
+            }
+
+        }
+
+        return tool;
 
     }
 }

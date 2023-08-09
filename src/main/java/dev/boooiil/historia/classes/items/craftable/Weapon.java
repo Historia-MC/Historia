@@ -46,6 +46,8 @@ public class Weapon extends CraftedItem {
 
         if (valid) {
 
+            this.name = weaponName;
+
             String root = weaponName;
 
             // It's calling the parent class's constructor.
@@ -313,5 +315,16 @@ public class Weapon extends CraftedItem {
     public int getDurability() {
         return durability;
     }
+
+    @Override
+    public String toString() {
+        return "Weapon [weightClass=" + weightClass + ", weight=" + weight + ", damageRange=" + damageRange
+                + ", damage=" + damage + ", speedRange=" + speedRange + ", speed=" + speed + ", knockbackRange="
+                + knockbackRange + ", knockback=" + knockback + ", sweepRange=" + sweepRange + ", sweep=" + sweep
+                + ", durabilityRange=" + durabilityRange + ", durability=" + durability + ", itemStack=" + itemStack
+                + "]";
+    }
+
+    
     
 }

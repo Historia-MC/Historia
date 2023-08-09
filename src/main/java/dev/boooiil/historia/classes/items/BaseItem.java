@@ -9,6 +9,7 @@ public abstract class BaseItem {
      * TODO: IMPLEMENT
      */
 
+    protected String name;
     protected boolean valid;
 
     /**
@@ -36,6 +37,12 @@ public abstract class BaseItem {
     public ItemStack getItemStack() {
 
         return itemStack;
+
+    }
+
+    public String getName() {
+
+        return this.name;
 
     }
 
