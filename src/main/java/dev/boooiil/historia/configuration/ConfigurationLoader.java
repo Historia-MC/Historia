@@ -22,6 +22,7 @@ import dev.boooiil.historia.configuration.specific.CustomItemConfig;
 import dev.boooiil.historia.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
 import dev.boooiil.historia.configuration.specific.OreConfig;
+import dev.boooiil.historia.configuration.specific.ToolConfig;
 import dev.boooiil.historia.configuration.specific.WeaponConfig;
 
 /**
@@ -36,6 +37,7 @@ public class ConfigurationLoader {
     private static GeneralConfig generalConfig = new GeneralConfig();
     private static CustomItemConfig customItemConfig = new CustomItemConfig();
     private static CropConfig cropConfig = new CropConfig();
+    private static ToolConfig toolConfig = new ToolConfig();
 
     /**
      * It returns the armorConfig variable
@@ -96,6 +98,11 @@ public class ConfigurationLoader {
         return cropConfig;
     }
 
+    public static ToolConfig getToolConfig() {
+
+        return toolConfig;
+    }
+
     /**
      * It loads the configuration files
      */
@@ -107,6 +114,7 @@ public class ConfigurationLoader {
         weaponConfig.loadConfiguration("weapons.yml");
         customItemConfig.loadConfiguration("customitems.yml");
         cropConfig.loadConfiguration("crops.yml");
+        toolConfig.loadConfiguration("tools.yml");
         
     }
     

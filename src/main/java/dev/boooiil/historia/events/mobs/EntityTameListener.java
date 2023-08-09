@@ -11,7 +11,7 @@ import dev.boooiil.historia.handlers.mobs.TameAnimal;
 public class EntityTameListener implements Listener {
 
     @EventHandler
-    public void onTameAnimal(EntityTameEvent event) {
+    public void onEntityTame(EntityTameEvent event) {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getOwner().getUniqueId(), false);
 

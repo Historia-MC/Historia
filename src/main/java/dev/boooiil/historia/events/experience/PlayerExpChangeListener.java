@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerExpChangeEvent;
 public class PlayerExpChangeListener implements Listener {
 
     @EventHandler
-    public void onExperienceGain(PlayerExpChangeEvent event) {
+    public void onPlayerExpChange(PlayerExpChangeEvent event) {
         event.setAmount(0);
     }
 

@@ -17,7 +17,7 @@ import dev.boooiil.historia.util.Logging;
 public class CraftItemListener implements Listener {
 
     @EventHandler
-    public void onCraftResult(CraftItemEvent event) {
+    public void onCraftItem(CraftItemEvent event) {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId(), false);
         WeaponConfig weaponConfig = ConfigurationLoader.getWeaponConfig();

@@ -12,7 +12,7 @@ import dev.boooiil.historia.handlers.playerInteraction.RightClickStonecutter;
 public class PlayerInteractListener implements Listener {
 
     @EventHandler
-    public void onPlayerRightClickAir(PlayerInteractEvent event) {
+    public void onPlayerInteract(PlayerInteractEvent event) {
 
 
         if (event.getAction() == Action.RIGHT_CLICK_AIR) {

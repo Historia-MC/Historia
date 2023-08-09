@@ -9,7 +9,7 @@ import dev.boooiil.historia.handlers.playerInteraction.RightClickChicken;
 public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
-    public void onPlayerRightClickEntity(PlayerInteractEntityEvent event) {
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
 
         RightClickChicken rightClickChicken = new RightClickChicken(event);
         rightClickChicken.doInteraction();

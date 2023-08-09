@@ -9,7 +9,7 @@ import dev.boooiil.historia.handlers.pvp.PlayerShootBow;
 public class EntityShootBowListener implements Listener {
     
     @EventHandler
-    public void onShootBow(EntityShootBowEvent event) {
+    public void onEntityShootBow(EntityShootBowEvent event) {
      
         PlayerShootBow playerShootBow = new PlayerShootBow(event);
         playerShootBow.doShoot();

@@ -23,7 +23,7 @@ public class BlockBreakListener implements Listener {
     // a valid ore, it
     // drops the item that the ore is supposed to drop.
     @EventHandler
-    public void onBreakBlock(BlockBreakEvent event) {
+    public void onBlockBreak(BlockBreakEvent event) {
 
         // if the player can't break the block, cancel the event.
         if (!TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getBlock().getType())) {

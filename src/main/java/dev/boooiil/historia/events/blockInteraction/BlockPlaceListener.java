@@ -10,7 +10,7 @@ import dev.boooiil.historia.handlers.blockInteraction.PlayerPlaceBlock;
 public class BlockPlaceListener implements Listener {
 
     @EventHandler
-    public void onPlaceBlock(BlockPlaceEvent event) {
+    public void onBlockPlace(BlockPlaceEvent event) {
 
         new PlayerPlaceBlock(event).doPlace();
 

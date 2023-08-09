@@ -32,7 +32,7 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply efficiency axe to woodcutters.
 - [x] Apply chance for double ore drop for miners.
 - [x] Apply chance for double wood drop for woodcutters.
-- [ ] Apply chance for double feather drop for hunters.
+- [x] Apply chance for double feather drop for hunters.
 - [ ] Apply chance for no anvil damage for blacksmiths.
 - [x] Apply chance to not consume the block for builders.
 - [ ] Apply custom fishing loot for fishermen.
@@ -145,10 +145,10 @@ To be considered as a release, the following requirements must be met:
 
 - [x] Player without custom weapon deals base item damage. 
 - [ ] Arrow landing has chance of igniting block if flamable.
-- [ ] Apply slowness debuff on damage.
+- [x] Apply slowness debuff on damage.
 - [ ] Can eat large fish / meat multiple times (?)
 - [ ] Toggle PvP on/off for settlements that have been raided or are attacking after being raided.
 - [x] Right click stonecutter to increase sharpness.
 - [x] Can shear chickens for feathers.
-- [ ] Limited use for sharpness.
+- [x] Limited use for sharpness.
 - [ ] Allow dulling of weapons (decrease base stats).

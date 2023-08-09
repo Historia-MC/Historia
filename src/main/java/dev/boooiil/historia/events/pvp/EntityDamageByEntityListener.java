@@ -7,14 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import dev.boooiil.historia.handlers.pvp.PlayerDamaged;
+import dev.boooiil.historia.handlers.pvp.PlayerDecreaseSharpness;
 import dev.boooiil.historia.util.Logging;
 
 public class EntityDamageByEntityListener implements Listener {
     
     @EventHandler
-    public void onPlayerHit(EntityDamageByEntityEvent event) {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
-        Logging.debugToConsole("PlayerDamaged event created.");
+        Logging.debugToConsole("EntityDamagedByEntity event created.");
         Logging.debugToConsole("Attacker: " + event.getDamager().getName());
         Logging.debugToConsole("Defender: " + event.getEntity().getName());
 
@@ -29,9 +30,19 @@ public class EntityDamageByEntityListener implements Listener {
 
         }
 
+        if (attacker instanceof Player) {
 
-        
-        
+            if (((Player)attacker).getInventory().getItemInMainHand() != null) {
+
+                Logging.debugToConsole("[EntityDamagedByEntity] Player was holding an item.");
+
+                PlayerDecreaseSharpness playerDecreaseSharpness = new PlayerDecreaseSharpness(event);
+                playerDecreaseSharpness.doDecrease();
+
+            }
+
+        }
+
     }
 
 }

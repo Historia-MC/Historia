@@ -11,7 +11,7 @@ import dev.boooiil.historia.configuration.specific.CropConfig;
 public class BlockFromToListener implements Listener {
 
     @EventHandler
-    public void onWaterBreakBlock(BlockFromToEvent event) {
+    public void onBlockFromTo(BlockFromToEvent event) {
 
         Block toBlock = event.getToBlock();
         CropConfig cropConfig = ConfigurationLoader.getCropConfig();

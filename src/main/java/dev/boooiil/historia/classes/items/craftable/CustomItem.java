@@ -1,5 +1,7 @@
 package dev.boooiil.historia.classes.items.craftable;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
 
@@ -9,7 +11,7 @@ public class CustomItem extends CraftedItem {
 
     public CustomItem(String itemName) {
 
-        configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
+        YamlConfiguration configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
         valid = ConfigurationLoader.getCustomItemConfig().isValid(itemName);
 
         if (valid) {
@@ -32,7 +34,7 @@ public class CustomItem extends CraftedItem {
 
             this.isShaped = configuration.getBoolean(itemName + ".requireShape");
 
-            this.proficiencies = configuration.getStringList(itemName + ".proficiencies");
+            this.proficiencies = configuration.getStringList(itemName + ".canCraft");
 
         }
     }

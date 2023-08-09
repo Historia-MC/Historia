@@ -26,7 +26,6 @@ import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.configuration.specific.IngotConfig;
 import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
-import dev.boooiil.historia.discord.HistoriaDiscord;
 import dev.boooiil.historia.events.blockInteraction.BlockPlaceListener;
 import dev.boooiil.historia.events.blockInteraction.BlockBreakListener;
 import dev.boooiil.historia.events.blockInteraction.BlockFromToListener;
@@ -40,16 +39,17 @@ import dev.boooiil.historia.events.furnace.FurnaceSmeltListener;
 import dev.boooiil.historia.events.furnace.FurnaceStartSmeltListener;
 import dev.boooiil.historia.events.inventory.InventoryClickListener;
 import dev.boooiil.historia.events.mobs.EntityBreedListener;
-import dev.boooiil.historia.events.mobs.EntityDeathListener;
 import dev.boooiil.historia.events.mobs.EntityTameListener;
 import dev.boooiil.historia.events.playerInteraction.PlayerInteractEntityListener;
+import dev.boooiil.historia.events.playerInteraction.PlayerInteractListener;
+import dev.boooiil.historia.events.pve.EntityDeathListener;
 import dev.boooiil.historia.events.pvp.PlayerDeathListener;
 import dev.boooiil.historia.events.pvp.EntityDamageByEntityListener;
 import dev.boooiil.historia.events.pvp.PlayerRespawnListener;
 import dev.boooiil.historia.events.pvp.EntityShootBowListener;
-import dev.boooiil.historia.runnable.PlayerIterator;
-import dev.boooiil.historia.runnable.SaveProgress;
-import dev.boooiil.historia.runnable.UpdateScoreboard;
+import dev.boooiil.historia.runnable.ClassEnchantsRunnable;
+import dev.boooiil.historia.runnable.SavePlayerRunnable;
+import dev.boooiil.historia.runnable.UpdateScoreboardRunnable;
 import dev.boooiil.historia.util.ConfigUtil;
 import dev.boooiil.historia.util.Logging;
 
@@ -83,8 +83,6 @@ public class Main extends JavaPlugin {
 
         deregisterRecipes();
 
-        HistoriaDiscord.init();
-
         // Check config files
         ConfigUtil.checkFiles();
 
@@ -101,7 +99,6 @@ public class Main extends JavaPlugin {
         ConfigurationLoader.init();
 
         registerEvent(new EntityBreedListener());
-        registerEvent(new EntityDeathListener());
         registerEvent(new EntityTameListener());
         registerEvent(new PlayerExpChangeListener());
         registerEvent(new FoodLevelChangeListener());
@@ -121,6 +118,8 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
+        registerEvent(new EntityDeathListener());
+        registerEvent(new PlayerInteractListener());
 
         registerCommand("checkplayers", new CommandPlayers());
         registerCommand("debug", new CommandDebug());
@@ -129,9 +128,9 @@ public class Main extends JavaPlugin {
         registerCommand("give", new CommandGive());
         registerCommand("proficiency", new CommandProficiency());
 
-        registerRunnable(new PlayerIterator());
-        registerRunnable(new UpdateScoreboard());
-        registerRunnable(new SaveProgress(), 6000l);
+        registerRunnable(new ClassEnchantsRunnable());
+        registerRunnable(new UpdateScoreboardRunnable());
+        registerRunnable(new SavePlayerRunnable(), 6000l);
 
         registerFurnaceRecipes();
 
@@ -147,7 +146,6 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
         MySQLConnection.closeConnection();
-        HistoriaDiscord.destroy();
 
         getLogger().info("Plugin disabled.");
     }
