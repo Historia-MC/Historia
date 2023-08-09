@@ -107,7 +107,7 @@ Heavy_Stone_Sword:
   sweeping: [1.0, 2.5]
   durability: [100, 132]
   type: Heavy
-  recipe-items: ["STONE", "STICK"]
+  recipe-items: ["COBBLESTONE", "STICK"]
   requireShape: true
   canCraft: [ Blacksmith ]
 
@@ -125,7 +125,7 @@ Heavy_Stone_Axe:
   sweeping: [0.0, 0.0]
   durability: [100, 132]
   type: Heavy
-  recipe-items: ["STONE", "STICK"]
+  recipe-items: ["COBBLESTONE", "STICK"]
   requireShape: true
   canCraft: [ Blacksmith ]
 
@@ -517,8 +517,7 @@ Heavy_Steel_Axe:
   recipe-items: ["HEAVY_STEEL_INGOT", "STICK"]
   requireShape: true
   canCraft: [ Blacksmith ]
-
-
+  
 Light_Wooden_Pitchfork:
   item:
     type: TRIDENT
