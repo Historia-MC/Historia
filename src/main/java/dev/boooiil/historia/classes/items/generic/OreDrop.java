@@ -31,6 +31,7 @@ public class OreDrop extends BaseItem {
     // It's a constructor.
     public OreDrop(String currentRoot, String dropName, YamlConfiguration configuration) {
 
+        this.name = dropName;
         // Accessing BLOCK_NAME_1.drop_category_1.DROP_NAME_1
         String root = currentRoot + "." + dropName;
 

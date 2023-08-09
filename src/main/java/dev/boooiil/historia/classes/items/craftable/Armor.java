@@ -31,6 +31,8 @@ public class Armor extends CraftedItem {
 
         if (valid) {
 
+            this.name = armorName;
+
             String itemRoot = armorName;
 
             // Calling the parent class's constructor.

@@ -43,6 +43,8 @@ public class Tool extends CraftedItem {
 
         if (valid) {
 
+            this.name = toolName;
+
             String root = toolName;
 
             // It's calling the parent class's constructor.

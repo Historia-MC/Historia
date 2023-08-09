@@ -7,8 +7,6 @@ import dev.boooiil.historia.util.Construct;
 
 public class CustomItem extends CraftedItem {
 
-    private String itemName;
-
     public CustomItem(String itemName) {
 
         YamlConfiguration configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
@@ -16,7 +14,7 @@ public class CustomItem extends CraftedItem {
 
         if (valid) {
 
-            this.itemName = itemName;
+            this.name = itemName;
 
             // Calling the parent class's constructor.
             itemStack = Construct.itemStack(
@@ -37,17 +35,6 @@ public class CustomItem extends CraftedItem {
             this.proficiencies = configuration.getStringList(itemName + ".canCraft");
 
         }
-    }
-    
-    /**
-     * It returns the name of the item.
-     * 
-     * @return The name of the item.
-     */
-    public String getItemName() {
-        
-        return this.itemName;
-
     }
 
     public boolean isShapeDependent() {
