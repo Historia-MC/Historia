@@ -129,7 +129,7 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
             // Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
             // Logging.debugToConsole("--- --------------- ---");
 
-            if (weapon.getRecipeShape().equals(shape)) {
+            if (weapon.getRecipeShape() != null && weapon.getRecipeShape().equals(shape)) {
 
                 set.add(weapon);
 

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import dev.boooiil.historia.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.classes.items.craftable.Tool;
-import dev.boooiil.historia.classes.items.craftable.Weapon;
 import dev.boooiil.historia.configuration.BaseConfiguration;
 import dev.boooiil.historia.util.Logging;
 
@@ -130,7 +129,7 @@ public class ToolConfig extends BaseConfiguration<Tool> {
             // Logging.debugToConsole("W-MATCH: " + shape.equals(tool.getRecipeShape()));
             // Logging.debugToConsole("--- --------------- ---");
 
-            if (tool.getRecipeShape().equals(shape)) {
+            if (tool.getRecipeShape() != null && tool.getRecipeShape().equals(shape)) {
 
                 set.add(tool);
 

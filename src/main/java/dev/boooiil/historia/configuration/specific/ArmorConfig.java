@@ -121,7 +121,7 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
             // Logging.debugToConsole("A-MATCH: " + shape.equals(armor.getRecipeShape()));
             // Logging.debugToConsole("--- -------------- ---");
 
-            if (armor.getRecipeShape().equals(shape)) {
+            if (armor.getRecipeShape() != null && armor.getRecipeShape().equals(shape)) {
 
                 Logging.debugToConsole(armor.getItemStack().getItemMeta().getAsString());
 
