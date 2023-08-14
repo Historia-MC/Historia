@@ -1,12 +1,20 @@
 package dev.boooiil.historia.util;
 
-import java.math.RoundingMode;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class NumberUtils {
     
     public static float random(int min, int max) {
         return (float) (Math.random() * (max - min + 1) + min);
+    }
+
+    public static float random(float min, float max) {
+        return (float) (Math.random() * (max - min + 1) + min);
+    }
+
+    public static double random(double min, double max) {
+        return (Math.random() * (max - min + 1) + min);
     }
 
     public static float randomToTenth(int min, int max) {
