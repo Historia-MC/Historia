@@ -37,7 +37,7 @@ public class ExperienceTypes {
         RANGED_KILL(2d),
         NONE(0d);
 
-        private double key;
+        private final double key;
 
         private AllSources(double key) {
             this.key = key;
@@ -60,7 +60,7 @@ public class ExperienceTypes {
         RANGED_HIT(AllSources.valueOf("RANGED_HIT")),
         RANGED_KILL(AllSources.valueOf("RANGED_KILL"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private CombatSources(AllSources key) {
             this.key = key;
@@ -82,7 +82,7 @@ public class ExperienceTypes {
         BLOCK_BREAK(AllSources.valueOf("BLOCK_BREAK")),
         BLOCK_INTERACT(AllSources.valueOf("BLOCK_INTERACT"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private BlockSources(AllSources key) {
             this.key = key;
@@ -101,7 +101,7 @@ public class ExperienceTypes {
         FISH_TRASH(AllSources.valueOf("FISH_TRASH")),
         FISH_TREASURE(AllSources.valueOf("FISH_TREASURE"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private FishingSources(AllSources key) {
             this.key = key;
@@ -119,7 +119,7 @@ public class ExperienceTypes {
         BREED_ANIMAL(AllSources.valueOf("BREED_ANIMAL")),
         TAME_ANIMAL(AllSources.valueOf("TAME_ANIMAL"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private AnimalSources(AllSources key) {
             this.key = key;
@@ -137,7 +137,7 @@ public class ExperienceTypes {
         CROP_PLACE(AllSources.valueOf("CROP_PLACE")),
         CROP_BREAK(AllSources.valueOf("CROP_BREAK"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private FarmingSources(AllSources key) {
             this.key = key;
@@ -158,7 +158,7 @@ public class ExperienceTypes {
         ARMOR_CRAFT(AllSources.valueOf("ARMOR_CRAFT")),
         OTHER_CRAFT(AllSources.valueOf("OTHER_CRAFT"));
 
-        private AllSources key;
+        private final AllSources key;
 
         private CraftingSources(AllSources key) {
             this.key = key;

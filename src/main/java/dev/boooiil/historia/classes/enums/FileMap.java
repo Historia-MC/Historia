@@ -20,7 +20,7 @@ public class FileMap {
         /** tools.yml */
         TOOLS("tools.yml");
 
-        private String key;
+        private final String key;
 
         private ResourceKeys(String key) {
 
