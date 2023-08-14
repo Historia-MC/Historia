@@ -19,7 +19,7 @@ public class MySQLMaps {
         LOGOUT("logout"),
         PLAYTIME("playtime");
 
-        private String key;
+        private final String key;
 
         private HistoriaUserKeys(String key) {
 
