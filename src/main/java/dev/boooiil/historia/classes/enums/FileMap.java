@@ -13,8 +13,6 @@ public class FileMap {
         PROFICIENCY("proficiency.yml"),
         /** config.yml */
         CONFIG("config.yml"),
-        /** expiry.yml */
-        EXPIRY("expiry.yml"),
         /** plugin.yml */
         PLUGIN("plugin.yml"),
         /** weapons.yml */
