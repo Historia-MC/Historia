@@ -198,14 +198,7 @@
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
         <includes>
-          <include>plugin.yml</include>
-          <include>armor.yml</include>
-          <include>proficiency.yml</include>
-          <include>config.yml</include>
-          <include>crops.yml</include>
-          <include>customitems.yml</include>
-          <include>tools.yml</include>
-          <include>weapons.yml</include>
+          <include>*.yml</include>
         </includes>
       </resource>
     </resources>
