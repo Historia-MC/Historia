@@ -12,14 +12,15 @@ import java.util.UUID;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
+import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.util.Logging;
 
 /**
- * It's a class that handles all of the MySQL queries for the plugin.
+ * It's a class that handles all the MySQL queries for the plugin.
  */
 public class MySQLHandler {
 
-    private static Connection connection = MySQLConnection.getConnection();
+    private final static Connection connection = MySQLConnection.getConnection();
 
     /**
      * Create the table in the database if it does not exist.
@@ -50,7 +51,12 @@ public class MySQLHandler {
             createTable();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO CREATE TABLE.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
         }
     }
@@ -84,7 +90,11 @@ public class MySQLHandler {
 
         } catch (SQLException e) {
 
-            e.printStackTrace();
+            Logging.errorToConsole("FAILED TO CREATE USER.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
         }
 
@@ -115,9 +125,13 @@ public class MySQLHandler {
             setUsername(uuid, playerName);
 
         } catch (SQLException e) {
-            e.printStackTrace();
 
-            Logging.errorToConsole("FAILED TO CREATE USER.");
+            Logging.errorToConsole("FAILED TO SET USERNAME.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
     }
@@ -145,7 +159,13 @@ public class MySQLHandler {
             setProficiency(uuid, className);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO SET PROFICIENCY.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
     }
@@ -173,7 +193,13 @@ public class MySQLHandler {
             setProficiencyLevel(uuid, classLevel);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO SET PROFICIENCY LEVEL.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
     }
@@ -198,10 +224,16 @@ public class MySQLHandler {
             Logging.infoToConsole("Communication Exception");
 
             MySQLConnection.reconnectOnStale();
-            setLogin(uuid);;
+            setLogin(uuid);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO SET LOGIN.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
     }
@@ -230,9 +262,13 @@ public class MySQLHandler {
             setCurrentExperience(uuid, experience);
 
         } catch (SQLException e) {
-            e.printStackTrace();
 
-            Logging.errorToConsole("FAILED TO CREATE USER.");
+            Logging.errorToConsole("FAILED TO SET EXPERIENCE.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
 
@@ -265,10 +301,16 @@ public class MySQLHandler {
             Logging.infoToConsole("Communication Exception");
 
             MySQLConnection.reconnectOnStale();
-            setLogout(uuid, lastLogin, previousPlaytime);;
+            setLogout(uuid, lastLogin, previousPlaytime);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO SET LOGOUT.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
     }
@@ -306,7 +348,11 @@ public class MySQLHandler {
             return getUsernames();
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO GET USERNAMES.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
         return answer;
@@ -341,7 +387,11 @@ public class MySQLHandler {
             return getUsername(uuid);
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO GET USERNAME.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
         return null;
@@ -373,27 +423,27 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public static Map<String, String> getUser(UUID uuid) {
+    public static Map<HistoriaUserKeys, String> getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
 
-            Map<String, String> map = new HashMap<>();
+            Map<HistoriaUserKeys, String> map = new HashMap<>();
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
 
-                map.put("UUID", results.getString("UUID"));
-                map.put("username", results.getString("Username"));
-                map.put("class", results.getString("Class"));
-                map.put("level", results.getString("Level"));
-                map.put("experience", results.getString("Experience"));
-                map.put("login", results.getString("Login"));
-                map.put("logout", results.getString("Logout"));
-                map.put("playtime", results.getString("Playtime"));
+                map.put(HistoriaUserKeys.UUID, results.getString("UUID"));
+                map.put(HistoriaUserKeys.USERNAME, results.getString("Username"));
+                map.put(HistoriaUserKeys.CLASS, results.getString("Class"));
+                map.put(HistoriaUserKeys.LEVEL, results.getString("Level"));
+                map.put(HistoriaUserKeys.EXPERIENCE, results.getString("Experience"));
+                map.put(HistoriaUserKeys.LOGIN, results.getString("Login"));
+                map.put(HistoriaUserKeys.LOGOUT, results.getString("Logout"));
+                map.put(HistoriaUserKeys.PLAYTIME, results.getString("Playtime"));
 
             }
 
@@ -407,7 +457,11 @@ public class MySQLHandler {
             return getUser(uuid);
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO GET USER.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
         return null;
@@ -449,7 +503,11 @@ public class MySQLHandler {
             return getUUIDs();
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO GET UUIDS.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
         return answer;
@@ -502,7 +560,11 @@ public class MySQLHandler {
             return getUUID(playerName);
 
         } catch (Exception e) {
-            e.printStackTrace();
+
+            Logging.errorToConsole("FAILED TO GET UUID.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
         }
 
         return null;
@@ -530,9 +592,13 @@ public class MySQLHandler {
             MySQLConnection.reconnectOnStale();
             return userExists(uuid);
 
-        } catch (SQLException sqlE) {
+        } catch (SQLException e) {
 
-            sqlE.printStackTrace();
+            Logging.errorToConsole("FAILED TO SET PROFICIENCY.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
         }
 
