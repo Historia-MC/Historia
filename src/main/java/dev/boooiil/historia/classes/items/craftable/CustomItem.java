@@ -1,9 +1,8 @@
 package dev.boooiil.historia.classes.items.craftable;
 
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 public class CustomItem extends CraftedItem {
 
@@ -50,7 +49,4 @@ public class CustomItem extends CraftedItem {
 
     }
 
-    public boolean isShapeDependent() {
-        return isShaped;
-    }
 }
