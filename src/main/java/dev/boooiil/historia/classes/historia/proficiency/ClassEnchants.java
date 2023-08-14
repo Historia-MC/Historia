@@ -1,16 +1,15 @@
 package dev.boooiil.historia.classes.historia.proficiency;
 
+import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
+import dev.boooiil.historia.util.Logging;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
-import dev.boooiil.historia.util.Logging;
-
 public class ClassEnchants {
 
-    private HistoriaPlayer historiaPlayer;
-    private PlayerInventory inventory;
+    private final HistoriaPlayer historiaPlayer;
+    private final PlayerInventory inventory;
 
     public ClassEnchants(HistoriaPlayer historiaPlayer, PlayerInventory inventory) {
         this.historiaPlayer = historiaPlayer;
