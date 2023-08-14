@@ -425,11 +425,11 @@ public class MySQLHandler {
 
     public static Map<HistoriaUserKeys, String> getUser(UUID uuid) {
 
+        Map<HistoriaUserKeys, String> map = new HashMap<>();
+
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
-
-            Map<HistoriaUserKeys, String> map = new HashMap<>();
 
             Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(string);
@@ -462,9 +462,18 @@ public class MySQLHandler {
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
+            map.put(HistoriaUserKeys.UUID, uuid.toString());
+            map.put(HistoriaUserKeys.USERNAME, "null");
+            map.put(HistoriaUserKeys.CLASS, "None");
+            map.put(HistoriaUserKeys.LEVEL, "1");
+            map.put(HistoriaUserKeys.EXPERIENCE, "0");
+            map.put(HistoriaUserKeys.LOGIN, "0");
+            map.put(HistoriaUserKeys.LOGOUT, "0");
+            map.put(HistoriaUserKeys.PLAYTIME, "0");
+
         }
 
-        return null;
+        return map;
 
     }
 
