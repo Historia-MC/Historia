@@ -1,12 +1,11 @@
 package dev.boooiil.historia.classes.historia.proficiency;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.bukkit.configuration.file.FileConfiguration;
-
 import dev.boooiil.historia.classes.enums.FileMap.ResourceKeys;
 import dev.boooiil.historia.util.FileGetter;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class represents a proficiency that a character can have. It contains
@@ -172,10 +171,7 @@ public class Proficiency {
      */
     public boolean canUseRanged() {
 
-        boolean found = getStats().getUsableWeaponTypes().contains("Bow");
-        found = found ? found : getStats().getUsableWeaponTypes().contains("Crossbow"); 
-
-        return found;
+        return getStats().getUsableWeaponTypes().contains("Bow") || getStats().getUsableWeaponTypes().contains("Crossbow");
     }
 
     /**
