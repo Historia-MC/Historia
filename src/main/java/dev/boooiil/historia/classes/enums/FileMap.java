@@ -15,10 +15,6 @@ public class FileMap {
         CONFIG("config.yml"),
         /** expiry.yml */
         EXPIRY("expiry.yml"),
-        /** ingots.yml */
-        INGOTS("ingots.yml"),
-        /** ores.yml */
-        ORES("ores.yml"),
         /** plugin.yml */
         PLUGIN("plugin.yml"),
         /** weapons.yml */

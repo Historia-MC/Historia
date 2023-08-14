@@ -16,14 +16,12 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import dev.boooiil.historia.commands.CommandSet;
-import dev.boooiil.historia.classes.items.generic.Ingot;
 import dev.boooiil.historia.commands.CommandDebug;
 import dev.boooiil.historia.commands.CommandGive;
 import dev.boooiil.historia.commands.CommandPlayers;
 import dev.boooiil.historia.commands.CommandProficiency;
 import dev.boooiil.historia.commands.CommandStats;
 import dev.boooiil.historia.configuration.ConfigurationLoader;
-import dev.boooiil.historia.configuration.specific.IngotConfig;
 import dev.boooiil.historia.database.mysql.MySQLConnection;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.events.blockInteraction.BlockPlaceListener;
@@ -35,14 +33,11 @@ import dev.boooiil.historia.events.crafting.PrepareItemCraftListener;
 import dev.boooiil.historia.events.crafting.CraftItemListener;
 import dev.boooiil.historia.events.experience.PlayerExpChangeListener;
 import dev.boooiil.historia.events.food.FoodLevelChangeListener;
-import dev.boooiil.historia.events.furnace.FurnaceSmeltListener;
-import dev.boooiil.historia.events.furnace.FurnaceStartSmeltListener;
 import dev.boooiil.historia.events.inventory.InventoryClickListener;
 import dev.boooiil.historia.events.mobs.EntityBreedListener;
 import dev.boooiil.historia.events.mobs.EntityTameListener;
 import dev.boooiil.historia.events.playerInteraction.PlayerInteractEntityListener;
 import dev.boooiil.historia.events.playerInteraction.PlayerInteractListener;
-import dev.boooiil.historia.events.pve.EntityDeathListener;
 import dev.boooiil.historia.events.pvp.PlayerDeathListener;
 import dev.boooiil.historia.events.pvp.EntityDamageByEntityListener;
 import dev.boooiil.historia.events.pvp.PlayerRespawnListener;
@@ -102,8 +97,6 @@ public class Main extends JavaPlugin {
         registerEvent(new EntityTameListener());
         registerEvent(new PlayerExpChangeListener());
         registerEvent(new FoodLevelChangeListener());
-        registerEvent(new FurnaceSmeltListener());
-        registerEvent(new FurnaceStartSmeltListener());
         registerEvent(new InventoryClickListener());
         registerEvent(new BlockBreakListener());
         registerEvent(new BlockPlaceListener());
@@ -118,7 +111,6 @@ public class Main extends JavaPlugin {
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
-        registerEvent(new EntityDeathListener());
         registerEvent(new PlayerInteractListener());
 
         registerCommand("checkplayers", new CommandPlayers());
@@ -131,8 +123,6 @@ public class Main extends JavaPlugin {
         registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000l);
-
-        registerFurnaceRecipes();
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
@@ -274,48 +264,4 @@ public class Main extends JavaPlugin {
 
     }
 
-    public void registerFurnaceRecipes() {
-
-        IngotConfig ig = ConfigurationLoader.getIngotConfig();
-        Ingot base_tin_ingot = ig.getObject("LOW_LIGHT_TIN_INGOT");
-
-
-        FurnaceRecipe base_tin_safety_raw = new FurnaceRecipe(
-            new NamespacedKey(this, "base_tin_safety_raw"),
-            base_tin_ingot.getItemStack(), 
-            Material.RAW_IRON,
-            0f,
-            base_tin_ingot.getSmeltTime()
-        );
-
-        FurnaceRecipe base_tin_safety_ingot = new FurnaceRecipe(
-            new NamespacedKey(this, "base_tin_safety_ingot"),
-            base_tin_ingot.getItemStack(), 
-            Material.IRON_INGOT,
-            0f,
-            base_tin_ingot.getSmeltTime()
-        );
-
-        FurnaceRecipe base_bronze_safety_raw = new FurnaceRecipe(
-            new NamespacedKey(this, "base_bronze_safety_raw"),
-            base_tin_ingot.getItemStack(), 
-            Material.RAW_GOLD,
-            0f,
-            base_tin_ingot.getSmeltTime()
-        );
-
-        FurnaceRecipe base_bronze_safety_ingot = new FurnaceRecipe(
-            new NamespacedKey(this, "base_bronze_safety_ingot"),
-            base_tin_ingot.getItemStack(), 
-            Material.GOLD_INGOT,
-            0f,
-            base_tin_ingot.getSmeltTime()
-        );
-
-        Bukkit.addRecipe(base_tin_safety_raw);
-        Bukkit.addRecipe(base_tin_safety_ingot);
-        Bukkit.addRecipe(base_bronze_safety_raw);
-        Bukkit.addRecipe(base_bronze_safety_ingot);
-
-    }
 }

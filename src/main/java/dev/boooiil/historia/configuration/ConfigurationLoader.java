@@ -20,8 +20,6 @@ import dev.boooiil.historia.configuration.specific.ArmorConfig;
 import dev.boooiil.historia.configuration.specific.CropConfig;
 import dev.boooiil.historia.configuration.specific.CustomItemConfig;
 import dev.boooiil.historia.configuration.specific.GeneralConfig;
-import dev.boooiil.historia.configuration.specific.IngotConfig;
-import dev.boooiil.historia.configuration.specific.OreConfig;
 import dev.boooiil.historia.configuration.specific.ToolConfig;
 import dev.boooiil.historia.configuration.specific.WeaponConfig;
 
@@ -31,8 +29,6 @@ import dev.boooiil.historia.configuration.specific.WeaponConfig;
 public class ConfigurationLoader {
     
     private static ArmorConfig armorConfig = new ArmorConfig();
-    private static IngotConfig ingotConfig = new IngotConfig();
-    private static OreConfig oreConfig = new OreConfig();
     private static WeaponConfig weaponConfig = new WeaponConfig();
     private static GeneralConfig generalConfig = new GeneralConfig();
     private static CustomItemConfig customItemConfig = new CustomItemConfig();
@@ -46,24 +42,6 @@ public class ConfigurationLoader {
      */
     public static ArmorConfig getArmorConfig() {
         return armorConfig;
-    }
-
-    /**
-     * It returns the ingotConfig variable
-     * 
-     * @return The ingotConfig variable.
-     */
-    public static IngotConfig getIngotConfig() {
-        return ingotConfig;
-    }
-
-    /**
-     * It returns the oreConfig variable
-     * 
-     * @return The oreConfig variable.
-     */
-    public static OreConfig getOreConfig() {
-        return oreConfig;
     }
 
     /**
@@ -109,8 +87,6 @@ public class ConfigurationLoader {
     public static void init() {
 
         armorConfig.loadConfiguration("armor.yml");
-        ingotConfig.loadConfiguration("ingots.yml");
-        oreConfig.loadConfiguration("ores.yml");
         weaponConfig.loadConfiguration("weapons.yml");
         customItemConfig.loadConfiguration("customitems.yml");
         cropConfig.loadConfiguration("crops.yml");
