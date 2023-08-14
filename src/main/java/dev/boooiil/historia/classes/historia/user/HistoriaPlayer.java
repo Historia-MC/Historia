@@ -3,19 +3,11 @@ package dev.boooiil.historia.classes.historia.user;
 import java.util.Map;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Server;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 import dev.boooiil.historia.classes.enums.ExperienceTypes.AllSources;
 import dev.boooiil.historia.classes.enums.MySQLMaps.HistoriaUserKeys;
 import dev.boooiil.historia.classes.historia.proficiency.Proficiency;
-import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.database.mysql.MySQLHandler;
 import dev.boooiil.historia.util.Logging;
 import dev.boooiil.historia.util.NumberUtils;
@@ -28,8 +20,6 @@ import dev.boooiil.historia.util.NumberUtils;
  */
 public class HistoriaPlayer extends BasePlayer {
 
-    private boolean isValid;
-
     private int level;
 
     private long lastLogin;
@@ -40,8 +30,6 @@ public class HistoriaPlayer extends BasePlayer {
     private float modifiedHealth;
 
     private double currentTemperature;
-    private double armorAdjustment;
-    private double environmentAdjustment;
     private double maxTemperature;
 
     private double currentExperience;
@@ -54,11 +42,10 @@ public class HistoriaPlayer extends BasePlayer {
     protected Server server;
 
     /**
-     * Default constrctor, will return invalid player.
+     * Default constructor, will return invalid player.
      */
     public HistoriaPlayer() {
         super(null);
-        this.isValid = false;
 
         Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
@@ -83,15 +70,13 @@ public class HistoriaPlayer extends BasePlayer {
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
-        Map<String, String> user = MySQLHandler.getUser(uuid);
+        Map<HistoriaUserKeys, String> user = MySQLHandler.getUser(uuid);
 
-        this.proficiency = new Proficiency(user.get(HistoriaUserKeys.CLASS.getKey()));
-
-        this.isValid = true;
+        this.proficiency = new Proficiency(user.get(HistoriaUserKeys.CLASS));
 
         this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
 
-        this.level = this.level < 1 ? 1 : this.level;
+        this.level = Math.max(this.level, 1);
 
         this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
 
@@ -102,9 +87,6 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
         this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT.getKey()));
         this.playtime = Long.parseLong(user.get(HistoriaUserKeys.PLAYTIME.getKey()));
-
-        this.armorAdjustment = calculateArmorAdjustment();
-        this.environmentAdjustment = calculateEnvironmentAdjustment();
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
@@ -151,17 +133,6 @@ public class HistoriaPlayer extends BasePlayer {
     public Proficiency getProficiency() {
 
         return this.proficiency;
-
-    }
-
-    /**
-     * Check if the player is valid.
-     * 
-     * @return {@link Boolean}
-     */
-    public boolean isValid() {
-
-        return this.isValid;
 
     }
 
@@ -243,7 +214,7 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * Get the player's total playtime..
+     * Get the player's total playtime.
      * 
      * @return {@link Long} - Player's total playtime.
      */
@@ -261,28 +232,6 @@ public class HistoriaPlayer extends BasePlayer {
     public double getCurrentTemperature() {
 
         return this.currentTemperature;
-
-    }
-
-    /**
-     * Get the temperature adjustment for armor.
-     * 
-     * @return {@link Double} - Calculated armor adjustment.
-     */
-    public double getArmorAdjustment() {
-
-        return this.armorAdjustment;
-
-    }
-
-    /**
-     * Get the temperature adjustment for the player's environment.
-     * 
-     * @return {@link Double} - Calculated environment adjustment.
-     */
-    public double getEnvironmentAdjustment() {
-
-        return this.environmentAdjustment;
 
     }
 
@@ -325,119 +274,9 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    /**
-     * Calculate the temperature adjustemnet for armor.
-     * 
-     * @return {@link Double}
-     */
-    public double calculateArmorAdjustment() {
-
-        if (!this.isOnline())
-            return 0;
-
-        Player player = Bukkit.getPlayer(this.getUUID());
-
-        PlayerInventory inventory = player.getInventory();
-        ItemStack[] playerArmor = inventory.getArmorContents();
-
-        double mod = 0;
-
-        // Essential check for plugin functions (realism). The easy fix would be using real weights but management deemed this too "personal".
-        if (this.getUsername().equalsIgnoreCase("Mtndew98")) return Double.MAX_VALUE;
-
-        for (ItemStack armor : playerArmor) {
-
-            if (armor != null) {
-
-                mod += ConfigurationLoader.getArmorConfig().getObject(armor.getItemMeta().getLocalizedName()).getWeight();
-
-            }
-
-        }
-
-        return mod;
-
-    }
-
     public void setTemperature(double temperature) {
 
         this.currentTemperature = temperature;
-
-    }
-
-    /**
-     * Calculate the temperature adjustemnet for the player's environment.
-     * 
-     * @return {@link Double}
-     */
-    public double calculateEnvironmentAdjustment() {
-
-        if (!isOnline())
-            return 0;
-
-        Player player = Bukkit.getPlayer(this.getUUID());
-
-        double currentTime = player.getWorld().getTime();
-        double mod = 0;
-
-        boolean[] environment = checkSurroundingArea();
-
-        boolean inSkylight = checkInSkylight();
-        boolean isInside = !inSkylight; // inSkylight ? true : environment[0];
-        boolean isNearHeatSource = environment[1];
-
-        if (isNearHeatSource)
-            mod += 3.2;
-
-        // Sunrise
-        if (currentTime > 23000 && currentTime < 2000) {
-
-            mod += 0.4;
-
-            if (isInside)
-                mod += -1.2;
-            else
-                mod += 0.6;
-
-        }
-
-        // Noon
-        if (currentTime > 2000 && currentTime < 12000) {
-
-            mod = 0.6;
-
-            if (isInside)
-                mod += -1.2;
-            else
-                mod += 1.4;
-
-        }
-
-        // Sunset
-        if (currentTime > 12000 && currentTime < 13000) {
-
-            mod = -0.4;
-
-            if (isInside)
-                mod += -1.2;
-            else
-                mod += -0.6;
-
-        }
-
-        // Night
-        if (currentTime > 13000 && currentTime < 23000) {
-
-            mod = -0.4;
-
-            if (isInside)
-                mod += -1.2;
-            else
-                mod += -1.0;
-
-        }
-
-        return mod;
 
     }
 
@@ -446,92 +285,6 @@ public class HistoriaPlayer extends BasePlayer {
         //TODO: Adjust player modifiers based on new proficiency.
 
         this.proficiency = new Proficiency(proficiency);
-
-    }
-
-    /**
-     * Check if the player has the sun above them.
-     * 
-     * @return true if there is no block above the player.
-     */
-    private boolean checkInSkylight() {
-
-        if (!isOnline())
-            return false;
-
-        Player player = Bukkit.getPlayer(this.getUUID());
-
-        Block block = player.getLocation().getBlock();
-        boolean found = true;
-
-        for (int i = 0; i < 255; i++) {
-
-            if (!block.getType().equals(Material.AIR)) {
-
-                found = false;
-                break;
-
-            }
-            ;
-
-        }
-
-        Logging.infoToConsole("Player is in skylight: " + found);
-
-        return found;
-
-    }
-
-    /**
-     * Checks if a given player is surrounded by blocks.
-     * 
-     * @return { ifInEmptySpace, ifAroundFireSource }.
-     */
-    private boolean[] checkSurroundingArea() {
-
-        // TODO: CALC > PLAYER-Y + 2
-
-        // EMPTY,
-        boolean found[] = { false, false };
-        int radius = 10;
-
-        if (!isOnline()) {
-
-            found[0] = found[1] = true;
-
-            return found;
-        }
-
-        Player player = Bukkit.getPlayer(this.getUUID());
-
-        Block block = player.getLocation().getBlock();
-
-        for (int i = 0; i < 180; i++) {
-
-            double y = block.getY() + 2;
-            double x = block.getX() + Math.sin((double) i) * radius;
-            double z = block.getZ() + Math.cos((double) i) * radius;
-
-            Location location = new Location(block.getWorld(), x, y, z);
-
-            Block nBlock = location.getBlock();
-
-            if (nBlock != null) {
-
-                found[0] = true;
-
-            }
-
-            if (nBlock != null && (nBlock.getType().equals(Material.FIRE) || nBlock.getType().equals(Material.CAMPFIRE)
-                    || nBlock.getType().equals(Material.LAVA))) {
-
-                found[1] = true;
-
-            }
-            
-        }
-
-        return found;
 
     }
 
@@ -608,8 +361,6 @@ public class HistoriaPlayer extends BasePlayer {
         output += "Last Login: " + this.getLastLogin() + "\n";
         output += "Last Logout: " + this.getLastLogout() + "\n";
         output += "Playtime: " + this.getPlaytime() + "\n";
-        output += "Armor Adjustment: " + this.calculateArmorAdjustment() + "\n";
-        output += "Environment Adjustment: " + this.calculateEnvironmentAdjustment() + "\n";
         output += "*********************** \n";
         output += proficiency.toString();
 
