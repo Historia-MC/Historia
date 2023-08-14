@@ -1,12 +1,11 @@
 package dev.boooiil.historia.classes.items.craftable;
 
-import java.util.List;
-import java.util.Random;
-
-import org.bukkit.configuration.file.YamlConfiguration;
-
 import dev.boooiil.historia.configuration.ConfigurationLoader;
 import dev.boooiil.historia.util.Construct;
+import dev.boooiil.historia.util.NumberUtils;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.util.List;
 
 /**
  *
@@ -31,8 +30,6 @@ public class Armor extends CraftedItem {
 
         if (valid) {
 
-            String itemRoot = armorName;
-
             // Calling the parent class's constructor.
             itemStack = Construct.itemStack(
                     configuration.getString(armorName + ".item.type"),
@@ -42,24 +39,24 @@ public class Armor extends CraftedItem {
                     configuration.getStringList(armorName + ".item.lore"));
 
             // Getting the weight class of the armor.
-            this.weightClass = configuration.getString(itemRoot + ".type");
+            this.weightClass = configuration.getString(armorName + ".type");
 
             // Getting the weight of the armor.
-            this.weight = configuration.getInt(itemRoot + ".weight");
+            this.weight = configuration.getInt(armorName + ".weight");
 
             // Getting the defense value of the armor.
-            this.defense = configuration.getDoubleList(itemRoot + ".defense");
+            this.defense = configuration.getDoubleList(armorName + ".defense");
 
             // Getting the durability of the armor.
-            this.durability = configuration.getIntegerList(itemRoot + ".durability");
+            this.durability = configuration.getIntegerList(armorName + ".durability");
 
             // Getting the recipe items from the config.
-            this.recipeItems = configuration.getStringList(itemRoot + ".recipe-items");
+            this.recipeItems = configuration.getStringList(armorName + ".recipe-items");
 
             // Getting the recipe shape from the config.
-            this.recipeShape = configuration.getStringList(itemRoot + ".recipe-shape");
+            this.recipeShape = configuration.getStringList(armorName + ".recipe-shape");
             
-            this.proficiencies = configuration.getStringList(itemRoot + ".canCraft");
+            this.proficiencies = configuration.getStringList(armorName + ".canCraft");
 
         }
 
@@ -94,10 +91,7 @@ public class Armor extends CraftedItem {
      */
     public Double getRandomDefenseValue() {
 
-        Random random = new Random();
-        Double result = random.nextDouble() * (getMinDefenceValue() - getMaxDefenceValue()) + getMinDefenceValue();
-
-        return result;
+        return NumberUtils.random(getMinDefenceValue(), getMaxDefenceValue());
 
     }
 
@@ -108,11 +102,7 @@ public class Armor extends CraftedItem {
      */
     public Integer getRandomDurabilityValue() {
 
-        Random random = new Random();
-        Integer result = random.nextInt() * (getMinDurabilityValue() - getMaxDurabilityValue())
-                + getMinDurabilityValue();
-
-        return result;
+        return NumberUtils.randomInt(getMinDurabilityValue(), getMaxDurabilityValue());
 
     }
 
