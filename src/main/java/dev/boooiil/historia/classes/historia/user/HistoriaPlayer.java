@@ -74,19 +74,19 @@ public class HistoriaPlayer extends BasePlayer {
 
         this.proficiency = new Proficiency(user.get(HistoriaUserKeys.CLASS));
 
-        this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL.getKey()));
+        this.level = Integer.parseInt(user.get(HistoriaUserKeys.LEVEL));
 
         this.level = Math.max(this.level, 1);
 
-        this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE.getKey()));
+        this.currentExperience = Float.parseFloat(user.get(HistoriaUserKeys.EXPERIENCE));
 
         this.currentExperience = this.currentExperience < 0 ? 0 : this.currentExperience;
 
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
-        this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN.getKey()));
-        this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT.getKey()));
-        this.playtime = Long.parseLong(user.get(HistoriaUserKeys.PLAYTIME.getKey()));
+        this.lastLogin = Long.parseLong(user.get(HistoriaUserKeys.LOGIN));
+        this.lastLogout = Long.parseLong(user.get(HistoriaUserKeys.LOGOUT));
+        this.playtime = Long.parseLong(user.get(HistoriaUserKeys.PLAYTIME));
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
@@ -251,6 +251,8 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void applyClassStats() {
 
+        //TODO: create method or handler that applies the proficiency stats
+
         return;
 
     }
@@ -289,9 +291,8 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * Get the player's current experience.
-     * 
-     * @return {@link Double}
+     * Increase the player's experience.
+     * @param source - The source of the experience.
      */
     public void increaseExperience(AllSources source) {
 
