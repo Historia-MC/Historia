@@ -14,6 +14,8 @@ import com.palmergames.bukkit.towny.object.Town;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.util.Logging;
 
+import javax.annotation.Nullable;
+
 public abstract class BasePlayer {
 
     private UUID uuid;
@@ -28,7 +30,7 @@ public abstract class BasePlayer {
      * Constructs a new BasePlayer object with the given UUID.
      * @param uuid the UUID of the player
      */
-    public BasePlayer(UUID uuid) {
+    public BasePlayer(@Nullable UUID uuid) {
 
         Logging.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
 
