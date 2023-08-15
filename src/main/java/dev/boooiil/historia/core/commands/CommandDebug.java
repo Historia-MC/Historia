@@ -35,8 +35,6 @@ public class CommandDebug implements CommandExecutor {
                 message += "Mod Health: " + player.getModifiedHealth() + "\n";
                 message += "Experience: " + player.getCurrentExperience() + "\n";
                 message += "Temperature: " + player.getCurrentTemperature() + "\n";
-                message += "Armor Temp: " + player.getArmorAdjustment() + "\n";
-                message += "Env Temp: " + player.getEnvironmentAdjustment() + "\n";
 
                 Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
                 Logging.debugToConsole(player.toString());

@@ -33,8 +33,6 @@ public class CommandStats implements CommandExecutor {
                     message += "Hunger: " + bukkitPlayer.getFoodLevel() + "/" + historiaPlayer.getProficiency().getStats().getBaseFood() + "\n";
                     message += "Experience: " + historiaPlayer.getCurrentExperience() + "/" + historiaPlayer.getMaxExperience() + "\n";
                     message += "Temperature: " + historiaPlayer.getCurrentTemperature() + "\n";
-                    message += "Armor Temp: " + historiaPlayer.getArmorAdjustment() + "\n";
-                    message += "Env Temp: " + historiaPlayer.getEnvironmentAdjustment() + "\n";
                     message += "Weapon Class: " + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes() + "\n";
                     message += "Armor Class: " + historiaPlayer.getProficiency().getStats().getUsableArmorTypes() + "\n";
                     message += "Experience Sources: " + historiaPlayer.getProficiency().getStats().getExperienceSources() + "\n";
