@@ -38,8 +38,6 @@ public class BlockHandler extends BaseBlockHandler {
      */
     public void doBreak() {
 
-        CropHandler.safetyCheckBlockBrokenHoldsCrop(breakEvent.getBlock());
-
         if (breakEvent.getBlock().getType().toString().contains("LOG")) {
 
             if (historiaPlayer.getProficiency().getSkills().hasChanceExtraWood()) {
