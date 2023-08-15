@@ -1,16 +1,12 @@
 package dev.boooiil.historia.events.blockInteraction;
 
-import org.bukkit.block.Block;
-import org.bukkit.block.data.Ageable;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-
 import dev.boooiil.historia.classes.historia.user.HistoriaPlayer;
 import dev.boooiil.historia.database.internal.PlayerStorage;
 import dev.boooiil.historia.dependents.towny.TownyHandler;
 import dev.boooiil.historia.handlers.blockInteraction.BlockHandler;
-import dev.boooiil.historia.handlers.blockInteraction.CropHandler;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 
 /**
  * It's a listener that listens for a player to break a block, and if the block
@@ -36,23 +32,11 @@ public class BlockBreakListener implements Listener {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
-        Block block = event.getBlock();
 
-        if (block.getBlockData() instanceof Ageable) {
-
-            CropHandler cropHandler = new CropHandler(event, historiaPlayer);
-
-            cropHandler.doBreak();
-
-        }
-
-        else {
 
             BlockHandler blockHandler = new BlockHandler(event, historiaPlayer);
 
             blockHandler.doBreak();
-
-        }
 
     }
 

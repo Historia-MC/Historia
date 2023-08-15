@@ -16,24 +16,18 @@
  */
 package dev.boooiil.historia.configuration;
 
-import dev.boooiil.historia.configuration.specific.ArmorConfig;
-import dev.boooiil.historia.configuration.specific.CropConfig;
-import dev.boooiil.historia.configuration.specific.CustomItemConfig;
-import dev.boooiil.historia.configuration.specific.GeneralConfig;
-import dev.boooiil.historia.configuration.specific.ToolConfig;
-import dev.boooiil.historia.configuration.specific.WeaponConfig;
+import dev.boooiil.historia.configuration.specific.*;
 
 /**
  * It loads the configuration files.
  */
 public class ConfigurationLoader {
     
-    private static ArmorConfig armorConfig = new ArmorConfig();
-    private static WeaponConfig weaponConfig = new WeaponConfig();
-    private static GeneralConfig generalConfig = new GeneralConfig();
-    private static CustomItemConfig customItemConfig = new CustomItemConfig();
-    private static CropConfig cropConfig = new CropConfig();
-    private static ToolConfig toolConfig = new ToolConfig();
+    private static final ArmorConfig armorConfig = new ArmorConfig();
+    private static final WeaponConfig weaponConfig = new WeaponConfig();
+    private static final GeneralConfig generalConfig = new GeneralConfig();
+    private static final CustomItemConfig customItemConfig = new CustomItemConfig();
+    private static final ToolConfig toolConfig = new ToolConfig();
 
     /**
      * It returns the armorConfig variable
@@ -71,11 +65,6 @@ public class ConfigurationLoader {
         return customItemConfig;
     }
 
-    public static CropConfig getCropConfig() {
-
-        return cropConfig;
-    }
-
     public static ToolConfig getToolConfig() {
 
         return toolConfig;
@@ -89,7 +78,6 @@ public class ConfigurationLoader {
         armorConfig.loadConfiguration("armor.yml");
         weaponConfig.loadConfiguration("weapons.yml");
         customItemConfig.loadConfiguration("customitems.yml");
-        cropConfig.loadConfiguration("crops.yml");
         toolConfig.loadConfiguration("tools.yml");
         
     }
