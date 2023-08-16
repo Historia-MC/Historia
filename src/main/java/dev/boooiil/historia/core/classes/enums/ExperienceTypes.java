@@ -39,7 +39,7 @@ public class ExperienceTypes {
 
         private final double key;
 
-        private AllSources(double key) {
+        AllSources(double key) {
             this.key = key;
         }
 
@@ -62,7 +62,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private CombatSources(AllSources key) {
+        CombatSources(AllSources key) {
             this.key = key;
         }
 
@@ -84,7 +84,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private BlockSources(AllSources key) {
+        BlockSources(AllSources key) {
             this.key = key;
         }
 
@@ -103,7 +103,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private FishingSources(AllSources key) {
+        FishingSources(AllSources key) {
             this.key = key;
         }
 
@@ -121,7 +121,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private AnimalSources(AllSources key) {
+        AnimalSources(AllSources key) {
             this.key = key;
         }
 
@@ -139,7 +139,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private FarmingSources(AllSources key) {
+        FarmingSources(AllSources key) {
             this.key = key;
         }
 
@@ -160,7 +160,7 @@ public class ExperienceTypes {
 
         private final AllSources key;
 
-        private CraftingSources(AllSources key) {
+        CraftingSources(AllSources key) {
             this.key = key;
         }
 

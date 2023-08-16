@@ -5,7 +5,7 @@ public class FileMap {
      * This enum represents the keys for the various resource files used in the
      * plugin.
      */
-    public static enum ResourceKeys {
+    public enum ResourceKeys {
 
         /** armor.yml */
         ARMOR("armor.yml"),
@@ -22,7 +22,7 @@ public class FileMap {
 
         private final String key;
 
-        private ResourceKeys(String key) {
+        ResourceKeys(String key) {
 
             this.key = key;
 
