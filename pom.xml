@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>dev.boooiil.historia</groupId>
-  <artifactId>Historia</artifactId>
+  <artifactId>Historia-Core</artifactId>
   <version>1.0.8-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -198,17 +198,7 @@
       <resource>
         <directory>${project.basedir}/src/main/resources</directory>
         <includes>
-          <include>plugin.yml</include>
-          <include>armor.yml</include>
-          <include>proficiency.yml</include>
-          <include>config.yml</include>
-          <include>expiry.yml</include>
-          <include>ingots.yml</include>
-          <include>ores.yml</include>
-          <include>crops.yml</include>
-          <include>customitems.yml</include>
-          <include>tools.yml</include>
-          <include>weapons.yml</include>
+          <include>*.yml</include>
         </includes>
       </resource>
     </resources>
