@@ -114,7 +114,7 @@ public class Main extends JavaPlugin {
 
         registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(new UpdateScoreboardRunnable());
-        registerRunnable(new SavePlayerRunnable(), 6000l);
+        registerRunnable(new SavePlayerRunnable(), 6000);
 
         MySQLConnection.connect();
         MySQLHandler.createTable();
