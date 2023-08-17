@@ -6,6 +6,7 @@ import dev.boooiil.historia.core.configuration.BaseConfiguration;
 import dev.boooiil.historia.core.util.Logging;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -38,10 +39,10 @@ public class CustomItemConfig extends BaseConfiguration<CustomItem> {
 
         for (Map.Entry<String, CustomItem> entry : map.entrySet()) {
 
-            boolean valid = ((CustomItem) entry.getValue()).isValidRecipe(inputItems, inputShape);
+            boolean valid = entry.getValue().isValidRecipe(inputItems, inputShape);
 
             if (valid) {
-                item = (CustomItem) entry.getValue();
+                item = entry.getValue();
                 break;
             }
 
@@ -126,13 +127,7 @@ public class CustomItemConfig extends BaseConfiguration<CustomItem> {
 
         for(CustomItem customItem : map.values()) {
 
-            // Logging.debugToConsole("--- ARMOR EQUALITY ---");
-            // Logging.debugToConsole("A-ISHAPE:", materials.toString());
-            // Logging.debugToConsole("A-RSHAPE:", customItem.getRecipeShape().toString());
-            // Logging.debugToConsole("A-MATCH: " + customItem.getRecipeItems().containsAll(materials));
-            // Logging.debugToConsole("--- -------------- ---");
-
-            if (customItem.getRecipeItems().containsAll(materials)) {
+            if (new HashSet<>(customItem.getRecipeItems()).containsAll(materials)) {
 
                 Logging.debugToConsole(customItem.getItemStack().getItemMeta().getAsString());
 
