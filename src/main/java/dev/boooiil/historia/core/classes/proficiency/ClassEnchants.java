@@ -20,7 +20,7 @@ public class ClassEnchants {
 
         inventory.iterator().forEachRemaining(item -> {
 
-            if (item == null)
+            if (item == null || item.getItemMeta() == null)
                 return;
 
             String itemType = item.getType().toString().toUpperCase();
