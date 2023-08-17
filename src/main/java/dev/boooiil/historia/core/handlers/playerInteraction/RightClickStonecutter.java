@@ -29,21 +29,20 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
         Matcher matcher = pattern.matcher(this.getHeldItem().getType().toString());
 
         Logging.debugToConsole(
-                "[RightClickStonecutter] Player " + this.getPlayer().getName() + " right clicked a stonecutter.");
-        Logging.debugToConsole("[RightClickStonecutter] Player " + this.getPlayer().getName() + " has proficiency "
+                "[RCS] Player " + this.getPlayer().getName() + " right clicked a stonecutter.");
+        Logging.debugToConsole("[RCS] Player " + this.getPlayer().getName() + " has proficiency "
                 + this.getHistoriaPlayer().getProficiency().getName() + ".");
         Logging.debugToConsole(
-                "[RightClickStonecutter] Held Item: " + this.getHeldItem().getType().toString().toLowerCase() + ".");
-        Logging.debugToConsole("[RightClickStonecutter] Held Item Enchantments: "
+                "[RCS] Held Item: " + this.getHeldItem().getType().toString().toLowerCase() + ".");
+        Logging.debugToConsole("[RCS] Held Item Enchantments: "
                 + this.getHeldItem().getEnchantments().toString() + ".");
-        Logging.debugToConsole("[RightClickStonecutter] Held Item Matches: " + matcher.matches());
+        Logging.debugToConsole("[RCS] Held Item Matches: " + matcher.matches());
 
         // if not sword or axe
         if (!matcher.matches()) return;
 
         if (!this.getHistoriaPlayer().getProficiency().getSkills().canApplySharpness()) {
             Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
-            return;
         } else {
 
             event.setCancelled(true);
@@ -68,9 +67,9 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
             int increasedSharpnessLevel = currentSharpnessLevel + 1;
             int adjustedSharpnessUses = (int) Math.round(increasedSharpnessLevel * 1.5);
 
-            Logging.debugToConsole("[RightClickStonecutter] Current Sharpness Level: " + currentSharpnessLevel);
-            Logging.debugToConsole("[RightClickStonecutter] Increased Sharpness Level: " + increasedSharpnessLevel);
-            Logging.debugToConsole("[RightClickStonecutter] Adjusted Sharpness Uses: " + adjustedSharpnessUses);
+            Logging.debugToConsole("[RCS] Current Sharpness Level: " + currentSharpnessLevel);
+            Logging.debugToConsole("[RCS] Increased Sharpness Level: " + increasedSharpnessLevel);
+            Logging.debugToConsole("[RCS] Adjusted Sharpness Uses: " + adjustedSharpnessUses);
 
             ItemMeta itemMeta = this.getHeldItem().getItemMeta();
             List<String> currentLore = itemMeta.getLore();
