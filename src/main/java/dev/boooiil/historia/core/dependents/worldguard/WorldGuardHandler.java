@@ -32,10 +32,7 @@ public class WorldGuardHandler {
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
             RegionQuery query = container.createQuery();
 
-            if (!query.testState(worldGuardLocation, localPlayer, Flags.BUILD)) {
-                return false;
-            }
-            return true;
+            return query.testState(worldGuardLocation, localPlayer, Flags.BUILD);
 
         } catch (Exception e) {
             System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
