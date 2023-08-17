@@ -27,15 +27,15 @@ public class Logging {
      */
     public static void infoToConsole(String... messages) {
        
-        String built = "";
+        StringBuilder built = new StringBuilder();
 
         for (String message : messages) {
 
-            built += message + " ";
+            built.append(message).append(" ");
 
         }
 
-        logger.info(built);
+        logger.info(built.toString());
 
     }
 
@@ -58,7 +58,7 @@ public class Logging {
 
         Player player = Main.server().getPlayer(uuid);
 
-        if (player.isOnline()) player.sendMessage(messagePrefix + "§7" + message);
+        if (player != null && player.isOnline()) player.sendMessage(messagePrefix + "§7" + message);
 
     }
 
@@ -71,7 +71,7 @@ public class Logging {
 
         Player player = Main.server().getPlayer(uuid);
 
-        if (player.isOnline()) player.sendMessage("§7" + message);
+        if (player != null && player.isOnline()) player.sendMessage("§7" + message);
 
     }
 
@@ -82,15 +82,15 @@ public class Logging {
      */
     public static void warnToConsole(String... messages) {
         
-        String built = "";
+        StringBuilder built = new StringBuilder();
 
         for (String message : messages) {
 
-            built += message + " ";
+            built.append(message).append(" ");
 
         }
 
-        logger.warning(built);
+        logger.warning(built.toString());
 
     }
 
@@ -123,15 +123,15 @@ public class Logging {
      */
     public static void errorToConsole(String... messages) {
 
-        String built = "";
+        StringBuilder built = new StringBuilder();
 
         for (String message : messages) {
 
-            built += message + " ";
+            built.append(message).append(" ");
 
         }
 
-        logger.severe(built);
+        logger.severe(built.toString());
 
     }
 
@@ -166,11 +166,11 @@ public class Logging {
         
         if (GeneralConfig.debug) {
 
-            String built = "";
+            StringBuilder built = new StringBuilder();
 
             for (String message : messages) {
     
-                built += message + " ";
+                built.append(message).append(" ");
     
             }
 
