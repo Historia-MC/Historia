@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class MySQLConnection {
     
-    private static GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
+    private static final GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
     private static final String USERNAME = MYSQLCONFIG.username;
@@ -47,9 +47,10 @@ public class MySQLConnection {
 
         } catch (Exception e) {
 
-            Logging.errorToConsole("MySQL connection failed.");
+            Logging.errorToConsole("FAILED TO CONNECT.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
-            e.printStackTrace();
 
         }
 
@@ -67,18 +68,13 @@ public class MySQLConnection {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             Logging.warnToConsole("Reconnected to SQL Server.");
 
-            // Logging.warnToConsole("Resending query...");
+        } catch (SQLException e) {
 
-            // ResultSet result = connection.createStatement().executeQuery(query);
-
-            // result.next();
-
-            // return result;
-
-        } catch (SQLException sqlE) {
-
-            Logging.errorToConsole("Could not reconnect on stale connection.");
-            sqlE.printStackTrace();
+            Logging.errorToConsole("FAILED TO RECONNECT.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
             // return null;
         }
@@ -95,9 +91,14 @@ public class MySQLConnection {
             } catch (SQLException e) {
     
                 Logging.errorToConsole("MySQL connection could not be closed.");
-    
-                e.printStackTrace();
-    
+
+                Logging.errorToConsole("FAILED TO CLOSE CONNECTION.");
+                Logging.errorToConsole("Cause: " + e.getCause());
+                Logging.errorToConsole("MySQL State: " + e.getSQLState());
+                Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+                Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
+
             }
     }
 
