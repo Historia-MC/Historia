@@ -38,7 +38,14 @@ public class Construct {
                 + " loc-name: "
                 + localizedName + " lore: " + lore);
 
-        ItemStack item = new ItemStack(Material.getMaterial(material, false), amount);
+        Material providedMaterial = Material.getMaterial(material, false);
+
+        if (providedMaterial == null) {
+            Logging.errorToConsole("Material " + material + " is not a valid material.");
+            return new ItemStack(Material.AIR);
+        }
+
+        ItemStack item = new ItemStack(providedMaterial, amount);
 
         ItemMeta meta = item.getItemMeta();
 
@@ -62,7 +69,14 @@ public class Construct {
                 + " loc-name: "
                 + localizedName);
 
-        ItemStack item = new ItemStack(Material.getMaterial(material, false), amount);
+        Material providedMaterial = Material.getMaterial(material, false);
+
+        if (providedMaterial == null) {
+            Logging.errorToConsole("Material " + material + " is not a valid material.");
+            return new ItemStack(Material.AIR);
+        }
+
+        ItemStack item = new ItemStack(providedMaterial, amount);
 
         ItemMeta meta = item.getItemMeta();
 
@@ -92,7 +106,7 @@ public class Construct {
 
         // If the size of the list is greater than 0
         // IE, if there are items to be given to the player
-        if (givenItems.size() > 0) {
+        if (!givenItems.isEmpty()) {
 
             brokenBlock.getDrops().clear();
 
@@ -102,9 +116,8 @@ public class Construct {
                 Integer amount = Integer.getInteger(item.get("amount"));
                 String displayName = item.get("display-name");
                 String localizedName = item.get("localized-name");
-                List<String> lore = null;
 
-                ItemStack droppedItem = Construct.itemStack(item.get("material"), amount, displayName, localizedName, lore);
+                ItemStack droppedItem = Construct.itemStack(item.get("material"), amount, displayName, localizedName, null);
 
                 brokenBlock.getDrops().add(droppedItem);
 
