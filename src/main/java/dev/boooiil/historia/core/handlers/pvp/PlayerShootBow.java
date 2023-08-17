@@ -30,7 +30,6 @@ public class PlayerShootBow {
             //((Player) event.getEntity()).getInventory().addItem(event.getConsumable());
 
             Logging.infoToPlayer("You do not know how to use this weapon.", event.getEntity().getUniqueId());
-            return;
 
         }
 
