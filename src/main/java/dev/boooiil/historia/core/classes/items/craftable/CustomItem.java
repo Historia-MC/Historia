@@ -8,32 +8,32 @@ public class CustomItem extends CraftedItem {
 
     private String itemName;
 
-    public CustomItem(String itemName) {
+    public CustomItem(String localizedName) {
 
         YamlConfiguration configuration = ConfigurationLoader.getCustomItemConfig().getConfiguration();
-        valid = ConfigurationLoader.getCustomItemConfig().isValid(itemName);
+        valid = ConfigurationLoader.getCustomItemConfig().isValid(localizedName);
 
         if (valid) {
 
-            this.itemName = itemName;
+            this.itemName = localizedName;
 
             // Calling the parent class's constructor.
             itemStack = Construct.itemStack(
-                    configuration.getString(itemName + ".item.type"),
-                    configuration.getInt(itemName + ".item.amount"),
-                    configuration.getString(itemName + ".item.display-name"),
-                    configuration.getString(itemName + ".item.loc-name"),
-                    configuration.getStringList(itemName + ".item.lore"));
+                    configuration.getString(localizedName + ".item.type"),
+                    configuration.getInt(localizedName + ".item.amount"),
+                    configuration.getString(localizedName + ".item.display-name"),
+                    configuration.getString(localizedName + ".item.loc-name"),
+                    configuration.getStringList(localizedName + ".item.lore"));
 
             // Getting the recipe items from the config.
-            this.recipeItems = configuration.getStringList(itemName + ".recipe-items");
+            this.recipeItems = configuration.getStringList(localizedName + ".recipe-items");
 
             // Getting the recipe shape from the config.
-            this.recipeShape = configuration.getStringList(itemName + ".recipe-shape");
+            this.recipeShape = configuration.getStringList(localizedName + ".recipe-shape");
 
-            this.isShaped = configuration.getBoolean(itemName + ".requireShape");
+            this.isShaped = configuration.getBoolean(localizedName + ".requireShape");
 
-            this.proficiencies = configuration.getStringList(itemName + ".canCraft");
+            this.proficiencies = configuration.getStringList(localizedName + ".canCraft");
 
         }
     }
