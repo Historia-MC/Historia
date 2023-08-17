@@ -12,9 +12,9 @@ import java.util.UUID;
 public class PlayerStorage {
 
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<UUID, HistoriaPlayer> players = new HashMap<UUID, HistoriaPlayer>();
+    public static HashMap<UUID, HistoriaPlayer> players = new HashMap<>();
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<String, UUID> usernameMap = new HashMap<String, UUID>();
+    public static HashMap<String, UUID> usernameMap = new HashMap<>();
 
     /**
      * Add a player to our storage.
@@ -105,7 +105,6 @@ public class PlayerStorage {
 
     /**
      * Remove a player from our stored player list.
-     * 
      * This will be used on logout events.
      * 
      * @param uuid UUID of the player.
