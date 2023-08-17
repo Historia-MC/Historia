@@ -120,8 +120,10 @@ public class TownyHandler {
 
     public static String getTownName(UUID uuid) {
 
-        if (hasTown(uuid))
-            return getTown(uuid).getName();
+        Town town = getTown(uuid);
+
+        if (town != null)
+            return town.getName();
         else
             return "Wilderness";
     }
@@ -135,11 +137,13 @@ public class TownyHandler {
 
     public static boolean hasHomeBlock(UUID uuid) {
 
-        if (hasTown(uuid)) {
+        Town town = getTown(uuid);
+
+        if (town != null) {
 
             try {
 
-                TownBlock homeBlock = getTown(uuid).getHomeBlock();
+                TownBlock homeBlock = town.getHomeBlock();
 
                 return homeBlock.hasTown();
 
@@ -318,9 +322,10 @@ public class TownyHandler {
     public static void sendToTown(UUID uuid, String message) {
 
         Town town = getTown(uuid);
-        String prefix = "[" + town.getName() + "] ";
 
         if (town != null) {
+
+            String prefix = "[" + town.getName() + "] ";
 
             town.getResidents().forEach(resident -> {
 
@@ -345,9 +350,10 @@ public class TownyHandler {
     public static void sendToNation(UUID uuid, String message) {
 
         Nation nation = getNation(uuid);
-        String prefix = "[" + nation.getName() + "] ";
 
         if (nation != null) {
+
+            String prefix = "[" + nation.getName() + "] ";
 
             nation.getResidents().forEach(resident -> {
 
