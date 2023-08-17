@@ -20,10 +20,10 @@ import java.util.UUID;
 
 public class CraftingResult {
 
-    private Inventory inventory;
-    private ItemStack result;
-    private CraftedItem craftedItem;
-    private HistoriaPlayer historiaPlayer;
+    private final Inventory inventory;
+    private final ItemStack result;
+    private final CraftedItem craftedItem;
+    private final HistoriaPlayer historiaPlayer;
 
     public CraftingResult(Inventory inventory, ItemStack result, CraftedItem craftedItem,
             HistoriaPlayer historiaPlayer) {
@@ -59,7 +59,7 @@ public class CraftingResult {
 
             historiaPlayer.increaseExperience(CraftingSources.OTHER_CRAFT.getKey());
 
-        };
+        }
 
     }
 
