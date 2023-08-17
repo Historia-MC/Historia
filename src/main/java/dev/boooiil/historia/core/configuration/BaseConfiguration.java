@@ -90,10 +90,9 @@ public abstract class BaseConfiguration<T> {
      * It takes a class and a variable number of arguments and creates a new
      * instance of the class for
      * each key in the set and puts it in the map
-     * 
-     * @param TargetObject The class of the object you want to create.
+     *
      */
-    private void populateMap(Object... args) {
+    private void populateMap() {
 
         for (String key : set)
             if (!key.equals("version"))
