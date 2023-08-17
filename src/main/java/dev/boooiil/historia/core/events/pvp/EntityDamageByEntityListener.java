@@ -31,14 +31,10 @@ public class EntityDamageByEntityListener implements Listener {
 
         if (attacker instanceof Player) {
 
-            if (((Player)attacker).getInventory().getItemInMainHand() != null) {
-
                 Logging.debugToConsole("[EntityDamagedByEntity] Player was holding an item.");
 
                 PlayerDecreaseSharpness playerDecreaseSharpness = new PlayerDecreaseSharpness(event);
                 playerDecreaseSharpness.doDecrease();
-
-            }
 
         }
 
