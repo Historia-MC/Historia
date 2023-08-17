@@ -43,7 +43,7 @@ public class PlayerDecreaseSharpness {
     private int getSharpnessUses(ItemStack weapon) {
 
         List<String> lore = weapon.getItemMeta().getLore();
-        Pattern pattern = Pattern.compile("Sharpness \\(I+\\): (\\d+)\\/\\d+");
+        Pattern pattern = Pattern.compile("Sharpness \\(I+\\): (\\d+)/\\d+");
         Matcher matcher = pattern.matcher(lore.get(lore.size() - 1));
 
         if (matcher.find()) {
