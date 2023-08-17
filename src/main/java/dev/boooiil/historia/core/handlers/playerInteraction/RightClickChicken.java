@@ -5,14 +5,11 @@ import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
 public class RightClickChicken extends BaseInteractionEventEntity {
-
-    LivingEntity entity;
 
     public RightClickChicken(PlayerInteractEntityEvent event) {
         super(event);
