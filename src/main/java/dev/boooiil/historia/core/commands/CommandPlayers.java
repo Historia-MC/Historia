@@ -20,7 +20,7 @@ public class CommandPlayers implements CommandExecutor {
     // It's a method that is called when a command is executed.
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        String message = "";
+        StringBuilder message = new StringBuilder();
 
         if (!(sender instanceof Player)) return false;
 
@@ -28,11 +28,16 @@ public class CommandPlayers implements CommandExecutor {
 
             HistoriaPlayer historiaPlayer = storedPlayer.getValue();
 
-            message += "Player: " + historiaPlayer.getUsername() + " Level: " + historiaPlayer.getLevel() + " Class: " + historiaPlayer.getProficiency().getName() + "\n";
+            message
+                    .append("Player: ")
+                    .append(historiaPlayer.getUsername())
+                    .append(" Level: ").append(historiaPlayer.getLevel())
+                    .append(" Class: ").append(historiaPlayer.getProficiency().getName())
+                    .append("\n");
 
         }
 
-        Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
+        Logging.infoToPlayer(message.toString(), ((Player) sender).getUniqueId());
 
         return true;
 
