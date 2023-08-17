@@ -18,12 +18,10 @@ public class CommandGive implements CommandExecutor {
     // It's a method that is called when a command is executed.
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player player))
             return false;
         if (args.length == 0)
             return false;
-
-        Player player = (Player) sender;
 
         if (args[0].equalsIgnoreCase("weapon")) {
 
