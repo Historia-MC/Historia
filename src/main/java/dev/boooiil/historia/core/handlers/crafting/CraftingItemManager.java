@@ -11,14 +11,13 @@ import java.util.List;
 public class CraftingItemManager {
 
     private ItemStack result;
-    private List<CraftedItem> matchingItems;
-    private ArrayList<String> patterns;
-    private ArrayList<String> materials;
-    private ArrayList<String> fullMaterials;
+    private final List<CraftedItem> matchingItems;
+    private final ArrayList<String> materials;
+    private final ArrayList<String> fullMaterials;
 
     public CraftingItemManager(CraftingTableInspector inspector) {
 
-        patterns = inspector.getPattern();
+        ArrayList<String> patterns = inspector.getPattern();
         materials = inspector.getMaterials();
         fullMaterials = inspector.getFullMaterials();
 
@@ -31,7 +30,7 @@ public class CraftingItemManager {
 
     public void doMatch() {
 
-        if (matchingItems.size() > 0) {
+        if (!matchingItems.isEmpty()) {
 
             for (CraftedItem item : matchingItems) {
 
