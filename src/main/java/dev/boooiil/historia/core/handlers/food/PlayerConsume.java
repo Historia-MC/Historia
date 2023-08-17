@@ -6,8 +6,8 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class PlayerConsume {
     
-    private HistoriaPlayer historiaPlayer;
-    private FoodLevelChangeEvent event;
+    private final HistoriaPlayer historiaPlayer;
+    private final FoodLevelChangeEvent event;
 
     public PlayerConsume(FoodLevelChangeEvent event, HistoriaPlayer historiaPlayer) {
 
