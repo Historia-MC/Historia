@@ -7,8 +7,8 @@ import org.bukkit.event.entity.EntityTameEvent;
 
 public class TameAnimal {
     
-    HistoriaPlayer historiaPlayer;
-    EntityTameEvent event;
+    private final HistoriaPlayer historiaPlayer;
+    private final EntityTameEvent event;
 
     public TameAnimal(HistoriaPlayer historiaPlayer, EntityTameEvent event) {
         this.historiaPlayer = historiaPlayer;

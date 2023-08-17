@@ -9,13 +9,16 @@ import java.util.UUID;
 
 public class ScoreboardAdapter {
 
-    private ScoreboardManager scoreboardManager;
-    private Scoreboard scoreboard;
+    private final Scoreboard scoreboard;
     private Objective objective;
 
     public ScoreboardAdapter() {
 
-        scoreboardManager = Bukkit.getScoreboardManager();
+        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+
+        if (scoreboardManager == null) {
+            throw new NullPointerException("Scoreboard Manager is null!");
+        }
         scoreboard = scoreboardManager.getNewScoreboard();
 
     }
