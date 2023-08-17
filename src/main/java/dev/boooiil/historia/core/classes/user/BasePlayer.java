@@ -9,13 +9,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
 public abstract class BasePlayer {
 
-    private UUID uuid;
+    private final UUID uuid;
     private String username;
     private boolean isOnline;
 
@@ -27,7 +26,7 @@ public abstract class BasePlayer {
      * Constructs a new BasePlayer object with the given UUID.
      * @param uuid the UUID of the player
      */
-    public BasePlayer(@Nullable UUID uuid) {
+    public BasePlayer(UUID uuid) {
 
         Logging.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
 
@@ -42,7 +41,7 @@ public abstract class BasePlayer {
 
         }
 
-        else if (offlinePlayer != null) {
+        else if (offlinePlayer.hasPlayedBefore()) {
 
             this.uuid = uuid;
             this.username = offlinePlayer.getName();
