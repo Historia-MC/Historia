@@ -12,16 +12,12 @@ import java.util.Map;
  * It's a class that gets information from a configuration file.
  */
 public class WeaponConfig extends BaseConfiguration<Weapon> {
-    
-    // private static YamlConfiguration configuration = FileGetter.get("ingots.yml");
-
-    // static final Set<String> weaponSet = configuration.getKeys(false);
 
     /**
      * Used to create a new instance of Weapon.
      * 
      * @param weaponName - Name of the weapon to create.
-     * @return Returns an Weapon object.
+     * @return Returns a Weapon object.
      */
     public Weapon createNew(String weaponName) {
 
@@ -45,9 +41,9 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
 
         for (Map.Entry<String, Weapon> entry : map.entrySet()) {
 
-            boolean armorValid = ((Weapon) entry.getValue()).isValidRecipe(inputItems, inputShape);
+            boolean armorValid = entry.getValue().isValidRecipe(inputItems, inputShape);
 
-            if (armorValid) { weapon = (Weapon) entry.getValue(); break; }
+            if (armorValid) { weapon = entry.getValue(); break; }
 
         }
 
@@ -63,7 +59,7 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
      */
     public Weapon getObject(String weaponName) {
 
-        if (isValid(weaponName)) return (Weapon) map.get(weaponName);
+        if (isValid(weaponName)) return map.get(weaponName);
         else return null;
 
     }
@@ -121,12 +117,6 @@ public class WeaponConfig extends BaseConfiguration<Weapon> {
         List<CraftedItem> set = new ArrayList<>();
         
         for(Weapon weapon : map.values()) {
-
-            // Logging.debugToConsole("--- WEAPON EQUALITY ---");
-            // Logging.debugToConsole("W-ISHAPE:", shape.toString());
-            // Logging.debugToConsole("W-RSHAPE:", weapon.getRecipeShape().toString());
-            // Logging.debugToConsole("W-MATCH: " + shape.equals(weapon.getRecipeShape()));
-            // Logging.debugToConsole("--- --------------- ---");
 
             if (weapon.getRecipeShape().equals(shape)) {
 
