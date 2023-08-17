@@ -14,11 +14,11 @@ import org.bukkit.potion.PotionEffectType;
 
 public class PlayerDamaged {
 
-    private Player attacker;
-    private Player defender;
-    private EntityDamageByEntityEvent event;
-    private HistoriaPlayer historiaAttacker;
-    private HistoriaPlayer historiaDefender;
+    private final Player attacker;
+    private final Player defender;
+    private final EntityDamageByEntityEvent event;
+    private final HistoriaPlayer historiaAttacker;
+    private final HistoriaPlayer historiaDefender;
 
     public PlayerDamaged(EntityDamageByEntityEvent event) {
 
@@ -77,7 +77,6 @@ public class PlayerDamaged {
                         defender.getUniqueId());
 
                 event.setCancelled(true);
-                return;
 
             }
         }
