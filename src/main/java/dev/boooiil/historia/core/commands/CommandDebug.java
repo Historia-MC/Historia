@@ -19,7 +19,7 @@ public class CommandDebug implements CommandExecutor {
 
         args[0] = args[0].toLowerCase();
 
-        if (args.length > 0 && args.length == 2) {
+        if (args.length == 2) {
 
             if (args[0].equals("player")) {
 
