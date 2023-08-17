@@ -13,7 +13,7 @@ public class InventoryClickListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
 
         Logging.debugToConsole("Player interacted with their inventory");
-        Logging.debugToConsole("Action: " + event.getAction().toString());
+        Logging.debugToConsole("Action: " + event.getAction());
 
         if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR) {
             
