@@ -12,16 +12,12 @@ import java.util.Map;
  * It's a class that gets information from a configuration file.
  */
 public class ToolConfig extends BaseConfiguration<Tool> {
-    
-    // private static YamlConfiguration configuration = FileGetter.get("ingots.yml");
-
-    // static final Set<String> weaponSet = configuration.getKeys(false);
 
     /**
      * Used to create a new instance of Tool.
      * 
      * @param toolName - Name of the tool to create.
-     * @return Returns an Tool object.
+     * @return Returns a Tool object.
      */
     public Tool createNew(String toolName) {
 
@@ -45,9 +41,9 @@ public class ToolConfig extends BaseConfiguration<Tool> {
 
         for (Map.Entry<String, Tool> entry : map.entrySet()) {
 
-            boolean armorValid = ((Tool) entry.getValue()).isValidRecipe(inputItems, inputShape);
+            boolean armorValid = entry.getValue().isValidRecipe(inputItems, inputShape);
 
-            if (armorValid) { tool = (Tool) entry.getValue(); break; }
+            if (armorValid) { tool = entry.getValue(); break; }
 
         }
 
@@ -63,12 +59,12 @@ public class ToolConfig extends BaseConfiguration<Tool> {
      */
     public Tool getObject(String toolName) {
 
-        if (isValid(toolName)) return (Tool) map.get(toolName);
+        if (isValid(toolName)) return map.get(toolName);
         else return null;
 
     }
 
-        /**
+    /**
      * It checks if the shape of the recipe is valid
      * 
      * @param shape The shape of the recipe.
@@ -121,12 +117,6 @@ public class ToolConfig extends BaseConfiguration<Tool> {
         List<CraftedItem> set = new ArrayList<>();
         
         for(Tool tool : map.values()) {
-
-            // Logging.debugToConsole("--- tool EQUALITY ---");
-            // Logging.debugToConsole("W-ISHAPE:", shape.toString());
-            // Logging.debugToConsole("W-RSHAPE:", tool.getRecipeShape().toString());
-            // Logging.debugToConsole("W-MATCH: " + shape.equals(tool.getRecipeShape()));
-            // Logging.debugToConsole("--- --------------- ---");
 
             if (tool.getRecipeShape().equals(shape)) {
 
