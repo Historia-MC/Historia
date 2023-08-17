@@ -35,7 +35,7 @@ public class PrepareItemCraftListener implements Listener {
             }
             else {
                     
-                Logging.debugToConsole("Result: " + resultItem.getType().toString() + " " + resultItem.getAmount());
+                Logging.debugToConsole("Result: " + resultItem.getType() + " " + resultItem.getAmount());
             
             }
         }
