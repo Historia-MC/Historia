@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
-import dev.boooiil.historia.core.classes.enums.FileMap.ResourceKeys;
+import dev.boooiil.historia.core.classes.enums.file.FileKeys;
 import dev.boooiil.historia.core.util.FileGetter;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -34,7 +34,7 @@ public class Proficiency {
      * @param proficiencyName the name of the proficiency
      */
     public Proficiency(String proficiencyName) {
-        FileConfiguration config = FileGetter.get(ResourceKeys.PROFICIENCY);
+        FileConfiguration config = FileGetter.get(FileKeys.PROFICIENCY);
 
         if (config.contains(proficiencyName)) {
             this.name = proficiencyName;

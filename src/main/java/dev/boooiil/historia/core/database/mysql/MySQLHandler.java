@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.mysql;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import dev.boooiil.historia.core.classes.enums.MySQLMaps.HistoriaUserKeys;
+import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
 import dev.boooiil.historia.core.util.Logging;
 
 import java.sql.Connection;
@@ -418,9 +418,9 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
 
-    public static Map<HistoriaUserKeys, String> getUser(UUID uuid) {
+    public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
 
-        Map<HistoriaUserKeys, String> map = new HashMap<>();
+        Map<MySQLUserKeys, String> map = new HashMap<>();
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -431,14 +431,14 @@ public class MySQLHandler {
 
             while (results.next()) {
 
-                map.put(HistoriaUserKeys.UUID, results.getString("UUID"));
-                map.put(HistoriaUserKeys.USERNAME, results.getString("Username"));
-                map.put(HistoriaUserKeys.CLASS, results.getString("Class"));
-                map.put(HistoriaUserKeys.LEVEL, results.getString("Level"));
-                map.put(HistoriaUserKeys.EXPERIENCE, results.getString("Experience"));
-                map.put(HistoriaUserKeys.LOGIN, results.getString("Login"));
-                map.put(HistoriaUserKeys.LOGOUT, results.getString("Logout"));
-                map.put(HistoriaUserKeys.PLAYTIME, results.getString("Playtime"));
+                map.put(MySQLUserKeys.UUID, results.getString("UUID"));
+                map.put(MySQLUserKeys.USERNAME, results.getString("Username"));
+                map.put(MySQLUserKeys.CLASS, results.getString("Class"));
+                map.put(MySQLUserKeys.LEVEL, results.getString("Level"));
+                map.put(MySQLUserKeys.EXPERIENCE, results.getString("Experience"));
+                map.put(MySQLUserKeys.LOGIN, results.getString("Login"));
+                map.put(MySQLUserKeys.LOGOUT, results.getString("Logout"));
+                map.put(MySQLUserKeys.PLAYTIME, results.getString("Playtime"));
 
             }
 
@@ -457,14 +457,14 @@ public class MySQLHandler {
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
-            map.put(HistoriaUserKeys.UUID, uuid.toString());
-            map.put(HistoriaUserKeys.USERNAME, "null");
-            map.put(HistoriaUserKeys.CLASS, "None");
-            map.put(HistoriaUserKeys.LEVEL, "1");
-            map.put(HistoriaUserKeys.EXPERIENCE, "0");
-            map.put(HistoriaUserKeys.LOGIN, "0");
-            map.put(HistoriaUserKeys.LOGOUT, "0");
-            map.put(HistoriaUserKeys.PLAYTIME, "0");
+            map.put(MySQLUserKeys.UUID, uuid.toString());
+            map.put(MySQLUserKeys.USERNAME, "null");
+            map.put(MySQLUserKeys.CLASS, "None");
+            map.put(MySQLUserKeys.LEVEL, "1");
+            map.put(MySQLUserKeys.EXPERIENCE, "0");
+            map.put(MySQLUserKeys.LOGIN, "0");
+            map.put(MySQLUserKeys.LOGOUT, "0");
+            map.put(MySQLUserKeys.PLAYTIME, "0");
 
         }
 

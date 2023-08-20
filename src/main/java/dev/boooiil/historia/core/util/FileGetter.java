@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.util;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.enums.FileMap.ResourceKeys;
+import dev.boooiil.historia.core.classes.enums.file.FileKeys;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class FileGetter {
      * @param check The name of the file you want to check for.
      * @return A boolean value.
      */
-    public static boolean find(File[] files, ResourceKeys check) {
+    public static boolean find(File[] files, FileKeys check) {
 
         for (File file : files) {
 
@@ -43,7 +43,7 @@ public class FileGetter {
      * @param check The file name to check for.
      * @return A YamlConfiguration object.
      */
-    public static YamlConfiguration get(ResourceKeys check) {
+    public static YamlConfiguration get(FileKeys check) {
 
         YamlConfiguration config;
 

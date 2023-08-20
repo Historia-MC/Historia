@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.AllSources;
+import dev.boooiil.historia.core.classes.enums.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.configuration.file.FileConfiguration;
 

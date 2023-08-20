@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.classes.user;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.AllSources;
-import dev.boooiil.historia.core.classes.enums.MySQLMaps;
+import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
+import dev.boooiil.historia.core.classes.enums.experience.AllSources;
 import dev.boooiil.historia.core.classes.proficiency.Proficiency;
 import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import dev.boooiil.historia.core.util.Logging;
@@ -69,23 +69,23 @@ public class HistoriaPlayer extends BasePlayer {
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
-        Map<MySQLMaps.HistoriaUserKeys, String> user = MySQLHandler.getUser(uuid);
+        Map<MySQLUserKeys, String> user = MySQLHandler.getUser(uuid);
 
-        this.proficiency = new Proficiency(user.get(MySQLMaps.HistoriaUserKeys.CLASS));
+        this.proficiency = new Proficiency(user.get(MySQLUserKeys.CLASS));
 
-        this.level = Integer.parseInt(user.get(MySQLMaps.HistoriaUserKeys.LEVEL));
+        this.level = Integer.parseInt(user.get(MySQLUserKeys.LEVEL));
 
         this.level = Math.max(this.level, 1);
 
-        this.currentExperience = Float.parseFloat(user.get(MySQLMaps.HistoriaUserKeys.EXPERIENCE));
+        this.currentExperience = Float.parseFloat(user.get(MySQLUserKeys.EXPERIENCE));
 
         this.currentExperience = this.currentExperience < 0 ? 0 : this.currentExperience;
 
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
 
-        this.lastLogin = Long.parseLong(user.get(MySQLMaps.HistoriaUserKeys.LOGIN));
-        this.lastLogout = Long.parseLong(user.get(MySQLMaps.HistoriaUserKeys.LOGOUT));
-        this.playtime = Long.parseLong(user.get(MySQLMaps.HistoriaUserKeys.PLAYTIME));
+        this.lastLogin = Long.parseLong(user.get(MySQLUserKeys.LOGIN));
+        this.lastLogout = Long.parseLong(user.get(MySQLUserKeys.LOGOUT));
+        this.playtime = Long.parseLong(user.get(MySQLUserKeys.PLAYTIME));
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
