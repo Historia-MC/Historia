@@ -1,0 +1,508 @@
+classDiagram
+
+    Main ..|> ConfigurationLoader
+    Main ..|> MySQLConnection
+    Main ..|> ConfigUtil
+    Main ..|> MySQLHandler
+
+    ConfigurationLoader o-- ArmorConfig
+    ConfigurationLoader o-- WeaponConfig
+    ConfigurationLoader o-- GeneralConfig
+    ConfigurationLoader o-- CustomItemConfig
+    ConfigurationLoader o-- ToolConfig
+
+    BaseConfiguration~T~ ..|> ConfigUtil
+
+    ArmorConfig <|-- BaseConfiguration
+    WeaponConfig <|-- BaseConfiguration
+    GeneralConfig <|-- BaseConfiguration
+    CustomItemConfig <|-- BaseConfiguration
+    ToolConfig <|-- BaseConfiguration
+
+    ArmorConfig o-- Armor
+    WeaponConfig o-- Weapon
+    CustomItemConfig o-- CustomItem
+    ToolConfig o-- Tool
+
+    CraftedItem <|-- BaseItem
+
+    Armor <|-- CraftedItem
+    Weapon <|-- CraftedItem
+    CustomItem <|-- CraftedItem
+    Tool <|-- CraftedItem
+
+    PlayerStorage --> "0..*" HistoriaPlayer : Contains
+    HistoriaPlayer ..|> MySQLHandler
+    HistoriaPlayer <|-- BasePlayer
+    HistoriaPlayer *.. Proficiency
+    Proficiency o-- Skills
+    Proficiency o-- Stats
+
+
+    class Main {
+
+        +server() : Server
+        +disable() : void
+        -registerEvent(Listener) : void
+        -registerCommand(String, CommandExecutor) : void
+        -registerRunnable(Runnable) : void
+        -registerRunnable(Runnable, Long) : void
+
+    }
+
+    class MySQLConnection {
+
+        -GeneralConfig MYSQLCONFIG$
+        -String DATABASE$
+        -String USERNAME$
+        -String PASSWORD$
+        -String IP$
+        -String PORT$
+        -String URL$
+        -Connection connection
+
+        +connect()$ : void
+        +reconnectOnStale()$ : void
+        +closeConnection()$ : void
+        +getConnection()$ : Connection
+        +validateFields()$ : boolean
+    }
+
+    class MySQLHandler {
+
+        -Connection connection$
+
+        +createTable()$ : void
+        +createUser()$ : void
+        +getUser(UUID)$ : Map&lt;HistoriaUserKeys, String>
+        +getUsernames()$ : List~String~
+        +getUsername(UUID)$ : String
+        +setUsername(UUID, String)$ : void
+        +setProficiency(UUID, String)$ : void
+        +setProficiencyLevel(UUID, int)$ : void
+        +setLogin(UUID)$ : void
+        +setLogout(UUID, long, long)$ : void
+        +setCurrentExperience(UUID, double)$ : void
+        +getUUIDs()$ : List~UUID~
+        +getUUID(String)$ : UUID
+        -userExists(UUID)$ : boolean
+        -MySQLHandler() : IllegalStateException
+
+    }
+
+    class ConfigUtil {
+
+        -List~String~ configFileNames$
+        +checkFiles()$ : void
+        +yamlFromSource(InputStream)$ : YamlConfiguration
+        +yamlFromSource(File)$ : YamlConfiguration
+
+    }
+
+    class BaseConfiguration~T~ {
+
+        +loadConfiguration(String) : void
+        +getConfiguration() : YamlConfiguration
+        +getSet() : Set~String~
+        +getMap() : HashMap&lt;String, T>
+        +isValid(String) : boolean
+        +createNew(String) : T*
+        +getObject(String) : T*
+        -populateMap() : void
+
+    }
+
+    class ConfigurationLoader {
+
+        -ArmorConfig armorConfig$
+        -WeaponConfig weaponConfig$
+        -GeneralConfig generalConfig$
+        -CustomItemConfig customItemConfig$
+        -ToolConfig toolConfig$
+
+        +getArmorConfig()$ : ArmorConfig
+        +getWeaponConfig()$ : WeaponConfig
+        +getGeneralConfig()$ : GeneralConfig
+        +getCustomItemConfig()$ : CustomItemConfig
+        +getToolConfig()$ : ToolConfig
+
+        +init()$ : void
+        +reload()$ : void
+
+    }
+
+    class ArmorConfig {
+
+        +createNew(String): Armor
+        +getObject(List~String~ inputItems, List~String~ inputShape): Armor
+        +getObject(String): Armor
+        +validShape(List~String~ shape): boolean
+        +getAllShapes(): List~List~String~~
+        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
+
+    }
+
+
+    class WeaponConfig {
+
+        +createNew(String): Weapon
+        +getObject(List~String~ inputItems, List~String~ inputShape): Weapon
+        +getObject(String): Weapon
+        +validShape(List~String~ shape): boolean
+        +getAllShapes(): List~List~String~~
+        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
+
+    }
+
+    class GeneralConfig {
+
+        +String username
+        +String password
+        +String database
+        +String ip
+        +String port
+
+        +GeneralConfig()
+
+    }
+
+    class CustomItemConfig {
+
+        +createNew(String): CustomItem
+        +getObject(List~String~ inputItems, List~String~ inputShape): CustomItem
+        +getObject(String): CustomItem
+        +validShape(List~String~ shape): boolean
+        +getAllShapes(): List~List~String~~
+        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
+        +getAllMatchingMaterials(List~String~ materials): List~CraftedItem~
+
+    }
+
+    class ToolConfig {
+
+        +createNew(String): Tool
+        +getObject(List~String~ inputItems, List~String~ inputShape): Tool
+        +getObject(String): Tool
+        +validShape(List~String~ shape): boolean
+        +getAllShapes(): List~List~String~~
+        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
+
+    }
+
+    class BaseItem {
+
+        #boolean valid
+        #ItemStack itemStack
+
+        +BaseItem()
+        +BaseItem(ItemStack)
+        +getItemStack() : ItemStack
+        +isValid() : boolean
+
+    }
+
+    class CraftedItem {
+
+        #List~String~ recipeShape
+        #List~String~ recipeItems
+        #List~String~ proficiencies
+        #boolean isShaped
+
+        +getRecipeItems() : List~String~
+        +getRecipeShape() : List~String~
+        +isValidRecipe(List~String~ inputItems, List~String~ inputShape) : boolean
+        +isShapeDependent() : boolean
+        +canCraft(String) : boolean
+
+    }
+
+    class Armor {
+
+        -String weightClass
+        -Integer weight
+        -List~Double~ defence
+        -List~Integer~ durability
+
+        +Armor(String)
+        +getWeightClass() : String
+        +getWeight() : Integer
+        +getRandomDefenceValue() : Integer
+        +getRandomDurabilityValue() : Integer
+        +getMinDefenceValue() : Double
+        +getMaxDefenceValue() : Double
+        +getMinDurabilityValue() : Integer
+        +getMaxDurabilityValue() : Integer
+
+    }
+
+    class Weapon {
+
+        -String weightClass
+        -Integer weight
+        -List~Double~ damageRange
+        -List~Double~ speedRange
+        -List~Double~ knockbackRange
+        -List~Double~ sweepRange
+        -List~Integer~ durability
+
+        +Weapon(String)
+        +getWeightClass() : String
+        +getWeight() : Integer
+        +getDamageRange() : List~Double~
+        +getSpeedRange() : List~Double~
+        +getKnockbackRange() : List~Double~
+        +getSweepRange() : List~Double~
+        +getDurabilityRange() : List~Double~
+        +getRandomDamageValue(): Double
+        +getRandomDefenceValue() : Integer
+        +getRandomDurabilityValue() : Integer
+        +getMinDamageValue() : Double
+        +getMaxDamageValue() : Double
+        +getMinSpeedValue() : Double
+        +getMaxSpeedValue() : Double
+        +getMinKnockbackValue() : Double
+        +getMaxKnockbackValue() : Double
+        +getMinSweepingValue() : Double
+        +getMaxSweepingValue() : Double
+        +getMinDefenceValue() : Double
+        +getMaxDefenceValue() : Double
+        +getMinDurabilityValue() : Integer
+        +getMaxDurabilityValue() : Integer
+
+    }
+    class CustomItem {
+
+        -String itemName
+
+        +CustomItem(String)
+        +getItemName() : String
+
+
+    }
+
+    class Tool {
+
+        -String weightClass
+        -Integer weight
+        -List~Double~ damageRange
+        -List~Double~ speedRange
+        -List~Double~ knockbackRange
+        -List~Integer~ durability
+
+        +Weapon(String)
+        +getWeightClass() : String
+        +getWeight() : Integer
+        +getDamageRange() : List~Double~
+        +getSpeedRange() : List~Double~
+        +getKnockbackRange() : List~Double~
+        +getDurabilityRange() : List~Double~
+        +getRandomDamageValue(): Double
+        +getRandomDefenceValue() : Integer
+        +getRandomDurabilityValue() : Integer
+        +getMinDamageValue() : Double
+        +getMaxDamageValue() : Double
+        +getMinSpeedValue() : Double
+        +getMaxSpeedValue() : Double
+        +getMinKnockbackValue() : Double
+        +getMaxKnockbackValue() : Double
+        +getMinDefenceValue() : Double
+        +getMaxDefenceValue() : Double
+        +getMinDurabilityValue() : Integer
+        +getMaxDurabilityValue() : Integer
+
+    }
+
+    class ToolConfig
+
+
+    class PlayerStorage {
+
+        -HashMap&lt;String, HistoriaPlayer> players$
+        -HashMap&lt;String, UUID> usernameMap$
+
+        +addPlayer(UUID, HistoriaPlayer)$ : void
+        +getPlayer(UUID, boolean)$ : HistoriaPlayer
+        +getPlayer(String, boolean)$ : HistoriaPlayer
+        +has(UUID)$ : boolean
+        +has(String)$ : boolean
+        +markOffline(UUID)$ : void
+        +saveStates()$ : void
+
+    }
+
+    class BasePlayer {
+        -UUID uuid
+        -String username
+        -boolean isOnline
+        -Resident resident
+        -Town town
+        -Nation nation
+
+        +BasePlayer(UUID)
+        +getUUID(): UUID
+        +getUsername(): String
+        +setUsername(String): void
+        +isOnline(): boolean
+        +setOnline(boolean): void
+        +getResident(): Resident
+        +setResident(Resident): void
+        +getTownRanks(): List~String~
+        +getNationRanks(): List~String~
+        +getTownName(): String
+        +getTown(): Town
+        +setTown(Town): void
+        +getNation(): Nation
+        +setNation(Nation): void
+        +toString() : String
+    }
+
+    class HistoriaPlayer {
+
+        -int level
+        -long lastLogin
+        -long lastLogout
+        -long playtime
+        -float maxHealth
+        -float modifiedHealth
+        -double currentTemperature
+        -double maxTemperature
+        -double currentExperience
+        -double maxExperience
+        -Proficiency proficiency
+        -long lastSaved
+        #Server server
+
+        +HistoriaPlayer()
+        +HistoriaPlayer(UUID)
+        +setLevel(int) : void
+        +setLastLogin(long) : void
+        +setLastLogout(long) : void
+        +setModifiedHealth(float) : void
+        +setCurrentExperience(double) : void
+        +setMaxExperience(double) : void
+        +getLevel() : int
+        +getProficiency() : Proficiency
+        +getBaseHealth() : float
+        +getMaxHealth() : float
+        +getModifiedHealth() : float
+        +getCurrentExperience() : double
+        +getMaxExperience() : double
+        +getLastLogin() : long
+        +getLastLogout() : long
+        +getPlaytime() : long
+        +getCurrentTemperature() : double
+        +getMaxTemperature() : double
+        +applyClassStats() : void
+        +saveCharacter() : void
+        +getLastSaved() : long
+        +setTemperature(double) : void
+        +changeProficiency(String) : void
+        +increaseExperience(AllSources): void
+        +decreaseExperience(AllSources) : void
+        +toString() : String
+
+    }
+
+    class Proficiency {
+
+        -String name
+        -Stats stats
+        -Skills skills
+
+        +Proficiency(String)
+        +getName() : String
+        +setName(String): void
+        +getStats() : Stats
+        +setStats(Stats) : void
+        +getSkills() : Skills
+        +setSkills(Skills): void
+
+    }
+
+    class Skills {
+
+        -boolean hasNameTag
+        -boolean hasFeathreFall
+        -boolean hasQuickCharge
+        -boolean hasEfficiencyPickaxe
+        -boolean hasEfficiencyShovel
+        -boolean hasEfficiencyAxe
+        -boolean hasChanceExtraOre
+        -boolean hasChanceExtraWood
+        -boolean hasChanceExtraFeathers
+        -boolean hasChancenoAnvilDamage
+        -boolean hasChanceNoConsumeBlock
+        -boolean hasLadderBypass
+        -boolean canIgniteOil
+        -boolean canBreakGrass
+        -boolean canTameAnimals
+        -boolean canSweepingEdge
+        -boolean canBreakBeehive
+        -boolean canApplyUnbreaking
+        -boolean canApplySharpness
+        -boolean canShearChickens
+        -boolean canHarvestBones
+        -boolean canHarvestLeather
+        -boolean canMakeKnowledgeBook
+
+        +getter() : boolean
+
+    }
+
+    class Stats {
+
+        -float baseHealth
+        -float maxHealth
+        -int baseFood
+        -double baseSpeed
+        -double baseExperience
+        -double harvestChance
+        -double doubleHarvestChance
+        -double instantGrowthChance
+        -double beheadChance
+        -double baseSwordProficiency
+        -double baseBowProficiency
+        -double baseCrossbowProficiency
+        -List~AllSources~ experienceSources
+        -List~String~ usableWeaponTypes
+        -List~String~ usableArmorTypes
+
+        +Stats(FileConfiguration, String)
+        +getBaseHealth() : float
+        +setBaseHealth(float) : void
+        +getMaxHealth() : float
+        +setMaxHealth(float) : void
+        +getBaseFood() : int
+        +setBaseFood(int) : void
+        +getBaseSpeed() : double
+        +setBaseSpeed(double) : void
+        +getBaseEvasion() : double
+        +setBaseEvasion(double) : void
+        +getHarvestChance() : double
+        +setHarvestChance(double) : void
+        +getDoubleHarvestChance() : double
+        +setDoubleHarvestChance(double) : void
+        +getInstantGrowthChance() : double
+        +setInstantGrowthChance(double) : void
+        +getBeheadChance() : double
+        +setBeheadChance(double) : void
+        +getbaseSwordProficiency() : double
+        +setBaseSwordProficiency(double) : void
+        +getBaseBowProficiency() : double
+        +setBaseBowProficiency(double) : void
+        +getBaseCrossbowProficiency(): double
+        +setBaseCrossbowProficiency(double) : void
+        +getBaseExperienceGain() : double
+        +setBaseExperienceGain(double) : void
+        +getUsableWeaponTypes() : List~String~
+        +setUsableWeaponTypes(List~String~ weaponTypes) : void
+        +getUsableArmorTypes() : List~String~
+        +setUsableArmorTypes(List~String~ armorTypes) : void
+        +getExperienceSources() : List~AllSources~
+        +setExperienceSources(List~AllSources~ experienceSources) : void
+        +hasIncomeSource(AllSources) : boolean
+        +getIncomeValue(AllSources) : double
+        +toString() : String
+
+
+    }
