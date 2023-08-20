@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.handlers.mobs;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.AnimalSources;
+import dev.boooiil.historia.core.classes.enums.experience.AnimalSources;
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.entity.EntityTameEvent;
@@ -17,7 +18,7 @@ public class TameAnimal {
 
     public void doTameAnimal() {
 
-        if (historiaPlayer.getProficiency().getSkills().canTameAnimals()) {
+        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.TAME_ANIMALS)) {
 
             historiaPlayer.increaseExperience(AnimalSources.TAME_ANIMAL.getKey());
 
