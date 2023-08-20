@@ -27,7 +27,7 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
      * @param inputShape Recipe shape.
      * @return Armor object.
      */
-    public Armor getArmor(List<String> inputItems, List<String> inputShape) {
+    public Armor getObject(List<String> inputItems, List<String> inputShape) {
 
         Armor armor = null;
 
