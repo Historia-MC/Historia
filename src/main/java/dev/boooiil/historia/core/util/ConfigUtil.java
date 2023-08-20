@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.util;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.enums.FileMap.ResourceKeys;
+import dev.boooiil.historia.core.classes.enums.file.FileKeys;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class ConfigUtil {
 
     static {
 
-        for (ResourceKeys key : ResourceKeys.values()) {
+        for (FileKeys key : FileKeys.values()) {
             configFileNames.add(key.getKey());
         }
        
