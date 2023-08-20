@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.handlers.pvp;
 
 import dev.boooiil.historia.core.classes.enums.ExperienceTypes.CombatSources;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
-import dev.boooiil.historiaspawnkill.classes.TimedUser;
-import dev.boooiil.historiaspawnkill.handlers.SpawnKillHandler;
+import dev.boooiil.historia.spawnkill.classes.TimedUser;
+import dev.boooiil.historia.spawnkill.handlers.SpawnKillHandler;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;

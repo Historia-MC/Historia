@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  * It saves the player's data, sets the player as offline, and updates the
- * Discord bot's activity.
+ * Discord bot activity.
  */
 public class PlayeQuitListener implements Listener {
 

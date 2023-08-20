@@ -3,7 +3,6 @@
  * It contains static methods to retrieve instances of specific configuration classes, such as ArmorConfig,
  * IngotConfig, OreConfig, WeaponConfig, GeneralConfig, CustomItemConfig, and CropConfig. It also provides
  * methods to initialize and reload the configuration files.
- * 
  * The configuration files are loaded from the plugin's resources folder and are in YAML format.
  * 
  * @see ArmorConfig

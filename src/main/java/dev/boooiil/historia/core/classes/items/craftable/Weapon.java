@@ -34,40 +34,38 @@ public class Weapon extends CraftedItem {
     private List<Integer> durabilityRange;
     private int durability;
 
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     // It's a constructor.
-    public Weapon(String weaponName) {
+    public Weapon(String localizedName) {
 
         YamlConfiguration configuration = ConfigurationLoader.getWeaponConfig().getConfiguration();
 
-        valid = ConfigurationLoader.getWeaponConfig().isValid(weaponName);
+        valid = ConfigurationLoader.getWeaponConfig().isValid(localizedName);
 
         if (valid) {
 
-            String root = weaponName;
-
             // It's calling the parent class's constructor.
             itemStack = Construct.itemStack(
-                    configuration.getString(weaponName + ".item.type"),
-                    configuration.getInt(weaponName + ".item.amount"),
-                    configuration.getString(weaponName + ".item.display-name"),
-                    configuration.getString(weaponName + ".item.loc-name"),
-                    configuration.getStringList(weaponName + ".item.lore"));
+                    configuration.getString(localizedName + ".item.type"),
+                    configuration.getInt(localizedName + ".item.amount"),
+                    configuration.getString(localizedName + ".item.display-name"),
+                    configuration.getString(localizedName + ".item.loc-name"),
+                    configuration.getStringList(localizedName + ".item.lore"));
 
-            this.recipeItems = configuration.getStringList(root + ".recipe-items");
-            this.recipeShape = configuration.getStringList(root + ".recipe-shape");
+            this.recipeItems = configuration.getStringList(localizedName + ".recipe-items");
+            this.recipeShape = configuration.getStringList(localizedName + ".recipe-shape");
 
-            this.weightClass = configuration.getString(root + ".type");
-            this.damageRange = configuration.getDoubleList(root + ".damage");
-            this.speedRange = configuration.getDoubleList(root + ".speed");
-            this.knockbackRange = configuration.getDoubleList(root + ".knockback");
-            this.sweepRange = configuration.getDoubleList(root + ".sweeping");
-            this.durabilityRange = configuration.getIntegerList(root + ".durability");
+            this.weightClass = configuration.getString(localizedName + ".type");
+            this.damageRange = configuration.getDoubleList(localizedName + ".damage");
+            this.speedRange = configuration.getDoubleList(localizedName + ".speed");
+            this.knockbackRange = configuration.getDoubleList(localizedName + ".knockback");
+            this.sweepRange = configuration.getDoubleList(localizedName + ".sweeping");
+            this.durabilityRange = configuration.getIntegerList(localizedName + ".durability");
 
-            this.isShaped = configuration.getBoolean(root + ".requireShape");
+            this.isShaped = configuration.getBoolean(localizedName + ".requireShape");
             
-            this.proficiencies = configuration.getStringList(root + ".canCraft");
+            this.proficiencies = configuration.getStringList(localizedName + ".canCraft");
 
         } else {
             itemStack = new ItemStack(Material.AIR);
@@ -118,11 +116,7 @@ public class Weapon extends CraftedItem {
      */
     public double getDamageRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinDamageValue() - getMaxDamageValue())
-                + getMaxDamageValue();
-
-        return result;
+        return NumberUtils.random(getMinDamageValue(), getMaxDamageValue());
 
     }
 
@@ -150,11 +144,7 @@ public class Weapon extends CraftedItem {
      */
     public double getSpeedRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinSpeedValue() - getMaxSpeedValue())
-                + getMaxSpeedValue();
-
-        return result;
+        return NumberUtils.random(getMinSpeedValue(), getMaxSpeedValue());
 
     }
 
@@ -182,11 +172,7 @@ public class Weapon extends CraftedItem {
      */
     public double getKnockbackRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinKnockbackValue() - getMaxKnockbackValue())
-                + getMaxKnockbackValue();
-
-        return result;
+        return NumberUtils.random(getMinKnockbackValue(), getMaxKnockbackValue());
 
     }
 
@@ -214,11 +200,7 @@ public class Weapon extends CraftedItem {
      */
     public double getSweepRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinSweepValue() - getMaxSweepValue())
-                + getMaxSweepValue();
-
-        return result;
+        return NumberUtils.random(getMinSweepValue(), getMaxSweepValue());
 
     }
 
@@ -261,9 +243,7 @@ public class Weapon extends CraftedItem {
      */
     public Integer getRandomDurabilityValue() {
 
-        Integer result = (int) NumberUtils.random(getMinDurabilityValue(), getMaxDurabilityValue());
-
-        return result;
+        return NumberUtils.randomInt(getMinDurabilityValue(), getMaxDurabilityValue());
 
     }
 

@@ -16,7 +16,7 @@ public class CommandStats implements CommandExecutor {
 
         arguments[0] = arguments[0].toLowerCase();
 
-        if (arguments.length > 0 && arguments.length == 2) {
+        if (arguments.length == 2) {
 
             if (arguments[0].equals("player")) {
 

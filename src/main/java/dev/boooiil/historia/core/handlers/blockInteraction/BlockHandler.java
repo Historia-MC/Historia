@@ -42,10 +42,10 @@ public class BlockHandler extends BaseBlockHandler {
 
             if (historiaPlayer.getProficiency().getSkills().hasChanceExtraWood()) {
 
-                Float doulbeDropChance = 0.05f;
-                Float dropChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
+                float doubleDropChance = 0.05f;
+                float dropChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
 
-                boolean didDouble = dropChanceRoll <= doulbeDropChance;
+                boolean didDouble = dropChanceRoll <= doubleDropChance;
 
                 if (didDouble) {
 
@@ -72,9 +72,6 @@ public class BlockHandler extends BaseBlockHandler {
 
             }
 
-        }
-
-        else {
         }
 
     }

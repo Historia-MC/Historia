@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 public class PlayerPlaceBlock {
     
-    private BlockPlaceEvent event;
+    private final BlockPlaceEvent event;
 
     public PlayerPlaceBlock(BlockPlaceEvent event) {
 

@@ -58,7 +58,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         super(uuid);
 
-        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid.toString() + ".");
+        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid + ".");
 
         // TODO: GET TOWN AND NATION VALUES
         // TODO: SET PLAYTIME IN HISTORIA TABLE
@@ -251,8 +251,6 @@ public class HistoriaPlayer extends BasePlayer {
     public void applyClassStats() {
 
         //TODO: create method or handler that applies the proficiency stats
-
-        return;
 
     }
 

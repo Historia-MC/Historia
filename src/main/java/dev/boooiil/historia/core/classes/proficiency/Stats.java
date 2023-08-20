@@ -51,7 +51,7 @@ public class Stats {
 
         this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
         this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
-        this.experienceSources = new ArrayList<AllSources>();
+        this.experienceSources = new ArrayList<>();
 
         for (String key : config.getStringList(root + ".experienceSources")) {
 
@@ -289,7 +289,7 @@ public class Stats {
     }
 
     /**
-     * This function returns the base experience gain of the Pokemon
+     * This function returns the base experience gain
      * 
      * @return The baseExperienceGain variable is being returned.
      */
@@ -364,6 +364,12 @@ public class Stats {
         this.experienceSources = experienceSources;
     }
 
+    /**
+     * This function returns a boolean value indicating whether the character has
+     * the given income source or not.
+     * @param source The income source to check for.
+     * @return true if the character has the income source, false otherwise.
+     */
     public boolean hasIncomeSource(AllSources source) {
 
         return this.experienceSources.contains(source);

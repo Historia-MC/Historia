@@ -31,36 +31,34 @@ public class Tool extends CraftedItem {
     private List<Integer> durabilityRange;
     private int durability;
 
-    private ItemStack itemStack;
+    private final ItemStack itemStack;
 
     // It's a constructor.
-    public Tool(String toolName) {
+    public Tool(String localizedName) {
 
         YamlConfiguration configuration = ConfigurationLoader.getToolConfig().getConfiguration();
 
-        valid = ConfigurationLoader.getToolConfig().isValid(toolName);
+        valid = ConfigurationLoader.getToolConfig().isValid(localizedName);
 
         if (valid) {
 
-            String root = toolName;
-
             // It's calling the parent class's constructor.
             itemStack = Construct.itemStack(
-                    configuration.getString(toolName + ".item.type"),
-                    configuration.getInt(toolName + ".item.amount"),
-                    configuration.getString(toolName + ".item.display-name"),
-                    configuration.getString(toolName + ".item.loc-name"),
-                    configuration.getStringList(toolName + ".item.lore"));
+                    configuration.getString(localizedName + ".item.type"),
+                    configuration.getInt(localizedName + ".item.amount"),
+                    configuration.getString(localizedName + ".item.display-name"),
+                    configuration.getString(localizedName + ".item.loc-name"),
+                    configuration.getStringList(localizedName + ".item.lore"));
 
-            this.recipeItems = configuration.getStringList(root + ".recipe-items");
-            this.recipeShape = configuration.getStringList(root + ".recipe-shape");
-            this.proficiencies = configuration.getStringList(root + ".canCraft");
+            this.recipeItems = configuration.getStringList(localizedName + ".recipe-items");
+            this.recipeShape = configuration.getStringList(localizedName + ".recipe-shape");
+            this.proficiencies = configuration.getStringList(localizedName + ".canCraft");
 
-            this.weightClass = configuration.getString(root + ".type");
-            this.damageRange = configuration.getDoubleList(root + ".damage");
-            this.speedRange = configuration.getDoubleList(root + ".speed");
-            this.knockbackRange = configuration.getDoubleList(root + ".knockback");
-            this.durabilityRange = configuration.getIntegerList(root + ".durability");
+            this.weightClass = configuration.getString(localizedName + ".type");
+            this.damageRange = configuration.getDoubleList(localizedName + ".damage");
+            this.speedRange = configuration.getDoubleList(localizedName + ".speed");
+            this.knockbackRange = configuration.getDoubleList(localizedName + ".knockback");
+            this.durabilityRange = configuration.getIntegerList(localizedName + ".durability");
 
         } else {
             itemStack = new ItemStack(Material.AIR);
@@ -112,11 +110,7 @@ public class Tool extends CraftedItem {
      */
     public double getDamageRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinDamageValue() - getMaxDamageValue())
-                + getMaxDamageValue();
-
-        return result;
+        return NumberUtils.random(getMinDamageValue(), getMaxDamageValue());
 
     }
 
@@ -144,11 +138,7 @@ public class Tool extends CraftedItem {
      */
     public double getSpeedRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinSpeedValue() - getMaxSpeedValue())
-                + getMaxSpeedValue();
-
-        return result;
+        return NumberUtils.random(getMinSpeedValue(), getMaxSpeedValue());
 
     }
 
@@ -176,11 +166,7 @@ public class Tool extends CraftedItem {
      */
     public double getKnockbackRandomValue() {
 
-        Random random = new Random();
-        double result = random.nextDouble() * (getMinKnockbackValue() - getMaxKnockbackValue())
-                + getMaxKnockbackValue();
-
-        return result;
+        return NumberUtils.random(getMinKnockbackValue(), getMaxKnockbackValue());
 
     }
 
@@ -223,9 +209,7 @@ public class Tool extends CraftedItem {
      */
     public Integer getRandomDurabilityValue() {
 
-        Integer result = (int) NumberUtils.random(getMinDurabilityValue(), getMaxDurabilityValue());
-
-        return result;
+        return NumberUtils.randomInt(getMinDurabilityValue(), getMaxDurabilityValue());
 
     }
 

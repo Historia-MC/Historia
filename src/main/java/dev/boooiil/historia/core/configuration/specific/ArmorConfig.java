@@ -33,10 +33,10 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
 
         for (Map.Entry<String, Armor> entry : map.entrySet()) {
 
-            boolean armorValid = ((Armor) entry.getValue()).isValidRecipe(inputItems, inputShape);
+            boolean armorValid = entry.getValue().isValidRecipe(inputItems, inputShape);
 
             if (armorValid) {
-                armor = (Armor) entry.getValue();
+                armor = entry.getValue();
                 break;
             }
 
@@ -55,7 +55,7 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
     public Armor getObject(String armorName) {
 
         if (isValid(armorName))
-            return (Armor) map.get(armorName);
+            return map.get(armorName);
         else
             return null;
 
@@ -115,15 +115,9 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
 
         for(Armor armor : map.values()) {
 
-            // Logging.debugToConsole("--- ARMOR EQUALITY ---");
-            // Logging.debugToConsole("A-ISHAPE:", shape.toString());
-            // Logging.debugToConsole("A-RSHAPE:", armor.getRecipeShape().toString());
-            // Logging.debugToConsole("A-MATCH: " + shape.equals(armor.getRecipeShape()));
-            // Logging.debugToConsole("--- -------------- ---");
-
             if (armor.getRecipeShape().equals(shape)) {
 
-                Logging.debugToConsole(armor.getItemStack().getItemMeta().getAsString());
+                Logging.debugToConsole(armor.getItemStack().getItemMeta().toString());
 
                 set.add(armor);
 
@@ -133,21 +127,5 @@ public class ArmorConfig extends BaseConfiguration<Armor> {
         return set;
 
     }
-    
-    // public List<Armor> getAllMatchingShape(List<String> shape) {
 
-    //     List<Armor> set = new ArrayList<>();
-
-    //     for(Armor armor : map.values()) {
-
-    //         if (armor.getRecipeShape().equals(shape)) {
-
-    //             set.add(armor);
-
-    //         }
-    //     }
-
-    //     return set;
-
-    // }
 }

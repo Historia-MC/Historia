@@ -8,7 +8,7 @@ public class MySQLMaps {
     /**
      * This enum represents the keys for the User table.
      */
-    public static enum HistoriaUserKeys {
+    public enum HistoriaUserKeys {
 
         UUID("uuid"),
         USERNAME("username"),
@@ -21,7 +21,7 @@ public class MySQLMaps {
 
         private final String key;
 
-        private HistoriaUserKeys(String key) {
+        HistoriaUserKeys(String key) {
 
             this.key = key;
 

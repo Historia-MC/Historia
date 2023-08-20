@@ -22,41 +22,41 @@ public class Armor extends CraftedItem {
     private List<Integer> durability;
 
     // Getting the armor's information from the config.
-    public Armor(String armorName) {
+    public Armor(String localizedName) {
 
         YamlConfiguration configuration = ConfigurationLoader.getArmorConfig().getConfiguration();
 
-        valid = ConfigurationLoader.getArmorConfig().isValid(armorName);
+        valid = ConfigurationLoader.getArmorConfig().isValid(localizedName);
 
         if (valid) {
 
             // Calling the parent class's constructor.
             itemStack = Construct.itemStack(
-                    configuration.getString(armorName + ".item.type"),
-                    configuration.getInt(armorName + ".item.amount"),
-                    configuration.getString(armorName + ".item.display-name"),
-                    configuration.getString(armorName + ".item.loc-name"),
-                    configuration.getStringList(armorName + ".item.lore"));
+                    configuration.getString(localizedName + ".item.type"),
+                    configuration.getInt(localizedName + ".item.amount"),
+                    configuration.getString(localizedName + ".item.display-name"),
+                    configuration.getString(localizedName + ".item.loc-name"),
+                    configuration.getStringList(localizedName + ".item.lore"));
 
             // Getting the weight class of the armor.
-            this.weightClass = configuration.getString(armorName + ".type");
+            this.weightClass = configuration.getString(localizedName + ".type");
 
             // Getting the weight of the armor.
-            this.weight = configuration.getInt(armorName + ".weight");
+            this.weight = configuration.getInt(localizedName + ".weight");
 
             // Getting the defense value of the armor.
-            this.defense = configuration.getDoubleList(armorName + ".defense");
+            this.defense = configuration.getDoubleList(localizedName + ".defense");
 
             // Getting the durability of the armor.
-            this.durability = configuration.getIntegerList(armorName + ".durability");
+            this.durability = configuration.getIntegerList(localizedName + ".durability");
 
             // Getting the recipe items from the config.
-            this.recipeItems = configuration.getStringList(armorName + ".recipe-items");
+            this.recipeItems = configuration.getStringList(localizedName + ".recipe-items");
 
             // Getting the recipe shape from the config.
-            this.recipeShape = configuration.getStringList(armorName + ".recipe-shape");
+            this.recipeShape = configuration.getStringList(localizedName + ".recipe-shape");
             
-            this.proficiencies = configuration.getStringList(armorName + ".canCraft");
+            this.proficiencies = configuration.getStringList(localizedName + ".canCraft");
 
         }
 

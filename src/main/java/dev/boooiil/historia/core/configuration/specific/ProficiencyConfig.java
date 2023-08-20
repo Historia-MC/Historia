@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ProficiencyConfig {
 
-    private static Map<String, Proficiency> proficiencyMap = new HashMap<String, Proficiency>();
+    private static final Map<String, Proficiency> proficiencyMap = new HashMap<>();
 
     /**
      * Return a preloaded configuration.
@@ -16,13 +16,12 @@ public class ProficiencyConfig {
      */
     public static Proficiency getConfig(String proficiencyName) {
 
-        if (proficiencyMap.containsKey(proficiencyName)) return proficiencyMap.get(proficiencyName);
-        else {
-            
+        if (!proficiencyMap.containsKey(proficiencyName)) {
+
             proficiencyMap.put(proficiencyName, new Proficiency(proficiencyName));
-            return proficiencyMap.get(proficiencyName);
 
         }
+        return proficiencyMap.get(proficiencyName);
     }
 
     public static void reloadConfig() {

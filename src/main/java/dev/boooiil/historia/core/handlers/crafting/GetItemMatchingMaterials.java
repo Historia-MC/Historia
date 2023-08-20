@@ -14,7 +14,7 @@ public class GetItemMatchingMaterials {
     /**
      * It takes a list of items, and returns an item.
      * 
-     * @param items     The list of items to compare.
+     * @param item     The item you are comparing against.
      * @param materials The list of materials to compare.
      */
     GetItemMatchingMaterials(CraftedItem item, List<String> materials) {
@@ -23,12 +23,6 @@ public class GetItemMatchingMaterials {
 
         int need = materials.size();
         int matched = 0;
-
-        // Logging.debugToConsole("[getItemBasedOnIngot] Item: " + item.getItemStack().getType());
-        // Logging.debugToConsole("[getItemBasedOnIngot] Item Name: " + item.getItemStack().getItemMeta().getLocalizedName());
-        // Logging.debugToConsole("[getItemBasedOnIngot] Materials: " + item.getRecipeItems());
-        // Logging.debugToConsole("[getItemBasedOnIngot] Recipe Item Size: " + item.getRecipeItems().size());
-        // Logging.debugToConsole("[getItemBasedOnIngot] Materials Size: " + materials.size());
 
         if (materials.size() == item.getRecipeItems().size()) {
 

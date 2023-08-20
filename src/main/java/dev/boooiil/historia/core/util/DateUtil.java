@@ -8,7 +8,7 @@ import java.util.TimeZone;
  */
 public class DateUtil {
 
-    private static String months[] = { "January", "Febuary", "March", "April", "May", "June", "July", "August",
+    private static final String[] months = { "January", "February", "March", "April", "May", "June", "July", "August",
             "September", "October", "November", "December" };
 
     /**
@@ -32,7 +32,7 @@ public class DateUtil {
         int hour = calendar.get(Calendar.HOUR) + 1;
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
-        String delim = calendar.get(Calendar.AM) == 0 ? "AM " : "PM ";
+        String period = calendar.get(Calendar.AM_PM) == Calendar.AM ? "AM " : "PM ";
 
         string += month < 10 ? "0" + month + "-" : month + "-";
         string += day < 10 ? "0" + day + "-" : day + "-";
@@ -40,7 +40,7 @@ public class DateUtil {
         string += hour > 9 ? hour + ":" : "0" + hour + ":";
         string += minute < 10 ? "0" + minute + ":" : minute + ":";
         string += second < 10 ? "0" + second + "-" : second + "-";
-        string += delim;
+        string += period;
         string += "EST";
 
         return string;
@@ -91,12 +91,12 @@ public class DateUtil {
         int hour = calendar.get(Calendar.HOUR) + 1;
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
-        String delim = calendar.get(Calendar.AM) == 0 ? "AM " : "PM ";
+        String period = calendar.get(Calendar.AM_PM) == Calendar.AM ? "AM " : "PM ";
 
         string += hour > 9 ? hour + ":" : "0" + hour + ":";
         string += minute < 10 ? "0" + minute + ":" : minute + ":";
         string += second < 10 ? "0" + second + "-" : second + "-";
-        string += delim;
+        string += period;
 
         return string;
 

@@ -21,9 +21,11 @@ public class CommandProficiency implements CommandExecutor {
 
         if (args[0].equals("set")) {
 
-            if (Bukkit.getOnlinePlayers().contains(Bukkit.getPlayer(args[1]))) {
+            Player player = Bukkit.getPlayer(args[1]);
 
-                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(Bukkit.getPlayer(args[1]).getUniqueId(), true);
+            if (player != null && player.isOnline()) {
+
+                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), true);
 
                 String providedProficiency = args[2];
 

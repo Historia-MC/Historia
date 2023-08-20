@@ -11,7 +11,7 @@ public class CommandSet implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String alias, String[] arguments) {
 
-        if (arguments.length == 0) {
+        if (arguments.length > 2) {
 
             sender.sendMessage("Invalid arguments.");
             return true;

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConfigUtil {
     
-    private static List<String> configFileNames = new ArrayList<>();
+    private static final List<String> configFileNames = new ArrayList<>();
 
     static {
 
@@ -26,7 +26,7 @@ public class ConfigUtil {
 
     public static void checkFiles() {
 
-        Logging.infoToConsole("Checking existance and version of config files.");
+        Logging.infoToConsole("Checking existence and version of config files.");
 
         for (String fileName : configFileNames) {
             File diskFile = new File(Main.plugin().getDataFolder(), fileName);
@@ -47,11 +47,10 @@ public class ConfigUtil {
             if (diskVersion < jarVersion) { 
                 Logging.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName + " has been replaced on disk by the newer version " + jarVersion + ".");
                 Main.plugin().saveResource(fileName, true);
-                continue;
             }
         }
 
-        Logging.infoToConsole("Completed checks of existance and version of config files.");
+        Logging.infoToConsole("Completed checks of existence and version of config files.");
 
     }
 

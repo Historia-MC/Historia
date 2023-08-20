@@ -16,7 +16,7 @@ import java.util.List;
 
 public class InventorySwapWithCursor {
 
-    private InventoryClickEvent event;
+    private final InventoryClickEvent event;
 
     public InventorySwapWithCursor(InventoryClickEvent event) {
 
@@ -51,7 +51,7 @@ public class InventorySwapWithCursor {
         Damageable flintAndSteelDamageable = (Damageable) flintAndSteelMeta;
 
         // TODO: Comment this out on release
-        List<String> lore = new ArrayList<String>();
+        List<String> lore = new ArrayList<>();
 
         // TODO: Enable this on release
         // List<String> lore = arrowMeta.getLore();
