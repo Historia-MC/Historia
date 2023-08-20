@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -41,7 +42,7 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
         // if not sword or axe
         if (!matcher.matches()) return;
 
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().canApplySharpness()) {
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.APPLY_SHARPNESS)) {
             Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
         } else {
 

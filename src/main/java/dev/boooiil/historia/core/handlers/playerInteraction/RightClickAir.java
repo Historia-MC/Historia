@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -21,7 +22,7 @@ public class RightClickAir extends BaseInteractionEventBlock {
         if (this.getHeldItem() == null) return;
         if (this.getHeldItem().getType() != Material.BOW) return;
         if (this.getOffHandItem().getType() != Material.FLINT_AND_STEEL) return;
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().canIgniteOil()) return;
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.IGNITE_OIL)) return;
 
         ItemMeta handItemMeta = this.getHeldItem().getItemMeta();
         ItemMeta offhandItemMeta = this.getOffHandItem().getItemMeta();

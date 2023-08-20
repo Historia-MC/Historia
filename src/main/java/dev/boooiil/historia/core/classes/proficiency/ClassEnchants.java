@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.enchantments.Enchantment;
@@ -28,7 +29,7 @@ public class ClassEnchants {
 
             if (itemType.contains("_PICKAXE")) {
 
-                if (historiaPlayer.getProficiency().getSkills().hasEfficiencyPickaxe()) {
+                if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.EFFICIENCY_PICKAXE)) {
 
                     if (!itemMeta.hasEnchant(Enchantment.DIG_SPEED)) {
 
@@ -58,7 +59,7 @@ public class ClassEnchants {
 
             if (itemType.contains("_SHOVEL")) {
 
-                if (historiaPlayer.getProficiency().getSkills().hasEfficiencyShovel()) {
+                if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.EFFICIENCY_SHOVEL)) {
 
                     if (!itemMeta.hasEnchant(Enchantment.DIG_SPEED)) {
 
@@ -88,7 +89,7 @@ public class ClassEnchants {
 
             if (itemType.contains("_AXE")) {
 
-                if (historiaPlayer.getProficiency().getSkills().hasEfficiencyAxe()) {
+                if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.EFFICIENCY_AXE)) {
 
                     if (!itemMeta.hasEnchant(Enchantment.DIG_SPEED)) {
 
@@ -117,7 +118,7 @@ public class ClassEnchants {
 
             if (itemType.contains("BOOTS")) {
 
-                if (historiaPlayer.getProficiency().getSkills().hasFeatherFall()) {
+                if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.FEATHER_FALL)) {
 
                     if (!itemMeta.hasEnchant(Enchantment.PROTECTION_FALL)) {
 
@@ -147,7 +148,7 @@ public class ClassEnchants {
 
             if (itemType.contains("CROSSBOW")) {
 
-                if (historiaPlayer.getProficiency().getSkills().hasQuickCharge()) {
+                if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.QUICK_CHARGE)) {
 
                     if (!itemMeta.hasEnchant(Enchantment.QUICK_CHARGE)) {
 

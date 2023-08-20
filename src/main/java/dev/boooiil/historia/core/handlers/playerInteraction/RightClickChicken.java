@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.Material;
@@ -28,7 +29,7 @@ public class RightClickChicken extends BaseInteractionEventEntity {
         Logging.debugToConsole("[RightClickChicken] Entity is a chicken.");
         
         // if unable to extract feathers
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().canShearChickens()) return;
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.SHEAR_CHICKEN)) return;
 
         Logging.debugToConsole("[RightClickChicken] Player can shear chickens.");
 
