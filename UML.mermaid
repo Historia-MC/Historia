@@ -2,7 +2,6 @@ classDiagram
 
     Main ..|> ConfigurationLoader
     Main ..|> MySQLConnection
-    Main ..|> ConfigUtil
     Main ..|> MySQLHandler
 
     ConfigurationLoader o-- ArmorConfig
@@ -10,8 +9,6 @@ classDiagram
     ConfigurationLoader o-- GeneralConfig
     ConfigurationLoader o-- CustomItemConfig
     ConfigurationLoader o-- ToolConfig
-
-    BaseConfiguration~T~ ..|> ConfigUtil
 
     ArmorConfig <|-- BaseConfiguration
     WeaponConfig <|-- BaseConfiguration
@@ -33,8 +30,8 @@ classDiagram
 
     PlayerStorage --> "0..*" HistoriaPlayer : Contains
     HistoriaPlayer ..|> MySQLHandler
-    HistoriaPlayer <|-- BasePlayer
     HistoriaPlayer *.. Proficiency
+    HistoriaPlayer <|-- BasePlayer
     Proficiency o-- Skills
     Proficiency o-- Stats
 
@@ -90,14 +87,14 @@ classDiagram
 
     }
 
-    class ConfigUtil {
-
-        -List~String~ configFileNames$
-        +checkFiles()$ : void
-        +yamlFromSource(InputStream)$ : YamlConfiguration
-        +yamlFromSource(File)$ : YamlConfiguration
-
-    }
+%%    class ConfigUtil {
+%%
+%%        -List~String~ configFileNames$
+%%        +checkFiles()$ : void
+%%        +yamlFromSource(InputStream)$ : YamlConfiguration
+%%        +yamlFromSource(File)$ : YamlConfiguration
+%%
+%%    }
 
     class BaseConfiguration~T~ {
 
@@ -141,7 +138,6 @@ classDiagram
         +getAllMatchingShape(List~String~ shape): List~CraftedItem~
 
     }
-
 
     class WeaponConfig {
 
@@ -270,6 +266,7 @@ classDiagram
         +getMaxDurabilityValue() : Integer
 
     }
+
     class CustomItem {
 
         -String itemName
@@ -311,9 +308,6 @@ classDiagram
         +getMaxDurabilityValue() : Integer
 
     }
-
-    class ToolConfig
-
 
     class PlayerStorage {
 
@@ -421,31 +415,10 @@ classDiagram
 
     class Skills {
 
-        -boolean hasNameTag
-        -boolean hasFeathreFall
-        -boolean hasQuickCharge
-        -boolean hasEfficiencyPickaxe
-        -boolean hasEfficiencyShovel
-        -boolean hasEfficiencyAxe
-        -boolean hasChanceExtraOre
-        -boolean hasChanceExtraWood
-        -boolean hasChanceExtraFeathers
-        -boolean hasChancenoAnvilDamage
-        -boolean hasChanceNoConsumeBlock
-        -boolean hasLadderBypass
-        -boolean canIgniteOil
-        -boolean canBreakGrass
-        -boolean canTameAnimals
-        -boolean canSweepingEdge
-        -boolean canBreakBeehive
-        -boolean canApplyUnbreaking
-        -boolean canApplySharpness
-        -boolean canShearChickens
-        -boolean canHarvestBones
-        -boolean canHarvestLeather
-        -boolean canMakeKnowledgeBook
+        -HashMap&lt;SkillType, Boolean> skills
 
-        +getter() : boolean
+        +hasSkill(SkillType) : boolean
+        +toString() : String
 
     }
 
