@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.crafting;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.CraftingSources;
+import dev.boooiil.historia.core.classes.enums.experience.CraftingSources;
 import dev.boooiil.historia.core.classes.items.craftable.Armor;
 import dev.boooiil.historia.core.classes.items.craftable.CraftedItem;
 import dev.boooiil.historia.core.classes.items.craftable.Weapon;

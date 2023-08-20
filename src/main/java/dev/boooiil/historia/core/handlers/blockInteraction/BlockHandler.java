@@ -1,7 +1,8 @@
 package dev.boooiil.historia.core.handlers.blockInteraction;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.BlockSources;
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.FarmingSources;
+import dev.boooiil.historia.core.classes.enums.experience.BlockSources;
+import dev.boooiil.historia.core.classes.enums.experience.FarmingSources;
+import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -40,7 +41,7 @@ public class BlockHandler extends BaseBlockHandler {
 
         if (breakEvent.getBlock().getType().toString().contains("LOG")) {
 
-            if (historiaPlayer.getProficiency().getSkills().hasChanceExtraWood()) {
+            if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOD)) {
 
                 float doubleDropChance = 0.05f;
                 float dropChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
@@ -65,7 +66,7 @@ public class BlockHandler extends BaseBlockHandler {
 
         else if (breakEvent.getBlock().getType().toString().contains("BEEHIVE")) {
 
-            if (!historiaPlayer.getProficiency().getSkills().canBreakBeehive()) {
+            if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.BREAK_BEEHIVE)) {
 
                 breakEvent.setCancelled(true);
                 Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
@@ -80,7 +81,7 @@ public class BlockHandler extends BaseBlockHandler {
 
         // TODO: check for ores
 
-        if (historiaPlayer.getProficiency().getSkills().hasChanceNoConsumeBlock()) {
+        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_NO_CONSUME_BLOCK)) {
 
             placeEvent.setCancelled(true);
             placeEvent.getBlockPlaced().setType(placeEvent.getBlockPlaced().getType());

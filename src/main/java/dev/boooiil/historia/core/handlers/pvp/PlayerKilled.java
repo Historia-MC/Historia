@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.pvp;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.CombatSources;
+import dev.boooiil.historia.core.classes.enums.experience.CombatSources;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.spawnkill.classes.TimedUser;
 import dev.boooiil.historia.spawnkill.handlers.SpawnKillHandler;

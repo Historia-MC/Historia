@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.events.pvp;
 
-import dev.boooiil.historia.core.classes.enums.ExperienceTypes.CombatSources;
+import dev.boooiil.historia.core.classes.enums.experience.CombatSources;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.handlers.pvp.PlayerKilled;
