@@ -632,12 +632,14 @@ Light_Wooden_Pitchfork:
     display-name: §7Wood Pitchfork
     loc-name: Light_Wood_Pitchfork
     lore:
-      [
-        "",
-        "§7A wooden pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, wooden pitchfork."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -657,12 +659,14 @@ Light_Wooden_Trident:
     display-name: §7Wood Trident
     loc-name: Light_Wood_Trident
     lore:
-      [
-        "",
-        "§7A wooden trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, wooden trident."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -682,12 +686,14 @@ Light_Tin_Pitchfork:
     display-name: §7Tin Pitchfork
     loc-name: Light_Tin_Pitchfork
     lore:
-      [
-        "",
-        "§7A tin pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, tin pitchfork."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -707,12 +713,14 @@ Light_Tin_Trident:
     display-name: §7Tin Trident
     loc-name: Light_Tin_Trident
     lore:
-      [
-        "",
-        "§7A tin trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, tin pitchfork."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -732,12 +740,14 @@ Medium_Tin_Pitchfork:
     display-name: §7Tin Pitchfork
     loc-name: Medium_Tin_Pitchfork
     lore:
-      [
-        "",
-        "§7A tin pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, tin pitchfork."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -757,12 +767,14 @@ Medium_Tin_Trident:
     display-name: §7Tin Trident
     loc-name: Medium_Tin_Trident
     lore:
-      [
-        "",
-        "§7A tin trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, tin trident."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -782,12 +794,14 @@ Heavy_Tin_Pitchfork:
     display-name: §7Tin Pitchfork
     loc-name: Heavy_Tin_Pitchfork
     lore:
-      [
-        "",
-        "§7A tin pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, tin pitchfork."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -807,12 +821,14 @@ Heavy_Tin_Trident:
     display-name: §7Tin Trident
     loc-name: Heavy_Tin_Trident
     lore:
-      [
-        "",
-        "§7A tin trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, tin trident."
+      - ""
+      - "§oA fast low damage weapon"
+      - "§oalso usable as a throwable."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [4.5, 6.0]
   speed: [1.3, 1.6]
@@ -832,12 +848,14 @@ Heavy_Stone_Pitchfork:
     display-name: §7Stone Pitchfork
     loc-name: Heavy_Stone_Pitchfork
     lore:
-      [
-        "",
-        "§7A stone pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, stone pitchfork."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.0, 6.5]
   speed: [1.3, 1.6]
@@ -857,12 +875,14 @@ Heavy_Stone_Trident:
     display-name: §7Stone Trident
     loc-name: Heavy_Stone_Trident
     lore:
-      [
-        "",
-        "§7A stone trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, stone trident."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.0, 6.5]
   speed: [1.3, 1.6]
@@ -882,12 +902,14 @@ Light_Iron_Pitchfork:
     display-name: §7Iron Pitchfork
     loc-name: Light_Iron_Pitchfork
     lore:
-      [
-        "",
-        "§7An iron pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, iron pitchfork."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -907,12 +929,14 @@ Light_Iron_Trident:
     display-name: §7Iron Trident
     loc-name: Light_Iron_Trident
     lore:
-      [
-        "",
-        "§7An iron trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, iron trident."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -932,12 +956,14 @@ Medium_Iron_Pitchfork:
     display-name: §7Iron Pitchfork
     loc-name: Medium_Iron_Pitchfork
     lore:
-      [
-        "",
-        "§7An iron pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, iron pitchfork."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -957,12 +983,14 @@ Medium_Iron_Trident:
     display-name: §7Iron Trident
     loc-name: Medium_Iron_Trident
     lore:
-      [
-        "",
-        "§7An iron trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, iron trident."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -982,12 +1010,14 @@ Heavy_Iron_Pitchfork:
     display-name: §7Iron Pitchfork
     loc-name: Heavy_Iron_Pitchfork
     lore:
-      [
-        "",
-        "§7An iron pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, iron pitchfork."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -1007,12 +1037,14 @@ Heavy_Iron_Trident:
     display-name: §7Iron Trident
     loc-name: Heavy_Iron_Trident
     lore:
-      [
-        "",
-        "§7An iron trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, iron trident."
+      - ""
+      - "§oa fast medium damage weapon"
+      - "§oforged with more durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [5.5, 7.0]
   speed: [1.3, 1.6]
@@ -1032,12 +1064,14 @@ Light_Steel_Pitchfork:
     display-name: §7Steel Pitchfork
     loc-name: Light_Steel_Pitchfork
     lore:
-      [
-        "",
-        "§7A steel pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, steel pitchfork."
+      - ""
+      - "§oa fast high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
@@ -1057,12 +1091,14 @@ Light_Steel_Trident:
     display-name: §7Steel Trident
     loc-name: Light_Steel_Trident
     lore:
-      [
-        "",
-        "§7A steel trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §clight§7, steel trident."
+      - ""
+      - "§oa fast high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
@@ -1082,12 +1118,14 @@ Medium_Steel_Pitchfork:
     display-name: §7Steel Pitchfork
     loc-name: Medium_Steel_Pitchfork
     lore:
-      [
-        "",
-        "§7A steel pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, steel pitchfork."
+      - ""
+      - "§oa fast high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
@@ -1107,12 +1145,14 @@ Medium_Steel_Trident:
     display-name: §7Steel Trident
     loc-name: Medium_Steel_Trident
     lore:
-      [
-        "",
-        "§7A steel trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cmedium§7, steel trident."
+      - ""
+      - "§oa fast high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
@@ -1132,12 +1172,14 @@ Heavy_Steel_Pitchfork:
     display-name: §7Steel Pitchfork
     loc-name: Heavy_Steel_Pitchfork
     lore:
-      [
-        "",
-        "§7A steel pitchfork.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, steel pitchfork."
+      - ""
+      - "§oa high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
@@ -1157,12 +1199,14 @@ Heavy_Steel_Trident:
     display-name: §7Steel Trident
     loc-name: Heavy_Steel_Trident
     lore:
-      [
-        "",
-        "§7A steel trident.",
-        "Fast speed with weak damage", 
-        "and little knockback. ",
-      ]
+      - ""
+      - "§7A §cheavy§7, steel trident."
+      - ""
+      - "§oa high damage weapon"
+      - "§oforged with great durability."
+      - ""
+      - "§9--------------------"
+      - ""
 
   damage: [6.0, 7.5]
   speed: [1.3, 1.6]
