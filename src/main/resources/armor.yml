@@ -153,7 +153,7 @@ Light_Leather_Leggings:
     loc-name: Light_Leather_Leggings
     lore:
       - ""
-      - "§7A §clight§7, leather legging."
+      - "§7A §clight§7, pair of leather leggings."
       - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
@@ -177,7 +177,7 @@ Medium_Leather_Leggings:
     loc-name: Medium_Leather_Leggings
     lore:
       - ""
-      - "§7A §cmedium§7, leather legging."
+      - "§7A §cmedium§7, pair of leather leggings."
       - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
@@ -201,7 +201,7 @@ Heavy_Leather_Leggings:
     loc-name: Heavy_Leather_Leggings
     lore:
       - ""
-      - "§7A §cheavy§7, leather legging."
+      - "§7A §cheavy§7, pair of leather leggings."
       - ""
       - "§oServes good protection"
       - "§oagainst the elements."
@@ -225,7 +225,7 @@ Light_Leather_Boots:
     loc-name: Light_Leather_Boots
     lore:
       - ""
-      - "§7A §clight§7, leather boots."
+      - "§7A §clight§7, pair of leather boots."
       - ""
       - "§oServes a little protection"
       - "§oagainst the elements."
@@ -249,7 +249,7 @@ Medium_Leather_Boots:
     loc-name: Medium_Leather_Boots
     lore:
       - ""
-      - "§7A §cmedium§7, leather boots."
+      - "§7A §cmedium§7, pair of leather boots."
       - ""
       - "§oServes fair protection"
       - "§oagainst the elements."
@@ -273,7 +273,7 @@ Heavy_Leather_Boots:
     loc-name: Heavy_Leather_Boots
     lore:
       - ""
-      - "§7A §cheavy§7, leather boots."
+      - "§7A §cheavy§7, pair of leather boots."
       - ""
       - "§oServes good protection"
       - "§oagainst the elements."
@@ -345,7 +345,7 @@ Light_Tin_Leggings:
     loc-name: Light_Tin_Leggings
     lore:
       - ""
-      - "§7A §clight§7, tin legging."
+      - "§7A §clight§7, pair of tin leggings."
       - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron."
@@ -369,7 +369,7 @@ Light_Tin_Boots:
     loc-name: Light_Tin_Boots
     lore:
       - ""
-      - "§7A §clight§7, tin boots."
+      - "§7A §clight§7, pair of tin boots."
       - ""
       - "§oBetter protection than leather"
       - "§obut not as bulky as iron"
@@ -537,7 +537,7 @@ Light_Bronze_Leggings:
     loc-name: Light_Bronze_Leggings
     lore:
       - ""
-      - "§7A §clight§7, bronze legging."
+      - "§7A §clight§7, pair of bronze leggings."
       - ""
       - "§oMore resilient than tin"
       - "§oand more fashionable too."
@@ -561,7 +561,7 @@ Medium_Bronze_Leggings:
     loc-name: Medium_Bronze_Leggings
     lore:
       - ""
-      - "§7A §cmedium§7, bronze legging."
+      - "§7A §cmedium§7, pair of bronze leggings."
       - ""
       - "§oFairly more resilient than tin"
       - "§oand more fashionable too"
@@ -585,7 +585,7 @@ Heavy_Bronze_Leggings:
     loc-name: Heavy_Bronze_Leggings
     lore:
       - ""
-      - "§7A §cheavy§7, bronze legging."
+      - "§7A §cheavy§7, pair of bronze leggings."
       - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
@@ -609,7 +609,7 @@ Light_Bronze_Boots:
     loc-name: Light_Bronze_Boots
     lore:
       - ""
-      - "§7A §clight§7, bronze boots."
+      - "§7A §clight§7, pair of bronze boots."
       - ""
       - "§oMore resilient than tin"
       - "§oand more fashionable too."
@@ -633,7 +633,7 @@ Medium_Bronze_Boots:
     loc-name: Medium_Bronze_Boots
     lore:
       - ""
-      - "§7A §cmedium§7, bronze boots."
+      - "§7A §cmedium§7, pair of bronze boots."
       - ""
       - "§oFairly more resilient than tin"
       - "§oand more fashionable too"
@@ -657,7 +657,7 @@ Heavy_Bronze_Boots:
     loc-name: Heavy_Bronze_Boots
     lore:
       - ""
-      - "§7A §cheavy§7, bronze boots."
+      - "§7A §cheavy§7, pair of bronze boots."
       - ""
       - "§oWearing this heeds resemblance"
       - "§oto the warriors of old."
@@ -825,7 +825,7 @@ Light_Iron_Leggings:
     loc-name: Light_Iron_Leggings
     lore:
       - ""
-      - "§7A §clight§7, iron legging."
+      - "§7A §clight§7, pair of iron leggings."
       - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable"
@@ -849,7 +849,7 @@ Medium_Iron_Leggings:
     loc-name: Medium_Iron_Leggings
     lore:
       - ""
-      - "§7A §cmedium§7, iron legging."
+      - "§7A §cmedium§7, pair of iron leggings."
       - ""
       - "§oArmor worn by strong soldiers"
       - "§oforged with extra reliability."
@@ -873,7 +873,7 @@ Heavy_Iron_Leggings:
     loc-name: Heavy_Iron_Leggings
     lore:
       - ""
-      - "§7A §cheavy§7, iron legging."
+      - "§7A §cheavy§7, pair of iron leggings."
       - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability."
@@ -897,7 +897,7 @@ Light_Iron_Boots:
     loc-name: Light_Iron_Boots
     lore:
       - ""
-      - "§7A §clight§7, iron boots."
+      - "§7A §clight§7, pair of iron boots."
       - ""
       - "§oCommon armor of todays soldiers"
       - "§oas it is reliable and affordable."
@@ -921,7 +921,7 @@ Medium_Iron_Boots:
     loc-name: Medium_Iron_Boots
     lore:
       - ""
-      - "§7A §cmedium§7, iron boots."
+      - "§7A §cmedium§7, pair of iron boots."
       - ""
       - "§oArmor worn by strong soldiers"
       - "§oforged with extra reliability."
@@ -945,7 +945,7 @@ Heavy_Iron_Boots:
     loc-name: Heavy_Iron_Boots
     lore:
       - ""
-      - "§7A §cheavy§7, iron boots."
+      - "§7A §cheavy§7, pair of iron boots."
       - ""
       - "§oArmor worn by renown soldiers"
       - "§oforged with extra durability."
@@ -1113,7 +1113,7 @@ Light_Steel_Leggings:
     loc-name: Light_Steel_Leggings
     lore:
       - ""
-      - "§7A §clight§7, steel legging."
+      - "§7A §clight§7, pair of steel leggings."
       - ""
       - "§oA recent invention"
       - "§oforged into a lighter form."
@@ -1137,7 +1137,7 @@ Medium_Steel_Leggings:
     loc-name: Medium_Steel_Leggings
     lore:
       - ""
-      - "§7A §cmedium§7, steel legging."
+      - "§7A §cmedium§7, pair of steel leggings."
       - ""
       - "§oRecently invented alloy"
       - "§oforged into powerful armor."
@@ -1161,7 +1161,7 @@ Heavy_Steel_Leggings:
     loc-name: Heavy_Steel_Leggings
     lore:
       - ""
-      - "§7A §cheavy§7, steel legging."
+      - "§7A §cheavy§7, pair of steel leggings."
       - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
@@ -1185,7 +1185,7 @@ Light_Steel_Boots:
     loc-name: Light_Steel_Boots
     lore:
       - ""
-      - "§7A §clight§7, steel boots."
+      - "§7A §clight§7, pair of steel boots."
       - ""
       - "§oA recent invention"
       - "§oForged into a lighter form"
@@ -1209,7 +1209,7 @@ Medium_Steel_Boots:
     loc-name: Medium_Steel_Boots
     lore:
       - ""
-      - "§7A §cmedium§7, steel boots."
+      - "§7A §cmedium§7, pair of steel boots."
       - ""
       - "§oRecently invented alloy"
       - "§oforged into powerful armor."
@@ -1233,7 +1233,7 @@ Heavy_Steel_Boots:
     loc-name: Heavy_Steel_Boots
     lore:
       - ""
-      - "§7A §cheavy§7, steel boots."
+      - "§7A §cheavy§7, pair of steel boots."
       - ""
       - "§oThe invention of steel"
       - "§ocreated histories strongest armor."
