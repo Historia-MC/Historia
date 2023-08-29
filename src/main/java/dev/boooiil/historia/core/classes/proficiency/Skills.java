@@ -1,9 +1,14 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
 import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * This class represents the skills of a player in the game. It contains boolean
@@ -12,7 +17,8 @@ import java.util.HashMap;
  */
 public class Skills {
 
-    private final HashMap<SkillType, Boolean> skills = new HashMap<>();
+    private final EnumMap<SkillType, Boolean> skills = new EnumMap<>(SkillType.class);
+    private final HashMap<Pattern, Enchantment> skillEnchants = new HashMap<>();
 
     public Skills(FileConfiguration config, String root) {
 
@@ -40,10 +46,33 @@ public class Skills {
         skills.put(SkillType.HARVEST_LEATHER, config.getBoolean(root + ".harvestLeather"));
         skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, config.getBoolean(root + ".makeKnowledgeBook"));
 
+        for (String item : config.getConfigurationSection(root + ".skills.enchants").getKeys(false)) {
+
+            Pattern pattern = Pattern.compile(item);
+            Enchantment enchantment = Enchantment.getByName(config.getString(root + ".skills.enchants." + item));
+            skillEnchants.put(pattern, enchantment);
+
+        }
+
     }
 
     public boolean hasSkill(SkillType skill) {
         return skills.get(skill);
+    }
+
+    public boolean hasSkillEnchants() {
+        return !skillEnchants.isEmpty();
+    }
+    public Enchantment getSkillEnchantment(Material material) {
+
+        for (Map.Entry<Pattern, Enchantment> entry : skillEnchants.entrySet()) {
+
+            if (entry.getKey().matcher(material.toString()).matches())
+                return entry.getValue();
+
+        }
+
+        return null;
     }
 
     @Override
