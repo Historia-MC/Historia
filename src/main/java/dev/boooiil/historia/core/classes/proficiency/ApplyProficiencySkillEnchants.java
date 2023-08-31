@@ -35,7 +35,7 @@ public class ApplyProficiencySkillEnchants {
 
                 }
 
-                else if (enchant == null) {
+                else if (enchant == null && itemMeta.hasEnchants()) {
 
                     remove(item, historiaPlayer);
 
@@ -44,6 +44,8 @@ public class ApplyProficiencySkillEnchants {
             } else {
 
                 if (item.getItemMeta().hasEnchants()) {
+
+                    Logging.debugToConsole(item.getEnchantments().toString());
 
                     remove(item, historiaPlayer);
 
