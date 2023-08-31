@@ -415,9 +415,12 @@ classDiagram
 
     class Skills {
 
-        -HashMap&lt;SkillType, Boolean> skills
+        -EnumMap&lt;SkillType, Boolean> skills
+        -HashMap&lt;Pattern, Enchantment> skillEnchantments
 
         +hasSkill(SkillType) : boolean
+        +hasSkilLEnchants(Enchantment) : boolean
+        +getSkillEnchantment(Enchantment) : Enchantment
         +toString() : String
 
     }
