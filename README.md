@@ -49,10 +49,10 @@ To be considered as a release, the following requirements must be met:
 - [x] Check if player can make high tier armor.
 - [ ] Check if player can generate a knowledge book.
 - [ ] Increase breath underwater for fishermen (enchant of respiration)
-- [ ] Allow building of tridents for fishermen and farmers.
+- [x] Allow building of tridents for fishermen and farmers.
 - [ ] Allow holding bonemeal for farmers.
 - [ ] Allow for increased yields for farmers based on level.
-- [ ] Allow for greater leather drops for hunters.
+- [x] Allow for greater leather drops for hunters.
 - [x] Allow for architects to place ladders and scaffolding in other towns.
 - [x] Allow for apothecaries to apply poison to arrows.
 
@@ -61,8 +61,8 @@ To be considered as a release, the following requirements must be met:
 - [x] Get experience increase for successful proficiency action.
 - [x] Check level up condition and apply level up.
 - [x] Calculate dealth pentalty to experience and level down where necessary.
-- [ ] Calculate ambient temperature.
-- [ ] Calculate armor weight and temperature.
+- [x] Calculate ambient temperature.
+- [x] Calculate armor weight and temperature.
 - [ ] Check exhaustion condition and apply debuffs.
 
 ## [Crafting]
@@ -76,9 +76,8 @@ To be considered as a release, the following requirements must be met:
 - [x] Apply randomized durability value based on range and level.
 - [x] Apply randomized attack speed value based on range and level.
 - [x] Apply randomized knockback value based on range and level.
-- [ ] Apply randomized critical chance value based on range and level (?).
 - [x] Apply randomized sweeping edge damage value based on range and level.
-- [ ] Add trident recipe and weights in the weapons yml.
+- [x] Add trident recipe and weights in the weapons yml.
 
 ### [Armor]
 
@@ -129,10 +128,10 @@ To be considered as a release, the following requirements must be met:
 
 ### [Tools]
 
-- [ ] Create tools that match custom resource types.
-- [ ] Create object for each tool.
-- [ ] Preload tool objects on init into hashmap.
-- [ ] Getter for tool object.
+- [x] Create tools that match custom resource types.
+- [x] Create object for each tool.
+- [x] Preload tool objects on init into hashmap.
+- [x] Getter for tool object.
 
 ### [Other]
 

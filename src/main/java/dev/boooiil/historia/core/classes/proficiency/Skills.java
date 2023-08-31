@@ -1,9 +1,15 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
 import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
+import dev.boooiil.historia.core.util.Logging;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * This class represents the skills of a player in the game. It contains boolean
@@ -12,7 +18,8 @@ import java.util.HashMap;
  */
 public class Skills {
 
-    private final HashMap<SkillType, Boolean> skills = new HashMap<>();
+    private final EnumMap<SkillType, Boolean> skills = new EnumMap<>(SkillType.class);
+    private final HashMap<Pattern, Enchantment> skillEnchants = new HashMap<>();
 
     public Skills(FileConfiguration config, String root) {
 
@@ -40,10 +47,46 @@ public class Skills {
         skills.put(SkillType.HARVEST_LEATHER, config.getBoolean(root + ".harvestLeather"));
         skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, config.getBoolean(root + ".makeKnowledgeBook"));
 
+        if (config.contains(root + ".enchants")) {
+
+            for (String itemNumber : config.getConfigurationSection(root + ".enchants").getKeys(false)) {
+
+                String regex = config.getString(root + ".enchants." + itemNumber + ".regex");
+
+                Logging.debugToConsole("Adding weapon regex " + regex + " to skill enchants");
+                Pattern pattern = Pattern.compile(regex);
+
+                for (String enchantment : config.getStringList(root + ".enchants." + itemNumber + ".values")) {
+
+                    Logging.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
+                    Enchantment enchant = Enchantment.getByName(enchantment);
+                    skillEnchants.put(pattern, enchant);
+
+                }
+
+            }
+
+        }
+
     }
 
     public boolean hasSkill(SkillType skill) {
         return skills.get(skill);
+    }
+
+    public boolean hasSkillEnchants() {
+        return !skillEnchants.isEmpty();
+    }
+    public Enchantment getSkillEnchantment(Material material) {
+
+        for (Map.Entry<Pattern, Enchantment> entry : skillEnchants.entrySet()) {
+
+            if (entry.getKey().matcher(material.toString()).matches())
+                return entry.getValue();
+
+        }
+
+        return null;
     }
 
     @Override
