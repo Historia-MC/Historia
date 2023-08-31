@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
 import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
+import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -46,11 +47,24 @@ public class Skills {
         skills.put(SkillType.HARVEST_LEATHER, config.getBoolean(root + ".harvestLeather"));
         skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, config.getBoolean(root + ".makeKnowledgeBook"));
 
-        for (String item : config.getConfigurationSection(root + ".skills.enchants").getKeys(false)) {
+        if (config.contains(root + ".enchants")) {
 
-            Pattern pattern = Pattern.compile(item);
-            Enchantment enchantment = Enchantment.getByName(config.getString(root + ".skills.enchants." + item));
-            skillEnchants.put(pattern, enchantment);
+            for (String itemNumber : config.getConfigurationSection(root + ".enchants").getKeys(false)) {
+
+                String regex = config.getString(root + ".enchants." + itemNumber + ".regex");
+
+                Logging.debugToConsole("Adding weapon regex " + regex + " to skill enchants");
+                Pattern pattern = Pattern.compile(regex);
+
+                for (String enchantment : config.getStringList(root + ".enchants." + itemNumber + ".values")) {
+
+                    Logging.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
+                    Enchantment enchant = Enchantment.getByName(enchantment);
+                    skillEnchants.put(pattern, enchant);
+
+                }
+
+            }
 
         }
 
