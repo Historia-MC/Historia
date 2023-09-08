@@ -28,18 +28,60 @@ public class TownyHandler {
      * @return If the player is able to break the block.
      */
 
-    public static boolean getPermissionByMaterial(Player player, Location location, Material material) {
+    public static boolean getBreakPermissions(Player player, Location location, Material material) {
+
+        boolean hasPermission;
 
         try {
 
-            return PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.DESTROY);
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.DESTROY);
 
         } catch (Exception e) {
 
             System.out.println("§7[§9Historia§7] There was an error checking Towny permissions.");
-            return false;
+            hasPermission = false;
 
         }
+
+        return hasPermission;
+
+    }
+
+    public static boolean getPlacePermissions(Player player, Location location, Material material) {
+
+        boolean hasPermission;
+
+        try {
+
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.BUILD);
+
+        } catch (Exception e) {
+
+            System.out.println("§7[§9Historia§7] There was an error checking Towny permissions.");
+            hasPermission = false;
+
+        }
+
+        return hasPermission;
+
+    }
+
+    public static boolean getUsePermissions(Player player, Location location, Material material) {
+
+        boolean hasPermission;
+
+        try {
+
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.SWITCH);
+
+        } catch (Exception e) {
+
+            System.out.println("§7[§9Historia§7] There was an error checking Towny permissions.");
+            hasPermission = false;
+
+        }
+
+        return hasPermission;
 
     }
 
