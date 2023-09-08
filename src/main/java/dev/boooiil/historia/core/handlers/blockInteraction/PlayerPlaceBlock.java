@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.handlers.blockInteraction;
 import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.dependents.towny.TownyHandler;
+import dev.boooiil.historia.core.dependents.Permissions;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockPlaceEvent;
 
@@ -24,7 +24,7 @@ public class PlayerPlaceBlock {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
             if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.LADDER_BYPASS)) return;
-            if (TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getBlock().getType())) return;
+            if (Permissions.canPlaceBlock(event.getPlayer(), event.getBlock())) return;
         
             event.getPlayer().getWorld().setBlockData(event.getBlock().getLocation(), event.getBlock().getBlockData().clone());
             event.getItemInHand().setAmount(event.getItemInHand().getAmount() - 1);

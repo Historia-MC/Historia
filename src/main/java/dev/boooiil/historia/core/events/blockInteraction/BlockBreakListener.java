@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.events.blockInteraction;
 
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.dependents.towny.TownyHandler;
+import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.blockInteraction.BlockHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,8 +21,9 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
+
         // if the player can't break the block, cancel the event.
-        if (!TownyHandler.getPermissionByMaterial(event.getPlayer(), event.getPlayer().getLocation(), event.getBlock().getType())) {
+        if (!Permissions.canBreakBlock(event.getPlayer(), event.getBlock())) {
 
             event.setCancelled(true);
 
@@ -31,8 +32,6 @@ public class BlockBreakListener implements Listener {
         }
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
-
-
 
             BlockHandler blockHandler = new BlockHandler(event, historiaPlayer);
 
