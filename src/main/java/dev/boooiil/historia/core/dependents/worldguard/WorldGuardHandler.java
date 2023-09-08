@@ -22,7 +22,10 @@ public class WorldGuardHandler {
      * @param location The location of the block you want to check.
      * @return A boolean value.
      */
-    public static boolean getPermissions(Player player, Location location) {
+    public static boolean getBuildPermissions(Player player, Location location) {
+
+        boolean hasPermission;
+
         try {
 
             LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
@@ -32,12 +35,62 @@ public class WorldGuardHandler {
             RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
             RegionQuery query = container.createQuery();
 
-            return query.testState(worldGuardLocation, localPlayer, Flags.BUILD);
+            hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_PLACE);
 
         } catch (Exception e) {
             System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
-            return false;
+            hasPermission = false;
         }
+
+        return hasPermission;
+
+    }
+
+    public static boolean getBreakPermissions(Player player, Location location) {
+
+        boolean hasPermission;
+
+        try {
+
+            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            World worldGuardWorld = localPlayer.getWorld();
+            com.sk89q.worldedit.util.Location worldGuardLocation = new com.sk89q.worldedit.util.Location(
+                    worldGuardWorld, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = container.createQuery();
+
+            hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_BREAK);
+
+        } catch (Exception e) {
+            System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
+            hasPermission = false;
+        }
+
+        return hasPermission;
+
+    }
+
+    public static boolean getUsePermissions(Player player, Location location) {
+
+        boolean hasPermission;
+
+        try {
+
+            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            World worldGuardWorld = localPlayer.getWorld();
+            com.sk89q.worldedit.util.Location worldGuardLocation = new com.sk89q.worldedit.util.Location(
+                    worldGuardWorld, location.getBlockX(), location.getBlockY(), location.getBlockZ());
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = container.createQuery();
+
+            hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.USE);
+
+        } catch (Exception e) {
+            System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
+            hasPermission = false;
+        }
+
+        return hasPermission;
 
     }
 
