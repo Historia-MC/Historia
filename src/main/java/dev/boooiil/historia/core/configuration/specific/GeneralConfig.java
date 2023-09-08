@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.configuration.specific;
 
 import dev.boooiil.historia.core.classes.enums.file.FileKeys;
-import dev.boooiil.historia.core.util.FileGetter;
+import dev.boooiil.historia.core.util.FileIO;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public class GeneralConfig {
     
-    public static YamlConfiguration configuration = FileGetter.get(FileKeys.CONFIG);
+    public static YamlConfiguration configuration = FileIO.get(FileKeys.CONFIG);
 
     public static boolean debug;
 

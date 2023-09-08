@@ -25,7 +25,7 @@ import dev.boooiil.historia.core.events.pvp.PlayerRespawnListener;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
-import dev.boooiil.historia.core.util.ConfigUtil;
+import dev.boooiil.historia.core.util.FileIO;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -71,7 +71,7 @@ public class Main extends JavaPlugin {
         deregisterRecipes();
 
         // Check config files
-        ConfigUtil.checkFiles();
+        FileIO.checkFiles();
 
     }
 

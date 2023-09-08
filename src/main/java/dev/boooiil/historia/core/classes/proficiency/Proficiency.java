@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.classes.proficiency;
 
 import dev.boooiil.historia.core.classes.enums.file.FileKeys;
-import dev.boooiil.historia.core.util.FileGetter;
+import dev.boooiil.historia.core.util.FileIO;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.regex.Matcher;
@@ -34,7 +34,7 @@ public class Proficiency {
      * @param proficiencyName the name of the proficiency
      */
     public Proficiency(String proficiencyName) {
-        FileConfiguration config = FileGetter.get(FileKeys.PROFICIENCY);
+        FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
         if (config.contains(proficiencyName)) {
             this.name = proficiencyName;
