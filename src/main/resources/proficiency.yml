@@ -1,4 +1,4 @@
-version: 8
+version: 10
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -7,6 +7,9 @@ version: 8
 # ANIMAL: BREED_ANIMAL, TAME_ANIMAL
 # FARMING: CROP_PLACE, CROP_BREAK
 # CRAFTING: WEAPON_CRAFT, TOOL_CRAFT, ARMOR_CRAFT
+
+# WEAPON ENCHANTS CAN USE REGEX TO MATCH ITEMS
+# EX: .*_AXE, (IRON|WOOD)_SWORD
 
 None:
 
@@ -52,7 +55,11 @@ Warrior:
   skills:
     nametag: true
     sweepingEdge: true
-    applySharpness: true
+    enchants:
+      1:
+        regex: .*_SWORD|.*_AXE
+        values:
+          - "DAMAGE_ALL"
 
 Archer:
 
@@ -77,9 +84,13 @@ Archer:
 
   skills:
     nametag: true
-    quickCharge: true
     igniteOil: true
-    
+    enchants:
+      1:
+        regex: CROSSBOW
+        values:
+          - "QUICK_CHARGE"
+
 Fisherman:
 
   stats:
@@ -128,8 +139,11 @@ Miner:
   skills:
     nametag: true
     extraOreChance: true
-    efficiencyPickaxe: true
-    efficiencyShovel: true
+    enchants:
+      1:
+        regex: .*_PICKAXE|.*_SHOVEL
+        values:
+          - "EFFICIENCY"
 
 Blacksmith:
 
@@ -156,8 +170,8 @@ Blacksmith:
   skills:
     nametag: true
     applyUnbreaking: true
-    chanceNoAnvilDamage: true
     applySharpness: true
+    chanceNoAnvilDamage: true
 
 Huntsman:
 
@@ -238,8 +252,12 @@ Architect:
   skills:
     nametag: true
     chanceNoConsumeBlock: true
-    featherFall: true
     ladderBypass: true
+    enchants:
+      1:
+        regex: .*_BOOTS
+        values:
+          - "FEATHER_FALLING"
 
 Lumberjack:
 
@@ -265,8 +283,12 @@ Lumberjack:
   skills:
     nametag: true
     chanceExtraWood: true
-    efficiencyAxe: true
     applySharpness: true
+    enchants:
+      1:
+        regex: .*_AXE
+        values:
+          - "EFFICIENCY"
 
 Farmer:
 
@@ -288,7 +310,7 @@ Farmer:
     weaponProficiency: [ Trident, Light ]
     armorProficiency: [ Light, Medium ]
     experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
-            
+
   skills:
     nametag: true
     breakBeehive: true
