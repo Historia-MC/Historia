@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.events.blockInteraction.BlockFromToListener;
 import dev.boooiil.historia.core.events.blockInteraction.BlockPlaceListener;
 import dev.boooiil.historia.core.events.connection.PlayeQuitListener;
 import dev.boooiil.historia.core.events.connection.PlayerJoinListener;
-import dev.boooiil.historia.core.events.crafting.PrepareItemCraftListener;
 import dev.boooiil.historia.core.events.experience.PlayerExpChangeListener;
 import dev.boooiil.historia.core.events.food.FoodLevelChangeListener;
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener;
@@ -87,7 +86,6 @@ public class Main extends JavaPlugin {
         registerEvent(new InventoryClickListener());
         registerEvent(new BlockBreakListener());
         registerEvent(new BlockPlaceListener());
-        registerEvent(new PrepareItemCraftListener());
         registerEvent(new PlayerJoinListener());
         registerEvent(new PlayeQuitListener());
         //registerEvent(new PlayerRightClickAir());
