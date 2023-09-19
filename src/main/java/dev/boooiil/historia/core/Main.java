@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.events.blockInteraction.BlockFromToListener;
 import dev.boooiil.historia.core.events.blockInteraction.BlockPlaceListener;
 import dev.boooiil.historia.core.events.connection.PlayeQuitListener;
 import dev.boooiil.historia.core.events.connection.PlayerJoinListener;
-import dev.boooiil.historia.core.events.crafting.CraftItemListener;
 import dev.boooiil.historia.core.events.crafting.PrepareItemCraftListener;
 import dev.boooiil.historia.core.events.experience.PlayerExpChangeListener;
 import dev.boooiil.historia.core.events.food.FoodLevelChangeListener;
@@ -93,7 +92,6 @@ public class Main extends JavaPlugin {
         registerEvent(new BlockBreakListener());
         registerEvent(new BlockPlaceListener());
         registerEvent(new PrepareItemCraftListener());
-        registerEvent(new CraftItemListener());
         registerEvent(new PlayerDeathListener());
         registerEvent(new EntityDamageByEntityListener());
         registerEvent(new PlayerJoinListener());
@@ -109,7 +107,6 @@ public class Main extends JavaPlugin {
         registerCommand("debug", new CommandDebug());
         registerCommand("stats", new CommandStats());
         registerCommand("set", new CommandSet());
-        registerCommand("give", new CommandGive());
         registerCommand("proficiency", new CommandProficiency());
 
         registerRunnable(new ClassEnchantsRunnable());

@@ -15,36 +15,14 @@
  */
 package dev.boooiil.historia.core.configuration;
 
-import dev.boooiil.historia.core.configuration.specific.*;
+import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 
 /**
  * It loads the configuration files.
  */
 public class ConfigurationLoader {
     
-    private static final ArmorConfig armorConfig = new ArmorConfig();
-    private static final WeaponConfig weaponConfig = new WeaponConfig();
     private static final GeneralConfig generalConfig = new GeneralConfig();
-    private static final CustomItemConfig customItemConfig = new CustomItemConfig();
-    private static final ToolConfig toolConfig = new ToolConfig();
-
-    /**
-     * It returns the armorConfig variable
-     * 
-     * @return The armorConfig variable.
-     */
-    public static ArmorConfig getArmorConfig() {
-        return armorConfig;
-    }
-
-    /**
-     * It returns the weaponConfig variable
-     * 
-     * @return The weaponConfig object.
-     */
-    public static WeaponConfig getWeaponConfig() {
-        return weaponConfig;
-    }
 
     /**
      * This function returns the generalConfig object
@@ -56,28 +34,9 @@ public class ConfigurationLoader {
     }
 
     /**
-     * It returns the customItemConfig variable
-     * 
-     * @return The customItemConfig variable.
-     */
-    public static CustomItemConfig getCustomItemConfig() {
-        return customItemConfig;
-    }
-
-    public static ToolConfig getToolConfig() {
-
-        return toolConfig;
-    }
-
-    /**
      * It loads the configuration files
      */
     public static void init() {
-
-        armorConfig.loadConfiguration("armor.yml");
-        weaponConfig.loadConfiguration("weapons.yml");
-        customItemConfig.loadConfiguration("customitems.yml");
-        toolConfig.loadConfiguration("tools.yml");
         
     }
     
