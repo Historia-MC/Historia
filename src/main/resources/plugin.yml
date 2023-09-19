@@ -33,7 +33,3 @@ commands:
     description: Adjust stuff.
     usage: /<command> set <player> <proficiency>
     permission: historia.proficiency
-  give:
-    description: Adjust stuff.
-    usage: /<command> <weapon/armor/other> itemName
-    permission: historia.give
