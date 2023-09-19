@@ -1,5 +1,4 @@
 module Historia.Core {
-    requires Historia.Spawnkill;
     requires towny;
     requires org.bukkit;
     requires bungeecord.chat;
