@@ -17,10 +17,6 @@ import dev.boooiil.historia.core.events.mobs.EntityBreedListener;
 import dev.boooiil.historia.core.events.mobs.EntityTameListener;
 import dev.boooiil.historia.core.events.playerInteraction.PlayerInteractEntityListener;
 import dev.boooiil.historia.core.events.playerInteraction.PlayerInteractListener;
-import dev.boooiil.historia.core.events.pvp.EntityDamageByEntityListener;
-import dev.boooiil.historia.core.events.pvp.EntityShootBowListener;
-import dev.boooiil.historia.core.events.pvp.PlayerDeathListener;
-import dev.boooiil.historia.core.events.pvp.PlayerRespawnListener;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
@@ -92,14 +88,10 @@ public class Main extends JavaPlugin {
         registerEvent(new BlockBreakListener());
         registerEvent(new BlockPlaceListener());
         registerEvent(new PrepareItemCraftListener());
-        registerEvent(new PlayerDeathListener());
-        registerEvent(new EntityDamageByEntityListener());
         registerEvent(new PlayerJoinListener());
         registerEvent(new PlayeQuitListener());
-        registerEvent(new PlayerRespawnListener());
         //registerEvent(new PlayerRightClickAir());
         registerEvent(new PlayerInteractEntityListener());
-        registerEvent(new EntityShootBowListener());
         registerEvent(new BlockFromToListener());
         registerEvent(new PlayerInteractListener());
 
