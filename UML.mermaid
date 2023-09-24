@@ -4,37 +4,15 @@ classDiagram
     Main ..|> MySQLConnection
     Main ..|> MySQLHandler
 
-    ConfigurationLoader o-- ArmorConfig
-    ConfigurationLoader o-- WeaponConfig
     ConfigurationLoader o-- GeneralConfig
-    ConfigurationLoader o-- CustomItemConfig
-    ConfigurationLoader o-- ToolConfig
 
-    ArmorConfig <|-- BaseConfiguration~T~
-    WeaponConfig <|-- BaseConfiguration
     GeneralConfig <|-- BaseConfiguration
-    CustomItemConfig <|-- BaseConfiguration
-    ToolConfig <|-- BaseConfiguration
-
-    ArmorConfig o-- Armor
-    WeaponConfig o-- Weapon
-    CustomItemConfig o-- CustomItem
-    ToolConfig o-- Tool
-
-    CraftedItem <|-- BaseItem
-
-    Armor <|-- CraftedItem
-    Weapon <|-- CraftedItem
-    CustomItem <|-- CraftedItem
-    Tool <|-- CraftedItem
-
     PlayerStorage --> "0..*" HistoriaPlayer : Contains
     HistoriaPlayer ..|> MySQLHandler
     HistoriaPlayer *.. Proficiency
     HistoriaPlayer <|-- BasePlayer
     Proficiency o-- Skills
     Proficiency o-- Stats
-
 
     class Main {
 
@@ -128,28 +106,6 @@ classDiagram
 
     }
 
-    class ArmorConfig {
-
-        +createNew(String): Armor
-        +getObject(List~String~ inputItems, List~String~ inputShape): Armor
-        +getObject(String): Armor
-        +validShape(List~String~ shape): boolean
-        +getAllShapes(): List~List~String~~
-        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
-
-    }
-
-    class WeaponConfig {
-
-        +createNew(String): Weapon
-        +getObject(List~String~ inputItems, List~String~ inputShape): Weapon
-        +getObject(String): Weapon
-        +validShape(List~String~ shape): boolean
-        +getAllShapes(): List~List~String~~
-        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
-
-    }
-
     class GeneralConfig {
 
         +String username
@@ -159,153 +115,6 @@ classDiagram
         +String port
 
         +GeneralConfig()
-
-    }
-
-    class CustomItemConfig {
-
-        +createNew(String): CustomItem
-        +getObject(List~String~ inputItems, List~String~ inputShape): CustomItem
-        +getObject(String): CustomItem
-        +validShape(List~String~ shape): boolean
-        +getAllShapes(): List~List~String~~
-        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
-        +getAllMatchingMaterials(List~String~ materials): List~CraftedItem~
-
-    }
-
-    class ToolConfig {
-
-        +createNew(String): Tool
-        +getObject(List~String~ inputItems, List~String~ inputShape): Tool
-        +getObject(String): Tool
-        +validShape(List~String~ shape): boolean
-        +getAllShapes(): List~List~String~~
-        +getAllMatchingShape(List~String~ shape): List~CraftedItem~
-
-    }
-
-    class BaseItem {
-
-        #boolean valid
-        #ItemStack itemStack
-
-        +BaseItem()
-        +BaseItem(ItemStack)
-        +getItemStack() : ItemStack
-        +isValid() : boolean
-
-    }
-
-    class CraftedItem {
-
-        #List~String~ recipeShape
-        #List~String~ recipeItems
-        #List~String~ proficiencies
-        #boolean isShaped
-
-        +getRecipeItems() : List~String~
-        +getRecipeShape() : List~String~
-        +isValidRecipe(List~String~ inputItems, List~String~ inputShape) : boolean
-        +isShapeDependent() : boolean
-        +canCraft(String) : boolean
-
-    }
-
-    class Armor {
-
-        -String weightClass
-        -Integer weight
-        -List~Double~ defence
-        -List~Integer~ durability
-
-        +Armor(String)
-        +getWeightClass() : String
-        +getWeight() : Integer
-        +getRandomDefenceValue() : Integer
-        +getRandomDurabilityValue() : Integer
-        +getMinDefenceValue() : Double
-        +getMaxDefenceValue() : Double
-        +getMinDurabilityValue() : Integer
-        +getMaxDurabilityValue() : Integer
-
-    }
-
-    class Weapon {
-
-        -String weightClass
-        -Integer weight
-        -List~Double~ damageRange
-        -List~Double~ speedRange
-        -List~Double~ knockbackRange
-        -List~Double~ sweepRange
-        -List~Integer~ durability
-
-        +Weapon(String)
-        +getWeightClass() : String
-        +getWeight() : Integer
-        +getDamageRange() : List~Double~
-        +getSpeedRange() : List~Double~
-        +getKnockbackRange() : List~Double~
-        +getSweepRange() : List~Double~
-        +getDurabilityRange() : List~Double~
-        +getRandomDamageValue(): Double
-        +getRandomDefenceValue() : Integer
-        +getRandomDurabilityValue() : Integer
-        +getMinDamageValue() : Double
-        +getMaxDamageValue() : Double
-        +getMinSpeedValue() : Double
-        +getMaxSpeedValue() : Double
-        +getMinKnockbackValue() : Double
-        +getMaxKnockbackValue() : Double
-        +getMinSweepingValue() : Double
-        +getMaxSweepingValue() : Double
-        +getMinDefenceValue() : Double
-        +getMaxDefenceValue() : Double
-        +getMinDurabilityValue() : Integer
-        +getMaxDurabilityValue() : Integer
-
-    }
-
-    class CustomItem {
-
-        -String itemName
-
-        +CustomItem(String)
-        +getItemName() : String
-
-
-    }
-
-    class Tool {
-
-        -String weightClass
-        -Integer weight
-        -List~Double~ damageRange
-        -List~Double~ speedRange
-        -List~Double~ knockbackRange
-        -List~Integer~ durability
-
-        +Weapon(String)
-        +getWeightClass() : String
-        +getWeight() : Integer
-        +getDamageRange() : List~Double~
-        +getSpeedRange() : List~Double~
-        +getKnockbackRange() : List~Double~
-        +getDurabilityRange() : List~Double~
-        +getRandomDamageValue(): Double
-        +getRandomDefenceValue() : Integer
-        +getRandomDurabilityValue() : Integer
-        +getMinDamageValue() : Double
-        +getMaxDamageValue() : Double
-        +getMinSpeedValue() : Double
-        +getMaxSpeedValue() : Double
-        +getMinKnockbackValue() : Double
-        +getMaxKnockbackValue() : Double
-        +getMinDefenceValue() : Double
-        +getMaxDefenceValue() : Double
-        +getMinDurabilityValue() : Integer
-        +getMaxDurabilityValue() : Integer
 
     }
 
@@ -432,6 +241,7 @@ classDiagram
         -int baseFood
         -double baseSpeed
         -double baseExperience
+        -double baseEvasion
         -double harvestChance
         -double doubleHarvestChance
         -double instantGrowthChance
