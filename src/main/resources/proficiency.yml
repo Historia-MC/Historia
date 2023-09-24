@@ -61,7 +61,7 @@ Warrior:
         values:
           - "DAMAGE_ALL"
 
-Archer:
+Archer: #ADD SWIFT_SNEAK for 1.20
 
   stats:
     baseHealth: 18
@@ -114,6 +114,16 @@ Fisherman:
 
   skills:
     nametag: true
+    specialFishingDrops: true
+    enchants:
+      1:
+        regex: .*_HELMET
+        values:
+          - "WATER_WORKER"
+      2:
+        regex: .*_BOOTS
+        values:
+          - "DEPTH_STRIDER"
 
 Miner:
 
@@ -144,6 +154,22 @@ Miner:
         regex: .*_PICKAXE|.*_SHOVEL
         values:
           - "EFFICIENCY"
+      2:
+        regex: .*_HELMET
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      3:
+        regex: .*_CHESTPLATE
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      4:
+        regex: .*_LEGGINGS
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      5:
+        regex: .*_BOOTS
+        values:
+          - "PROTECTION_EXPLOSIONS"
 
 Blacksmith:
 
@@ -173,7 +199,7 @@ Blacksmith:
     applySharpness: true
     chanceNoAnvilDamage: true
 
-Huntsman:
+Huntsman: #ADD SWIFT_SNEAK for 1.20
 
   stats:
     baseHealth: 16
@@ -202,8 +228,9 @@ Huntsman:
     extraFeathers: true
     shearChicken: true
     harvestLeather: true
+    canBreed: true
 
-Apothecary:
+Apothecary: #BREWERY CLASS
 
   stats:
     baseHealth: 20
@@ -227,6 +254,7 @@ Apothecary:
   skills:
     nametag: true
     makeKnowledgeBook: true
+    igniteOil: true
 
 Architect:
 
@@ -284,13 +312,14 @@ Lumberjack:
     nametag: true
     chanceExtraWood: true
     applySharpness: true
+    canClimbLogs: true
     enchants:
       1:
         regex: .*_AXE
         values:
           - "EFFICIENCY"
 
-Farmer:
+Farmer: #ARMOR TRIM CLASS
 
   stats:
     baseHealth: 20
@@ -317,3 +346,4 @@ Farmer:
     breakGrass: true
     shearChicken: true
     harvestLeather: true
+    canBreed: true

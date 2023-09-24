@@ -46,6 +46,8 @@ public class Skills {
         skills.put(SkillType.HARVEST_BONES, config.getBoolean(root + ".bonesFromAnimals"));
         skills.put(SkillType.HARVEST_LEATHER, config.getBoolean(root + ".harvestLeather"));
         skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, config.getBoolean(root + ".makeKnowledgeBook"));
+        skills.put(SkillType.CAN_BREED, config.getBoolean(root + ".canBreed"));
+        skills.put(SkillType.CAN_CLIMB_LOGS, config.getBoolean(root + ".canClimbLogs"));
 
         if (config.contains(root + ".enchants")) {
 
