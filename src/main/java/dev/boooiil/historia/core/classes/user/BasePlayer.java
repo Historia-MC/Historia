@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.classes.user;
 
+import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
@@ -24,6 +25,7 @@ public abstract class BasePlayer {
 
     /**
      * Constructs a new BasePlayer object with the given UUID.
+     * 
      * @param uuid the UUID of the player
      */
     public BasePlayer(UUID uuid) {
@@ -57,11 +59,13 @@ public abstract class BasePlayer {
 
         }
 
-        if (this.username != null) {
+        if (this.username != null && !this.username.equals("MockUser")) {
 
-            this.resident = TownyHandler.getResident(uuid);
-            this.town = TownyHandler.getTown(uuid);
-            this.nation = TownyHandler.getNation(uuid);
+            if (TownyUniverse.getInstance() != null) {
+                this.resident = TownyHandler.getResident(uuid);
+                this.town = TownyHandler.getTown(uuid);
+                this.nation = TownyHandler.getNation(uuid);
+            }
 
         }
 
@@ -69,6 +73,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns the UUID of the player.
+     * 
      * @return the UUID of the player
      */
     public UUID getUUID() {
@@ -77,6 +82,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns the username of the player.
+     * 
      * @return the username of the player
      */
     public String getUsername() {
@@ -85,6 +91,7 @@ public abstract class BasePlayer {
 
     /**
      * Sets the username of the player.
+     * 
      * @param username the new username of the player
      */
     public void setUsername(String username) {
@@ -93,6 +100,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns whether the player is online.
+     * 
      * @return true if the player is online, false otherwise
      */
     public boolean isOnline() {
@@ -101,6 +109,7 @@ public abstract class BasePlayer {
 
     /**
      * Sets whether the player is online.
+     * 
      * @param isOnline true if the player is online, false otherwise
      */
     public void setOnline(boolean isOnline) {
@@ -109,6 +118,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns the resident object associated with the player.
+     * 
      * @return the resident object associated with the player
      */
     public Resident getResident() {
@@ -117,30 +127,37 @@ public abstract class BasePlayer {
 
     public List<String> getTownRanks() {
 
-        if (town == null) return List.of("None");
+        if (town == null)
+            return List.of("None");
 
-        else return getResident().getTownRanks();
+        else
+            return getResident().getTownRanks();
 
     }
 
     public List<String> getNationRanks() {
 
-        if (nation == null) return List.of("None");
+        if (nation == null)
+            return List.of("None");
 
-        else return getResident().getNationRanks();
+        else
+            return getResident().getNationRanks();
 
     }
 
     public String getTownName() {
 
-        if (town == null) return "Wilderness";
+        if (town == null)
+            return "Wilderness";
 
-        else return town.getName();
+        else
+            return town.getName();
 
     }
 
     /**
      * Sets the resident object associated with the player.
+     * 
      * @param resident the new resident object associated with the player
      */
     public void setResident(Resident resident) {
@@ -149,6 +166,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns the town object associated with the player.
+     * 
      * @return the town object associated with the player
      */
     public Town getTown() {
@@ -157,6 +175,7 @@ public abstract class BasePlayer {
 
     /**
      * Sets the town object associated with the player.
+     * 
      * @param town the new town object associated with the player
      */
     public void setTown(Town town) {
@@ -165,6 +184,7 @@ public abstract class BasePlayer {
 
     /**
      * Returns the nation object associated with the player.
+     * 
      * @return the nation object associated with the player
      */
     public Nation getNation() {
@@ -173,6 +193,7 @@ public abstract class BasePlayer {
 
     /**
      * Sets the nation object associated with the player.
+     * 
      * @param nation the new nation object associated with the player
      */
     public void setNation(Nation nation) {
