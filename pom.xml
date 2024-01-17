@@ -29,11 +29,6 @@
     </repository>
 
     <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-    </repository>
-
-    <repository>
       <id>sk89q-repo</id>
       <url>https://maven.enginehub.org/repo/</url>
     </repository>
@@ -46,7 +41,7 @@
   </repositories>
 
   <dependencies>
-    
+
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
@@ -62,15 +57,15 @@
     </dependency>
 
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.30</version>
+      <groupId>com.mysql</groupId>
+      <artifactId>mysql-connector-j</artifactId>
+      <version>8.2.0</version>
     </dependency>
 
     <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
-      <version>1.19.2-R0.1-SNAPSHOT</version>
+      <groupId>io.papermc.paper</groupId>
+      <artifactId>paper-api</artifactId>
+      <version>1.19.4-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
 
@@ -78,14 +73,12 @@
       <groupId>com.sk89q.worldguard</groupId>
       <artifactId>worldguard-bukkit</artifactId>
       <version>7.0.9</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Towny</artifactId>
       <version>0.99.5.18</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -101,6 +94,11 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>net.md-5</groupId>
+      <artifactId>bungeecord-chat</artifactId>
+      <version>1.16-R0.4</version>
+    </dependency>
 
   </dependencies>
 
@@ -115,7 +113,7 @@
         <version>3.6.0</version>
         <configuration>
           <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
-          <doclint>none</doclint>          
+          <doclint>none</doclint>
           <show>private</show>
           <nohelp>true</nohelp>
         </configuration>
@@ -146,16 +144,16 @@
             </goals>
             <configuration>
               <outputDirectory>${env.SERVER}/plugins</outputDirectory>
-              <resources>          
+              <resources>
                 <resource>
                   <directory>./target</directory>
                   <filtering>false</filtering>
                   <includes>
-                     <include>*.jar</include>
+                    <include>*.jar</include>
                   </includes>
                 </resource>
-              </resources>              
-            </configuration>            
+              </resources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
