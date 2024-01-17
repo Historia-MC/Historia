@@ -1,7 +1,6 @@
 package dev.boooiil.historia.core.events.blockInteraction;
 
-
-import dev.boooiil.historia.core.handlers.blockInteraction.PlayerPlaceBlock;
+import dev.boooiil.historia.core.handlers.blockBreakListener.PlayerPlaceBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -15,6 +14,4 @@ public class BlockPlaceListener implements Listener {
 
     }
 
-
-    
 }

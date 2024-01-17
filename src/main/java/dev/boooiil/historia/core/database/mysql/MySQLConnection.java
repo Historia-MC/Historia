@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConnection {
-    
+
     private static final GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
@@ -18,9 +18,9 @@ public class MySQLConnection {
     private static final String PASSWORD = MYSQLCONFIG.password;
     private static final String IP = MYSQLCONFIG.ip;
     private static final String PORT = MYSQLCONFIG.port;
-    
+
     static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
-    + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true";
+            + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true";
 
     private static Connection connection;
 
@@ -51,7 +51,6 @@ public class MySQLConnection {
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
-
         }
 
     }
@@ -81,34 +80,33 @@ public class MySQLConnection {
     }
 
     public static void closeConnection() {
-            
-            try {
-    
-                connection.close();
-    
-                Logging.infoToConsole("MySQL connection closed.");
-    
-            } catch (SQLException e) {
-    
-                Logging.errorToConsole("MySQL connection could not be closed.");
 
-                Logging.errorToConsole("FAILED TO CLOSE CONNECTION.");
-                Logging.errorToConsole("Cause: " + e.getCause());
-                Logging.errorToConsole("MySQL State: " + e.getSQLState());
-                Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-                Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+        try {
 
+            connection.close();
 
-            }
+            Logging.infoToConsole("MySQL connection closed.");
+
+        } catch (SQLException e) {
+
+            Logging.errorToConsole("MySQL connection could not be closed.");
+
+            Logging.errorToConsole("FAILED TO CLOSE CONNECTION.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
+        }
     }
 
     /**
      * @return the connection
      */
     public static Connection getConnection() {
-            
-            return connection;
-    
+
+        return connection;
+
     }
 
     private static boolean validateFields() {
@@ -165,6 +163,5 @@ public class MySQLConnection {
         return true;
 
     }
-
 
 }
