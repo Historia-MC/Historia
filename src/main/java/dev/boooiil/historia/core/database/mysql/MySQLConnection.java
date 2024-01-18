@@ -13,16 +13,18 @@ public class MySQLConnection {
 
     private static final GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
 
-    private static final String DATABASE = MYSQLCONFIG.database;
-    private static final String USERNAME = MYSQLCONFIG.username;
-    private static final String PASSWORD = MYSQLCONFIG.password;
-    private static final String IP = MYSQLCONFIG.ip;
-    private static final String PORT = MYSQLCONFIG.port;
+    private static String DATABASE = MYSQLCONFIG.database;
+    private static String USERNAME = MYSQLCONFIG.username;
+    private static String PASSWORD = MYSQLCONFIG.password;
+    private static String IP = MYSQLCONFIG.ip;
+    private static String PORT = MYSQLCONFIG.port;
 
     private static BasicDataSource dataSource;
+    private static Connection connection;
 
     static {
-        initDataSource();
+        if (validateFields())
+            initDataSource();
     }
 
     private static void initDataSource() {
@@ -37,7 +39,15 @@ public class MySQLConnection {
         }
     }
 
-    private static Connection connection;
+    public static void customConnection(String database, String username, String password, String ip, String port) {
+        Logging.warnToConsole("USING CUSTOM CONNECTION");
+        DATABASE = database;
+        USERNAME = username;
+        PASSWORD = password;
+        IP = ip;
+        PORT = port;
+        initDataSource();
+    }
 
     /**
      * Connects to the MySQL database.
@@ -46,8 +56,8 @@ public class MySQLConnection {
 
         if (!validateFields()) {
 
+            Logging.errorToConsole("MYSQL FIELDS ARE NULL. CHECK THE CONFIGURATION FILE.");
             return;
-
         }
 
         try {
@@ -64,6 +74,10 @@ public class MySQLConnection {
             Logging.errorToConsole("FAILED TO CONNECT.");
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+            Logging.errorToConsole("USERNAME: " + USERNAME);
+            Logging.errorToConsole("DATABASE: " + DATABASE);
+            Logging.errorToConsole("IP: " + IP);
+            Logging.errorToConsole("PORT: " + PORT);
 
         }
 
@@ -110,14 +124,34 @@ public class MySQLConnection {
         }
     }
 
+    public static void closeDataSource() {
+
+        try {
+            if (dataSource != null && !dataSource.isClosed()) {
+                dataSource.close();
+                Logging.infoToConsole("MySQL data source closed.");
+            }
+        } catch (SQLException e) {
+            Logging.errorToConsole("MySQL data source could not be closed.");
+            Logging.errorToConsole("FAILED TO CLOSE DATA SOURCE.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+        }
+    }
+
     /**
      * @return the connection
      */
     public static Connection getConnection() {
 
         try {
-            connection = dataSource.getConnection();
-            return connection;
+            if (dataSource != null && !dataSource.isClosed()) {
+                connection = dataSource.getConnection();
+                return connection;
+            }
+            return null;
         } catch (Exception e) {
             Logging.errorToConsole("FAILED TO GET CONNECTION.");
             Logging.errorToConsole("Cause: " + e.getCause());
@@ -172,8 +206,6 @@ public class MySQLConnection {
         }
 
         if (caught > 0) {
-
-            Main.disable();
 
             return false;
         }
