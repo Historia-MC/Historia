@@ -23,7 +23,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
-        MySQLHandler.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getDisplayName());
+        MySQLHandler.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getName());
         MySQLHandler.setLogin(event.getPlayer().getUniqueId());
 
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
@@ -34,7 +34,11 @@ public class PlayerJoinListener implements Listener {
         Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
         Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
-        Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+
+        // MockBukkit does not have the exhaustion or level attributes implemented.
+        if (!historiaPlayer.getUsername().equals("MockUser")) {
+            Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+        }
         Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
 
         InitialStatLoader initialStatLoader = new InitialStatLoader(event.getPlayer());
@@ -45,7 +49,12 @@ public class PlayerJoinListener implements Listener {
         Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
         Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
-        Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+
+        // MockBukkit does not have the exhaustion or level attributes implemented.
+        if (!historiaPlayer.getUsername().equals("MockUser")) {
+            Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+        }
+
         Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
 
     }
