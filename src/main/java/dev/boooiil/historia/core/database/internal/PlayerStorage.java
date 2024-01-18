@@ -53,11 +53,7 @@ public class PlayerStorage {
         if (players.containsKey(uuid))
             return players.get(uuid);
 
-        else if (useSQLFallback)
-            return new HistoriaPlayer(uuid);
-
-        else
-            return new HistoriaPlayer();
+        else return new HistoriaPlayer(uuid);
 
     }
 
