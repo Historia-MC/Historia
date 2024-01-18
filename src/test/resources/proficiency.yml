@@ -1,0 +1,349 @@
+version: 10
+
+# XP SOURCES:
+# COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
+# BLOCK: BLOCK_BREAK, BLOCK_PLACE, BLOCK_INTERACT, ORE_BREAK
+# FISHING: FISH, FISH_TRASH, FISH_TREASURE
+# ANIMAL: BREED_ANIMAL, TAME_ANIMAL
+# FARMING: CROP_PLACE, CROP_BREAK
+# CRAFTING: WEAPON_CRAFT, TOOL_CRAFT, ARMOR_CRAFT
+
+# WEAPON ENCHANTS CAN USE REGEX TO MATCH ITEMS
+# EX: .*_AXE, (IRON|WOOD)_SWORD
+
+None:
+
+  stats:
+    baseHealth: 14
+    maxHealth: 30
+    baseFood: 10
+    baseSpeed: 0.7
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+
+Warrior:
+
+  stats:
+    baseHealth: 26
+    maxHealth: 40
+    baseFood: 16
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.10
+
+    weaponProficiency: [ Light, Medium, Heavy ]
+    armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ ATTACK, DEFEND, EVADE, KILL, DEATH ]
+
+  skills:
+    nametag: true
+    sweepingEdge: true
+    enchants:
+      1:
+        regex: .*_SWORD|.*_AXE
+        values:
+          - "DAMAGE_ALL"
+
+Archer: #ADD SWIFT_SNEAK for 1.20
+
+  stats:
+    baseHealth: 18
+    maxHealth: 36
+    baseFood: 26
+    baseSpeed: 1.3
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 2.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Bow, Crossbow, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
+
+  skills:
+    nametag: true
+    igniteOil: true
+    enchants:
+      1:
+        regex: CROSSBOW
+        values:
+          - "QUICK_CHARGE"
+
+Fisherman:
+
+  stats:
+    baseHealth: 18
+    maxHealth: 36
+    baseFood: 30
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Trident, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE ]
+
+  skills:
+    nametag: true
+    specialFishingDrops: true
+    enchants:
+      1:
+        regex: .*_HELMET
+        values:
+          - "WATER_WORKER"
+      2:
+        regex: .*_BOOTS
+        values:
+          - "DEPTH_STRIDER"
+
+Miner:
+
+  stats:
+    baseHealth: 22
+    maxHealth: 38
+    baseFood: 26
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, ORE_BREAK ]
+
+  skills:
+    nametag: true
+    extraOreChance: true
+    enchants:
+      1:
+        regex: .*_PICKAXE|.*_SHOVEL
+        values:
+          - "EFFICIENCY"
+      2:
+        regex: .*_HELMET
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      3:
+        regex: .*_CHESTPLATE
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      4:
+        regex: .*_LEGGINGS
+        values:
+          - "PROTECTION_EXPLOSIONS"
+      5:
+        regex: .*_BOOTS
+        values:
+          - "PROTECTION_EXPLOSIONS"
+
+Blacksmith:
+
+  stats:
+    baseHealth: 24
+    maxHealth: 39
+    baseFood: 26
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT ]
+
+
+  skills:
+    nametag: true
+    applyUnbreaking: true
+    applySharpness: true
+    chanceNoAnvilDamage: true
+
+Huntsman: #ADD SWIFT_SNEAK for 1.20
+
+  stats:
+    baseHealth: 16
+    maxHealth: 34
+    baseFood: 24
+    baseSpeed: 1.5
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.0
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.07
+
+    weaponProficiency: [ Bow, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
+
+  skills:
+    nametag: false
+    bonesFromAnimals: true
+    tameAnimals: true
+    extraWool: true
+    extraFeathers: true
+    shearChicken: true
+    harvestLeather: true
+    canBreed: true
+
+Apothecary: #BREWERY CLASS
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 22
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 1.5
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE ]
+
+  skills:
+    nametag: true
+    makeKnowledgeBook: true
+    igniteOil: true
+
+Architect:
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 28
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.05
+
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_PLACE ]
+
+  skills:
+    nametag: true
+    chanceNoConsumeBlock: true
+    ladderBypass: true
+    enchants:
+      1:
+        regex: .*_BOOTS
+        values:
+          - "FEATHER_FALLING"
+
+Lumberjack:
+
+  stats:
+    baseHealth: 26
+    maxHealth: 40
+    baseFood: 18
+    baseSpeed: 1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.2
+    doubleHarvestChance: 0
+    instantGrowChance: 0
+    beheadChance: 0.08
+
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_BREAK ]
+
+  skills:
+    nametag: true
+    chanceExtraWood: true
+    applySharpness: true
+    canClimbLogs: true
+    enchants:
+      1:
+        regex: .*_AXE
+        values:
+          - "EFFICIENCY"
+
+Farmer: #ARMOR TRIM CLASS
+
+  stats:
+    baseHealth: 20
+    maxHealth: 35
+    baseFood: 20
+    baseSpeed: 1.1
+    baseEvasion: 0.03
+    baseSwordProficiency: 1.0
+    baseBowProficiency: 0.5
+    baseCrossbowProficiency: 0.5
+    baseExperienceGain: 0.25
+    harvestChance: 0.85
+    doubleHarvestChance: 0.05
+    instantGrowChance: 0.3
+    beheadChance: 0.10
+
+    weaponProficiency: [ Trident, Light ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
+
+  skills:
+    nametag: true
+    breakBeehive: true
+    breakGrass: true
+    shearChicken: true
+    harvestLeather: true
+    canBreed: true

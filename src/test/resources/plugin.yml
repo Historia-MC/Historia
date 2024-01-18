@@ -1,0 +1,35 @@
+main: dev.boooiil.historia.core.Main
+name: Historia
+version: 1.0
+description: Something simple, I guess!
+authors: [boooiil, RedSkilZZ, UnholyRuby]
+api-version: 1.19
+author: boooiil
+load: STARTUP
+loadbefore:
+  - Historia-Spawnkill
+  - Historia-RMushroom
+  - Historia-Combat
+depend: [WorldGuard, Towny, Vault, Historia-Spawnkill]
+
+commands:
+  checkplayers:
+    description: Get class information from all users.
+    usage: /<command> <player>
+    permission: historia.checkplayers
+  debug:
+    description: Get debug information.
+    usage: /<command> [player] <args...>
+    permission: historia.debug
+  stats:
+    description: Get the stats of a player.
+    usage: /<command> <player>
+    permission: historia.stats
+  set:
+    description: Adjust stuff.
+    usage: /<command> <number>
+    permission: historia.set
+  proficiency:
+    description: Adjust stuff.
+    usage: /<command> set <player> <proficiency>
+    permission: historia.proficiency
