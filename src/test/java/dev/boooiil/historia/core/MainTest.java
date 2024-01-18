@@ -45,7 +45,6 @@ public class MainTest {
     @AfterEach
     public void tearDown() {
         System.out.println("Tearing down mock...");
-        Main.disable();
         MockBukkit.unmock();
     }
 
