@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.blockInteraction;
+package dev.boooiil.historia.core.handlers.blockBreakListener;
 
 import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class PlayerPlaceBlock {
-    
+
     private final BlockPlaceEvent event;
 
     public PlayerPlaceBlock(BlockPlaceEvent event) {
@@ -16,17 +16,20 @@ public class PlayerPlaceBlock {
         this.event = event;
 
     }
-    
+
     public void doPlace() {
 
         if (event.getBlock().getType() == Material.LADDER) {
-            
+
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
-            if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.LADDER_BYPASS)) return;
-            if (Permissions.canPlaceBlock(event.getPlayer(), event.getBlock())) return;
-        
-            event.getPlayer().getWorld().setBlockData(event.getBlock().getLocation(), event.getBlock().getBlockData().clone());
+            if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.LADDER_BYPASS))
+                return;
+            if (Permissions.canPlaceBlock(event.getPlayer(), event.getBlock()))
+                return;
+
+            event.getPlayer().getWorld().setBlockData(event.getBlock().getLocation(),
+                    event.getBlock().getBlockData().clone());
             event.getItemInHand().setAmount(event.getItemInHand().getAmount() - 1);
 
         }

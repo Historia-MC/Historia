@@ -19,8 +19,6 @@ public class PlayeQuitListener implements Listener {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
-        historiaPlayer.saveCharacter();
-
         MySQLHandler.setLogout(historiaPlayer.getUUID(), historiaPlayer.getLastLogin(), historiaPlayer.getPlaytime());
 
         PlayerStorage.markOffline(event.getPlayer().getUniqueId());

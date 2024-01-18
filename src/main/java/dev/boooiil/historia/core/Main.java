@@ -88,7 +88,7 @@ public class Main extends JavaPlugin {
         registerEvent(new BlockPlaceListener());
         registerEvent(new PlayerJoinListener());
         registerEvent(new PlayeQuitListener());
-        //registerEvent(new PlayerRightClickAir());
+        // registerEvent(new PlayerRightClickAir());
         registerEvent(new PlayerInteractEntityListener());
         registerEvent(new BlockFromToListener());
         registerEvent(new PlayerInteractListener());

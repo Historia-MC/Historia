@@ -1,0 +1,10 @@
+version: 2
+
+MySQL:
+    user:
+    password:
+    database: historia-dev
+    ip:
+    port: 3306
+
+debug: false

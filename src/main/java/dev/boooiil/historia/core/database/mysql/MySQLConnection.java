@@ -4,13 +4,13 @@ import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.core.util.Logging;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConnection {
-    
+
     private static final GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
 
     private static final String DATABASE = MYSQLCONFIG.database;
@@ -18,9 +18,24 @@ public class MySQLConnection {
     private static final String PASSWORD = MYSQLCONFIG.password;
     private static final String IP = MYSQLCONFIG.ip;
     private static final String PORT = MYSQLCONFIG.port;
-    
-    static final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
-    + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true";
+
+    private static BasicDataSource dataSource;
+
+    static {
+        initDataSource();
+    }
+
+    private static void initDataSource() {
+        if (dataSource == null || dataSource.isClosed()) {
+            dataSource = new BasicDataSource();
+            dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+            dataSource.setUrl("jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
+                    + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true");
+            dataSource.setUsername(USERNAME);
+            dataSource.setPassword(PASSWORD);
+            dataSource.setMaxTotal(15);
+        }
+    }
 
     private static Connection connection;
 
@@ -36,8 +51,7 @@ public class MySQLConnection {
         }
 
         try {
-
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = dataSource.getConnection();
 
             if (connection != null) {
 
@@ -50,7 +64,6 @@ public class MySQLConnection {
             Logging.errorToConsole("FAILED TO CONNECT.");
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
 
         }
 
@@ -65,7 +78,7 @@ public class MySQLConnection {
             Logging.warnToConsole("Connection closed.");
 
             Logging.warnToConsole("Attempting to reconnect...");
-            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection = dataSource.getConnection();
             Logging.warnToConsole("Reconnected to SQL Server.");
 
         } catch (SQLException e) {
@@ -81,34 +94,37 @@ public class MySQLConnection {
     }
 
     public static void closeConnection() {
-            
-            try {
-    
+
+        try {
+            if (connection != null && !connection.isClosed()) {
                 connection.close();
-    
                 Logging.infoToConsole("MySQL connection closed.");
-    
-            } catch (SQLException e) {
-    
-                Logging.errorToConsole("MySQL connection could not be closed.");
-
-                Logging.errorToConsole("FAILED TO CLOSE CONNECTION.");
-                Logging.errorToConsole("Cause: " + e.getCause());
-                Logging.errorToConsole("MySQL State: " + e.getSQLState());
-                Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-                Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-
             }
+        } catch (SQLException e) {
+            Logging.errorToConsole("MySQL connection could not be closed.");
+            Logging.errorToConsole("FAILED TO CLOSE CONNECTION.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+        }
     }
 
     /**
      * @return the connection
      */
     public static Connection getConnection() {
-            
+
+        try {
+            connection = dataSource.getConnection();
             return connection;
-    
+        } catch (Exception e) {
+            Logging.errorToConsole("FAILED TO GET CONNECTION.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+            return null;
+        }
+
     }
 
     private static boolean validateFields() {
@@ -165,6 +181,5 @@ public class MySQLConnection {
         return true;
 
     }
-
 
 }

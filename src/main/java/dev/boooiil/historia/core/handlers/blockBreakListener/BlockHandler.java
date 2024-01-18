@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.blockInteraction;
+package dev.boooiil.historia.core.handlers.blockBreakListener;
 
 import dev.boooiil.historia.core.classes.enums.experience.BlockSources;
 import dev.boooiil.historia.core.classes.enums.experience.FarmingSources;
@@ -11,9 +11,10 @@ import org.bukkit.event.block.BlockPlaceEvent;
 public class BlockHandler extends BaseBlockHandler {
 
     /**
-     * Constructor for BlockHandler class that takes a BlockBreakEvent and a HistoriaPlayer as parameters.
+     * Constructor for BlockHandler class that takes a BlockBreakEvent and a
+     * HistoriaPlayer as parameters.
      * 
-     * @param event the BlockBreakEvent that triggered the handler
+     * @param event          the BlockBreakEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
     public BlockHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
@@ -23,9 +24,10 @@ public class BlockHandler extends BaseBlockHandler {
     }
 
     /**
-     * Constructor for BlockHandler class that takes a BlockPlaceEvent and a HistoriaPlayer as parameters.
+     * Constructor for BlockHandler class that takes a BlockPlaceEvent and a
+     * HistoriaPlayer as parameters.
      * 
-     * @param event the BlockPlaceEvent that triggered the handler
+     * @param event          the BlockPlaceEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
     public BlockHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
@@ -35,7 +37,10 @@ public class BlockHandler extends BaseBlockHandler {
     }
 
     /**
-     * Method that handles the breaking of a block. It checks if the block is a valid ore or log, and if so, drops the corresponding item(s) and sets the block to air. It also checks if the player has a chance to get double drops and increases their experience accordingly.
+     * Method that handles the breaking of a block. It checks if the block is a
+     * valid ore or log, and if so, drops the corresponding item(s) and sets the
+     * block to air. It also checks if the player has a chance to get double drops
+     * and increases their experience accordingly.
      */
     public void doBreak() {
 

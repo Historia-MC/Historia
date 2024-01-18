@@ -4,9 +4,13 @@ import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
 import dev.boooiil.historia.core.classes.enums.experience.AllSources;
 import dev.boooiil.historia.core.classes.proficiency.Proficiency;
 import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
@@ -250,7 +254,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void applyClassStats() {
 
-        //TODO: create method or handler that applies the proficiency stats
+        // TODO: create method or handler that applies the proficiency stats
 
     }
 
@@ -280,21 +284,36 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     public void changeProficiency(String proficiency) {
+        Logging.debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
+                + proficiency + ".");
 
-        //TODO: Adjust player modifiers based on new proficiency.
+        // TODO: Adjust player modifiers based on new proficiency.
 
         this.proficiency = new Proficiency(proficiency);
+
+        saveCharacter();
+
+        // validate user is online before loading the new stats
+        if (isOnline()) {
+            Logging.debugToConsole("Player is online, applying new stats.");
+            Player player = Bukkit.getPlayer(this.getUUID());
+            InitialStatLoader initialStatLoader = new InitialStatLoader(player);
+            initialStatLoader.apply();
+        }
 
     }
 
     /**
      * Increase the player's experience.
+     * 
      * @param source - The source of the experience.
      */
     public void increaseExperience(AllSources source) {
 
-        if (source == null) return;
-        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
+        if (source == null)
+            return;
+        if (!this.proficiency.getStats().hasIncomeSource(source))
+            return;
 
         double incomeValue = this.proficiency.getStats().getIncomeValue(source);
         double incomeModified = incomeValue * this.level / 10;
@@ -315,13 +334,15 @@ public class HistoriaPlayer extends BasePlayer {
             setCurrentExperience(getCurrentExperience() + incomeModified);
 
         }
-    
+
     }
 
     public void decreaseExperience(AllSources source) {
-        
-        if (source == null) return;
-        if (!this.proficiency.getStats().hasIncomeSource(source)) return;
+
+        if (source == null)
+            return;
+        if (!this.proficiency.getStats().hasIncomeSource(source))
+            return;
 
         double incomeValue = this.proficiency.getStats().getIncomeValue(source);
         double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
@@ -333,8 +354,10 @@ public class HistoriaPlayer extends BasePlayer {
 
             double overflow = (getCurrentExperience() - incomeModified) - getMaxExperience();
 
-            if (overflow < getMaxExperience() && getLevel() != 1) setCurrentExperience(getMaxExperience() - overflow);
-            else setCurrentExperience(0);
+            if (overflow < getMaxExperience() && getLevel() != 1)
+                setCurrentExperience(getMaxExperience() - overflow);
+            else
+                setCurrentExperience(0);
 
             saveCharacter();
 
@@ -347,7 +370,7 @@ public class HistoriaPlayer extends BasePlayer {
         }
 
     }
-    
+
     public String toString() {
 
         String output = super.toString();
