@@ -33,11 +33,15 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  * It's a plugin that loads, enables, and disables.
  */
 public class Main extends JavaPlugin {
+
+    public static boolean isTesting = false;
+    private static Plugin instance = null;
 
     public Main() {
         super();
@@ -60,12 +64,21 @@ public class Main extends JavaPlugin {
     // It's a method that is called when the plugin is loaded.
     public void onLoad() {
 
+        instance = this;
+
         Logging.infoToConsole("Plugin has loaded.");
 
         deregisterRecipes();
 
         // Check config files
         FileIO.checkFiles();
+
+        System.out.println("RUNNING VERSION: " + Bukkit.getVersion());
+
+        if (Bukkit.getVersion().contains("MockBukkit")) {
+            System.out.println("RUNNING IN TEST MODE");
+            isTesting = true;
+        }
 
     }
 
@@ -103,8 +116,15 @@ public class Main extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
-        MySQLConnection.connect();
-        MySQLHandler.createTable();
+        if (isTesting) {
+            MySQLConnection.customConnection("historia-test", "root", "ThisIsForTesting#Historia!", "127.0.0.1",
+                    "3306");
+            MySQLConnection.connect();
+            MySQLHandler.createTable();
+        } else {
+            MySQLConnection.connect();
+            MySQLHandler.createTable();
+        }
 
         Logging.infoToConsole("Plugin Enabled.");
 
@@ -126,8 +146,7 @@ public class Main extends JavaPlugin {
      */
     public static Plugin plugin() {
 
-        return Bukkit.getPluginManager().getPlugin("Historia");
-        // return getPlugin(HistoriaPlugin.class);
+        return instance;
 
     }
 
