@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.util;
 
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -16,7 +17,7 @@ public class Logging {
     private static final String announcePrefix = "§7[§9Announcement§7] ";
     // private static final String debugPrefix = "§7[§cDebug§7] ";
 
-    private static final Logger logger = Main.plugin().getLogger();
+    private static final Logger logger = Bukkit.getLogger();
     
     // It's a private constructor that throws an error if someone tries to instantiate the class.
     private Logging() { throw new IllegalAccessError( "Static utility class."); }
