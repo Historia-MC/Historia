@@ -23,6 +23,11 @@ public class MySQLHandler {
      */
     public static void createTable() {
 
+        if (connection == null) {
+            Logging.errorToConsole("FAILED TO CREATE TABLE. CONNECTION IS NULL.");
+            return;
+        }
+
         try {
             String createTable = "CREATE TABLE IF NOT EXISTS " +
                     "historia(UUID varchar(36), " +
@@ -35,8 +40,8 @@ public class MySQLHandler {
                     "Playtime bigint, " +
                     "PRIMARY KEY (UUID))";
 
-                Statement statement = connection.createStatement();
-                statement.execute(createTable);
+            Statement statement = connection.createStatement();
+            statement.execute(createTable);
 
         } catch (CommunicationsException cE) {
 
@@ -209,7 +214,8 @@ public class MySQLHandler {
 
         try {
 
-            String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid + "'");
+            String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
+                    + "'");
 
             Statement statement = connection.createStatement();
             statement.execute(string);
@@ -265,7 +271,6 @@ public class MySQLHandler {
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
 
         }
-
 
     }
 
