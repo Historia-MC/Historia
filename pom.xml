@@ -16,10 +16,12 @@
     <powermock.version>2.0.2</powermock.version>
   </properties>
 
-  <scm>
-    <developerConnection>scm:git:git://github.com/Historia-MC/Historia</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
+  <distributionManagement>
+    <repository>
+      <id>historia-repo</id>
+      <url>http://boooiil.sytes.net:1200/releases</url>
+    </repository>
+  </distributionManagement>
 
   <repositories>
 
