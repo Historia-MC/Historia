@@ -117,7 +117,7 @@ public class Main extends JavaPlugin {
         registerRunnable(new SavePlayerRunnable(), 6000);
 
         if (isTesting) {
-            MySQLConnection.customConnection("historia-test", "root", "ThisIsForTesting#Historia!", "127.0.0.1",
+            MySQLConnection.customConnection("historia_test", "historia-test", "ThisIsForTesting#Historia!", "127.0.0.1",
                     "3306");
             MySQLConnection.connect();
             MySQLHandler.createTable();
