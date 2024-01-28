@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.database.mysql;
 
-import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.core.util.Logging;
@@ -52,12 +51,12 @@ public class MySQLConnection {
     /**
      * Connects to the MySQL database.
      */
-    public static void connect() {
+    public static boolean connect() {
 
         if (!validateFields()) {
 
             Logging.errorToConsole("MYSQL FIELDS ARE NULL. CHECK THE CONFIGURATION FILE.");
-            return;
+            return false;
         }
 
         try {
@@ -66,7 +65,7 @@ public class MySQLConnection {
             if (connection != null) {
 
                 Logging.infoToConsole("MySQL connection established.");
-
+                return true;
             }
 
         } catch (Exception e) {
@@ -80,6 +79,8 @@ public class MySQLConnection {
             Logging.errorToConsole("PORT: " + PORT);
 
         }
+
+        return false;
 
     }
 
