@@ -3,8 +3,8 @@ version: 2
 MySQL:
     user:
     password:
-    database: historia-dev
+    database:
     ip:
-    port: 3306
+    port:
 
-debug: false
+debug: true
