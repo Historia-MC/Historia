@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.events.connection;
 
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -19,7 +19,8 @@ public class PlayeQuitListener implements Listener {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
 
-        MySQLHandler.setLogout(historiaPlayer.getUUID(), historiaPlayer.getLastLogin(), historiaPlayer.getPlaytime());
+        DatabaseAdapter.setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
+                historiaPlayer.getPlaytime());
 
         PlayerStorage.markOffline(event.getPlayer().getUniqueId());
 

@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.classes.user;
 import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
 import dev.boooiil.historia.core.classes.enums.experience.AllSources;
 import dev.boooiil.historia.core.classes.proficiency.Proficiency;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -73,7 +73,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         // Get an object where the key is a string and the value is also a string.
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
-        Map<MySQLUserKeys, String> user = MySQLHandler.getUser(uuid);
+        Map<MySQLUserKeys, String> user = DatabaseAdapter.getUser(uuid);
 
         this.proficiency = new Proficiency(user.get(MySQLUserKeys.CLASS));
 
@@ -263,9 +263,9 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        MySQLHandler.setProficiency(this.getUUID(), this.getProficiency().getName());
-        MySQLHandler.setProficiencyLevel(this.getUUID(), this.getLevel());
-        MySQLHandler.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+        DatabaseAdapter.setProficiency(this.getUUID(), this.getProficiency().getName());
+        DatabaseAdapter.setProficiencyLevel(this.getUUID(), this.getLevel());
+        DatabaseAdapter.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
 
         this.lastSaved = System.currentTimeMillis();
 

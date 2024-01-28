@@ -2,8 +2,8 @@ package dev.boooiil.historia.core;
 
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.mysql.MySQLConnection;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import dev.boooiil.historia.core.events.blockInteraction.BlockBreakListener;
 import dev.boooiil.historia.core.events.blockInteraction.BlockFromToListener;
 import dev.boooiil.historia.core.events.blockInteraction.BlockPlaceListener;
@@ -33,7 +33,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  * It's a plugin that loads, enables, and disables.
@@ -116,15 +115,8 @@ public class Main extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
-        if (isTesting) {
-            MySQLConnection.customConnection("historia_test", "historia-test", "ThisIsForTesting#Historia!", "127.0.0.1",
-                    "3306");
-            MySQLConnection.connect();
-            MySQLHandler.createTable();
-        } else {
-            MySQLConnection.connect();
-            MySQLHandler.createTable();
-        }
+        DatabaseAdapter.connect();
+        DatabaseAdapter.createTable();
 
         Logging.infoToConsole("Plugin Enabled.");
 

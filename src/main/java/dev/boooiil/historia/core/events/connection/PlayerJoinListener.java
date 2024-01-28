@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.events.connection;
 
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.EventHandler;
@@ -23,8 +23,8 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
 
-        MySQLHandler.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getName());
-        MySQLHandler.setLogin(event.getPlayer().getUniqueId());
+        DatabaseAdapter.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getName());
+        DatabaseAdapter.setLogin(event.getPlayer().getUniqueId());
 
         HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
         PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
