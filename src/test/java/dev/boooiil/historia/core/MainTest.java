@@ -5,7 +5,6 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.database.mysql.MySQLConnection;
 
 import java.util.UUID;
 
@@ -32,11 +31,6 @@ public class MainTest {
         System.out.println("Creating player...");
         player = new PlayerMock(server, "MockUser", UUID.fromString("00000000-0000-0000-0000-000000000001"));
         System.out.println("Player created: " + player.getName());
-
-        if (MySQLConnection.getConnection() == null) {
-            System.out.println("Connecting to MySQL...");
-            MySQLConnection.connect();
-        }
 
         System.out.println("Finished setup.");
 
