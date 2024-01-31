@@ -18,7 +18,7 @@ public class SQLiteConnection {
             initDataSource();
     }
 
-    public static void initDataSource() {
+    private static void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
             Logging.infoToConsole("(SQLite) Initializing data source.");
             Logging.infoToConsole("(SQLite) Data source location: " + Main.plugin().getDataFolder().getAbsolutePath()
@@ -30,7 +30,7 @@ public class SQLiteConnection {
         }
     }
 
-    public static void connect() {
+    public static boolean connect() {
 
         Logging.debugToConsole("Connecting to SQLite database...");
 
@@ -39,6 +39,7 @@ public class SQLiteConnection {
 
             if (connection != null) {
                 Logging.debugToConsole("Connected to SQLite database.");
+                return true;
             } else {
                 Logging.errorToConsole("Failed to connect to SQLite database.");
             }
@@ -51,6 +52,8 @@ public class SQLiteConnection {
             Logging.errorToConsole("SQLite Error Message: " + e.getMessage());
 
         }
+
+        return false;
 
     }
 
