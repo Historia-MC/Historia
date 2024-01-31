@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.internal;
 
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -53,7 +53,8 @@ public class PlayerStorage {
         if (players.containsKey(uuid))
             return players.get(uuid);
 
-        else return new HistoriaPlayer(uuid);
+        else
+            return new HistoriaPlayer(uuid);
 
     }
 
@@ -70,7 +71,7 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
 
         else if (useSQLFallback)
-            return new HistoriaPlayer(MySQLHandler.getUUID(username));
+            return new HistoriaPlayer(DatabaseAdapter.getUUID(username));
 
         else
             return new HistoriaPlayer();
@@ -79,6 +80,7 @@ public class PlayerStorage {
 
     /**
      * Check if the storage holds the given UUID.
+     * 
      * @param uuid - UUID of the player.
      * @return - {@link Boolean}
      */
@@ -90,7 +92,8 @@ public class PlayerStorage {
 
     /**
      * Check if the storage holds the given username.
-     * @param username - Username  of the player.
+     * 
+     * @param username - Username of the player.
      * @return - {@link Boolean}
      */
     public static boolean has(String username) {
