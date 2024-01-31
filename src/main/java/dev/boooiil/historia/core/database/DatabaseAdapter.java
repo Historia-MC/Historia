@@ -184,4 +184,12 @@ public class DatabaseAdapter {
         }
     }
 
+    public static UUID getUUID(String username) {
+        switch (databaseType) {
+            case MYSQL:
+                return MySQLHandler.getUUID(username);
+            default:
+                return SQLiteHandler.getUUID(username);
+        }
+    }
 }
