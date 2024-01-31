@@ -1,9 +1,10 @@
 package dev.boooiil.historia.core.classes.user;
 
-import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Bukkit;
@@ -15,9 +16,9 @@ import java.util.UUID;
 
 public abstract class BasePlayer {
 
-    private final UUID uuid;
-    private String username;
-    private boolean isOnline;
+    private UUID uuid;
+    protected String username;
+    protected boolean isOnline;
 
     private Resident resident;
     private Town town;
@@ -29,6 +30,11 @@ public abstract class BasePlayer {
      * @param uuid the UUID of the player
      */
     public BasePlayer(UUID uuid) {
+
+        if (uuid == null) {
+            Logging.debugToConsole("Constructing new BasePlayer object with null UUID.");
+            return;
+        }
 
         Logging.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
 
@@ -59,13 +65,11 @@ public abstract class BasePlayer {
 
         }
 
-        if (this.username != null && !this.username.equals("MockUser")) {
+        if (this.uuid != null && !Main.isTesting) {
 
-            if (TownyUniverse.getInstance() != null) {
-                this.resident = TownyHandler.getResident(uuid);
-                this.town = TownyHandler.getTown(uuid);
-                this.nation = TownyHandler.getNation(uuid);
-            }
+            this.resident = TownyHandler.getResident(uuid);
+            this.town = TownyHandler.getTown(uuid);
+            this.nation = TownyHandler.getNation(uuid);
 
         }
 
