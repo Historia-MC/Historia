@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.events.connection;
 
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
@@ -36,7 +37,7 @@ public class PlayerJoinListener implements Listener {
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
-        if (!historiaPlayer.getUsername().equals("MockUser")) {
+        if (!Main.isTesting) {
             Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
         Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
@@ -51,7 +52,7 @@ public class PlayerJoinListener implements Listener {
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
-        if (!historiaPlayer.getUsername().equals("MockUser")) {
+        if (!Main.isTesting) {
             Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
 
