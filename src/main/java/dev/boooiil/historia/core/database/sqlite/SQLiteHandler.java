@@ -288,6 +288,8 @@ public class SQLiteHandler {
 
             if (results.next()) {
 
+                Logging.debugToConsole("(SQLite) USER EXISTS. RETURNING USER.");
+
                 return Map.of(
                         MySQLUserKeys.UUID, results.getString("UUID"),
                         MySQLUserKeys.USERNAME, results.getString("Username"),
@@ -297,18 +299,8 @@ public class SQLiteHandler {
                         MySQLUserKeys.LOGIN, results.getString("Login"),
                         MySQLUserKeys.LOGOUT, results.getString("Logout"),
                         MySQLUserKeys.PLAYTIME, results.getString("Playtime"));
-
-            } else {
-                return Map.of(
-                        MySQLUserKeys.UUID, uuid.toString(),
-                        MySQLUserKeys.USERNAME, null,
-                        MySQLUserKeys.CLASS, "None",
-                        MySQLUserKeys.LEVEL, "1",
-                        MySQLUserKeys.EXPERIENCE, "0",
-                        MySQLUserKeys.LOGIN, "0",
-                        MySQLUserKeys.LOGOUT, "0",
-                        MySQLUserKeys.PLAYTIME, "0");
             }
+
         }
 
         catch (Exception e) {
@@ -316,17 +308,19 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
 
-            return Map.of(
-                    MySQLUserKeys.UUID, uuid.toString(),
-                    MySQLUserKeys.USERNAME, null,
-                    MySQLUserKeys.CLASS, "None",
-                    MySQLUserKeys.LEVEL, "1",
-                    MySQLUserKeys.EXPERIENCE, "0",
-                    MySQLUserKeys.LOGIN, "0",
-                    MySQLUserKeys.LOGOUT, "0",
-                    MySQLUserKeys.PLAYTIME, "0");
-
         }
+
+        Logging.debugToConsole("(SQLite) USER DOES NOT EXIST. RETURNING EMPTY USER.");
+
+        return Map.of(
+                MySQLUserKeys.UUID, uuid.toString(),
+                MySQLUserKeys.USERNAME, "null",
+                MySQLUserKeys.CLASS, "None",
+                MySQLUserKeys.LEVEL, "1",
+                MySQLUserKeys.EXPERIENCE, "0",
+                MySQLUserKeys.LOGIN, "0",
+                MySQLUserKeys.LOGOUT, "0",
+                MySQLUserKeys.PLAYTIME, "0");
 
     }
 
