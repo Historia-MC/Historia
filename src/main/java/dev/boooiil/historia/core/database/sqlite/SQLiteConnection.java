@@ -26,7 +26,7 @@ public class SQLiteConnection {
             dataSource = new BasicDataSource();
             dataSource.setDriverClassName("org.sqlite.JDBC");
             dataSource.setUrl("jdbc:sqlite:" + Main.plugin().getDataFolder().getAbsolutePath() + "/database.db");
-            dataSource.setMaxTotal(15);
+            dataSource.setMaxTotal(150);
         }
     }
 
