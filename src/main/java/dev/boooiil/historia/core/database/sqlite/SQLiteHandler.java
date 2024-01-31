@@ -15,11 +15,11 @@ public class SQLiteHandler {
 
     private static final Connection CONNECTION = SQLiteConnection.getConnection();
 
-    public static void createTable() {
+    public static boolean createTable() {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO CREATE TABLE. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -36,6 +36,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(createTable);
+            return true;
         }
 
         catch (Exception e) {
@@ -43,17 +44,19 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+
+        return false;
     }
 
-    public static void createUser(UUID uuid, String playerName) {
+    public static boolean createUser(UUID uuid, String playerName) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO CREATE USER. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         if (userExists(uuid)) {
-            return;
+            return false;
         }
 
         try {
@@ -62,6 +65,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(createUser);
+            return true;
         }
 
         catch (Exception e) {
@@ -69,13 +73,14 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
-    public static void setUsername(UUID uuid, String playerName) {
+    public static boolean setUsername(UUID uuid, String playerName) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET USERNAME. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -85,6 +90,7 @@ public class SQLiteHandler {
             statement.executeUpdate(setUsername);
 
             Logging.infoToConsole("(SQLite) SET USERNAME FOR " + uuid + " TO " + playerName + ".");
+            return true;
         }
 
         catch (Exception e) {
@@ -92,13 +98,15 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+
+        return false;
     }
 
-    public static void setProficiency(UUID uuid, String proficiency) {
+    public static boolean setProficiency(UUID uuid, String proficiency) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -106,7 +114,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(setProficiency);
-
+            return true;
         }
 
         catch (Exception e) {
@@ -114,13 +122,14 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
-    public static void setProficiencyLevel(UUID uuid, int level) {
+    public static boolean setProficiencyLevel(UUID uuid, int level) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY LEVEL. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -128,7 +137,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(setProficiencyLevel);
-
+            return true;
         }
 
         catch (Exception e) {
@@ -136,13 +145,14 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
-    public static void setLogin(UUID uuid) {
+    public static boolean setLogin(UUID uuid) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET LOGIN. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -151,7 +161,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(setLogin);
-
+            return true;
         }
 
         catch (Exception e) {
@@ -159,13 +169,14 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
-    public static void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
+    public static boolean setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET LOGOUT. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -178,7 +189,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(string);
-
+            return true;
         }
 
         catch (Exception e) {
@@ -186,13 +197,14 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
-    public static void setCurrentExperience(UUID uuid, double experience) {
+    public static boolean setCurrentExperience(UUID uuid, double experience) {
 
         if (CONNECTION == null) {
             Logging.errorToConsole("(SQLite) FAILED TO SET CURRENT EXPERIENCE. CONNECTION IS NULL.");
-            return;
+            return false;
         }
 
         try {
@@ -201,7 +213,7 @@ public class SQLiteHandler {
 
             Statement statement = CONNECTION.createStatement();
             statement.executeUpdate(setCurrentExperience);
-
+            return true;
         }
 
         catch (Exception e) {
@@ -209,6 +221,7 @@ public class SQLiteHandler {
             Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
             Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
         }
+        return false;
     }
 
     public static List<String> getUsernames() {
