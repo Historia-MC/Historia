@@ -75,6 +75,12 @@ public class HistoriaPlayer extends BasePlayer {
         // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
         Map<MySQLUserKeys, String> user = DatabaseAdapter.getUser(uuid);
 
+        if (!user.get(MySQLUserKeys.USERNAME).equals("null")) {
+            if (this.username == null || !this.username.equals(user.get(MySQLUserKeys.USERNAME))) {
+                this.username = user.get(MySQLUserKeys.USERNAME);
+            }
+        }
+
         this.proficiency = new Proficiency(user.get(MySQLUserKeys.CLASS));
 
         this.level = Integer.parseInt(user.get(MySQLUserKeys.LEVEL));
