@@ -19,7 +19,6 @@ import dev.boooiil.historia.core.util.Logging;
 public class PlayerStorageTest {
 
     private ServerMock server;
-    private Main plugin;
 
     @BeforeEach
     public void setUp() {
@@ -27,10 +26,13 @@ public class PlayerStorageTest {
         server = MockBukkit.mock();
         System.out.println("Loading plugin...");
         try {
-            plugin = MockBukkit.load(Main.class);
+            MockBukkit.load(Main.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        PlayerStorage.players.clear();
+        PlayerStorage.usernameMap.clear();
 
         System.out.println("Finished setup.");
 
