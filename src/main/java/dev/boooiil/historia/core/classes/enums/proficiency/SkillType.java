@@ -1,29 +1,44 @@
 package dev.boooiil.historia.core.classes.enums.proficiency;
 
 public enum SkillType {
-    NAME_TAG,
-    FEATHER_FALL,
-    QUICK_CHARGE,
-    EFFICIENCY_PICKAXE,
-    EFFICIENCY_SHOVEL,
-    EFFICIENCY_AXE,
-    CHANCE_EXTRA_ORE,
-    CHANCE_EXTRA_WOOD,
-    CHANCE_EXTRA_FEATHERS,
-    CHANCE_NO_ANVIL_DAMAGE,
-    CHANCE_NO_CONSUME_BLOCK,
-    LADDER_BYPASS,
-    IGNITE_OIL,
-    BREAK_GRASS,
-    TAME_ANIMALS,
-    SWEEPING_EDGE,
-    BREAK_BEEHIVE,
-    APPLY_UNBREAKING,
-    APPLY_SHARPNESS,
-    SHEAR_CHICKEN,
-    HARVEST_BONES,
-    HARVEST_LEATHER,
-    MAKE_KNOWLEDGE_BOOK,
-    CAN_BREED,
-    CAN_CLIMB_LOGS
+    NAME_TAG("nametag"),
+    FEATHER_FALL("featherFall"),
+    QUICK_CHARGE("quickCharge"),
+    EFFICIENCY_PICKAXE("efficiencyPickaxe"),
+    EFFICIENCY_SHOVEL("efficiencyShovel"),
+    EFFICIENCY_AXE("efficiencyAxe"),
+    CHANCE_EXTRA_ORE("chanceExtraOre"),
+    CHANCE_EXTRA_WOOD("chanceExtraWood"),
+    CHANCE_EXTRA_FEATHERS("chanceExtraFeathers"),
+    CHANCE_NO_ANVIL_DAMAGE("chanceNoAnvilDamage"),
+    CHANCE_NO_CONSUME_BLOCK("chanceNoConsumeBlock"),
+    LADDER_BYPASS("ladderBypass"),
+    IGNITE_OIL("igniteOil"),
+    BREAK_GRASS("breakGrass"),
+    TAME_ANIMALS("tameAnimals"),
+    SWEEPING_EDGE("sweepingEdge"),
+    BREAK_BEEHIVE("breakBeehive"),
+    APPLY_UNBREAKING("applyUnbreaking"),
+    APPLY_SHARPNESS("applySharpness"),
+    SHEAR_CHICKEN("shearChicken"),
+    HARVEST_BONES("bonesFromAnimals"),
+    HARVEST_LEATHER("harvestLeather"),
+    MAKE_KNOWLEDGE_BOOK("makeKnowledgeBook"),
+    CAN_BREED("canBreed"),
+    CAN_CLIMB_LOGS("canClimbLogs");
+
+    private final String key;
+
+    SkillType(String key) {
+
+        this.key = key;
+
+    }
+
+    public String getKey() {
+
+        return this.key;
+
+    }
+
 }
