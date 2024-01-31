@@ -40,6 +40,14 @@ public class SkillsTest {
     }
 
     @Test
+    public void testNoneCompleteness() {
+
+        ConfigurationSection section = config.getConfigurationSection("None.skills");
+
+        assert section == null;
+    }
+
+    @Test
     public void testWarriorCompleteness() {
         Skills skills = new Skills(config, "Warrior.skills");
 
