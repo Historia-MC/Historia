@@ -1,6 +1,8 @@
 package dev.boooiil.historia.core.handlers.inventory;
 
-import dev.boooiil.historia.core.util.Construct;
+import dev.boooiil.historia.core.Main;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -18,37 +20,42 @@ public class InventoryClickHandler {
 
     private final InventoryClickEvent event;
 
+    private ItemStack slottedItem;
+    private ItemStack cursorItem;
+
     public InventoryClickHandler(InventoryClickEvent event) {
 
         this.event = event;
+        this.slottedItem = event.getCurrentItem();
+        this.cursorItem = event.getCursor();
 
     }
 
-    public void doClick() {
+    public void doInventoryClick() {
+
+        if (cursorItem.getType() == Material.FLINT_AND_STEEL && slottedItem.getType() == Material.ARROW) {
+            doApplyFlameToArrow();
+        }
+    }
+
+    private void doApplyFlameToArrow() {
 
         // TODO: Possibly account for arrows that have multiple uses (through lore)
 
         // TODO: Account for multiple items in the slot
         // TODO: Ignite user for too many ignited arrows
 
-        if (event.getCurrentItem() == null)
-            return;
-        if (event.getCurrentItem().getType() != Material.ARROW)
-            return;
-        if (event.getCursor().getType() != Material.FLINT_AND_STEEL)
-            return;
-
         // TODO: Enable this on release
         // if (!event.getCurrentItem().getItemMeta().hasLore()) return;
 
         ItemStack flintAndSteelItem = event.getCursor();
-        ItemStack newArrow = Construct.itemStack(Material.ARROW.toString(), 1, "Ignited Arrow", "Ignited_Arrow");
+        ItemStack newArrow = new ItemStack(Material.ARROW);
         // ItemStack arrowItem = event.getCurrentItem();
 
-        ItemMeta flintAndSteelMeta = flintAndSteelItem.getItemMeta();
-        ItemMeta arrowMeta = newArrow.getItemMeta();
+        ItemMeta flintSteelMeta = this.cursorItem.getItemMeta();
+        ItemMeta newArrowMeta = Main.server().getItemFactory().getItemMeta(Material.ARROW);
 
-        Damageable flintAndSteelDamageable = (Damageable) flintAndSteelMeta;
+        Damageable flintAndSteelDamageable = (Damageable) flintSteelMeta;
 
         // TODO: Comment this out on release
         List<String> lore = new ArrayList<>();
@@ -57,10 +64,11 @@ public class InventoryClickHandler {
         // List<String> lore = arrowMeta.getLore();
 
         lore.add(ChatColor.RED + "Ignited - 1/1");
-        arrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
-        arrowMeta.setLore(lore);
+        newArrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        newArrowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        arrowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        newArrowMeta.lore(List.of(
+                Component.text("Ignited - 1/1", TextColor.color(255, 0, 0))));
 
         flintAndSteelDamageable.setDamage(flintAndSteelDamageable.getDamage() + 8);
 
@@ -73,7 +81,7 @@ public class InventoryClickHandler {
             flintAndSteelItem.setItemMeta(flintAndSteelDamageable);
         }
 
-        newArrow.setItemMeta(arrowMeta);
+        newArrow.setItemMeta(newArrowMeta);
 
         event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - 1);
 
