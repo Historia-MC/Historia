@@ -1,9 +1,9 @@
 package dev.boooiil.historia.core.configuration.specific;
 
-import dev.boooiil.historia.core.classes.proficiency.Proficiency;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import dev.boooiil.historia.core.proficiency.Proficiency;
 
 public class ProficiencyConfig {
 
@@ -11,6 +11,7 @@ public class ProficiencyConfig {
 
     /**
      * Return a preloaded configuration.
+     * 
      * @param proficiencyName Provided proficiency name.
      * @return BaseClass associated with the class.
      */

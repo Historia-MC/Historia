@@ -1,9 +1,9 @@
 package dev.boooiil.historia.core.handlers.blockBreakListener;
 
-import dev.boooiil.historia.core.classes.enums.experience.BlockSources;
-import dev.boooiil.historia.core.classes.enums.experience.FarmingSources;
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.experience.BlockSources;
+import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;

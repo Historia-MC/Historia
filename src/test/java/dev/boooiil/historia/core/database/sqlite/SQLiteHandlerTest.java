@@ -9,9 +9,9 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 public class SQLiteHandlerTest {
 

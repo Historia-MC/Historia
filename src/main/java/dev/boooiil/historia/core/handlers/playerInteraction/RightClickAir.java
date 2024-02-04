@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -8,21 +7,27 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
+
 import java.util.List;
 
 public class RightClickAir extends BaseInteractionEventBlock {
-    
+
     public RightClickAir(PlayerInteractEvent event) {
         super(event);
     }
 
     @Override
     public void doInteraction() {
-        
-        if (this.getHeldItem() == null) return;
-        if (this.getHeldItem().getType() != Material.BOW) return;
-        if (this.getOffHandItem().getType() != Material.FLINT_AND_STEEL) return;
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.IGNITE_OIL)) return;
+
+        if (this.getHeldItem() == null)
+            return;
+        if (this.getHeldItem().getType() != Material.BOW)
+            return;
+        if (this.getOffHandItem().getType() != Material.FLINT_AND_STEEL)
+            return;
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.IGNITE_OIL))
+            return;
 
         ItemMeta handItemMeta = this.getHeldItem().getItemMeta();
         ItemMeta offhandItemMeta = this.getOffHandItem().getItemMeta();
@@ -42,10 +47,10 @@ public class RightClickAir extends BaseInteractionEventBlock {
         }
 
         else {
-            this.getOffHandItem().setItemMeta(offhandItemMeta);  
+            this.getOffHandItem().setItemMeta(offhandItemMeta);
         }
 
-        this.getHeldItem().setItemMeta(handItemMeta);      
+        this.getHeldItem().setItemMeta(handItemMeta);
 
     }
 

@@ -1,10 +1,10 @@
 package dev.boooiil.historia.core.events.connection;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

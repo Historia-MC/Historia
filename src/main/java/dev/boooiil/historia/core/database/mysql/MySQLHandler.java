@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.mysql;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
+
 import dev.boooiil.historia.core.util.Logging;
 
 import java.sql.Connection;

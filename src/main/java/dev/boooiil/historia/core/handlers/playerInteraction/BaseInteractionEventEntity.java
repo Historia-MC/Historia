@@ -1,7 +1,8 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -11,7 +12,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class BaseInteractionEventEntity {
-    
+
     protected PlayerInteractEntityEvent event;
 
     public BaseInteractionEventEntity(PlayerInteractEntityEvent event) {

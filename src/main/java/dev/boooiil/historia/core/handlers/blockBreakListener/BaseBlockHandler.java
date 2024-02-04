@@ -1,11 +1,12 @@
 package dev.boooiil.historia.core.handlers.blockBreakListener;
 
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 public abstract class BaseBlockHandler {
 

@@ -3,8 +3,8 @@ package dev.boooiil.historia.core;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 import java.util.UUID;
 

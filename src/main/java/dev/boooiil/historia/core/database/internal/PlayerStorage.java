@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.internal;
 
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 import java.util.HashMap;
 import java.util.UUID;

@@ -1,9 +1,9 @@
 package dev.boooiil.historia.core.events.mobs;
 
-import dev.boooiil.historia.core.classes.enums.experience.AnimalSources;
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.entity.Breedable;
 import org.bukkit.entity.Player;
@@ -15,7 +15,7 @@ public class EntityBreedListener implements Listener {
 
     @EventHandler
     public void onEntityBreed(EntityBreedEvent event) {
-    
+
         // not sure what other entities can breed
         // shouldn't (TM) be a problem
         Player breeder = (Player) event.getBreeder();
@@ -23,11 +23,10 @@ public class EntityBreedListener implements Listener {
 
         if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.TAME_ANIMALS)) {
             historiaPlayer.increaseExperience(AnimalSources.BREED_ANIMAL.getKey());
-        }
-        else {
+        } else {
 
             event.setCancelled(true);
-            
+
             ((Breedable) event.getFather()).setBreed(false);
             ((Breedable) event.getMother()).setBreed(false);
 

@@ -12,8 +12,8 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 
 public class PlayerStorageTest {

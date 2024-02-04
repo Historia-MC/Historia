@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -40,7 +40,8 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
         Logging.debugToConsole("[RCS] Held Item Matches: " + matcher.matches());
 
         // if not sword or axe
-        if (!matcher.matches()) return;
+        if (!matcher.matches())
+            return;
 
         if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.APPLY_SHARPNESS)) {
             Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
@@ -77,11 +78,12 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
 
             itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             itemMeta.addEnchant(Enchantment.DAMAGE_ALL, increasedSharpnessLevel, true);
-            
+
             if (currentSharpnessLevel > 0) {
 
-                currentLore.set(currentLore.size() - 1, "Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
-                    + "/" + adjustedSharpnessUses);
+                currentLore.set(currentLore.size() - 1,
+                        "Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
+                                + "/" + adjustedSharpnessUses);
 
             }
 
@@ -89,7 +91,7 @@ public class RightClickStonecutter extends BaseInteractionEventBlock {
 
                 currentLore.add("");
                 currentLore.add("Sharpness (" + "I".repeat(increasedSharpnessLevel) + "): " + adjustedSharpnessUses
-                    + "/" + adjustedSharpnessUses);
+                        + "/" + adjustedSharpnessUses);
 
             }
 

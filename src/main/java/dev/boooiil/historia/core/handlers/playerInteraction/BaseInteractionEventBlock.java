@@ -1,7 +1,8 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -48,5 +49,5 @@ public class BaseInteractionEventBlock {
     public boolean blockIsType(Material material) {
         return getBlock().getType() == material;
     }
-    
+
 }

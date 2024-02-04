@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
 import dev.boooiil.historia.core.database.mysql.MySQLConnection;
 import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.database.sqlite.SQLiteConnection;
 import dev.boooiil.historia.core.database.sqlite.SQLiteHandler;
 

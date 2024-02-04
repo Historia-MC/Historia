@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.playerInteraction;
 
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.Material;
@@ -19,29 +19,34 @@ public class RightClickChicken extends BaseInteractionEventEntity {
     @Override
     public void doInteraction() {
 
-        Logging.debugToConsole("[RightClickChicken] Player " + this.getPlayer().getName() + " right clicked an entity.");
+        Logging.debugToConsole(
+                "[RightClickChicken] Player " + this.getPlayer().getName() + " right clicked an entity.");
         Logging.debugToConsole("[RightClickChicken] Player " + this.getPlayer().getName() + " has proficiency "
                 + this.getHistoriaPlayer().getProficiency().getName() + ".");
 
         // if not chicken
-        if (!entityIsType(EntityType.CHICKEN)) return;
+        if (!entityIsType(EntityType.CHICKEN))
+            return;
 
         Logging.debugToConsole("[RightClickChicken] Entity is a chicken.");
-        
+
         // if unable to extract feathers
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.SHEAR_CHICKEN)) return;
+        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.SHEAR_CHICKEN))
+            return;
 
         Logging.debugToConsole("[RightClickChicken] Player can shear chickens.");
 
         // if not holding shears
-        if (getHeldItem().getType() != Material.SHEARS) return;
+        if (getHeldItem().getType() != Material.SHEARS)
+            return;
 
         Logging.debugToConsole("[RightClickChicken] Player is holding shears.");
 
         Ageable ageableEntity = (Ageable) getEntity();
 
         // if not adult
-        if (!ageableEntity.isAdult()) return;
+        if (!ageableEntity.isAdult())
+            return;
 
         Logging.debugToConsole("[RightClickChicken] Entity is an adult.");
 

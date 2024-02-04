@@ -1,9 +1,10 @@
 package dev.boooiil.historia.core.handlers.blockBreakListener;
 
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
+
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockPlaceEvent;
 
