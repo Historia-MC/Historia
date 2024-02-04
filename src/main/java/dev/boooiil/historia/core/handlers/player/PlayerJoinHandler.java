@@ -5,13 +5,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 
 public class PlayerJoinHandler {
 
     private PlayerJoinEvent event;
+    private HistoriaPlayer historiaPlayer;
 
     public PlayerJoinHandler(PlayerJoinEvent event) {
         this.event = event;
@@ -23,8 +23,8 @@ public class PlayerJoinHandler {
     }
 
     public void doAddToInternalStorage() {
-        HistoriaPlayer historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
-        PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), historiaPlayer);
+        this.historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
+        PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), this.historiaPlayer);
 
         Logging.debugToConsole("************* INITIAL STATS *************");
         Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
@@ -40,8 +40,8 @@ public class PlayerJoinHandler {
     }
 
     public void doPlayerStatsInitialization() {
-        InitialStatLoader initialStatLoader = new InitialStatLoader(event.getPlayer());
-        initialStatLoader.apply();
+
+        historiaPlayer.applyClassStats();
 
         Logging.debugToConsole("************* ADJUSTED STATS *************");
         Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
