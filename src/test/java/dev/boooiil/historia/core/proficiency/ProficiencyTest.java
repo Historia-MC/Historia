@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.proficiency.Proficiency;
 
 public class ProficiencyTest {
 
