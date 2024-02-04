@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
 import dev.boooiil.historia.core.events.entity.EntityBreedListener;
 import dev.boooiil.historia.core.events.entity.EntityTameListener;
-import dev.boooiil.historia.core.events.entity.FoodLevelChangeListener;
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener;
 import dev.boooiil.historia.core.events.player.PlayeQuitListener;
 import dev.boooiil.historia.core.events.player.PlayerExpChangeListener;
@@ -29,8 +28,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.io.File;
 
 /**
  * It's a plugin that loads, enables, and disables.
@@ -85,7 +82,6 @@ public class Main extends JavaPlugin {
         registerEvent(new EntityBreedListener());
         registerEvent(new EntityTameListener());
         registerEvent(new PlayerExpChangeListener());
-        registerEvent(new FoodLevelChangeListener());
         registerEvent(new InventoryClickListener());
         registerEvent(new BlockBreakListener());
         registerEvent(new BlockPlaceListener());
