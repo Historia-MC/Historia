@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.enums.file;
+package dev.boooiil.historia.core.file;
 
 public enum FileKeys {
 

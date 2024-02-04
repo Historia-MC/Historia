@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.enums.proficiency;
+package dev.boooiil.historia.core.proficiency.skills;
 
 public enum SkillType {
     NAME_TAG("nametag"),

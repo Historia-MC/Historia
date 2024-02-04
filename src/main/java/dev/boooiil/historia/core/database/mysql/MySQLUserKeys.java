@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.enums.database;
+package dev.boooiil.historia.core.database.mysql;
 
 public enum MySQLUserKeys {
 

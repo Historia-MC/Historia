@@ -1,6 +1,5 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency.skills;
 
-import dev.boooiil.historia.core.classes.enums.proficiency.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -79,6 +78,7 @@ public class Skills {
     public boolean hasSkillEnchants() {
         return !skillEnchants.isEmpty();
     }
+
     public Enchantment getSkillEnchantment(Material material) {
 
         for (Map.Entry<Pattern, Enchantment> entry : skillEnchants.entrySet()) {

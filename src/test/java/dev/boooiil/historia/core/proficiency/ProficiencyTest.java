@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.proficiency.Proficiency;
 
 public class ProficiencyTest {
 

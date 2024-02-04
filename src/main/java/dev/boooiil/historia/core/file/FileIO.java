@@ -1,7 +1,8 @@
-package dev.boooiil.historia.core.util;
+package dev.boooiil.historia.core.file;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.enums.file.FileKeys;
+import dev.boooiil.historia.core.util.Logging;
+
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -45,7 +46,8 @@ public class FileIO {
             int jarVersion = jarConfig.getInt("version");
 
             if (diskVersion < jarVersion) {
-                Logging.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName + " has been replaced on disk by the newer version " + jarVersion + ".");
+                Logging.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName
+                        + " has been replaced on disk by the newer version " + jarVersion + ".");
                 Main.plugin().saveResource(fileName, true);
             }
         }
@@ -64,7 +66,8 @@ public class FileIO {
     }
 
     /**
-     * It takes an array of files and a string, and returns true if the string is the name of one of
+     * It takes an array of files and a string, and returns true if the string is
+     * the name of one of
      * the files in the array
      *
      * @param files The array of files to check
@@ -89,7 +92,8 @@ public class FileIO {
     }
 
     /**
-     * If the file exists in the external directory, load it from there. If it doesn't, load it from
+     * If the file exists in the external directory, load it from there. If it
+     * doesn't, load it from
      * the internal directory
      *
      * @param check The file name to check for.
@@ -101,7 +105,8 @@ public class FileIO {
 
         if (find(Main.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.debugToConsole("Obtained file from external directory: ", Main.plugin().getDataFolder().getPath() + "\\" + check.getKey());
+            Logging.debugToConsole("Obtained file from external directory: ",
+                    Main.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
             File file = new File(Main.plugin().getDataFolder().getPath(), check.getKey());
 

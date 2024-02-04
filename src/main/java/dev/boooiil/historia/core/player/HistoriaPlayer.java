@@ -1,10 +1,10 @@
-package dev.boooiil.historia.core.classes.user;
+package dev.boooiil.historia.core.player;
 
-import dev.boooiil.historia.core.classes.enums.database.MySQLUserKeys;
-import dev.boooiil.historia.core.classes.enums.experience.AllSources;
-import dev.boooiil.historia.core.classes.proficiency.Proficiency;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
+import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 

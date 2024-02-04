@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.classes.enums.experience.AllSources;
-import dev.boooiil.historia.core.classes.enums.file.FileKeys;
-import dev.boooiil.historia.core.util.FileIO;
+import dev.boooiil.historia.core.file.FileIO;
+import dev.boooiil.historia.core.file.FileKeys;
+import dev.boooiil.historia.core.proficiency.experience.AllSources;
+import dev.boooiil.historia.core.proficiency.stats.Stats;
 
 public class StatsTest {
     FileConfiguration config;

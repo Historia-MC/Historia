@@ -1,5 +1,9 @@
-package dev.boooiil.historia.core.classes.enums.experience;
+package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * Do not use this.
+ * Use the specific enum for the source of experience.
+ */
 public enum AllSources {
 
     ATTACK(1d),

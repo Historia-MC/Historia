@@ -1,6 +1,6 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency.runnable;
 
-import dev.boooiil.historia.core.classes.user.HistoriaPlayer;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -63,7 +63,8 @@ public class ApplyProficiencySkillEnchants {
 
             ItemMeta itemMeta = item.getItemMeta();
 
-            Logging.debugToConsole(historiaPlayer.getUsername() + " had an item in their inventory that wasn't enchanted.");
+            Logging.debugToConsole(
+                    historiaPlayer.getUsername() + " had an item in their inventory that wasn't enchanted.");
 
             itemMeta.addEnchant(enchant, 1, true);
             item.setItemMeta(itemMeta);
@@ -78,7 +79,8 @@ public class ApplyProficiencySkillEnchants {
 
             ItemMeta itemMeta = item.getItemMeta();
 
-            Logging.debugToConsole(historiaPlayer.getUsername() + " had an item in their inventory with an illegal enchant.");
+            Logging.debugToConsole(
+                    historiaPlayer.getUsername() + " had an item in their inventory with an illegal enchant.");
 
             item.getItemMeta().getEnchants().forEach((enchant, level) -> {
 
@@ -93,4 +95,3 @@ public class ApplyProficiencySkillEnchants {
     }
 
 }
-

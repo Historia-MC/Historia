@@ -1,6 +1,6 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency.stats;
 
-import dev.boooiil.historia.core.classes.enums.experience.AllSources;
+import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -355,7 +355,8 @@ public class Stats {
     }
 
     /**
-     * This function sets the experienceSources variable to the value of the parameter
+     * This function sets the experienceSources variable to the value of the
+     * parameter
      * experienceSources
      * 
      * @param experienceSources The income sources of the character.
@@ -367,6 +368,7 @@ public class Stats {
     /**
      * This function returns a boolean value indicating whether the character has
      * the given income source or not.
+     * 
      * @param source The income source to check for.
      * @return true if the character has the income source, false otherwise.
      */

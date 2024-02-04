@@ -1,7 +1,10 @@
-package dev.boooiil.historia.core.classes.proficiency;
+package dev.boooiil.historia.core.proficiency;
 
-import dev.boooiil.historia.core.classes.enums.file.FileKeys;
-import dev.boooiil.historia.core.util.FileIO;
+import dev.boooiil.historia.core.file.FileIO;
+import dev.boooiil.historia.core.file.FileKeys;
+import dev.boooiil.historia.core.proficiency.skills.Skills;
+import dev.boooiil.historia.core.proficiency.stats.Stats;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.regex.Matcher;
@@ -171,7 +174,8 @@ public class Proficiency {
      */
     public boolean canUseRanged() {
 
-        return getStats().getUsableWeaponTypes().contains("Bow") || getStats().getUsableWeaponTypes().contains("Crossbow");
+        return getStats().getUsableWeaponTypes().contains("Bow")
+                || getStats().getUsableWeaponTypes().contains("Crossbow");
     }
 
     /**
@@ -235,7 +239,7 @@ public class Proficiency {
         }
 
     }
-    
+
     /**
      * Returns a string representation of the Proficiency object.
      * 

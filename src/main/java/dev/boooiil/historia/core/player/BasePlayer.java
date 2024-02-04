@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.classes.user;
+package dev.boooiil.historia.core.player;
 
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class BasePlayer {
+abstract class BasePlayer {
 
     private UUID uuid;
     protected String username;
