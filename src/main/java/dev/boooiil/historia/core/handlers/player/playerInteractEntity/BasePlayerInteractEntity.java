@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.playerInteraction;
+package dev.boooiil.historia.core.handlers.player.playerInteractEntity;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
@@ -11,43 +11,39 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BaseInteractionEventEntity {
+class BasePlayerInteractEntity {
 
     protected PlayerInteractEntityEvent event;
 
-    public BaseInteractionEventEntity(PlayerInteractEntityEvent event) {
+    BasePlayerInteractEntity(PlayerInteractEntityEvent event) {
         this.event = event;
     }
 
-    public Entity getEntity() {
+    protected Entity getEntity() {
         return event.getRightClicked();
     }
 
-    public Player getPlayer() {
+    protected Player getPlayer() {
         return event.getPlayer();
     }
 
-    public HistoriaPlayer getHistoriaPlayer() {
+    protected HistoriaPlayer getHistoriaPlayer() {
         return PlayerStorage.getPlayer(getPlayer().getUniqueId(), false);
     }
 
-    public ItemStack getHeldItem() {
+    protected ItemStack getHeldItem() {
         return event.getPlayer().getInventory().getItemInMainHand();
     }
 
-    public void doInteraction() {
-
-    }
-
-    public boolean entityIsType(EntityType entityType) {
+    protected boolean entityIsType(EntityType entityType) {
         return getEntity().getType().equals(entityType);
     }
 
-    public World getWorld() {
+    protected World getWorld() {
         return getEntity().getWorld();
     }
 
-    public Location getLocation() {
+    protected Location getLocation() {
         return getEntity().getLocation();
     }
 
