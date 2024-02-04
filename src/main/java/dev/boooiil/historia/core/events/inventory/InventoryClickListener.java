@@ -20,7 +20,7 @@ public class InventoryClickListener implements Listener {
             Logging.debugToConsole("Player clicked in their inventory with cursor");
 
             InventoryClickHandler inventorySwapWithCursor = new InventoryClickHandler(event);
-            inventorySwapWithCursor.doClick();
+            inventorySwapWithCursor.doInventoryClick();
         }
 
     }
