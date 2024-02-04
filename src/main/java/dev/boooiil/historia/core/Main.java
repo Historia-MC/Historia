@@ -57,11 +57,17 @@ public class Main extends JavaPlugin {
         // Check config files
         FileIO.checkFiles();
 
-        System.out.println("RUNNING VERSION: " + Bukkit.getVersion());
+        Logging.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion());
 
         if (Bukkit.getVersion().contains("MockBukkit")) {
             System.out.println("RUNNING IN TEST MODE");
             isTesting = true;
+        }
+
+        else if (!Bukkit.getVersion().contains("Paper")) {
+            Logging.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
+            Logging.errorToConsole("DISABLING PLUGIN");
+            Main.disable();
         }
 
     }
