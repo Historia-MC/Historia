@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.playerInteraction;
+package dev.boooiil.historia.core.handlers.player.playerInteract;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
@@ -10,43 +10,39 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BaseInteractionEventBlock {
+class BasePlayerInteract {
 
     protected PlayerInteractEvent event;
 
-    public BaseInteractionEventBlock(PlayerInteractEvent event) {
+    BasePlayerInteract(PlayerInteractEvent event) {
         this.event = event;
     }
 
-    public Player getPlayer() {
+    protected Player getPlayer() {
         return event.getPlayer();
     }
 
-    public Action getAction() {
+    protected Action getAction() {
         return event.getAction();
     }
 
-    public HistoriaPlayer getHistoriaPlayer() {
+    protected HistoriaPlayer getHistoriaPlayer() {
         return PlayerStorage.getPlayer(getPlayer().getUniqueId(), false);
     }
 
-    public Block getBlock() {
+    protected Block getBlock() {
         return event.getClickedBlock();
     }
 
-    public ItemStack getHeldItem() {
+    protected ItemStack getHeldItem() {
         return event.getItem();
     }
 
-    public ItemStack getOffHandItem() {
+    protected ItemStack getOffHandItem() {
         return getPlayer().getInventory().getItemInOffHand();
     }
 
-    public void doInteraction() {
-
-    }
-
-    public boolean blockIsType(Material material) {
+    protected boolean blockIsType(Material material) {
         return getBlock().getType() == material;
     }
 
