@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.blockBreakListener;
+package dev.boooiil.historia.core.handlers.block;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

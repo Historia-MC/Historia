@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.handlers.blockBreakListener;
+package dev.boooiil.historia.core.handlers.block.blockPlace;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
@@ -8,11 +8,11 @@ import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import org.bukkit.Material;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class PlayerPlaceBlock {
+public class BlockPlaceHandler {
 
     private final BlockPlaceEvent event;
 
-    public PlayerPlaceBlock(BlockPlaceEvent event) {
+    public BlockPlaceHandler(BlockPlaceEvent event) {
 
         this.event = event;
 

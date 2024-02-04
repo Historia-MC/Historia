@@ -1,5 +1,6 @@
-package dev.boooiil.historia.core.handlers.blockBreakListener;
+package dev.boooiil.historia.core.handlers.block.blockBreak;
 
+import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
@@ -8,7 +9,7 @@ import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class BlockHandler extends BaseBlockHandler {
+public class BlockBreakHandler extends BaseBlockHandler {
 
     /**
      * Constructor for BlockHandler class that takes a BlockBreakEvent and a
@@ -17,7 +18,7 @@ public class BlockHandler extends BaseBlockHandler {
      * @param event          the BlockBreakEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
-    public BlockHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
+    public BlockBreakHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
 
         super(event, historiaPlayer);
 
@@ -30,7 +31,7 @@ public class BlockHandler extends BaseBlockHandler {
      * @param event          the BlockPlaceEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
-    public BlockHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
+    public BlockBreakHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
 
         super(event, historiaPlayer);
 
