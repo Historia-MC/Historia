@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.experience;
+package dev.boooiil.historia.core.events.player;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

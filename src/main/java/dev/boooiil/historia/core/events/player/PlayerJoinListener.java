@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.connection;
+package dev.boooiil.historia.core.events.player;
 
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.database.DatabaseAdapter;

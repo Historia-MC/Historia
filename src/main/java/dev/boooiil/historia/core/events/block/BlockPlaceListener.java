@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.blockInteraction;
+package dev.boooiil.historia.core.events.block;
 
 import dev.boooiil.historia.core.handlers.blockBreakListener.PlayerPlaceBlock;
 import org.bukkit.event.EventHandler;

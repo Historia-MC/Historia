@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.playerInteraction;
+package dev.boooiil.historia.core.events.player;
 
 import dev.boooiil.historia.core.handlers.playerInteraction.RightClickChicken;
 import org.bukkit.event.EventHandler;
@@ -14,5 +14,5 @@ public class PlayerInteractEntityListener implements Listener {
         rightClickChicken.doInteraction();
 
     }
-    
+
 }

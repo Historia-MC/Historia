@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.mobs;
+package dev.boooiil.historia.core.events.entity;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.handlers.mobs.TameAnimal;

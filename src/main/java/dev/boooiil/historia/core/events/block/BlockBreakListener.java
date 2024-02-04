@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.blockInteraction;
+package dev.boooiil.historia.core.events.block;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.dependents.Permissions;

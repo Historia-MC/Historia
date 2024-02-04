@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.blockInteraction;
+package dev.boooiil.historia.core.events.block;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,5 +10,5 @@ public class BlockFromToListener implements Listener {
     public void onBlockFromTo(BlockFromToEvent event) {
 
     }
-    
+
 }

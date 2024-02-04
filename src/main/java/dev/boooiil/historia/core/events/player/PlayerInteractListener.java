@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.events.playerInteraction;
+package dev.boooiil.historia.core.events.player;
 
 import dev.boooiil.historia.core.handlers.playerInteraction.RightClickAir;
 import dev.boooiil.historia.core.handlers.playerInteraction.RightClickAnvil;
@@ -12,7 +12,6 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-
 
         if (event.getAction() == Action.RIGHT_CLICK_AIR) {
 
@@ -33,5 +32,4 @@ public class PlayerInteractListener implements Listener {
 
     }
 
-    
 }
