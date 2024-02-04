@@ -1,8 +1,6 @@
 package dev.boooiil.historia.core.events.entity;
 
-import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.handlers.mobs.TameAnimal;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.handlers.entity.EntityTameHandler;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,10 +11,8 @@ public class EntityTameListener implements Listener {
     @EventHandler
     public void onEntityTame(EntityTameEvent event) {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getOwner().getUniqueId(), false);
-
-        TameAnimal tameAnimal = new TameAnimal(historiaPlayer, event);
-        tameAnimal.doTameAnimal();
+        EntityTameHandler entityTameHandler = new EntityTameHandler(event);
+        entityTameHandler.doDetermineTamedAnimalAndRunTame();
 
     }
 
