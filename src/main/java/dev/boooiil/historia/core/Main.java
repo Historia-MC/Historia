@@ -155,6 +155,10 @@ public class Main extends JavaPlugin {
 
     }
 
+    public static NamespacedKey getNamespacedKey(String key) {
+        return new NamespacedKey(plugin(), key);
+    }
+
     /**
      * It registers an event
      * 
