@@ -2,7 +2,6 @@ package dev.boooiil.historia.core.player;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
-import dev.boooiil.historia.core.handlers.connection.InitialStatLoader;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
@@ -10,6 +9,8 @@ import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -260,7 +261,29 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void applyClassStats() {
 
-        // TODO: create method or handler that applies the proficiency stats
+        Player player = Bukkit.getPlayer(this.getUUID());
+
+        // TODO: Need to make sure that the player is not losing health or food each
+        // time they join if base health > 20
+        // base health scale: getHealth() / getMaxHealth() * getHealthScale().
+        double previousHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue();
+        AttributeInstance healthAttribute = player.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+
+        if (healthAttribute.getBaseValue() != this.getProficiency().getStats().getBaseHealth()) {
+
+            healthAttribute.setBaseValue(this.getProficiency().getStats().getBaseHealth());
+            player.setHealth(
+                    this.getProficiency().getStats().getBaseHealth() * (player.getHealth() / previousHealth));
+
+        }
+
+        player.setWalkSpeed(0.2f * (float) this.getProficiency().getStats().getBaseSpeed());
+
+        player.setLevel(this.getLevel());
+
+        // just dont bother with this, update food status on consume event
+        // player.setFoodLevel(historiaPlayer.getProficiency().getStats().getBaseFood()
+        // * (player.getFoodLevel()/20));
 
     }
 
@@ -302,9 +325,7 @@ public class HistoriaPlayer extends BasePlayer {
         // validate user is online before loading the new stats
         if (isOnline()) {
             Logging.debugToConsole("Player is online, applying new stats.");
-            Player player = Bukkit.getPlayer(this.getUUID());
-            InitialStatLoader initialStatLoader = new InitialStatLoader(player);
-            initialStatLoader.apply();
+            this.applyClassStats();
         }
 
     }
