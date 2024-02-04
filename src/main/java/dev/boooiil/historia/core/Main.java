@@ -16,10 +16,10 @@ import dev.boooiil.historia.core.events.mobs.EntityBreedListener;
 import dev.boooiil.historia.core.events.mobs.EntityTameListener;
 import dev.boooiil.historia.core.events.playerInteraction.PlayerInteractEntityListener;
 import dev.boooiil.historia.core.events.playerInteraction.PlayerInteractListener;
+import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
-import dev.boooiil.historia.core.util.FileIO;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -27,9 +27,7 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.File;
@@ -44,19 +42,6 @@ public class Main extends JavaPlugin {
 
     public Main() {
         super();
-    }
-
-    /**
-     * It's a constructor that is called when the plugin is loaded.
-     * 
-     * @param loader      - The plugin loader responsible for this plugin, can be
-     *                    null
-     * @param description - The plugin.yml file for this plugin
-     * @param dataFolder  - The folder that contains the plugin's data
-     * @param file        - The plugin's file
-     */
-    protected Main(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
-        super(loader, description, dataFolder, file);
     }
 
     @Override
@@ -160,7 +145,7 @@ public class Main extends JavaPlugin {
      */
     public static void disable() {
 
-        plugin().getPluginLoader().disablePlugin(plugin());
+        server().getPluginManager().disablePlugin(plugin());
 
     }
 
