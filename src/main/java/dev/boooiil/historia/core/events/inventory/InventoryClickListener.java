@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.events.inventory;
 
-import dev.boooiil.historia.core.handlers.inventory.InventorySwapWithCursor;
+import dev.boooiil.historia.core.handlers.inventory.InventoryClickHandler;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,13 +16,13 @@ public class InventoryClickListener implements Listener {
         Logging.debugToConsole("Action: " + event.getAction());
 
         if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR) {
-            
+
             Logging.debugToConsole("Player clicked in their inventory with cursor");
 
-            InventorySwapWithCursor inventorySwapWithCursor = new InventorySwapWithCursor(event);
+            InventoryClickHandler inventorySwapWithCursor = new InventoryClickHandler(event);
             inventorySwapWithCursor.doClick();
         }
 
     }
-    
+
 }

@@ -1,8 +1,6 @@
 package dev.boooiil.historia.core.events.player;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.handlers.player.PlayerQuitHandler;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,12 +16,10 @@ public class PlayeQuitListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
+        PlayerQuitHandler playerQuitHandler = new PlayerQuitHandler(event);
 
-        DatabaseAdapter.setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
-                historiaPlayer.getPlaytime());
-
-        PlayerStorage.markOffline(event.getPlayer().getUniqueId());
+        playerQuitHandler.doPlayerDBLogout();
+        playerQuitHandler.doMarkAsOffline();
 
     }
 
