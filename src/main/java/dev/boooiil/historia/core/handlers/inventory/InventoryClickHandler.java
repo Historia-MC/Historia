@@ -14,11 +14,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventorySwapWithCursor {
+public class InventoryClickHandler {
 
     private final InventoryClickEvent event;
 
-    public InventorySwapWithCursor(InventoryClickEvent event) {
+    public InventoryClickHandler(InventoryClickEvent event) {
 
         this.event = event;
 
@@ -26,7 +26,7 @@ public class InventorySwapWithCursor {
 
     public void doClick() {
 
-        //TODO: Possibly account for arrows that have multiple uses (through lore)
+        // TODO: Possibly account for arrows that have multiple uses (through lore)
 
         // TODO: Account for multiple items in the slot
         // TODO: Ignite user for too many ignited arrows
