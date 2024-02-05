@@ -31,7 +31,7 @@ public class BlockBreakListener implements Listener {
 
         BlockBreakHandler blockHandler = new BlockBreakHandler(event);
 
-        blockHandler.doBreak();
+        blockHandler.doDetermineBlockType();
 
     }
 
