@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.handlers.block.blockPlace;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
+import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
@@ -11,12 +12,12 @@ import org.bukkit.Material;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class BlockPlaceHandler {
+public class BlockPlaceHandler extends BaseBlockHandler {
 
     private final BlockPlaceEvent event;
 
     public BlockPlaceHandler(BlockPlaceEvent event) {
-
+        super(event);
         this.event = event;
 
     }
