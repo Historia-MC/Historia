@@ -1,4 +1,4 @@
-version: 10
+version: 11
 
 # XP SOURCES:
 # COMBAT: ATTACK, DEFEND, EVADE, KILL, DEATH, RANGED_HIT, RANGED_KILL
@@ -12,7 +12,6 @@ version: 10
 # EX: .*_AXE, (IRON|WOOD)_SWORD
 
 None:
-
   stats:
     baseHealth: 14
     maxHealth: 30
@@ -28,11 +27,10 @@ None:
     instantGrowChance: 0
     beheadChance: 0.10
 
-    weaponProficiency: [ Light ]
-    armorProficiency: [ Light ]
+    weaponProficiency: [Light]
+    armorProficiency: [Light]
 
 Warrior:
-
   stats:
     baseHealth: 26
     maxHealth: 40
@@ -48,9 +46,9 @@ Warrior:
     instantGrowChance: 0
     beheadChance: 0.10
 
-    weaponProficiency: [ Light, Medium, Heavy ]
-    armorProficiency: [ Light, Medium, Heavy ]
-    experienceSources: [ ATTACK, DEFEND, EVADE, KILL, DEATH ]
+    weaponProficiency: [Light, Medium, Heavy]
+    armorProficiency: [Light, Medium, Heavy]
+    experienceSources: [ATTACK, DEFEND, EVADE, KILL, DEATH]
 
   skills:
     nametag: true
@@ -59,10 +57,9 @@ Warrior:
       1:
         regex: .*_SWORD|.*_AXE
         values:
-          - "DAMAGE_ALL"
+          - "sharpness"
 
 Archer: #ADD SWIFT_SNEAK for 1.20
-
   stats:
     baseHealth: 18
     maxHealth: 36
@@ -78,9 +75,9 @@ Archer: #ADD SWIFT_SNEAK for 1.20
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Bow, Crossbow, Light ]
-    armorProficiency: [ Light ]
-    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
+    weaponProficiency: [Bow, Crossbow, Light]
+    armorProficiency: [Light]
+    experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
 
   skills:
     nametag: true
@@ -89,10 +86,9 @@ Archer: #ADD SWIFT_SNEAK for 1.20
       1:
         regex: CROSSBOW
         values:
-          - "QUICK_CHARGE"
+          - "quick_charge"
 
 Fisherman:
-
   stats:
     baseHealth: 18
     maxHealth: 36
@@ -108,9 +104,9 @@ Fisherman:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Trident, Light ]
-    armorProficiency: [ Light ]
-    experienceSources: [ KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE ]
+    weaponProficiency: [Trident, Light]
+    armorProficiency: [Light]
+    experienceSources: [KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE]
 
   skills:
     nametag: true
@@ -119,14 +115,13 @@ Fisherman:
       1:
         regex: .*_HELMET
         values:
-          - "WATER_WORKER"
+          - "aqua_affinity"
       2:
         regex: .*_BOOTS
         values:
-          - "DEPTH_STRIDER"
+          - "depth_strider"
 
 Miner:
-
   stats:
     baseHealth: 22
     maxHealth: 38
@@ -142,9 +137,9 @@ Miner:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Light, Medium ]
-    armorProficiency: [ Light, Medium ]
-    experienceSources: [ EVADE, DEATH, ORE_BREAK ]
+    weaponProficiency: [Light, Medium]
+    armorProficiency: [Light, Medium]
+    experienceSources: [EVADE, DEATH, ORE_BREAK]
 
   skills:
     nametag: true
@@ -153,26 +148,25 @@ Miner:
       1:
         regex: .*_PICKAXE|.*_SHOVEL
         values:
-          - "EFFICIENCY"
+          - "efficiency"
       2:
         regex: .*_HELMET
         values:
-          - "PROTECTION_EXPLOSIONS"
+          - "blast_protection"
       3:
         regex: .*_CHESTPLATE
         values:
-          - "PROTECTION_EXPLOSIONS"
+          - "blast_protection"
       4:
         regex: .*_LEGGINGS
         values:
-          - "PROTECTION_EXPLOSIONS"
+          - "blast_protection"
       5:
         regex: .*_BOOTS
         values:
-          - "PROTECTION_EXPLOSIONS"
+          - "blast_protection"
 
 Blacksmith:
-
   stats:
     baseHealth: 24
     maxHealth: 39
@@ -188,10 +182,9 @@ Blacksmith:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Light, Medium ]
-    armorProficiency: [ Light, Medium, Heavy ]
-    experienceSources: [ EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT ]
-
+    weaponProficiency: [Light, Medium]
+    armorProficiency: [Light, Medium, Heavy]
+    experienceSources: [EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT]
 
   skills:
     nametag: true
@@ -200,7 +193,6 @@ Blacksmith:
     chanceNoAnvilDamage: true
 
 Huntsman: #ADD SWIFT_SNEAK for 1.20
-
   stats:
     baseHealth: 16
     maxHealth: 34
@@ -216,9 +208,9 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     instantGrowChance: 0
     beheadChance: 0.07
 
-    weaponProficiency: [ Bow, Light ]
-    armorProficiency: [ Light ]
-    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
+    weaponProficiency: [Bow, Light]
+    armorProficiency: [Light]
+    experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
 
   skills:
     nametag: false
@@ -231,7 +223,6 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     canBreed: true
 
 Apothecary: #BREWERY CLASS
-
   stats:
     baseHealth: 20
     maxHealth: 35
@@ -247,9 +238,9 @@ Apothecary: #BREWERY CLASS
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Light ]
-    armorProficiency: [ Light ]
-    experienceSources: [ KILL, DEATH, EVADE ]
+    weaponProficiency: [Light]
+    armorProficiency: [Light]
+    experienceSources: [KILL, DEATH, EVADE]
 
   skills:
     nametag: true
@@ -257,7 +248,6 @@ Apothecary: #BREWERY CLASS
     igniteOil: true
 
 Architect:
-
   stats:
     baseHealth: 20
     maxHealth: 35
@@ -273,9 +263,9 @@ Architect:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [ Light ]
-    armorProficiency: [ Light ]
-    experienceSources: [ KILL, DEATH, EVADE, BLOCK_PLACE ]
+    weaponProficiency: [Light]
+    armorProficiency: [Light]
+    experienceSources: [KILL, DEATH, EVADE, BLOCK_PLACE]
 
   skills:
     nametag: true
@@ -285,10 +275,9 @@ Architect:
       1:
         regex: .*_BOOTS
         values:
-          - "FEATHER_FALLING"
+          - "feather_falling"
 
 Lumberjack:
-
   stats:
     baseHealth: 26
     maxHealth: 40
@@ -304,9 +293,9 @@ Lumberjack:
     instantGrowChance: 0
     beheadChance: 0.08
 
-    weaponProficiency: [ Light, Medium ]
-    armorProficiency: [ Light, Medium ]
-    experienceSources: [ KILL, DEATH, EVADE, BLOCK_BREAK ]
+    weaponProficiency: [Light, Medium]
+    armorProficiency: [Light, Medium]
+    experienceSources: [KILL, DEATH, EVADE, BLOCK_BREAK]
 
   skills:
     nametag: true
@@ -317,10 +306,9 @@ Lumberjack:
       1:
         regex: .*_AXE
         values:
-          - "EFFICIENCY"
+          - "efficiency"
 
 Farmer: #ARMOR TRIM CLASS
-
   stats:
     baseHealth: 20
     maxHealth: 35
@@ -336,9 +324,9 @@ Farmer: #ARMOR TRIM CLASS
     instantGrowChance: 0.3
     beheadChance: 0.10
 
-    weaponProficiency: [ Trident, Light ]
-    armorProficiency: [ Light, Medium ]
-    experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
+    weaponProficiency: [Trident, Light]
+    armorProficiency: [Light, Medium]
+    experienceSources: [EVADE, DEATH, CROP_BREAK, CROP_PLACE]
 
   skills:
     nametag: true
