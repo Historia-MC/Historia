@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.proficiency.skills;
 
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 
@@ -60,7 +61,14 @@ public class Skills {
                 for (String enchantment : config.getStringList(root + ".enchants." + itemNumber + ".values")) {
 
                     Logging.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
-                    Enchantment enchant = Enchantment.getByName(enchantment);
+
+                    Enchantment enchant = Enchantment
+                            .getByKey(NamespacedKey.minecraft(enchantment));
+
+                    // we will eventually have to use this method:
+                    // Enchantment enchant =
+                    // Registry.ENCHANTMENT.get(NamespacedKey.minecraft(enchantment.toLowerCase()));
+
                     skillEnchants.put(pattern, enchant);
 
                 }
@@ -95,6 +103,8 @@ public class Skills {
     public String toString() {
         return "Skills{" +
                 "skills=" + skills +
+                '}' + "SkillEnchants{" +
+                "skillEnchants=" + skillEnchants +
                 '}';
     }
 }
