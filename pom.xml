@@ -13,7 +13,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>18</maven.compiler.source>
     <maven.compiler.target>18</maven.compiler.target>
-    <powermock.version>2.0.2</powermock.version>
   </properties>
 
   <distributionManagement>
@@ -127,7 +126,6 @@
       <artifactId>logback-classic</artifactId>
       <version>1.4.14</version>
     </dependency>
-
 
   </dependencies>
 
