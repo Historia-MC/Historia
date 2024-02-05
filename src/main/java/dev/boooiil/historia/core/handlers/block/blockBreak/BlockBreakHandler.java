@@ -1,13 +1,10 @@
 package dev.boooiil.historia.core.handlers.block.blockBreak;
 
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 
 public class BlockBreakHandler extends BaseBlockHandler {
 
@@ -18,22 +15,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
      * @param event          the BlockBreakEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
-    public BlockBreakHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
+    public BlockBreakHandler(BlockBreakEvent event) {
 
-        super(event, historiaPlayer);
-
-    }
-
-    /**
-     * Constructor for BlockHandler class that takes a BlockPlaceEvent and a
-     * HistoriaPlayer as parameters.
-     * 
-     * @param event          the BlockPlaceEvent that triggered the handler
-     * @param historiaPlayer the HistoriaPlayer associated with the event
-     */
-    public BlockBreakHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
-
-        super(event, historiaPlayer);
+        super(event);
 
     }
 
@@ -78,21 +62,6 @@ public class BlockBreakHandler extends BaseBlockHandler {
                 Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
 
             }
-
-        }
-
-    }
-
-    public void doPlace() {
-
-        // TODO: check for ores
-
-        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_NO_CONSUME_BLOCK)) {
-
-            placeEvent.setCancelled(true);
-            placeEvent.getBlockPlaced().setType(placeEvent.getBlockPlaced().getType());
-            Logging.infoToPlayer("You did not consume any resources for this block!", historiaPlayer.getUUID());
-            historiaPlayer.increaseExperience(BlockSources.BLOCK_PLACE.getKey());
 
         }
 
