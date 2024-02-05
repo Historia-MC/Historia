@@ -31,9 +31,7 @@ public class BlockBreakListener implements Listener {
 
         }
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
-
-        BlockBreakHandler blockHandler = new BlockBreakHandler(event, historiaPlayer);
+        BlockBreakHandler blockHandler = new BlockBreakHandler(event);
 
         blockHandler.doBreak();
 
