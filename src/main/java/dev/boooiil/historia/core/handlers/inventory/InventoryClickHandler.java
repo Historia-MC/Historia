@@ -1,6 +1,9 @@
 package dev.boooiil.historia.core.handlers.inventory;
 
 import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.database.internal.PlayerStorage;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
@@ -40,28 +43,27 @@ public class InventoryClickHandler {
 
     private void doApplyFlameToArrow() {
 
-        // TODO: Possibly account for arrows that have multiple uses (through lore)
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId(), false);
 
-        // TODO: Account for multiple items in the slot
-        // TODO: Ignite user for too many ignited arrows
+        // guard against player without ignite oil skill
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.IGNITE_OIL)) {
+            return;
+        }
 
-        // TODO: Enable this on release
-        // if (!event.getCurrentItem().getItemMeta().hasLore()) return;
+        // guard against arrow that is not oiled
+        if (!slottedItem.hasItemMeta() || !slottedItem.getItemMeta().getPersistentDataContainer()
+                .has(Main.getNamespacedKey("arrow-oiled"))) {
+            return;
+        }
 
         ItemStack flintAndSteelItem = event.getCursor();
         ItemStack newArrow = new ItemStack(Material.ARROW);
-        // ItemStack arrowItem = event.getCurrentItem();
 
         ItemMeta flintSteelMeta = this.cursorItem.getItemMeta();
         ItemMeta newArrowMeta = Main.server().getItemFactory().getItemMeta(Material.ARROW);
 
         Damageable flintAndSteelDamageable = (Damageable) flintSteelMeta;
-
-        // TODO: Comment this out on release
         List<String> lore = new ArrayList<>();
-
-        // TODO: Enable this on release
-        // List<String> lore = arrowMeta.getLore();
 
         lore.add(ChatColor.RED + "Ignited - 1/1");
         newArrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);

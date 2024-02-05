@@ -11,7 +11,7 @@ public class BlockPlaceListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
 
-        new BlockPlaceHandler(event).doPlace();
+        new BlockPlaceHandler(event).doDetermineBlockType();
 
     }
 

@@ -1,13 +1,13 @@
 package dev.boooiil.historia.core.handlers.block.blockBreak;
 
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.NumberUtils;
+
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class BlockBreakHandler extends BaseBlockHandler {
 
@@ -18,81 +18,64 @@ public class BlockBreakHandler extends BaseBlockHandler {
      * @param event          the BlockBreakEvent that triggered the handler
      * @param historiaPlayer the HistoriaPlayer associated with the event
      */
-    public BlockBreakHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
+    public BlockBreakHandler(BlockBreakEvent event) {
 
-        super(event, historiaPlayer);
-
-    }
-
-    /**
-     * Constructor for BlockHandler class that takes a BlockPlaceEvent and a
-     * HistoriaPlayer as parameters.
-     * 
-     * @param event          the BlockPlaceEvent that triggered the handler
-     * @param historiaPlayer the HistoriaPlayer associated with the event
-     */
-    public BlockBreakHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
-
-        super(event, historiaPlayer);
+        super(event);
 
     }
 
-    /**
-     * Method that handles the breaking of a block. It checks if the block is a
-     * valid ore or log, and if so, drops the corresponding item(s) and sets the
-     * block to air. It also checks if the player has a chance to get double drops
-     * and increases their experience accordingly.
-     */
-    public void doBreak() {
+    public void doDetermineBlockType() {
 
-        if (breakEvent.getBlock().getType().toString().contains("LOG")) {
+        switch (this.getBlock().getType()) {
 
-            if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOD)) {
+            case OAK_LOG:
+            case SPRUCE_LOG:
+            case BIRCH_LOG:
+            case JUNGLE_LOG:
+            case ACACIA_LOG:
+            case DARK_OAK_LOG:
+                doExtraWoodChance();
+                break;
 
-                float doubleDropChance = 0.05f;
-                float dropChanceRoll = (float) Math.round((Math.random() * 100)) / 100;
+            case BEEHIVE:
+                doBreakBeehive();
+                break;
 
-                boolean didDouble = dropChanceRoll <= doubleDropChance;
+            default:
+                break;
+        }
+    }
 
-                if (didDouble) {
+    private void doExtraWoodChance() {
 
-                    breakEvent.setCancelled(true);
-                    breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(),
-                            breakEvent.getBlock().getDrops().iterator().next());
-                    breakEvent.getBlock().getWorld().dropItemNaturally(breakEvent.getBlock().getLocation(),
-                            breakEvent.getBlock().getDrops().iterator().next());
-                    Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
-                    historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
+        if (this.historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOD)) {
 
-                }
+            float doubleDropChance = 0.05f;
+            float dropChanceRoll = NumberUtils.random(0, 1);
+
+            boolean didDouble = dropChanceRoll <= doubleDropChance;
+
+            if (didDouble) {
+
+                ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
+
+                this.getPlayer().getInventory().addItem(item);
+
+                historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
+
+                Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
 
             }
 
         }
-
-        else if (breakEvent.getBlock().getType().toString().contains("BEEHIVE")) {
-
-            if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.BREAK_BEEHIVE)) {
-
-                breakEvent.setCancelled(true);
-                Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
-
-            }
-
-        }
-
     }
 
-    public void doPlace() {
+    private void doBreakBeehive() {
 
-        // TODO: check for ores
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.BREAK_BEEHIVE)) {
 
-        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_NO_CONSUME_BLOCK)) {
-
-            placeEvent.setCancelled(true);
-            placeEvent.getBlockPlaced().setType(placeEvent.getBlockPlaced().getType());
-            Logging.infoToPlayer("You did not consume any resources for this block!", historiaPlayer.getUUID());
-            historiaPlayer.increaseExperience(BlockSources.BLOCK_PLACE.getKey());
+            breakEvent.setCancelled(true);
+            Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
 
         }
 

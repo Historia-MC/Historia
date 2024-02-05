@@ -6,6 +6,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 public abstract class BaseBlockHandler {
@@ -36,10 +37,10 @@ public abstract class BaseBlockHandler {
      * @param historiaPlayer The HistoriaPlayer object that represents the player
      *                       who triggered the block interaction event.
      */
-    public BaseBlockHandler(BlockBreakEvent event, HistoriaPlayer historiaPlayer) {
+    public BaseBlockHandler(BlockBreakEvent event) {
 
         this.breakEvent = event;
-        this.historiaPlayer = historiaPlayer;
+        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), true);
 
     }
 
@@ -52,10 +53,10 @@ public abstract class BaseBlockHandler {
      * @param historiaPlayer The HistoriaPlayer object that represents the player
      *                       who triggered the block interaction event.
      */
-    public BaseBlockHandler(BlockPlaceEvent event, HistoriaPlayer historiaPlayer) {
+    public BaseBlockHandler(BlockPlaceEvent event) {
 
         this.placeEvent = event;
-        this.historiaPlayer = historiaPlayer;
+        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), true);
 
     }
 
@@ -75,6 +76,14 @@ public abstract class BaseBlockHandler {
             return this.breakEvent.getBlock();
         } else {
             return this.placeEvent.getBlock();
+        }
+    }
+
+    public Block getPlacedBlock() {
+        if (this.placeEvent != null) {
+            return this.placeEvent.getBlockPlaced();
+        } else {
+            return null;
         }
     }
 }

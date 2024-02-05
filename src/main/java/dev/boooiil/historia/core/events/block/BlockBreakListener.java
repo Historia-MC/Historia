@@ -1,9 +1,7 @@
 package dev.boooiil.historia.core.events.block;
 
-import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.blockBreak.BlockBreakHandler;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,11 +29,9 @@ public class BlockBreakListener implements Listener {
 
         }
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
+        BlockBreakHandler blockHandler = new BlockBreakHandler(event);
 
-        BlockBreakHandler blockHandler = new BlockBreakHandler(event, historiaPlayer);
-
-        blockHandler.doBreak();
+        blockHandler.doDetermineBlockType();
 
     }
 
