@@ -78,4 +78,12 @@ public abstract class BaseBlockHandler {
             return this.placeEvent.getBlock();
         }
     }
+
+    public Block getPlacedBlock() {
+        if (this.placeEvent != null) {
+            return this.placeEvent.getBlockPlaced();
+        } else {
+            return null;
+        }
+    }
 }
