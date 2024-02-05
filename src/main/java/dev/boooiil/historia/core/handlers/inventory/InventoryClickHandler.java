@@ -40,28 +40,20 @@ public class InventoryClickHandler {
 
     private void doApplyFlameToArrow() {
 
-        // TODO: Possibly account for arrows that have multiple uses (through lore)
-
-        // TODO: Account for multiple items in the slot
-        // TODO: Ignite user for too many ignited arrows
-
-        // TODO: Enable this on release
-        // if (!event.getCurrentItem().getItemMeta().hasLore()) return;
+        // guard against arrow that is not oiled
+        if (!slottedItem.hasItemMeta() || !slottedItem.getItemMeta().getPersistentDataContainer()
+                .has(Main.getNamespacedKey("arrow-oiled"))) {
+            return;
+        }
 
         ItemStack flintAndSteelItem = event.getCursor();
         ItemStack newArrow = new ItemStack(Material.ARROW);
-        // ItemStack arrowItem = event.getCurrentItem();
 
         ItemMeta flintSteelMeta = this.cursorItem.getItemMeta();
         ItemMeta newArrowMeta = Main.server().getItemFactory().getItemMeta(Material.ARROW);
 
         Damageable flintAndSteelDamageable = (Damageable) flintSteelMeta;
-
-        // TODO: Comment this out on release
         List<String> lore = new ArrayList<>();
-
-        // TODO: Enable this on release
-        // List<String> lore = arrowMeta.getLore();
 
         lore.add(ChatColor.RED + "Ignited - 1/1");
         newArrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
