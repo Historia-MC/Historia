@@ -18,7 +18,20 @@ public class BlockPlaceHandler {
 
     }
 
-    public void doPlace() {
+    public void doDetermineBlockType() {
+
+        switch (event.getBlock().getType()) {
+
+            case LADDER:
+                doLadderBypass();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void doLadderBypass() {
 
         if (event.getBlock().getType() == Material.LADDER) {
 
@@ -35,4 +48,5 @@ public class BlockPlaceHandler {
 
         }
     }
+
 }
