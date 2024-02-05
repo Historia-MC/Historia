@@ -11,7 +11,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Map;
 import java.util.UUID;
@@ -393,6 +397,83 @@ public class HistoriaPlayer extends BasePlayer {
         } else if (getLevel() > 1) {
 
             setCurrentExperience(getCurrentExperience() - incomeModified);
+
+        }
+
+    }
+
+    public void applySkillEnchants(Inventory inventory) {
+
+        inventory.iterator().forEachRemaining(item -> {
+
+            if (item == null || item.getItemMeta() == null)
+                return;
+
+            if (this.getProficiency().getSkills().hasSkillEnchants()) {
+
+                Enchantment enchant = this.getProficiency().getSkills().getSkillEnchantment(item.getType());
+                ItemMeta itemMeta = item.getItemMeta();
+
+                if (enchant != null && !itemMeta.hasEnchant(enchant)) {
+
+                    addSkillEnchantToItem(item, enchant);
+
+                }
+
+                else if (enchant == null && itemMeta.hasEnchants()) {
+
+                    removeSkillEnchantFromItem(item);
+
+                }
+
+            } else {
+
+                if (item.getItemMeta().hasEnchants()) {
+
+                    Logging.debugToConsole(item.getEnchantments().toString());
+
+                    removeSkillEnchantFromItem(item);
+
+                }
+
+            }
+
+        });
+
+    }
+
+    private void addSkillEnchantToItem(ItemStack item, Enchantment enchant) {
+
+        if (item != null && item.getItemMeta() != null) {
+
+            ItemMeta itemMeta = item.getItemMeta();
+
+            Logging.debugToConsole(
+                    this.getUsername() + " had an item in their inventory that wasn't enchanted.");
+
+            itemMeta.addEnchant(enchant, 1, true);
+            item.setItemMeta(itemMeta);
+
+        }
+
+    }
+
+    private void removeSkillEnchantFromItem(ItemStack item) {
+
+        if (item != null && item.getItemMeta() != null && !item.getItemMeta().hasEnchants()) {
+
+            ItemMeta itemMeta = item.getItemMeta();
+
+            Logging.debugToConsole(
+                    this.getUsername() + " had an item in their inventory with an illegal enchant.");
+
+            item.getItemMeta().getEnchants().forEach((enchant, level) -> {
+
+                itemMeta.removeEnchant(enchant);
+
+            });
+
+            item.setItemMeta(itemMeta);
 
         }
 
