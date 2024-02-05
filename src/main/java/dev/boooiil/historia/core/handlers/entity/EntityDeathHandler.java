@@ -57,7 +57,8 @@ public class EntityDeathHandler {
             case PIG:
             case HORSE:
                 doHarvestLeather();
-                doHarvestBones();
+            case CHICKEN:
+                doExtraFeathers();
             default:
                 doHarvestBones();
                 break;
@@ -105,4 +106,19 @@ public class EntityDeathHandler {
 
     }
 
+    private void doExtraFeathers() {
+
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId(), true);
+
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_FEATHERS)) {
+            return;
+        }
+
+        float chance = 0.1f;
+        float random = NumberUtils.random(0, 1);
+
+        if (random <= chance) {
+            event.getDrops().add(new ItemStack(Material.FEATHER, NumberUtils.randomInt(1, 3)));
+        }
+    }
 }
