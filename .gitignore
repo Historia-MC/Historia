@@ -9,3 +9,4 @@ release/*
 .idea/
 Historia-Core.iml
 htmlReport/
+dependency-reduced-pom.xml
