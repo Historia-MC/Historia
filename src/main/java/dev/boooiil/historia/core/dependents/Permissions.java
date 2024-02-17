@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.dependents;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.dependents.worldguard.WorldGuardHandler;
+import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -23,8 +24,7 @@ public class Permissions {
         boolean townyPermission = TownyHandler.getBreakPermissions(player, block.getLocation(), block.getType());
         boolean worldGuardPermission = WorldGuardHandler.getBuildPermissions(player, block.getLocation());
 
-        return townyPermission && worldGuardPermission;
-
+        return (townyPermission && worldGuardPermission) || player.isOp();
     }
 
     /**
@@ -39,8 +39,7 @@ public class Permissions {
         boolean townyPermission = TownyHandler.getUsePermissions(player, block.getLocation(), block.getType());
         boolean worldGuardPermission = WorldGuardHandler.getBuildPermissions(player, block.getLocation());
 
-        return townyPermission && worldGuardPermission;
-
+        return (townyPermission && worldGuardPermission) || player.isOp();
     }
 
     /**
@@ -55,8 +54,7 @@ public class Permissions {
         boolean townyPermission = TownyHandler.getPlacePermissions(player, block.getLocation(), block.getType());
         boolean worldGuardPermission = WorldGuardHandler.getBuildPermissions(player, block.getLocation());
 
-        return townyPermission && worldGuardPermission;
-
+        return (townyPermission && worldGuardPermission) || player.isOp();
     }
 
 }

@@ -7,6 +7,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
+import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -38,7 +39,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_PLACE);
 
         } catch (Exception e) {
-            System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
+            Logging.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
@@ -62,7 +63,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_BREAK);
 
         } catch (Exception e) {
-            System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
+            Logging.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
@@ -86,7 +87,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.USE);
 
         } catch (Exception e) {
-            System.out.println("§7[§9Historia§7] There was an error checking WorldGuard permissions.");
+            Logging.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
