@@ -3,10 +3,12 @@ package dev.boooiil.historia.core.database.mysql;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import dev.boooiil.historia.core.util.Logging;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class MySQLConnection {
 
@@ -18,7 +20,7 @@ public class MySQLConnection {
     private static String IP = MYSQLCONFIG.ip;
     private static String PORT = MYSQLCONFIG.port;
 
-    private static BasicDataSource dataSource;
+    private static HikariDataSource dataSource;
     private static Connection connection;
 
     static {
@@ -28,13 +30,14 @@ public class MySQLConnection {
 
     private static void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
-            dataSource = new BasicDataSource();
-            dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-            dataSource.setUrl("jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl("jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
                     + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true");
-            dataSource.setUsername(USERNAME);
-            dataSource.setPassword(PASSWORD);
-            dataSource.setMaxTotal(15);
+            config.setUsername(USERNAME);
+            config.setPassword(PASSWORD);
+            config.setMaximumPoolSize(15);
+
+            dataSource = new HikariDataSource(config);
         }
     }
 
@@ -127,18 +130,9 @@ public class MySQLConnection {
 
     public static void closeDataSource() {
 
-        try {
-            if (dataSource != null && !dataSource.isClosed()) {
-                dataSource.close();
-                Logging.infoToConsole("MySQL data source closed.");
-            }
-        } catch (SQLException e) {
-            Logging.errorToConsole("MySQL data source could not be closed.");
-            Logging.errorToConsole("FAILED TO CLOSE DATA SOURCE.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+            Logging.infoToConsole("MySQL data source closed.");
         }
     }
 

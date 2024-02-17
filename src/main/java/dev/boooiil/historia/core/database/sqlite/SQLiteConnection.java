@@ -3,14 +3,15 @@ package dev.boooiil.historia.core.database.sqlite;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.util.Logging;
 
 public class SQLiteConnection {
 
-    private static BasicDataSource dataSource;
+    private static HikariDataSource dataSource;
     private static Connection connection;
 
     public static void initDataSource() {
@@ -18,10 +19,12 @@ public class SQLiteConnection {
             Logging.infoToConsole("(SQLite) Initializing data source.");
             Logging.infoToConsole("(SQLite) Data source location: " + Main.plugin().getDataFolder().getAbsolutePath()
                     + "/database.db");
-            dataSource = new BasicDataSource();
-            dataSource.setDriverClassName("org.sqlite.JDBC");
-            dataSource.setUrl("jdbc:sqlite:" + Main.plugin().getDataFolder().getAbsolutePath() + "/database.db");
-            dataSource.setMaxTotal(150);
+
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl("jdbc:sqlite:" + Main.plugin().getDataFolder().getAbsolutePath() + "/database.db");
+            config.setMaximumPoolSize(150); // Set max pool size
+
+            dataSource = new HikariDataSource(config);
         }
     }
 
@@ -69,15 +72,9 @@ public class SQLiteConnection {
 
     public static void closeDataSource() {
 
-        try {
-            if (dataSource != null && !dataSource.isClosed()) {
-                dataSource.close();
-                Logging.debugToConsole("Closed SQLite data source.");
-            }
-        } catch (SQLException e) {
-            Logging.errorToConsole("Failed to close SQLite data source.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("SQLite Error Message: " + e.getMessage());
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+            Logging.debugToConsole("Closed SQLite data source.");
         }
 
     }
