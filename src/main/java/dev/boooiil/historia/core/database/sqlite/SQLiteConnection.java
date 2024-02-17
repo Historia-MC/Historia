@@ -13,12 +13,7 @@ public class SQLiteConnection {
     private static BasicDataSource dataSource;
     private static Connection connection;
 
-    static {
-        if (Main.isTesting)
-            initDataSource();
-    }
-
-    private static void initDataSource() {
+    public static void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
             Logging.infoToConsole("(SQLite) Initializing data source.");
             Logging.infoToConsole("(SQLite) Data source location: " + Main.plugin().getDataFolder().getAbsolutePath()

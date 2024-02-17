@@ -33,6 +33,7 @@ public class DatabaseAdapter {
 
     public static void connect() {
         if (!MySQLConnection.connect()) {
+            SQLiteConnection.initDataSource();
             SQLiteConnection.connect();
             databaseType = DatabaseType.SQLITE;
         } else {
