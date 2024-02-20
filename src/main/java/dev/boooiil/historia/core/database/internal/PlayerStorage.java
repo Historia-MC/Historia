@@ -48,7 +48,24 @@ public class PlayerStorage {
      * @param useSQLFallback - Fallback to SQL if the user is not currently on.
      * @return {@link HistoriaPlayer} - The player you are requesting.
      */
+    @Deprecated(forRemoval = true)
     public static HistoriaPlayer getPlayer(UUID uuid, boolean useSQLFallback) {
+
+        if (players.containsKey(uuid))
+            return players.get(uuid);
+
+        else
+            return new HistoriaPlayer(uuid);
+
+    }
+
+    /**
+     * Get a player from our stored player list.
+     * 
+     * @param uuid           - UUID of the player.
+     * @return {@link HistoriaPlayer} - The player you are requesting.
+     */
+    public static HistoriaPlayer getPlayer(UUID uuid) {
 
         if (players.containsKey(uuid))
             return players.get(uuid);
@@ -77,7 +94,7 @@ public class PlayerStorage {
             return new HistoriaPlayer();
 
     }
-
+    
     /**
      * Check if the storage holds the given UUID.
      * 
