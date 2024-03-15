@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.NumberUtils;
 
@@ -103,6 +104,8 @@ public class EntityDeathHandler {
         }
 
         event.getDrops().add(new ItemStack(Material.BONE, NumberUtils.randomInt(1, 3)));
+
+        historiaPlayer.increaseExperience(AnimalSources.KILL_ANIMAL.getKey());
 
     }
 
