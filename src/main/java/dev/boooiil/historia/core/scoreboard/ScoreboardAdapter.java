@@ -25,7 +25,10 @@ public class ScoreboardAdapter {
 
     public void createHeader(String header) {
 
-        objective = scoreboard.registerNewObjective(UUID.randomUUID().toString(), Criteria.create(UUID.randomUUID().toString()) , header);
+        // TODO: adapt this to paper component
+
+        objective = scoreboard.registerNewObjective(UUID.randomUUID().toString(),
+                Criteria.create(UUID.randomUUID().toString()), header);
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
     }
@@ -42,5 +45,4 @@ public class ScoreboardAdapter {
 
     }
 
-    
 }
