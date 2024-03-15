@@ -27,7 +27,8 @@ public class CommandStats implements CommandExecutor {
                                 if (bukkitPlayer.isOnline()) {
 
                                         message += "----- (" + bukkitPlayer.name().examinableName() + ") -----\n";
-                                        message += "Proficiency: " + historiaPlayer.getProficiency().getName() + "\n";
+                                        message += "Proficiency: " + historiaPlayer.getProficiency().getName().getKey()
+                                                        + "\n";
                                         message += "Level: " + historiaPlayer.getLevel() + "\n";
                                         message += "Health: " + bukkitPlayer.getHealth() + "/"
                                                         + historiaPlayer.getBaseHealth() + "\n";
@@ -55,7 +56,8 @@ public class CommandStats implements CommandExecutor {
                                 else {
 
                                         message += "----- (" + bukkitPlayer.getName() + ") -----\n";
-                                        message += "Proficiency: " + historiaPlayer.getProficiency().getName() + "\n";
+                                        message += "Proficiency: " + historiaPlayer.getProficiency().getName().getKey()
+                                                        + "\n";
                                         message += "Level: " + historiaPlayer.getLevel() + "\n";
                                         message += "Health: ??/" + historiaPlayer.getBaseHealth() + "\n";
                                         message += "Experience: " + historiaPlayer.getCurrentExperience() + "/"
