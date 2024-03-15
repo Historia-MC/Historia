@@ -16,10 +16,40 @@ import java.util.regex.Pattern;
  */
 public class Proficiency {
 
+    public enum ProficiencyName {
+
+        NONE("None"),
+        ARCHER("Archer"),
+        WARRIOR("Warrior"),
+        FISHERMAN("Fisherman"),
+        MINER("Miner"),
+        BLACKSMITH("Blacksmith"),
+        HUNTSMAN("Huntsman"),
+        APOTHECARY("Apothecary"),
+        ARCHITECT("Architect"),
+        LUMBERJACK("Lumberjack"),
+        FARMER("Farmer");
+
+        private final String key;
+
+        ProficiencyName(String key) {
+
+            this.key = key;
+
+        }
+
+        public String getKey() {
+
+            return this.key;
+
+        }
+
+    }
+
     /**
      * The name of the proficiency.
      */
-    private String name;
+    private ProficiencyName name;
 
     /**
      * The stats associated with the proficiency.
@@ -40,13 +70,13 @@ public class Proficiency {
         FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
         if (config.contains(proficiencyName)) {
-            this.name = proficiencyName;
+            this.name = ProficiencyName.valueOf(proficiencyName);
             this.stats = new Stats(config, proficiencyName + ".stats");
             this.skills = new Skills(config, proficiencyName + ".skills");
         }
 
         else {
-            this.name = "None";
+            this.name = ProficiencyName.NONE;
             this.stats = new Stats(config, "None.stats");
             this.skills = new Skills(config, "None.skills");
         }
@@ -57,7 +87,7 @@ public class Proficiency {
      * 
      * @return the name of the proficiency
      */
-    public String getName() {
+    public ProficiencyName getName() {
         return name;
     }
 
@@ -66,7 +96,7 @@ public class Proficiency {
      * 
      * @param proficiencyName the new name of the proficiency
      */
-    public void setName(String proficiencyName) {
+    public void setName(ProficiencyName proficiencyName) {
         this.name = proficiencyName;
     }
 
