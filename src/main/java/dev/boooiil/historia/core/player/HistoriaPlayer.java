@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
-//TODO: Add methods to track xp gain and loss.
 
 /**
  * It's a class that holds all the information about a player
@@ -69,9 +68,6 @@ public class HistoriaPlayer extends BasePlayer {
 
         Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid + ".");
 
-        // TODO: GET TOWN AND NATION VALUES
-        // TODO: SET PLAYTIME IN HISTORIA TABLE
-
         // Base health and multiplier will get determined when we finish the class
         // config.
         // Experience max will just be experience * multiplier.
@@ -104,8 +100,6 @@ public class HistoriaPlayer extends BasePlayer {
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
-
-        // TODO: Calculate experience gain
 
     }
 
@@ -319,8 +313,6 @@ public class HistoriaPlayer extends BasePlayer {
     public void changeProficiency(String proficiency) {
         Logging.debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
                 + proficiency + ".");
-
-        // TODO: Adjust player modifiers based on new proficiency.
 
         this.proficiency = new Proficiency(proficiency);
 
