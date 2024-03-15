@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityBreedEvent;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 
 public class EntityBreedHandler {
@@ -43,7 +43,7 @@ public class EntityBreedHandler {
         // not sure what other entities can breed
         // shouldn't (TM) be a problem
         Player breeder = (Player) event.getBreeder();
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(breeder.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(breeder.getUniqueId());
 
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.TAME_ANIMALS)) {
             Logging.infoToPlayer("Unfortunately you were never told about the birds and bees.",

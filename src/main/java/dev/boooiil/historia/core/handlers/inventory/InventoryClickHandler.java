@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.handlers.inventory;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
@@ -43,7 +43,7 @@ public class InventoryClickHandler {
 
     private void doApplyFlameToArrow() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId());
 
         // guard against player without ignite oil skill
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.IGNITE_OIL)) {

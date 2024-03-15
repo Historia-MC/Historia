@@ -5,7 +5,7 @@ import org.bukkit.event.entity.EntityTameEvent;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 
 public class EntityTameHandler {
@@ -35,7 +35,7 @@ public class EntityTameHandler {
 
     private void doTameAnimal() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getOwner().getUniqueId(), true);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getOwner().getUniqueId());
 
         if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.TAME_ANIMALS)) {
 

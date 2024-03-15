@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 public class EntityDeathHandler {
@@ -68,7 +68,7 @@ public class EntityDeathHandler {
 
     private void doHarvestLeather() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId(), true);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId());
         List<ItemStack> drops = event.getDrops();
 
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.HARVEST_LEATHER)) {
@@ -96,7 +96,7 @@ public class EntityDeathHandler {
 
     private void doHarvestBones() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId(), true);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId());
 
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.HARVEST_BONES)) {
             return;
@@ -108,7 +108,7 @@ public class EntityDeathHandler {
 
     private void doExtraFeathers() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId(), true);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getEntity().getKiller().getUniqueId());
 
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_FEATHERS)) {
             return;
