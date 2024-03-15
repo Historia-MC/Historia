@@ -66,6 +66,7 @@ public class Proficiency {
      * 
      * @param proficiencyName the name of the proficiency
      */
+    @Deprecated(forRemoval = true)
     public Proficiency(String proficiencyName) {
         FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
@@ -80,6 +81,20 @@ public class Proficiency {
             this.stats = new Stats(config, "None.stats");
             this.skills = new Skills(config, "None.skills");
         }
+    }
+
+    /**
+     * Constructs a new proficiency with the given name.
+     * 
+     * @param proficiencyName the name of the proficiency
+     */
+    public Proficiency(ProficiencyName proficiencyName) {
+        FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
+
+        this.name = proficiencyName;
+        this.stats = new Stats(config, proficiencyName + ".stats");
+        this.skills = new Skills(config, proficiencyName + ".skills");
+
     }
 
     /**
