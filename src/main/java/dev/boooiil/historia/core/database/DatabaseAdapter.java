@@ -10,6 +10,7 @@ import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.database.sqlite.SQLiteConnection;
 import dev.boooiil.historia.core.database.sqlite.SQLiteHandler;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
 public class DatabaseAdapter {
 
@@ -94,13 +95,13 @@ public class DatabaseAdapter {
         }
     }
 
-    public static void setProficiency(UUID uuid, String proficiency) {
+    public static void setProficiency(UUID uuid, ProficiencyName proficiency) {
         switch (databaseType) {
             case MYSQL:
-                MySQLHandler.setProficiency(uuid, proficiency);
+                MySQLHandler.setProficiency(uuid, proficiency.getKey());
                 break;
             default:
-                SQLiteHandler.setProficiency(uuid, proficiency);
+                SQLiteHandler.setProficiency(uuid, proficiency.getKey());
                 break;
         }
     }
