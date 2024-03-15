@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.handlers.block.blockBreak;
 
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 

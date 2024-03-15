@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.handlers.block.blockPlace;
 
 import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 

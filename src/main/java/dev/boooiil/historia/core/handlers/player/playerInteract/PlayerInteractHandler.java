@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;

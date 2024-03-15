@@ -10,7 +10,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 
 public class SkillsTest {

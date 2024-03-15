@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.player.playerInteractEntity;
 
-import dev.boooiil.historia.core.proficiency.skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.Material;
