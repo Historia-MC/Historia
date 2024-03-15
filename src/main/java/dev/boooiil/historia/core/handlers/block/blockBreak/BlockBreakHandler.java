@@ -1,6 +1,8 @@
 package dev.boooiil.historia.core.handlers.block.blockBreak;
 
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
@@ -15,8 +17,7 @@ public class BlockBreakHandler extends BaseBlockHandler {
      * Constructor for BlockHandler class that takes a BlockBreakEvent and a
      * HistoriaPlayer as parameters.
      * 
-     * @param event          the BlockBreakEvent that triggered the handler
-     * @param historiaPlayer the HistoriaPlayer associated with the event
+     * @param event the BlockBreakEvent that triggered the handler
      */
     public BlockBreakHandler(BlockBreakEvent event) {
 
@@ -41,6 +42,27 @@ public class BlockBreakHandler extends BaseBlockHandler {
                 doBreakBeehive();
                 break;
 
+            case COAL_ORE:
+            case IRON_ORE:
+            case GOLD_ORE:
+            case DIAMOND_ORE:
+            case EMERALD_ORE:
+            case LAPIS_ORE:
+            case REDSTONE_ORE:
+                doExtraOreChance();
+                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
+                    historiaPlayer.increaseExperience(BlockSources.ORE_BREAK.getKey());
+                break;
+
+            case STONE:
+            case GRANITE:
+            case DIORITE:
+            case ANDESITE:
+            case DEEPSLATE:
+            case GRAVEL:
+                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
+                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
+
             default:
                 break;
         }
@@ -55,9 +77,13 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
             boolean didDouble = dropChanceRoll <= doubleDropChance;
 
-            if (didDouble) {
+            ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
 
-                ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
+            this.getPlayer().getInventory().addItem(item);
+
+            historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
+
+            if (didDouble) {
 
                 this.getPlayer().getInventory().addItem(item);
 
@@ -81,4 +107,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
     }
 
+    private void doExtraOreChance() {
+
+        // cant do this here, have to do it in Historia-Ores
+
+    }
 }
