@@ -44,6 +44,22 @@ public class Proficiency {
 
         }
 
+        public static ProficiencyName fromString(String key) {
+
+            for (ProficiencyName proficiencyName : ProficiencyName.values()) {
+
+                if (proficiencyName.getKey().equalsIgnoreCase(key)) {
+
+                    return proficiencyName;
+
+                }
+
+            }
+
+            return NONE;
+
+        }
+
     }
 
     /**
@@ -71,7 +87,7 @@ public class Proficiency {
         FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
         if (config.contains(proficiencyName)) {
-            this.name = ProficiencyName.valueOf(proficiencyName);
+            this.name = ProficiencyName.fromString(proficiencyName);
             this.stats = new Stats(config, proficiencyName + ".stats");
             this.skills = new Skills(config, proficiencyName + ".skills");
         }
