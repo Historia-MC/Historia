@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 public class MainTest {
 
     private ServerMock server;
-    private Main plugin;
     private PlayerMock player;
 
     @BeforeEach
@@ -24,7 +23,7 @@ public class MainTest {
         server = MockBukkit.mock();
         System.out.println("Loading plugin...");
         try {
-            plugin = MockBukkit.load(Main.class);
+            MockBukkit.load(Main.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +61,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Warrior");
     }
@@ -75,7 +74,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Archer");
     }
@@ -88,7 +87,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Fisherman");
     }
@@ -101,7 +100,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Miner");
     }
@@ -116,7 +115,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Blacksmith");
     }
@@ -129,7 +128,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Huntsman");
     }
@@ -142,7 +141,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Apothecary");
     }
@@ -155,7 +154,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Architect");
     }
@@ -168,7 +167,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Lumberjack");
     }
@@ -181,7 +180,7 @@ public class MainTest {
 
         server.addPlayer(player);
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         historiaPlayer.changeProficiency("Farmer");
     }
