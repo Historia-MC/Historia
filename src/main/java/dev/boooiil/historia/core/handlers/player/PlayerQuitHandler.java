@@ -16,7 +16,7 @@ public class PlayerQuitHandler {
 
     public void doPlayerDBLogout() {
 
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
 
         DatabaseAdapter.setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
                 historiaPlayer.getPlaytime());

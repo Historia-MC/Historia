@@ -15,7 +15,7 @@ public class ClassEnchantsRunnable extends BukkitRunnable {
 
             if (player.isOnline()) {
 
-                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
                 historiaPlayer.applySkillEnchants(player.getInventory());
 

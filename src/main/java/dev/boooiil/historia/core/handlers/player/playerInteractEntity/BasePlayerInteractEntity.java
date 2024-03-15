@@ -28,7 +28,7 @@ class BasePlayerInteractEntity {
     }
 
     protected HistoriaPlayer getHistoriaPlayer() {
-        return PlayerStorage.getPlayer(getPlayer().getUniqueId(), false);
+        return PlayerStorage.getPlayer(getPlayer().getUniqueId());
     }
 
     protected ItemStack getHeldItem() {

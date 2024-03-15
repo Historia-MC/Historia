@@ -94,7 +94,7 @@ public class SQLiteHandlerTest {
     @Test
     public void testSetLogout() {
         Player player = server.addPlayer();
-        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         String logout = SQLiteHandler.getUser(player.getUniqueId()).get(MySQLUserKeys.LOGOUT);
 

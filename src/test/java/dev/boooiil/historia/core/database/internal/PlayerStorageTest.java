@@ -66,7 +66,7 @@ public class PlayerStorageTest {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
         }
 
@@ -81,7 +81,7 @@ public class PlayerStorageTest {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
             PlayerMock playerMock = (PlayerMock) player;
@@ -102,7 +102,7 @@ public class PlayerStorageTest {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
             System.out.println(DatabaseAdapter.getUsername(player.getUniqueId()));
@@ -119,7 +119,7 @@ public class PlayerStorageTest {
             assert PlayerStorage.players.size() == 0;
             assert PlayerStorage.usernameMap.size() == 0;
 
-            historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), true);
+            historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
             assert !historiaPlayer.isOnline();
             assert historiaPlayer.getUsername() != null;
@@ -139,7 +139,7 @@ public class PlayerStorageTest {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
             assert PlayerStorage.has(player.getUniqueId());
@@ -163,7 +163,7 @@ public class PlayerStorageTest {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
             assert PlayerStorage.has(player.getUniqueId());
@@ -182,7 +182,7 @@ public class PlayerStorageTest {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), false);
+            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
             assert PlayerStorage.has(player.getUniqueId());

@@ -40,7 +40,7 @@ public abstract class BaseBlockHandler {
     public BaseBlockHandler(BlockBreakEvent event) {
 
         this.breakEvent = event;
-        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), true);
+        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
 
     }
 
@@ -56,7 +56,7 @@ public abstract class BaseBlockHandler {
     public BaseBlockHandler(BlockPlaceEvent event) {
 
         this.placeEvent = event;
-        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId(), true);
+        this.historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
 
     }
 

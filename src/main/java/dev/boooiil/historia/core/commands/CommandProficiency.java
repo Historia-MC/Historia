@@ -26,7 +26,7 @@ public class CommandProficiency implements CommandExecutor {
 
             if (player != null && player.isOnline()) {
 
-                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId(), true);
+                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
                 String providedProficiency = args[2];
 
@@ -41,7 +41,7 @@ public class CommandProficiency implements CommandExecutor {
 
             else {
 
-                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(((Player) sender).getUniqueId(), true);
+                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(((Player) sender).getUniqueId());
 
                 String providedProficiency = args[1];
 
