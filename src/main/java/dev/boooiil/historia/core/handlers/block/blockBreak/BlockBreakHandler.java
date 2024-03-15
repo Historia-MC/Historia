@@ -35,6 +35,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case JUNGLE_LOG:
             case ACACIA_LOG:
             case DARK_OAK_LOG:
+                if (historiaPlayer.getProficiency().getName() == ProficiencyName.LUMBERJACK) {
+                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
+                }
                 doExtraWoodChance();
                 break;
 
@@ -62,6 +65,25 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case GRAVEL:
                 if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
                     historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
+                break;
+
+            case WHEAT:
+            case CARROTS:
+            case POTATOES:
+            case BEETROOTS:
+            case MELON:
+            case PUMPKIN:
+            case SUGAR_CANE:
+            case CACTUS:
+            case BAMBOO:
+            case NETHER_WART:
+            case COCOA:
+            case CHORUS_FLOWER:
+            case CHORUS_PLANT:
+            case KELP:
+                // TODO: separate sources for crops that harvest in less quantities
+                if (historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
+                    historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
             default:
                 break;
