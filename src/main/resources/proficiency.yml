@@ -143,7 +143,7 @@ Miner:
 
   skills:
     nametag: true
-    extraOreChance: true
+    chanceExtraOre: true
     enchants:
       1:
         regex: .*_PICKAXE|.*_SHOVEL
@@ -216,8 +216,8 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     nametag: false
     bonesFromAnimals: true
     tameAnimals: true
-    extraWool: true
-    extraFeathers: true
+    chanceExtraWool: true
+    chanceExtraFeathers: true
     shearChicken: true
     harvestLeather: true
     canBreed: true
