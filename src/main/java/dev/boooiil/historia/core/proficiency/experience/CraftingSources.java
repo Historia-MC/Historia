@@ -6,6 +6,9 @@ public enum CraftingSources {
     WEAPON_CRAFT(AllSources.WEAPON_CRAFT),
     TOOL_CRAFT(AllSources.TOOL_CRAFT),
     ARMOR_CRAFT(AllSources.ARMOR_CRAFT),
+    IGNITE_ARROW(AllSources.IGNITE_ARROW),
+    APPLY_UNBREAKING(AllSources.APPLY_UNBREAKING),
+    APPLY_SHARPNESS(AllSources.APPLY_SHARPNESS),
     OTHER_CRAFT(AllSources.OTHER_CRAFT);
 
     private final AllSources key;
