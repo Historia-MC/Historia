@@ -1,7 +1,10 @@
 package dev.boooiil.historia.core.handlers.block.blockPlace;
 
+import dev.boooiil.historia.core.database.internal.BlockStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -26,10 +29,27 @@ public class BlockPlaceHandler extends BaseBlockHandler {
                 doLadderBypass();
                 break;
 
+            case CARROTS:
+            case POTATOES:
+            case WHEAT:
+            case BEETROOTS:
+            case MELON:
+            case PUMPKIN:
+            case SUGAR_CANE:
+            case CACTUS:
+            case BAMBOO:
+            case NETHER_WART:
+                if (this.historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
+                    this.historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
+                break;
+
             default:
                 doConsumptionBypass();
                 break;
         }
+
+        BlockStorage.addBlock(this.event.getBlock().getLocation());
+
     }
 
     private void doLadderBypass() {

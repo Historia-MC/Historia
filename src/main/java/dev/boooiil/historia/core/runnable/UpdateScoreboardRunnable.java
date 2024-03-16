@@ -21,7 +21,7 @@ public class UpdateScoreboardRunnable extends BukkitRunnable {
                         scoreboardAdapter.addLine(12, "");
                         scoreboardAdapter.addLine(11,
                                         ChatColor.AQUA + "Proficiency: " + ChatColor.GRAY
-                                                        + historiaPlayer.getProficiency().getName());
+                                                        + historiaPlayer.getProficiency().getName().getKey());
                         scoreboardAdapter.addLine(10,
                                         ChatColor.DARK_AQUA + "Level: " + ChatColor.GRAY + historiaPlayer.getLevel());
                         scoreboardAdapter.addLine(9, ChatColor.AQUA + "Health: " + ChatColor.GRAY

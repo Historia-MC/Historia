@@ -33,7 +33,7 @@ public class CommandPlayers implements CommandExecutor {
                     .append("Player: ")
                     .append(historiaPlayer.getUsername())
                     .append(" Level: ").append(historiaPlayer.getLevel())
-                    .append(" Class: ").append(historiaPlayer.getProficiency().getName())
+                    .append(" Class: ").append(historiaPlayer.getProficiency().getName().getKey())
                     .append("\n");
 
         }

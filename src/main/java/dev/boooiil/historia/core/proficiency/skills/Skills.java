@@ -27,6 +27,7 @@ public class Skills {
         EFFICIENCY_AXE("efficiencyAxe"),
         CHANCE_EXTRA_ORE("chanceExtraOre"),
         CHANCE_EXTRA_WOOD("chanceExtraWood"),
+        CHANCE_EXTRA_WOOL("chanceExtraWool"),
         CHANCE_EXTRA_FEATHERS("chanceExtraFeathers"),
         CHANCE_NO_ANVIL_DAMAGE("chanceNoAnvilDamage"),
         CHANCE_NO_CONSUME_BLOCK("chanceNoConsumeBlock"),
@@ -73,6 +74,7 @@ public class Skills {
         skills.put(SkillType.EFFICIENCY_AXE, config.getBoolean(root + ".efficiencyAxe"));
         skills.put(SkillType.CHANCE_EXTRA_ORE, config.getBoolean(root + ".chanceExtraOre"));
         skills.put(SkillType.CHANCE_EXTRA_WOOD, config.getBoolean(root + ".chanceExtraWood"));
+        skills.put(SkillType.CHANCE_EXTRA_WOOL, config.getBoolean(root + ".chanceExtraWool"));
         skills.put(SkillType.CHANCE_EXTRA_FEATHERS, config.getBoolean(root + ".chanceExtraFeathers"));
         skills.put(SkillType.CHANCE_NO_ANVIL_DAMAGE, config.getBoolean(root + ".chanceNoAnvilDamage"));
         skills.put(SkillType.CHANCE_NO_CONSUME_BLOCK, config.getBoolean(root + ".chanceNoConsumeBlock"));
