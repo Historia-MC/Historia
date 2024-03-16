@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.handlers.inventory;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -89,6 +90,8 @@ public class InventoryClickHandler {
 
         event.getClickedInventory().addItem(newArrow);
         event.setCancelled(true);
+
+        historiaPlayer.increaseExperience(CraftingSources.IGNITE_ARROW.getKey());
 
     }
 
