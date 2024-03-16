@@ -108,8 +108,8 @@ public class Proficiency {
         FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
         this.name = proficiencyName;
-        this.stats = new Stats(config, proficiencyName + ".stats");
-        this.skills = new Skills(config, proficiencyName + ".skills");
+        this.stats = new Stats(config, proficiencyName.getKey() + ".stats");
+        this.skills = new Skills(config, proficiencyName.getKey() + ".skills");
 
     }
 
