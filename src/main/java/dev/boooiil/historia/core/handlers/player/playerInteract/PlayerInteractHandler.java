@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
 import dev.boooiil.historia.core.util.Logging;
 import net.kyori.adventure.text.Component;
@@ -164,6 +165,8 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         Logging.debugToConsole("[PIH#increaseSharpness] Player " + this.getPlayer().getName()
                 + " sharpened their " + this.getHeldItem().displayName().examinableName() + " to level "
                 + increasedSharpnessLevel + ".");
+
+        this.getHistoriaPlayer().increaseExperience(CraftingSources.APPLY_SHARPNESS.getKey());
     }
 
 }
