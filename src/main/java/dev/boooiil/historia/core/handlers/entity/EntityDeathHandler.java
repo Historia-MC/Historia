@@ -36,6 +36,10 @@ public class EntityDeathHandler {
 
     public void doDetermineDeathCauseAndRunDeath() {
 
+        if (historiaPlayerKiller == null) {
+            return;
+        }
+
         switch (event.getEntity().getType()) {
             case PLAYER:
                 doDetermineCombatExperience();
@@ -67,18 +71,21 @@ public class EntityDeathHandler {
 
     private void doDetermineHarvestType() {
 
-        if (historiaPlayerKiller == null) {
-            return;
-        }
-
         switch (event.getEntity().getType()) {
-            case COW:
             case SHEEP:
+                doExtraWool();
+                doHarvestBones();
+                break;
+            case COW:
             case PIG:
             case HORSE:
                 doHarvestLeather();
+                doHarvestBones();
+                break;
             case CHICKEN:
                 doExtraFeathers();
+                doHarvestBones();
+                break;
             default:
                 doHarvestBones();
                 break;
@@ -134,6 +141,8 @@ public class EntityDeathHandler {
 
         event.getDrops().add(new ItemStack(Material.LEATHER, NumberUtils.randomInt(1, 3)));
 
+        this.historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_LEATHER.getKey());
+
     }
 
     private void doHarvestBones() {
@@ -144,7 +153,7 @@ public class EntityDeathHandler {
 
         event.getDrops().add(new ItemStack(Material.BONE, NumberUtils.randomInt(1, 3)));
 
-        historiaPlayerKiller.increaseExperience(AnimalSources.KILL_ANIMAL.getKey());
+        historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_BONES.getKey());
 
     }
 
@@ -159,6 +168,37 @@ public class EntityDeathHandler {
 
         if (random <= chance) {
             event.getDrops().add(new ItemStack(Material.FEATHER, NumberUtils.randomInt(1, 3)));
+            historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_FEATHERS.getKey());
+        }
+    }
+
+    private void doExtraWool() {
+
+        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOL)) {
+            return;
+        }
+
+        float chance = 0.1f;
+        float random = NumberUtils.random(0, 1);
+
+        if (random <= chance) {
+
+            Material woolType = null;
+
+            for (ItemStack itemStack : event.getDrops()) {
+                if (itemStack.getType().toString().contains("WOOL")) {
+                    woolType = itemStack.getType();
+                    break;
+                }
+            }
+
+            if (woolType == null) {
+                return;
+            }
+
+            event.getDrops().add(new ItemStack(woolType, NumberUtils.randomInt(1, 3)));
+
+            historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_WOOL.getKey());
         }
     }
 }
