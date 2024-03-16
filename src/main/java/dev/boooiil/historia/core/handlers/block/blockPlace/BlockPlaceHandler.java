@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.handlers.block.blockPlace;
 
+import dev.boooiil.historia.core.database.internal.BlockStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
@@ -46,6 +47,9 @@ public class BlockPlaceHandler extends BaseBlockHandler {
                 doConsumptionBypass();
                 break;
         }
+
+        BlockStorage.addBlock(this.event.getBlock().getLocation());
+
     }
 
     private void doLadderBypass() {
