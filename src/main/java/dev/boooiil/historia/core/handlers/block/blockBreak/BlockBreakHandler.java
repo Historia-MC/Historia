@@ -101,13 +101,11 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
             ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
 
-            this.getPlayer().getInventory().addItem(item);
-
             historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
             if (didDouble) {
 
-                this.getPlayer().getInventory().addItem(item);
+                this.getBlock().getDrops().add(item);
 
                 historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
