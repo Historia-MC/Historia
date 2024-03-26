@@ -3,7 +3,6 @@ package dev.boooiil.historia.core;
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.mysql.MySQLConnection;
 import dev.boooiil.historia.core.events.block.BlockBreakListener;
 import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
@@ -113,7 +112,7 @@ public class Main extends JavaPlugin {
     // It's a method that is called when the plugin is disabled.
     public void onDisable() {
 
-        MySQLConnection.closeConnection();
+        DatabaseAdapter.closeConnection();
 
         getLogger().info("Plugin disabled.");
     }
