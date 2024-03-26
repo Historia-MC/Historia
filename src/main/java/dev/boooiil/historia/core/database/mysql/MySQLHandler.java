@@ -2,9 +2,9 @@ package dev.boooiil.historia.core.database.mysql;
 
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.util.Logging;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,18 +19,11 @@ import java.util.UUID;
  */
 public class MySQLHandler {
 
-    private final static Connection connection = MySQLConnection.getConnection();
-
     /**
      * Create the table in the database if it does not exist.
      * 
      */
     public static void createTable() {
-
-        if (connection == null) {
-            Logging.errorToConsole("FAILED TO CREATE TABLE. CONNECTION IS NULL.");
-            return;
-        }
 
         try {
             String createTable = "CREATE TABLE IF NOT EXISTS " +
@@ -44,14 +37,14 @@ public class MySQLHandler {
                     "Playtime bigint, " +
                     "PRIMARY KEY (UUID))";
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(createTable);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             createTable();
 
         } catch (SQLException e) {
@@ -82,14 +75,14 @@ public class MySQLHandler {
             String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
                     + System.currentTimeMillis() + ", 0, 0)";
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(createUser);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             createUser(uuid, playerName);
 
         } catch (SQLException e) {
@@ -116,7 +109,7 @@ public class MySQLHandler {
 
             String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
             Logging.infoToConsole("Created user: " + playerName + " in the Database.");
@@ -125,7 +118,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setUsername(uuid, playerName);
 
         } catch (SQLException e) {
@@ -152,14 +145,14 @@ public class MySQLHandler {
 
             String string = ("UPDATE historia SET Class = '" + className + "' WHERE UUID = '" + uuid + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setProficiency(uuid, className);
 
         } catch (SQLException e) {
@@ -186,14 +179,14 @@ public class MySQLHandler {
 
             String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setProficiencyLevel(uuid, classLevel);
 
         } catch (SQLException e) {
@@ -221,14 +214,14 @@ public class MySQLHandler {
             String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
                     + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setLogin(uuid);
 
         } catch (SQLException e) {
@@ -256,14 +249,14 @@ public class MySQLHandler {
 
             String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setCurrentExperience(uuid, experience);
 
         } catch (SQLException e) {
@@ -297,14 +290,14 @@ public class MySQLHandler {
                     "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
                     "WHERE UUID = '" + uuid + "'");
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.execute(string);
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             setLogout(uuid, lastLogin, previousPlaytime);
 
         } catch (SQLException e) {
@@ -335,7 +328,7 @@ public class MySQLHandler {
 
         try {
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
@@ -348,7 +341,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return getUsernames();
 
         } catch (Exception e) {
@@ -376,7 +369,7 @@ public class MySQLHandler {
 
         try {
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             results.next();
@@ -387,7 +380,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return getUsername(uuid);
 
         } catch (Exception e) {
@@ -435,7 +428,7 @@ public class MySQLHandler {
 
         try {
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
@@ -457,7 +450,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return getUser(uuid);
 
         } catch (Exception e) {
@@ -499,7 +492,7 @@ public class MySQLHandler {
 
         try {
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
@@ -512,7 +505,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return getUUIDs();
 
         } catch (Exception e) {
@@ -546,7 +539,7 @@ public class MySQLHandler {
 
         try {
 
-            Statement statement = connection.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             Logging.debugToConsole("SQL Result: " + results);
@@ -569,7 +562,7 @@ public class MySQLHandler {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return getUUID(playerName);
 
         } catch (Exception e) {
@@ -596,13 +589,13 @@ public class MySQLHandler {
 
         try {
 
-            return connection.createStatement().executeQuery(statement).next();
+            return DatabaseAdapter.getConnection().createStatement().executeQuery(statement).next();
 
         } catch (CommunicationsException cE) {
 
             Logging.infoToConsole("Communication Exception");
 
-            MySQLConnection.reconnectOnStale();
+            DatabaseAdapter.reconnect();
             return userExists(uuid);
 
         } catch (SQLException e) {

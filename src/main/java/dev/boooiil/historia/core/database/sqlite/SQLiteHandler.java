@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.database.sqlite;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -8,19 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.util.Logging;
 
 public class SQLiteHandler {
 
-    private static final Connection CONNECTION = SQLiteConnection.getConnection();
-
     public static boolean createTable() {
-
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO CREATE TABLE. CONNECTION IS NULL.");
-            return false;
-        }
 
         try {
             String createTable = "CREATE TABLE IF NOT EXISTS " +
@@ -34,7 +27,7 @@ public class SQLiteHandler {
                     "Playtime bigint, " +
                     "PRIMARY KEY (UUID))";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(createTable);
             return true;
         }
@@ -50,11 +43,6 @@ public class SQLiteHandler {
 
     public static boolean createUser(UUID uuid, String playerName) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO CREATE USER. CONNECTION IS NULL.");
-            return false;
-        }
-
         if (userExists(uuid)) {
             return false;
         }
@@ -63,7 +51,7 @@ public class SQLiteHandler {
             String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
                     + System.currentTimeMillis() + ", 0, 0)";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(createUser);
             return true;
         }
@@ -78,15 +66,10 @@ public class SQLiteHandler {
 
     public static boolean setUsername(UUID uuid, String playerName) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET USERNAME. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             String setUsername = "UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(setUsername);
 
             Logging.infoToConsole("(SQLite) SET USERNAME FOR " + uuid + " TO " + playerName + ".");
@@ -104,15 +87,10 @@ public class SQLiteHandler {
 
     public static boolean setProficiency(UUID uuid, String proficiency) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             String setProficiency = "UPDATE historia SET Class = '" + proficiency + "' WHERE UUID = '" + uuid + "'";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(setProficiency);
             return true;
         }
@@ -127,15 +105,10 @@ public class SQLiteHandler {
 
     public static boolean setProficiencyLevel(UUID uuid, int level) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY LEVEL. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             String setProficiencyLevel = "UPDATE historia SET Level = " + level + " WHERE UUID = '" + uuid + "'";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(setProficiencyLevel);
             return true;
         }
@@ -150,16 +123,11 @@ public class SQLiteHandler {
 
     public static boolean setLogin(UUID uuid) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET LOGIN. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             String setLogin = "UPDATE historia SET Login = " + System.currentTimeMillis() + " WHERE UUID = '" + uuid
                     + "'";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(setLogin);
             return true;
         }
@@ -174,11 +142,6 @@ public class SQLiteHandler {
 
     public static boolean setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET LOGOUT. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             long time = System.currentTimeMillis();
 
@@ -187,7 +150,7 @@ public class SQLiteHandler {
                     "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
                     "WHERE UUID = '" + uuid + "'");
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(string);
             return true;
         }
@@ -202,16 +165,11 @@ public class SQLiteHandler {
 
     public static boolean setCurrentExperience(UUID uuid, double experience) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET CURRENT EXPERIENCE. CONNECTION IS NULL.");
-            return false;
-        }
-
         try {
             String setCurrentExperience = "UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid
                     + "'";
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             statement.executeUpdate(setCurrentExperience);
             return true;
         }
@@ -226,17 +184,12 @@ public class SQLiteHandler {
 
     public static List<String> getUsernames() {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USERNAMES. CONNECTION IS NULL.");
-            return null;
-        }
-
         String string = "SELECT Username FROM historia";
         List<String> answer = new ArrayList<>();
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
@@ -257,16 +210,11 @@ public class SQLiteHandler {
 
     public static String getUsername(UUID uuid) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USERNAME. CONNECTION IS NULL.");
-            return null;
-        }
-
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             if (results.next()) {
@@ -287,16 +235,11 @@ public class SQLiteHandler {
 
     public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USER. CONNECTION IS NULL.");
-            return null;
-        }
-
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             if (results.next()) {
@@ -339,17 +282,12 @@ public class SQLiteHandler {
 
     public static List<UUID> getUUIDs() {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET UUIDS. CONNECTION IS NULL.");
-            return null;
-        }
-
         String string = "SELECT UUID FROM historia";
         List<UUID> answer = new ArrayList<>();
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             while (results.next()) {
@@ -370,16 +308,11 @@ public class SQLiteHandler {
 
     public static UUID getUUID(String playerName) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET UUID. CONNECTION IS NULL.");
-            return null;
-        }
-
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             if (results.next()) {
@@ -400,16 +333,11 @@ public class SQLiteHandler {
 
     private static boolean userExists(UUID uuid) {
 
-        if (CONNECTION == null) {
-            Logging.errorToConsole("(SQLite) FAILED TO CHECK IF USER EXISTS. CONNECTION IS NULL.");
-            return false;
-        }
-
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
         try {
 
-            Statement statement = CONNECTION.createStatement();
+            Statement statement = DatabaseAdapter.getConnection().createStatement();
             ResultSet results = statement.executeQuery(string);
 
             return results.next();
