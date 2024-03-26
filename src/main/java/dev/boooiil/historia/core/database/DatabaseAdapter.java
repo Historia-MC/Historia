@@ -15,51 +15,59 @@ import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 public class DatabaseAdapter {
 
     private static DatabaseType databaseType;
+    private static DatabaseConnection<?> databaseConnection;
 
-    enum DatabaseType {
+    public enum DatabaseType {
         MYSQL,
         SQLITE
     }
 
-    public static Connection getConnection() {
+    public static void setDatabaseConnection(DatabaseConnection<?> databaseConnection) {
+        DatabaseAdapter.databaseConnection = databaseConnection;
+    }
 
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLConnection.getConnection();
-            default:
-                return SQLiteConnection.getConnection();
-        }
+    public static void setDatabaseType(DatabaseType databaseType) {
+        DatabaseAdapter.databaseType = databaseType;
+    }
 
+    public static DatabaseType getDatabaseType() {
+        return databaseType;
     }
 
     public static void connect() {
-        if (!MySQLConnection.connect()) {
-            SQLiteConnection.initDataSource();
-            SQLiteConnection.connect();
+
+        MySQLConnection mySQLConnection = new MySQLConnection();
+
+        if (mySQLConnection.isErrored()) {
+            setDatabaseConnection(new SQLiteConnection());
+            databaseConnection.initDataSource();
+            databaseConnection.connect();
             databaseType = DatabaseType.SQLITE;
         } else {
+            setDatabaseConnection(mySQLConnection);
+            databaseConnection.initDataSource();
+            databaseConnection.connect();
             databaseType = DatabaseType.MYSQL;
         }
+
+    }
+
+    public static Connection getConnection() {
+
+        return databaseConnection.getConnection();
+
     }
 
     public static void closeConnection() {
-        MySQLConnection.closeConnection();
-        SQLiteConnection.closeConnection();
+        databaseConnection.closeConnection();
     }
 
     public static void closeDataSource() {
-        MySQLConnection.closeDataSource();
-        SQLiteConnection.closeDataSource();
+        databaseConnection.closeDataSource();
     }
 
     public static void reconnect() {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLConnection.reconnectOnStale();
-                break;
-            default:
-                break;
-        }
+        databaseConnection.reconnect();
     }
 
     public static void createTable() {
