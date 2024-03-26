@@ -7,14 +7,15 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.database.DatabaseConnection;
 import dev.boooiil.historia.core.util.Logging;
 
-public class SQLiteConnection {
+public class SQLiteConnection implements DatabaseConnection<SQLiteConnection> {
 
-    private static HikariDataSource dataSource;
-    private static Connection connection;
+    private HikariDataSource dataSource;
+    private Connection connection;
 
-    public static void initDataSource() {
+    public void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
             Logging.infoToConsole("(SQLite) Initializing data source.");
             Logging.infoToConsole("(SQLite) Data source location: " + Main.plugin().getDataFolder().getAbsolutePath()
@@ -28,7 +29,7 @@ public class SQLiteConnection {
         }
     }
 
-    public static boolean connect() {
+    public boolean connect() {
 
         Logging.debugToConsole("Connecting to SQLite database...");
 
@@ -55,7 +56,7 @@ public class SQLiteConnection {
 
     }
 
-    public static void closeConnection() {
+    public void closeConnection() {
 
         try {
             if (connection != null && !connection.isClosed()) {
@@ -70,7 +71,7 @@ public class SQLiteConnection {
 
     }
 
-    public static void closeDataSource() {
+    public void closeDataSource() {
 
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
@@ -79,7 +80,7 @@ public class SQLiteConnection {
 
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
 
         try {
             if (dataSource != null && !dataSource.isClosed()) {
@@ -94,6 +95,10 @@ public class SQLiteConnection {
             return null;
         }
 
+    }
+
+    public void reconnect() {
+        // No need to reconnect for SQLite
     }
 
 }

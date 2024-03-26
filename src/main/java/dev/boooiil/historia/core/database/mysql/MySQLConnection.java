@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.mysql;
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
+import dev.boooiil.historia.core.database.DatabaseConnection;
 import dev.boooiil.historia.core.util.Logging;
 
 import java.sql.Connection;
@@ -10,55 +10,56 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class MySQLConnection {
+public class MySQLConnection implements DatabaseConnection<MySQLConnection> {
 
-    private static final GeneralConfig MYSQLCONFIG = ConfigurationLoader.getGeneralConfig();
+    private String database = ConfigurationLoader.getGeneralConfig().database;
+    private String username = ConfigurationLoader.getGeneralConfig().username;
+    private String password = ConfigurationLoader.getGeneralConfig().password;
+    private String ip = ConfigurationLoader.getGeneralConfig().ip;
+    private String port = ConfigurationLoader.getGeneralConfig().port;
 
-    private static String DATABASE = MYSQLCONFIG.database;
-    private static String USERNAME = MYSQLCONFIG.username;
-    private static String PASSWORD = MYSQLCONFIG.password;
-    private static String IP = MYSQLCONFIG.ip;
-    private static String PORT = MYSQLCONFIG.port;
+    private HikariDataSource dataSource;
+    private Connection connection;
+    private boolean errored;
 
-    private static HikariDataSource dataSource;
-    private static Connection connection;
-
-    static {
-        if (validateFields())
+    public MySQLConnection() {
+        if (validateFields()) {
             initDataSource();
+        } else {
+            Logging.errorToConsole("MYSQL FIELDS ARE NULL. CHECK THE CONFIGURATION FILE.");
+            errored = true;
+        }
     }
 
-    private static void initDataSource() {
+    public void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
             HikariConfig config = new HikariConfig();
-            config.setJdbcUrl("jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
+            config.setJdbcUrl("jdbc:mysql://" + ip + ":" + port + "/" + database
                     + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true");
-            config.setUsername(USERNAME);
-            config.setPassword(PASSWORD);
+            config.setUsername(username);
+            config.setPassword(password);
             config.setMaximumPoolSize(15);
 
             dataSource = new HikariDataSource(config);
         }
     }
 
-    public static void customConnection(String database, String username, String password, String ip, String port) {
+    public void customConnection(String database, String username, String password, String ip, String port) {
         Logging.warnToConsole("USING CUSTOM CONNECTION");
-        DATABASE = database;
-        USERNAME = username;
-        PASSWORD = password;
-        IP = ip;
-        PORT = port;
+        this.database = database;
+        this.username = username;
+        this.password = password;
+        this.ip = ip;
+        this.port = port;
         initDataSource();
     }
 
     /**
      * Connects to the MySQL database.
      */
-    public static boolean connect() {
+    public boolean connect() {
 
-        if (!validateFields()) {
-
-            Logging.errorToConsole("MYSQL FIELDS ARE NULL. CHECK THE CONFIGURATION FILE.");
+        if (errored) {
             return false;
         }
 
@@ -76,18 +77,20 @@ public class MySQLConnection {
             Logging.errorToConsole("FAILED TO CONNECT.");
             Logging.errorToConsole("Cause: " + e.getCause());
             Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-            Logging.errorToConsole("USERNAME: " + USERNAME);
-            Logging.errorToConsole("DATABASE: " + DATABASE);
-            Logging.errorToConsole("IP: " + IP);
-            Logging.errorToConsole("PORT: " + PORT);
+            Logging.errorToConsole("USERNAME: " + username);
+            Logging.errorToConsole("DATABASE: " + database);
+            Logging.errorToConsole("IP: " + ip);
+            Logging.errorToConsole("PORT: " + port);
+            errored = true;
 
         }
 
+        errored = true;
         return false;
 
     }
 
-    public static void reconnectOnStale() {
+    public void reconnect() {
 
         try {
 
@@ -111,7 +114,7 @@ public class MySQLConnection {
         }
     }
 
-    public static void closeConnection() {
+    public void closeConnection() {
 
         try {
             if (connection != null && !connection.isClosed()) {
@@ -128,7 +131,7 @@ public class MySQLConnection {
         }
     }
 
-    public static void closeDataSource() {
+    public void closeDataSource() {
 
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
@@ -139,7 +142,7 @@ public class MySQLConnection {
     /**
      * @return the connection
      */
-    public static Connection getConnection() {
+    public Connection getConnection() {
 
         try {
             if (dataSource != null && !dataSource.isClosed()) {
@@ -156,11 +159,15 @@ public class MySQLConnection {
 
     }
 
-    private static boolean validateFields() {
+    public boolean isErrored() {
+        return errored;
+    }
+
+    private boolean validateFields() {
 
         int caught = 0;
 
-        if (DATABASE == null) {
+        if (database == null) {
 
             Logging.errorToConsole("VALUE IN MySQL.database IS NULL.");
 
@@ -168,7 +175,7 @@ public class MySQLConnection {
 
         }
 
-        if (IP == null) {
+        if (ip == null) {
 
             Logging.errorToConsole("VALUE IN MySQL.ip IS NULL.");
 
@@ -176,7 +183,7 @@ public class MySQLConnection {
 
         }
 
-        if (USERNAME == null) {
+        if (username == null) {
 
             Logging.errorToConsole("VALUE IN MySQL.username IS NULL.");
 
@@ -184,7 +191,7 @@ public class MySQLConnection {
 
         }
 
-        if (PASSWORD == null) {
+        if (password == null) {
 
             Logging.errorToConsole("VALUE IN MySQL.password IS NULL.");
 
@@ -192,7 +199,7 @@ public class MySQLConnection {
 
         }
 
-        if (PORT == null) {
+        if (port == null) {
 
             Logging.errorToConsole("VALUE IN MySQL.port IS NULL.");
 
