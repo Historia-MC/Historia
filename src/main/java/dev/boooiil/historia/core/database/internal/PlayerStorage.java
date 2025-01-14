@@ -51,11 +51,7 @@ public class PlayerStorage {
     @Deprecated(forRemoval = true)
     public static HistoriaPlayer getPlayer(UUID uuid, boolean useSQLFallback) {
 
-        if (players.containsKey(uuid))
-            return players.get(uuid);
-
-        else
-            return new HistoriaPlayer(uuid);
+        return getPlayer(uuid);
 
     }
 

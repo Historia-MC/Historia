@@ -1,14 +1,20 @@
 package dev.boooiil.historia.core.database.sqlite;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.database.mysql.MySQLConnection;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
 public class SQLiteHandler {
@@ -233,6 +239,7 @@ public class SQLiteHandler {
         return null;
     }
 
+    @Deprecated(forRemoval = true)
     public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
@@ -277,6 +284,57 @@ public class SQLiteHandler {
                 MySQLUserKeys.LOGIN, "0",
                 MySQLUserKeys.LOGOUT, "0",
                 MySQLUserKeys.PLAYTIME, "0");
+
+    }
+
+
+    public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
+
+        String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
+
+        try {
+
+            Statement statement = CONNECTION.createStatement();
+            ResultSet results = statement.executeQuery(string);
+
+            String username = "";
+            ProficiencyName proficiencyName = ProficiencyName.NONE;
+            int level = 0;
+            double experience = 0;
+            long login = 0;
+            long logout = 0;
+            long playtime = 0;
+
+            while (results.next()) {
+
+                username = results.getString("Username");
+                proficiencyName = ProficiencyName.fromString(results.getString("Class"));
+                level = results.getInt("Level");
+                experience = results.getDouble("Experience");
+                login = results.getLong("Login");
+                logout = results.getLong("Logout");
+                playtime = results.getLong("Playtime");
+
+            }
+
+            return new HistoriaPlayer(uuid, username, proficiencyName, level, experience, login, logout, playtime);
+
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            MySQLConnection.reconnectOnStale();
+            return getUser(uuid, true);
+
+        } catch (Exception e) {
+
+            Logging.errorToConsole("FAILED TO GET USER.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
+            return new HistoriaPlayer(uuid);
+
+        }
 
     }
 
@@ -329,6 +387,46 @@ public class SQLiteHandler {
         }
 
         return getUUID("null");
+    }
+
+    public static void saveUser(HistoriaPlayer historiaPlayer) {
+        try {
+            UUID uuid = historiaPlayer.getUUID();
+            String username = historiaPlayer.getUsername();
+            String proficiency = historiaPlayer.getProficiency().getName().getKey();
+            int level = historiaPlayer.getLevel();
+            double experience = historiaPlayer.getCurrentExperience();
+
+            String query = "UPDATE historia " +
+                    "SET Class = '" + proficiency + "', " +
+                    "Username = '" + username + "', " +
+                    "Level = '" + level + "', " +
+                    "Experience = '" + experience + "' " +
+                    "WHERE UUID = '" + uuid + "' AND " +
+                    "(Class != '" + proficiency + "' OR " +
+                    "Username != '" + username + "' OR " +
+                    "Level != '" + level + "' OR " +
+                    "Experience != '" + experience + "')";
+
+            Statement statement = CONNECTION.createStatement();
+            statement.execute(query);
+
+        } catch (CommunicationsException cE) {
+
+            Logging.infoToConsole("Communication Exception");
+
+            MySQLConnection.reconnectOnStale();
+            saveUser(historiaPlayer);
+
+        } catch (SQLException e) {
+
+            Logging.errorToConsole("FAILED TO SAVE USER.");
+            Logging.errorToConsole("Cause: " + e.getCause());
+            Logging.errorToConsole("MySQL State: " + e.getSQLState());
+            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
+            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+
+        }
     }
 
     private static boolean userExists(UUID uuid) {

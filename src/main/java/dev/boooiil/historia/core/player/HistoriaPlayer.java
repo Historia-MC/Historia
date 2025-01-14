@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.player;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -62,6 +63,7 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @param uuid - UUID of the player.
      */
+    @Deprecated(forRemoval = true)
     public HistoriaPlayer(UUID uuid) {
 
         super(uuid);
@@ -100,6 +102,20 @@ public class HistoriaPlayer extends BasePlayer {
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
+
+    }
+
+    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, int level, double experience,
+            long login, long logout, long playtime) {
+        super(uuid);
+
+        this.username = username;
+        this.proficiency = new Proficiency(proficiency);
+        this.level = level;
+        this.currentExperience = experience;
+        this.lastLogin = login;
+        this.lastLogout = logout;
+        this.playtime = playtime;
 
     }
 
@@ -289,6 +305,8 @@ public class HistoriaPlayer extends BasePlayer {
      * Save the character to SQL.
      */
     public void saveCharacter() {
+        
+        DatabaseAdapter.saveUser(this);
 
         DatabaseAdapter.setProficiency(this.getUUID(), this.getProficiency().getName());
         DatabaseAdapter.setProficiencyLevel(this.getUUID(), this.getLevel());

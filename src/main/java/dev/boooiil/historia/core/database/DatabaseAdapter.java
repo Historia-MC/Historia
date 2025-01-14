@@ -10,6 +10,7 @@ import dev.boooiil.historia.core.database.mysql.MySQLHandler;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.database.sqlite.SQLiteConnection;
 import dev.boooiil.historia.core.database.sqlite.SQLiteHandler;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
 public class DatabaseAdapter {
@@ -176,12 +177,22 @@ public class DatabaseAdapter {
         }
     }
 
+    @Deprecated(forRemoval = true)
     public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
         switch (databaseType) {
             case MYSQL:
                 return MySQLHandler.getUser(uuid);
             default:
                 return SQLiteHandler.getUser(uuid);
+        }
+    }
+
+    public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
+        switch (databaseType) {
+            case MYSQL:
+                return MySQLHandler.getUser(uuid, opt);
+            default:
+                return SQLiteHandler.getUser(uuid, opt);
         }
     }
 
@@ -200,6 +211,15 @@ public class DatabaseAdapter {
                 return MySQLHandler.getUUID(username);
             default:
                 return SQLiteHandler.getUUID(username);
+        }
+    }
+    
+    public static void saveUser(HistoriaPlayer historiaPlayer) {
+        switch (databaseType) {
+            case MYSQL:
+                MySQLHandler.saveUser(historiaPlayer);
+            default:
+                SQLiteHandler.saveUser(historiaPlayer);
         }
     }
 }
