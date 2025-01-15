@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.database;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -162,4 +163,9 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      */
     public DatabaseType getDatabaseType();
 
+    public ResultSet queryExecutor(String statement);
+
+    public void updateExecutor(String statement);
+
+    public boolean nextResult(ResultSet result);
 }
