@@ -5,221 +5,120 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import dev.boooiil.historia.core.database.mysql.MySQLConnection;
-import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
-import dev.boooiil.historia.core.database.sqlite.SQLiteConnection;
-import dev.boooiil.historia.core.database.sqlite.SQLiteHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.util.Logging;
 
 public class DatabaseAdapter {
 
-    private static DatabaseType databaseType;
-    private static DatabaseConnection<?> databaseConnection;
+    private static IDatabaseHandler databaseHandler;
 
-    public enum DatabaseType {
-        MYSQL,
-        SQLITE
-    }
-
-    public static void setDatabaseConnection(DatabaseConnection<?> databaseConnection) {
-        DatabaseAdapter.databaseConnection = databaseConnection;
-    }
-
-    public static void setDatabaseType(DatabaseType databaseType) {
-        DatabaseAdapter.databaseType = databaseType;
+    public static void setDatabaseHandler(IDatabaseHandler databaseHandler) {
+        DatabaseAdapter.databaseHandler = databaseHandler;
     }
 
     public static DatabaseType getDatabaseType() {
-        return databaseType;
+        return databaseHandler.getDatabaseType();
     }
 
+    /**
+     * Attempt to connect to the configured database.
+     */
     public static void connect() {
 
-        MySQLConnection mySQLConnection = new MySQLConnection();
-
-        if (mySQLConnection.isErrored()) {
-            setDatabaseConnection(new SQLiteConnection());
-            databaseConnection.initDataSource();
-            databaseConnection.connect();
-            databaseType = DatabaseType.SQLITE;
-        } else {
-            setDatabaseConnection(mySQLConnection);
-            databaseConnection.initDataSource();
-            databaseConnection.connect();
-            databaseType = DatabaseType.MYSQL;
+        if (databaseHandler.isErrored()) {
+            Logging.errorToConsole("There was an error connecting to the",
+                    databaseHandler.getDatabaseType().toString(), "database. Disabling.");
+            Main.disable();
         }
+
+        // not sure why i am init data source before connecting
+        databaseHandler.initDataSource();
+        databaseHandler.connect();
 
     }
 
     public static Connection getConnection() {
 
-        return databaseConnection.getConnection();
+        return databaseHandler.getConnection();
 
     }
 
     public static void closeConnection() {
-        databaseConnection.closeConnection();
+        databaseHandler.closeConnection();
     }
 
     public static void closeDataSource() {
-        databaseConnection.closeDataSource();
+        databaseHandler.closeDataSource();
     }
 
     public static void reconnect() {
-        databaseConnection.reconnect();
+        databaseHandler.reconnect();
     }
 
     public static void createTable() {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.createTable();
-                break;
-            default:
-                SQLiteHandler.createTable();
-                break;
-        }
+        databaseHandler.createTable();
     }
 
     public static void createUser(UUID uuid, String username) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.createUser(uuid, username);
-                break;
-            default:
-                SQLiteHandler.createUser(uuid, username);
-                break;
-        }
+        databaseHandler.createUser(uuid, username);
     }
 
     public static void setUsername(UUID uuid, String username) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setUsername(uuid, username);
-                break;
-            default:
-                SQLiteHandler.setUsername(uuid, username);
-                break;
-        }
+        databaseHandler.setUsername(uuid, username);
+
     }
 
-    public static void setProficiency(UUID uuid, ProficiencyName proficiency) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setProficiency(uuid, proficiency.getKey());
-                break;
-            default:
-                SQLiteHandler.setProficiency(uuid, proficiency.getKey());
-                break;
-        }
+    public static void setProficiency(UUID uuid, Proficiency proficiency) {
+        databaseHandler.setProficiency(uuid, proficiency);
+
     }
 
     public static void setProficiencyLevel(UUID uuid, int level) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setProficiencyLevel(uuid, level);
-                break;
-            default:
-                SQLiteHandler.setProficiencyLevel(uuid, level);
-                break;
-        }
+        databaseHandler.setProficiencyLevel(uuid, level);
     }
 
     public static void setLogin(UUID uuid) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setLogin(uuid);
-                break;
-            default:
-                SQLiteHandler.setLogin(uuid);
-                break;
-        }
+        databaseHandler.setLogin(uuid);
     }
 
     public static void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setLogout(uuid, lastLogin, previousPlaytime);
-                break;
-            default:
-                SQLiteHandler.setLogout(uuid, lastLogin, previousPlaytime);
-                break;
-        }
+        databaseHandler.setLogout(uuid, lastLogin, previousPlaytime);
     }
 
     public static void setCurrentExperience(UUID uuid, double experience) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.setCurrentExperience(uuid, experience);
-                break;
-            default:
-                SQLiteHandler.setCurrentExperience(uuid, experience);
-                break;
-        }
+        databaseHandler.setCurrentExperience(uuid, experience);
     }
 
     public static List<String> getUsernames() {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUsernames();
-            default:
-                return SQLiteHandler.getUsernames();
-        }
+        return databaseHandler.getUsernames();
     }
 
     public static String getUsername(UUID uuid) {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUsername(uuid);
-            default:
-                return SQLiteHandler.getUsername(uuid);
-        }
+        return databaseHandler.getUsername(uuid);
     }
 
     @Deprecated(forRemoval = true)
     public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUser(uuid);
-            default:
-                return SQLiteHandler.getUser(uuid);
-        }
+        return databaseHandler.getUser(uuid);
     }
 
     public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUser(uuid, opt);
-            default:
-                return SQLiteHandler.getUser(uuid, opt);
-        }
+        return databaseHandler.getUser(uuid, opt);
     }
 
     public static List<UUID> getUUIDs() {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUUIDs();
-            default:
-                return SQLiteHandler.getUUIDs();
-        }
+        return databaseHandler.getUUIDs();
     }
 
     public static UUID getUUID(String username) {
-        switch (databaseType) {
-            case MYSQL:
-                return MySQLHandler.getUUID(username);
-            default:
-                return SQLiteHandler.getUUID(username);
-        }
+        return databaseHandler.getUUID(username);
     }
-    
+
     public static void saveUser(HistoriaPlayer historiaPlayer) {
-        switch (databaseType) {
-            case MYSQL:
-                MySQLHandler.saveUser(historiaPlayer);
-            default:
-                SQLiteHandler.saveUser(historiaPlayer);
-        }
+        databaseHandler.saveUser(historiaPlayer);
     }
 }
