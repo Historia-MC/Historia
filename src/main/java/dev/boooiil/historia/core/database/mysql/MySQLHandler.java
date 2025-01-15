@@ -3,7 +3,10 @@ package dev.boooiil.historia.core.database.mysql;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.database.IDatabaseHandler;
+import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
@@ -19,13 +22,17 @@ import java.util.UUID;
 /**
  * It's a class that handles all the MySQL queries for the plugin.
  */
-public class MySQLHandler {
+public class MySQLHandler implements IDatabaseHandler {
+
+    public DatabaseType getDatabaseType() {
+        return DatabaseType.MYSQL;
+    }
 
     /**
      * Create the table in the database if it does not exist.
      * 
      */
-    public static void createTable() {
+    public void createTable() {
 
         try {
             String createTable = "CREATE TABLE IF NOT EXISTS " +
@@ -67,7 +74,7 @@ public class MySQLHandler {
      * @param playerName - Name of the player.
      */
 
-    public static void createUser(UUID uuid, String playerName) {
+    public void createUser(UUID uuid, String playerName) {
 
         if (userExists(uuid))
             return;
@@ -105,7 +112,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setUsername(UUID uuid, String playerName) {
+    public void setUsername(UUID uuid, String playerName) {
 
         try {
 
@@ -141,7 +148,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setProficiency(UUID uuid, String className) {
+    public void setProficiency(UUID uuid, Proficiency proficiency) {
 
         try {
 
@@ -175,7 +182,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setProficiencyLevel(UUID uuid, int classLevel) {
+    public void setProficiencyLevel(UUID uuid, int classLevel) {
 
         try {
 
@@ -209,7 +216,7 @@ public class MySQLHandler {
      * @param uuid - UUID of the player.
      */
 
-    public static void setLogin(UUID uuid) {
+    public void setLogin(UUID uuid) {
 
         try {
 
@@ -245,7 +252,7 @@ public class MySQLHandler {
      * @param experience - Provided experience of the player.
      */
 
-    public static void setCurrentExperience(UUID uuid, double experience) {
+    public void setCurrentExperience(UUID uuid, double experience) {
 
         try {
 
@@ -281,7 +288,7 @@ public class MySQLHandler {
      * @param previousPlaytime - Provided playtime of the player.
      */
 
-    public static void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
+    public void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
         try {
 
@@ -323,7 +330,7 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
 
-    public static List<String> getUsernames() {
+    public List<String> getUsernames() {
 
         String string = "SELECT Username FROM historia";
         List<String> answer = new ArrayList<>();
@@ -365,7 +372,7 @@ public class MySQLHandler {
      * @return Username of the player.
      */
 
-    public static String getUsername(UUID uuid) {
+    public String getUsername(UUID uuid) {
 
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -422,7 +429,7 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
      */
     @Deprecated(forRemoval = true)
-    public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
+    public Map<MySQLUserKeys, String> getUser(UUID uuid) {
 
         Map<MySQLUserKeys, String> map = new HashMap<>();
 
@@ -476,7 +483,7 @@ public class MySQLHandler {
 
     }
 
-    public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
+    public HistoriaPlayer getUser(UUID uuid, boolean opt) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -537,7 +544,7 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
 
-    public static List<UUID> getUUIDs() {
+    public List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
         List<UUID> answer = new ArrayList<>();
@@ -583,7 +590,7 @@ public class MySQLHandler {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
 
-    public static UUID getUUID(String playerName) {
+    public UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
@@ -629,7 +636,7 @@ public class MySQLHandler {
 
     }
 
-    public static void saveUser(HistoriaPlayer historiaPlayer) {
+    public void saveUser(HistoriaPlayer historiaPlayer) {
         try {
             UUID uuid = historiaPlayer.getUUID();
             String username = historiaPlayer.getUsername();
@@ -675,7 +682,7 @@ public class MySQLHandler {
      * @param uuid The UUID of the player
      * @return A boolean value.
      */
-    private static boolean userExists(UUID uuid) {
+    public boolean userExists(UUID uuid) {
 
         String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 

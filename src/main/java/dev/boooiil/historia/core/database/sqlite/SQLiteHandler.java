@@ -11,15 +11,16 @@ import java.util.UUID;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.database.IDatabaseHandler;
 import dev.boooiil.historia.core.database.mysql.MySQLConnection;
 import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
-public class SQLiteHandler {
+public class SQLiteHandler implements IDatabaseHandler {
 
-    public static boolean createTable() {
+    public boolean createTable() {
 
         try {
             String createTable = "CREATE TABLE IF NOT EXISTS " +
@@ -47,7 +48,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean createUser(UUID uuid, String playerName) {
+    public boolean createUser(UUID uuid, String playerName) {
 
         if (userExists(uuid)) {
             return false;
@@ -70,7 +71,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setUsername(UUID uuid, String playerName) {
+    public boolean setUsername(UUID uuid, String playerName) {
 
         try {
             String setUsername = "UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'";
@@ -91,7 +92,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setProficiency(UUID uuid, String proficiency) {
+    public boolean setProficiency(UUID uuid, String proficiency) {
 
         try {
             String setProficiency = "UPDATE historia SET Class = '" + proficiency + "' WHERE UUID = '" + uuid + "'";
@@ -109,7 +110,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setProficiencyLevel(UUID uuid, int level) {
+    public boolean setProficiencyLevel(UUID uuid, int level) {
 
         try {
             String setProficiencyLevel = "UPDATE historia SET Level = " + level + " WHERE UUID = '" + uuid + "'";
@@ -127,7 +128,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setLogin(UUID uuid) {
+    public boolean setLogin(UUID uuid) {
 
         try {
             String setLogin = "UPDATE historia SET Login = " + System.currentTimeMillis() + " WHERE UUID = '" + uuid
@@ -146,7 +147,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
+    public boolean setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
         try {
             long time = System.currentTimeMillis();
@@ -169,7 +170,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static boolean setCurrentExperience(UUID uuid, double experience) {
+    public boolean setCurrentExperience(UUID uuid, double experience) {
 
         try {
             String setCurrentExperience = "UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid
@@ -188,7 +189,7 @@ public class SQLiteHandler {
         return false;
     }
 
-    public static List<String> getUsernames() {
+    public List<String> getUsernames() {
 
         String string = "SELECT Username FROM historia";
         List<String> answer = new ArrayList<>();
@@ -214,7 +215,7 @@ public class SQLiteHandler {
         return answer;
     }
 
-    public static String getUsername(UUID uuid) {
+    public String getUsername(UUID uuid) {
 
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -240,7 +241,7 @@ public class SQLiteHandler {
     }
 
     @Deprecated(forRemoval = true)
-    public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
+    public Map<MySQLUserKeys, String> getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -287,8 +288,7 @@ public class SQLiteHandler {
 
     }
 
-
-    public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
+    public HistoriaPlayer getUser(UUID uuid, boolean opt) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
@@ -338,7 +338,7 @@ public class SQLiteHandler {
 
     }
 
-    public static List<UUID> getUUIDs() {
+    public List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
         List<UUID> answer = new ArrayList<>();
@@ -364,7 +364,7 @@ public class SQLiteHandler {
         return answer;
     }
 
-    public static UUID getUUID(String playerName) {
+    public UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
@@ -389,7 +389,7 @@ public class SQLiteHandler {
         return getUUID("null");
     }
 
-    public static void saveUser(HistoriaPlayer historiaPlayer) {
+    public void saveUser(HistoriaPlayer historiaPlayer) {
         try {
             UUID uuid = historiaPlayer.getUUID();
             String username = historiaPlayer.getUsername();
@@ -429,7 +429,7 @@ public class SQLiteHandler {
         }
     }
 
-    private static boolean userExists(UUID uuid) {
+    private boolean userExists(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
