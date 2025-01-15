@@ -31,8 +31,8 @@ public class PlayerStorageTest {
             e.printStackTrace();
         }
 
-        PlayerStorage.players.clear();
-        PlayerStorage.usernameMap.clear();
+        PlayerStorage.getPlayerMap().clear();
+        PlayerStorage.getUsernameMap().clear();
 
         System.out.println("Finished setup.");
 
@@ -46,7 +46,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testPlayerAddedOnJoin() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(10);
 
@@ -54,13 +54,13 @@ public class PlayerStorageTest {
             Logging.debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId().toString());
         }
 
-        assert PlayerStorage.players.size() == 10;
+        assert PlayerStorage.getPlayerMap().size() == 10;
 
     }
 
     @Test
     public void testPlayerSetOnlineOnJoin() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -74,7 +74,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testPlayerSetOfflineOnQuit() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -95,7 +95,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testDatabaseFallback() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -113,11 +113,11 @@ public class PlayerStorageTest {
 
             assert !historiaPlayer.isOnline();
 
-            PlayerStorage.players.remove(player.getUniqueId());
-            PlayerStorage.usernameMap.remove(player.getName());
+            PlayerStorage.getPlayerMap().remove(player.getUniqueId());
+            PlayerStorage.getUsernameMap().remove(player.getName());
 
-            assert PlayerStorage.players.size() == 0;
-            assert PlayerStorage.usernameMap.size() == 0;
+            assert PlayerStorage.getPlayerMap().size() == 0;
+            assert PlayerStorage.getUsernameMap().size() == 0;
 
             historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
@@ -132,7 +132,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testStorageHasPlayerValid() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -149,14 +149,14 @@ public class PlayerStorageTest {
 
     @Test
     public void testStorageHasPlayerInvalid() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         assert !PlayerStorage.has(UUID.randomUUID());
     }
 
     @Test
     public void testGetOnlinePlayerUsername() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -175,7 +175,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testGetOfflinePlayerUsername() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         server.setPlayers(1);
 
@@ -193,11 +193,11 @@ public class PlayerStorageTest {
 
             assert !historiaPlayer.isOnline();
 
-            PlayerStorage.players.remove(player.getUniqueId());
-            PlayerStorage.usernameMap.remove(player.getName());
+            PlayerStorage.getPlayerMap().remove(player.getUniqueId());
+            PlayerStorage.getUsernameMap().remove(player.getName());
 
-            assert PlayerStorage.players.size() == 0;
-            assert PlayerStorage.usernameMap.size() == 0;
+            assert PlayerStorage.getPlayerMap().size() == 0;
+            assert PlayerStorage.getUsernameMap().size() == 0;
 
             historiaPlayer = PlayerStorage.getPlayer(player.getName(), true);
 
@@ -212,7 +212,7 @@ public class PlayerStorageTest {
 
     @Test
     public void testAddPlayerNotExist() {
-        assert PlayerStorage.players.size() == 0;
+        assert PlayerStorage.getPlayerMap().size() == 0;
 
         PlayerMock playerMock = new PlayerMock(server, "Player0");
 
@@ -220,8 +220,8 @@ public class PlayerStorageTest {
 
         PlayerStorage.addPlayer(playerMock.getUniqueId(), historiaPlayer);
 
-        assert PlayerStorage.players.size() == 1;
-        assert PlayerStorage.usernameMap.size() == 1;
+        assert PlayerStorage.getPlayerMap().size() == 1;
+        assert PlayerStorage.getUsernameMap().size() == 1;
 
     }
 }
