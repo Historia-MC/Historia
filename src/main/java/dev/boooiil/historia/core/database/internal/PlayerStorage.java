@@ -12,9 +12,9 @@ import java.util.UUID;
 public class PlayerStorage {
 
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<UUID, HistoriaPlayer> players = new HashMap<>();
+    private static HashMap<UUID, HistoriaPlayer> players = new HashMap<>();
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<String, UUID> usernameMap = new HashMap<>();
+    private static HashMap<String, UUID> usernameMap = new HashMap<>();
 
     /**
      * Add a player to our storage.
@@ -58,7 +58,7 @@ public class PlayerStorage {
     /**
      * Get a player from our stored player list.
      * 
-     * @param uuid           - UUID of the player.
+     * @param uuid - UUID of the player.
      * @return {@link HistoriaPlayer} - The player you are requesting.
      */
     public static HistoriaPlayer getPlayer(UUID uuid) {
@@ -90,7 +90,15 @@ public class PlayerStorage {
             return new HistoriaPlayer();
 
     }
-    
+
+    public static HashMap<UUID, HistoriaPlayer> getPlayerMap() {
+        return players;
+    }
+
+    public static HashMap<String, UUID> getUsernameMap() {
+        return usernameMap;
+    }
+
     /**
      * Check if the storage holds the given UUID.
      * 
