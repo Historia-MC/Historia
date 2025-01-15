@@ -25,7 +25,7 @@ public class CommandPlayers implements CommandExecutor {
         if (!(sender instanceof Player))
             return false;
 
-        for (Map.Entry<UUID, HistoriaPlayer> storedPlayer : PlayerStorage.players.entrySet()) {
+        for (Map.Entry<UUID, HistoriaPlayer> storedPlayer : PlayerStorage.getPlayerMap().entrySet()) {
 
             HistoriaPlayer historiaPlayer = storedPlayer.getValue();
 
