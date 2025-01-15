@@ -7,10 +7,10 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.database.DatabaseConnection;
+import dev.boooiil.historia.core.database.IDatabaseConnection;
 import dev.boooiil.historia.core.util.Logging;
 
-public class SQLiteConnection implements DatabaseConnection<SQLiteConnection> {
+public class SQLiteConnection implements IDatabaseConnection {
 
     private HikariDataSource dataSource;
     private Connection connection;

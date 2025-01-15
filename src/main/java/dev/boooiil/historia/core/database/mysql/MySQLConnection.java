@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.mysql;
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.database.DatabaseConnection;
+import dev.boooiil.historia.core.database.IDatabaseConnection;
 import dev.boooiil.historia.core.util.Logging;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class MySQLConnection implements DatabaseConnection<MySQLConnection> {
+public class MySQLConnection implements IDatabaseConnection {
 
     private String database = ConfigurationLoader.getGeneralConfig().database;
     private String username = ConfigurationLoader.getGeneralConfig().username;
