@@ -31,6 +31,10 @@ public class MySQLConnection implements IDatabaseConnection {
         }
     }
 
+    public DatabaseType getDatabaseType() {
+        return DatabaseType.MYSQL;
+    }
+
     public void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
             HikariConfig config = new HikariConfig();
