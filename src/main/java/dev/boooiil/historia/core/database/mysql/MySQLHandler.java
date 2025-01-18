@@ -4,12 +4,13 @@ import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.IDatabaseHandler;
-import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
+import java.sql.Array;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,10 +20,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.annotation.Nullable;
+
 /**
  * It's a class that handles all the MySQL queries for the plugin.
  */
-public class MySQLHandler implements IDatabaseHandler {
+public class MySQLHandler extends MySQLConnection implements IDatabaseHandler {
 
     public DatabaseType getDatabaseType() {
         return DatabaseType.MYSQL;
@@ -34,37 +37,19 @@ public class MySQLHandler implements IDatabaseHandler {
      */
     public void createTable() {
 
-        try {
-            String createTable = "CREATE TABLE IF NOT EXISTS " +
-                    "historia(UUID varchar(36), " +
-                    "Username varchar(16), " +
-                    "Class varchar(30), " +
-                    "Level int, " +
-                    "Experience int, " +
-                    "Login bigint, " +
-                    "Logout bigint, " +
-                    "Playtime bigint, " +
-                    "PRIMARY KEY (UUID))";
+        String string = "CREATE TABLE IF NOT EXISTS " +
+                "historia(UUID varchar(36), " +
+                "Username varchar(16), " +
+                "Class varchar(30), " +
+                "Level int, " +
+                "Experience int, " +
+                "Login bigint, " +
+                "Logout bigint, " +
+                "Playtime bigint, " +
+                "PRIMARY KEY (UUID))";
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(createTable);
+        executor(string);
 
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            createTable();
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO CREATE TABLE.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
     }
 
     /**
@@ -76,33 +61,15 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void createUser(UUID uuid, String playerName) {
 
+        // TODO: figure out why i am making this check.
+        // i should not be doing this, this is redundant
         if (userExists(uuid))
             return;
 
-        try {
+        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
+                + System.currentTimeMillis() + ", 0, 0)";
 
-            String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
-                    + System.currentTimeMillis() + ", 0, 0)";
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(createUser);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            createUser(uuid, playerName);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO CREATE USER.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        executor(string);
 
     }
 
@@ -114,31 +81,9 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setUsername(UUID uuid, String playerName) {
 
-        try {
+        String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
 
-            String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-            Logging.infoToConsole("Created user: " + playerName + " in the Database.");
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setUsername(uuid, playerName);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET USERNAME.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -150,29 +95,9 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setProficiency(UUID uuid, Proficiency proficiency) {
 
-        try {
+        String string = ("UPDATE historia SET Class = '" + proficiency.getName() + "' WHERE UUID = '" + uuid + "'");
 
-            String string = ("UPDATE historia SET Class = '" + className + "' WHERE UUID = '" + uuid + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setProficiency(uuid, className);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET PROFICIENCY.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -184,29 +109,9 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setProficiencyLevel(UUID uuid, int classLevel) {
 
-        try {
+        String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
 
-            String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setProficiencyLevel(uuid, classLevel);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET PROFICIENCY LEVEL.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -218,30 +123,10 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setLogin(UUID uuid) {
 
-        try {
+        String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
+                + "'");
 
-            String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
-                    + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setLogin(uuid);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET LOGIN.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -254,29 +139,9 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setCurrentExperience(UUID uuid, double experience) {
 
-        try {
+        String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
 
-            String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setCurrentExperience(uuid, experience);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET EXPERIENCE.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -290,34 +155,14 @@ public class MySQLHandler implements IDatabaseHandler {
 
     public void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
 
-        try {
+        long time = System.currentTimeMillis();
 
-            long time = System.currentTimeMillis();
+        String string = ("UPDATE historia " +
+                "SET Logout = '" + time + "', " +
+                "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
+                "WHERE UUID = '" + uuid + "'");
 
-            String string = ("UPDATE historia " +
-                    "SET Logout = '" + time + "', " +
-                    "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
-                    "WHERE UUID = '" + uuid + "'");
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.execute(string);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            setLogout(uuid, lastLogin, previousPlaytime);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET LOGOUT.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(string, 5);
 
     }
 
@@ -333,35 +178,15 @@ public class MySQLHandler implements IDatabaseHandler {
     public List<String> getUsernames() {
 
         String string = "SELECT Username FROM historia";
-        List<String> answer = new ArrayList<>();
 
-        try {
+        ResultSet result = queryExecutor(string);
+        List<String> usernames = new ArrayList<>();
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            while (results.next()) {
-
-                answer.add(results.getString("Username"));
-
-            }
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            return getUsernames();
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET USERNAMES.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
+        while (nextResult(result)) {
+            usernames.add(getResult(result, "Username", String.class));
         }
 
-        return answer;
+        return usernames;
 
     }
 
@@ -376,31 +201,12 @@ public class MySQLHandler implements IDatabaseHandler {
 
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
-        try {
+        ResultSet result = queryExecutor(string);
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
+        if (!nextResult(result))
+            return null;
 
-            results.next();
-
-            return results.getString(1);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            return getUsername(uuid);
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET USERNAME.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
-
-        return null;
+        return getResult(result, 1, String.class);
 
     }
 
@@ -430,6 +236,8 @@ public class MySQLHandler implements IDatabaseHandler {
      */
     @Deprecated(forRemoval = true)
     public Map<MySQLUserKeys, String> getUser(UUID uuid) {
+
+        Logging.errorToConsole("WARNING: This method is marked for removal and will not be updated.");
 
         Map<MySQLUserKeys, String> map = new HashMap<>();
 
@@ -487,49 +295,20 @@ public class MySQLHandler implements IDatabaseHandler {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
-        try {
+        ResultSet result = queryExecutor(string);
 
-            Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery(string);
+        if (!nextResult(result))
+            return null;
 
-            String username = "";
-            ProficiencyName proficiencyName = ProficiencyName.NONE;
-            int level = 0;
-            double experience = 0;
-            long login = 0;
-            long logout = 0;
-            long playtime = 0;
+        String username = getResult(result, "Username", String.class);
+        ProficiencyName proficiencyName = ProficiencyName.fromString(getResult(result, "Class", String.class));
+        int level = getResult(result, "Level", Integer.class);
+        double experience = getResult(result, "Experience", Double.class);
+        long login = getResult(result, "Login", Long.class);
+        long logout = getResult(result, "Logout", Long.class);
+        long playtime = getResult(result, "Playtime", Long.class);
 
-            while (results.next()) {
-
-                username = results.getString("Username");
-                proficiencyName = ProficiencyName.fromString(results.getString("Class"));
-                level = results.getInt("Level");
-                experience = results.getDouble("Experience");
-                login = results.getLong("Login");
-                logout = results.getLong("Logout");
-                playtime = results.getLong("Playtime");
-
-            }
-
-            return new HistoriaPlayer(uuid, username, proficiencyName, level, experience, login, logout, playtime);
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            MySQLConnection.reconnectOnStale();
-            return getUser(uuid, true);
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET USER.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-            return new HistoriaPlayer(uuid);
-
-        }
+        return new HistoriaPlayer(uuid, username, proficiencyName, level, experience, login, logout, playtime);
 
     }
 
@@ -547,35 +326,15 @@ public class MySQLHandler implements IDatabaseHandler {
     public List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
-        List<UUID> answer = new ArrayList<>();
 
-        try {
+        ResultSet result = queryExecutor(string);
+        List<UUID> uuids = new ArrayList<>();
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            while (results.next()) {
-
-                answer.add(UUID.fromString(results.getString("UUID")));
-
-            }
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            return getUUIDs();
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET UUIDS.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
+        while (nextResult(result)) {
+            uuids.add(UUID.fromString(getResult(result, "UUID", String.class)));
         }
 
-        return answer;
+        return uuids;
 
     }
 
@@ -589,91 +348,40 @@ public class MySQLHandler implements IDatabaseHandler {
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
-
+    @Nullable
     public UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
-        Logging.debugToConsole("Query String: " + string);
+        ResultSet result = queryExecutor(string);
 
-        try {
+        if (!nextResult(result))
+            return null;
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            Logging.debugToConsole("SQL Result: " + results);
-
-            if (!results.next()) {
-
-                return getUUID("null");
-
-            }
-
-            else {
-
-                Logging.debugToConsole("Next SQL Result: " + results);
-
-                return UUID.fromString(results.getString(1));
-
-            }
-
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            return getUUID(playerName);
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET UUID.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
-
-        return null;
+        return UUID.fromString(getResult(result, 1, String.class));
 
     }
 
     public void saveUser(HistoriaPlayer historiaPlayer) {
-        try {
-            UUID uuid = historiaPlayer.getUUID();
-            String username = historiaPlayer.getUsername();
-            String proficiency = historiaPlayer.getProficiency().getName().getKey();
-            int level = historiaPlayer.getLevel();
-            double experience = historiaPlayer.getCurrentExperience();
 
-            String query = "UPDATE historia " +
-                    "SET Class = '" + proficiency + "', " +
-                    "Username = '" + username + "', " +
-                    "Level = '" + level + "', " +
-                    "Experience = '" + experience + "' " +
-                    "WHERE UUID = '" + uuid + "' AND " +
-                    "(Class != '" + proficiency + "' OR " +
-                    "Username != '" + username + "' OR " +
-                    "Level != '" + level + "' OR " +
-                    "Experience != '" + experience + "')";
+        UUID uuid = historiaPlayer.getUUID();
+        String username = historiaPlayer.getUsername();
+        String proficiency = historiaPlayer.getProficiency().getName().getKey();
+        int level = historiaPlayer.getLevel();
+        double experience = historiaPlayer.getCurrentExperience();
 
-            Statement statement = connection.createStatement();
-            statement.execute(query);
+        String query = "UPDATE historia " +
+                "SET Class = '" + proficiency + "', " +
+                "Username = '" + username + "', " +
+                "Level = '" + level + "', " +
+                "Experience = '" + experience + "' " +
+                "WHERE UUID = '" + uuid + "' AND " +
+                "(Class != '" + proficiency + "' OR " +
+                "Username != '" + username + "' OR " +
+                "Level != '" + level + "' OR " +
+                "Experience != '" + experience + "')";
 
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            MySQLConnection.reconnectOnStale();
-            saveUser(historiaPlayer);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SAVE USER.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(query, 5);
     }
 
     /**
@@ -686,30 +394,178 @@ public class MySQLHandler implements IDatabaseHandler {
 
         String statement = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
+        ResultSet result = queryExecutor(statement);
+        return nextResult(result);
+
+    }
+
+    public void executor(String statement) {
+
+        Logging.debugToConsole("Executnig:", statement);
+
         try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(statement);
 
-            return DatabaseAdapter.getConnection().createStatement().executeQuery(statement).next();
+            preparedStatement.execute();
+        } catch (SQLException sqlException) {
 
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            DatabaseAdapter.reconnect();
-            return userExists(uuid);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SET PROFICIENCY.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
+            Logging.errorToConsole("Failed to execute:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
 
         }
 
-        return false;
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public ResultSet queryExecutor(String statement) {
+
+        Logging.debugToConsole("Executing query:", statement);
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(statement);
+
+            return preparedStatement.executeQuery();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to execute query:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+
+            return null;
+        }
+    }
+
+    public void updateExecutor(String statement) {
+
+        Logging.debugToConsole("Executnig update query:", statement);
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(statement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to execute update:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+
+        }
+
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public void updateExecutor(String statement, int maxRetry) {
+        Logging.debugToConsole("Executnig update query:", statement, "with max retries: " + maxRetry);
+        updateExecutor(statement, maxRetry, 0);
+    }
+
+    public void updateExecutor(String statement, int maxRetry, int curr) {
+
+        Logging.debugToConsole("Executnig update query:", statement, "with max retries: " + maxRetry,
+                "and current retries: " + curr);
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(statement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to execute update:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            Logging.errorToConsole("Retry " + ++curr + "/" + maxRetry);
+
+            updateExecutor(statement, maxRetry, curr);
+
+        }
+
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public boolean nextResult(ResultSet result) {
+
+        Logging.debugToConsole("Trying next result...");
+
+        try {
+            return result.next();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to process next result.");
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+
+            return false;
+        }
 
     }
+
+    public <T> T getResult(ResultSet result, int column, Class<T> clazz) {
+        try {
+            if (clazz == String.class) {
+                return clazz.cast(result.getString(column));
+            } else if (clazz == Integer.class) {
+                return clazz.cast(result.getInt(column));
+            } else if (clazz == Double.class) {
+                return clazz.cast(result.getDouble(column));
+            } else if (clazz == Float.class) {
+                return clazz.cast(result.getFloat(column));
+            } else if (clazz == Boolean.class) {
+                return clazz.cast(result.getBoolean(column));
+            } else if (clazz == Long.class) {
+                return clazz.cast(result.getLong(column));
+            } else if (clazz == Array.class) {
+                return clazz.cast(result.getArray(column));
+            } else {
+                Logging.errorToConsole("Unimplemented result type:", clazz.getName());
+                return null;
+            }
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to process next result.");
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            return null;
+        }
+    };
+
+    public <T> T getResult(ResultSet result, String columnName, Class<T> clazz) {
+
+        try {
+            if (clazz == String.class) {
+                return clazz.cast(result.getString(columnName));
+            } else if (clazz == Integer.class) {
+                return clazz.cast(result.getInt(columnName));
+            } else if (clazz == Double.class) {
+                return clazz.cast(result.getDouble(columnName));
+            } else if (clazz == Float.class) {
+                return clazz.cast(result.getFloat(columnName));
+            } else if (clazz == Boolean.class) {
+                return clazz.cast(result.getBoolean(columnName));
+            } else if (clazz == Long.class) {
+                return clazz.cast(result.getLong(columnName));
+            } else if (clazz == Array.class) {
+                return clazz.cast(result.getArray(columnName));
+            } else {
+                Logging.errorToConsole("Unimplemented result type:", clazz.getName());
+                return null;
+            }
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to process next result.");
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            return null;
+        }
+    };
 
     // A private constructor.
     private MySQLHandler() {
