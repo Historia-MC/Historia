@@ -18,13 +18,12 @@ public class PlayerJoinHandler {
     }
 
     public void doPlayerDBInitialization() {
-        DatabaseAdapter.createUser(event.getPlayer().getUniqueId(), event.getPlayer().getName());
-        DatabaseAdapter.setLogin(event.getPlayer().getUniqueId());
+        historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
+        historiaPlayer.setLastLogin(System.currentTimeMillis());
+        DatabaseAdapter.setLogin(historiaPlayer.getUUID());
     }
 
     public void doAddToInternalStorage() {
-        this.historiaPlayer = new HistoriaPlayer(event.getPlayer().getUniqueId());
-        PlayerStorage.addPlayer(event.getPlayer().getUniqueId(), this.historiaPlayer);
 
         Logging.debugToConsole("************* INITIAL STATS *************");
         Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
