@@ -2,15 +2,15 @@ package dev.boooiil.historia.core.database;
 
 import java.sql.ResultSet;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
-import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 
 public interface IDatabaseHandler extends IDatabaseConnection {
+
+    // TODO: voids become boolean
 
     /**
      * Create the table in the database if it does not exist.
@@ -18,12 +18,6 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      */
     public void createTable();
 
-    /**
-     * Create the user in the database.
-     * 
-     * @param uuid       - UUID of the player.
-     * @param playerName - Name of the player.
-     */
     public void createUser(UUID uuid, String playerName);
 
     /**
@@ -88,39 +82,12 @@ public interface IDatabaseHandler extends IDatabaseConnection {
     public List<String> getUsernames();
 
     /**
-     * Get all user information from the database.
-     * 
-     * @param uuid - UUID of the player.
-     *
-     * @return
-     *         <p>
-     *         "UUID", {@link java.lang.String String}
-     *         <p>
-     *         "Username", {@link java.lang.String String}
-     *         <p>
-     *         "Class", {@link java.lang.String String}
-     *         <p>
-     *         "Level", {@link java.lang.String String}
-     *         <p>
-     *         "Experience", {@link java.lang.String String}
-     *         <p>
-     *         "Login", {@link java.lang.String String}
-     *         <p>
-     *         "Logout", {@link java.lang.String String}
-     * 
-     * @see <a href=
-     *      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">Map</a>
-     */
-    @Deprecated(forRemoval = true)
-    public Map<MySQLUserKeys, String> getUser(UUID uuid);
-
-    /**
      * Get the provided HistoriaPlayer from the database.
      * 
      * @param uuid - UUID of the player.
      * @return {@link HistoriaPlayer}
      */
-    public HistoriaPlayer getUser(UUID uuid, boolean opt);
+    public HistoriaPlayer getUser(UUID uuid);
 
     /**
      * Get a specific UUID from the database using a username.
@@ -149,14 +116,6 @@ public interface IDatabaseHandler extends IDatabaseConnection {
     public void saveUser(HistoriaPlayer historiaPlayer);
 
     /**
-     * It checks if the user exists in the database
-     * 
-     * @param uuid The UUID of the player
-     * @return A boolean value.
-     */
-    public boolean userExists(UUID uuid);
-
-    /**
      * Get the type of the current database.
      * 
      * @return {@link DatabaseType}
@@ -171,15 +130,11 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      */
     public void executor(String statement);
 
-    /**
-     * This method will execute a query and return the result set. If the query
-     * fails, it will log the error to the console.
-     * 
-     * @param statement The SQL query to be executed.
-     * @return A ResultSet object containing the data retrieved from the database.
-     * 
-     */
-    public ResultSet queryExecutor(String statement);
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor);
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry);
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry, int curr);
 
     /**
      * This method will execute an update statement with no retry count.
@@ -240,5 +195,9 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @return The object of the specified type.
      */
     public <T> T getResult(ResultSet result, String columnName, Class<T> clazz);
+
+    public interface IResultProcessor<T> {
+        T process(ResultSet resultSet);
+    }
 
 }
