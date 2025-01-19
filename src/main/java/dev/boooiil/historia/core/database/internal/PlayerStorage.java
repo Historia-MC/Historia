@@ -92,26 +92,6 @@ public class PlayerStorage {
         return DatabaseAdapter.getUser(uuid);
     }
 
-    /**
-     * Get a player from our stored player list.
-     * 
-     * @param username       - Username of the player.
-     * @param useSQLFallback - Fallback to SQL if the user is not currently on.
-     * @return {@link HistoriaPlayer} - The player you are requesting.
-     */
-    public static HistoriaPlayer getPlayer(String username, boolean useSQLFallback) {
-
-        if (usernameMap.containsKey(username))
-            return players.get(usernameMap.get(username));
-
-        else if (useSQLFallback)
-            return new HistoriaPlayer(DatabaseAdapter.getUUID(username));
-
-        else
-            return new HistoriaPlayer();
-
-    }
-
     public static HashMap<UUID, HistoriaPlayer> getPlayerMap() {
         return players;
     }
