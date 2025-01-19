@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.database.internal;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.util.Logging;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -23,6 +24,8 @@ public class PlayerStorage {
      * @param historiaPlayer - {@link HistoriaPlayer} - Player object.
      */
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
+
+        Logging.debugToConsole("Adding player:", historiaPlayer.getUsername(), uuid.toString());
 
         // If the player has already been logged into the server.
         if (players.containsKey(uuid)) {
@@ -66,9 +69,27 @@ public class PlayerStorage {
         if (players.containsKey(uuid))
             return players.get(uuid);
 
-        else
-            return new HistoriaPlayer(uuid);
+        else {
 
+            HistoriaPlayer player = DatabaseAdapter.getUser(uuid);
+            addPlayer(uuid, player);
+            return player;
+        }
+
+    }
+
+    public static HistoriaPlayer getPlayer(String username) {
+        if (usernameMap.containsKey(username)) {
+            return players.get(usernameMap.get(username));
+        }
+
+        UUID uuid = DatabaseAdapter.getUUID(username);
+
+        if (uuid == null) {
+            return null;
+        }
+
+        return DatabaseAdapter.getUser(uuid);
     }
 
     /**
