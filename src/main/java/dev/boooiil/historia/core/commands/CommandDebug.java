@@ -24,7 +24,7 @@ public class CommandDebug implements CommandExecutor {
 
             if (args[0].equals("player")) {
 
-                HistoriaPlayer player = PlayerStorage.getPlayer(args[1], true);
+                HistoriaPlayer player = PlayerStorage.getPlayer(args[1]);
 
                 String message = "----- (" + player.getUsername() + ") -----\n";
 
