@@ -168,7 +168,7 @@ public class PlayerStorageTest {
 
             assert PlayerStorage.has(player.getUniqueId());
 
-            assert PlayerStorage.getPlayer(player.getName(), true) != null;
+            assert PlayerStorage.getPlayer(player.getName()) != null;
 
         }
     }
@@ -199,7 +199,7 @@ public class PlayerStorageTest {
             assert PlayerStorage.getPlayerMap().size() == 0;
             assert PlayerStorage.getUsernameMap().size() == 0;
 
-            historiaPlayer = PlayerStorage.getPlayer(player.getName(), true);
+            historiaPlayer = PlayerStorage.getPlayer(player.getName());
 
             assert !historiaPlayer.isOnline();
             assert historiaPlayer.getUsername() != null;
