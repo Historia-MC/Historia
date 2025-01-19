@@ -3,6 +3,7 @@ package dev.boooiil.historia.core;
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.database.IDatabaseHandler;
 import dev.boooiil.historia.core.events.block.BlockBreakListener;
 import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
@@ -101,6 +102,7 @@ public class Main extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
+        DatabaseAdapter.setDatabaseHandler(IDatabaseHandler.DatabaseType.MYSQL);
         DatabaseAdapter.connect();
         DatabaseAdapter.createTable();
 
@@ -113,6 +115,7 @@ public class Main extends JavaPlugin {
     public void onDisable() {
 
         DatabaseAdapter.closeConnection();
+        DatabaseAdapter.closeDataSource();
 
         getLogger().info("Plugin disabled.");
     }
