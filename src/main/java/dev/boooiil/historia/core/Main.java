@@ -102,7 +102,7 @@ public class Main extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
-        DatabaseAdapter.setDatabaseHandler(IDatabaseHandler.DatabaseType.MYSQL);
+        DatabaseAdapter.setDatabaseHandler(ConfigurationLoader.getGeneralConfig().databaseType);
         DatabaseAdapter.connect();
         DatabaseAdapter.createTable();
 
