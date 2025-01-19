@@ -1,452 +1,498 @@
 package dev.boooiil.historia.core.database.sqlite;
 
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import javax.annotation.Nullable;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
 import dev.boooiil.historia.core.database.IDatabaseHandler;
-import dev.boooiil.historia.core.database.mysql.MySQLConnection;
-import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
-public class SQLiteHandler implements IDatabaseHandler {
+public class SQLiteHandler extends SQLiteConnection implements IDatabaseHandler {
 
-    public boolean createTable() {
+    public SQLiteHandler() {
 
-        try {
-            String createTable = "CREATE TABLE IF NOT EXISTS " +
-                    "historia(UUID varchar(36), " +
-                    "Username varchar(16), " +
-                    "Class varchar(30), " +
-                    "Level int, " +
-                    "Experience int, " +
-                    "Login bigint, " +
-                    "Logout bigint, " +
-                    "Playtime bigint, " +
-                    "PRIMARY KEY (UUID))";
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(createTable);
-            return true;
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO CREATE TABLE.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-
-        return false;
     }
 
-    public boolean createUser(UUID uuid, String playerName) {
-
-        if (userExists(uuid)) {
-            return false;
-        }
-
-        try {
-            String createUser = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
-                    + System.currentTimeMillis() + ", 0, 0)";
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(createUser);
-            return true;
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO CREATE USER.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
+    public DatabaseType getDatabaseType() {
+        return DatabaseType.SQLITE;
     }
 
-    public boolean setUsername(UUID uuid, String playerName) {
+    /**
+     * Create the table in the database if it does not exist.
+     * 
+     */
+    public void createTable() {
 
-        try {
-            String setUsername = "UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'";
+        String string = "CREATE TABLE IF NOT EXISTS " +
+                "historia(UUID varchar(36), " +
+                "Username varchar(16), " +
+                "Class varchar(30), " +
+                "Level int, " +
+                "Experience int, " +
+                "Login bigint, " +
+                "Logout bigint, " +
+                "Playtime bigint, " +
+                "PRIMARY KEY (UUID))";
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(setUsername);
+        executor(string);
 
-            Logging.infoToConsole("(SQLite) SET USERNAME FOR " + uuid + " TO " + playerName + ".");
-            return true;
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET USERNAME.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-
-        return false;
     }
 
-    public boolean setProficiency(UUID uuid, String proficiency) {
+    /**
+     * Create the user in the database.
+     * 
+     * @param uuid       - UUID of the player.
+     * @param playerName - Name of the player.
+     */
 
-        try {
-            String setProficiency = "UPDATE historia SET Class = '" + proficiency + "' WHERE UUID = '" + uuid + "'";
+    public void createUser(UUID uuid, String playerName) {
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(setProficiency);
-            return true;
-        }
+        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
+                + System.currentTimeMillis() + ", 0, 0)";
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
+        executor(string);
+
     }
 
-    public boolean setProficiencyLevel(UUID uuid, int level) {
+    /**
+     * Set the username for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
-        try {
-            String setProficiencyLevel = "UPDATE historia SET Level = " + level + " WHERE UUID = '" + uuid + "'";
+    public void setUsername(UUID uuid, String playerName) {
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(setProficiencyLevel);
-            return true;
-        }
+        String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET PROFICIENCY LEVEL.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
+        updateExecutor(string, 5);
+
     }
 
-    public boolean setLogin(UUID uuid) {
+    /**
+     * Set the class name for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
-        try {
-            String setLogin = "UPDATE historia SET Login = " + System.currentTimeMillis() + " WHERE UUID = '" + uuid
-                    + "'";
+    public void setProficiency(UUID uuid, Proficiency proficiency) {
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(setLogin);
-            return true;
-        }
+        String string = ("UPDATE historia SET Class = '" + proficiency.getName() + "' WHERE UUID = '" + uuid + "'");
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET LOGIN.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
+        updateExecutor(string, 5);
+
     }
 
-    public boolean setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
+    /**
+     * Set the class level for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
-        try {
-            long time = System.currentTimeMillis();
+    public void setProficiencyLevel(UUID uuid, int classLevel) {
 
-            String string = ("UPDATE historia " +
-                    "SET Logout = '" + time + "', " +
-                    "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
-                    "WHERE UUID = '" + uuid + "'");
+        String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(string);
-            return true;
-        }
+        updateExecutor(string, 5);
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET LOGOUT.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
     }
 
-    public boolean setCurrentExperience(UUID uuid, double experience) {
+    /**
+     * Set the login time for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
 
-        try {
-            String setCurrentExperience = "UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid
-                    + "'";
+    public void setLogin(UUID uuid) {
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            statement.executeUpdate(setCurrentExperience);
-            return true;
-        }
+        String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
+                + "'");
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO SET CURRENT EXPERIENCE.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-        return false;
+        updateExecutor(string, 5);
+
     }
+
+    /**
+     * Set the current experience for the given user.
+     * 
+     * @param uuid       - UUID of the player.
+     * @param experience - Provided experience of the player.
+     */
+
+    public void setCurrentExperience(UUID uuid, double experience) {
+
+        String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
+
+        updateExecutor(string, 5);
+
+    }
+
+    /**
+     * Set the logout time for the given user.
+     * 
+     * @param uuid             - UUID of the player.
+     * @param lastLogin        - Provided last login of the player.
+     * @param previousPlaytime - Provided playtime of the player.
+     */
+
+    public void setLogout(UUID uuid, long lastLogin, long previousPlaytime) {
+
+        long time = System.currentTimeMillis();
+
+        String string = ("UPDATE historia " +
+                "SET Logout = '" + time + "', " +
+                "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
+                "WHERE UUID = '" + uuid + "'");
+
+        updateExecutor(string, 5);
+
+    }
+
+    /**
+     * Get a list of usernames from the database.
+     *
+     * @return List of usernames.
+     * 
+     * @see <a href=
+     *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     */
 
     public List<String> getUsernames() {
 
         String string = "SELECT Username FROM historia";
-        List<String> answer = new ArrayList<>();
 
-        try {
+        return queryExecutor(string, result -> {
+            List<String> usernames = new ArrayList<>();
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            while (results.next()) {
-
-                answer.add(results.getString("Username"));
-
+            while (nextResult(result)) {
+                usernames.add(getResult(result, "Username", String.class));
             }
-        }
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USERNAMES.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
+            return usernames;
+        });
 
-        return answer;
     }
+
+    /**
+     * Get the username with a given UUID.
+     * 
+     * @param uuid - UUID of the player.
+     * @return Username of the player.
+     */
 
     public String getUsername(UUID uuid) {
 
         String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
 
-        try {
+        return queryExecutor(string, result -> {
+            if (!nextResult(result))
+                return null;
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            if (results.next()) {
-
-                return results.getString(1);
-
-            }
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USERNAME.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-
-        return null;
-    }
-
-    @Deprecated(forRemoval = true)
-    public Map<MySQLUserKeys, String> getUser(UUID uuid) {
-
-        String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
-
-        try {
-
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            if (results.next()) {
-
-                Logging.debugToConsole("(SQLite) USER EXISTS. RETURNING USER.");
-
-                return Map.of(
-                        MySQLUserKeys.UUID, results.getString("UUID"),
-                        MySQLUserKeys.USERNAME, results.getString("Username"),
-                        MySQLUserKeys.CLASS, results.getString("Class"),
-                        MySQLUserKeys.LEVEL, results.getString("Level"),
-                        MySQLUserKeys.EXPERIENCE, results.getString("Experience"),
-                        MySQLUserKeys.LOGIN, results.getString("Login"),
-                        MySQLUserKeys.LOGOUT, results.getString("Logout"),
-                        MySQLUserKeys.PLAYTIME, results.getString("Playtime"));
-            }
-
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET USER.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-
-        }
-
-        Logging.debugToConsole("(SQLite) USER DOES NOT EXIST. RETURNING EMPTY USER.");
-
-        return Map.of(
-                MySQLUserKeys.UUID, uuid.toString(),
-                MySQLUserKeys.USERNAME, "null",
-                MySQLUserKeys.CLASS, "None",
-                MySQLUserKeys.LEVEL, "1",
-                MySQLUserKeys.EXPERIENCE, "0",
-                MySQLUserKeys.LOGIN, "0",
-                MySQLUserKeys.LOGOUT, "0",
-                MySQLUserKeys.PLAYTIME, "0");
+            return getResult(result, 1, String.class);
+        });
 
     }
 
-    public HistoriaPlayer getUser(UUID uuid, boolean opt) {
+    public HistoriaPlayer getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
 
-        try {
+        return queryExecutor(string, result -> {
 
-            Statement statement = CONNECTION.createStatement();
-            ResultSet results = statement.executeQuery(string);
+            if (!nextResult(result))
+                return new HistoriaPlayer(uuid);
 
-            String username = "";
-            ProficiencyName proficiencyName = ProficiencyName.NONE;
-            int level = 0;
-            double experience = 0;
-            long login = 0;
-            long logout = 0;
-            long playtime = 0;
-
-            while (results.next()) {
-
-                username = results.getString("Username");
-                proficiencyName = ProficiencyName.fromString(results.getString("Class"));
-                level = results.getInt("Level");
-                experience = results.getDouble("Experience");
-                login = results.getLong("Login");
-                logout = results.getLong("Logout");
-                playtime = results.getLong("Playtime");
-
-            }
+            String username = getResult(result, "Username", String.class);
+            ProficiencyName proficiencyName = ProficiencyName.fromString(getResult(result, "Class", String.class));
+            int level = getResult(result, "Level", Integer.class);
+            double experience = getResult(result, "Experience", Double.class);
+            long login = getResult(result, "Login", Long.class);
+            long logout = getResult(result, "Logout", Long.class);
+            long playtime = getResult(result, "Playtime", Long.class);
 
             return new HistoriaPlayer(uuid, username, proficiencyName, level, experience, login, logout, playtime);
+        }, 1, 1);
 
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            MySQLConnection.reconnectOnStale();
-            return getUser(uuid, true);
-
-        } catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO GET USER.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-            return new HistoriaPlayer(uuid);
-
-        }
+        // ResultSet result = queryExecutor(string);
+        // return new HistoriaPlayer(uuid, username, proficiencyName, level, experience,
+        // login, logout, playtime);
 
     }
+
+    /**
+     * Get a list of UUIDs from the database.
+     *
+     * @return List of UUIDs.
+     * 
+     * @see <a href=
+     *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     * @see <a href=
+     *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     */
 
     public List<UUID> getUUIDs() {
 
         String string = "SELECT UUID FROM historia";
-        List<UUID> answer = new ArrayList<>();
 
-        try {
+        return queryExecutor(string, result -> {
+            List<UUID> uuids = new ArrayList<>();
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
-
-            while (results.next()) {
-
-                answer.add(UUID.fromString(results.getString("UUID")));
-
+            while (nextResult(result)) {
+                uuids.add(UUID.fromString(getResult(result, "UUID", String.class)));
             }
-        }
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET UUIDS.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
+            return uuids;
+        });
 
-        return answer;
     }
 
+    /**
+     * Get a specific UUID from the database using a username.
+     * 
+     * @param playerName - Name of the player.
+     *
+     * @return UUID of the given username.
+     * 
+     * @see <a href=
+     *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     */
+    @Nullable
     public UUID getUUID(String playerName) {
 
         String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
 
-        try {
+        return queryExecutor(string, result -> {
+            if (!nextResult(result))
+                return null;
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
+            return UUID.fromString(getResult(result, 1, String.class));
 
-            if (results.next()) {
+        });
 
-                return UUID.fromString(results.getString(1));
-
-            }
-        }
-
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO GET UUID.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
-        }
-
-        return getUUID("null");
     }
 
     public void saveUser(HistoriaPlayer historiaPlayer) {
-        try {
-            UUID uuid = historiaPlayer.getUUID();
-            String username = historiaPlayer.getUsername();
-            String proficiency = historiaPlayer.getProficiency().getName().getKey();
-            int level = historiaPlayer.getLevel();
-            double experience = historiaPlayer.getCurrentExperience();
 
-            String query = "UPDATE historia " +
-                    "SET Class = '" + proficiency + "', " +
-                    "Username = '" + username + "', " +
-                    "Level = '" + level + "', " +
-                    "Experience = '" + experience + "' " +
-                    "WHERE UUID = '" + uuid + "' AND " +
-                    "(Class != '" + proficiency + "' OR " +
-                    "Username != '" + username + "' OR " +
-                    "Level != '" + level + "' OR " +
-                    "Experience != '" + experience + "')";
+        UUID uuid = historiaPlayer.getUUID();
+        String username = historiaPlayer.getUsername();
+        String proficiency = historiaPlayer.getProficiency().getName().getKey();
+        int level = historiaPlayer.getLevel();
+        double experience = historiaPlayer.getCurrentExperience();
 
-            Statement statement = CONNECTION.createStatement();
-            statement.execute(query);
+        String query = "UPDATE historia " +
+                "SET Class = '" + proficiency + "', " +
+                "Username = '" + username + "', " +
+                "Level = '" + level + "', " +
+                "Experience = '" + experience + "' " +
+                "WHERE UUID = '" + uuid + "' AND " +
+                "(Class != '" + proficiency + "' OR " +
+                "Username != '" + username + "' OR " +
+                "Level != '" + level + "' OR " +
+                "Experience != '" + experience + "')";
 
-        } catch (CommunicationsException cE) {
-
-            Logging.infoToConsole("Communication Exception");
-
-            MySQLConnection.reconnectOnStale();
-            saveUser(historiaPlayer);
-
-        } catch (SQLException e) {
-
-            Logging.errorToConsole("FAILED TO SAVE USER.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
-        }
+        updateExecutor(query, 5);
     }
 
-    private boolean userExists(UUID uuid) {
+    public void executor(String statement) {
 
-        String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
+        Logging.debugToConsole("Executing:", statement);
 
-        try {
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);
 
-            Statement statement = DatabaseAdapter.getConnection().createStatement();
-            ResultSet results = statement.executeQuery(string);
+            preparedStatement.execute();
+        } catch (SQLException sqlException) {
 
-            return results.next();
+            Logging.errorToConsole("Failed to execute:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
 
         }
 
-        catch (Exception e) {
-            Logging.errorToConsole("(SQLite) FAILED TO CHECK IF USER EXISTS.");
-            Logging.errorToConsole("(SQLite) Cause: " + e.getCause());
-            Logging.errorToConsole("(SQLite) SQLite Error Message: " + e.getMessage());
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor) {
+
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultProcessor.process(resultSet);
+
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to execute query:", statement);
+            Logging.errorToConsole("Cause:", String.valueOf(sqlException.getCause()));
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage());
+
+            return null;
+        }
+
+    }
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry) {
+        return queryExecutor(statement, resultProcessor, maxRetry, 0);
+    }
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry, int curr) {
+
+        try (Connection connection = getConnection()) {
+
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultProcessor.process(resultSet);
+
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to execute query:", statement);
+            Logging.errorToConsole("Cause:", String.valueOf(sqlException.getCause()));
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage());
+
+            return curr > maxRetry ? queryExecutor(statement, resultProcessor, maxRetry, curr) : null;
+        }
+
+    }
+
+    public void updateExecutor(String statement) {
+
+        Logging.debugToConsole("Executing update query:", statement);
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to execute update:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+
+        }
+
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public void updateExecutor(String statement, int maxRetry) {
+        Logging.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry);
+        updateExecutor(statement, maxRetry, 0);
+    }
+
+    public void updateExecutor(String statement, int maxRetry, int curr) {
+
+        Logging.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry,
+                "and current retries: " + curr);
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to execute update:", statement);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            Logging.errorToConsole("Retry " + ++curr + "/" + maxRetry);
+
+            updateExecutor(statement, maxRetry, curr);
+
+        }
+
+        // TODO: create a cache or something to handle stale connections while the
+        // server is currently running
+    }
+
+    public boolean nextResult(ResultSet result) {
+
+        Logging.debugToConsole("Trying next result...");
+
+        try {
+            return result.next();
+        } catch (SQLException sqlException) {
+
+            Logging.errorToConsole("Failed to process next result.");
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+
             return false;
         }
+
     }
+
+    public <T> T getResult(ResultSet result, int column, Class<T> clazz) {
+        try {
+            if (clazz == String.class) {
+                return clazz.cast(result.getString(column));
+            } else if (clazz == Integer.class) {
+                return clazz.cast(result.getInt(column));
+            } else if (clazz == Double.class) {
+                return clazz.cast(result.getDouble(column));
+            } else if (clazz == Float.class) {
+                return clazz.cast(result.getFloat(column));
+            } else if (clazz == Boolean.class) {
+                return clazz.cast(result.getBoolean(column));
+            } else if (clazz == Long.class) {
+                return clazz.cast(result.getLong(column));
+            } else if (clazz == Array.class) {
+                return clazz.cast(result.getArray(column));
+            } else {
+                Logging.errorToConsole("Unimplemented result type:", clazz.getName());
+                return null;
+            }
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to get result: " + column);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            return null;
+        }
+    };
+
+    public <T> T getResult(ResultSet result, String columnName, Class<T> clazz) {
+
+        try {
+            if (clazz == String.class) {
+                return clazz.cast(result.getString(columnName));
+            } else if (clazz == Integer.class) {
+                return clazz.cast(result.getInt(columnName));
+            } else if (clazz == Double.class) {
+                return clazz.cast(result.getDouble(columnName));
+            } else if (clazz == Float.class) {
+                return clazz.cast(result.getFloat(columnName));
+            } else if (clazz == Boolean.class) {
+                return clazz.cast(result.getBoolean(columnName));
+            } else if (clazz == Long.class) {
+                return clazz.cast(result.getLong(columnName));
+            } else if (clazz == Array.class) {
+                return clazz.cast(result.getArray(columnName));
+            } else {
+                Logging.errorToConsole("Unimplemented result type:", clazz.getName());
+                return null;
+            }
+        } catch (SQLException sqlException) {
+            Logging.errorToConsole("Failed to get result:", columnName);
+            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
+            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            return null;
+        }
+    };
+
 }
