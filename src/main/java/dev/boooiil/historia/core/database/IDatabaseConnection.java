@@ -4,6 +4,8 @@ import java.sql.Connection;
 
 public interface IDatabaseConnection {
 
+    // TODO: voids become boolean
+
     public enum DatabaseType {
         MYSQL,
         SQLITE
