@@ -208,8 +208,11 @@ public class SQLiteHandler extends SQLiteConnection implements IDatabaseHandler 
 
         return queryExecutor(string, result -> {
 
-            if (!nextResult(result))
-                return new HistoriaPlayer(uuid);
+            if (!nextResult(result)) {
+                HistoriaPlayer historiaPlayer = new HistoriaPlayer(uuid);
+                createUser(historiaPlayer.getUUID(), historiaPlayer.getUsername());
+                return historiaPlayer;
+            }
 
             String username = getResult(result, "Username", String.class);
             ProficiencyName proficiencyName = ProficiencyName.fromString(getResult(result, "Class", String.class));
@@ -313,7 +316,7 @@ public class SQLiteHandler extends SQLiteConnection implements IDatabaseHandler 
         } catch (SQLException sqlException) {
 
             Logging.errorToConsole("Failed to execute:", statement);
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
+            Logging.errorToConsole("Cause: " + sqlException.getCause());
             Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
             Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
 
