@@ -2,12 +2,11 @@ package dev.boooiil.historia.core.database;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import dev.boooiil.historia.core.Main;
-import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
-import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
+import dev.boooiil.historia.core.database.mysql.MySQLHandler;
+import dev.boooiil.historia.core.database.sqlite.SQLiteHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.util.Logging;
@@ -20,7 +19,24 @@ public class DatabaseAdapter {
         DatabaseAdapter.databaseHandler = databaseHandler;
     }
 
-    public static DatabaseType getDatabaseType() {
+    public static void setDatabaseHandler(IDatabaseHandler.DatabaseType type) {
+
+        switch (type) {
+            case MYSQL:
+                databaseHandler = new MySQLHandler();
+                break;
+            case SQLITE:
+                databaseHandler = new SQLiteHandler();
+                break;
+            default:
+                Logging.errorToConsole("Unknown database type: ", type.toString());
+                Main.disable();
+                break;
+        }
+
+    }
+
+    public static IDatabaseHandler.DatabaseType getDatabaseType() {
         return databaseHandler.getDatabaseType();
     }
 
@@ -47,6 +63,10 @@ public class DatabaseAdapter {
 
     }
 
+    public static IDatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
+
     public static void closeConnection() {
         databaseHandler.closeConnection();
     }
@@ -61,10 +81,6 @@ public class DatabaseAdapter {
 
     public static void createTable() {
         databaseHandler.createTable();
-    }
-
-    public static void createUser(UUID uuid, String username) {
-        databaseHandler.createUser(uuid, username);
     }
 
     public static void setUsername(UUID uuid, String username) {
@@ -101,13 +117,8 @@ public class DatabaseAdapter {
         return databaseHandler.getUsername(uuid);
     }
 
-    @Deprecated(forRemoval = true)
-    public static Map<MySQLUserKeys, String> getUser(UUID uuid) {
+    public static HistoriaPlayer getUser(UUID uuid) {
         return databaseHandler.getUser(uuid);
-    }
-
-    public static HistoriaPlayer getUser(UUID uuid, boolean opt) {
-        return databaseHandler.getUser(uuid, opt);
     }
 
     public static List<UUID> getUUIDs() {
