@@ -23,12 +23,7 @@ public class MySQLConnection implements IDatabaseConnection {
     private boolean errored;
 
     public MySQLConnection() {
-        if (validateFields()) {
-            initDataSource();
-        } else {
-            Logging.errorToConsole("MYSQL FIELDS ARE NULL. CHECK THE CONFIGURATION FILE.");
-            errored = true;
-        }
+        errored = !validateFields();
     }
 
     public DatabaseType getDatabaseType() {
@@ -42,7 +37,8 @@ public class MySQLConnection implements IDatabaseConnection {
                     + "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true");
             config.setUsername(username);
             config.setPassword(password);
-            config.setMaximumPoolSize(15);
+            config.setMaximumPoolSize(30);
+            config.setLeakDetectionThreshold(2000);
 
             dataSource = new HikariDataSource(config);
         }
