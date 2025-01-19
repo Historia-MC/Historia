@@ -14,6 +14,18 @@ public class SQLiteConnection implements IDatabaseConnection {
 
     private HikariDataSource dataSource;
     private Connection connection;
+    private boolean errored;
+
+    public SQLiteConnection() {
+    }
+
+    public DatabaseType getDatabaseType() {
+        return DatabaseType.SQLITE;
+    }
+
+    public boolean isErrored() {
+        return errored;
+    }
 
     public void initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
