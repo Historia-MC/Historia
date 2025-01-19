@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.configuration.specific;
 
+import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
 
@@ -19,6 +20,7 @@ public class GeneralConfig {
     public String database;
     public String ip;
     public String port;
+    public DatabaseType databaseType;
 
     public GeneralConfig() {
 
@@ -29,6 +31,7 @@ public class GeneralConfig {
         this.database = configuration.getString("MySQL.database");
         this.ip = configuration.getString("MySQL.ip");
         this.port = configuration.getString("MySQL.port");
+        this.databaseType = DatabaseType.fromString(configuration.getString("type"));
 
         debug = configuration.getBoolean("debug");
 
