@@ -1,7 +1,6 @@
 package dev.boooiil.historia.core.player;
 
 import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
@@ -18,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Map;
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
@@ -63,7 +61,6 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @param uuid - UUID of the player.
      */
-    @Deprecated(forRemoval = true)
     public HistoriaPlayer(UUID uuid) {
 
         super(uuid);
@@ -317,7 +314,7 @@ public class HistoriaPlayer extends BasePlayer {
         Logging.debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
                 + proficiency + ".");
 
-        this.proficiency = new Proficiency(proficiency);
+        this.proficiency = new Proficiency(ProficiencyName.fromString(proficiency));
 
         saveCharacter();
 

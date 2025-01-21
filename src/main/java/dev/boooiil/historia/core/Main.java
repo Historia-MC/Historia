@@ -3,7 +3,6 @@ package dev.boooiil.historia.core;
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.IDatabaseHandler;
 import dev.boooiil.historia.core.events.block.BlockBreakListener;
 import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
