@@ -33,67 +33,67 @@ public class ProficiencyTest {
 
     @Test
     public void testConstructWarrior() {
-        Proficiency proficiency = new Proficiency("Warrior");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Warrior"));
         assert proficiency.getName() == ProficiencyName.WARRIOR;
     }
 
     @Test
     public void testConstructFarmer() {
-        Proficiency proficiency = new Proficiency("Farmer");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Farmer"));
         assert proficiency.getName() == ProficiencyName.FARMER;
     }
 
     @Test
     public void testConstructNone() {
-        Proficiency proficiency = new Proficiency("None");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("None"));
         assert proficiency.getName() == ProficiencyName.NONE;
     }
 
     @Test
     public void testConstructInvalid() {
-        Proficiency proficiency = new Proficiency("Invalid");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Invalid"));
         assert proficiency.getName() == ProficiencyName.NONE;
     }
 
     @Test
     public void testConstructFisherman() {
-        Proficiency proficiency = new Proficiency("Fisherman");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Fisherman"));
         assert proficiency.getName() == ProficiencyName.FISHERMAN;
     }
 
     @Test
     public void testConstructMiner() {
-        Proficiency proficiency = new Proficiency("Miner");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Miner"));
         assert proficiency.getName() == ProficiencyName.MINER;
     }
 
     @Test
     public void testConstructLumberjack() {
-        Proficiency proficiency = new Proficiency("Lumberjack");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Lumberjack"));
         assert proficiency.getName() == ProficiencyName.LUMBERJACK;
     }
 
     @Test
     public void testConstructArchitect() {
-        Proficiency proficiency = new Proficiency("Architect");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Architect"));
         assert proficiency.getName() == ProficiencyName.ARCHITECT;
     }
 
     @Test
     public void testConstructArcher() {
-        Proficiency proficiency = new Proficiency("Archer");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Archer"));
         assert proficiency.getName() == ProficiencyName.ARCHER;
     }
 
     @Test
     public void testConstructHuntsman() {
-        Proficiency proficiency = new Proficiency("Huntsman");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Huntsman"));
         assert proficiency.getName() == ProficiencyName.HUNTSMAN;
     }
 
     @Test
     public void testConstructApothecary() {
-        Proficiency proficiency = new Proficiency("Apothecary");
+        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Apothecary"));
         assert proficiency.getName() == ProficiencyName.APOTHECARY;
     }
 }
