@@ -392,7 +392,6 @@ public class SQLiteHandler extends SQLiteConnection implements IDatabaseHandler 
     }
 
     public void updateExecutor(String statement, int maxRetry) {
-        Logging.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry);
         updateExecutor(statement, maxRetry, 0);
     }
 
@@ -413,7 +412,8 @@ public class SQLiteHandler extends SQLiteConnection implements IDatabaseHandler 
             Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
             Logging.errorToConsole("Retry " + ++curr + "/" + maxRetry);
 
-            updateExecutor(statement, maxRetry, curr);
+            if (curr > maxRetry)
+                updateExecutor(statement, maxRetry, curr);
 
         }
 

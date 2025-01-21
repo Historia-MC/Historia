@@ -395,7 +395,6 @@ public class MySQLHandler extends MySQLConnection implements IDatabaseHandler {
     }
 
     public void updateExecutor(String statement, int maxRetry) {
-        Logging.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry);
         updateExecutor(statement, maxRetry, 0);
     }
 
