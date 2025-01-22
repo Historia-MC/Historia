@@ -7,7 +7,7 @@ import dev.boooiil.historia.core.util.Logging;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-public class CoreMySQLConnection extends DatabaseConnection {
+public class MySQLConnection extends DatabaseConnection {
 
     private String database = ConfigurationLoader.getGeneralConfig().database;
     private String username = ConfigurationLoader.getGeneralConfig().username;
@@ -15,7 +15,7 @@ public class CoreMySQLConnection extends DatabaseConnection {
     private String ip = ConfigurationLoader.getGeneralConfig().ip;
     private String port = ConfigurationLoader.getGeneralConfig().port;
 
-    public CoreMySQLConnection() {
+    public MySQLConnection() {
         errored = !validateFields();
     }
 

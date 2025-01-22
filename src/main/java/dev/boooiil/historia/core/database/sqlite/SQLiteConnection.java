@@ -8,9 +8,9 @@ import dev.boooiil.historia.core.database.DatabaseConnection;
 import dev.boooiil.historia.core.util.Logging;
 
 @Deprecated(forRemoval = false)
-public class CoreSQLiteConnection extends DatabaseConnection {
+public class SQLiteConnection extends DatabaseConnection {
 
-    public CoreSQLiteConnection() {
+    public SQLiteConnection() {
     }
 
     public DatabaseType getDatabaseType() {
