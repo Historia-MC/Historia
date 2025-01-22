@@ -18,7 +18,7 @@ import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.util.Logging;
 
 @Deprecated(forRemoval = false)
-public class CoreSQLiteHandler extends CoreSQLiteConnection implements ICoreDatabaseHandler {
+public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabaseHandler {
 
     public CoreSQLiteHandler() {
 

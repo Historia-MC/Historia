@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
 /**
  * It's a class that handles all the MySQL queries for the plugin.
  */
-public class CoreMySQLHandler extends CoreMySQLConnection implements ICoreDatabaseHandler {
+public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHandler {
 
     public CoreMySQLHandler() {
 
