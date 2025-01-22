@@ -2,7 +2,6 @@ package dev.boooiil.historia.core;
 
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.database.CoreDatabaseHandler;
 import dev.boooiil.historia.core.database.DatabaseConnection;
 import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
 import dev.boooiil.historia.core.database.IDatabaseConnection;
@@ -155,12 +154,8 @@ public class Main extends JavaPlugin {
 
     }
 
-    public static ICoreDatabaseHandler getIDatabaseHandler() {
+    public static ICoreDatabaseHandler getDatabaseHandler() {
         return databaseHandler;
-    }
-
-    public static CoreDatabaseHandler getDatabaseHandler() {
-        return (CoreDatabaseHandler) databaseHandler;
     }
 
     public static IDatabaseConnection getIDatabaseConnection() {
