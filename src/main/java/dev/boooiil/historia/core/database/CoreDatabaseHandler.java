@@ -4,11 +4,12 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.UUID;
 
-import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 
-public interface IDatabaseHandler extends IDatabaseConnection {
+public abstract class CoreDatabaseHandler extends DatabaseConnection implements ICoreDatabaseHandler {
+
+    private DatabaseConnection databaseConnection;
 
     // TODO: voids become boolean
 
@@ -16,9 +17,13 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * Create the table in the database if it does not exist.
      * 
      */
-    public void createTable();
+    public abstract void createTable();
 
-    public void createUser(UUID uuid, String playerName);
+    public abstract void createUser(UUID uuid, String playerName);
+
+    public DatabaseConnection getDatabaseConnection() {
+        return databaseConnection;
+    };
 
     /**
      * Set the current experience for the given user.
@@ -26,9 +31,9 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param uuid       - UUID of the player.
      * @param experience - Provided experience of the player.
      */
-    public void setCurrentExperience(UUID uuid, double experience);
+    public abstract void setCurrentExperience(UUID uuid, double experience);
 
-    public void setUsername(UUID uuid, String playerName);
+    public abstract void setUsername(UUID uuid, String playerName);
 
     /**
      * Change the {@link Proficiency} for the given user.
@@ -36,7 +41,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param uuid        - UUID of the player.
      * @param proficiency - The proficiency to change.
      */
-    public void setProficiency(UUID uuid, Proficiency proficiency);
+    public abstract void setProficiency(UUID uuid, Proficiency proficiency);
 
     /**
      * Set the class level for the given user.
@@ -44,14 +49,14 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param uuid - UUID of the player.
      * @param int  - The level of the current class.
      */
-    public void setProficiencyLevel(UUID uuid, int classLevel);
+    public abstract void setProficiencyLevel(UUID uuid, int classLevel);
 
     /**
      * Set the login time for the given user.
      * 
      * @param uuid - UUID of the player.
      */
-    public void setLogin(UUID uuid);
+    public abstract void setLogin(UUID uuid);
 
     /**
      * Set the logout time for the given user.
@@ -60,7 +65,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param lastLogin        - Provided last login of the player.
      * @param previousPlaytime - Provided playtime of the player.
      */
-    public void setLogout(UUID uuid, long lastLogin, long previousPlaytime);
+    public abstract void setLogout(UUID uuid, long lastLogin, long previousPlaytime);
 
     /**
      * Get the username with a given UUID.
@@ -68,7 +73,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param uuid - UUID of the player.
      * @return Username of the player.
      */
-    public String getUsername(UUID uuid);
+    public abstract String getUsername(UUID uuid);
 
     /**
      * Get a list of usernames from the database.
@@ -79,7 +84,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
 
-    public List<String> getUsernames();
+    public abstract List<String> getUsernames();
 
     /**
      * Get the provided HistoriaPlayer from the database.
@@ -87,7 +92,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param uuid - UUID of the player.
      * @return {@link HistoriaPlayer}
      */
-    public HistoriaPlayer getUser(UUID uuid);
+    public abstract HistoriaPlayer getUser(UUID uuid);
 
     /**
      * Get a specific UUID from the database using a username.
@@ -99,7 +104,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
-    public UUID getUUID(String playerName);
+    public abstract UUID getUUID(String playerName);
 
     /**
      * Get a list of UUIDs from the database.
@@ -111,16 +116,16 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
-    public List<UUID> getUUIDs();
+    public abstract List<UUID> getUUIDs();
 
-    public void saveUser(HistoriaPlayer historiaPlayer);
+    public abstract void saveUser(HistoriaPlayer historiaPlayer);
 
     /**
      * Get the type of the current database.
      * 
      * @return {@link DatabaseType}
      */
-    public DatabaseType getDatabaseType();
+    public abstract DatabaseType getDatabaseType();
 
     /**
      * Execute a SQL statement without returning any result.
@@ -128,13 +133,13 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param statement The SQL statement to be executed.
      * 
      */
-    public void executor(String statement);
+    public abstract void executor(String statement);
 
-    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor);
+    public abstract <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor);
 
-    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry);
+    public abstract <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry);
 
-    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry, int curr);
+    public abstract <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry, int curr);
 
     /**
      * This method will execute an update statement with no retry count.
@@ -142,7 +147,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param statement The SQL statement to be executed.
      * 
      */
-    public void updateExecutor(String statement);
+    public abstract void updateExecutor(String statement);
 
     /**
      * This method will attempt to execute the update statement up to maxRetry times
@@ -152,7 +157,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param maxRetry  The maximum number of times to retry the execution.
      * 
      */
-    public void updateExecutor(String statement, int maxRetry);
+    public abstract void updateExecutor(String statement, int maxRetry);
 
     /**
      * This method will attempt to execute the update statement up to maxRetry times
@@ -163,7 +168,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param curr      The current retry count.
      * 
      */
-    public void updateExecutor(String statement, int maxRetry, int curr);
+    public abstract void updateExecutor(String statement, int maxRetry, int curr);
 
     /**
      * Get the next result from the result set.
@@ -172,7 +177,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @return true if there is a next result, false otherwise.
      * 
      */
-    public boolean nextResult(ResultSet result);
+    public abstract boolean nextResult(ResultSet result);
 
     /**
      * Get a result from the result set.
@@ -183,7 +188,7 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param clazz  - The class type to cast the result to.
      * @return The object of the specified type.
      */
-    public <T> T getResult(ResultSet result, int column, Class<T> clazz);
+    public abstract <T> T getResult(ResultSet result, int column, Class<T> clazz);
 
     /**
      * Get a result from the result set.
@@ -194,9 +199,9 @@ public interface IDatabaseHandler extends IDatabaseConnection {
      * @param clazz      - The class type to cast the result to.
      * @return The object of the specified type.
      */
-    public <T> T getResult(ResultSet result, String columnName, Class<T> clazz);
+    public abstract <T> T getResult(ResultSet result, String columnName, Class<T> clazz);
 
-    public interface IResultProcessor<T> {
+    public abstract interface IResultProcessor<T> {
         T process(ResultSet resultSet);
     }
 

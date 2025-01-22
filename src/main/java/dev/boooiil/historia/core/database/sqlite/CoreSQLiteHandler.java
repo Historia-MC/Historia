@@ -1,10 +1,4 @@
-package dev.boooiil.historia.core.database.mysql;
-
-import dev.boooiil.historia.core.database.IDatabaseHandler;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.Proficiency;
-import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
-import dev.boooiil.historia.core.util.Logging;
+package dev.boooiil.historia.core.database.sqlite;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -17,17 +11,21 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-/**
- * It's a class that handles all the MySQL queries for the plugin.
- */
-public class MySQLHandler extends MySQLConnection implements IDatabaseHandler {
+import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import dev.boooiil.historia.core.util.Logging;
 
-    public MySQLHandler() {
+@Deprecated(forRemoval = false)
+public class CoreSQLiteHandler extends CoreSQLiteConnection implements ICoreDatabaseHandler {
+
+    public CoreSQLiteHandler() {
 
     }
 
     public DatabaseType getDatabaseType() {
-        return DatabaseType.MYSQL;
+        return DatabaseType.SQLITE;
     }
 
     /**
@@ -415,7 +413,8 @@ public class MySQLHandler extends MySQLConnection implements IDatabaseHandler {
             Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
             Logging.errorToConsole("Retry " + ++curr + "/" + maxRetry);
 
-            updateExecutor(statement, maxRetry, curr);
+            if (curr > maxRetry)
+                updateExecutor(statement, maxRetry, curr);
 
         }
 
