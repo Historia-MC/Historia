@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.configuration.specific;
 
-import dev.boooiil.historia.core.database.IDatabaseConnection.DatabaseType;
+import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
 

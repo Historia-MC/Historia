@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.database.internal;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 
@@ -71,7 +71,7 @@ public class PlayerStorage {
 
         else {
 
-            HistoriaPlayer player = DatabaseAdapter.getUser(uuid);
+            HistoriaPlayer player = Main.getDatabaseHandler().getUser(uuid);
             addPlayer(uuid, player);
             return player;
         }
@@ -83,13 +83,13 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
         }
 
-        UUID uuid = DatabaseAdapter.getUUID(username);
+        UUID uuid = Main.getDatabaseHandler().getUUID(username);
 
         if (uuid == null) {
             return null;
         }
 
-        return DatabaseAdapter.getUser(uuid);
+        return Main.getDatabaseHandler().getUser(uuid);
     }
 
     public static HashMap<UUID, HistoriaPlayer> getPlayerMap() {

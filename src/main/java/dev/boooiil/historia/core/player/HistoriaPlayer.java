@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.player;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
@@ -288,11 +288,11 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        DatabaseAdapter.saveUser(this);
+        Main.getDatabaseHandler().saveUser(this);
 
-        DatabaseAdapter.setProficiency(this.getUUID(), this.getProficiency());
-        DatabaseAdapter.setProficiencyLevel(this.getUUID(), this.getLevel());
-        DatabaseAdapter.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+        Main.getDatabaseHandler().setProficiency(this.getUUID(), this.getProficiency());
+        Main.getDatabaseHandler().setProficiencyLevel(this.getUUID(), this.getLevel());
+        Main.getDatabaseHandler().setCurrentExperience(this.getUUID(), this.getCurrentExperience());
 
         this.lastSaved = System.currentTimeMillis();
 
