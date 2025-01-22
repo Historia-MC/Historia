@@ -20,7 +20,7 @@ public class CommandStats implements CommandExecutor {
 
                         if (arguments[0].equals("player")) {
 
-                                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(arguments[1], true);
+                                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(arguments[1]);
                                 Player bukkitPlayer = Bukkit.getPlayer(historiaPlayer.getUUID());
                                 String message = "";
 

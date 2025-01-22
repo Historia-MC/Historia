@@ -2,8 +2,12 @@ package dev.boooiil.historia.core;
 
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.mysql.MySQLConnection;
+import dev.boooiil.historia.core.database.DatabaseConnection;
+import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
+import dev.boooiil.historia.core.database.IDatabaseConnection;
+import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType;
+import dev.boooiil.historia.core.database.mysql.CoreMySQLHandler;
+import dev.boooiil.historia.core.database.sqlite.CoreSQLiteHandler;
 import dev.boooiil.historia.core.events.block.BlockBreakListener;
 import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
@@ -36,6 +40,7 @@ public class Main extends JavaPlugin {
 
     public static boolean isTesting = false;
     private static Plugin instance = null;
+    private static ICoreDatabaseHandler databaseHandler;
 
     public Main() {
         super();
@@ -102,8 +107,7 @@ public class Main extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
-        DatabaseAdapter.connect();
-        DatabaseAdapter.createTable();
+        initDatabase();
 
         Logging.infoToConsole("Plugin Enabled.");
 
@@ -113,8 +117,7 @@ public class Main extends JavaPlugin {
     // It's a method that is called when the plugin is disabled.
     public void onDisable() {
 
-        MySQLConnection.closeConnection();
-
+        closeDatabase();
         getLogger().info("Plugin disabled.");
     }
 
@@ -151,8 +154,46 @@ public class Main extends JavaPlugin {
 
     }
 
+    public static ICoreDatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
+    }
+
+    public static IDatabaseConnection getIDatabaseConnection() {
+        return databaseHandler;
+    }
+
+    public static DatabaseConnection getBaseDatabaseConnection() {
+        return (DatabaseConnection) databaseHandler;
+    }
+
     public static NamespacedKey getNamespacedKey(String key) {
         return new NamespacedKey(plugin(), key);
+    }
+
+    private void initDatabase() {
+        DatabaseType DBType = ConfigurationLoader.getGeneralConfig().databaseType;
+
+        switch (DBType) {
+            case MYSQL:
+                databaseHandler = new CoreMySQLHandler();
+                break;
+            case SQLITE:
+                databaseHandler = new CoreSQLiteHandler();
+                break;
+            default:
+                Logging.errorToConsole("Unknown database type: ", DBType.toString());
+                Main.disable();
+                break;
+        }
+
+        databaseHandler.initDataSource();
+        databaseHandler.connect();
+        databaseHandler.createTable();
+    }
+
+    private void closeDatabase() {
+        databaseHandler.closeConnection();
+        databaseHandler.closeDataSource();
     }
 
     /**

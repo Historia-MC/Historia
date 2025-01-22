@@ -18,7 +18,7 @@
   <distributionManagement>
     <repository>
       <id>historia-repo</id>
-      <url>http://boooiil.sytes.net:1200/releases</url>
+      <url>https://maven.boobot.org/releases</url>
     </repository>
   </distributionManagement>
 

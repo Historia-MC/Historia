@@ -16,6 +16,7 @@ public class MainTest {
 
     private ServerMock server;
     private PlayerMock player;
+    private PlayerMock rPlayer;
 
     @BeforeEach
     public void setUp() {
@@ -29,6 +30,7 @@ public class MainTest {
         }
         System.out.println("Creating player...");
         player = new PlayerMock(server, "MockUser", UUID.fromString("00000000-0000-0000-0000-000000000001"));
+        rPlayer = new PlayerMock(server, "Random User", UUID.randomUUID());
         System.out.println("Player created: " + player.getName());
 
         System.out.println("Finished setup.");
@@ -43,11 +45,11 @@ public class MainTest {
 
     @Test
     public void testNewPlayerJoinLeave() {
-        server.addPlayer(player);
+        server.addPlayer(rPlayer);
 
         System.out.println("Player joined: " + player.getName());
 
-        player.disconnect();
+        rPlayer.disconnect();
 
         System.out.println("Player left: " + player.getName());
     }

@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.player;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
-import dev.boooiil.historia.core.database.mysql.MySQLUserKeys;
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -17,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Map;
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
@@ -58,7 +57,7 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * General constructor.
+     * Create a default HistoriaUser.
      * 
      * @param uuid - UUID of the player.
      */
@@ -72,34 +71,33 @@ public class HistoriaPlayer extends BasePlayer {
         // config.
         // Experience max will just be experience * multiplier.
 
-        // Get an object where the key is a string and the value is also a string.
-        // IE: { "key": "value" }, where "key" can be accessed using the .get() method.
-        Map<MySQLUserKeys, String> user = DatabaseAdapter.getUser(uuid);
-
-        if (!user.get(MySQLUserKeys.USERNAME).equals("null")) {
-            if (this.username == null || !this.username.equals(user.get(MySQLUserKeys.USERNAME))) {
-                this.username = user.get(MySQLUserKeys.USERNAME);
-            }
-        }
-
-        this.proficiency = new Proficiency(user.get(MySQLUserKeys.CLASS));
-
-        this.level = Integer.parseInt(user.get(MySQLUserKeys.LEVEL));
-
-        this.level = Math.max(this.level, 1);
-
-        this.currentExperience = Float.parseFloat(user.get(MySQLUserKeys.EXPERIENCE));
-
-        this.currentExperience = this.currentExperience < 0 ? 0 : this.currentExperience;
-
+        this.proficiency = new Proficiency(ProficiencyName.NONE);
+        this.level = 1;
+        this.currentExperience = 0;
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
-
-        this.lastLogin = Long.parseLong(user.get(MySQLUserKeys.LOGIN));
-        this.lastLogout = Long.parseLong(user.get(MySQLUserKeys.LOGOUT));
-        this.playtime = Long.parseLong(user.get(MySQLUserKeys.PLAYTIME));
+        this.lastLogin = 0;
+        this.lastLogout = 0;
+        this.playtime = 0;
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
+
+    }
+
+    /**
+     * Initialize a HistoriaPlayer with specified details.
+     */
+    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, int level, double experience,
+            long login, long logout, long playtime) {
+        super(uuid);
+
+        this.username = username;
+        this.proficiency = new Proficiency(proficiency);
+        this.level = level;
+        this.currentExperience = experience;
+        this.lastLogin = login;
+        this.lastLogout = logout;
+        this.playtime = playtime;
 
     }
 
@@ -290,9 +288,11 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        DatabaseAdapter.setProficiency(this.getUUID(), this.getProficiency().getName());
-        DatabaseAdapter.setProficiencyLevel(this.getUUID(), this.getLevel());
-        DatabaseAdapter.setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+        Main.getDatabaseHandler().saveUser(this);
+
+        Main.getDatabaseHandler().setProficiency(this.getUUID(), this.getProficiency());
+        Main.getDatabaseHandler().setProficiencyLevel(this.getUUID(), this.getLevel());
+        Main.getDatabaseHandler().setCurrentExperience(this.getUUID(), this.getCurrentExperience());
 
         this.lastSaved = System.currentTimeMillis();
 
@@ -314,7 +314,7 @@ public class HistoriaPlayer extends BasePlayer {
         Logging.debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
                 + proficiency + ".");
 
-        this.proficiency = new Proficiency(proficiency);
+        this.proficiency = new Proficiency(ProficiencyName.fromString(proficiency));
 
         saveCharacter();
 

@@ -1,7 +1,8 @@
 package dev.boooiil.historia.core.database.internal;
 
-import dev.boooiil.historia.core.database.DatabaseAdapter;
+import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.util.Logging;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -12,9 +13,9 @@ import java.util.UUID;
 public class PlayerStorage {
 
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<UUID, HistoriaPlayer> players = new HashMap<>();
+    private static HashMap<UUID, HistoriaPlayer> players = new HashMap<>();
     // It's a HashMap that stores all the players that are currently online
-    public static HashMap<String, UUID> usernameMap = new HashMap<>();
+    private static HashMap<String, UUID> usernameMap = new HashMap<>();
 
     /**
      * Add a player to our storage.
@@ -23,6 +24,8 @@ public class PlayerStorage {
      * @param historiaPlayer - {@link HistoriaPlayer} - Player object.
      */
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
+
+        Logging.debugToConsole("Adding player:", historiaPlayer.getUsername(), uuid.toString());
 
         // If the player has already been logged into the server.
         if (players.containsKey(uuid)) {
@@ -51,18 +54,14 @@ public class PlayerStorage {
     @Deprecated(forRemoval = true)
     public static HistoriaPlayer getPlayer(UUID uuid, boolean useSQLFallback) {
 
-        if (players.containsKey(uuid))
-            return players.get(uuid);
-
-        else
-            return new HistoriaPlayer(uuid);
+        return getPlayer(uuid);
 
     }
 
     /**
      * Get a player from our stored player list.
      * 
-     * @param uuid           - UUID of the player.
+     * @param uuid - UUID of the player.
      * @return {@link HistoriaPlayer} - The player you are requesting.
      */
     public static HistoriaPlayer getPlayer(UUID uuid) {
@@ -70,31 +69,37 @@ public class PlayerStorage {
         if (players.containsKey(uuid))
             return players.get(uuid);
 
-        else
-            return new HistoriaPlayer(uuid);
+        else {
+
+            HistoriaPlayer player = Main.getDatabaseHandler().getUser(uuid);
+            addPlayer(uuid, player);
+            return player;
+        }
 
     }
 
-    /**
-     * Get a player from our stored player list.
-     * 
-     * @param username       - Username of the player.
-     * @param useSQLFallback - Fallback to SQL if the user is not currently on.
-     * @return {@link HistoriaPlayer} - The player you are requesting.
-     */
-    public static HistoriaPlayer getPlayer(String username, boolean useSQLFallback) {
-
-        if (usernameMap.containsKey(username))
+    public static HistoriaPlayer getPlayer(String username) {
+        if (usernameMap.containsKey(username)) {
             return players.get(usernameMap.get(username));
+        }
 
-        else if (useSQLFallback)
-            return new HistoriaPlayer(DatabaseAdapter.getUUID(username));
+        UUID uuid = Main.getDatabaseHandler().getUUID(username);
 
-        else
-            return new HistoriaPlayer();
+        if (uuid == null) {
+            return null;
+        }
 
+        return Main.getDatabaseHandler().getUser(uuid);
     }
-    
+
+    public static HashMap<UUID, HistoriaPlayer> getPlayerMap() {
+        return players;
+    }
+
+    public static HashMap<String, UUID> getUsernameMap() {
+        return usernameMap;
+    }
+
     /**
      * Check if the storage holds the given UUID.
      * 
