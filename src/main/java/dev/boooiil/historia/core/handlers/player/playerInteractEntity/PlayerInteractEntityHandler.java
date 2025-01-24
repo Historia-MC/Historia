@@ -86,19 +86,19 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
             case CREEPER:
                 doDetermineMobInteraction();
                 break;
-            case ENDER_CRYSTAL:
+            case END_CRYSTAL:
             case ARMOR_STAND:
             case ITEM_FRAME:
             case PAINTING:
-            case LEASH_HITCH:
+            case LEASH_KNOT:
             case MINECART:
-            case MINECART_CHEST:
-            case MINECART_FURNACE:
-            case MINECART_TNT:
-            case MINECART_HOPPER:
-            case MINECART_MOB_SPAWNER:
-            case MINECART_COMMAND:
-            case DROPPED_ITEM:
+            case CHEST_MINECART:
+            case FURNACE_MINECART:
+            case TNT_MINECART:
+            case HOPPER_MINECART:
+            case SPAWNER_MINECART:
+            case COMMAND_BLOCK_MINECART:
+            case ITEM:
             case EXPERIENCE_ORB:
             case AREA_EFFECT_CLOUD:
             default:

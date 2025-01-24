@@ -63,7 +63,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         arrowMeta.lore(List.of(
                 Component.text("Ignited - 1/1", TextColor.color(255, 0, 0))));
 
-        arrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        arrowMeta.addEnchant(Enchantment.FLAME, 1, true);
 
         this.getHeldItem().setItemMeta(arrowMeta);
 
@@ -129,7 +129,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
 
     private void increaseSharpness() {
 
-        int currentSharpnessLevel = this.getHeldItem().getEnchantmentLevel(Enchantment.DAMAGE_ALL);
+        int currentSharpnessLevel = this.getHeldItem().getEnchantmentLevel(Enchantment.SHARPNESS);
 
         if (currentSharpnessLevel >= 3) {
             Logging.infoToPlayer("Your " + this.getHeldItem().displayName().examinableName()
@@ -141,7 +141,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         int increasedSharpnessLevel = currentSharpnessLevel + 1;
         int adjustedSharpnessUses = (int) Math.round(increasedSharpnessLevel * 1.5);
 
-        heldItemMeta.addEnchant(Enchantment.DAMAGE_ALL, increasedSharpnessLevel, true);
+        heldItemMeta.addEnchant(Enchantment.SHARPNESS, increasedSharpnessLevel, true);
         heldItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         List<Component> lore = new ArrayList<>();

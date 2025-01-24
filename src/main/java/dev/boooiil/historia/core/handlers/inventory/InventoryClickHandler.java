@@ -67,7 +67,7 @@ public class InventoryClickHandler {
         List<String> lore = new ArrayList<>();
 
         lore.add(ChatColor.RED + "Ignited - 1/1");
-        newArrowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        newArrowMeta.addEnchant(Enchantment.FLAME, 1, true);
         newArrowMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         newArrowMeta.lore(List.of(
