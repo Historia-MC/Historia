@@ -11,7 +11,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import dev.boooiil.historia.core.util.Logging;
 
-public abstract class DatabaseConnection {
+public abstract class DatabaseConnection implements IDatabaseConnection {
 
     protected HikariDataSource dataSource;
     protected Connection connection;
@@ -339,9 +339,5 @@ public abstract class DatabaseConnection {
             return null;
         }
     };
-
-    public interface IResultProcessor<T> {
-        T process(ResultSet resultSet);
-    }
 
 }

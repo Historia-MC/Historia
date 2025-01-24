@@ -52,7 +52,13 @@ public interface IDatabaseConnection {
      */
     public boolean initDataSource();
 
-    /**
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor);
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry);
+
+    public <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry, int curr);
+
+    /*
      * Execute a SQL statement without returning any result.
      * 
      * @param statement The SQL statement to be executed.
@@ -128,5 +134,9 @@ public interface IDatabaseConnection {
      * @return The object of the specified type.
      */
     public <T> T getResult(ResultSet result, String columnName, Class<T> clazz);
+
+    public interface IResultProcessor<T> {
+        T process(ResultSet resultSet);
+    }
 
 }
