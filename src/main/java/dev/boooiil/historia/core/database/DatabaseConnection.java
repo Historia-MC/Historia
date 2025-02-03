@@ -70,13 +70,12 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                Logging.debugToConsole("Closed SQLite connection.");
+                Logging.debugToConsole("Closed", getDatabaseType().toString(), "connection.");
             }
             return true;
-        } catch (SQLException e) {
-            Logging.errorToConsole("Failed to close SQLite connection.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("SQLite Error Message: " + e.getMessage());
+        } catch (SQLException sqlException) {
+
+            exceptionLogger(sqlException, "Failed to close connection.");
             return false;
         }
 
@@ -97,11 +96,8 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             }
         }
 
-        catch (Exception e) {
-
-            Logging.errorToConsole("FAILED TO CONNECT.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole(getDatabaseType().toString(), "Error Message: " + e.getMessage());
+        catch (SQLException sqlException) {
+            exceptionLogger(sqlException, "Failed to connect to database.");
 
         }
 
@@ -113,7 +109,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
-            Logging.debugToConsole("Closed SQLite data source.");
+            Logging.debugToConsole("Closed", getDatabaseType().toString(), "data source.");
         }
 
         return true;
@@ -128,10 +124,8 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
                 return connection;
             }
             return null;
-        } catch (Exception e) {
-            Logging.errorToConsole("FAILED TO GET CONNECTION.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole(getDatabaseType().toString(), "Error Message: " + e.getMessage());
+        } catch (SQLException sqlException) {
+            exceptionLogger(sqlException, "Failed to get connection.");
             return null;
         }
 
@@ -149,14 +143,9 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             connection = dataSource.getConnection();
             Logging.warnToConsole("Reconnected to SQL Server.");
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException sqlException) {
 
-            Logging.errorToConsole("FAILED TO RECONNECT.");
-            Logging.errorToConsole("Cause: " + e.getCause());
-            Logging.errorToConsole("MySQL State: " + e.getSQLState());
-            Logging.errorToConsole("MySQL Error Code: " + e.getErrorCode());
-            Logging.errorToConsole("MySQL Error Message: " + e.getMessage());
-
+            exceptionLogger(sqlException, "Failed to reconnect.");
             return false;
         }
     }
@@ -171,10 +160,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             preparedStatement.execute();
         } catch (SQLException sqlException) {
 
-            Logging.errorToConsole("Failed to execute:", statement);
-            Logging.errorToConsole("Cause: " + sqlException.getCause());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            exceptionLogger(sqlException, "Failed to execute:" + statement);
 
         }
 
@@ -192,10 +178,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             return resultProcessor.process(resultSet);
 
         } catch (SQLException sqlException) {
-            Logging.errorToConsole("Failed to execute query:", statement);
-            Logging.errorToConsole("Cause:", String.valueOf(sqlException.getCause()));
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage());
+            exceptionLogger(sqlException, "Failed to execute query:" + statement);
 
             return null;
         }
@@ -216,10 +199,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             return resultProcessor.process(resultSet);
 
         } catch (SQLException sqlException) {
-            Logging.errorToConsole("Failed to execute query:", statement);
-            Logging.errorToConsole("Cause:", String.valueOf(sqlException.getCause()));
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage());
+            exceptionLogger(sqlException, "Failed to execute query:" + statement);
 
             return curr > maxRetry ? queryExecutor(statement, resultProcessor, maxRetry, curr) : null;
         }
@@ -236,10 +216,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
 
-            Logging.errorToConsole("Failed to execute update:", statement);
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            exceptionLogger(sqlException, "Failed to execute update:" + statement);
 
         }
 
@@ -262,11 +239,8 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
 
-            Logging.errorToConsole("Failed to execute update:", statement);
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
-            Logging.errorToConsole("Retry " + ++curr + "/" + maxRetry);
+            exceptionLogger(sqlException, "Failed to execute update: " + statement + "Retry " + ++curr + "/"
+                    + maxRetry);
 
             updateExecutor(statement, maxRetry, curr);
 
@@ -283,12 +257,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
         try {
             return result.next();
         } catch (SQLException sqlException) {
-
-            Logging.errorToConsole("Failed to process next result.");
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
-
+            exceptionLogger(sqlException, "Failed to process next result");
             return false;
         }
 
@@ -302,10 +271,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             return getResult(result, resultSetMetaData.getColumnName(column), clazz);
 
         } catch (SQLException sqlException) {
-            Logging.errorToConsole("Failed to get result: " + column);
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            exceptionLogger(sqlException, "Failed to get result: " + column);
             return null;
         }
     };
@@ -332,12 +298,18 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
                 return null;
             }
         } catch (SQLException sqlException) {
-            Logging.errorToConsole("Failed to get result:", columnName);
-            Logging.errorToConsole("Cause:", sqlException.getCause().toString());
-            Logging.errorToConsole("MySQL Error Code:", String.valueOf(sqlException.getErrorCode()));
-            Logging.errorToConsole("MySQL Error Message:", sqlException.getMessage().toString());
+            exceptionLogger(sqlException, "Failed to get result: " + columnName);
             return null;
         }
     };
+
+    protected void exceptionLogger(SQLException sqlE, String leadingMessage) {
+
+        Logging.errorToConsole("[", getDatabaseType().toString(), "]", leadingMessage);
+        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Cause: " + sqlE.getCause());
+        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Error Code: " + sqlE.getErrorCode());
+        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Error Message: " + sqlE.getMessage());
+
+    }
 
 }

@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.database.mysql;
 
 import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
 import java.util.ArrayList;
@@ -31,15 +31,16 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
     public void createTable() {
 
         String string = "CREATE TABLE IF NOT EXISTS " +
-                "historia(UUID varchar(36), " +
-                "Username varchar(16), " +
-                "Class varchar(30), " +
-                "Level int, " +
-                "Experience int, " +
-                "Login bigint, " +
-                "Logout bigint, " +
-                "Playtime bigint, " +
-                "PRIMARY KEY (UUID))";
+                "historia(uuid varchar(36), " +
+                "username varchar(16), " +
+                "proficiency varchar(30), " +
+                "culture varchar(30), " +
+                "level int, " +
+                "experience int, " +
+                "login bigint, " +
+                "logout bigint, " +
+                "playtime bigint, " +
+                "PRIMARY KEY (uuid))";
 
         executor(string);
 
@@ -54,7 +55,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public void createUser(UUID uuid, String playerName) {
 
-        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'None', 1, 0, "
+        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'none', 'none', 1, 0, "
                 + System.currentTimeMillis() + ", 0, 0)";
 
         executor(string);
@@ -69,35 +70,51 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public void setUsername(UUID uuid, String playerName) {
 
-        String string = ("UPDATE historia SET Username = '" + playerName + "' WHERE UUID = '" + uuid + "'");
+        String string = ("UPDATE historia SET username = '" + playerName + "' WHERE uuid = '" + uuid + "'");
 
         updateExecutor(string, 5);
 
     }
 
     /**
-     * Set the class name for the given user.
+     * Set the proficiency name for the given user.
      * 
      * @param uuid - UUID of the player.
      */
 
-    public void setProficiency(UUID uuid, Proficiency proficiency) {
+    public void setProficiency(UUID uuid, ProficiencyName proficiencyName) {
 
-        String string = ("UPDATE historia SET Class = '" + proficiency.getName() + "' WHERE UUID = '" + uuid + "'");
+        String string = ("UPDATE historia SET proficiency = '" + proficiencyName.name().toLowerCase()
+                + "' WHERE uuid = '" + uuid + "'");
 
         updateExecutor(string, 5);
 
     }
 
     /**
-     * Set the class level for the given user.
+     * Set the proficiency name for the given user.
      * 
      * @param uuid - UUID of the player.
      */
 
-    public void setProficiencyLevel(UUID uuid, int classLevel) {
+    public void setCulture(UUID uuid, Cultures culture) {
 
-        String string = ("UPDATE historia SET Level = '" + classLevel + "' WHERE UUID = '" + uuid + "'");
+        String string = ("UPDATE historia SET culture = '" + culture.name().toLowerCase() + "' WHERE uuid = '"
+                + uuid + "'");
+
+        updateExecutor(string, 5);
+
+    }
+
+    /**
+     * Set the proficiency level for the given user.
+     * 
+     * @param uuid - UUID of the player.
+     */
+
+    public void setProficiencyLevel(UUID uuid, int proficiencyLevel) {
+
+        String string = ("UPDATE historia SET level = '" + proficiencyLevel + "' WHERE uuid = '" + uuid + "'");
 
         updateExecutor(string, 5);
 
@@ -111,7 +128,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public void setLogin(UUID uuid) {
 
-        String string = ("UPDATE historia SET Login = '" + System.currentTimeMillis() + "' WHERE UUID = '" + uuid
+        String string = ("UPDATE historia SET login = '" + System.currentTimeMillis() + "' WHERE uuid = '" + uuid
                 + "'");
 
         updateExecutor(string, 5);
@@ -127,7 +144,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public void setCurrentExperience(UUID uuid, double experience) {
 
-        String string = ("UPDATE historia SET Experience = '" + experience + "' WHERE UUID = '" + uuid + "'");
+        String string = ("UPDATE historia SET experience = '" + experience + "' WHERE uuid = '" + uuid + "'");
 
         updateExecutor(string, 5);
 
@@ -146,9 +163,9 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
         long time = System.currentTimeMillis();
 
         String string = ("UPDATE historia " +
-                "SET Logout = '" + time + "', " +
-                "Playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
-                "WHERE UUID = '" + uuid + "'");
+                "SET logout = '" + time + "', " +
+                "playtime = '" + ((time - lastLogin) + previousPlaytime) + "' " +
+                "WHERE uuid = '" + uuid + "'");
 
         updateExecutor(string, 5);
 
@@ -165,13 +182,13 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public List<String> getUsernames() {
 
-        String string = "SELECT Username FROM historia";
+        String string = "SELECT username FROM historia";
 
         return queryExecutor(string, result -> {
             List<String> usernames = new ArrayList<>();
 
             while (nextResult(result)) {
-                usernames.add(getResult(result, "Username", String.class));
+                usernames.add(getResult(result, "username", String.class));
             }
 
             return usernames;
@@ -183,12 +200,12 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
      * Get the username with a given UUID.
      * 
      * @param uuid - UUID of the player.
-     * @return Username of the player.
+     * @return username of the player.
      */
 
     public String getUsername(UUID uuid) {
 
-        String string = "SELECT Username FROM historia WHERE UUID = '" + uuid + "'";
+        String string = "SELECT username FROM historia WHERE uuid = '" + uuid + "'";
 
         return queryExecutor(string, result -> {
             if (!nextResult(result))
@@ -201,7 +218,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     public HistoriaPlayer getUser(UUID uuid) {
 
-        String string = "SELECT * FROM historia WHERE UUID = '" + uuid + "'";
+        String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
 
         return queryExecutor(string, result -> {
 
@@ -211,15 +228,18 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
                 return historiaPlayer;
             }
 
-            String username = getResult(result, "Username", String.class);
-            ProficiencyName proficiencyName = ProficiencyName.fromString(getResult(result, "Class", String.class));
-            int level = getResult(result, "Level", Integer.class);
-            double experience = getResult(result, "Experience", Double.class);
-            long login = getResult(result, "Login", Long.class);
-            long logout = getResult(result, "Logout", Long.class);
-            long playtime = getResult(result, "Playtime", Long.class);
+            String username = getResult(result, "username", String.class);
+            ProficiencyName proficiencyName = ProficiencyName
+                    .fromString(getResult(result, "proficiency", String.class));
+            Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
+            int level = getResult(result, "level", Integer.class);
+            double experience = getResult(result, "experience", Double.class);
+            long login = getResult(result, "login", Long.class);
+            long logout = getResult(result, "logout", Long.class);
+            long playtime = getResult(result, "playtime", Long.class);
 
-            return new HistoriaPlayer(uuid, username, proficiencyName, level, experience, login, logout, playtime);
+            return new HistoriaPlayer(uuid, username, proficiencyName, culture, level, experience, login, logout,
+                    playtime);
         }, 1, 1);
 
         // ResultSet result = queryExecutor(string);
@@ -247,7 +267,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
             List<UUID> uuids = new ArrayList<>();
 
             while (nextResult(result)) {
-                uuids.add(UUID.fromString(getResult(result, "UUID", String.class)));
+                uuids.add(UUID.fromString(getResult(result, "uuid", String.class)));
             }
 
             return uuids;
@@ -268,7 +288,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
     @Nullable
     public UUID getUUID(String playerName) {
 
-        String string = "SELECT UUID FROM historia WHERE Username = '" + playerName + "'";
+        String string = "SELECT uuid FROM historia WHERE username = '" + playerName + "'";
 
         return queryExecutor(string, result -> {
             if (!nextResult(result))
@@ -284,20 +304,23 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
         UUID uuid = historiaPlayer.getUUID();
         String username = historiaPlayer.getUsername();
-        String proficiency = historiaPlayer.getProficiency().getName().getKey();
+        String proficiency = historiaPlayer.getProficiency().getName().getKey().toLowerCase();
+        String culture = historiaPlayer.getCulture().name().toLowerCase();
         int level = historiaPlayer.getLevel();
         double experience = historiaPlayer.getCurrentExperience();
 
         String query = "UPDATE historia " +
-                "SET Class = '" + proficiency + "', " +
-                "Username = '" + username + "', " +
-                "Level = '" + level + "', " +
-                "Experience = '" + experience + "' " +
-                "WHERE UUID = '" + uuid + "' AND " +
-                "(Class != '" + proficiency + "' OR " +
-                "Username != '" + username + "' OR " +
-                "Level != '" + level + "' OR " +
-                "Experience != '" + experience + "')";
+                "SET proficiency = '" + proficiency + "', " +
+                "culture = '" + culture + "', " +
+                "username = '" + username + "', " +
+                "level = '" + level + "', " +
+                "experience = '" + experience + "' " +
+                "WHERE uuid = '" + uuid + "' AND " +
+                "(proficiency != '" + proficiency + "' OR " +
+                "culture != '" + culture + "' OR " +
+                "username != '" + username + "' OR " +
+                "level != '" + level + "' OR " +
+                "experience != '" + experience + "')";
 
         updateExecutor(query, 5);
     }

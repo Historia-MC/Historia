@@ -5,7 +5,8 @@ import java.util.UUID;
 
 import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.player.culture.Cultures;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
 public interface ICoreDatabaseHandler extends IDatabaseConnection {
 
@@ -30,12 +31,20 @@ public interface ICoreDatabaseHandler extends IDatabaseConnection {
     public void setUsername(UUID uuid, String playerName);
 
     /**
-     * Change the {@link Proficiency} for the given user.
+     * Change the {@link ProficiencyName} for the given user.
      * 
      * @param uuid        - UUID of the player.
      * @param proficiency - The proficiency to change.
      */
-    public void setProficiency(UUID uuid, Proficiency proficiency);
+    public void setProficiency(UUID uuid, ProficiencyName proficiencyName);
+
+    /**
+     * Set the culture for the given user.
+     * 
+     * @param uuid    - UUID of the player.
+     * @param culture - The culture to set.
+     */
+    public void setCulture(UUID uuid, Cultures culture);
 
     /**
      * Set the class level for the given user.

@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.player;
 
 import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
@@ -8,7 +9,6 @@ import dev.boooiil.historia.core.util.Logging;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -25,6 +25,8 @@ import java.util.UUID;
  * It's a class that holds all the information about a player
  */
 public class HistoriaPlayer extends BasePlayer {
+
+    Cultures culture;
 
     private int level;
 
@@ -44,8 +46,6 @@ public class HistoriaPlayer extends BasePlayer {
     private Proficiency proficiency;
 
     private long lastSaved;
-
-    protected Server server;
 
     /**
      * Default constructor, will return invalid player.
@@ -71,6 +71,7 @@ public class HistoriaPlayer extends BasePlayer {
         // config.
         // Experience max will just be experience * multiplier.
 
+        this.culture = Cultures.NONE;
         this.proficiency = new Proficiency(ProficiencyName.NONE);
         this.level = 1;
         this.currentExperience = 0;
@@ -87,10 +88,11 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * Initialize a HistoriaPlayer with specified details.
      */
-    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, int level, double experience,
-            long login, long logout, long playtime) {
+    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, Cultures culture,
+            int level, double experience, long login, long logout, long playtime) {
         super(uuid);
 
+        this.culture = culture;
         this.username = username;
         this.proficiency = new Proficiency(proficiency);
         this.level = level;
@@ -99,6 +101,14 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogout = logout;
         this.playtime = playtime;
 
+    }
+
+    public void setProficiency(ProficiencyName proficiency) {
+        this.proficiency = new Proficiency(proficiency);
+    }
+
+    public void setCulture(Cultures culture) {
+        this.culture = culture;
     }
 
     public void setLevel(int level) {
@@ -140,6 +150,10 @@ public class HistoriaPlayer extends BasePlayer {
 
         return this.proficiency;
 
+    }
+
+    public Cultures getCulture() {
+        return this.culture;
     }
 
     /**
@@ -290,9 +304,12 @@ public class HistoriaPlayer extends BasePlayer {
 
         Main.getDatabaseHandler().saveUser(this);
 
-        Main.getDatabaseHandler().setProficiency(this.getUUID(), this.getProficiency());
-        Main.getDatabaseHandler().setProficiencyLevel(this.getUUID(), this.getLevel());
-        Main.getDatabaseHandler().setCurrentExperience(this.getUUID(), this.getCurrentExperience());
+        // Main.getDatabaseHandler().setProficiency(this.getUUID(),
+        // this.getProficiency().getName());
+        // Main.getDatabaseHandler().setProficiencyLevel(this.getUUID(),
+        // this.getLevel());
+        // Main.getDatabaseHandler().setCurrentExperience(this.getUUID(),
+        // this.getCurrentExperience());
 
         this.lastSaved = System.currentTimeMillis();
 
@@ -477,6 +494,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         output += "*** HISTORIA PLAYER *** \n";
         output += "Level: " + this.getLevel() + "\n";
+        output += "Culture: " + this.getCulture() + "\n";
         output += "Current Experience: " + this.getCurrentExperience() + "\n";
         output += "Max Experience: " + this.getMaxExperience() + "\n";
         output += "Last Login: " + this.getLastLogin() + "\n";
