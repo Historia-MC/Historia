@@ -177,12 +177,9 @@ public class Main extends JavaPlugin {
             case MYSQL:
                 databaseHandler = new CoreMySQLHandler();
                 break;
-            case SQLITE:
-                databaseHandler = new CoreSQLiteHandler();
-                break;
             default:
-                Logging.errorToConsole("Unknown database type: ", DBType.toString());
-                Main.disable();
+                Logging.debugToConsole("Using default database type. Configured:", DBType.name());
+                databaseHandler = new CoreSQLiteHandler();
                 break;
         }
 
