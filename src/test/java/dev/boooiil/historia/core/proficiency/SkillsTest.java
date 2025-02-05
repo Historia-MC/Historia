@@ -6,7 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.Main;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
