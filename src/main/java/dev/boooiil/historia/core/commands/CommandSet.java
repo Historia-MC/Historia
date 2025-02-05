@@ -21,7 +21,7 @@ public class CommandSet implements CommandExecutor {
 
         if (arguments[0].equals("health")) {
 
-            AttributeInstance attribute = ((Player) sender).getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            AttributeInstance attribute = ((Player) sender).getAttribute(Attribute.MAX_HEALTH);
             attribute.setBaseValue(Double.parseDouble(arguments[1]));
 
         }
