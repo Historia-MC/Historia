@@ -11,7 +11,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
 
@@ -25,7 +25,7 @@ public class PlayerStorageTest {
         server = MockBukkit.mock();
         System.out.println("Loading plugin...");
         try {
-            MockBukkit.load(Main.class);
+            MockBukkit.load(HistoriaCore.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,7 +104,7 @@ public class PlayerStorageTest {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
-            System.out.println(Main.getDatabaseHandler().getUsername(player.getUniqueId()));
+            System.out.println(HistoriaCore.getDatabaseHandler().getUsername(player.getUniqueId()));
 
             PlayerMock playerMock = (PlayerMock) player;
             playerMock.disconnect();

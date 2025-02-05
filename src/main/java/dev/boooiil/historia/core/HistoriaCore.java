@@ -36,13 +36,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * It's a plugin that loads, enables, and disables.
  */
-public class Main extends JavaPlugin {
+public class HistoriaCore extends JavaPlugin {
 
     public static boolean isTesting = false;
     private static Plugin instance = null;
     private static ICoreDatabaseHandler databaseHandler;
 
-    public Main() {
+    public HistoriaCore() {
         super();
     }
 
@@ -69,7 +69,7 @@ public class Main extends JavaPlugin {
         else if (!Bukkit.getVersion().contains("Paper")) {
             Logging.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
             Logging.errorToConsole("DISABLING PLUGIN");
-            Main.disable();
+            HistoriaCore.disable();
         }
 
     }

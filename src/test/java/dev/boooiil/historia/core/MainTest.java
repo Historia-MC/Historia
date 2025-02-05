@@ -24,7 +24,7 @@ public class MainTest {
         server = MockBukkit.mock();
         System.out.println("Loading plugin...");
         try {
-            MockBukkit.load(Main.class);
+            MockBukkit.load(HistoriaCore.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.configuration;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,7 +30,7 @@ public abstract class BaseConfiguration<T> {
     public void loadConfiguration(String fileName) {
 
         // @sonatype-lift ignore
-        this.configuration = FileIO.yamlFromSource(new File(Main.plugin().getDataFolder(), fileName));
+        this.configuration = FileIO.yamlFromSource(new File(HistoriaCore.plugin().getDataFolder(), fileName));
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
 

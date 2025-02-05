@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.util;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import net.kyori.adventure.text.Component;
 
@@ -53,7 +53,7 @@ public class Logging {
      */
     public static void infoToServer(String message) {
 
-        Main.server().broadcast(Component.text(announcePrefix + "§7" + message));
+        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§7" + message));
 
     }
 
@@ -65,7 +65,7 @@ public class Logging {
      */
     public static void infoToPlayer(String message, UUID uuid) {
 
-        Player player = Main.server().getPlayer(uuid);
+        Player player = HistoriaCore.server().getPlayer(uuid);
 
         if (player != null && player.isOnline())
             player.sendMessage(messagePrefix + "§7" + message);
@@ -80,7 +80,7 @@ public class Logging {
      */
     public static void infoToPlayerNoPrefix(String message, UUID uuid) {
 
-        Player player = Main.server().getPlayer(uuid);
+        Player player = HistoriaCore.server().getPlayer(uuid);
 
         if (player != null && player.isOnline())
             player.sendMessage("§7" + message);
@@ -113,7 +113,7 @@ public class Logging {
      */
     public static void warnToServer(String message) {
 
-        Main.server().broadcast(Component.text(announcePrefix + "§6" + message));
+        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§6" + message));
 
     }
 
@@ -125,7 +125,7 @@ public class Logging {
      */
     public static void warnToPlayer(String message, UUID uuid) {
 
-        Player player = Main.server().getPlayer(uuid);
+        Player player = HistoriaCore.server().getPlayer(uuid);
 
         if (player.isOnline())
             player.sendMessage(messagePrefix + "§6" + message);
@@ -158,7 +158,7 @@ public class Logging {
      */
     public static void errorToServer(String message) {
 
-        Main.server().broadcast(Component.text(announcePrefix + "§c" + message));
+        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§c" + message));
 
     }
 
@@ -170,7 +170,7 @@ public class Logging {
      */
     public static void errorToPlayer(String message, UUID uuid) {
 
-        Player player = Main.server().getPlayer(uuid);
+        Player player = HistoriaCore.server().getPlayer(uuid);
 
         if (player.isOnline())
             player.sendMessage(messagePrefix + "§c" + message);

@@ -4,7 +4,7 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.util.Logging;
 import org.bukkit.Bukkit;
@@ -65,7 +65,7 @@ abstract class BasePlayer {
 
         }
 
-        if (this.uuid != null && !Main.isTesting) {
+        if (this.uuid != null && !HistoriaCore.isTesting) {
 
             this.resident = TownyHandler.getResident(uuid);
             this.town = TownyHandler.getTown(uuid);

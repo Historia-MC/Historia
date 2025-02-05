@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.file;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.util.Logging;
 
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,17 +30,17 @@ public class FileIO {
         Logging.infoToConsole("Checking existence and version of config files.");
 
         for (String fileName : configFileNames) {
-            File diskFile = new File(Main.plugin().getDataFolder(), fileName);
+            File diskFile = new File(HistoriaCore.plugin().getDataFolder(), fileName);
 
             if (!diskFile.exists()) {
                 Logging.infoToConsole("Missing config file: " + fileName + " has been saved to disk from resources.");
                 Logging.infoToConsole("Location: " + diskFile.getAbsolutePath());
-                Main.plugin().saveResource(fileName, false);
+                HistoriaCore.plugin().saveResource(fileName, false);
                 continue;
             }
 
             YamlConfiguration diskConfig = yamlFromSource(diskFile);
-            YamlConfiguration jarConfig = yamlFromSource(Main.plugin().getResource(fileName));
+            YamlConfiguration jarConfig = yamlFromSource(HistoriaCore.plugin().getResource(fileName));
 
             int diskVersion = diskConfig.getInt("version");
             int jarVersion = jarConfig.getInt("version");
@@ -48,7 +48,7 @@ public class FileIO {
             if (diskVersion < jarVersion) {
                 Logging.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName
                         + " has been replaced on disk by the newer version " + jarVersion + ".");
-                Main.plugin().saveResource(fileName, true);
+                HistoriaCore.plugin().saveResource(fileName, true);
             }
         }
 
@@ -103,12 +103,12 @@ public class FileIO {
 
         YamlConfiguration config;
 
-        if (find(Main.plugin().getDataFolder().listFiles(), check)) {
+        if (find(HistoriaCore.plugin().getDataFolder().listFiles(), check)) {
 
             Logging.debugToConsole("Obtained file from external directory: ",
-                    Main.plugin().getDataFolder().getPath() + "\\" + check.getKey());
+                    HistoriaCore.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
-            File file = new File(Main.plugin().getDataFolder().getPath(), check.getKey());
+            File file = new File(HistoriaCore.plugin().getDataFolder().getPath(), check.getKey());
 
             config = YamlConfiguration.loadConfiguration(file);
         }

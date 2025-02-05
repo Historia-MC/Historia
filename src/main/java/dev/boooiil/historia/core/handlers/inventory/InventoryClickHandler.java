@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.handlers.inventory;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
@@ -53,7 +53,7 @@ public class InventoryClickHandler {
 
         // guard against arrow that is not oiled
         if (!slottedItem.hasItemMeta() || !slottedItem.getItemMeta().getPersistentDataContainer()
-                .has(Main.getNamespacedKey("arrow-oiled"))) {
+                .has(HistoriaCore.getNamespacedKey("arrow-oiled"))) {
             return;
         }
 
@@ -61,7 +61,7 @@ public class InventoryClickHandler {
         ItemStack newArrow = new ItemStack(Material.ARROW);
 
         ItemMeta flintSteelMeta = this.cursorItem.getItemMeta();
-        ItemMeta newArrowMeta = Main.server().getItemFactory().getItemMeta(Material.ARROW);
+        ItemMeta newArrowMeta = HistoriaCore.server().getItemFactory().getItemMeta(Material.ARROW);
 
         Damageable flintAndSteelDamageable = (Damageable) flintSteelMeta;
         List<String> lore = new ArrayList<>();

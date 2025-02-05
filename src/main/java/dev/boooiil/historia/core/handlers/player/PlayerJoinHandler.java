@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.handlers.player;
 
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.Logging;
@@ -19,7 +19,7 @@ public class PlayerJoinHandler {
     public void doPlayerDBInitialization() {
         historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
         historiaPlayer.setLastLogin(System.currentTimeMillis());
-        Main.getDatabaseHandler().setLogin(historiaPlayer.getUUID());
+        HistoriaCore.getDatabaseHandler().setLogin(historiaPlayer.getUUID());
     }
 
     public void doAddToInternalStorage() {
@@ -31,7 +31,7 @@ public class PlayerJoinHandler {
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
-        if (!Main.isTesting) {
+        if (!HistoriaCore.isTesting) {
             Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
         Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
@@ -48,7 +48,7 @@ public class PlayerJoinHandler {
         Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
-        if (!Main.isTesting) {
+        if (!HistoriaCore.isTesting) {
             Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
 

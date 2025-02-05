@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.handlers.player;
 
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 
@@ -18,7 +18,7 @@ public class PlayerQuitHandler {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
 
-        Main.getDatabaseHandler().setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
+        HistoriaCore.getDatabaseHandler().setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
                 historiaPlayer.getPlaytime());
     }
 
