@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.handlers.player.playerInteractEntity;
 
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Ageable;
@@ -143,7 +143,7 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
 
         // guard against player not having skill
         if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.SHEAR_CHICKEN)) {
-            Logging.debugToConsole(
+            CoreLogger.debugToConsole(
                     "[PIEH#doShearChicken] Player " + this.getPlayer().getName()
                             + " does not have the skill to shear chickens.");
             return;
@@ -151,7 +151,7 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
 
         // guard against player not holding shears
         if (getHeldItem().getType() != Material.SHEARS) {
-            Logging.debugToConsole(
+            CoreLogger.debugToConsole(
                     "[PIEH#doShearChicken] Player " + this.getPlayer().getName() + " is not holding shears.");
             return;
         }
@@ -160,7 +160,7 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
 
         // guard against entity not being an adult
         if (!ageableEntity.isAdult()) {
-            Logging.debugToConsole(
+            CoreLogger.debugToConsole(
                     "[PIEH#doShearChicken] Entity is not an adult.");
             return;
         }
@@ -178,7 +178,7 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
         ageableEntity.setBaby();
         getWorld().dropItemNaturally(getLocation(), new ItemStack(Material.FEATHER, NumberUtils.randomInt(1, 3)));
 
-        Logging.debugToConsole(
+        CoreLogger.debugToConsole(
                 "[PIEH#doShearChicken] Player " + this.getPlayer().getName() + " sheared a chicken.");
     }
 

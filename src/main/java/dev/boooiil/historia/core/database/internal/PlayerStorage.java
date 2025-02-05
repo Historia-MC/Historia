@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.database.internal;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -25,7 +25,7 @@ public class PlayerStorage {
      */
     public static void addPlayer(UUID uuid, HistoriaPlayer historiaPlayer) {
 
-        Logging.debugToConsole("Adding player:", historiaPlayer.getUsername(), uuid.toString());
+        CoreLogger.debugToConsole("Adding player:", historiaPlayer.getUsername(), uuid.toString());
 
         // If the player has already been logged into the server.
         if (players.containsKey(uuid)) {

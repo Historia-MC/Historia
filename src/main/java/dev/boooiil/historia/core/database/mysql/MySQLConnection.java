@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.database.mysql;
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.database.DatabaseConnection;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -45,7 +45,7 @@ public class MySQLConnection extends DatabaseConnection {
 
         if (database == null) {
 
-            Logging.errorToConsole("VALUE IN MySQL.database IS NULL.");
+            CoreLogger.errorToConsole("VALUE IN MySQL.database IS NULL.");
 
             caught++;
 
@@ -53,7 +53,7 @@ public class MySQLConnection extends DatabaseConnection {
 
         if (ip == null) {
 
-            Logging.errorToConsole("VALUE IN MySQL.ip IS NULL.");
+            CoreLogger.errorToConsole("VALUE IN MySQL.ip IS NULL.");
 
             caught++;
 
@@ -61,7 +61,7 @@ public class MySQLConnection extends DatabaseConnection {
 
         if (username == null) {
 
-            Logging.errorToConsole("VALUE IN MySQL.username IS NULL.");
+            CoreLogger.errorToConsole("VALUE IN MySQL.username IS NULL.");
 
             caught++;
 
@@ -69,7 +69,7 @@ public class MySQLConnection extends DatabaseConnection {
 
         if (password == null) {
 
-            Logging.errorToConsole("VALUE IN MySQL.password IS NULL.");
+            CoreLogger.errorToConsole("VALUE IN MySQL.password IS NULL.");
 
             caught++;
 
@@ -77,7 +77,7 @@ public class MySQLConnection extends DatabaseConnection {
 
         if (port == null) {
 
-            Logging.errorToConsole("VALUE IN MySQL.port IS NULL.");
+            CoreLogger.errorToConsole("VALUE IN MySQL.port IS NULL.");
 
             caught++;
 

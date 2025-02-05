@@ -23,25 +23,25 @@ public class Construct {
     /**
      * It creates an ItemStack with the given parameters
      * 
-     * @param material The material of the item.
-     * @param amount The amount of the item
-     * @param displayName The name that will be displayed on the item.
+     * @param material      The material of the item.
+     * @param amount        The amount of the item
+     * @param displayName   The name that will be displayed on the item.
      * @param localizedName The name of the item in the language file.
-     * @param lore The lore of the item.
+     * @param lore          The lore of the item.
      * @return An ItemStack
      */
     public static ItemStack itemStack(String material, int amount, String displayName, String localizedName,
             List<String> lore) {
 
         // LOGGING TO BE REMOVED AFTER PUBLISH
-        Logging.debugToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
+        CoreLogger.debugToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
                 + " loc-name: "
                 + localizedName + " lore: " + lore);
 
         Material providedMaterial = Material.getMaterial(material, false);
 
         if (providedMaterial == null) {
-            Logging.errorToConsole("Material " + material + " is not a valid material.");
+            CoreLogger.errorToConsole("Material " + material + " is not a valid material.");
             return new ItemStack(Material.AIR);
         }
 
@@ -65,14 +65,14 @@ public class Construct {
     public static ItemStack itemStack(String material, int amount, String displayName, String localizedName) {
 
         // LOGGING TO BE REMOVED AFTER PUBLISH
-        Logging.debugToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
+        CoreLogger.debugToConsole("material: " + material + " amount: " + amount + " display-name: " + displayName
                 + " loc-name: "
                 + localizedName);
 
         Material providedMaterial = Material.getMaterial(material, false);
 
         if (providedMaterial == null) {
-            Logging.errorToConsole("Material " + material + " is not a valid material.");
+            CoreLogger.errorToConsole("Material " + material + " is not a valid material.");
             return new ItemStack(Material.AIR);
         }
 
@@ -94,11 +94,12 @@ public class Construct {
     /**
      * It takes a list of items, and replaces the drops of a block with those items
      * 
-     * @param player The player who broke the block
+     * @param player      The player who broke the block
      * @param brokenBlock The block that was broken
-     * @param newBlock The material of the block that will replace the broken block
-     * @param sound The sound to be played when the block is broken
-     * @param givenItems A list of HashMaps that contain the following keys:
+     * @param newBlock    The material of the block that will replace the broken
+     *                    block
+     * @param sound       The sound to be played when the block is broken
+     * @param givenItems  A list of HashMaps that contain the following keys:
      * @return A boolean value.
      */
     public static boolean blockReplacement(Player player, Block brokenBlock, Material newBlock, Sound sound,
@@ -117,7 +118,8 @@ public class Construct {
                 String displayName = item.get("display-name");
                 String localizedName = item.get("localized-name");
 
-                ItemStack droppedItem = Construct.itemStack(item.get("material"), amount, displayName, localizedName, null);
+                ItemStack droppedItem = Construct.itemStack(item.get("material"), amount, displayName, localizedName,
+                        null);
 
                 brokenBlock.getDrops().add(droppedItem);
 

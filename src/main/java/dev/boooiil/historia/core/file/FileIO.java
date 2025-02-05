@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.file;
 
 import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -27,14 +27,15 @@ public class FileIO {
 
     public static void checkFiles() {
 
-        Logging.infoToConsole("Checking existence and version of config files.");
+        CoreLogger.infoToConsole("Checking existence and version of config files.");
 
         for (String fileName : configFileNames) {
             File diskFile = new File(HistoriaCore.plugin().getDataFolder(), fileName);
 
             if (!diskFile.exists()) {
-                Logging.infoToConsole("Missing config file: " + fileName + " has been saved to disk from resources.");
-                Logging.infoToConsole("Location: " + diskFile.getAbsolutePath());
+                CoreLogger
+                        .infoToConsole("Missing config file: " + fileName + " has been saved to disk from resources.");
+                CoreLogger.infoToConsole("Location: " + diskFile.getAbsolutePath());
                 HistoriaCore.plugin().saveResource(fileName, false);
                 continue;
             }
@@ -46,13 +47,13 @@ public class FileIO {
             int jarVersion = jarConfig.getInt("version");
 
             if (diskVersion < jarVersion) {
-                Logging.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName
+                CoreLogger.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName
                         + " has been replaced on disk by the newer version " + jarVersion + ".");
                 HistoriaCore.plugin().saveResource(fileName, true);
             }
         }
 
-        Logging.infoToConsole("Completed checks of existence and version of config files.");
+        CoreLogger.infoToConsole("Completed checks of existence and version of config files.");
 
     }
 
@@ -105,7 +106,7 @@ public class FileIO {
 
         if (find(HistoriaCore.plugin().getDataFolder().listFiles(), check)) {
 
-            Logging.debugToConsole("Obtained file from external directory: ",
+            CoreLogger.debugToConsole("Obtained file from external directory: ",
                     HistoriaCore.plugin().getDataFolder().getPath() + "\\" + check.getKey());
 
             File file = new File(HistoriaCore.plugin().getDataFolder().getPath(), check.getKey());
@@ -115,7 +116,7 @@ public class FileIO {
 
         else {
 
-            Logging.debugToConsole("Obtained file from internal directory: " + check.getKey());
+            CoreLogger.debugToConsole("Obtained file from internal directory: " + check.getKey());
 
             InputStream is = FileIO.class.getClassLoader().getResourceAsStream(check.getKey());
 

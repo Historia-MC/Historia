@@ -23,7 +23,7 @@ import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
@@ -52,14 +52,14 @@ public class HistoriaCore extends JavaPlugin {
 
         instance = this;
 
-        Logging.infoToConsole("Plugin has loaded.");
+        CoreLogger.infoToConsole("Plugin has loaded.");
 
         deregisterRecipes();
 
         // Check config files
         FileIO.checkFiles();
 
-        Logging.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion());
+        CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion());
 
         if (Bukkit.getVersion().contains("MockBukkit")) {
             System.out.println("RUNNING IN TEST MODE");
@@ -67,8 +67,8 @@ public class HistoriaCore extends JavaPlugin {
         }
 
         else if (!Bukkit.getVersion().contains("Paper")) {
-            Logging.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
-            Logging.errorToConsole("DISABLING PLUGIN");
+            CoreLogger.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
+            CoreLogger.errorToConsole("DISABLING PLUGIN");
             HistoriaCore.disable();
         }
 
@@ -109,7 +109,7 @@ public class HistoriaCore extends JavaPlugin {
 
         initDatabase();
 
-        Logging.infoToConsole("Plugin Enabled.");
+        CoreLogger.infoToConsole("Plugin Enabled.");
 
     }
 
@@ -178,7 +178,7 @@ public class HistoriaCore extends JavaPlugin {
                 databaseHandler = new CoreMySQLHandler();
                 break;
             default:
-                Logging.debugToConsole("Using default database type. Configured:", DBType.name());
+                CoreLogger.debugToConsole("Using default database type. Configured:", DBType.name());
                 databaseHandler = new CoreSQLiteHandler();
                 break;
         }

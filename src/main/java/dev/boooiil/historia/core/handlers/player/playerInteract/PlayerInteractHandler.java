@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
@@ -43,7 +43,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
 
         // if arrow in main hand and flint and steel in offhand, ignite arrow
         if (getHeldItem().getType() == Material.ARROW && getOffHandItem().getType() == Material.FLINT_AND_STEEL) {
-            Logging.debugToConsole("[PIH#doAirInteraction] Player: " + getPlayer().getName()
+            CoreLogger.debugToConsole("[PIH#doAirInteraction] Player: " + getPlayer().getName()
                     + " is igniting an arrow with a flint and steel.");
             doIgniteArrow();
             return;
@@ -99,7 +99,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.CHANCE_NO_ANVIL_DAMAGE)) {
 
             event.setCancelled(true);
-            Logging.infoToPlayer("Maybe there is someone more skilled that can do this...",
+            CoreLogger.infoToPlayer("Maybe there is someone more skilled that can do this...",
                     this.getPlayer().getUniqueId());
 
         }
@@ -111,14 +111,14 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         Matcher matcher = pattern.matcher(this.getHeldItem().getType().toString());
 
         if (!matcher.matches()) {
-            Logging.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
+            CoreLogger.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
                     + " right clicked a stonecutter with an invalid item " + this.getHeldItem().getType().toString());
             return;
         }
 
         if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillType.APPLY_SHARPNESS)) {
-            Logging.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
-            Logging.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
+            CoreLogger.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
+            CoreLogger.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
                     + " right clicked a stonecutter without the required skill.");
             return;
         }
@@ -132,7 +132,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         int currentSharpnessLevel = this.getHeldItem().getEnchantmentLevel(Enchantment.SHARPNESS);
 
         if (currentSharpnessLevel >= 3) {
-            Logging.infoToPlayer("Your " + this.getHeldItem().displayName().examinableName()
+            CoreLogger.infoToPlayer("Your " + this.getHeldItem().displayName().examinableName()
                     + " already has the max level of sharpness.", this.getPlayer().getUniqueId());
             return;
         }
@@ -160,9 +160,9 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         heldItemMeta.lore(lore);
         getHeldItem().setItemMeta(heldItemMeta);
 
-        Logging.infoToPlayer("You sharpened your " + this.getHeldItem().displayName().examinableName() + "!",
+        CoreLogger.infoToPlayer("You sharpened your " + this.getHeldItem().displayName().examinableName() + "!",
                 this.getPlayer().getUniqueId());
-        Logging.debugToConsole("[PIH#increaseSharpness] Player " + this.getPlayer().getName()
+        CoreLogger.debugToConsole("[PIH#increaseSharpness] Player " + this.getPlayer().getName()
                 + " sharpened their " + this.getHeldItem().displayName().examinableName() + " to level "
                 + increasedSharpnessLevel + ".");
 

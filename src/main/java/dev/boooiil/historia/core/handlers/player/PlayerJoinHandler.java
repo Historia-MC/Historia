@@ -5,7 +5,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 public class PlayerJoinHandler {
 
@@ -24,34 +24,34 @@ public class PlayerJoinHandler {
 
     public void doAddToInternalStorage() {
 
-        Logging.debugToConsole("************* INITIAL STATS *************");
-        Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
-        Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
-        Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
-        Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
+        CoreLogger.debugToConsole("************* INITIAL STATS *************");
+        CoreLogger.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
+        CoreLogger.debugToConsole("Health: " + event.getPlayer().getHealth());
+        CoreLogger.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
+        CoreLogger.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
         if (!HistoriaCore.isTesting) {
-            Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+            CoreLogger.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
-        Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
+        CoreLogger.debugToConsole("Level: " + event.getPlayer().getLevel());
     }
 
     public void doPlayerStatsInitialization() {
 
         historiaPlayer.applyClassStats();
 
-        Logging.debugToConsole("************* ADJUSTED STATS *************");
-        Logging.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
-        Logging.debugToConsole("Health: " + event.getPlayer().getHealth());
-        Logging.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
-        Logging.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
+        CoreLogger.debugToConsole("************* ADJUSTED STATS *************");
+        CoreLogger.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
+        CoreLogger.debugToConsole("Health: " + event.getPlayer().getHealth());
+        CoreLogger.debugToConsole("Food: " + event.getPlayer().getFoodLevel());
+        CoreLogger.debugToConsole("Saturation: " + event.getPlayer().getSaturation());
 
         // MockBukkit does not have the exhaustion or level attributes implemented.
         if (!HistoriaCore.isTesting) {
-            Logging.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
+            CoreLogger.debugToConsole("Exhaustion: " + event.getPlayer().getExhaustion());
         }
 
-        Logging.debugToConsole("Level: " + event.getPlayer().getLevel());
+        CoreLogger.debugToConsole("Level: " + event.getPlayer().getLevel());
     }
 }

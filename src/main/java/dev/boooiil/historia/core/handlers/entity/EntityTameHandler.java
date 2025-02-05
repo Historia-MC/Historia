@@ -6,7 +6,7 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 public class EntityTameHandler {
 
@@ -43,7 +43,7 @@ public class EntityTameHandler {
 
         } else {
 
-            Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
             event.setCancelled(true);
 
         }

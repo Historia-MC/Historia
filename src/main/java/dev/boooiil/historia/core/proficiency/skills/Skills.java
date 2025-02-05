@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.proficiency.skills;
 
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -99,12 +99,12 @@ public class Skills {
 
                 String regex = config.getString(root + ".enchants." + itemNumber + ".regex");
 
-                Logging.debugToConsole("Adding weapon regex " + regex + " to skill enchants");
+                CoreLogger.debugToConsole("Adding weapon regex " + regex + " to skill enchants");
                 Pattern pattern = Pattern.compile(regex);
 
                 for (String enchantment : config.getStringList(root + ".enchants." + itemNumber + ".values")) {
 
-                    Logging.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
+                    CoreLogger.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
 
                     Enchantment enchant = Enchantment
                             .getByKey(NamespacedKey.minecraft(enchantment));

@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class Stats {
 
         for (String key : config.getStringList(root + ".experienceSources")) {
 
-            Logging.debugToConsole("Experience Source: " + key);
+            CoreLogger.debugToConsole("Experience Source: " + key);
             this.experienceSources.add(AllSources.valueOf(key));
 
         }

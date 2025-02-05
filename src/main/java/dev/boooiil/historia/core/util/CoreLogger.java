@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * It's a class that sends messages to the console, server, or a player
  */
-public class Logging {
+public class CoreLogger {
 
     private static final String messagePrefix = "§7[§9Historia§7] ";
     private static final String announcePrefix = "§7[§9Announcement§7] ";
@@ -23,7 +23,7 @@ public class Logging {
 
     // It's a private constructor that throws an error if someone tries to
     // instantiate the class.
-    private Logging() {
+    private CoreLogger() {
         throw new IllegalAccessError("Static utility class.");
     }
 

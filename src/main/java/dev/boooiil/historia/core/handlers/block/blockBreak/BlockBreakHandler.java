@@ -5,7 +5,7 @@ import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.event.block.BlockBreakEvent;
@@ -109,7 +109,7 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
                 historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
-                Logging.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
+                CoreLogger.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
 
             }
 
@@ -121,7 +121,7 @@ public class BlockBreakHandler extends BaseBlockHandler {
         if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.BREAK_BEEHIVE)) {
 
             breakEvent.setCancelled(true);
-            Logging.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
 
         }
 

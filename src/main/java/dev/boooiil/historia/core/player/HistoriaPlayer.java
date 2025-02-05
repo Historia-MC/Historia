@@ -5,7 +5,7 @@ import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Bukkit;
@@ -53,7 +53,7 @@ public class HistoriaPlayer extends BasePlayer {
     public HistoriaPlayer() {
         super(null);
 
-        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
+        CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
 
     /**
@@ -65,7 +65,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         super(uuid);
 
-        Logging.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid + ".");
+        CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID " + uuid + ".");
 
         // Base health and multiplier will get determined when we finish the class
         // config.
@@ -328,8 +328,9 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     public void changeProficiency(String proficiency) {
-        Logging.debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
-                + proficiency + ".");
+        CoreLogger
+                .debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
+                        + proficiency + ".");
 
         this.proficiency = new Proficiency(ProficiencyName.fromString(proficiency));
 
@@ -337,7 +338,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         // validate user is online before loading the new stats
         if (isOnline()) {
-            Logging.debugToConsole("Player is online, applying new stats.");
+            CoreLogger.debugToConsole("Player is online, applying new stats.");
             this.applyClassStats();
         }
 
@@ -367,7 +368,7 @@ public class HistoriaPlayer extends BasePlayer {
             setMaxExperience(NumberUtils.roundDouble(Math.pow(getLevel(), 1.68), 2));
             saveCharacter();
 
-            Logging.infoToPlayer("You have leveled up to level " + getLevel() + "!", this.getUUID());
+            CoreLogger.infoToPlayer("You have leveled up to level " + getLevel() + "!", this.getUUID());
 
         } else {
 
@@ -401,7 +402,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             saveCharacter();
 
-            Logging.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
+            CoreLogger.infoToPlayer("You have leveled down to level " + getLevel() + "!", this.getUUID());
 
         } else if (getLevel() > 1) {
 
@@ -439,7 +440,7 @@ public class HistoriaPlayer extends BasePlayer {
 
                 if (item.getItemMeta().hasEnchants()) {
 
-                    Logging.debugToConsole(item.getEnchantments().toString());
+                    CoreLogger.debugToConsole(item.getEnchantments().toString());
 
                     removeSkillEnchantFromItem(item);
 
@@ -457,7 +458,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             ItemMeta itemMeta = item.getItemMeta();
 
-            Logging.debugToConsole(
+            CoreLogger.debugToConsole(
                     this.getUsername() + " had an item in their inventory that wasn't enchanted.");
 
             itemMeta.addEnchant(enchant, 1, true);
@@ -473,7 +474,7 @@ public class HistoriaPlayer extends BasePlayer {
 
             ItemMeta itemMeta = item.getItemMeta();
 
-            Logging.debugToConsole(
+            CoreLogger.debugToConsole(
                     this.getUsername() + " had an item in their inventory with an illegal enchant.");
 
             item.getItemMeta().getEnchants().forEach((enchant, level) -> {

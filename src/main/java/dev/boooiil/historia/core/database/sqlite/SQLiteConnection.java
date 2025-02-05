@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.DatabaseConnection;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 @Deprecated(forRemoval = false)
 public class SQLiteConnection extends DatabaseConnection {
@@ -20,8 +20,8 @@ public class SQLiteConnection extends DatabaseConnection {
     @Override
     public boolean initDataSource() {
         if (dataSource == null || dataSource.isClosed()) {
-            Logging.infoToConsole("(SQLite) Initializing data source.");
-            Logging.infoToConsole(
+            CoreLogger.infoToConsole("(SQLite) Initializing data source.");
+            CoreLogger.infoToConsole(
                     "(SQLite) Data source location: " + HistoriaCore.plugin().getDataFolder().getAbsolutePath()
                             + "/database.db");
 
