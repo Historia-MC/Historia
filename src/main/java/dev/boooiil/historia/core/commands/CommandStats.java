@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.commands;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -73,7 +73,7 @@ public class CommandStats implements CommandExecutor {
 
                                 }
 
-                                Logging.infoToPlayerNoPrefix(message, ((Player) sender).getUniqueId());
+                                CoreLogger.infoToPlayerNoPrefix(message, ((Player) sender).getUniqueId());
 
                                 return true;
                         } else

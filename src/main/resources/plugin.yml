@@ -1,4 +1,4 @@
-main: dev.boooiil.historia.core.Main
+main: dev.boooiil.historia.core.HistoriaCore
 name: Historia
 version: 1.0
 description: Something simple, I guess!

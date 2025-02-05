@@ -6,7 +6,7 @@ import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Material;
@@ -64,12 +64,12 @@ public class BlockPlaceHandler extends BaseBlockHandler {
 
         // TODO: test this!!
 
-        Logging.debugToConsole(
+        CoreLogger.debugToConsole(
                 "[BPH#ladderBypass] Player: " + this.getPlayer().getName() + " placed a ladder!");
 
-        Logging.debugToConsole("[BPH#ladderBypass] Block placed location: " + this.getPlacedBlock().getLocation());
-        Logging.debugToConsole("[BPH#ladderBypass] Block location: " + this.getBlock().getLocation());
-        Logging.debugToConsole("[BPH#ladderBypass] Player location: " + this.getPlayer().getLocation());
+        CoreLogger.debugToConsole("[BPH#ladderBypass] Block placed location: " + this.getPlacedBlock().getLocation());
+        CoreLogger.debugToConsole("[BPH#ladderBypass] Block location: " + this.getBlock().getLocation());
+        CoreLogger.debugToConsole("[BPH#ladderBypass] Player location: " + this.getPlayer().getLocation());
 
         ItemStack heldItem = this.getPlayer().getInventory().getItemInMainHand();
         ItemStack offhandItem = this.getPlayer().getInventory().getItemInOffHand();
@@ -120,7 +120,7 @@ public class BlockPlaceHandler extends BaseBlockHandler {
 
         this.getPlayer().getInventory().addItem(item);
 
-        Logging.infoToPlayer("Your skills allowed you to not consume a block!", historiaPlayer.getUUID());
+        CoreLogger.infoToPlayer("Your skills allowed you to not consume a block!", historiaPlayer.getUUID());
     }
 
 }

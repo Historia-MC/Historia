@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.mockbukkit.mockbukkit.MockBukkit;
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
@@ -22,7 +22,7 @@ public class StatsTest {
         MockBukkit.mock();
         System.out.println("Loading plugin...");
         try {
-            MockBukkit.load(Main.class);
+            MockBukkit.load(HistoriaCore.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

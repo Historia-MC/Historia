@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 public abstract class DatabaseConnection implements IDatabaseConnection {
 
@@ -70,7 +70,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                Logging.debugToConsole("Closed", getDatabaseType().toString(), "connection.");
+                CoreLogger.debugToConsole("Closed", getDatabaseType().toString(), "connection.");
             }
             return true;
         } catch (SQLException sqlException) {
@@ -83,16 +83,16 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     public boolean connect() {
 
-        Logging.debugToConsole("Connecting to database...");
+        CoreLogger.debugToConsole("Connecting to database...");
 
         try {
             connection = dataSource.getConnection();
 
             if (connection != null) {
-                Logging.debugToConsole("Connected to database.");
+                CoreLogger.debugToConsole("Connected to database.");
                 return true;
             } else {
-                Logging.errorToConsole("Failed to connect to database.");
+                CoreLogger.errorToConsole("Failed to connect to database.");
             }
         }
 
@@ -109,7 +109,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
-            Logging.debugToConsole("Closed", getDatabaseType().toString(), "data source.");
+            CoreLogger.debugToConsole("Closed", getDatabaseType().toString(), "data source.");
         }
 
         return true;
@@ -135,13 +135,13 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
         try {
 
-            Logging.warnToConsole("Attempting to close the connection...");
+            CoreLogger.warnToConsole("Attempting to close the connection...");
             connection.close();
-            Logging.warnToConsole("Connection closed.");
+            CoreLogger.warnToConsole("Connection closed.");
 
-            Logging.warnToConsole("Attempting to reconnect...");
+            CoreLogger.warnToConsole("Attempting to reconnect...");
             connection = dataSource.getConnection();
-            Logging.warnToConsole("Reconnected to SQL Server.");
+            CoreLogger.warnToConsole("Reconnected to SQL Server.");
             return true;
         } catch (SQLException sqlException) {
 
@@ -152,7 +152,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     public void executor(String statement) {
 
-        Logging.debugToConsole("Executing:", statement);
+        CoreLogger.debugToConsole("Executing:", statement);
 
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(statement);
@@ -208,7 +208,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     public void updateExecutor(String statement) {
 
-        Logging.debugToConsole("Executing update query:", statement);
+        CoreLogger.debugToConsole("Executing update query:", statement);
 
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(statement);
@@ -230,7 +230,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     public void updateExecutor(String statement, int maxRetry, int curr) {
 
-        Logging.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry,
+        CoreLogger.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry,
                 "and current retries: " + curr);
 
         try (Connection connection = getConnection()) {
@@ -252,7 +252,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     public boolean nextResult(ResultSet result) {
 
-        Logging.debugToConsole("Trying next result...");
+        CoreLogger.debugToConsole("Trying next result...");
 
         try {
             return result.next();
@@ -294,7 +294,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
             } else if (clazz == Array.class) {
                 return clazz.cast(result.getArray(columnName));
             } else {
-                Logging.errorToConsole("Unimplemented result type:", clazz.getName());
+                CoreLogger.errorToConsole("Unimplemented result type:", clazz.getName());
                 return null;
             }
         } catch (SQLException sqlException) {
@@ -305,10 +305,10 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
     protected void exceptionLogger(SQLException sqlE, String leadingMessage) {
 
-        Logging.errorToConsole("[", getDatabaseType().toString(), "]", leadingMessage);
-        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Cause: " + sqlE.getCause());
-        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Error Code: " + sqlE.getErrorCode());
-        Logging.errorToConsole("[", getDatabaseType().toString(), "]", "Error Message: " + sqlE.getMessage());
+        CoreLogger.errorToConsole("[", getDatabaseType().toString(), "]", leadingMessage);
+        CoreLogger.errorToConsole("[", getDatabaseType().toString(), "]", "Cause: " + sqlE.getCause());
+        CoreLogger.errorToConsole("[", getDatabaseType().toString(), "]", "Error Code: " + sqlE.getErrorCode());
+        CoreLogger.errorToConsole("[", getDatabaseType().toString(), "]", "Error Message: " + sqlE.getMessage());
 
     }
 

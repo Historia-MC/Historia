@@ -7,7 +7,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -19,7 +19,7 @@ public class WorldGuardHandler {
     /**
      * It checks if a player has permission to build at a location
      * 
-     * @param player The player who is trying to place the block
+     * @param player   The player who is trying to place the block
      * @param location The location of the block you want to check.
      * @return A boolean value.
      */
@@ -39,7 +39,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_PLACE);
 
         } catch (Exception e) {
-            Logging.debugToConsole("There was an error checking WorldGuard permissions");
+            CoreLogger.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
@@ -63,7 +63,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.BLOCK_BREAK);
 
         } catch (Exception e) {
-            Logging.debugToConsole("There was an error checking WorldGuard permissions");
+            CoreLogger.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
@@ -87,7 +87,7 @@ public class WorldGuardHandler {
             hasPermission = query.testState(worldGuardLocation, localPlayer, Flags.USE);
 
         } catch (Exception e) {
-            Logging.debugToConsole("There was an error checking WorldGuard permissions");
+            CoreLogger.debugToConsole("There was an error checking WorldGuard permissions");
             hasPermission = false;
         }
 
@@ -95,5 +95,4 @@ public class WorldGuardHandler {
 
     }
 
-    
 }

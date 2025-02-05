@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.dependents;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.dependents.worldguard.WorldGuardHandler;
 import org.bukkit.block.Block;
@@ -17,7 +17,7 @@ public class Permissions {
      */
     public static boolean canBreakBlock(Player player, Block block) {
 
-        if (Main.isTesting)
+        if (HistoriaCore.isTesting)
             return true;
 
         boolean townyPermission = TownyHandler.getBreakPermissions(player, block.getLocation(), block.getType());

@@ -4,9 +4,9 @@ import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 
-import dev.boooiil.historia.core.Main;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -32,11 +32,11 @@ abstract class BasePlayer {
     public BasePlayer(UUID uuid) {
 
         if (uuid == null) {
-            Logging.debugToConsole("Constructing new BasePlayer object with null UUID.");
+            CoreLogger.debugToConsole("Constructing new BasePlayer object with null UUID.");
             return;
         }
 
-        Logging.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
+        CoreLogger.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
 
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         Player player = Bukkit.getPlayer(uuid);
@@ -65,7 +65,7 @@ abstract class BasePlayer {
 
         }
 
-        if (this.uuid != null && !Main.isTesting) {
+        if (this.uuid != null && !HistoriaCore.isTesting) {
 
             this.resident = TownyHandler.getResident(uuid);
             this.town = TownyHandler.getTown(uuid);

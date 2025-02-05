@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.commands;
 
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.util.Logging;
+import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,8 +37,8 @@ public class CommandDebug implements CommandExecutor {
                 message += "Experience: " + player.getCurrentExperience() + "\n";
                 message += "Temperature: " + player.getCurrentTemperature() + "\n";
 
-                Logging.infoToPlayer(message, ((Player) sender).getUniqueId());
-                Logging.debugToConsole(player.toString());
+                CoreLogger.infoToPlayer(message, ((Player) sender).getUniqueId());
+                CoreLogger.debugToConsole(player.toString());
 
                 return true;
 
