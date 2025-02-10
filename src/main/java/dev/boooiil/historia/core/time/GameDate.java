@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @NullMarked
-public final class GameDate implements Comparable<GameDate> {
+public final class GameDate {
     private static final Map<Integer, Integer> daysOfMonth = new HashMap<>();
 
     private final int year;
@@ -86,18 +86,6 @@ public final class GameDate implements Comparable<GameDate> {
         return this.year == that.year &&
                 this.month == that.month &&
                 this.day == that.day;
-    }
-
-    @Override
-    public int compareTo(GameDate other) {
-        int cmp = (year - other.year);
-        if (cmp == 0) {
-            cmp = (month - other.month);
-            if (cmp == 0) {
-                cmp = (day - other.day);
-            }
-        }
-        return cmp;
     }
 
     @Override
