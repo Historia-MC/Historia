@@ -2,12 +2,15 @@ package dev.boooiil.historia.core.proficiency.stats;
 
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
+
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stats {
+public class Stats implements JSONSerializable {
 
     private float baseHealth;
     private float maxHealth;
@@ -386,22 +389,37 @@ public class Stats {
 
     public String toString() {
 
-        return "*** STATS *** \n" +
-                "Base Health: " + this.baseHealth + "\n" +
-                "Base Speed: " + this.baseSpeed + "\n" +
-                "Base Evasion: " + this.baseEvasion + "\n" +
-                "Harvest Chance: " + this.harvestChance + "\n" +
-                "Double Harvest Chance: " + this.doubleHarvestChance + "\n" +
-                "Instant Growth Chance: " + this.instantGrowthChance + "\n" +
-                "Behead Chance: " + this.beheadChance + "\n" +
-                "Base Sword Proficiency: " + this.baseSwordProficiency + "\n" +
-                "Base Bow Proficiency: " + this.baseBowProficiency + "\n" +
-                "Base Crossbow Proficiency: " + this.baseCrossbowProficiency + "\n" +
-                "Base Experience Gain: " + this.baseExperienceGain + "\n" +
-                "Weapon Proficiency: " + this.usableWeaponTypes + "\n" +
-                "Armor Proficiency: " + this.usableArmorTypes + "\n" +
-                "************* \n";
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("Stats");
+        sb.append(toJSON());
+
+        return sb.toString();
+
+    }
+
+    @Override
+    public String toJSON() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append(JSONUtils.fromValue("baseHealth", this.baseHealth) + ", ");
+        sb.append(JSONUtils.fromValue("baseSpeed", this.baseSpeed) + ", ");
+        sb.append(JSONUtils.fromValue("baseEvasion", this.baseEvasion) + ", ");
+        sb.append(JSONUtils.fromValue("harvestChance", this.harvestChance) + ", ");
+        sb.append(JSONUtils.fromValue("doubleHarvestChance", this.doubleHarvestChance) + ", ");
+        sb.append(JSONUtils.fromValue("instantGrowthChance", this.instantGrowthChance) + ", ");
+        sb.append(JSONUtils.fromValue("beheadChance", this.beheadChance) + ", ");
+        sb.append(JSONUtils.fromValue("baseSwordProficiency", this.baseSwordProficiency) + ", ");
+        sb.append(JSONUtils.fromValue("baseBowProficiency", this.baseBowProficiency) + ", ");
+        sb.append(JSONUtils.fromValue("baseCrossbowProficiency", this.baseCrossbowProficiency) + ", ");
+        sb.append(JSONUtils.fromValue("baseExperienceGain", this.baseExperienceGain) + ", ");
+        sb.append(JSONUtils.fromStringList("usableWeaponTypes", this.usableWeaponTypes) + ", ");
+        sb.append(JSONUtils.fromStringList("usableArmorTypes", this.usableArmorTypes));
+        sb.append("}");
+
+        return sb.toString();
     }
 
 }

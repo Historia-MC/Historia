@@ -6,6 +6,7 @@ import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Bukkit;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.List;
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
@@ -489,22 +491,58 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    @Override
     public String toString() {
 
-        String output = super.toString();
+        CoreLogger.debugToConsole("HP TS");
+        CoreLogger.debugToConsole("super", super.toString());
 
-        output += "*** HISTORIA PLAYER *** \n";
-        output += "Level: " + this.getLevel() + "\n";
-        output += "Culture: " + this.getCulture() + "\n";
-        output += "Current Experience: " + this.getCurrentExperience() + "\n";
-        output += "Max Experience: " + this.getMaxExperience() + "\n";
-        output += "Last Login: " + this.getLastLogin() + "\n";
-        output += "Last Logout: " + this.getLastLogout() + "\n";
-        output += "Playtime: " + this.getPlaytime() + "\n";
-        output += "*********************** \n";
-        output += proficiency.toString();
+        StringBuilder sb = new StringBuilder();
 
-        return output;
+        sb.append("HistoriaPlayer");
+        sb.append("{");
+        sb.append("\"basePlayer\":" + super.toString() + ", ");
+        sb.append(JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", ");
+        sb.append(JSONUtils.fromValue("level", level) + ", ");
+        sb.append(JSONUtils.fromValue("lastLogin", lastLogin) + ", ");
+        sb.append(JSONUtils.fromValue("lastLogout", lastLogout) + ", ");
+        sb.append(JSONUtils.fromValue("playtime", playtime) + ", ");
+        sb.append(JSONUtils.fromValue("maxHealth", maxHealth) + ", ");
+        sb.append(JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", ");
+        sb.append(JSONUtils.fromValue("currentTemperature", currentTemperature) + ", ");
+        sb.append(JSONUtils.fromValue("maxTemperature", maxTemperature) + ", ");
+        sb.append(JSONUtils.fromValue("currentExperience", currentExperience) + ", ");
+        sb.append(JSONUtils.fromValue("maxExperience", maxExperience) + ", ");
+        sb.append("\"proficiency\":" + proficiency.toString() + ", ");
+        sb.append(JSONUtils.fromValue("lastSaved", lastSaved));
+        sb.append("}");
 
+        return sb.toString();
+
+    }
+
+    @Override
+    public String toJSON() {
+        CoreLogger.debugToConsole("HP TJ");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append("\"basePlayer\":" + super.toJSON() + ", ");
+        sb.append(JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", ");
+        sb.append(JSONUtils.fromValue("level", level) + ", ");
+        sb.append(JSONUtils.fromValue("lastLogin", lastLogin) + ", ");
+        sb.append(JSONUtils.fromValue("lastLogout", lastLogout) + ", ");
+        sb.append(JSONUtils.fromValue("playtime", playtime) + ", ");
+        sb.append(JSONUtils.fromValue("maxHealth", maxHealth) + ", ");
+        sb.append(JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", ");
+        sb.append(JSONUtils.fromValue("currentTemperature", currentTemperature) + ", ");
+        sb.append(JSONUtils.fromValue("maxTemperature", maxTemperature) + ", ");
+        sb.append(JSONUtils.fromValue("currentExperience", currentExperience) + ", ");
+        sb.append(JSONUtils.fromValue("maxExperience", maxExperience) + ", ");
+        sb.append("\"proficiency\":" + proficiency.toJSON() + ", ");
+        sb.append(JSONUtils.fromValue("lastSaved", lastSaved));
+        sb.append("}");
+
+        return sb.toString();
     }
 }

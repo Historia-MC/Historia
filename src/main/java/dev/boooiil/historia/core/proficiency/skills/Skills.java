@@ -1,6 +1,9 @@
 package dev.boooiil.historia.core.proficiency.skills;
 
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
+
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,7 +19,7 @@ import java.util.regex.Pattern;
  * variables that represent
  * Whether the player has certain skills or abilities.
  */
-public class Skills {
+public class Skills implements JSONSerializable {
 
     public enum SkillType {
         NAME_TAG("nametag"),
@@ -145,10 +148,26 @@ public class Skills {
 
     @Override
     public String toString() {
-        return "Skills{" +
-                "skills=" + skills +
-                '}' + "SkillEnchants{" +
-                "skillEnchants=" + skillEnchants +
-                '}';
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Skills");
+        sb.append("{");
+        sb.append(JSONUtils.fromMapAsString("skills", skills) + ", ");
+        sb.append(JSONUtils.fromMapAsString("skillEnchants", skillEnchants));
+        sb.append("}");
+
+        return sb.toString();
+    }
+
+    @Override
+    public String toJSON() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append(JSONUtils.fromMapAsJSON("skills", skills) + ", ");
+        sb.append(JSONUtils.fromMapAsJSON("skillEnchants", skillEnchants));
+        sb.append("}");
+
+        return sb.toString();
     }
 }

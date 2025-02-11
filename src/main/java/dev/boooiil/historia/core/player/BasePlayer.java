@@ -7,21 +7,32 @@ import com.palmergames.bukkit.towny.object.Town;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.UUID;
 
-abstract class BasePlayer {
+import javax.annotation.Nullable;
+
+@NullMarked
+abstract class BasePlayer implements JSONSerializable {
 
     private UUID uuid;
+    @Nullable
     protected String username;
     protected boolean isOnline;
 
+    @Nullable
     private Resident resident;
+    @Nullable
     private Town town;
+    @Nullable
     private Nation nation;
 
     /**
@@ -204,15 +215,84 @@ abstract class BasePlayer {
         this.nation = nation;
     }
 
+    @Override
     public String toString() {
 
-        String output = "*** BASE PLAYER *** \n";
-        output += "UUID: " + uuid.toString() + "\n";
-        output += "Username: " + username + "\n";
-        output += "Online: " + isOnline + "\n";
-        output += "******************* \n";
+        CoreLogger.debugToConsole("BP TS");
 
-        return output;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("BasePlayer");
+
+        sb.append("{");
+        sb.append(JSONUtils.fromValue("uuid", getUUID().toString()) + ", ");
+        sb.append(JSONUtils.fromValue("username", username) + ", ");
+        sb.append(JSONUtils.fromValue("isOnline", isOnline) + ", ");
+
+        if (getResident() != null) {
+            sb.append(JSONUtils.fromValue("resident", getResident().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("resident", "None") + ", ");
+        }
+
+        if (getTown() != null) {
+            sb.append(JSONUtils.fromValue("town", getTown().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("town", "None") + ", ");
+        }
+
+        sb.append(JSONUtils.fromStringList("townRanks", getTownRanks()) + ", ");
+
+        if (getNation() != null) {
+            sb.append(JSONUtils.fromValue("nation", getNation().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("nation", "None") + ", ");
+        }
+
+        sb.append(JSONUtils.fromStringList("nationRanks", getNationRanks()));
+
+        sb.append("}");
+
+        return sb.toString();
+
+    }
+
+    @Override
+    public String toJSON() {
+
+        CoreLogger.debugToConsole("BP TJ");
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append(JSONUtils.fromValue("uuid", getUUID().toString()) + ", ");
+        sb.append(JSONUtils.fromValue("username", username) + ", ");
+        sb.append(JSONUtils.fromValue("isOnline", isOnline) + ", ");
+
+        if (getResident() != null) {
+            sb.append(JSONUtils.fromValue("resident", getResident().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("resident", "None") + ", ");
+        }
+
+        if (getTown() != null) {
+            sb.append(JSONUtils.fromValue("town", getTown().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("town", "None") + ", ");
+        }
+
+        sb.append(JSONUtils.fromStringList("townRanks", getTownRanks()) + ", ");
+
+        if (getNation() != null) {
+            sb.append(JSONUtils.fromValue("nation", getNation().getName()) + ", ");
+        } else {
+            sb.append(JSONUtils.fromValue("nation", "None") + ", ");
+        }
+
+        sb.append(JSONUtils.fromStringList("nationRanks", getNationRanks()));
+
+        sb.append("}");
+
+        return sb.toString();
 
     }
 

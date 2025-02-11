@@ -4,6 +4,8 @@ import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -14,7 +16,7 @@ import java.util.regex.Pattern;
  * This class represents a proficiency that a character can have. It contains
  * information about the proficiency's name, stats, and skills.
  */
-public class Proficiency {
+public class Proficiency implements JSONSerializable {
 
     public enum ProficiencyName {
 
@@ -309,14 +311,30 @@ public class Proficiency {
      */
     public String toString() {
 
-        String output = "*** PROFICIENCY ***\n";
+        StringBuilder sb = new StringBuilder();
 
-        output += "Name: " + name + "\n";
-        output += stats.toString();
-        output += skills.toString();
+        sb.append("Proficiency");
+        sb.append("{");
+        sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
+        sb.append("\"stats\":" + stats.toString() + ", ");
+        sb.append("\"skills\":" + skills.toString());
+        sb.append("}");
 
-        return output;
+        return sb.toString();
 
+    }
+
+    @Override
+    public String toJSON() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("{");
+        sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
+        sb.append("\"stats\":" + stats.toJSON() + ", ");
+        sb.append("\"skills\":" + skills.toJSON());
+        sb.append("}");
+
+        return sb.toString();
     }
 
 }
