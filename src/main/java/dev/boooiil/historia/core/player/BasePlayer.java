@@ -162,11 +162,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     public String getTownName() {
 
-        if (town == null)
-            return "Wilderness";
-
-        else
-            return town.getName();
+        return town != null ? town.getName() : "Wilderness";
 
     }
 
