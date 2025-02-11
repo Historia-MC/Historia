@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.bukkit.Warning;
+import org.bukkit.potion.PotionEffect;
 import org.jspecify.annotations.NullMarked;
 
 import net.kyori.adventure.text.Component;
@@ -156,6 +157,25 @@ public class JSONUtils {
         return sb.toString();
     }
 
+    public static String fromPotionEffectList(String key, List<PotionEffect> values) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\"" + key + "\":[");
+
+        for (int i = 0; i < values.size(); i++) {
+            sb.append("{");
+            sb.append(fromValue("type", values.get(i).getType().toString()) + ", ");
+            sb.append(fromValue("duration", values.get(i).getAmplifier()) + ", ");
+            sb.append(fromValue("amplifier", values.get(i).getDuration()));
+            sb.append("}, ");
+        }
+
+        sb.setLength(sb.length() - 2);
+        sb.append("]");
+
+        return sb.toString();
+    }
+
     public static String fromIntegerSet(String key, Set<Integer> values) {
         return fromIntegerList(key, new ArrayList<>(values));
     }
@@ -182,6 +202,10 @@ public class JSONUtils {
 
     public static String fromComponentSet(String key, Set<Component> values) {
         return fromComponentList(key, new ArrayList<>(values));
+    }
+
+    public static String fromPotionEffectSet(String key, Set<PotionEffect> values) {
+        return fromPotionEffectList(key, new ArrayList<>(values));
     }
 
     @Warning(reason = "Use at your own risk. If the value is formatted with our implementation it will not output a correctly formatted JSON.")
