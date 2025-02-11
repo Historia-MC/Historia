@@ -10,8 +10,6 @@ import java.util.Map.Entry;
 import org.bukkit.Warning;
 import org.jspecify.annotations.NullMarked;
 
-import dev.boooiil.historia.core.util.JSONSerializable;
-
 import net.kyori.adventure.text.Component;
 
 @NullMarked
@@ -205,14 +203,20 @@ public class JSONUtils {
 
         for (Entry<K, V> entry : values.entrySet()) {
 
-            if (isSerializable) {
-                sb.append("\"" + entry.getKey().toString() + "\":");
-                sb.append(((JSONSerializable) entry.getValue()).toJSON() + ", ");
+            // if (isSerializable) {
+            // sb.append("\"" + entry.getKey().toString() + "\":");
+            // sb.append(((JSONSerializable) entry.getValue()).toJSON() + ", ");
+            // } else {
+
+            // if map inside map, recursively call
+            if (entry.getValue() instanceof Map) {
+                sb.append(fromMapAsJSON(entry.getKey().toString(), (Map<?, ?>) entry.getValue()));
             } else {
-                sb.append("\"" + entry.getKey().toString() + "\":{");
+                sb.append("\"" + entry.getKey().toString() + "\":");
                 sb.append(entry.getValue().toString());
-                sb.append("}, ");
+                sb.append(", ");
             }
+            // }
 
         }
 
@@ -223,12 +227,10 @@ public class JSONUtils {
         return sb.toString();
     }
 
-    @Warning(reason = "Use at your own risk. If the value is formatted with our implementation it will not output a correctly formatted JSON.")
     public static <K, V> String fromMapAsJSON(String key, HashMap<K, V> values) {
         return fromMapAsJSON(key, (Map<K, V>) values);
     }
 
-    @Warning(reason = "Use at your own risk. If the value is formatted with our implementation it will not output a correctly formatted JSON.")
     public static <K, V> String fromMapAsString(String key, Map<K, V> values) {
 
         if (values.isEmpty()) {
@@ -247,14 +249,20 @@ public class JSONUtils {
 
         for (Entry<K, V> entry : values.entrySet()) {
 
-            if (isSerializable) {
-                sb.append("\"" + entry.getKey().toString() + "\":");
-                sb.append((entry.getValue()).toString() + ", ");
+            // if (isSerializable) {
+            // sb.append("\"" + entry.getKey().toString() + "\":");
+            // sb.append((entry.getValue()).toString() + ", ");
+            // } else {
+
+            // if map inside map, recursively call
+            if (entry.getValue() instanceof Map) {
+                sb.append(fromMapAsString(entry.getKey().toString(), (Map<?, ?>) entry.getValue()));
             } else {
-                sb.append("\"" + entry.getKey().toString() + "\":{");
+                sb.append("\"" + entry.getKey().toString() + "\":");
                 sb.append(entry.getValue().toString());
-                sb.append("}, ");
+                sb.append(", ");
             }
+            // }
 
         }
 
