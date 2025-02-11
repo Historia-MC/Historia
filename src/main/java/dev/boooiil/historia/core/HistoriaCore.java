@@ -118,7 +118,12 @@ public class HistoriaCore extends JavaPlugin {
     public void onDisable() {
 
         closeDatabase();
-        getLogger().info("Plugin disabled.");
+
+        CoreLogger.errorToConsole("The plugin has been disabled. This should not happen!");
+        CoreLogger.errorToConsole("Stopping the server to prevent potential harm.");
+
+        if (!isTesting)
+            server().shutdown();
     }
 
     /**
