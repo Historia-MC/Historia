@@ -5,6 +5,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.util.CoreLogger;
 
 import java.util.UUID;
 
@@ -64,6 +65,9 @@ public class MainTest {
         server.addPlayer(player);
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+
+        CoreLogger.debugToConsole(historiaPlayer.toString());
+        CoreLogger.debugToConsole(historiaPlayer.toJSON());
 
         historiaPlayer.changeProficiency("Warrior");
     }
