@@ -247,8 +247,8 @@ public class HistoriaCore extends JavaPlugin {
 
     private void deregisterRecipes() {
 
-        Bukkit.removeRecipe(NamespacedKey.minecraft("iron_nugget"));
-        Bukkit.removeRecipe(NamespacedKey.minecraft("gold_nugget"));
+        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_nugget"));
+        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_nugget"));
 
         // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_sword"));
         // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_sword"));
