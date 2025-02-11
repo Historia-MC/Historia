@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
+import dev.boooiil.historia.core.util.KyoriUtils;
+
 import java.util.UUID;
 
 public class ScoreboardAdapter {
@@ -28,7 +30,7 @@ public class ScoreboardAdapter {
         // TODO: adapt this to paper component
 
         objective = scoreboard.registerNewObjective(UUID.randomUUID().toString(),
-                Criteria.create(UUID.randomUUID().toString()), header);
+                Criteria.create(UUID.randomUUID().toString()), KyoriUtils.textComponent(header));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
     }
