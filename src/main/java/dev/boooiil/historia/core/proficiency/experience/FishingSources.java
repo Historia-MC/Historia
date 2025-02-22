@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * This is a list of all experience source incomes for fishing.
+ */
 public enum FishingSources {
 
     NONE(AllSources.NONE),

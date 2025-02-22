@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * This is a list of all experience source incomes for farming activities.
+ */
 public enum FarmingSources {
 
     NONE(AllSources.NONE),

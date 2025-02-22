@@ -7,9 +7,13 @@ import dev.boooiil.historia.core.util.CoreLogger;
 import java.util.HashMap;
 import java.util.UUID;
 
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
 /**
- * It's a HashMap that stores all the players that are currently online
+ * Utility class for obtaining {@link HistoriaPlayer HistoriaPlayers}
  */
+@NullMarked
 public class PlayerStorage {
 
     // It's a HashMap that stores all the players that are currently online
@@ -78,7 +82,7 @@ public class PlayerStorage {
 
     }
 
-    public static HistoriaPlayer getPlayer(String username) {
+    public static @Nullable HistoriaPlayer getPlayer(String username) {
         if (usernameMap.containsKey(username)) {
             return players.get(usernameMap.get(username));
         }

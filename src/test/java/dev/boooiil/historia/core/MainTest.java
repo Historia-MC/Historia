@@ -6,7 +6,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONUtils;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
@@ -70,6 +73,7 @@ public class MainTest {
         CoreLogger.debugToConsole(historiaPlayer.toJSON());
 
         historiaPlayer.changeProficiency("Warrior");
+
     }
 
     @Test

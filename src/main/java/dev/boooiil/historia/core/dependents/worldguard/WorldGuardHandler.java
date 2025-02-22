@@ -10,18 +10,20 @@ import com.sk89q.worldguard.protection.regions.RegionQuery;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
 /**
- * It checks if the player has permissions to break in the specific location.
+ * WorldGuard Utility class.
  */
+@NullMarked
 public class WorldGuardHandler {
 
     /**
-     * It checks if a player has permission to build at a location
+     * Checks to see if the player is able to place a block.
      * 
-     * @param player   The player who is trying to place the block
-     * @param location The location of the block you want to check.
-     * @return A boolean value.
+     * @param player   - Player placing the block.
+     * @param location - Location of the block.
+     * @return - If the player is able to place a block.
      */
     public static boolean getBuildPermissions(Player player, Location location) {
 
@@ -47,6 +49,13 @@ public class WorldGuardHandler {
 
     }
 
+    /**
+     * Checks to see if the player is able to break the block.
+     * 
+     * @param player   - Player breaking the block.
+     * @param location - Location of the block.
+     * @return If the player is able to break the block.
+     */
     public static boolean getBreakPermissions(Player player, Location location) {
 
         boolean hasPermission;
@@ -71,6 +80,13 @@ public class WorldGuardHandler {
 
     }
 
+    /**
+     * Checks to see if the player is able to use an item.
+     * 
+     * @param player   - Player using the item.
+     * @param location - Location of the item.
+     * @return - If the player is able to use an item.
+     */
     public static boolean getUsePermissions(Player player, Location location) {
 
         boolean hasPermission;

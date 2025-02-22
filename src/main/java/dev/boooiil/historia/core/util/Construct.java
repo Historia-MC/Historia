@@ -6,19 +6,16 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Construct various Bukkit types.
+ * Static utility class for constructing various bukkit objects.
  */
+@NullMarked
 public class Construct {
-
-    // A private constructor that throws an exception if it is called.
-    private Construct() {
-        throw new IllegalCallerException("Static utility class.");
-    }
 
     /**
      * It creates an ItemStack with the given parameters

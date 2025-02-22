@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * ??
+ */
 @NullMarked
 public final class GameDate {
     private static final Map<Integer, Integer> daysOfMonth = new HashMap<>();
@@ -80,8 +83,10 @@ public final class GameDate {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
+        if (obj == this)
+            return true;
+        if (obj == null || obj.getClass() != this.getClass())
+            return false;
         var that = (GameDate) obj;
         return this.year == that.year &&
                 this.month == that.month &&
@@ -92,7 +97,6 @@ public final class GameDate {
     public int hashCode() {
         return Objects.hash(year, month, day);
     }
-
 
     static {
         daysOfMonth.put(1, 31); // January

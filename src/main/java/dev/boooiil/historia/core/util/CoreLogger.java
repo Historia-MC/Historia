@@ -6,26 +6,25 @@ import net.kyori.adventure.text.Component;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
- * It's a class that sends messages to the console, server, or a player
+ * Static utility class for logging messages in Historia-Core.
  */
+@NullMarked
 public class CoreLogger {
 
+    /** Prefix for all logging messages that do not use the bukkit logger. */
     private static final String messagePrefix = "§7[§9Historia§7] ";
+    /** Announcement prefix. */
     private static final String announcePrefix = "§7[§9Announcement§7] ";
     // private static final String debugPrefix = "§7[§cDebug§7] ";
 
-    private static final Logger logger = Bukkit.getLogger();
-
-    // It's a private constructor that throws an error if someone tries to
-    // instantiate the class.
-    private CoreLogger() {
-        throw new IllegalAccessError("Static utility class.");
-    }
+    /** Bukkit logger to send messages to the console. */
+    private static final Logger logger = HistoriaCore.isTesting ? null : Bukkit.getLogger();
 
     /**
      * Send an info message to the console.
@@ -102,7 +101,11 @@ public class CoreLogger {
 
         }
 
-        logger.warning(built.toString());
+        if (logger != null) {
+            logger.warning(built.toString());
+        } else {
+            System.out.println(built.toString());
+        }
 
     }
 
@@ -184,7 +187,7 @@ public class CoreLogger {
      */
     public static void debugToConsole(String... messages) {
 
-        if (GeneralConfig.debug) {
+        if (HistoriaCore.isTesting || GeneralConfig.debug) {
 
             StringBuilder built = new StringBuilder();
 

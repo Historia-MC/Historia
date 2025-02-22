@@ -2,6 +2,9 @@ package dev.boooiil.historia.core.player.culture;
 
 import java.util.Set;
 
+/**
+ * Enum storing all possibe regions and the cultures within them.
+ */
 public enum Regions {
 
     WESTERN_EUROPE(

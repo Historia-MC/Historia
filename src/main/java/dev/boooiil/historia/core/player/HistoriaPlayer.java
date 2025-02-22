@@ -17,35 +17,50 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
 
 /**
- * It's a class that holds all the information about a player
+ * Represents a player in the Historia plugin, extending {@link BasePlayer}.
  */
+@NullMarked
 public class HistoriaPlayer extends BasePlayer {
 
+    /** The culture of the user. */
     Cultures culture;
 
+    /** The player's level. */
     private int level;
 
+    /** The last login of the user. */
     private long lastLogin;
+    /** The last logout of the user. */
     private long lastLogout;
+    /** The playtime of the user. */
     private long playtime;
 
+    /** The max health of the user. */
     private float maxHealth;
+    /** The modified health of the user. */
     private float modifiedHealth;
 
+    /** The current temperature of the user. */
     private double currentTemperature;
+    /** The max temperature of the user. */
     private double maxTemperature;
 
+    /** The current experience of the user. */
     private double currentExperience;
+    /** The max experience of the user. */
     private double maxExperience;
 
+    /** The proficiency of the user. */
     private Proficiency proficiency;
 
+    /** When the user was last saved. */
     private long lastSaved;
 
     /**
@@ -88,6 +103,16 @@ public class HistoriaPlayer extends BasePlayer {
 
     /**
      * Initialize a HistoriaPlayer with specified details.
+     * 
+     * @param uuid        - UUID of the player.
+     * @param username    - Username of the player.
+     * @param proficiency - Proficiency of the player.
+     * @param culture     - Culture of the player.
+     * @param level       - Level of the player.
+     * @param experience  - Experience of the player.
+     * @param login       - Time of the last login.
+     * @param logout      - Time of the last logout.
+     * @param playtime    - Playtime of the player in seconds.
      */
     public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, Cultures culture,
             int level, double experience, long login, long logout, long playtime) {
@@ -104,34 +129,77 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Set the proficiency of the player.
+     * 
+     * @param proficiency - Proficiency to be set.
+     */
     public void setProficiency(ProficiencyName proficiency) {
         this.proficiency = new Proficiency(proficiency);
     }
+
+    /**
+     * Set the culture of the player.
+     * 
+     * @param culture - Culture to be set.
+     */
 
     public void setCulture(Cultures culture) {
         this.culture = culture;
     }
 
+    /**
+     * 
+     * Set the username of the player.
+     * 
+     * @param username - Username to be set.
+     */
+
     public void setLevel(int level) {
         this.level = level;
     }
 
+    /**
+     * Set the last login of the player.
+     * 
+     * @param lastLogin - Last login time to be set.
+     */
     public void setLastLogin(long lastLogin) {
         this.lastLogin = lastLogin;
     }
 
+    /**
+     * Set the last logout of the player.
+     * 
+     * @param lastLogout - Last logout time to be set.
+     */
     public void setLastLogout(long lastLogout) {
         this.lastLogout = lastLogout;
     }
 
+    /**
+     * Set the modified health of the player.
+     * 
+     * @param modifiedHealth - Modified health to be set.
+     */
     public void setModifiedHealth(float modifiedHealth) {
         this.modifiedHealth = modifiedHealth;
     }
 
+    /**
+     * Set current experience of the player.
+     * 
+     * @param currentExperience - Current experience to be set.
+     */
     public void setCurrentExperience(double currentExperience) {
         this.currentExperience = currentExperience;
     }
 
+    /**
+     * Set max experience of the player.
+     * 
+     * @param experienceMax - Max experience to be set.
+     */
     public void setMaxExperience(double experienceMax) {
         this.maxExperience = experienceMax;
     }
@@ -147,12 +215,22 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Get the proficiency of the player.
+     * 
+     * @return the proficiency of the player.
+     */
     public Proficiency getProficiency() {
 
         return this.proficiency;
 
     }
 
+    /**
+     * Get the culture of the player.
+     * 
+     * @return the culture of the player.
+     */
     public Cultures getCulture() {
         return this.culture;
     }
@@ -316,18 +394,33 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Get when the user was last saved.
+     * 
+     * @return when the user was last saved.
+     */
     public long getLastSaved() {
 
         return this.lastSaved;
 
     }
 
+    /**
+     * Set the temperature of the player.
+     * 
+     * @param temperature The temperature to set.
+     */
     public void setTemperature(double temperature) {
 
         this.currentTemperature = temperature;
 
     }
 
+    /**
+     * Change the proficiency of the user.
+     * 
+     * @param proficiency The proficiency to set.
+     */
     public void changeProficiency(String proficiency) {
         CoreLogger
                 .debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
@@ -379,6 +472,11 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Decreases the player's experience based on the source provided.
+     * 
+     * @param source The source from which the experience is to be decreased.
+     */
     public void decreaseExperience(AllSources source) {
 
         if (source == null)
@@ -413,6 +511,11 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Apply skill enchants to the items in the inventory.
+     * 
+     * @param inventory Inventory of the player.
+     */
     public void applySkillEnchants(Inventory inventory) {
 
         inventory.iterator().forEachRemaining(item -> {
@@ -453,6 +556,12 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    /**
+     * Add a skill enchant to an item if applicable.
+     * 
+     * @param item    The ItemStack to add the enchant to.
+     * @param enchant The Enchantment to add.
+     */
     private void addSkillEnchantToItem(ItemStack item, Enchantment enchant) {
 
         if (item != null && item.getItemMeta() != null) {
@@ -468,6 +577,12 @@ public class HistoriaPlayer extends BasePlayer {
         }
 
     }
+
+    /**
+     * Remove a skill enchant from an item if applicable.
+     * 
+     * @param item The ItemStack to remove the enchant from.
+     */
 
     private void removeSkillEnchantFromItem(ItemStack item) {
 

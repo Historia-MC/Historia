@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * This is a list of all crafting related sources.
+ */
 public enum CraftingSources {
 
     NONE(AllSources.NONE),

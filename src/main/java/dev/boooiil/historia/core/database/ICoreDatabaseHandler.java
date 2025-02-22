@@ -8,6 +8,9 @@ import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
+/**
+ * Interface for handling database operations.
+ */
 public interface ICoreDatabaseHandler extends IDatabaseConnection {
 
     // TODO: voids become boolean
@@ -18,6 +21,12 @@ public interface ICoreDatabaseHandler extends IDatabaseConnection {
      */
     public void createTable();
 
+    /**
+     * Create a new user in the database with the provided UUID and player name.
+     * 
+     * @param uuid       - UUID of the player.
+     * @param playerName - Username of the player.
+     */
     public void createUser(UUID uuid, String playerName);
 
     /**
@@ -28,6 +37,12 @@ public interface ICoreDatabaseHandler extends IDatabaseConnection {
      */
     public void setCurrentExperience(UUID uuid, double experience);
 
+    /**
+     * Set the username of the given UUID.
+     * 
+     * @param uuid       - UUID to set the username to.
+     * @param playerName - The username to set.
+     */
     public void setUsername(UUID uuid, String playerName);
 
     /**

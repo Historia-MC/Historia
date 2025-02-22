@@ -14,26 +14,36 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
+/**
+ * Base class for players in the HistoriaCore system.
+ * This class provides common functionality and properties that can be extended
+ * by specific player implementations.
+ */
 @NullMarked
 abstract class BasePlayer implements JSONSerializable {
 
+    /** The unique identifier for the player. */
     private UUID uuid;
-    @Nullable
-    protected String username;
+
+    /** The username of the player, if available. */
+    protected @Nullable String username;
+
+    /** Indicates whether the player is currently online. */
     protected boolean isOnline;
 
-    @Nullable
-    private Resident resident;
-    @Nullable
-    private Town town;
-    @Nullable
-    private Nation nation;
+    /** The resident associated with the player, if applicable. */
+    private @Nullable Resident resident;
+
+    /** The town associated with the player, if applicable. */
+    private @Nullable Town town;
+
+    /** The nation associated with the player, if applicable. */
+    private @Nullable Nation nation;
 
     /**
      * Constructs a new BasePlayer object with the given UUID.
@@ -140,6 +150,11 @@ abstract class BasePlayer implements JSONSerializable {
         return resident;
     }
 
+    /**
+     * Get the town ranks assocuated with this user.
+     * 
+     * @return A list of town ranks.
+     */
     public List<String> getTownRanks() {
 
         if (town == null)
@@ -150,6 +165,11 @@ abstract class BasePlayer implements JSONSerializable {
 
     }
 
+    /**
+     * Get the nation ranks assocuated with this user.
+     * 
+     * @return A list of nation ranks.
+     */
     public List<String> getNationRanks() {
 
         if (nation == null)
@@ -160,6 +180,11 @@ abstract class BasePlayer implements JSONSerializable {
 
     }
 
+    /**
+     * Get the town name that the current user is in.
+     * 
+     * @return The name of the town, or "Wilderness" if not in a town.
+     */
     public String getTownName() {
 
         return town != null ? town.getName() : "Wilderness";

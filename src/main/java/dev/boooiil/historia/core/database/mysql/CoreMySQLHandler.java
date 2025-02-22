@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
- * It's a class that handles all the MySQL queries for the plugin.
+ * MySQL database query handler for Historia-Core.
  */
+@NullMarked
 public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHandler {
 
     public CoreMySQLHandler() {
@@ -285,8 +287,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
-    @Nullable
-    public UUID getUUID(String playerName) {
+    public @Nullable UUID getUUID(String playerName) {
 
         String string = "SELECT uuid FROM historia WHERE username = '" + playerName + "'";
 
@@ -300,6 +301,11 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
 
     }
 
+    /**
+     * Save a user to the database.
+     * 
+     * @param historiaPlayer - Player to save.
+     */
     public void saveUser(HistoriaPlayer historiaPlayer) {
 
         UUID uuid = historiaPlayer.getUUID();
