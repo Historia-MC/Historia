@@ -24,7 +24,7 @@ public class CoreLogger {
     // private static final String debugPrefix = "§7[§cDebug§7] ";
 
     /** Bukkit logger to send messages to the console. */
-    private static final Logger logger = HistoriaCore.isTesting ? null : Bukkit.getLogger();
+    private static final Logger logger = Bukkit.getLogger();
 
     /**
      * Send an info message to the console.
