@@ -491,9 +491,6 @@ public class JSONUtils {
         V t_value = values.get(values.keySet().toArray()[0]);
         Boolean isSerializable = (t_value instanceof JSONSerializable);
 
-        CoreLogger.debugToConsole(t_value.getClass().getName(), "" + (t_value instanceof JSONSerializable),
-                isSerializable.toString());
-
         StringBuilder sb = new StringBuilder();
 
         sb.append("\"" + key + "\":{");
@@ -574,9 +571,6 @@ public class JSONUtils {
 
         V t_value = values.get(values.keySet().toArray()[0]);
         Boolean isSerializable = (t_value instanceof JSONSerializable);
-
-        CoreLogger.debugToConsole(t_value.getClass().getName(), "" + (t_value instanceof JSONSerializable),
-                isSerializable.toString());
 
         StringBuilder sb = new StringBuilder();
 
