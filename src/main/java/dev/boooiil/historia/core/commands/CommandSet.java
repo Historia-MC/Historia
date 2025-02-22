@@ -7,6 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * Set player attributes such as health and speed.
+ * 
+ */
 public class CommandSet implements CommandExecutor {
 
     @Override

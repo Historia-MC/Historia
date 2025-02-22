@@ -1,8 +1,7 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
 /**
- * Do not use this.
- * Use the specific enum for the source of experience.
+ * This is a list of all experience source incomes.
  */
 public enum AllSources {
 

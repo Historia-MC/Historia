@@ -4,26 +4,35 @@ import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jspecify.annotations.NullMarked;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Set;
 
 /**
- * It takes a class and a variable number of arguments and creates a new
- * instance of the class for each
- * key in the set and puts it in the map
+ * Super class of the Configuration classes.
  */
+@NullMarked
 public abstract class BaseConfiguration<T> {
 
+    /**
+     * The {@link YamlConfiguration} file of this configuration.
+     */
     protected YamlConfiguration configuration;
+
+    /*
+     * The set of keys in the file.
+     */
     protected Set<String> set;
+
+    /**
+     * A map of keys and their objects.
+     */
     protected HashMap<String, T> map;
 
     /**
-     * It loads a YAML file from the plugin's data folder, and then populates a
-     * HashMap with the keys
-     * and values from the YAML file
+     * Load the provided YAML file and populate the map with its values.
      * 
      * @param fileName The name of the file you want to load.
      */
@@ -39,7 +48,7 @@ public abstract class BaseConfiguration<T> {
     }
 
     /**
-     * It returns the configuration file
+     * Get the {@link YamlConfiguration} for this configuration.
      * 
      * @return The configuration.
      */
@@ -50,7 +59,7 @@ public abstract class BaseConfiguration<T> {
     }
 
     /**
-     * Get a set (unordered list) of all keys described in the configuration.
+     * Get a {@link Set} of all top-level keys for this configuration.
      * 
      * 
      * @return Set of all keys described in the configuration.
@@ -65,7 +74,11 @@ public abstract class BaseConfiguration<T> {
     }
 
     /**
-     * This function returns a HashMap of String keys and Object values
+     * Get the HashMap representation of this configuration.
+     * <p>
+     * The objects T of this configuration are stored by the top level key provided
+     * by the {@link #getSet()}.
+     * 
      * 
      * @return A HashMap
      */
@@ -76,7 +89,7 @@ public abstract class BaseConfiguration<T> {
     }
 
     /**
-     * If the key is in the configuration.
+     * Check if the key is within the configuration's set.
      * 
      * @param key - Name of the object to check.
      * @return If the object is provided in the configuration.
@@ -88,9 +101,7 @@ public abstract class BaseConfiguration<T> {
     }
 
     /**
-     * It takes a class and a variable number of arguments and creates a new
-     * instance of the class for
-     * each key in the set and puts it in the map
+     * Populate the current map with the objects provided by the configuration file.
      *
      */
     private void populateMap() {
@@ -101,7 +112,20 @@ public abstract class BaseConfiguration<T> {
 
     }
 
+    /**
+     * Create a new object T for the given key.
+     * 
+     * @param name - The key to use for the new object.
+     * @return The newly created object.
+     */
     public abstract T createNew(String name);
+
+    /**
+     * Get an object from the configuration by its key.
+     * 
+     * @param objectName - The name of the object to retrieve.
+     * @return The retrieved object.
+     */
 
     public abstract T getObject(String objectName);
 }

@@ -8,19 +8,21 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
+import org.jspecify.annotations.NullMarked;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * This class represents the skills of a player in the game. It contains boolean
- * variables that represent
- * Whether the player has certain skills or abilities.
+ * Skill holder for HistoriaPlayer skills.
  */
+@NullMarked
 public class Skills implements JSONSerializable {
 
+    /**
+     * Skill types for HistoriaPlayer skills.
+     */
     public enum SkillType {
         NAME_TAG("nametag"),
         FEATHER_FALL("featherFall"),
@@ -64,7 +66,9 @@ public class Skills implements JSONSerializable {
         }
     }
 
-    private final EnumMap<SkillType, Boolean> skills = new EnumMap<>(SkillType.class);
+    /** Holds all existing skills and whether they have them. */
+    private final HashMap<SkillType, Boolean> skills = new HashMap<>();
+    /** Map of Regex patterns and enchants to apply to certain items. */
     private final HashMap<Pattern, Enchantment> skillEnchants = new HashMap<>();
 
     public Skills(FileConfiguration config, String root) {
@@ -126,14 +130,32 @@ public class Skills implements JSONSerializable {
 
     }
 
+    /**
+     * Check if a player has a certain skill.
+     * 
+     * @param skill The skill to check.
+     * @return true if the player has that skill.
+     */
     public boolean hasSkill(SkillType skill) {
         return skills.get(skill);
     }
 
+    /**
+     * Check if the player has skill enchants.
+     * 
+     * @return true if the player has skill enchants.
+     */
     public boolean hasSkillEnchants() {
         return !skillEnchants.isEmpty();
     }
 
+    /**
+     * Get the enchantment for a specific material that matches the pattern.
+     * 
+     * @param material The material to check against the pattern.
+     * @return The Enchantment that matches the pattern, or null if no match is
+     *         found.
+     */
     public Enchantment getSkillEnchantment(Material material) {
 
         for (Map.Entry<Pattern, Enchantment> entry : skillEnchants.entrySet()) {

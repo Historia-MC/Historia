@@ -4,20 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 
+/**
+ * SQLite database query handler for Historia-Core.
+ */
 @Deprecated(forRemoval = false)
+@NullMarked
 public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabaseHandler {
 
     public CoreSQLiteHandler() {
 
     }
 
+    /**
+     * Get the type of database.
+     */
     public DatabaseType getDatabaseType() {
         return DatabaseType.SQLITE;
     }
@@ -214,6 +222,13 @@ public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabase
 
     }
 
+    /**
+     * Get the user with a given UUID. If the user does not exist, create a new user
+     * and return it.
+     * 
+     * @param uuid - UUID of the player.
+     * @return {@link HistoriaPlayer} with the given UUID.
+     */
     public HistoriaPlayer getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
@@ -283,8 +298,7 @@ public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabase
      * @see <a href=
      *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
-    @Nullable
-    public UUID getUUID(String playerName) {
+    public @Nullable UUID getUUID(String playerName) {
 
         String string = "SELECT uuid FROM historia WHERE username = '" + playerName + "'";
 
@@ -298,6 +312,11 @@ public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabase
 
     }
 
+    /**
+     * Save a user to the database.
+     * 
+     * @param historiaPlayer - Player to save.
+     */
     public void saveUser(HistoriaPlayer historiaPlayer) {
 
         UUID uuid = historiaPlayer.getUUID();

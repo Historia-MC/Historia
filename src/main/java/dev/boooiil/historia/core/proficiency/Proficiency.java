@@ -8,6 +8,7 @@ import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,8 +17,12 @@ import java.util.regex.Pattern;
  * This class represents a proficiency that a character can have. It contains
  * information about the proficiency's name, stats, and skills.
  */
+@NullMarked
 public class Proficiency implements JSONSerializable {
 
+    /**
+     * Enum of valid proficienies.
+     */
     public enum ProficiencyName {
 
         NONE("None"),

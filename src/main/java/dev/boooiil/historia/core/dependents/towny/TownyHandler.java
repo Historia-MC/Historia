@@ -6,17 +6,17 @@ import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.UUID;
 
 /**
- * It's a class that handles all of the Towny related methods
+ * Towny Utility class.
  */
+@NullMarked
 public class TownyHandler {
 
-    // It's a private constructor that throws an exception.
     private TownyHandler() {
-        throw new IllegalStateException("Static utility class.");
     }
 
     /**
@@ -27,14 +27,14 @@ public class TownyHandler {
      * @param material - Material of the block.
      * @return If the player is able to break the block.
      */
-
     public static boolean getBreakPermissions(Player player, Location location, Material material) {
 
         boolean hasPermission;
 
         try {
 
-            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.DESTROY);
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material,
+                    TownyPermission.ActionType.DESTROY);
 
         } catch (Exception e) {
 
@@ -47,13 +47,22 @@ public class TownyHandler {
 
     }
 
+    /**
+     * Checks to see if the player is able to place a block.
+     * 
+     * @param player   - Player placing the block.
+     * @param location - Location of the block.
+     * @param material - Material of the block.
+     * @return - If the player is able to place a block.
+     */
     public static boolean getPlacePermissions(Player player, Location location, Material material) {
 
         boolean hasPermission;
 
         try {
 
-            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.BUILD);
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material,
+                    TownyPermission.ActionType.BUILD);
 
         } catch (Exception e) {
 
@@ -66,13 +75,22 @@ public class TownyHandler {
 
     }
 
+    /**
+     * Checks to see if the player is able to use an item.
+     * 
+     * @param player   - Player using the item.
+     * @param location - Location of the item.
+     * @param material - Material of the item.
+     * @return - If the player is able to use an item.
+     */
     public static boolean getUsePermissions(Player player, Location location, Material material) {
 
         boolean hasPermission;
 
         try {
 
-            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material, TownyPermission.ActionType.SWITCH);
+            hasPermission = PlayerCacheUtil.getCachePermission(player, location, material,
+                    TownyPermission.ActionType.SWITCH);
 
         } catch (Exception e) {
 

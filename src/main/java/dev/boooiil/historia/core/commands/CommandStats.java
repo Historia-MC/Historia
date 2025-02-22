@@ -9,6 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * Get a player's stats such as level, experience, and proficiency.
+ * 
+ */
 public class CommandStats implements CommandExecutor {
 
         @Override

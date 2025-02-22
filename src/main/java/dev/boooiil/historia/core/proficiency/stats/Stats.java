@@ -6,32 +6,54 @@ import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class will hold base stats provided in the configuration for each user's
+ * proficiency.
+ */
+@NullMarked
 public class Stats implements JSONSerializable {
 
+    /** Base health of the player. */
     private float baseHealth;
+    /** Max health of the player. */
     private float maxHealth;
+    /** Base food of the player. (How much hunger they can satiate) */
     private int baseFood;
+    /** Base speed of the player. */
     private double baseSpeed;
+    /** Base experience of the player. */
     private double baseExperienceGain;
 
+    /** Base evasion rate of the player. (How well they can dodge attacks) */
     private double baseEvasion;
 
+    /** Chance to harvest a crop successfully. */
     private double harvestChance;
+    /** Chance to harvest a crop twice. */
     private double doubleHarvestChance;
+    /** Chance to grow a crop instantly. */
     private double instantGrowthChance;
+    /** Chance to behead an enemy. */
     private double beheadChance;
 
+    /** ?? */
     private double baseSwordProficiency;
+    /** ?? */
     private double baseBowProficiency;
+    /** ?? */
     private double baseCrossbowProficiency;
 
+    /** Experience sources this player can gain from. */
     private List<AllSources> experienceSources;
 
+    /** The usable weapon weights this player can use. */
     private List<String> usableWeaponTypes;
+    /** The usable armor weights this player can use. */
     private List<String> usableArmorTypes;
 
     public Stats(FileConfiguration config, String root) {
@@ -66,16 +88,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the base health of the player
+     * returns the base health of the player
      * 
-     * @return The baseHealth variable is being returned.
+     * @return The baseHealth of the player is being returned.
      */
     public float getBaseHealth() {
         return baseHealth;
     }
 
     /**
-     * This function sets the base health of the player
+     * sets the base health of the player
      * 
      * @param baseHealth The base health of the player.
      */
@@ -84,16 +106,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the maxHealth variable
+     * returns the maxHealth of the player
      * 
-     * @return The maxHealth variable is being returned.
+     * @return The maxHealth of the player is being returned.
      */
     public float getMaxHealth() {
         return maxHealth;
     }
 
     /**
-     * This function sets the maxHealth variable to the value of the maxHealth
+     * sets the maxHealth of the player to the value of the maxHealth
      * parameter
      * 
      * @param maxHealth The maximum health of the player.
@@ -103,16 +125,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the baseFood variable
+     * returns the baseFood of the player
      * 
-     * @return The baseFood variable is being returned.
+     * @return The baseFood of the player is being returned.
      */
     public int getBaseFood() {
         return baseFood;
     }
 
     /**
-     * This function sets the base food of the player
+     * sets the base food of the player
      * 
      * @param baseFood The amount of food the player starts with.
      */
@@ -121,16 +143,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the base speed of the player
+     * returns the base speed of the player
      * 
-     * @return The baseSpeed variable is being returned.
+     * @return The baseSpeed of the player is being returned.
      */
     public double getBaseSpeed() {
         return baseSpeed;
     }
 
     /**
-     * This function sets the base speed of the player
+     * sets the base speed of the player
      * 
      * @param baseSpeed The speed of the enemy.
      */
@@ -139,16 +161,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the baseEvasion variable
+     * returns the baseEvasion of the player
      * 
-     * @return The baseEvasion variable is being returned.
+     * @return The baseEvasion of the player is being returned.
      */
     public double getBaseEvasion() {
         return baseEvasion;
     }
 
     /**
-     * This function sets the baseEvasion variable to the value of the parameter
+     * sets the baseEvasion of the player to the value of the parameter
      * baseEvasion
      * 
      * @param baseEvasion The base evasion of the character.
@@ -158,16 +180,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the harvest chance of the crop
+     * returns the harvest chance of the crop
      * 
-     * @return The harvestChance variable is being returned.
+     * @return The harvestChance of the player is being returned.
      */
     public double getHarvestChance() {
         return harvestChance;
     }
 
     /**
-     * This function sets the harvest chance of the crop to the value of the
+     * sets the harvest chance of the crop to the value of the
      * parameter harvestChance
      * 
      * @param harvestChance The chance that the block will drop an item when broken.
@@ -177,16 +199,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * It returns the doubleHarvestChance variable
+     * It returns the doubleHarvestChance of the player
      * 
-     * @return The doubleHarvestChance variable is being returned.
+     * @return The doubleHarvestChance of the player is being returned.
      */
     public double getDoubleHarvestChance() {
         return doubleHarvestChance;
     }
 
     /**
-     * This function sets the double harvest chance to the value of the parameter
+     * sets the double harvest chance to the value of the parameter
      * 
      * @param doubleHarvestChance The chance that a crop will drop two items instead
      *                            of one.
@@ -196,16 +218,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the instantGrowthChance variable
+     * returns the instantGrowthChance of the player
      * 
-     * @return The instantGrowthChance variable is being returned.
+     * @return The instantGrowthChance of the player is being returned.
      */
     public double getInstantGrowthChance() {
         return instantGrowthChance;
     }
 
     /**
-     * This function sets the instantGrowthChance variable to the value of the
+     * sets the instantGrowthChance of the player to the value of the
      * instantGrowthChance
      * parameter
      * 
@@ -216,16 +238,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the beheadChance variable
+     * returns the beheadChance of the player
      * 
-     * @return The beheadChance variable is being returned.
+     * @return The beheadChance of the player is being returned.
      */
     public double getBeheadChance() {
         return beheadChance;
     }
 
     /**
-     * This function sets the beheadChance variable to the value of the beheadChance
+     * sets the beheadChance of the player to the value of the beheadChance
      * parameter
      * 
      * @param beheadChance The chance that the player will behead the player.
@@ -235,16 +257,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the baseSwordProficiency variable
+     * returns the baseSwordProficiency of the player
      * 
-     * @return The baseSwordProficiency variable is being returned.
+     * @return The baseSwordProficiency of the player is being returned.
      */
     public double getBaseSwordProficiency() {
         return baseSwordProficiency;
     }
 
     /**
-     * This function sets the baseSwordProficiency variable to the value of the
+     * sets the baseSwordProficiency of the player to the value of the
      * parameter passed in
      * 
      * @param baseSwordProficiency The base proficiency of the sword.
@@ -254,16 +276,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the baseBowProficiency variable
+     * returns the baseBowProficiency of the player
      * 
-     * @return The baseBowProficiency variable is being returned.
+     * @return The baseBowProficiency of the player is being returned.
      */
     public double getBaseBowProficiency() {
         return baseBowProficiency;
     }
 
     /**
-     * This function sets the baseBowProficiency variable to the value of the
+     * sets the baseBowProficiency of the player to the value of the
      * parameter passed in
      * 
      * @param baseBowProficiency The base proficiency of the bow.
@@ -273,16 +295,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the baseCrossbowProficiency variable
+     * returns the baseCrossbowProficiency of the player
      * 
-     * @return The baseCrossbowProficiency variable is being returned.
+     * @return The baseCrossbowProficiency of the player is being returned.
      */
     public double getBaseCrossbowProficiency() {
         return baseCrossbowProficiency;
     }
 
     /**
-     * This function sets the baseCrossbowProficiency variable to the value of the
+     * sets the baseCrossbowProficiency of the player to the value of the
      * parameter passed in
      * 
      * @param baseCrossbowProficiency The base proficiency of the crossbow.
@@ -292,16 +314,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the base experience gain
+     * returns the base experience gain
      * 
-     * @return The baseExperienceGain variable is being returned.
+     * @return The baseExperienceGain of the player is being returned.
      */
     public double getBaseExperienceGain() {
         return baseExperienceGain;
     }
 
     /**
-     * This function sets the base experience gain of the player
+     * sets the base experience gain of the player
      * 
      * @param baseExperienceGain The base experience gain for the player.
      */
@@ -310,7 +332,7 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns a list of strings that represent the weapon proficiency
+     * returns a list of strings that represent the weapon proficiency
      * of the character
      * 
      * @return The weaponProficiency list.
@@ -320,7 +342,7 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function sets the weapon proficiency of the character
+     * sets the weapon proficiency of the character
      * 
      * @param weaponProficiency List of Strings
      */
@@ -329,7 +351,7 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns a list of strings that represent the armor proficiency
+     * returns a list of strings that represent the armor proficiency
      * of the class
      * 
      * @return A list of strings.
@@ -339,7 +361,7 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function sets the armorProficiency variable to the value of the
+     * sets the armorProficiency of the player to the value of the
      * parameter armorProficiency
      * 
      * @param armorProficiency List of armor types the character is proficient with.
@@ -349,16 +371,16 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns the experienceSources variable
+     * returns the experienceSources of the player
      * 
-     * @return The experienceSources variable is being returned.
+     * @return The experienceSources of the player is being returned.
      */
     public List<AllSources> getExperienceSources() {
         return experienceSources;
     }
 
     /**
-     * This function sets the experienceSources variable to the value of the
+     * sets the experienceSources of the player to the value of the
      * parameter
      * experienceSources
      * 
@@ -369,7 +391,7 @@ public class Stats implements JSONSerializable {
     }
 
     /**
-     * This function returns a boolean value indicating whether the character has
+     * returns a boolean value indicating whether the character has
      * the given income source or not.
      * 
      * @param source The income source to check for.

@@ -9,13 +9,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * It's a command that allows a player to view the debug information of another
- * player
+ * Debug a {@link HistoriaPlayer}.
  */
 public class CommandDebug implements CommandExecutor {
 
     @Override
-    // It's a method that is called when a command is executed.
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         args[0] = args[0].toLowerCase();

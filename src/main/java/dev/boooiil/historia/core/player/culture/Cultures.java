@@ -1,5 +1,9 @@
 package dev.boooiil.historia.core.player.culture;
 
+/**
+ * Enum storing all possible cultures.
+ * 
+ */
 public enum Cultures {
 
     // Western European Cultures

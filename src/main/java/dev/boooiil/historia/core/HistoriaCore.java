@@ -34,20 +34,25 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
- * It's a plugin that loads, enables, and disables.
+ * Historia-Core Main class
  */
 public class HistoriaCore extends JavaPlugin {
 
-    public static boolean isTesting = false;
+    /** if the plugin is testing */
+    public static boolean isTesting = true;
+    /** this plugin instance */
     private static Plugin instance = null;
+    /** the database handler */
     private static ICoreDatabaseHandler databaseHandler;
 
     public HistoriaCore() {
         super();
     }
 
+    /**
+     * Runs on plugin load.
+     */
     @Override
-    // It's a method that is called when the plugin is loaded.
     public void onLoad() {
 
         instance = this;
@@ -63,20 +68,22 @@ public class HistoriaCore extends JavaPlugin {
 
         if (Bukkit.getVersion().contains("MockBukkit")) {
             System.out.println("RUNNING IN TEST MODE");
-            isTesting = true;
         }
 
         else if (!Bukkit.getVersion().contains("Paper")) {
             CoreLogger.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
             CoreLogger.errorToConsole("DISABLING PLUGIN");
             HistoriaCore.disable();
+        } else {
+            isTesting = false;
         }
 
     }
 
+    /**
+     * Runs on plugin enable.
+     */
     @Override
-    // It's a method that is called when the plugin is enabled.
-    // Test
     public void onEnable() {
 
         // Save / Load the config in the Historia plugins folder.
@@ -113,6 +120,9 @@ public class HistoriaCore extends JavaPlugin {
 
     }
 
+    /**
+     * Runs on plugin disable.
+     */
     @Override
     // It's a method that is called when the plugin is disabled.
     public void onDisable() {
@@ -159,22 +169,46 @@ public class HistoriaCore extends JavaPlugin {
 
     }
 
+    /**
+     * Get the database handler.
+     * 
+     * @return the database handler
+     */
     public static ICoreDatabaseHandler getDatabaseHandler() {
         return databaseHandler;
     }
 
+    /**
+     * Get the database connection.
+     * 
+     * @return the database connection.
+     */
     public static IDatabaseConnection getIDatabaseConnection() {
         return databaseHandler;
     }
 
+    /**
+     * Get the database connection.
+     * 
+     * @return the database connection.
+     */
     public static DatabaseConnection getBaseDatabaseConnection() {
         return (DatabaseConnection) databaseHandler;
     }
 
+    /**
+     * Get a namespacedkey in the HistoriaCore namespace.
+     * 
+     * @param key - key to set.
+     * @return the namespaced key
+     */
     public static NamespacedKey getNamespacedKey(String key) {
         return new NamespacedKey(plugin(), key);
     }
 
+    /**
+     * Initialize the database.
+     */
     private void initDatabase() {
         DatabaseType DBType = ConfigurationLoader.getGeneralConfig().databaseType;
 
@@ -193,6 +227,9 @@ public class HistoriaCore extends JavaPlugin {
         databaseHandler.createTable();
     }
 
+    /**
+     * Close the database.
+     */
     private void closeDatabase() {
         databaseHandler.closeConnection();
         databaseHandler.closeDataSource();

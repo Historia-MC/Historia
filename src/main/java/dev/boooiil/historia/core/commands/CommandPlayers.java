@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * It's a command that lists all the players in the game
+ * List all players in the game with their level and class.
+ * 
  */
 public class CommandPlayers implements CommandExecutor {
 

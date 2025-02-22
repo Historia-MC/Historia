@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * This is a list of animal source experiences.
+ */
 public enum AnimalSources {
 
     NONE(AllSources.NONE),

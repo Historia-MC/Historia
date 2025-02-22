@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency.experience;
 
+/**
+ * This is a list of all experience source incomes for blocks.
+ */
 public enum BlockSources {
 
     NONE(AllSources.NONE),

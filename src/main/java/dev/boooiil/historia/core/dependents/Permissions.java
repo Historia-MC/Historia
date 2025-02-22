@@ -5,7 +5,12 @@ import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.dependents.worldguard.WorldGuardHandler;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
 
+/**
+ * Permissions adapter for region-based plugin dependencies.
+ */
+@NullMarked
 public class Permissions {
 
     /**
@@ -13,7 +18,9 @@ public class Permissions {
      * 
      * @param player The player who is trying to break the block.
      * @param block  The block you want to check.
-     * @return A boolean value.
+     * 
+     * @return returns true if the player can break the block; otherwise, returns
+     *         false.
      */
     public static boolean canBreakBlock(Player player, Block block) {
 
@@ -31,7 +38,9 @@ public class Permissions {
      * 
      * @param player The player who is trying to use the block.
      * @param block  The block you want to check.
-     * @return A boolean value.
+     * 
+     * @return returns true if the player can use the block; otherwise, returns
+     *         false.
      */
     public static boolean canUseBlock(Player player, Block block) {
 
@@ -46,7 +55,10 @@ public class Permissions {
      * 
      * @param player The player who is trying to place the block.
      * @param block  The block you want to check.
-     * @return A boolean value.
+     * 
+     * @return returns true if the player can place the block; otherwise, returns
+     *         false.
+     * 
      */
     public static boolean canPlaceBlock(Player player, Block block) {
 
