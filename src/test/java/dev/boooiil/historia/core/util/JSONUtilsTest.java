@@ -105,6 +105,32 @@ public class JSONUtilsTest {
     }
 
     @Test
+    void testFromJSONSerializableList() {
+
+        JSONListTestClass listTest = new JSONListTestClass();
+
+        assertEquals(listTest.toJSON(),
+                "{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
+
+        assertEquals(listTest.toString(),
+                "JSONListTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
+
+    }
+
+    @Test
+    void testFromJSONSerializableSet() {
+
+        JSONSetTestClass listTest = new JSONSetTestClass();
+
+        assertEquals(listTest.toJSON(),
+                "{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
+
+        assertEquals(listTest.toString(),
+                "JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
+
+    }
+
+    @Test
     void testFromDoubleSet() {
 
         Set<?> l = setMappings.get(Double.class);
@@ -178,7 +204,7 @@ public class JSONUtilsTest {
     }
 
     @Test
-    void testFromMapAsJSON() {
+    void testfromMap() {
 
         HashMap<String, Integer> simlpeMap = new HashMap<>();
         HashMap<String, List<Integer>> listMap = new HashMap<>();
@@ -193,18 +219,25 @@ public class JSONUtilsTest {
         complexMap.put("one", listMap);
         complexMap.put("two", listMap);
 
-        String smr = JSONUtils.fromMapAsJSON("map", simlpeMap);
+        String smr = JSONUtils.fromMap("map", simlpeMap);
 
         assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
 
-        String lmr = JSONUtils.fromMapAsJSON("map", listMap);
+        String lmr = JSONUtils.fromMap("map", listMap);
 
         assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
 
-        String cmr = JSONUtils.fromMapAsJSON("map", complexMap);
+        String cmr = JSONUtils.fromMap("map", complexMap);
 
         assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
 
+        JSONMapTestClass mapTest = new JSONMapTestClass();
+
+        assertEquals(mapTest.toJSON(),
+                "{\"test\":{\"set\":{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test\":{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, \"list\":{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test1\":{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}}}");
+
+        assertEquals(mapTest.toString(),
+                "JSONMapTestClass{\"test\":{\"set\":JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test\":JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, \"list\":JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test1\":JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}}}");
     }
 
     @Test
@@ -223,15 +256,15 @@ public class JSONUtilsTest {
         complexMap.put("one", listMap);
         complexMap.put("two", listMap);
 
-        String smr = JSONUtils.fromMapAsString("map", simlpeMap);
+        String smr = JSONUtils.fromMap("map", simlpeMap, true);
 
         assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
 
-        String lmr = JSONUtils.fromMapAsString("map", listMap);
+        String lmr = JSONUtils.fromMap("map", listMap, true);
 
         assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
 
-        String cmr = JSONUtils.fromMapAsString("map", complexMap);
+        String cmr = JSONUtils.fromMap("map", complexMap, true);
 
         assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
 
@@ -327,4 +360,160 @@ public class JSONUtilsTest {
         assertEquals(r, "\"value\":\"one\"");
     }
 
+    @Test
+    void testFromValue7() {
+        JSONTestClass testClass = new JSONTestClass();
+
+        assertEquals(JSONUtils.fromValue("test", testClass),
+                "\"test\":{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}");
+
+        assertEquals(JSONUtils.fromValue("test", testClass, true),
+                "\"test\":JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}");
+    }
+
+    private class JSONTestClass implements JSONSerializable {
+
+        int i = 1;
+        float f = 1f;
+        boolean b = true;
+        String s = "test";
+
+        JSONTestClass() {
+        }
+
+        JSONTestClass(int i, float f, boolean b, String s) {
+            this.i = i;
+            this.f = f;
+            this.b = b;
+            this.s = s;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(this.getClass().getSimpleName() + "{");
+            sb.append(JSONUtils.fromValue("i", i) + ", ");
+            sb.append(JSONUtils.fromValue("f", f) + ", ");
+            sb.append(JSONUtils.fromValue("b", b) + ", ");
+            sb.append(JSONUtils.fromValue("s", s));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+        @Override
+        public String toJSON() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("{");
+            sb.append(JSONUtils.fromValue("i", i) + ", ");
+            sb.append(JSONUtils.fromValue("f", f) + ", ");
+            sb.append(JSONUtils.fromValue("b", b) + ", ");
+            sb.append(JSONUtils.fromValue("s", s));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+    }
+
+    private class JSONMapTestClass implements JSONSerializable {
+
+        HashMap<String, JSONSerializable> map = new HashMap<>();
+
+        JSONMapTestClass() {
+            map.put("test", new JSONTestClass());
+            map.put("test1", new JSONTestClass(2, 2f, false, "test1"));
+            map.put("list", new JSONSetTestClass());
+            map.put("set", new JSONSetTestClass());
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(this.getClass().getSimpleName() + "{");
+            sb.append(JSONUtils.fromMap("test", map, true));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+        @Override
+        public String toJSON() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("{");
+            sb.append(JSONUtils.fromMap("test", map));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+    }
+
+    private class JSONListTestClass implements JSONSerializable {
+
+        List<JSONSerializable> list = new ArrayList<>();
+
+        JSONListTestClass() {
+            list.add(new JSONTestClass());
+            list.add(new JSONTestClass(2, 2f, false, "test1"));
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(this.getClass().getSimpleName() + "{");
+            sb.append(JSONUtils.fromList("test", list));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+        @Override
+        public String toJSON() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("{");
+            sb.append(JSONUtils.fromJSONSerializableList("test", list, true));
+            sb.append("}");
+
+            return sb.toString();
+        }
+    }
+
+    private class JSONSetTestClass implements JSONSerializable {
+
+        Set<JSONSerializable> set = new LinkedHashSet<>();
+
+        JSONSetTestClass() {
+            set.add(new JSONTestClass());
+            set.add(new JSONTestClass(2, 2f, false, "test1"));
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(this.getClass().getSimpleName() + "{");
+            sb.append(JSONUtils.fromSet("test", set));
+            sb.append("}");
+
+            return sb.toString();
+        }
+
+        @Override
+        public String toJSON() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("{");
+            sb.append(JSONUtils.fromJSONSerializableSet("test", set, true));
+            sb.append("}");
+
+            return sb.toString();
+        }
+    }
 }

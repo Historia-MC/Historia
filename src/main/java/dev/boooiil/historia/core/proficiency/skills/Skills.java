@@ -174,8 +174,8 @@ public class Skills implements JSONSerializable {
 
         sb.append("Skills");
         sb.append("{");
-        sb.append(JSONUtils.fromMapAsString("skills", skills) + ", ");
-        sb.append(JSONUtils.fromMapAsString("skillEnchants", skillEnchants));
+        sb.append(JSONUtils.fromMap("skills", skills, true) + ", ");
+        sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants, true));
         sb.append("}");
 
         return sb.toString();
@@ -186,8 +186,8 @@ public class Skills implements JSONSerializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{");
-        sb.append(JSONUtils.fromMapAsJSON("skills", skills) + ", ");
-        sb.append(JSONUtils.fromMapAsJSON("skillEnchants", skillEnchants));
+        sb.append(JSONUtils.fromMap("skills", skills) + ", ");
+        sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants));
         sb.append("}");
 
         return sb.toString();
