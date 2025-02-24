@@ -7,14 +7,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
-import org.bukkit.Warning;
 import org.bukkit.potion.PotionEffect;
 import org.jspecify.annotations.NullMarked;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 
 /**
  * Utility class for converting various data types to JSON format.
@@ -33,12 +30,18 @@ public class JSONUtils {
         TYPE_HANDLERS.put(String.class, castAndHandle(JSONUtils::fromStringList));
         TYPE_HANDLERS.put(Component.class, castAndHandle(JSONUtils::fromComponentList));
         TYPE_HANDLERS.put(PotionEffect.class, castAndHandle(JSONUtils::fromPotionEffectList));
+        TYPE_HANDLERS.put(JSONSerializable.class, castAndHandle(JSONUtils::handleJSONSerializableList));
     }
 
     @SuppressWarnings("unchecked")
     private static <T> BiFunction<String, List<?>, String> castAndHandle(
             BiFunction<String, List<T>, String> handler) {
         return (key, list) -> handler.apply(key, (List<T>) list);
+    }
+
+    /** idfk */
+    private static String handleJSONSerializableList(String key, List<JSONSerializable> values) {
+        return fromJSONSerializableList(key, values);
     }
 
     /**
@@ -107,13 +110,39 @@ public class JSONUtils {
         return "\"" + key + "\":" + "\"" + value + "\"";
     }
 
+    public static String fromValue(String key, JSONSerializable value) {
+        return fromValue(key, value, false);
+    }
+
+    public static String fromValue(String key, JSONSerializable value, boolean asString) {
+        return asString ? "\"" + key + "\":" + value.toString() : "\"" + key + "\":" + value.toJSON();
+    }
+
+    /**
+     * Convert a list into a valid "key": [ ...value ] JSON pair.
+     * 
+     * <pre>
+     * "SampleKey": [ v1, v2, ... ]
+     * </pre>
+     * 
+     * @param T      The type of the item in the list.
+     * @param key    the key of the pair.
+     * @param values the value(s) of the pair.
+     * @return a "key": [ ...value ] pair.
+     */
     public static <T> String fromList(String key, List<T> values) {
         if (values.isEmpty()) {
             return "\"" + key + "\": []";
         }
 
         Class<?> type = values.get(0).getClass();
-        BiFunction<String, List<?>, String> handler = TYPE_HANDLERS.get(type);
+        BiFunction<String, List<?>, String> handler = null;
+
+        if (values.get(0) instanceof JSONSerializable) {
+            handler = TYPE_HANDLERS.get(JSONSerializable.class);
+        } else {
+            handler = TYPE_HANDLERS.get(type);
+        }
 
         if (handler != null) {
             return handler.apply(key, values);
@@ -348,6 +377,52 @@ public class JSONUtils {
         return sb.toString();
     }
 
+    /**
+     * Convert a list into a valid "key": [ ...value ] JSON pair.
+     * 
+     * <pre>
+     * "SampleKey": [ v1, v2, ... ]
+     * </pre>
+     * 
+     * @param key    the key of the pair.
+     * @param values the value(s) of the pair.
+     * @return a "key": [ ...value ] pair.
+     */
+    public static String fromJSONSerializableList(String key, List<JSONSerializable> values) {
+        return fromJSONSerializableList(key, values, false);
+    }
+
+    /**
+     * Convert a list into a valid "key": [ ...value ] JSON pair.
+     * 
+     * <pre>
+     * "SampleKey": [ v1, v2, ... ]
+     * </pre>
+     * 
+     * @param key    the key of the pair.
+     * @param values the value(s) of the pair.
+     * @return a "key": [ ...value ] pair.
+     */
+    public static String fromJSONSerializableList(String key, List<JSONSerializable> values, boolean asString) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\"" + key + "\":[");
+
+        for (int i = 0; i < values.size(); i++) {
+            JSONSerializable j_value = values.get(i);
+
+            if (!asString)
+                sb.append(j_value.getClass().getSimpleName() + j_value.toJSON() + ", ");
+            else
+                sb.append(j_value.toJSON() + ", ");
+        }
+
+        sb.setLength(sb.length() - 2);
+        sb.append("]");
+
+        return sb.toString();
+    }
+
     public static <T> String fromSet(String key, Set<T> values) {
         return fromList(key, new ArrayList<>(values));
     }
@@ -473,6 +548,36 @@ public class JSONUtils {
     }
 
     /**
+     * Convert a set into a valid "key": [ ...value ] JSON pair.
+     * 
+     * <pre>
+     * "SampleKey": [ v1, v2, ... ]
+     * </pre>
+     * 
+     * @param key    the key of the pair.
+     * @param values the value(s) of the pair.
+     * @return a "key": [ ...value ] pair.
+     */
+    public static String fromJSONSerializableSet(String key, Set<JSONSerializable> values) {
+        return fromJSONSerializableSet(key, values, false);
+    }
+
+    /**
+     * Convert a set into a valid "key": [ ...value ] JSON pair.
+     * 
+     * <pre>
+     * "SampleKey": [ v1, v2, ... ]
+     * </pre>
+     * 
+     * @param key    the key of the pair.
+     * @param values the value(s) of the pair.
+     * @return a "key": [ ...value ] pair.
+     */
+    public static String fromJSONSerializableSet(String key, Set<JSONSerializable> values, boolean asString) {
+        return fromJSONSerializableList(key, new ArrayList<>(values), asString);
+    }
+
+    /**
      * Convert a map into a valid "key": { "key1": value, "key2": value }
      * 
      * @param <K>    - Name of the key.
@@ -481,8 +586,20 @@ public class JSONUtils {
      * @param values - Values to serialize.
      * @return - a "key": { "key1": value, "key2": value } pair
      */
-    @Warning(reason = "Use at your own risk. If the value is formatted with our implementation it will not output a correctly formatted JSON.")
-    public static <K, V> String fromMapAsJSON(String key, Map<K, V> values) {
+    public static <K, V> String fromMap(String key, Map<K, V> values) {
+        return fromMap(key, values, false);
+    }
+
+    /**
+     * Convert a map into a valid "key": { "key1": value, "key2": value }
+     * 
+     * @param <K>    - Name of the key.
+     * @param <V>    - Value to append to the key.
+     * @param key    - Key to set this object to.
+     * @param values - Values to serialize.
+     * @return - a "key": { "key1": value, "key2": value } pair
+     */
+    public static <K, V> String fromMap(String key, Map<K, V> values, boolean asString) {
 
         if (values.isEmpty()) {
             return "\"" + key + "\":{}";
@@ -502,14 +619,9 @@ public class JSONUtils {
                         + " should have type Enum or String, but has type: " + entry.getKey().getClass().getName());
             }
 
-            // if (isSerializable) {
-            // sb.append("\"" + entry.getKey().toString() + "\":");
-            // sb.append(((JSONSerializable) entry.getValue()).toJSON() + ", ");
-            // } else {
-
             // if map inside map, recursively call
             if (entry.getValue() instanceof Map) {
-                sb.append(fromMapAsJSON(entry.getKey().toString(), (Map<?, ?>) entry.getValue()));
+                sb.append(fromMap(entry.getKey().toString(), (Map<?, ?>) entry.getValue(), asString));
             }
             // if map contains list value
             else if (entry.getValue() instanceof List) {
@@ -520,12 +632,15 @@ public class JSONUtils {
                 sb.append(fromSet(entry.getKey().toString(), (Set<?>) entry.getValue()));
             } else {
                 sb.append("\"" + entry.getKey().toString() + "\":");
-                sb.append(entry.getValue().toString());
-            }
 
+                if (!asString && isSerializable) {
+                    JSONSerializable j_value = (JSONSerializable) entry.getValue();
+                    sb.append(j_value.toJSON());
+                } else {
+                    sb.append(entry.getValue().toString());
+                }
+            }
             sb.append(", ");
-            // }
-
         }
 
         sb.setLength(sb.length() - 2);
@@ -544,8 +659,8 @@ public class JSONUtils {
      * @param values - Values to serialize.
      * @return - a "key": { "key1": value, "key2": value } pair
      */
-    public static <K, V> String fromMapAsJSON(String key, HashMap<K, V> values) {
-        return fromMapAsJSON(key, (Map<K, V>) values);
+    public static <K, V> String fromMap(String key, HashMap<K, V> values) {
+        return fromMap(key, (Map<K, V>) values, false);
     }
 
     /**
@@ -557,63 +672,8 @@ public class JSONUtils {
      * @param values - Values to serialize.
      * @return - a "key": { "key1": value, "key2": value } pair
      */
-    public static <K, V> String fromMapAsString(String key, Map<K, V> values) {
-
-        // TODO: find difference between these methods
-        if (true) {
-
-            return fromMapAsJSON(key, values);
-        }
-
-        if (values.isEmpty()) {
-            return "\"" + key + "\":{}";
-        }
-
-        V t_value = values.get(values.keySet().toArray()[0]);
-        Boolean isSerializable = (t_value instanceof JSONSerializable);
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\"" + key + "\":{");
-
-        for (Entry<K, V> entry : values.entrySet()) {
-
-            // if (isSerializable) {
-            // sb.append("\"" + entry.getKey().toString() + "\":");
-            // sb.append((entry.getValue()).toString() + ", ");
-            // } else {
-
-            // if map inside map, recursively call
-            if (entry.getValue() instanceof Map) {
-                sb.append(fromMapAsString(entry.getKey().toString(), (Map<?, ?>) entry.getValue()));
-            } else {
-                sb.append("\"" + entry.getKey().toString() + "\":");
-                sb.append(entry.getValue().toString());
-                sb.append(", ");
-            }
-            // }
-
-        }
-
-        sb.setLength(sb.length() - 2);
-
-        sb.append("}");
-
-        return sb.toString();
-    }
-
-    /**
-     * Convert a map into a valid "key": { "key1": value, "key2": value }
-     * 
-     * @param <K>    - Name of the key.
-     * @param <V>    - Value to append to the key.
-     * @param key    - Key to set this object to.
-     * @param values - Values to serialize.
-     * @return - a "key": { "key1": value, "key2": value } pair
-     */
-    @Warning(reason = "Use at your own risk. If the value is formatted with our implementation it will not output a correctly formatted JSON.")
-    public static <K, V> String fromMapAsString(String key, HashMap<K, V> values) {
-        return fromMapAsString(key, (Map<K, V>) values);
+    public static <K, V> String fromMap(String key, HashMap<K, V> values, boolean asString) {
+        return fromMap(key, (Map<K, V>) values, asString);
     }
 
 }
