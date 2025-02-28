@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.registry;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
@@ -70,6 +71,10 @@ public class Registry<T> {
     @Nullable
     public T get(NamespacedKey key) {
         return registry.get(key);
+    }
+
+    public Set<NamespacedKey> allKeys() {
+        return registry.keySet();
     }
 
 }
