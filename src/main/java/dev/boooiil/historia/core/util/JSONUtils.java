@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.function.BiFunction;
 
+import org.bukkit.Keyed;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.potion.PotionEffect;
 import org.jspecify.annotations.NullMarked;
 
@@ -614,9 +616,14 @@ public class JSONUtils {
 
         for (Entry<K, V> entry : values.entrySet()) {
 
-            if (!(entry.getKey() instanceof String) && !entry.getKey().getClass().isEnum()) {
+            boolean isString = entry.getKey() instanceof String;
+            boolean isEnum = entry.getKey().getClass().isEnum();
+            boolean isKeyed = entry.getKey() instanceof Keyed;
+
+            if (!isString && !isEnum && !isKeyed) {
                 throw new IllegalArgumentException("Key value in map " + key
-                        + " should have type Enum or String, but has type: " + entry.getKey().getClass().getName());
+                        + " should have type Enum, Keyed, or String, but has type: "
+                        + entry.getKey().getClass().getName());
             }
 
             // if map inside map, recursively call
@@ -631,7 +638,11 @@ public class JSONUtils {
             else if (entry.getValue() instanceof Set) {
                 sb.append(fromSet(entry.getKey().toString(), (Set<?>) entry.getValue()));
             } else {
-                sb.append("\"" + entry.getKey().toString() + "\":");
+                if (isKeyed) {
+                    sb.append("\"" + ((Keyed) entry.getKey()).getKey().getKey() + "\":");
+                } else {
+                    sb.append("\"" + entry.getKey().toString() + "\":");
+                }
 
                 if (!asString && isSerializable) {
                     JSONSerializable j_value = (JSONSerializable) entry.getValue();
