@@ -32,8 +32,9 @@ public class Registry<T> {
      * @param key           The key to register the value under.
      * @param configuration The value to register.
      */
-    public void register(NamespacedKey key, T value) {
+    public Registry<T> register(NamespacedKey key, T value) {
         registry.put(key, value);
+        return this;
     }
 
     /**
@@ -41,8 +42,9 @@ public class Registry<T> {
      * 
      * @param key The key to deregister.
      */
-    public void deregister(NamespacedKey key) {
+    public Registry<T> deregister(NamespacedKey key) {
         registry.remove(key);
+        return this;
     }
 
     /**
@@ -57,8 +59,9 @@ public class Registry<T> {
      * @param key           The key to update.
      * @param configuration The new value.
      */
-    public void update(NamespacedKey key, T value) {
+    public Registry<T> update(NamespacedKey key, T value) {
         registry.put(key, value);
+        return this;
     }
 
     /**
