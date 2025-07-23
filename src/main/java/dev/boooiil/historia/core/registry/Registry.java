@@ -1,5 +1,7 @@
 package dev.boooiil.historia.core.registry;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -15,13 +17,13 @@ public class Registry<T> {
     /** The registry holder. */
     private HashMap<NamespacedKey, T> registry = new HashMap<>();
     /** The type of the registry values. */
-    private final Class<T> type;
+    private final Type type;
 
     public static final Registry<Registry<?>> registryHolder = generateHolder();
 
     /** registry default constructor */
-    public Registry(Class<T> typeClass) {
-        this.type = typeClass;
+    public Registry(Type type) {
+        this.type = type;
     }
 
     /**
@@ -91,7 +93,7 @@ public class Registry<T> {
      * @return Registry<T> | null if not found.
      */
     @Nullable
-    public static <T> Registry<T> get(NamespacedKey key, Class<T> type) {
+    public static <T> Registry<T> get(NamespacedKey key, Type type) {
         return get(registryHolder, key, type);
     }
 
@@ -109,7 +111,7 @@ public class Registry<T> {
      */
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T> Registry<T> get(Registry<Registry<?>> registry, NamespacedKey key, Class<T> type) {
+    public static <T> Registry<T> get(Registry<Registry<?>> registry, NamespacedKey key, Type type) {
 
         Registry<?> raw = registry.get(key);
 
@@ -118,15 +120,15 @@ public class Registry<T> {
             return null;
         }
 
-        if (raw.getType() != type) {
+        if (!raw.getType().equals(type)) {
             throw new IllegalArgumentException(
-                    "The registry with key " + key + " is not a Registry<" + type.getSimpleName() + "> type.");
+                    "The registry with key " + key + " is not a Registry<" + type.getTypeName() + "> type.");
         }
 
         return (Registry<T>) raw;
     }
 
-    public Class<T> getType() {
+    public Type getType() {
         return type;
     }
 
@@ -143,6 +145,32 @@ public class Registry<T> {
 
     public Set<NamespacedKey> allKeys() {
         return registry.keySet();
+    }
+
+    public static <T> Registry<T> of(Registry.TypeToken<T> token) {
+        return new Registry<>(token.getType());
+    }
+
+    public static abstract class TypeToken<T> {
+        private final Type type;
+
+        protected TypeToken() {
+            Type superclass = getClass().getGenericSuperclass();
+            if (superclass instanceof ParameterizedType) {
+                this.type = ((ParameterizedType) superclass).getActualTypeArguments()[0];
+            } else {
+                throw new IllegalArgumentException("Missing type parameter for TypeToken");
+            }
+        }
+
+        public Type getType() {
+            return type;
+        }
+
+        @Override
+        public String toString() {
+            return "TypeToken{" + "type=" + type + '}';
+        }
     }
 
 }

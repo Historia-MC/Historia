@@ -3,6 +3,8 @@ package dev.boooiil.historia.core.registry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.bukkit.NamespacedKey;
+
+import java.util.List;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -103,12 +105,19 @@ class RegistryTest {
 
         NamespacedKey regStrKey = new NamespacedKey("test", "mystrregistry");
         NamespacedKey regIntKey = new NamespacedKey("test", "myintregistry");
+        NamespacedKey regListIntKey = new NamespacedKey("test", "mylistintregistry");
 
         Registry<String> myStrRegistry = new Registry<>(String.class);
         Registry<Integer> myIntRegistry = new Registry<>(Integer.class);
+        Registry<List<Integer>> myListIntRegistry = Registry.of(new Registry.TypeToken<List<Integer>>() {
+        });
 
         registryHolder.register(regStrKey, myStrRegistry);
         registryHolder.register(regIntKey, myIntRegistry);
+        registryHolder.register(regListIntKey, myListIntRegistry);
+
+        System.out.println(myStrRegistry.getType().getTypeName());
+        System.out.println(myListIntRegistry.getType().getTypeName());
 
         Registry<String> foundStrRegistry = Registry.get(registryHolder, regStrKey, String.class);
         Registry<Integer> foundIntRegistry = Registry.get(registryHolder, regIntKey, Integer.class);
@@ -124,6 +133,30 @@ class RegistryTest {
         assertSame(myIntRegistry, foundIntRegistry);
 
         foundStrRegistry.register(new NamespacedKey("test", "newstrkey"), "newvalue");
+    }
+
+    @Test
+    void testOfWithTypeToken() {
+        Registry<String> reg = Registry.of(new Registry.TypeToken<String>() {
+        });
+        assertNotNull(reg);
+        assertEquals(String.class, reg.getType());
+        NamespacedKey key = new NamespacedKey("test", "token");
+        reg.register(key, "tokenValue");
+        assertEquals("tokenValue", reg.get(key));
+    }
+
+    @Test
+    void testTypeTokenThrowsIfNoTypeParameter() {
+        class RawTypeToken extends Registry.TypeToken {
+        }
+        assertThrows(IllegalArgumentException.class, RawTypeToken::new);
+    }
+
+    @Test
+    void testGetTypeReturnsCorrectType() {
+        Registry<Integer> intRegistry = new Registry<>(Integer.class);
+        assertEquals(Integer.class, intRegistry.getType());
     }
 
 }
