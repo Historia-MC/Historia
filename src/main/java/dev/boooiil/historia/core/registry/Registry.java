@@ -91,22 +91,8 @@ public class Registry<T> {
      * @return Registry<T> | null if not found.
      */
     @Nullable
-    @SuppressWarnings("unchecked")
     public static <T> Registry<T> get(NamespacedKey key, Class<T> type) {
-
-        Registry<?> raw = registryHolder.get(key);
-
-        if (raw == null) {
-            CoreLogger.errorToConsole("The registry with key " + key + " does not exist.");
-            return null;
-        }
-
-        if (raw.getType() != type) {
-            throw new IllegalArgumentException(
-                    "The registry with key " + key + " is not a Registry<" + type.getSimpleName() + "> type.");
-        }
-
-        return (Registry<T>) raw;
+        return get(registryHolder, key, type);
     }
 
     /**
