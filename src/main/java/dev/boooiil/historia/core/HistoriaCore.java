@@ -24,6 +24,7 @@ import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
 import dev.boooiil.historia.core.util.CoreLogger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
