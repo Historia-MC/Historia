@@ -24,8 +24,8 @@ public class Registry<T> {
     /**
      * Register a new value to the registry.
      * 
-     * @param key           The key to register the value under.
-     * @param configuration The value to register.
+     * @param key   The key to register the value under.
+     * @param value The value to register.
      */
     public Registry<T> register(NamespacedKey key, T value) {
         registry.put(key, value);
@@ -45,8 +45,8 @@ public class Registry<T> {
     /**
      * Update a value in the registry.
      * 
-     * @param key           The key to update.
-     * @param configuration The new value.
+     * @param key   The key to update.
+     * @param value The new value.
      */
     public Registry<T> update(NamespacedKey key, T value) {
         registry.put(key, value);
