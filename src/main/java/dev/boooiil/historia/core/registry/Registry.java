@@ -125,7 +125,9 @@ public class Registry<T> {
 
         if (!raw.getType().equals(type)) {
             throw new IllegalArgumentException(
-                    "The registry with key " + key + " is not a Registry<" + type.getTypeName() + "> type.");
+                    "The registry with key " + key + " is not a Registry<" + type.getTypeName()
+                            + "> type but is a Registry<"
+                            + raw.getType().getTypeName() + ">.");
         }
 
         return (Registry<T>) raw;
