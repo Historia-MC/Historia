@@ -7,14 +7,21 @@ import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import dev.boooiil.historia.core.util.CoreLogger;
+
 @NullMarked
 public class Registry<T> {
 
     /** The registry holder. */
     private HashMap<NamespacedKey, T> registry = new HashMap<>();
+    /** The type of the registry values. */
+    private final Class<T> type;
+
+    public static final Registry<Registry<?>> registryHolder = generateHolder();
 
     /** registry default constructor */
-    public Registry() {
+    public Registry(Class<T> typeClass) {
+        this.type = typeClass;
     }
 
     /**
@@ -71,6 +78,81 @@ public class Registry<T> {
     @Nullable
     public T get(NamespacedKey key) {
         return registry.get(key);
+    }
+
+    /**
+     * Get a registry from the internal registry holder.
+     * 
+     * This value will be bound to the plugin through its namespace key.
+     * 
+     * @param <T>  The type of the registry.
+     * @param key  The namespaced key of the registry. ie: 'plugin:crafting_recipes'
+     * @param type The class of the registry value.
+     * @return Registry<T> | null if not found.
+     */
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public static <T> Registry<T> get(NamespacedKey key, Class<T> type) {
+
+        Registry<?> raw = registryHolder.get(key);
+
+        if (raw == null) {
+            CoreLogger.errorToConsole("The registry with key " + key + " does not exist.");
+            return null;
+        }
+
+        if (raw.getType() != type) {
+            throw new IllegalArgumentException(
+                    "The registry with key " + key + " is not a Registry<" + type.getSimpleName() + "> type.");
+        }
+
+        return (Registry<T>) raw;
+    }
+
+    /**
+     * Get a registry from a provided registry holder.
+     * 
+     * This value will be bound to the plugin through its namespace key.
+     * 
+     * @param <T>      The type of the registry.
+     * @param registry The registry holder.
+     * @param key      The namespaced key of the registry. ie:
+     *                 'plugin:crafting_recipes'
+     * @param type     The class of the registry value.
+     * @return Registry<T> | null if not found.
+     */
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public static <T> Registry<T> get(Registry<Registry<?>> registry, NamespacedKey key, Class<T> type) {
+
+        Registry<?> raw = registry.get(key);
+
+        if (raw == null) {
+            CoreLogger.errorToConsole("The registry with key " + key + " does not exist.");
+            return null;
+        }
+
+        if (raw.getType() != type) {
+            throw new IllegalArgumentException(
+                    "The registry with key " + key + " is not a Registry<" + type.getSimpleName() + "> type.");
+        }
+
+        return (Registry<T>) raw;
+    }
+
+    public Class<T> getType() {
+        return type;
+    }
+
+    /**
+     * Generate a new registry holder.
+     * 
+     * @return A new registry holder.
+     */
+    @SuppressWarnings("unchecked")
+    public static Registry<Registry<?>> generateHolder() {
+        return new Registry<>(
+                (Class<Registry<?>>) (Class<?>) Registry.class);
     }
 
     public Set<NamespacedKey> allKeys() {
