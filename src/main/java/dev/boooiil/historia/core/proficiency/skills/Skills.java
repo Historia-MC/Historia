@@ -6,7 +6,7 @@ import dev.boooiil.historia.core.util.JSONUtils;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.jspecify.annotations.NullMarked;
 
@@ -71,45 +71,45 @@ public class Skills implements JSONSerializable {
     /** Map of Regex patterns and enchants to apply to certain items. */
     private final HashMap<Pattern, Enchantment> skillEnchants = new HashMap<>();
 
-    public Skills(FileConfiguration config, String root) {
+    public Skills(ConfigurationSection section) {
 
-        skills.put(SkillType.NAME_TAG, config.getBoolean(root + ".nametag"));
-        skills.put(SkillType.FEATHER_FALL, config.getBoolean(root + ".featherFall"));
-        skills.put(SkillType.QUICK_CHARGE, config.getBoolean(root + ".quickCharge"));
-        skills.put(SkillType.EFFICIENCY_PICKAXE, config.getBoolean(root + ".efficiencyPickaxe"));
-        skills.put(SkillType.EFFICIENCY_SHOVEL, config.getBoolean(root + ".efficiencyShovel"));
-        skills.put(SkillType.EFFICIENCY_AXE, config.getBoolean(root + ".efficiencyAxe"));
-        skills.put(SkillType.CHANCE_EXTRA_ORE, config.getBoolean(root + ".chanceExtraOre"));
-        skills.put(SkillType.CHANCE_EXTRA_WOOD, config.getBoolean(root + ".chanceExtraWood"));
-        skills.put(SkillType.CHANCE_EXTRA_WOOL, config.getBoolean(root + ".chanceExtraWool"));
-        skills.put(SkillType.CHANCE_EXTRA_FEATHERS, config.getBoolean(root + ".chanceExtraFeathers"));
-        skills.put(SkillType.CHANCE_NO_ANVIL_DAMAGE, config.getBoolean(root + ".chanceNoAnvilDamage"));
-        skills.put(SkillType.CHANCE_NO_CONSUME_BLOCK, config.getBoolean(root + ".chanceNoConsumeBlock"));
-        skills.put(SkillType.LADDER_BYPASS, config.getBoolean(root + ".ladderBypass"));
-        skills.put(SkillType.IGNITE_OIL, config.getBoolean(root + ".igniteOil"));
-        skills.put(SkillType.BREAK_GRASS, config.getBoolean(root + ".breakGrass"));
-        skills.put(SkillType.TAME_ANIMALS, config.getBoolean(root + ".tameAnimals"));
-        skills.put(SkillType.SWEEPING_EDGE, config.getBoolean(root + ".sweepingEdge"));
-        skills.put(SkillType.BREAK_BEEHIVE, config.getBoolean(root + ".breakBeehive"));
-        skills.put(SkillType.APPLY_UNBREAKING, config.getBoolean(root + ".applyUnbreaking"));
-        skills.put(SkillType.APPLY_SHARPNESS, config.getBoolean(root + ".applySharpness"));
-        skills.put(SkillType.SHEAR_CHICKEN, config.getBoolean(root + ".shearChicken"));
-        skills.put(SkillType.HARVEST_BONES, config.getBoolean(root + ".bonesFromAnimals"));
-        skills.put(SkillType.HARVEST_LEATHER, config.getBoolean(root + ".harvestLeather"));
-        skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, config.getBoolean(root + ".makeKnowledgeBook"));
-        skills.put(SkillType.CAN_BREED, config.getBoolean(root + ".canBreed"));
-        skills.put(SkillType.CAN_CLIMB_LOGS, config.getBoolean(root + ".canClimbLogs"));
+        skills.put(SkillType.NAME_TAG, section.getBoolean("nametag"));
+        skills.put(SkillType.FEATHER_FALL, section.getBoolean("featherFall"));
+        skills.put(SkillType.QUICK_CHARGE, section.getBoolean("quickCharge"));
+        skills.put(SkillType.EFFICIENCY_PICKAXE, section.getBoolean("efficiencyPickaxe"));
+        skills.put(SkillType.EFFICIENCY_SHOVEL, section.getBoolean("efficiencyShovel"));
+        skills.put(SkillType.EFFICIENCY_AXE, section.getBoolean("efficiencyAxe"));
+        skills.put(SkillType.CHANCE_EXTRA_ORE, section.getBoolean("chanceExtraOre"));
+        skills.put(SkillType.CHANCE_EXTRA_WOOD, section.getBoolean("chanceExtraWood"));
+        skills.put(SkillType.CHANCE_EXTRA_WOOL, section.getBoolean("chanceExtraWool"));
+        skills.put(SkillType.CHANCE_EXTRA_FEATHERS, section.getBoolean("chanceExtraFeathers"));
+        skills.put(SkillType.CHANCE_NO_ANVIL_DAMAGE, section.getBoolean("chanceNoAnvilDamage"));
+        skills.put(SkillType.CHANCE_NO_CONSUME_BLOCK, section.getBoolean("chanceNoConsumeBlock"));
+        skills.put(SkillType.LADDER_BYPASS, section.getBoolean("ladderBypass"));
+        skills.put(SkillType.IGNITE_OIL, section.getBoolean("igniteOil"));
+        skills.put(SkillType.BREAK_GRASS, section.getBoolean("breakGrass"));
+        skills.put(SkillType.TAME_ANIMALS, section.getBoolean("tameAnimals"));
+        skills.put(SkillType.SWEEPING_EDGE, section.getBoolean("sweepingEdge"));
+        skills.put(SkillType.BREAK_BEEHIVE, section.getBoolean("breakBeehive"));
+        skills.put(SkillType.APPLY_UNBREAKING, section.getBoolean("applyUnbreaking"));
+        skills.put(SkillType.APPLY_SHARPNESS, section.getBoolean("applySharpness"));
+        skills.put(SkillType.SHEAR_CHICKEN, section.getBoolean("shearChicken"));
+        skills.put(SkillType.HARVEST_BONES, section.getBoolean("bonesFromAnimals"));
+        skills.put(SkillType.HARVEST_LEATHER, section.getBoolean("harvestLeather"));
+        skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, section.getBoolean("makeKnowledgeBook"));
+        skills.put(SkillType.CAN_BREED, section.getBoolean("canBreed"));
+        skills.put(SkillType.CAN_CLIMB_LOGS, section.getBoolean("canClimbLogs"));
 
-        if (config.contains(root + ".enchants")) {
+        if (section.contains("enchants")) {
 
-            for (String itemNumber : config.getConfigurationSection(root + ".enchants").getKeys(false)) {
+            for (String itemNumber : section.getConfigurationSection("enchants").getKeys(false)) {
 
-                String regex = config.getString(root + ".enchants." + itemNumber + ".regex");
+                String regex = section.getString("enchants." + itemNumber + ".regex");
 
                 CoreLogger.debugToConsole("Adding weapon regex " + regex + " to skill enchants");
                 Pattern pattern = Pattern.compile(regex);
 
-                for (String enchantment : config.getStringList(root + ".enchants." + itemNumber + ".values")) {
+                for (String enchantment : section.getStringList("enchants." + itemNumber + ".values")) {
 
                     CoreLogger.debugToConsole("Adding enchantment " + enchantment + " to item " + itemNumber);
 
