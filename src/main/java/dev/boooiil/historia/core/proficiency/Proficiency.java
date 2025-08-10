@@ -1,17 +1,14 @@
 package dev.boooiil.historia.core.proficiency;
 
-import dev.boooiil.historia.core.file.FileIO;
-import dev.boooiil.historia.core.file.FileKeys;
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jspecify.annotations.NullMarked;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This class represents a proficiency that a character can have. It contains
@@ -48,6 +45,12 @@ public class Proficiency implements JSONSerializable {
         public String getKey() {
 
             return this.key;
+
+        }
+
+        public String getKeyLowercase() {
+
+            return this.key.toLowerCase();
 
         }
 
@@ -91,19 +94,27 @@ public class Proficiency implements JSONSerializable {
      */
     @Deprecated(forRemoval = true)
     public Proficiency(String proficiencyName) {
-        FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
 
-        if (config.contains(proficiencyName)) {
+        NamespacedKey key = HistoriaCore.getNamespacedKey(proficiencyName);
+
+        if (HistoriaCore.proficiencyRegistry.contains(key)) {
             this.name = ProficiencyName.fromString(proficiencyName);
-            this.stats = new Stats(config, proficiencyName + ".stats");
-            this.skills = new Skills(config, proficiencyName + ".skills");
+            this.stats = HistoriaCore.proficiencyRegistry.get(key).getStats();
+            this.skills = HistoriaCore.proficiencyRegistry.get(key).getSkills();
+            return;
+        } else {
+            key = HistoriaCore.getNamespacedKey("none");
+            this.name = ProficiencyName.NONE;
+            this.stats = HistoriaCore.proficiencyRegistry.get(key).getStats();
+            this.skills = HistoriaCore.proficiencyRegistry.get(key).getSkills();
         }
 
-        else {
-            this.name = ProficiencyName.NONE;
-            this.stats = new Stats(config, "None.stats");
-            this.skills = new Skills(config, "None.skills");
-        }
+    }
+
+    public Proficiency(Proficiency proficiency) {
+        this.name = proficiency.name;
+        this.stats = proficiency.stats;
+        this.skills = proficiency.skills;
     }
 
     /**
@@ -112,12 +123,13 @@ public class Proficiency implements JSONSerializable {
      * @param proficiencyName the name of the proficiency
      */
     public Proficiency(ProficiencyName proficiencyName) {
-        FileConfiguration config = FileIO.get(FileKeys.PROFICIENCY);
+        this(HistoriaCore.proficiencyRegistry.get(HistoriaCore.getNamespacedKey(proficiencyName.getKey())));
+    }
 
-        this.name = proficiencyName;
-        this.stats = new Stats(config, proficiencyName.getKey() + ".stats");
-        this.skills = new Skills(config, proficiencyName.getKey() + ".skills");
-
+    public Proficiency(ConfigurationSection section) {
+        this.name = ProficiencyName.fromString(section.getString("proficiencyName"));
+        this.stats = new Stats(section.getConfigurationSection("stats"), this.name);
+        this.skills = new Skills(section.getConfigurationSection("skills"));
     }
 
     /**
@@ -172,140 +184,6 @@ public class Proficiency implements JSONSerializable {
      */
     public void setSkills(Skills skills) {
         this.skills = skills;
-    }
-
-    /**
-     * Returns a boolean value indicating whether the character can use light armor
-     * or not.
-     * 
-     * @return true if the character can use light armor, false otherwise
-     */
-    public boolean canUseLightArmor() {
-        return getStats().getUsableArmorTypes().contains("Light");
-    }
-
-    /**
-     * Returns a boolean value indicating whether the character can use medium armor
-     * or not.
-     * 
-     * @return true if the character can use medium armor, false otherwise
-     */
-    public boolean canUseMediumArmor() {
-        return getStats().getUsableArmorTypes().contains("Medium");
-    }
-
-    /**
-     * Returns a boolean value indicating whether the character can use heavy armor
-     * or not.
-     * 
-     * @return true if the character can use heavy armor, false otherwise
-     */
-    public boolean canUseHeavyArmor() {
-        return getStats().getUsableArmorTypes().contains("Heavy");
-    }
-
-    /**
-     * Returns a boolean value indicating whether the character can use light
-     * weapons or not.
-     * 
-     * @return true if the character can use light weapons, false otherwise
-     */
-    public boolean canUseLightWeapon() {
-        return getStats().getUsableWeaponTypes().contains("Light");
-    }
-
-    /**
-     * Returns a boolean value indicating whether the character can use medium
-     * weapons or not.
-     * 
-     * @return true if the character can use medium weapons, false otherwise
-     */
-    public boolean canUseMediumWeapon() {
-        return getStats().getUsableWeaponTypes().contains("Medium");
-    }
-
-    /**
-     * This function returns a boolean value indicating whether the character can
-     * use heavy weapons or not.
-     * 
-     * @return true if the character can use heavy weapons, false otherwise.
-     */
-    public boolean canUseHeavyWeapon() {
-        return getStats().getUsableWeaponTypes().contains("Heavy");
-    }
-
-    /**
-     * This function returns a boolean value indicating whether the character can
-     * use bows or not.
-     * 
-     * @return true if the character can use bows, false otherwise.
-     */
-    public boolean canUseRanged() {
-
-        return getStats().getUsableWeaponTypes().contains("Bow")
-                || getStats().getUsableWeaponTypes().contains("Crossbow");
-    }
-
-    /**
-     * This function returns a boolean value indicating whether the character can
-     * use crossbows or not.
-     * 
-     * @return true if the character can use crossbows, false otherwise.
-     */
-    public boolean canUseCrossbow() {
-        return getStats().getUsableWeaponTypes().contains("Crossbow");
-    }
-
-    /**
-     * This function returns a boolean value indicating whether the character can
-     * use a weapon with the given localizedName or not.
-     * 
-     * @param localizedName the name of the weapon to check proficiency for.
-     * @return true if the character can use the weapon, false otherwise.
-     */
-    public boolean canUseWeapon(String localizedName) {
-
-        Pattern tier = Pattern.compile("Light|Medium|Heavy|Trident|Bow|Crossbow");
-        Matcher matcher = tier.matcher(localizedName);
-
-        if (matcher.matches()) {
-
-            return getStats().getUsableWeaponTypes().contains(localizedName);
-
-        }
-
-        else {
-
-            return false;
-
-        }
-
-    }
-
-    /**
-     * This function returns a boolean value indicating whether the character can
-     * use an armor with the given localizedName or not.
-     * 
-     * @param localizedName the name of the armor to check proficiency for.
-     * @return true if the character can use the armor, false otherwise.
-     */
-    public boolean canUseArmor(String localizedName) {
-
-        Pattern tier = Pattern.compile("Light|Medium|Heavy");
-        Matcher matcher = tier.matcher(localizedName);
-
-        if (matcher.matches()) {
-
-            return getStats().getUsableArmorTypes().contains(localizedName);
-
-        }
-
-        else {
-
-            return false;
-
-        }
-
     }
 
     /**
