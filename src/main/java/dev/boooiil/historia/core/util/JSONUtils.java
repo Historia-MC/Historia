@@ -615,13 +615,15 @@ public class JSONUtils {
 
         for (Entry<K, V> entry : values.entrySet()) {
 
+
             final List<Class<?>> CLASS_KEY_WHITELIST = List.of(String.class, Enum.class, NamespacedKey.class);
             boolean allowed = CLASS_KEY_WHITELIST.stream()
                     .anyMatch(clazz -> clazz.isAssignableFrom(key.getClass()));
 
             if (!allowed) {
                 throw new IllegalArgumentException("Key value in map " + key
-                        + " should have type Enum or String, but has type: " + entry.getKey().getClass().getName());
+                        + " should have type Enum, Keyed, or String, but has type: "
+                        + entry.getKey().getClass().getName());
             }
 
             // if map inside map, recursively call
@@ -636,7 +638,11 @@ public class JSONUtils {
             else if (entry.getValue() instanceof Set) {
                 sb.append(fromSet(entry.getKey().toString(), (Set<?>) entry.getValue()));
             } else {
-                sb.append("\"" + entry.getKey().toString() + "\":");
+                if (isKeyed) {
+                    sb.append("\"" + ((Keyed) entry.getKey()).getKey().getKey() + "\":");
+                } else {
+                    sb.append("\"" + entry.getKey().toString() + "\":");
+                }
 
                 if (!asString && isSerializable) {
                     JSONSerializable j_value = (JSONSerializable) entry.getValue();
