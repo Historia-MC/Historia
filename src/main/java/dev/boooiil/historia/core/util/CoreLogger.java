@@ -24,7 +24,7 @@ public class CoreLogger {
     // private static final String debugPrefix = "§7[§cDebug§7] ";
 
     /** Bukkit logger to send messages to the console. */
-    private static final Logger logger = Bukkit.getLogger();
+    private static final Logger logger = Bukkit.getServer() != null ? Bukkit.getLogger() : Logger.getLogger("Historia");
 
     /**
      * Send an info message to the console.
@@ -150,8 +150,10 @@ public class CoreLogger {
 
         }
 
-        logger.severe(built.toString());
-
+        if (logger != null)
+            logger.severe(built.toString());
+        else
+            System.err.println(built.toString());
     }
 
     /**

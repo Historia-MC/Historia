@@ -8,8 +8,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.function.BiFunction;
 
-import org.bukkit.Keyed;
-import org.bukkit.enchantments.Enchantment;
+import org.bukkit.NamespacedKey;
 import org.bukkit.potion.PotionEffect;
 import org.jspecify.annotations.NullMarked;
 
@@ -616,11 +615,12 @@ public class JSONUtils {
 
         for (Entry<K, V> entry : values.entrySet()) {
 
-            boolean isString = entry.getKey() instanceof String;
-            boolean isEnum = entry.getKey().getClass().isEnum();
-            boolean isKeyed = entry.getKey() instanceof Keyed;
 
-            if (!isString && !isEnum && !isKeyed) {
+            final List<Class<?>> CLASS_KEY_WHITELIST = List.of(String.class, Enum.class, NamespacedKey.class);
+            boolean allowed = CLASS_KEY_WHITELIST.stream()
+                    .anyMatch(clazz -> clazz.isAssignableFrom(key.getClass()));
+
+            if (!allowed) {
                 throw new IllegalArgumentException("Key value in map " + key
                         + " should have type Enum, Keyed, or String, but has type: "
                         + entry.getKey().getClass().getName());

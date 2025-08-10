@@ -371,6 +371,66 @@ public class JSONUtilsTest {
                 "\"test\":JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}");
     }
 
+    @Test
+    void testFromEmptyList() {
+        List<Integer> emptyList = new ArrayList<>();
+        String result = JSONUtils.fromList("empty", emptyList);
+        assertEquals("\"empty\": []", result);
+    }
+
+    @Test
+    void testFromEmptySet() {
+        Set<String> emptySet = new LinkedHashSet<>();
+        String result = JSONUtils.fromSet("empty", emptySet);
+        assertEquals("\"empty\": []", result);
+    }
+
+    @Test
+    void testFromEmptyMap() {
+        HashMap<String, Integer> emptyMap = new HashMap<>();
+        String result = JSONUtils.fromMap("empty", emptyMap);
+        assertEquals("\"empty\":{}", result);
+    }
+
+    @Test
+    void testFromStringListWithSpecialCharacters() {
+        List<String> list = Arrays.asList("a", "b", "c\"d", "e\\f");
+        String result = JSONUtils.fromStringList("special", list);
+        assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
+    }
+
+    @Test
+    void testFromStringSetWithSpecialCharacters() {
+        Set<String> set = new LinkedHashSet<>(Arrays.asList("a", "b", "c\"d", "e\\f"));
+        String result = JSONUtils.fromStringSet("special", set);
+        assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
+    }
+
+    @Test
+    void testFromListWithUnsupportedTypeThrows() {
+        class Dummy {
+        }
+        List<Dummy> dummyList = Arrays.asList(new Dummy());
+        try {
+            JSONUtils.fromList("dummy", dummyList);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Key dummy provided a list type of " + Dummy.class.getName()
+                    + " which does not have a configured handler.", e.getMessage());
+        }
+    }
+
+    @Test
+    void testFromMapWithNonStringKeyThrows() {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(1, 2);
+        try {
+            JSONUtils.fromMap("badmap", map);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Key value in map badmap should have type Enum or String, but has type: java.lang.Integer",
+                    e.getMessage());
+        }
+    }
+
     private class JSONTestClass implements JSONSerializable {
 
         int i = 1;

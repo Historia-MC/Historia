@@ -20,10 +20,12 @@ import dev.boooiil.historia.core.events.player.PlayerInteractEntityListener;
 import dev.boooiil.historia.core.events.player.PlayerInteractListener;
 import dev.boooiil.historia.core.events.player.PlayerJoinListener;
 import dev.boooiil.historia.core.file.FileIO;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
 import dev.boooiil.historia.core.util.CoreLogger;
+
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
@@ -38,6 +40,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class HistoriaCore extends JavaPlugin {
 
+    public static final RegistryHolder registryHolder = new RegistryHolder();
     /** if the plugin is testing */
     public static boolean isTesting = true;
     /** this plugin instance */
@@ -129,7 +132,7 @@ public class HistoriaCore extends JavaPlugin {
 
         closeDatabase();
 
-        CoreLogger.errorToConsole("The plugin has been disabled. This should not happen!");
+        CoreLogger.errorToConsole("The plugin has been disabled.");
         CoreLogger.errorToConsole("Stopping the server to prevent potential harm.");
 
         if (!isTesting)
