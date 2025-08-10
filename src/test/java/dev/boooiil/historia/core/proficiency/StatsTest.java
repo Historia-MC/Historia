@@ -10,8 +10,12 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
+import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
+import dev.boooiil.historia.core.proficiency.stats.Stats.ChanceStatsType;
+import dev.boooiil.historia.core.proficiency.stats.Stats.WeaponStatsType;
 
 public class StatsTest {
     FileConfiguration config;
@@ -41,369 +45,95 @@ public class StatsTest {
 
     @Test
     public void testNoneCompleteness() {
-        Stats stats = new Stats(config, "None.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("None.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
+        assertStats(ProficiencyName.NONE);
     }
 
     @Test
     public void testWarriorCompleteness() {
-        Stats stats = new Stats(config, "Warrior.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Warrior.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
-
+        assertStats(ProficiencyName.WARRIOR);
     }
 
     @Test
     public void testArcherCompleteness() {
-        Stats stats = new Stats(config, "Archer.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Archer.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
-
+        assertStats(ProficiencyName.ARCHER);
     }
 
     @Test
     public void testFarmerCompleteness() {
-        Stats stats = new Stats(config, "Farmer.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Farmer.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
+        assertStats(ProficiencyName.FARMER);
 
     }
 
     @Test
     public void testMinerCompleteness() {
-        Stats stats = new Stats(config, "Miner.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Miner.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
-
+        assertStats(ProficiencyName.MINER);
     }
 
     @Test
     public void testBlacksmithCompleteness() {
-        Stats stats = new Stats(config, "Blacksmith.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Blacksmith.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
-
+        assertStats(ProficiencyName.BLACKSMITH);
     }
 
     @Test
     public void testLumberjackCompleteness() {
-        Stats stats = new Stats(config, "Lumberjack.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Lumberjack.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
-
+        assertStats(ProficiencyName.LUMBERJACK);
     }
 
     @Test
     public void testFishermanCompleteness() {
-        Stats stats = new Stats(config, "Fisherman.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Fisherman.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
+        assertStats(ProficiencyName.FISHERMAN);
 
     }
 
     @Test
     public void testApothecaryCompleteness() {
-        Stats stats = new Stats(config, "Apothecary.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Apothecary.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
+        assertStats(ProficiencyName.APOTHECARY);
     }
 
     @Test
     public void testHuntsmanCompleteness() {
-        Stats stats = new Stats(config, "Huntsman.stats");
-
-        ConfigurationSection section = config.getConfigurationSection("Huntsman.stats");
-
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-        assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-        for (String source : section.getStringList("experienceSources")) {
-            assert stats.getExperienceSources().contains(AllSources.valueOf(source));
-        }
+        assertStats(ProficiencyName.HUNTSMAN);
     }
 
     @Test
     public void testArchitectCompleteness() {
-        Stats stats = new Stats(config, "Architect.stats");
+        assertStats(ProficiencyName.ARCHITECT);
+    }
 
-        ConfigurationSection section = config.getConfigurationSection("Architect.stats");
+    private void assertStats(ProficiencyName proficiencyName) {
 
-        assert stats.getBaseHealth() == section.getInt("baseHealth");
-        assert stats.getMaxHealth() == section.getInt("maxHealth");
-        assert stats.getBaseFood() == section.getInt("baseFood");
-        assert stats.getBaseSpeed() == section.getDouble("baseSpeed");
+        ConfigurationSection section = config.getConfigurationSection(proficiencyName.getKey() + ".stats");
+        Stats stats = new Stats(section, proficiencyName);
 
-        assert stats.getBaseEvasion() == section.getDouble("baseEvasion");
-        assert stats.getBaseSwordProficiency() == section.getDouble("baseSwordProficiency");
-        assert stats.getBaseBowProficiency() == section.getDouble("baseBowProficiency");
-        assert stats.getBaseCrossbowProficiency() == section.getDouble("baseCrossbowProficiency");
+        assert stats.getBodyStats().getLevel(BodyStatsType.HEALTH) == section.getInt("baseHealth");
+        // assert stats.getMaxHealth() == section.getInt("maxHealth");
+        // assert stats.getBaseFood() == section.getInt("baseFood");
+        assert stats.getBodyStats().getLevel(BodyStatsType.SPEED) == section.getDouble("baseSpeed");
 
-        assert stats.getBaseExperienceGain() == section.getDouble("baseExperienceGain");
-        assert stats.getHarvestChance() == section.getDouble("harvestChance");
-        assert stats.getDoubleHarvestChance() == section.getDouble("doubleHarvestChance");
+        assert stats.getBodyStats().getLevel(BodyStatsType.EVASION) == section.getDouble("baseEvasion");
+        assert stats.getWeaponStats().getLevel(WeaponStatsType.SWORD) == section.getDouble("baseSwordProficiency");
+        assert stats.getWeaponStats().getLevel(WeaponStatsType.BOW) == section.getDouble("baseBowProficiency");
+        assert stats.getWeaponStats().getLevel(WeaponStatsType.CROSSBOW) == section
+                .getDouble("baseCrossbowProficiency");
 
-        assert stats.getInstantGrowthChance() == section.getDouble("instantGrowthChance");
-        assert stats.getBeheadChance() == section.getDouble("beheadChance");
+        // assert stats.getBaseExperienceGain() ==
+        // section.getDouble("baseExperienceGain");
+        assert stats.getChanceStats().getLevel(ChanceStatsType.HARVEST) == section.getDouble("harvestChance");
+        assert stats.getChanceStats().getLevel(ChanceStatsType.DOUBLE_HARVEST) == section
+                .getDouble("doubleHarvestChance");
 
-        assert stats.getUsableWeaponTypes().size() == section.getStringList("weaponProficiency").size();
-        assert stats.getUsableWeaponTypes().containsAll(section.getStringList("weaponProficiency"));
+        assert stats.getChanceStats().getLevel(ChanceStatsType.INSTANT_GROWTH) == section
+                .getDouble("instantGrowthChance");
+        assert stats.getChanceStats().getLevel(ChanceStatsType.BEHEAD) == section.getDouble("beheadChance");
 
-        assert stats.getUsableArmorTypes().size() == section.getStringList("armorProficiency").size();
-        assert stats.getUsableArmorTypes().containsAll(section.getStringList("armorProficiency"));
-
+        assert stats.getWeaponStats().getUsableWeaponWeights().size() == section.getStringList("weaponProficiency")
+                .size();
+        assert stats.getWeaponStats().getUsableWeaponWeights().containsAll(section.getStringList("weaponProficiency"));
+        assert stats.getArmorStats().getUsableArmorWeights().size() == section.getStringList("armorProficiency").size();
+        assert stats.getArmorStats().getUsableArmorWeights().containsAll(section.getStringList("armorProficiency"));
         assert stats.getExperienceSources().size() == section.getStringList("experienceSources").size();
-
-        for (String source : section.getStringList("experienceSources"))
+        for (String source : section.getStringList("experienceSources")) {
             assert stats.getExperienceSources().contains(AllSources.valueOf(source));
+        }
     }
 }

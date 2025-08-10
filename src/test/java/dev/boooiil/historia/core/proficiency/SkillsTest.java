@@ -11,6 +11,7 @@ import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
 import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 
 public class SkillsTest {
@@ -50,163 +51,58 @@ public class SkillsTest {
 
     @Test
     public void testWarriorCompleteness() {
-        Skills skills = new Skills(config, "Warrior.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Warrior.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.WARRIOR);
     }
 
     @Test
     public void testArcherCompleteness() {
-        Skills skills = new Skills(config, "Archer.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Archer.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.ARCHER);
     }
 
     @Test
     public void testFarmerCompleteness() {
-        Skills skills = new Skills(config, "Farmer.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Farmer.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.FARMER);
     }
 
     @Test
     public void testMinerCompleteness() {
-        Skills skills = new Skills(config, "Miner.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Miner.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.MINER);
     }
 
     @Test
     public void testLumberjackCompleteness() {
-        Skills skills = new Skills(config, "Lumberjack.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Lumberjack.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.LUMBERJACK);
     }
 
     @Test
     public void testBlacksmithCompleteness() {
-        Skills skills = new Skills(config, "Blacksmith.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Blacksmith.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.BLACKSMITH);
     }
 
     @Test
     public void testFishermanCompleteness() {
-        Skills skills = new Skills(config, "Fisherman.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Fisherman.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.FISHERMAN);
     }
 
     @Test
     public void testHuntsmanCompleteness() {
-        Skills skills = new Skills(config, "Huntsman.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Huntsman.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-                }
-            }
-        }
+        assertSkills(ProficiencyName.HUNTSMAN);
     }
 
     @Test
     public void testApothecaryCompleteness() {
-        Skills skills = new Skills(config, "Apothecary.skills");
-
-        ConfigurationSection section = config.getConfigurationSection("Apothecary.skills");
-
-        for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
-                if (skill.getKey().equals(key)) {
-                    System.out.println("Testing " + skill.getKey());
-                    System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));
-                    assert skills.hasSkill(skill) == section.getBoolean(key);
-
-                }
-            }
-        }
+        assertSkills(ProficiencyName.APOTHECARY);
     }
 
     @Test
     public void testArchitectCompleteness() {
-        Skills skills = new Skills(config, "Architect.skills");
+        assertSkills(ProficiencyName.ARCHITECT);
+    }
 
-        ConfigurationSection section = config.getConfigurationSection("Architect.skills");
+    private void assertSkills(ProficiencyName proficiencyName) {
+
+        ConfigurationSection section = config.getConfigurationSection(proficiencyName.getKey() + ".skills");
+        Skills skills = new Skills(config);
 
         for (String key : section.getKeys(false)) {
             for (SkillType skill : SkillType.values()) {
