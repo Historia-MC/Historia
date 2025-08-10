@@ -20,6 +20,10 @@ import dev.boooiil.historia.core.events.player.PlayerInteractEntityListener;
 import dev.boooiil.historia.core.events.player.PlayerInteractListener;
 import dev.boooiil.historia.core.events.player.PlayerJoinListener;
 import dev.boooiil.historia.core.file.FileIO;
+import dev.boooiil.historia.core.proficiency.Proficiency;
+import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader;
+import dev.boooiil.historia.core.proficiency.stats.StatModifiers;
+import dev.boooiil.historia.core.registry.Registry;
 import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
@@ -41,6 +45,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class HistoriaCore extends JavaPlugin {
 
     public static final RegistryHolder registryHolder = new RegistryHolder();
+
+    // proficiency_name:proficiency
+    public static Registry<Proficiency> proficiencyRegistry = RegistryHolder.get(
+            HistoriaCore.registryHolder.register(
+                    getNamespacedKey("proficiency"),
+                    new Registry<Proficiency>(Proficiency.class)),
+            getNamespacedKey("proficiency"),
+            Proficiency.class);
+
+    // proficiency_name:stat_modifier
+    public static Registry<StatModifiers> statModifiersRegistry = RegistryHolder.get(
+            HistoriaCore.registryHolder.register(
+                    getNamespacedKey("stat_modifiers"),
+                    new Registry<StatModifiers>(StatModifiers.class)),
+            getNamespacedKey("stat_modifiers"),
+            StatModifiers.class);
+
     /** if the plugin is testing */
     public static boolean isTesting = true;
     /** this plugin instance */
@@ -120,6 +141,8 @@ public class HistoriaCore extends JavaPlugin {
         initDatabase();
 
         CoreLogger.infoToConsole("Plugin Enabled.");
+
+        ProficiencyRegistryLoader.load();
 
     }
 
@@ -206,7 +229,7 @@ public class HistoriaCore extends JavaPlugin {
      * @return the namespaced key
      */
     public static NamespacedKey getNamespacedKey(String key) {
-        return new NamespacedKey(plugin(), key);
+        return new NamespacedKey(plugin(), key.toLowerCase());
     }
 
     /**
