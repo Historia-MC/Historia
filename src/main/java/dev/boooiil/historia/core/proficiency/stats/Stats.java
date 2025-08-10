@@ -1,11 +1,12 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
@@ -18,67 +19,23 @@ import java.util.List;
 @NullMarked
 public class Stats implements JSONSerializable {
 
-    /** Base health of the player. */
-    private float baseHealth;
-    /** Max health of the player. */
-    private float maxHealth;
-    /** Base food of the player. (How much hunger they can satiate) */
-    private int baseFood;
-    /** Base speed of the player. */
-    private double baseSpeed;
-    /** Base experience of the player. */
-    private double baseExperienceGain;
+    private ArmorStats armorStats;
+    private BodyStats bodyStats;
+    private ChanceStats chanceStats;
+    private ToolStats toolStats;
+    private WeaponStats weaponStats;
 
-    /** Base evasion rate of the player. (How well they can dodge attacks) */
-    private double baseEvasion;
+    public Stats(ConfigurationSection section, ProficiencyName proficiencyName) {
 
-    /** Chance to harvest a crop successfully. */
-    private double harvestChance;
-    /** Chance to harvest a crop twice. */
-    private double doubleHarvestChance;
-    /** Chance to grow a crop instantly. */
-    private double instantGrowthChance;
-    /** Chance to behead an enemy. */
-    private double beheadChance;
+        this.armorStats = new ArmorStats(section.getConfigurationSection("armor"), proficiencyName);
+        this.bodyStats = new BodyStats(section.getConfigurationSection("body"), proficiencyName);
+        this.chanceStats = new ChanceStats(section.getConfigurationSection("chance"), proficiencyName);
+        this.toolStats = new ToolStats(section.getConfigurationSection("tool"), proficiencyName);
+        this.weaponStats = new WeaponStats(section.getConfigurationSection("weapon"), proficiencyName);
 
-    /** ?? */
-    private double baseSwordProficiency;
-    /** ?? */
-    private double baseBowProficiency;
-    /** ?? */
-    private double baseCrossbowProficiency;
-
-    /** Experience sources this player can gain from. */
-    private List<AllSources> experienceSources;
-
-    /** The usable weapon weights this player can use. */
-    private List<String> usableWeaponTypes;
-    /** The usable armor weights this player can use. */
-    private List<String> usableArmorTypes;
-
-    public Stats(FileConfiguration config, String root) {
-
-        this.baseHealth = config.getInt(root + ".baseHealth");
-        this.maxHealth = config.getInt(root + ".maxHealth");
-        this.baseFood = config.getInt(root + ".baseFood");
-
-        this.baseSpeed = config.getDouble(root + ".baseSpeed");
-        this.baseEvasion = config.getDouble(root + ".baseEvasion");
-        this.baseSwordProficiency = config.getDouble(root + ".baseSwordProficiency");
-        this.baseBowProficiency = config.getDouble(root + ".baseBowProficiency");
-        this.baseCrossbowProficiency = config.getDouble(root + ".baseCrossbowProficiency");
-        this.baseExperienceGain = config.getDouble(root + ".baseExperienceGain");
-
-        this.harvestChance = config.getDouble(root + ".harvestChance");
-        this.doubleHarvestChance = config.getDouble(root + ".doubleHarvestChance");
-        this.instantGrowthChance = config.getDouble(root + ".instantGrowChance");
-        this.beheadChance = config.getDouble(root + ".beheadChance");
-
-        this.usableWeaponTypes = config.getStringList(root + ".weaponProficiency");
-        this.usableArmorTypes = config.getStringList(root + ".armorProficiency");
         this.experienceSources = new ArrayList<>();
 
-        for (String key : config.getStringList(root + ".experienceSources")) {
+        for (String key : section.getStringList("experienceSources")) {
 
             CoreLogger.debugToConsole("Experience Source: " + key);
             this.experienceSources.add(AllSources.valueOf(key));
@@ -87,288 +44,217 @@ public class Stats implements JSONSerializable {
 
     }
 
-    /**
-     * returns the base health of the player
-     * 
-     * @return The baseHealth of the player is being returned.
-     */
-    public float getBaseHealth() {
-        return baseHealth;
+    public enum StatsType {
+        BOW,
+        CROSSBOW,
+        TRIDENT,
+        SWORD,
+        AXE,
+        PICKAXE,
+        SHOVEL,
+        HOE,
+        HELMET,
+        CHESTPLATE,
+        LEGGINGS,
+        BOOTS,
+        HEALTH,
+        SPEED,
+        EVASION,
+        TOUGHNESS,
+        HARVEST,
+        INSTANT_GROWTH,
+        DOUBLE_HARVEST,
+        BEHEAD
+    };
+
+    public enum ArmorStatsType {
+        HELMET(StatsType.HELMET),
+        CHESTPLATE(StatsType.CHESTPLATE),
+        LEGGINGS(StatsType.LEGGINGS),
+        BOOTS(StatsType.BOOTS);
+
+        private final StatsType key;
+
+        ArmorStatsType(StatsType key) {
+            this.key = key;
+        }
+
+        public StatsType getKey() {
+            return key;
+        }
     }
 
-    /**
-     * sets the base health of the player
-     * 
-     * @param baseHealth The base health of the player.
-     */
-    public void setBaseHealth(int baseHealth) {
-        this.baseHealth = baseHealth;
+    public enum BodyStatsType {
+        HEALTH(StatsType.HEALTH),
+        SPEED(StatsType.SPEED),
+        EVASION(StatsType.EVASION),
+        TOUGHNESS(StatsType.TOUGHNESS);
+
+        private final StatsType key;
+
+        BodyStatsType(StatsType key) {
+            this.key = key;
+        }
+
+        public StatsType getKey() {
+            return key;
+        }
     }
 
-    /**
-     * returns the maxHealth of the player
-     * 
-     * @return The maxHealth of the player is being returned.
-     */
-    public float getMaxHealth() {
-        return maxHealth;
+    public enum ChanceStatsType {
+        HARVEST(StatsType.HARVEST),
+        INSTANT_GROWTH(StatsType.INSTANT_GROWTH),
+        DOUBLE_HARVEST(StatsType.DOUBLE_HARVEST),
+        BEHEAD(StatsType.BEHEAD);
+
+        private final StatsType key;
+
+        ChanceStatsType(StatsType key) {
+            this.key = key;
+        }
+
+        public StatsType getKey() {
+            return key;
+        }
     }
 
-    /**
-     * sets the maxHealth of the player to the value of the maxHealth
-     * parameter
-     * 
-     * @param maxHealth The maximum health of the player.
-     */
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+    public enum ToolStatsType {
+        AXE(StatsType.AXE),
+        PICKAXE(StatsType.PICKAXE),
+        SHOVEL(StatsType.SHOVEL),
+        HOE(StatsType.HOE);
+
+        private final StatsType key;
+
+        ToolStatsType(StatsType key) {
+            this.key = key;
+        }
+
+        public StatsType getKey() {
+            return key;
+        }
     }
 
-    /**
-     * returns the baseFood of the player
-     * 
-     * @return The baseFood of the player is being returned.
-     */
-    public int getBaseFood() {
-        return baseFood;
+    public enum WeaponStatsType {
+        BOW(StatsType.BOW),
+        CROSSBOW(StatsType.CROSSBOW),
+        TRIDENT(StatsType.TRIDENT),
+        SWORD(StatsType.SWORD),
+        AXE(StatsType.AXE);
+
+        private final StatsType key;
+
+        WeaponStatsType(StatsType key) {
+            this.key = key;
+        }
+
+        public StatsType getKey() {
+            return key;
+        }
     }
 
-    /**
-     * sets the base food of the player
-     * 
-     * @param baseFood The amount of food the player starts with.
-     */
-    public void setBaseFood(int baseFood) {
-        this.baseFood = baseFood;
+    public boolean isArmor(StatsType type) {
+        return type == StatsType.HELMET || type == StatsType.CHESTPLATE || type == StatsType.LEGGINGS
+                || type == StatsType.BOOTS;
     }
 
-    /**
-     * returns the base speed of the player
-     * 
-     * @return The baseSpeed of the player is being returned.
-     */
-    public double getBaseSpeed() {
-        return baseSpeed;
+    public boolean isBody(StatsType type) {
+        return type == StatsType.HEALTH || type == StatsType.SPEED || type == StatsType.EVASION
+                || type == StatsType.TOUGHNESS;
     }
 
-    /**
-     * sets the base speed of the player
-     * 
-     * @param baseSpeed The speed of the enemy.
-     */
-    public void setBaseSpeed(double baseSpeed) {
-        this.baseSpeed = baseSpeed;
+    public boolean isChance(StatsType type) {
+        return type == StatsType.HARVEST || type == StatsType.INSTANT_GROWTH || type == StatsType.DOUBLE_HARVEST
+                || type == StatsType.BEHEAD;
     }
 
-    /**
-     * returns the baseEvasion of the player
-     * 
-     * @return The baseEvasion of the player is being returned.
-     */
-    public double getBaseEvasion() {
-        return baseEvasion;
+    public boolean isWeapon(StatsType type) {
+        return type == StatsType.BOW || type == StatsType.CROSSBOW || type == StatsType.TRIDENT
+                || type == StatsType.SWORD || type == StatsType.AXE;
     }
 
-    /**
-     * sets the baseEvasion of the player to the value of the parameter
-     * baseEvasion
-     * 
-     * @param baseEvasion The base evasion of the character.
-     */
-    public void setBaseEvasion(float baseEvasion) {
-        this.baseEvasion = baseEvasion;
+    public boolean isTool(StatsType type) {
+        return type == StatsType.AXE || type == StatsType.PICKAXE || type == StatsType.SHOVEL || type == StatsType.HOE;
     }
 
-    /**
-     * returns the harvest chance of the crop
-     * 
-     * @return The harvestChance of the player is being returned.
-     */
-    public double getHarvestChance() {
-        return harvestChance;
+    public void increaseStats(StatsType type, float amount) {
+
+        // most to least likely
+        if (isBody(type)) {
+            // TODO: send to BodyStats
+        } else if (isTool(type)) {
+            // TODO: send to ToolStats
+        } else if (isWeapon(type)) {
+            // TODO: send to WeaponStats
+        } else if (isArmor(type)) {
+            // TODO: send to ArmorStats
+        } else if (isChance(type)) {
+            // TODO: send to ChanceStats
+        }
     }
 
-    /**
-     * sets the harvest chance of the crop to the value of the
-     * parameter harvestChance
-     * 
-     * @param harvestChance The chance that the block will drop an item when broken.
-     */
-    public void setHarvestChance(float harvestChance) {
-        this.harvestChance = harvestChance;
+    public void increaseStats(ArmorStatsType type, float amount) {
+        // TODO: send to ArmorStats
     }
 
-    /**
-     * It returns the doubleHarvestChance of the player
-     * 
-     * @return The doubleHarvestChance of the player is being returned.
-     */
-    public double getDoubleHarvestChance() {
-        return doubleHarvestChance;
+    public void increaseStats(BodyStatsType type, float amount) {
+        // TODO: send to BodyStats
     }
 
-    /**
-     * sets the double harvest chance to the value of the parameter
-     * 
-     * @param doubleHarvestChance The chance that a crop will drop two items instead
-     *                            of one.
-     */
-    public void setDoubleHarvestChance(float doubleHarvestChance) {
-        this.doubleHarvestChance = doubleHarvestChance;
+    public void increaseStats(ChanceStatsType type, float amount) {
+        // TODO: send to ChanceStats
     }
 
-    /**
-     * returns the instantGrowthChance of the player
-     * 
-     * @return The instantGrowthChance of the player is being returned.
-     */
-    public double getInstantGrowthChance() {
-        return instantGrowthChance;
+    public void increaseStats(ToolStatsType type, float amount) {
+        // TODO: send to ToolStats
     }
 
-    /**
-     * sets the instantGrowthChance of the player to the value of the
-     * instantGrowthChance
-     * parameter
-     * 
-     * @param instantGrowthChance The chance that a plant will grow instantly.
-     */
-    public void setInstantGrowthChance(float instantGrowthChance) {
-        this.instantGrowthChance = instantGrowthChance;
+    public void increaseStats(WeaponStatsType type, float amount) {
+        // TODO: send to ArmorStats
     }
 
-    /**
-     * returns the beheadChance of the player
-     * 
-     * @return The beheadChance of the player is being returned.
-     */
-    public double getBeheadChance() {
-        return beheadChance;
+    public ArmorStats getArmorStats() {
+        return armorStats;
     }
 
-    /**
-     * sets the beheadChance of the player to the value of the beheadChance
-     * parameter
-     * 
-     * @param beheadChance The chance that the player will behead the player.
-     */
-    public void setBeheadChance(float beheadChance) {
-        this.beheadChance = beheadChance;
+    public BodyStats getBodyStats() {
+        return bodyStats;
     }
 
-    /**
-     * returns the baseSwordProficiency of the player
-     * 
-     * @return The baseSwordProficiency of the player is being returned.
-     */
-    public double getBaseSwordProficiency() {
-        return baseSwordProficiency;
+    public ChanceStats getChanceStats() {
+        return chanceStats;
     }
 
-    /**
-     * sets the baseSwordProficiency of the player to the value of the
-     * parameter passed in
-     * 
-     * @param baseSwordProficiency The base proficiency of the sword.
-     */
-    public void setBaseSwordProficiency(float baseSwordProficiency) {
-        this.baseSwordProficiency = baseSwordProficiency;
+    public ToolStats getToolStats() {
+        return toolStats;
     }
 
-    /**
-     * returns the baseBowProficiency of the player
-     * 
-     * @return The baseBowProficiency of the player is being returned.
-     */
-    public double getBaseBowProficiency() {
-        return baseBowProficiency;
+    public WeaponStats getWeaponStats() {
+        return weaponStats;
     }
 
-    /**
-     * sets the baseBowProficiency of the player to the value of the
-     * parameter passed in
-     * 
-     * @param baseBowProficiency The base proficiency of the bow.
-     */
-    public void setBaseBowProficiency(float baseBowProficiency) {
-        this.baseBowProficiency = baseBowProficiency;
+    public void setArmorStats(ArmorStats armorStats) {
+        this.armorStats = armorStats;
     }
 
-    /**
-     * returns the baseCrossbowProficiency of the player
-     * 
-     * @return The baseCrossbowProficiency of the player is being returned.
-     */
-    public double getBaseCrossbowProficiency() {
-        return baseCrossbowProficiency;
+    public void setBodyStats(BodyStats bodyStats) {
+        this.bodyStats = bodyStats;
     }
 
-    /**
-     * sets the baseCrossbowProficiency of the player to the value of the
-     * parameter passed in
-     * 
-     * @param baseCrossbowProficiency The base proficiency of the crossbow.
-     */
-    public void setBaseCrossbowProficiency(float baseCrossbowProficiency) {
-        this.baseCrossbowProficiency = baseCrossbowProficiency;
+    public void setChanceStats(ChanceStats chanceStats) {
+        this.chanceStats = chanceStats;
     }
 
-    /**
-     * returns the base experience gain
-     * 
-     * @return The baseExperienceGain of the player is being returned.
-     */
-    public double getBaseExperienceGain() {
-        return baseExperienceGain;
+    public void setToolStats(ToolStats toolStats) {
+        this.toolStats = toolStats;
     }
 
-    /**
-     * sets the base experience gain of the player
-     * 
-     * @param baseExperienceGain The base experience gain for the player.
-     */
-    public void setBaseExperienceGain(float baseExperienceGain) {
-        this.baseExperienceGain = baseExperienceGain;
+    public void setWeaponStats(WeaponStats weaponStats) {
+        this.weaponStats = weaponStats;
     }
 
-    /**
-     * returns a list of strings that represent the weapon proficiency
-     * of the character
-     * 
-     * @return The weaponProficiency list.
-     */
-    public List<String> getUsableWeaponTypes() {
-        return usableWeaponTypes;
-    }
-
-    /**
-     * sets the weapon proficiency of the character
-     * 
-     * @param weaponProficiency List of Strings
-     */
-    public void setUsableWeaponTypes(List<String> weaponProficiency) {
-        this.usableWeaponTypes = weaponProficiency;
-    }
-
-    /**
-     * returns a list of strings that represent the armor proficiency
-     * of the class
-     * 
-     * @return A list of strings.
-     */
-    public List<String> getUsableArmorTypes() {
-        return usableArmorTypes;
-    }
-
-    /**
-     * sets the armorProficiency of the player to the value of the
-     * parameter armorProficiency
-     * 
-     * @param armorProficiency List of armor types the character is proficient with.
-     */
-    public void setUsableArmorTypes(List<String> armorProficiency) {
-        this.usableArmorTypes = armorProficiency;
-    }
+    /** Experience sources this player can gain from. */
+    private List<AllSources> experienceSources;
 
     /**
      * returns the experienceSources of the player
@@ -426,19 +312,11 @@ public class Stats implements JSONSerializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{");
-        sb.append(JSONUtils.fromValue("baseHealth", this.baseHealth) + ", ");
-        sb.append(JSONUtils.fromValue("baseSpeed", this.baseSpeed) + ", ");
-        sb.append(JSONUtils.fromValue("baseEvasion", this.baseEvasion) + ", ");
-        sb.append(JSONUtils.fromValue("harvestChance", this.harvestChance) + ", ");
-        sb.append(JSONUtils.fromValue("doubleHarvestChance", this.doubleHarvestChance) + ", ");
-        sb.append(JSONUtils.fromValue("instantGrowthChance", this.instantGrowthChance) + ", ");
-        sb.append(JSONUtils.fromValue("beheadChance", this.beheadChance) + ", ");
-        sb.append(JSONUtils.fromValue("baseSwordProficiency", this.baseSwordProficiency) + ", ");
-        sb.append(JSONUtils.fromValue("baseBowProficiency", this.baseBowProficiency) + ", ");
-        sb.append(JSONUtils.fromValue("baseCrossbowProficiency", this.baseCrossbowProficiency) + ", ");
-        sb.append(JSONUtils.fromValue("baseExperienceGain", this.baseExperienceGain) + ", ");
-        sb.append(JSONUtils.fromStringList("usableWeaponTypes", this.usableWeaponTypes) + ", ");
-        sb.append(JSONUtils.fromStringList("usableArmorTypes", this.usableArmorTypes));
+        sb.append(JSONUtils.fromValue("armorStats", this.armorStats) + ", ");
+        sb.append(JSONUtils.fromValue("bodyStats", this.bodyStats) + ", ");
+        sb.append(JSONUtils.fromValue("chanceStats", this.chanceStats) + ", ");
+        sb.append(JSONUtils.fromValue("toolStats", this.toolStats) + ", ");
+        sb.append(JSONUtils.fromValue("weaponStats", this.weaponStats));
         sb.append("}");
 
         return sb.toString();
