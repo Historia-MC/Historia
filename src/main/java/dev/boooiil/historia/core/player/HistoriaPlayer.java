@@ -5,6 +5,7 @@ import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
+import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -242,7 +243,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public float getBaseHealth() {
 
-        return this.proficiency.getStats().getBaseHealth();
+        return this.proficiency.getStats().getBodyStats().getLevel(BodyStatsType.HEALTH);
 
     }
 
@@ -358,15 +359,19 @@ public class HistoriaPlayer extends BasePlayer {
         double previousHealth = player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue();
         AttributeInstance healthAttribute = player.getAttribute(Attribute.MAX_HEALTH);
 
-        if (healthAttribute.getBaseValue() != this.getProficiency().getStats().getBaseHealth()) {
+        if (healthAttribute.getBaseValue() != this.getProficiency().getStats().getBodyStats()
+                .getLevel(BodyStatsType.HEALTH)) {
 
-            healthAttribute.setBaseValue(this.getProficiency().getStats().getBaseHealth());
+            healthAttribute
+                    .setBaseValue(this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH));
             player.setHealth(
-                    this.getProficiency().getStats().getBaseHealth() * (player.getHealth() / previousHealth));
+                    this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH)
+                            * (player.getHealth() / previousHealth));
 
         }
 
-        player.setWalkSpeed(0.2f * (float) this.getProficiency().getStats().getBaseSpeed());
+        player.setWalkSpeed(
+                0.2f * (float) this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.SPEED));
 
         player.setLevel(this.getLevel());
 

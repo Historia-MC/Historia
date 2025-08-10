@@ -30,7 +30,8 @@ public class UpdateScoreboardRunnable extends BukkitRunnable {
                         scoreboardAdapter.addLine(8,
                                         ChatColor.DARK_AQUA + "Hunger: " + ChatColor.GRAY
                                                         + NumberUtils.roundDouble(player.getFoodLevel(), 2) + "/"
-                                                        + historiaPlayer.getProficiency().getStats().getBaseFood());
+                                                        + "0");
+                        // historiaPlayer.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.FOOD));
                         scoreboardAdapter.addLine(7, ChatColor.AQUA + "Experience: " + ChatColor.GRAY
                                         + historiaPlayer.getCurrentExperience() + "/"
                                         + historiaPlayer.getMaxExperience());
@@ -39,9 +40,11 @@ public class UpdateScoreboardRunnable extends BukkitRunnable {
                                                         + historiaPlayer.getCurrentTemperature());
                         scoreboardAdapter.addLine(5, ChatColor.AQUA + "Weight: " + ChatColor.GRAY + null);
                         scoreboardAdapter.addLine(4, ChatColor.DARK_AQUA + "Weapon Class: " + ChatColor.GRAY
-                                        + historiaPlayer.getProficiency().getStats().getUsableWeaponTypes());
+                                        + historiaPlayer.getProficiency().getStats().getWeaponStats()
+                                                        .getUsableWeaponWeights());
                         scoreboardAdapter.addLine(3, ChatColor.AQUA + "Armor Class: " + ChatColor.GRAY
-                                        + historiaPlayer.getProficiency().getStats().getUsableArmorTypes());
+                                        + historiaPlayer.getProficiency().getStats().getArmorStats()
+                                                        .getUsableArmorWeights());
 
                         scoreboardAdapter.addToPlayer(player);
 
