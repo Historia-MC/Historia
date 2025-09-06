@@ -22,6 +22,7 @@ import dev.boooiil.historia.core.events.player.PlayerJoinListener;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader;
+import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.StatModifiers;
 import dev.boooiil.historia.core.registry.Registry;
 import dev.boooiil.historia.core.registry.RegistryHolder;
@@ -38,6 +39,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Historia-Core Main class
@@ -47,18 +49,25 @@ public class HistoriaCore extends JavaPlugin {
     public static final RegistryHolder registryHolder = new RegistryHolder();
 
     // proficiency_name:proficiency
-    public static Registry<Proficiency> proficiencyRegistry = RegistryHolder.get(
+    public static final Registry<@NotNull Proficiency> PROFICIENCY_REGISTRY = RegistryHolder.get(
             HistoriaCore.registryHolder.register(
                     getNamespacedKey("proficiency"),
-                    new Registry<Proficiency>(Proficiency.class)),
+                    new Registry<>(Proficiency.class)),
             getNamespacedKey("proficiency"),
             Proficiency.class);
 
+    public static final Registry<@NotNull ISkill> SKILL_REGISTRY = RegistryHolder.get(
+            HistoriaCore.registryHolder.register(
+                    getNamespacedKey("skill"),
+                    new Registry<>(ISkill.class)),
+            getNamespacedKey("skill"),
+            ISkill.class);
+
     // proficiency_name:stat_modifier
-    public static Registry<StatModifiers> statModifiersRegistry = RegistryHolder.get(
+    public static final Registry<@NotNull StatModifiers> STAT_MODIFIERS_REGISTRY = RegistryHolder.get(
             HistoriaCore.registryHolder.register(
                     getNamespacedKey("stat_modifiers"),
-                    new Registry<StatModifiers>(StatModifiers.class)),
+                    new Registry<>(StatModifiers.class)),
             getNamespacedKey("stat_modifiers"),
             StatModifiers.class);
 
@@ -195,6 +204,10 @@ public class HistoriaCore extends JavaPlugin {
 
     }
 
+    public static HistoriaCore getInstance() {
+        return (HistoriaCore) instance;
+    }
+
     /**
      * Get the database handler.
      * 
@@ -232,6 +245,10 @@ public class HistoriaCore extends JavaPlugin {
         return new NamespacedKey(plugin(), key.toLowerCase());
     }
 
+    public static void registerSkill(ISkill skill) {
+        skill.register();
+    }
+
     /**
      * Initialize the database.
      */
@@ -266,7 +283,7 @@ public class HistoriaCore extends JavaPlugin {
      * 
      * @param event The event you want to register.
      */
-    private void registerEvent(Listener event) {
+    public void registerEvent(Listener event) {
 
         this.getServer().getPluginManager().registerEvents(event, this);
 
@@ -292,7 +309,7 @@ public class HistoriaCore extends JavaPlugin {
      * 
      * @param runnable The runnable you want to register.
      */
-    private void registerRunnable(BukkitRunnable runnable) {
+    public void registerRunnable(BukkitRunnable runnable) {
 
         runnable.runTaskTimer(this, 0, 20);
 
@@ -304,7 +321,7 @@ public class HistoriaCore extends JavaPlugin {
      * @param runnable The BukkitRunnable to be executed.
      * @param time     The time in ticks between each execution of the runnable.
      */
-    private void registerRunnable(BukkitRunnable runnable, long time) {
+    public void registerRunnable(BukkitRunnable runnable, long time) {
         runnable.runTaskTimer(this, 0, time);
     }
 
