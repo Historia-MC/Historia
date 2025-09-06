@@ -5,12 +5,14 @@ import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
+import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
@@ -60,6 +62,7 @@ public class HistoriaPlayer extends BasePlayer {
 
     /** The proficiency of the user. */
     private Proficiency proficiency;
+    private Stats stats;
 
     /** When the user was last saved. */
     private long lastSaved;
@@ -216,6 +219,8 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
+    public Stats getStats() {return this.stats; };
+
     /**
      * Get the proficiency of the player.
      * 
@@ -347,41 +352,6 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     /**
-     * Apply the given modifiers.
-     */
-    public void applyClassStats() {
-
-        Player player = Bukkit.getPlayer(this.getUUID());
-
-        // TODO: Need to make sure that the player is not losing health or food each
-        // time they join if base health > 20
-        // base health scale: getHealth() / getMaxHealth() * getHealthScale().
-        double previousHealth = player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue();
-        AttributeInstance healthAttribute = player.getAttribute(Attribute.MAX_HEALTH);
-
-        if (healthAttribute.getBaseValue() != this.getProficiency().getStats().getBodyStats()
-                .getLevel(BodyStatsType.HEALTH)) {
-
-            healthAttribute
-                    .setBaseValue(this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH));
-            player.setHealth(
-                    this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH)
-                            * (player.getHealth() / previousHealth));
-
-        }
-
-        player.setWalkSpeed(
-                0.2f * (float) this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.SPEED));
-
-        player.setLevel(this.getLevel());
-
-        // just dont bother with this, update food status on consume event
-        // player.setFoodLevel(historiaPlayer.getProficiency().getStats().getBaseFood()
-        // * (player.getFoodLevel()/20));
-
-    }
-
-    /**
      * Save the character to SQL.
      */
     public void saveCharacter() {
@@ -426,19 +396,24 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @param proficiency The proficiency to set.
      */
-    public void changeProficiency(String proficiency) {
+    public void changeProficiency(NamespacedKey proficiency) {
         CoreLogger
-                .debugToConsole("Player " + this.getUsername() + "(" + this.getUUID() + ") is changing proficiency to "
-                        + proficiency + ".");
+                .debugToConsole("Player ", this.getUsername(), "(",
+                        this.getUUID().toString(),") is changing proficiency to ", proficiency.toString(), ".");
 
-        this.proficiency = new Proficiency(ProficiencyName.fromString(proficiency));
+        if (!HistoriaCore.proficiencyRegistry.contains(proficiency)) {
+            throw new IllegalArgumentException("Tried to apply proficiency to player" + this.getUsername() +
+                    " but the proficiency " + proficiency + " does not exist in the registry.");
+        }
+
+        this.proficiency = new Proficiency(proficiency);
 
         saveCharacter();
 
         // validate user is online before loading the new stats
         if (isOnline()) {
             CoreLogger.debugToConsole("Player is online, applying new stats.");
-            this.applyClassStats();
+            // TODO: handle applying of stats to proficiency change
         }
 
     }
@@ -511,100 +486,6 @@ public class HistoriaPlayer extends BasePlayer {
         } else if (getLevel() > 1) {
 
             setCurrentExperience(getCurrentExperience() - incomeModified);
-
-        }
-
-    }
-
-    /**
-     * Apply skill enchants to the items in the inventory.
-     * 
-     * @param inventory Inventory of the player.
-     */
-    public void applySkillEnchants(Inventory inventory) {
-
-        inventory.iterator().forEachRemaining(item -> {
-
-            if (item == null || item.getItemMeta() == null)
-                return;
-
-            if (this.getProficiency().getSkills().hasSkillEnchants()) {
-
-                Enchantment enchant = this.getProficiency().getSkills().getSkillEnchantment(item.getType());
-                ItemMeta itemMeta = item.getItemMeta();
-
-                if (enchant != null && !itemMeta.hasEnchant(enchant)) {
-
-                    addSkillEnchantToItem(item, enchant);
-
-                }
-
-                else if (enchant == null && itemMeta.hasEnchants()) {
-
-                    removeSkillEnchantFromItem(item);
-
-                }
-
-            } else {
-
-                if (item.getItemMeta().hasEnchants()) {
-
-                    CoreLogger.debugToConsole(item.getEnchantments().toString());
-
-                    removeSkillEnchantFromItem(item);
-
-                }
-
-            }
-
-        });
-
-    }
-
-    /**
-     * Add a skill enchant to an item if applicable.
-     * 
-     * @param item    The ItemStack to add the enchant to.
-     * @param enchant The Enchantment to add.
-     */
-    private void addSkillEnchantToItem(ItemStack item, Enchantment enchant) {
-
-        if (item != null && item.getItemMeta() != null) {
-
-            ItemMeta itemMeta = item.getItemMeta();
-
-            CoreLogger.debugToConsole(
-                    this.getUsername() + " had an item in their inventory that wasn't enchanted.");
-
-            itemMeta.addEnchant(enchant, 1, true);
-            item.setItemMeta(itemMeta);
-
-        }
-
-    }
-
-    /**
-     * Remove a skill enchant from an item if applicable.
-     * 
-     * @param item The ItemStack to remove the enchant from.
-     */
-
-    private void removeSkillEnchantFromItem(ItemStack item) {
-
-        if (item != null && item.getItemMeta() != null && !item.getItemMeta().hasEnchants()) {
-
-            ItemMeta itemMeta = item.getItemMeta();
-
-            CoreLogger.debugToConsole(
-                    this.getUsername() + " had an item in their inventory with an illegal enchant.");
-
-            item.getItemMeta().getEnchants().forEach((enchant, level) -> {
-
-                itemMeta.removeEnchant(enchant);
-
-            });
-
-            item.setItemMeta(itemMeta);
 
         }
 
