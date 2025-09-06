@@ -8,11 +8,14 @@ import java.util.Set;
 import java.util.Map.Entry;
 import java.util.function.BiFunction;
 
+import dev.boooiil.historia.core.registry.Registry;
 import org.bukkit.NamespacedKey;
 import org.bukkit.potion.PotionEffect;
 import org.jspecify.annotations.NullMarked;
 
 import net.kyori.adventure.text.Component;
+
+import javax.xml.stream.events.Namespace;
 
 /**
  * Utility class for converting various data types to JSON format.
@@ -31,6 +34,7 @@ public class JSONUtils {
         TYPE_HANDLERS.put(String.class, castAndHandle(JSONUtils::fromStringList));
         TYPE_HANDLERS.put(Component.class, castAndHandle(JSONUtils::fromComponentList));
         TYPE_HANDLERS.put(PotionEffect.class, castAndHandle(JSONUtils::fromPotionEffectList));
+        TYPE_HANDLERS.put(NamespacedKey.class, castAndHandle(JSONUtils::fromNamespacedKeyList));
         TYPE_HANDLERS.put(JSONSerializable.class, castAndHandle(JSONUtils::handleJSONSerializableList));
     }
 
@@ -111,6 +115,8 @@ public class JSONUtils {
         return "\"" + key + "\":" + "\"" + value + "\"";
     }
 
+    public static String fromValue(String key, NamespacedKey value) { return "\"" + key + "\":" + "\"" + value + "\""; }
+
     public static String fromValue(String key, JSONSerializable value) {
         return fromValue(key, value, false);
     }
@@ -126,7 +132,7 @@ public class JSONUtils {
      * "SampleKey": [ v1, v2, ... ]
      * </pre>
      * 
-     * @param T      The type of the item in the list.
+     * @param <T>    The type of the item in the list.
      * @param key    the key of the pair.
      * @param values the value(s) of the pair.
      * @return a "key": [ ...value ] pair.
@@ -378,6 +384,23 @@ public class JSONUtils {
         return sb.toString();
     }
 
+    public static String fromNamespacedKeyList(String key, List<NamespacedKey> values) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("\"" + key + "\":[");
+
+        for (int i = 0; i < values.size(); i++) {
+            sb.append("\"" + values.get(i) + "\", ");
+        }
+
+        sb.setLength(sb.length() - 2);
+        sb.append("]");
+
+        return sb.toString();
+
+    }
+
     /**
      * Convert a list into a valid "key": [ ...value ] JSON pair.
      * 
@@ -548,6 +571,10 @@ public class JSONUtils {
         return fromPotionEffectList(key, new ArrayList<>(values));
     }
 
+    public static String fromNamespacedKeySet(String key, Set<NamespacedKey> values) {
+        return fromNamespacedKeyList(key, new ArrayList<>(values));
+    }
+
     /**
      * Convert a set into a valid "key": [ ...value ] JSON pair.
      * 
@@ -682,4 +709,7 @@ public class JSONUtils {
         return fromMap(key, (Map<K, V>) values, asString);
     }
 
+    public static <T> String fromRegistry(String key, Registry<T> value) {
+        return fromMap(key, (Map<NamespacedKey, T>) value);
+    }
 }
