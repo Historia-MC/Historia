@@ -39,9 +39,9 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             case CACTUS:
             case BAMBOO:
             case NETHER_WART:
-                if (this.historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
-                    this.historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
-                break;
+//                if (this.historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
+//                    this.historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
+//                break;
 
             default:
                 doConsumptionBypass();
@@ -59,8 +59,8 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players who do not have the skill
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.LADDER_BYPASS))
-            return;
+//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.LADDER_BYPASS))
+//            return;
 
         // TODO: test this!!
 
@@ -95,8 +95,8 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players that do not have this skill
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_CONSUME_BLOCK))
-            return;
+//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_CONSUME_BLOCK))
+//            return;
 
         switch (this.getBlock().getType()) {
 

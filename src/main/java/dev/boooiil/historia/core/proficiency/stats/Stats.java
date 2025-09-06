@@ -25,6 +25,9 @@ public class Stats implements JSONSerializable {
     private ToolStats toolStats;
     private WeaponStats weaponStats;
 
+    public Stats() {
+    }
+
     public Stats(ConfigurationSection section, ProficiencyName proficiencyName) {
 
         this.armorStats = new ArmorStats(section.getConfigurationSection("armor"), proficiencyName);

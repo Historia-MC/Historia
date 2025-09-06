@@ -72,7 +72,7 @@ public class MainTest {
         CoreLogger.debugToConsole(historiaPlayer.toString());
         CoreLogger.debugToConsole(historiaPlayer.toJSON());
 
-        historiaPlayer.changeProficiency("Warrior");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("warrior"));
 
     }
 
@@ -86,7 +86,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Archer");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("archer"));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Fisherman");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Fisherman"));
     }
 
     @Test
@@ -112,7 +112,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Miner");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Miner"));
     }
 
     @Test
@@ -127,7 +127,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Blacksmith");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Blacksmith"));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Huntsman");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Huntsman"));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Apothecary");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Apothecary"));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Architect");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Architect"));
     }
 
     @Test
@@ -179,7 +179,7 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Lumberjack");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Lumberjack"));
     }
 
     @Test
@@ -192,6 +192,6 @@ public class MainTest {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-        historiaPlayer.changeProficiency("Farmer");
+        historiaPlayer.changeProficiency(HistoriaCore.getNamespacedKey("Farmer"));
     }
 }

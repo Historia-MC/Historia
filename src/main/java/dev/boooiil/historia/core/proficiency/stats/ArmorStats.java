@@ -35,8 +35,8 @@ public class ArmorStats implements StatsComponent {
     private List<String> usableArmorWeights;
 
     public ArmorStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.statModifiersRegistry
-                .get(HistoriaCore.getNamespacedKey(proficiencyName.getKey()));
+        this.statModifiers = HistoriaCore.STAT_MODIFIERS_REGISTRY
+                .get(proficiencyName.getKey());
         this.helmet = section.getInt("helmet");
         this.helmetExperience = 0;
         this.chestplate = section.getInt("chestplate");

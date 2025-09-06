@@ -142,12 +142,12 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
     private void doShearChicken() {
 
         // guard against player not having skill
-        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.SHEAR_CHICKEN)) {
-            CoreLogger.debugToConsole(
-                    "[PIEH#doShearChicken] Player " + this.getPlayer().getName()
-                            + " does not have the skill to shear chickens.");
-            return;
-        }
+//        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.SHEAR_CHICKEN)) {
+//            CoreLogger.debugToConsole(
+//                    "[PIEH#doShearChicken] Player " + this.getPlayer().getName()
+//                            + " does not have the skill to shear chickens.");
+//            return;
+//        }
 
         // guard against player not holding shears
         if (getHeldItem().getType() != Material.SHEARS) {

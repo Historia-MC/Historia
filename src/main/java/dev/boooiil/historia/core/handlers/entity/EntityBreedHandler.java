@@ -45,16 +45,16 @@ public class EntityBreedHandler {
         Player breeder = (Player) event.getBreeder();
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(breeder.getUniqueId());
 
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.TAME_ANIMALS)) {
-            CoreLogger.infoToPlayer("Unfortunately you were never told about the birds and bees.",
-                    historiaPlayer.getUUID());
-            event.setCancelled(true);
-
-            ((Breedable) event.getFather()).setBreed(false);
-            ((Breedable) event.getMother()).setBreed(false);
-
-            return;
-        }
+//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.TAME_ANIMALS)) {
+//            CoreLogger.infoToPlayer("Unfortunately you were never told about the birds and bees.",
+//                    historiaPlayer.getUUID());
+//            event.setCancelled(true);
+//
+//            ((Breedable) event.getFather()).setBreed(false);
+//            ((Breedable) event.getMother()).setBreed(false);
+//
+//            return;
+//        }
 
         historiaPlayer.increaseExperience(AnimalSources.BREED_ANIMAL.getKey());
 

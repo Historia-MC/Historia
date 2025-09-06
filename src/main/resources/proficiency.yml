@@ -42,9 +42,11 @@ Warrior:
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 2.5
     harvestChance: 0.2
+    beheadChance: 0.10
+
+
     doubleHarvestChance: 0
     instantGrowChance: 0
-    beheadChance: 0.10
 
     weaponProficiency: [Light, Medium, Heavy]
     armorProficiency: [Light, Medium, Heavy]

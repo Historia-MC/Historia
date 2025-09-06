@@ -26,7 +26,6 @@ import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.StatModifiers;
 import dev.boooiil.historia.core.registry.Registry;
 import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.runnable.ClassEnchantsRunnable;
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
 import dev.boooiil.historia.core.util.CoreLogger;
@@ -143,7 +142,7 @@ public class HistoriaCore extends JavaPlugin {
         registerCommand("set", new CommandSet());
         registerCommand("proficiency", new CommandProficiency());
 
-        registerRunnable(new ClassEnchantsRunnable());
+//        registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 

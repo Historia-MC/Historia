@@ -37,16 +37,16 @@ public class EntityTameHandler {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getOwner().getUniqueId());
 
-        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.TAME_ANIMALS)) {
-
-            historiaPlayer.increaseExperience(AnimalSources.TAME_ANIMAL.getKey());
-
-        } else {
-
-            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
-            event.setCancelled(true);
-
-        }
+//        if (historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.TAME_ANIMALS)) {
+//
+//            historiaPlayer.increaseExperience(AnimalSources.TAME_ANIMAL.getKey());
+//
+//        } else {
+//
+//            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+//            event.setCancelled(true);
+//
+//        }
 
     }
 

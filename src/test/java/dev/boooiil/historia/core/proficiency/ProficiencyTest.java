@@ -1,5 +1,8 @@
 package dev.boooiil.historia.core.proficiency;
 
+import dev.boooiil.historia.core.registry.Registry;
+import org.bukkit.NamespacedKey;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,68 +35,22 @@ public class ProficiencyTest {
     }
 
     @Test
-    public void testConstructWarrior() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Warrior"));
-        assert proficiency.getName() == ProficiencyName.WARRIOR;
+    public void testConstructClasses() {
+        for (ProficiencyName name : ProficiencyName.values()) {
+            Proficiency proficiency = getProficiency(name.getKeyLowercase());
+
+            assert !proficiency.getSkills().isEmpty();
+        }
     }
 
-    @Test
-    public void testConstructFarmer() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Farmer"));
-        assert proficiency.getName() == ProficiencyName.FARMER;
-    }
+    private Proficiency getProficiency(String proficiency) {
 
-    @Test
-    public void testConstructNone() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("None"));
-        assert proficiency.getName() == ProficiencyName.NONE;
-    }
+        NamespacedKey key = HistoriaCore.getNamespacedKey(proficiency);
+        Registry<@NotNull Proficiency> registry = HistoriaCore.PROFICIENCY_REGISTRY;
 
-    @Test
-    public void testConstructInvalid() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Invalid"));
-        assert proficiency.getName() == ProficiencyName.NONE;
-    }
+        assert(registry != null);
 
-    @Test
-    public void testConstructFisherman() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Fisherman"));
-        assert proficiency.getName() == ProficiencyName.FISHERMAN;
-    }
+        return HistoriaCore.PROFICIENCY_REGISTRY.get(key);
 
-    @Test
-    public void testConstructMiner() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Miner"));
-        assert proficiency.getName() == ProficiencyName.MINER;
-    }
-
-    @Test
-    public void testConstructLumberjack() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Lumberjack"));
-        assert proficiency.getName() == ProficiencyName.LUMBERJACK;
-    }
-
-    @Test
-    public void testConstructArchitect() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Architect"));
-        assert proficiency.getName() == ProficiencyName.ARCHITECT;
-    }
-
-    @Test
-    public void testConstructArcher() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Archer"));
-        assert proficiency.getName() == ProficiencyName.ARCHER;
-    }
-
-    @Test
-    public void testConstructHuntsman() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Huntsman"));
-        assert proficiency.getName() == ProficiencyName.HUNTSMAN;
-    }
-
-    @Test
-    public void testConstructApothecary() {
-        Proficiency proficiency = new Proficiency(ProficiencyName.fromString("Apothecary"));
-        assert proficiency.getName() == ProficiencyName.APOTHECARY;
     }
 }

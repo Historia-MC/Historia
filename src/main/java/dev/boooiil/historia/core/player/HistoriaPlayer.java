@@ -92,7 +92,7 @@ public class HistoriaPlayer extends BasePlayer {
         // Experience max will just be experience * multiplier.
 
         this.culture = Cultures.NONE;
-        this.proficiency = new Proficiency(ProficiencyName.NONE);
+        this.proficiency = new Proficiency(ProficiencyName.NONE.getKey());
         this.level = 1;
         this.currentExperience = 0;
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
@@ -124,7 +124,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         this.culture = culture;
         this.username = username;
-        this.proficiency = new Proficiency(proficiency);
+        this.proficiency = new Proficiency(proficiency.getKey());
         this.level = level;
         this.currentExperience = experience;
         this.lastLogin = login;
@@ -139,7 +139,7 @@ public class HistoriaPlayer extends BasePlayer {
      * @param proficiency - Proficiency to be set.
      */
     public void setProficiency(ProficiencyName proficiency) {
-        this.proficiency = new Proficiency(proficiency);
+        this.proficiency = new Proficiency(proficiency.getKey());
     }
 
     /**
@@ -401,7 +401,7 @@ public class HistoriaPlayer extends BasePlayer {
                 .debugToConsole("Player ", this.getUsername(), "(",
                         this.getUUID().toString(),") is changing proficiency to ", proficiency.toString(), ".");
 
-        if (!HistoriaCore.proficiencyRegistry.contains(proficiency)) {
+        if (!HistoriaCore.PROFICIENCY_REGISTRY.contains(proficiency)) {
             throw new IllegalArgumentException("Tried to apply proficiency to player" + this.getUsername() +
                     " but the proficiency " + proficiency + " does not exist in the registry.");
         }

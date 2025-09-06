@@ -197,6 +197,9 @@ public class Proficiency implements JSONSerializable {
         this.skills.putAll(skills);
     }
 
+    public Stats getStats() {
+        return new Stats();
+    }
     /**
      * Returns a string representation of the Proficiency object.
      * 

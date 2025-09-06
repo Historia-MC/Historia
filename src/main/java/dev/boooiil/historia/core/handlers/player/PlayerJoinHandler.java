@@ -39,8 +39,6 @@ public class PlayerJoinHandler {
 
     public void doPlayerStatsInitialization() {
 
-        historiaPlayer.applyClassStats();
-
         CoreLogger.debugToConsole("************* ADJUSTED STATS *************");
         CoreLogger.debugToConsole("Speed: " + event.getPlayer().getWalkSpeed());
         CoreLogger.debugToConsole("Health: " + event.getPlayer().getHealth());

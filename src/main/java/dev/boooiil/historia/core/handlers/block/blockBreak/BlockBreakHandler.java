@@ -35,9 +35,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case JUNGLE_LOG:
             case ACACIA_LOG:
             case DARK_OAK_LOG:
-                if (historiaPlayer.getProficiency().getName() == ProficiencyName.LUMBERJACK) {
-                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
-                }
+                //if (historiaPlayer.getProficiency().getName() == ProficiencyName.LUMBERJACK) {
+              //      historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
+               // }
                 doExtraWoodChance();
                 break;
 
@@ -53,9 +53,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case LAPIS_ORE:
             case REDSTONE_ORE:
                 doExtraOreChance();
-                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
-                    historiaPlayer.increaseExperience(BlockSources.ORE_BREAK.getKey());
-                break;
+//                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
+//                    historiaPlayer.increaseExperience(BlockSources.ORE_BREAK.getKey());
+//                break;
 
             case STONE:
             case GRANITE:
@@ -63,9 +63,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case ANDESITE:
             case DEEPSLATE:
             case GRAVEL:
-                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
-                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
-                break;
+//                if (historiaPlayer.getProficiency().getName() == ProficiencyName.MINER)
+//                    historiaPlayer.increaseExperience(BlockSources.BLOCK_BREAK.getKey());
+//                break;
 
             case WHEAT:
             case CARROTS:
@@ -81,9 +81,9 @@ public class BlockBreakHandler extends BaseBlockHandler {
             case CHORUS_FLOWER:
             case CHORUS_PLANT:
             case KELP:
-                // TODO: separate sources for crops that harvest in less quantities
-                if (historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
-                    historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
+//                // TODO: separate sources for crops that harvest in less quantities
+//                if (historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
+//                    historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
             default:
                 break;
@@ -91,39 +91,39 @@ public class BlockBreakHandler extends BaseBlockHandler {
     }
 
     private void doExtraWoodChance() {
+//
+//        if (this.historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOD)) {
+//
+//            float doubleDropChance = 0.05f;
+//            float dropChanceRoll = NumberUtils.random(0, 1);
+//
+//            boolean didDouble = dropChanceRoll <= doubleDropChance;
+//
+//            ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
+//
+//            historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
 
-        if (this.historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOD)) {
+//            if (didDouble) {
+//
+//                this.getBlock().getDrops().add(item);
+//
+//                historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
+//
+//                CoreLogger.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
+//
+//            }
 
-            float doubleDropChance = 0.05f;
-            float dropChanceRoll = NumberUtils.random(0, 1);
-
-            boolean didDouble = dropChanceRoll <= doubleDropChance;
-
-            ItemStack item = new ItemStack(breakEvent.getBlock().getType(), 1);
-
-            historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
-
-            if (didDouble) {
-
-                this.getBlock().getDrops().add(item);
-
-                historiaPlayer.increaseExperience(FarmingSources.CROP_BREAK.getKey());
-
-                CoreLogger.infoToPlayer("You have doubled your log drop!", historiaPlayer.getUUID());
-
-            }
-
-        }
+//        }
     }
 
     private void doBreakBeehive() {
 
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.BREAK_BEEHIVE)) {
-
-            breakEvent.setCancelled(true);
-            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
-
-        }
+//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.BREAK_BEEHIVE)) {
+//
+//            breakEvent.setCancelled(true);
+//            CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
+//
+//        }
 
     }
 

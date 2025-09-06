@@ -47,9 +47,9 @@ public class InventoryClickHandler {
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getWhoClicked().getUniqueId());
 
         // guard against player without ignite oil skill
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.IGNITE_OIL)) {
-            return;
-        }
+//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.IGNITE_OIL)) {
+//            return;
+//        }
 
         // guard against arrow that is not oiled
         if (!slottedItem.hasItemMeta() || !slottedItem.getItemMeta().getPersistentDataContainer()
