@@ -1,0 +1,93 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '2.0.20' // or latest stable
+    id 'java'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' // shade equivalent
+}
+
+group = 'dev.boooiil.historia'
+version = '1.0.8-SNAPSHOT'
+
+base {
+    archivesName = 'Historia-Core'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    maven { url 'https://maven.boobot.org/releases' }
+    maven { url 'https://jitpack.io' }
+    maven { 
+        name = 'papermc' 
+        url 'https://repo.papermc.io/repository/maven-public/' 
+    }
+    maven { url 'https://maven.enginehub.org/repo/' }
+    maven { url 'https://repo.glaremasters.me/repository/towny/' }
+    mavenCentral()
+}
+
+dependencies {
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+    // Test dependencies
+    testImplementation 'org.yaml:snakeyaml:2.5'
+    testImplementation 'com.github.MockBukkit:MockBukkit:4.33.0'
+    testImplementation 'junit:junit:4.13.2'
+
+    // Runtime + compile
+    implementation 'com.mysql:mysql-connector-j:9.4.0'
+    implementation 'org.xerial:sqlite-jdbc:3.48.0.0'
+    compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
+    implementation 'com.sk89q.worldguard:worldguard-bukkit:7.0.9'
+    compileOnly 'com.palmergames.bukkit.towny:towny:0.101.1.0'
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7.1'
+    implementation 'net.md-5:bungeecord-chat:1.16-R0.4'
+    implementation 'com.zaxxer:HikariCP:6.2.1'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'ch.qos.logback:logback-classic:1.5.16'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+
+tasks.test {
+    systemProperty 'org.slf4j.simpleLogger.defaultLogLevel', 'WARN'
+    useJUnitPlatform()
+}
+
+// Shade equivalent for including HikariCP
+tasks.shadowJar {
+    archiveClassifier.set('')
+    dependencies {
+        include(dependency('com.zaxxer:HikariCP'))
+    }
+}
+
+// Copy jar to server/plugins (like maven-resources-plugin)
+// tasks.register('copyToServer', Copy) {
+//     dependsOn(tasks.shadowJar)
+//     from(tasks.shadowJar.get().archiveFile)
+//     into(System.getenv('SERVER') + '/plugins')
+// }
+
+// Publication (like distributionManagement + maven-deploy-plugin)
+publishing {
+    repositories {
+        maven {
+            url = uri("https://maven.boobot.org/releases")
+            credentials {
+                username = findProperty("mavenUser") ?: System.getenv("MAVEN_USER")
+                password = findProperty("mavenPassword") ?: System.getenv("MAVEN_PASSWORD")
+            }
+        }
+    }
+}
