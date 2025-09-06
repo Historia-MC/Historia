@@ -1,9 +1,11 @@
 package dev.boooiil.historia.core.commands;
 
+import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,7 +35,9 @@ public class CommandProficiency implements CommandExecutor {
 
                 String providedProficiency = args[2];
 
-                historiaPlayer.changeProficiency(providedProficiency);
+                NamespacedKey key = HistoriaCore.getNamespacedKey(providedProficiency);
+
+                historiaPlayer.changeProficiency(key);
                 historiaPlayer.saveCharacter();
 
                 sender.sendMessage("Changed proficiency to " + providedProficiency + ".");
@@ -48,7 +52,9 @@ public class CommandProficiency implements CommandExecutor {
 
                 String providedProficiency = args[1];
 
-                historiaPlayer.changeProficiency(providedProficiency);
+                NamespacedKey key = HistoriaCore.getNamespacedKey(providedProficiency);
+
+                historiaPlayer.changeProficiency(key);
                 historiaPlayer.saveCharacter();
 
                 sender.sendMessage("Changed proficiency to " + providedProficiency + ".");
