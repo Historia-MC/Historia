@@ -53,7 +53,7 @@ public class RegistryTest {
     public void testAllKeys() {
         registry.register(key1, "value1");
         registry.register(key2, "value2");
-        Set<NamespacedKey> keys = registry.allKeys();
+        Set<NamespacedKey> keys = registry.keySet();
         assertTrue(keys.contains(key1));
         assertTrue(keys.contains(key2));
         assertEquals(2, keys.size());

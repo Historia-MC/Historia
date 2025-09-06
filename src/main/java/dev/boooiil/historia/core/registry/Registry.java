@@ -1,7 +1,9 @@
 package dev.boooiil.historia.core.registry;
 
 import java.lang.reflect.Type;
+import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.NamespacedKey;
@@ -9,10 +11,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-public class Registry<T> {
+public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /** The registry holder. */
-    private HashMap<NamespacedKey, T> registry = new HashMap<>();
+    private final HashMap<NamespacedKey, T> registry = new HashMap<>();
     /** The type of the registry values. */
     private final Type type;
 
@@ -63,23 +65,19 @@ public class Registry<T> {
         return registry.containsKey(key);
     }
 
-    /**
-     * Get a value from the registry.
-     * 
-     * @param key The key of the value.
-     * @return The value.
-     */
     @Nullable
-    public T get(NamespacedKey key) {
-        return registry.get(key);
+    @Override
+    public T put(NamespacedKey key, T value) {
+        return registry.put(key, value);
+    }
+
+    @Override
+    public Set<Map.Entry<NamespacedKey, T>> entrySet() {
+        return registry.entrySet();
     }
 
     public Type getType() {
         return type;
-    }
-
-    public Set<NamespacedKey> allKeys() {
-        return registry.keySet();
     }
 
     /**
