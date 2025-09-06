@@ -7,10 +7,7 @@ import dev.boooiil.historia.core.proficiency.skills.ISkillHandler;
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.util.NumberUtils;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -42,8 +39,8 @@ public class SkillShearChicken implements ISkillHandler {
      * @return Name of the skill.
      */
     @Override
-    public Skills.SkillName getName() {
-        return Skills.SkillName.SHEAR_CHICKEN;
+    public NamespacedKey getName() {
+        return Skills.SkillName.SHEAR_CHICKEN.getKey();
     }
 
     /**
@@ -68,7 +65,7 @@ public class SkillShearChicken implements ISkillHandler {
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
         boolean isChicken = event.getRightClicked().getType() == EntityType.CHICKEN;
-        boolean hasSkill = historiaPlayer.getProficiency().getSkills().hasSkill(Skills.SkillName.SHEAR_CHICKEN.getKey());
+        boolean hasSkill = historiaPlayer.getProficiency().hasSkill(this);
         boolean isHoldingShears = player.getInventory().getItemInMainHand().getType() == Material.SHEARS;
 
         if (!isChicken || !hasSkill || !isHoldingShears) {
@@ -114,5 +111,10 @@ public class SkillShearChicken implements ISkillHandler {
     @Override
     public void deregister() {
 
+    }
+
+    @Override
+    public String toJSON() {
+        return "";
     }
 }

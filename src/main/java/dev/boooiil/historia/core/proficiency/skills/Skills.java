@@ -105,7 +105,7 @@ public class Skills implements JSONSerializable {
                     // Enchantment enchant =
                     // Registry.ENCHANTMENT.get(NamespacedKey.minecraft(enchantment.toLowerCase()));
 
-                    skillEnchants.put(pattern, enchant);
+                    //skillEnchants.put(pattern, enchant);
 
                 }
 
@@ -132,7 +132,7 @@ public class Skills implements JSONSerializable {
         sb.append("Skills");
         sb.append("{");
         sb.append(JSONUtils.fromMap("skills", skills, true) + ", ");
-        sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants, true));
+        //sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants, true));
         sb.append("}");
 
         return sb.toString();
@@ -144,7 +144,7 @@ public class Skills implements JSONSerializable {
 
         sb.append("{");
         sb.append(JSONUtils.fromMap("skills", skills) + ", ");
-        sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants));
+        //sb.append(JSONUtils.fromMap("skillEnchants", skillEnchants));
         sb.append("}");
 
         return sb.toString();

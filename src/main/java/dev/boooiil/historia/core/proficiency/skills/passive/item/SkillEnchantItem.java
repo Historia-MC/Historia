@@ -28,13 +28,9 @@ import dev.boooiil.historia.core.util.CoreLogger;
 public class SkillEnchantItem extends AbstractSkillRunnable {
 
     // skill -> material -> enchant -> level
-    private final HashMap<Material, SkillName> SKILL_MAP;
-    private final HashMap<Material, HashMap<Enchantment, Integer>> ENCHANTMENT_MAP;
 
     public SkillEnchantItem(Material material, int level) {
 
-        this.SKILL_MAP = skillMap;
-        this.ENCHANTMENT_MAP = enchantmentMap;
 
     }
 
@@ -55,57 +51,11 @@ public class SkillEnchantItem extends AbstractSkillRunnable {
          * check if the player is at the required level stage
          */
 
-
-
         for (Player player : Bukkit.getServer().getOnlinePlayers()) {
             HistoriaPlayer histPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            Proficiency proficiency = HistoriaCore.proficiencyRegistry.get(histPlayer.getProficiency().getName());
+            Proficiency proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(histPlayer.getProficiency().getName());
 
-            if (proficiency)
-        }
-
-
-
-
-
-
-
-
-
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-            for (ItemStack item : player.getInventory().getContents()) {
-                if (SKILL_MAP.containsKey(item.getType())) {
-
-                    SkillName skill = SKILL_MAP.get(item.getType());
-
-                    HistoriaPlayer histPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-                    HashMap<Enchantment, Integer> enchantment = ENCHANTMENT_MAP.get(item.getType());
-
-                    if (histPlayer.getProficiency().hasSkill(this)) {
-
-                        for (Entry<Enchantment, Integer> entry : enchantment.entrySet()) {
-                            CoreLogger.debugToConsole("Adding enchant", entry.getKey().toString(), "on item",
-                                    item.getType().toString(),
-                                    "for player", player.getName(), "with skill", skill.toString());
-                            if (!item.getEnchantments().containsKey(entry.getKey())) {
-                                item.addEnchantment(entry.getKey(), entry.getValue());
-                            }
-                        }
-                    }
-
-                    else {
-                        for (Entry<Enchantment, Integer> entry : enchantment.entrySet()) {
-                            if (item.containsEnchantment(entry.getKey())) {
-                                CoreLogger.debugToConsole("Removing enchant", entry.getKey().toString(), "on item",
-                                        item.getType().toString(),
-                                        "for player", player.getName(), "due to no skill", skill.toString());
-                                item.removeEnchantment(entry.getKey());
-                            }
-                        }
-                    }
-
-                }
-            }
+            if (proficiency == null) {}
         }
     }
 

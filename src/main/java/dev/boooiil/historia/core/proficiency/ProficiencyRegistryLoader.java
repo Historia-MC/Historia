@@ -30,21 +30,21 @@ public class ProficiencyRegistryLoader {
             if (name != ProficiencyName.NONE) {
 
                 Proficiency proficiency = new Proficiency(section);
-                HistoriaCore.proficiencyRegistry.register(HistoriaCore.getNamespacedKey(name.getKeyLowercase()),
+                HistoriaCore.PROFICIENCY_REGISTRY.register(HistoriaCore.getNamespacedKey(name.getKeyLowercase()),
                         proficiency);
 
                 StatModifiers modifiers = new StatModifiers(section.getConfigurationSection("modifiers"));
-                HistoriaCore.statModifiersRegistry.register(HistoriaCore.getNamespacedKey(name.getKeyLowercase()),
+                HistoriaCore.STAT_MODIFIERS_REGISTRY.register(HistoriaCore.getNamespacedKey(name.getKeyLowercase()),
                         modifiers);
 
             } else {
-                if (!HistoriaCore.proficiencyRegistry.contains(HistoriaCore.getNamespacedKey("none"))) {
+                if (!HistoriaCore.PROFICIENCY_REGISTRY.contains(HistoriaCore.getNamespacedKey("none"))) {
                     section = config.getConfigurationSection("none");
-                    HistoriaCore.proficiencyRegistry.register(HistoriaCore.getNamespacedKey("none"),
+                    HistoriaCore.PROFICIENCY_REGISTRY.register(HistoriaCore.getNamespacedKey("none"),
                             new Proficiency(section));
 
                     StatModifiers modifiers = new StatModifiers(section.getConfigurationSection("modifiers"));
-                    HistoriaCore.statModifiersRegistry.register(HistoriaCore.getNamespacedKey("none"), modifiers);
+                    HistoriaCore.STAT_MODIFIERS_REGISTRY.register(HistoriaCore.getNamespacedKey("none"), modifiers);
                 }
             }
         }

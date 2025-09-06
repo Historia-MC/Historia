@@ -105,13 +105,13 @@ public class Proficiency implements JSONSerializable {
 
         NamespacedKey  key = HistoriaCore.getNamespacedKey("none");
 
-        if (HistoriaCore.proficiencyRegistry.contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
+        if (HistoriaCore.PROFICIENCY_REGISTRY.contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
             key = HistoriaCore.getNamespacedKey(proficiencyName);
         }
 
         this.name = key;
         this.skills.clear();
-        this.skills.putAll(HistoriaCore.proficiencyRegistry.get(key).getSkills());
+        this.skills.putAll(HistoriaCore.PROFICIENCY_REGISTRY.get(key).getSkills());
 
     }
 
@@ -127,7 +127,7 @@ public class Proficiency implements JSONSerializable {
      * @param name the name of the proficiency
      */
     public Proficiency(NamespacedKey name) {
-        this(HistoriaCore.proficiencyRegistry.get(name));
+        this(HistoriaCore.PROFICIENCY_REGISTRY.get(name));
     }
 
     public Proficiency(ConfigurationSection section) {
@@ -209,7 +209,7 @@ public class Proficiency implements JSONSerializable {
 
         sb.append("Proficiency");
         sb.append("{");
-        sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
+        sb.append(JSONUtils.fromValue("proficiencyName", name.getKey().toLowerCase()) + ", ");
         sb.append("\"skills\":" + skills.toString());
         sb.append("}");
 
@@ -222,7 +222,7 @@ public class Proficiency implements JSONSerializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{");
-        sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
+        sb.append(JSONUtils.fromValue("proficiencyName", name.getKey().toLowerCase()) + ", ");
         sb.append(JSONUtils.fromMap("skills", skills));
         sb.append("}");
 

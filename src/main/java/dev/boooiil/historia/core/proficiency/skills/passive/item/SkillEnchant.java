@@ -87,7 +87,7 @@ public class SkillEnchant implements ISkillHandler {
                             // apply
                             attribute.addModifier(modifier);
                         } else {
-                            removeEnchant(inventory, i, Enchantment.EFFICIENCY);
+                            //
                         }
 
                         if (attribute == null) {
@@ -130,5 +130,10 @@ public class SkillEnchant implements ISkillHandler {
     @Override
     public void deregister() {
 
+    }
+
+    @Override
+    public String toJSON() {
+        return "";
     }
 }
