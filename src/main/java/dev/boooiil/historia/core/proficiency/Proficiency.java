@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.proficiency;
 
 import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.util.JSONSerializable;
@@ -10,6 +11,9 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * This class represents a proficiency that a character can have. It contains
  * information about the proficiency's name, stats, and skills.
@@ -17,32 +21,39 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public class Proficiency implements JSONSerializable {
 
+    /*
+     * This is now a configuration class.
+     * HistoriaCore -> Init -> Registry<Proficiency> -> Proficiency.register()
+     *
+     *
+     */
+
     /**
-     * Enum of valid proficienies.
+     * Enum of valid proficiencies.
      */
     public enum ProficiencyName {
 
-        NONE("None"),
-        ARCHER("Archer"),
-        WARRIOR("Warrior"),
-        FISHERMAN("Fisherman"),
-        MINER("Miner"),
-        BLACKSMITH("Blacksmith"),
-        HUNTSMAN("Huntsman"),
-        APOTHECARY("Apothecary"),
-        ARCHITECT("Architect"),
-        LUMBERJACK("Lumberjack"),
-        FARMER("Farmer");
+        NONE(HistoriaCore.getNamespacedKey("none")),
+        ARCHER(HistoriaCore.getNamespacedKey("archer")),
+        WARRIOR(HistoriaCore.getNamespacedKey("warrior")),
+        FISHERMAN(HistoriaCore.getNamespacedKey("fisherman")),
+        MINER(HistoriaCore.getNamespacedKey("miner")),
+        BLACKSMITH(HistoriaCore.getNamespacedKey("blacksmith")),
+        HUNTSMAN(HistoriaCore.getNamespacedKey("huntsman")),
+        APOTHECARY(HistoriaCore.getNamespacedKey("apothecary")),
+        ARCHITECT(HistoriaCore.getNamespacedKey("architect")),
+        LUMBERJACK(HistoriaCore.getNamespacedKey("lumberjack")),
+        FARMER(HistoriaCore.getNamespacedKey("farmer"));
 
-        private final String key;
+        private final NamespacedKey key;
 
-        ProficiencyName(String key) {
+        ProficiencyName(NamespacedKey key) {
 
             this.key = key;
 
         }
 
-        public String getKey() {
+        public NamespacedKey getKey() {
 
             return this.key;
 
@@ -50,23 +61,25 @@ public class Proficiency implements JSONSerializable {
 
         public String getKeyLowercase() {
 
-            return this.key.toLowerCase();
+            return this.key.getKey().toLowerCase();
 
         }
 
         public static ProficiencyName fromString(String key) {
 
+            ProficiencyName proficiency = NONE;
+
             for (ProficiencyName proficiencyName : ProficiencyName.values()) {
 
-                if (proficiencyName.getKey().equalsIgnoreCase(key)) {
+                if (proficiencyName.key.getKey().equalsIgnoreCase(key)) {
 
-                    return proficiencyName;
+                    proficiency = proficiencyName;
 
                 }
 
             }
 
-            return NONE;
+            return proficiency;
 
         }
 
@@ -75,17 +88,12 @@ public class Proficiency implements JSONSerializable {
     /**
      * The name of the proficiency.
      */
-    private ProficiencyName name;
-
-    /**
-     * The stats associated with the proficiency.
-     */
-    private Stats stats;
+    private final NamespacedKey name;
 
     /**
      * The skills associated with the proficiency.
      */
-    private Skills skills;
+    private final HashMap<ISkill, Integer> skills = new HashMap<>();
 
     /**
      * Constructs a new proficiency with the given name.
@@ -95,41 +103,54 @@ public class Proficiency implements JSONSerializable {
     @Deprecated(forRemoval = true)
     public Proficiency(String proficiencyName) {
 
-        NamespacedKey key = HistoriaCore.getNamespacedKey(proficiencyName);
+        NamespacedKey  key = HistoriaCore.getNamespacedKey("none");
 
-        if (HistoriaCore.proficiencyRegistry.contains(key)) {
-            this.name = ProficiencyName.fromString(proficiencyName);
-            this.stats = HistoriaCore.proficiencyRegistry.get(key).getStats();
-            this.skills = HistoriaCore.proficiencyRegistry.get(key).getSkills();
-            return;
-        } else {
-            key = HistoriaCore.getNamespacedKey("none");
-            this.name = ProficiencyName.NONE;
-            this.stats = HistoriaCore.proficiencyRegistry.get(key).getStats();
-            this.skills = HistoriaCore.proficiencyRegistry.get(key).getSkills();
+        if (HistoriaCore.proficiencyRegistry.contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
+            key = HistoriaCore.getNamespacedKey(proficiencyName);
         }
+
+        this.name = key;
+        this.skills.clear();
+        this.skills.putAll(HistoriaCore.proficiencyRegistry.get(key).getSkills());
 
     }
 
     public Proficiency(Proficiency proficiency) {
         this.name = proficiency.name;
-        this.stats = proficiency.stats;
-        this.skills = proficiency.skills;
+        this.skills.clear();
+        this.skills.putAll(proficiency.skills);
     }
 
     /**
      * Constructs a new proficiency with the given name.
      * 
-     * @param proficiencyName the name of the proficiency
+     * @param name the name of the proficiency
      */
-    public Proficiency(ProficiencyName proficiencyName) {
-        this(HistoriaCore.proficiencyRegistry.get(HistoriaCore.getNamespacedKey(proficiencyName.getKey())));
+    public Proficiency(NamespacedKey name) {
+        this(HistoriaCore.proficiencyRegistry.get(name));
     }
 
     public Proficiency(ConfigurationSection section) {
-        this.name = ProficiencyName.fromString(section.getString("proficiencyName"));
-        this.stats = new Stats(section.getConfigurationSection("stats"), this.name);
-        this.skills = new Skills(section.getConfigurationSection("skills"));
+
+        String sName = section.getString("proficiencyName");
+
+        if (sName == null) {
+            throw new IllegalArgumentException("Key 'proficiencyName' must be specified.");
+        }
+
+        this.name = HistoriaCore.getNamespacedKey(sName);
+
+        ConfigurationSection skillSection = section.getConfigurationSection("skills");
+
+        if (skillSection == null) {
+            throw new IllegalArgumentException("Key 'skills' must be specified for proficiency " + sName + ".");
+        }
+
+        Set<String> skillKeys = skillSection.getKeys(false);
+
+        for (String key : skillKeys) {
+            //TODO: Finish
+        }
     }
 
     /**
@@ -137,35 +158,8 @@ public class Proficiency implements JSONSerializable {
      * 
      * @return the name of the proficiency
      */
-    public ProficiencyName getName() {
+    public NamespacedKey getName() {
         return name;
-    }
-
-    /**
-     * Sets the name of the proficiency.
-     * 
-     * @param proficiencyName the new name of the proficiency
-     */
-    public void setName(ProficiencyName proficiencyName) {
-        this.name = proficiencyName;
-    }
-
-    /**
-     * Returns the stats associated with the proficiency.
-     * 
-     * @return the stats associated with the proficiency
-     */
-    public Stats getStats() {
-        return stats;
-    }
-
-    /**
-     * Sets the stats associated with the proficiency.
-     * 
-     * @param stats the new stats associated with the proficiency
-     */
-    public void setStats(Stats stats) {
-        this.stats = stats;
     }
 
     /**
@@ -173,8 +167,24 @@ public class Proficiency implements JSONSerializable {
      * 
      * @return the skills associated with the proficiency
      */
-    public Skills getSkills() {
+    public HashMap<ISkill, Integer> getSkills() {
         return skills;
+    }
+
+    public void registerSkills() {
+        for (ISkill skill : skills.keySet()) {
+            skill.register();
+        }
+    }
+
+    public void deregisterSkills() {
+        for (ISkill skill : skills.keySet()) {
+            skill.deregister();
+        }
+    }
+
+    public boolean hasSkill(ISkill skill) {
+        return skills.containsKey(skill);
     }
 
     /**
@@ -182,8 +192,9 @@ public class Proficiency implements JSONSerializable {
      * 
      * @param skills the new skills associated with the proficiency
      */
-    public void setSkills(Skills skills) {
-        this.skills = skills;
+    public void setSkills(HashMap<ISkill, Integer> skills) {
+        this.skills.clear();
+        this.skills.putAll(skills);
     }
 
     /**
@@ -199,7 +210,6 @@ public class Proficiency implements JSONSerializable {
         sb.append("Proficiency");
         sb.append("{");
         sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
-        sb.append("\"stats\":" + stats.toString() + ", ");
         sb.append("\"skills\":" + skills.toString());
         sb.append("}");
 
@@ -213,8 +223,7 @@ public class Proficiency implements JSONSerializable {
 
         sb.append("{");
         sb.append(JSONUtils.fromValue("proficiencyName", name.name().toLowerCase()) + ", ");
-        sb.append("\"stats\":" + stats.toJSON() + ", ");
-        sb.append("\"skills\":" + skills.toJSON());
+        sb.append(JSONUtils.fromMap("skills", skills));
         sb.append("}");
 
         return sb.toString();
