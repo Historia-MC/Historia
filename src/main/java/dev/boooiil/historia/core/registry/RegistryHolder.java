@@ -67,11 +67,11 @@ public class RegistryHolder {
      * 
      * This value will be bound to the plugin through its namespace key.
      * 
-     * @param <T>      The type of the registry.
-     * @param registry The registry holder.
-     * @param key      The namespaced key of the registry. ie:
-     *                 'plugin:crafting_recipes'
-     * @param type     The class of the registry value.
+     * @param <T>            The type of the registry.
+     * @param registryHolder The registry holder.
+     * @param key            The namespaced key of the registry. ie:
+     *                       'plugin:crafting_recipes'
+     * @param type           The class of the registry value.
      * @return Registry<T> | null if not found.
      */
     @Nullable
