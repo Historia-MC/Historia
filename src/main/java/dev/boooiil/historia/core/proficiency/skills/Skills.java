@@ -1,5 +1,7 @@
 package dev.boooiil.historia.core.proficiency.skills;
 
+import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.registry.Registry;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
@@ -20,46 +22,53 @@ import java.util.regex.Pattern;
 @NullMarked
 public class Skills implements JSONSerializable {
 
+    public enum SkillType {
+        PASSIVE,
+        ACTIVE,
+        RUNNER_PASSIVE,
+        RUNNER_ACTIVE
+    }
+
     /**
      * Skill types for HistoriaPlayer skills.
      */
-    public enum SkillType {
-        NAME_TAG("nametag"),
-        FEATHER_FALL("featherFall"),
-        QUICK_CHARGE("quickCharge"),
-        EFFICIENCY_PICKAXE("efficiencyPickaxe"),
-        EFFICIENCY_SHOVEL("efficiencyShovel"),
-        EFFICIENCY_AXE("efficiencyAxe"),
-        CHANCE_EXTRA_ORE("chanceExtraOre"),
-        CHANCE_EXTRA_WOOD("chanceExtraWood"),
-        CHANCE_EXTRA_WOOL("chanceExtraWool"),
-        CHANCE_EXTRA_FEATHERS("chanceExtraFeathers"),
-        CHANCE_NO_ANVIL_DAMAGE("chanceNoAnvilDamage"),
-        CHANCE_NO_CONSUME_BLOCK("chanceNoConsumeBlock"),
-        LADDER_BYPASS("ladderBypass"),
-        IGNITE_OIL("igniteOil"),
-        BREAK_GRASS("breakGrass"),
-        TAME_ANIMALS("tameAnimals"),
-        SWEEPING_EDGE("sweepingEdge"),
-        BREAK_BEEHIVE("breakBeehive"),
-        APPLY_UNBREAKING("applyUnbreaking"),
-        APPLY_SHARPNESS("applySharpness"),
-        SHEAR_CHICKEN("shearChicken"),
-        HARVEST_BONES("bonesFromAnimals"),
-        HARVEST_LEATHER("harvestLeather"),
-        MAKE_KNOWLEDGE_BOOK("makeKnowledgeBook"),
-        CAN_BREED("canBreed"),
-        CAN_CLIMB_LOGS("canClimbLogs");
+    public enum SkillName {
+        NAME_TAG(HistoriaCore.getNamespacedKey("nametag")),
+        FEATHER_FALL(HistoriaCore.getNamespacedKey("feather_fall")),
+        QUICK_CHARGE(HistoriaCore.getNamespacedKey("quick_charge")),
+        EFFICIENCY_PICKAXE(HistoriaCore.getNamespacedKey("efficiency_pickaxe")),
+        EFFICIENCY_SHOVEL(HistoriaCore.getNamespacedKey("efficiency_shovel")),
+        EFFICIENCY_AXE(HistoriaCore.getNamespacedKey("efficiency_axe")),
+        CHANCE_EXTRA_ORE(HistoriaCore.getNamespacedKey("chance_extra_ore")),
+        CHANCE_EXTRA_WOOD(HistoriaCore.getNamespacedKey("chance_extra_wood")),
+        CHANCE_EXTRA_WOOL(HistoriaCore.getNamespacedKey("chance_extra_wool")),
+        CHANCE_EXTRA_FEATHERS(HistoriaCore.getNamespacedKey("chance_extra_feathers")),
+        CHANCE_NO_ANVIL_DAMAGE(HistoriaCore.getNamespacedKey("chance_no_anvil_damage")),
+        CHANCE_NO_CONSUME_BLOCK(HistoriaCore.getNamespacedKey("chance_no_consume_block")),
+        LADDER_BYPASS(HistoriaCore.getNamespacedKey("ladder_bypass")),
+        IGNITE_OIL(HistoriaCore.getNamespacedKey("ignite_oil")),
+        BREAK_GRASS(HistoriaCore.getNamespacedKey("break_Grass")),
+        TAME_ANIMALS(HistoriaCore.getNamespacedKey("tame_Animals")),
+        SWEEPING_EDGE(HistoriaCore.getNamespacedKey("sweeping_Edge")),
+        BREAK_BEEHIVE(HistoriaCore.getNamespacedKey("break_Beehive")),
+        APPLY_UNBREAKING(HistoriaCore.getNamespacedKey("apply_unbreaking")),
+        APPLY_SHARPNESS(HistoriaCore.getNamespacedKey("apply_sharpness")),
+        SHEAR_CHICKEN(HistoriaCore.getNamespacedKey("shear_chicken")),
+        HARVEST_BONES(HistoriaCore.getNamespacedKey("bones_from_animals")),
+        HARVEST_LEATHER(HistoriaCore.getNamespacedKey("harvest_leather")),
+        MAKE_KNOWLEDGE_BOOK(HistoriaCore.getNamespacedKey("make_knowledge_book")),
+        CAN_BREED(HistoriaCore.getNamespacedKey("can_breed")),
+        CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs"));
 
-        private final String key;
+        private final NamespacedKey key;
 
-        SkillType(String key) {
+        SkillName(NamespacedKey key) {
 
             this.key = key;
 
         }
 
-        public String getKey() {
+        public NamespacedKey getKey() {
 
             return this.key;
 
@@ -67,38 +76,14 @@ public class Skills implements JSONSerializable {
     }
 
     /** Holds all existing skills and whether they have them. */
-    private final HashMap<SkillType, Boolean> skills = new HashMap<>();
-    /** Map of Regex patterns and enchants to apply to certain items. */
-    private final HashMap<Pattern, Enchantment> skillEnchants = new HashMap<>();
+    private final Registry<Boolean> skills = new Registry<>(Boolean.class);
+    //private final HashMap<SkillName, Boolean> skills = new HashMap<>();
 
     public Skills(ConfigurationSection section) {
 
-        skills.put(SkillType.NAME_TAG, section.getBoolean("nametag"));
-        skills.put(SkillType.FEATHER_FALL, section.getBoolean("featherFall"));
-        skills.put(SkillType.QUICK_CHARGE, section.getBoolean("quickCharge"));
-        skills.put(SkillType.EFFICIENCY_PICKAXE, section.getBoolean("efficiencyPickaxe"));
-        skills.put(SkillType.EFFICIENCY_SHOVEL, section.getBoolean("efficiencyShovel"));
-        skills.put(SkillType.EFFICIENCY_AXE, section.getBoolean("efficiencyAxe"));
-        skills.put(SkillType.CHANCE_EXTRA_ORE, section.getBoolean("chanceExtraOre"));
-        skills.put(SkillType.CHANCE_EXTRA_WOOD, section.getBoolean("chanceExtraWood"));
-        skills.put(SkillType.CHANCE_EXTRA_WOOL, section.getBoolean("chanceExtraWool"));
-        skills.put(SkillType.CHANCE_EXTRA_FEATHERS, section.getBoolean("chanceExtraFeathers"));
-        skills.put(SkillType.CHANCE_NO_ANVIL_DAMAGE, section.getBoolean("chanceNoAnvilDamage"));
-        skills.put(SkillType.CHANCE_NO_CONSUME_BLOCK, section.getBoolean("chanceNoConsumeBlock"));
-        skills.put(SkillType.LADDER_BYPASS, section.getBoolean("ladderBypass"));
-        skills.put(SkillType.IGNITE_OIL, section.getBoolean("igniteOil"));
-        skills.put(SkillType.BREAK_GRASS, section.getBoolean("breakGrass"));
-        skills.put(SkillType.TAME_ANIMALS, section.getBoolean("tameAnimals"));
-        skills.put(SkillType.SWEEPING_EDGE, section.getBoolean("sweepingEdge"));
-        skills.put(SkillType.BREAK_BEEHIVE, section.getBoolean("breakBeehive"));
-        skills.put(SkillType.APPLY_UNBREAKING, section.getBoolean("applyUnbreaking"));
-        skills.put(SkillType.APPLY_SHARPNESS, section.getBoolean("applySharpness"));
-        skills.put(SkillType.SHEAR_CHICKEN, section.getBoolean("shearChicken"));
-        skills.put(SkillType.HARVEST_BONES, section.getBoolean("bonesFromAnimals"));
-        skills.put(SkillType.HARVEST_LEATHER, section.getBoolean("harvestLeather"));
-        skills.put(SkillType.MAKE_KNOWLEDGE_BOOK, section.getBoolean("makeKnowledgeBook"));
-        skills.put(SkillType.CAN_BREED, section.getBoolean("canBreed"));
-        skills.put(SkillType.CAN_CLIMB_LOGS, section.getBoolean("canClimbLogs"));
+        for (SkillName key : SkillName.values()) {
+            skills.register(key.getKey(), section.getBoolean(key.getKey().getKey()));
+        }
 
         if (section.contains("enchants")) {
 
@@ -136,36 +121,8 @@ public class Skills implements JSONSerializable {
      * @param skill The skill to check.
      * @return true if the player has that skill.
      */
-    public boolean hasSkill(SkillType skill) {
-        return skills.get(skill);
-    }
-
-    /**
-     * Check if the player has skill enchants.
-     * 
-     * @return true if the player has skill enchants.
-     */
-    public boolean hasSkillEnchants() {
-        return !skillEnchants.isEmpty();
-    }
-
-    /**
-     * Get the enchantment for a specific material that matches the pattern.
-     * 
-     * @param material The material to check against the pattern.
-     * @return The Enchantment that matches the pattern, or null if no match is
-     *         found.
-     */
-    public Enchantment getSkillEnchantment(Material material) {
-
-        for (Map.Entry<Pattern, Enchantment> entry : skillEnchants.entrySet()) {
-
-            if (entry.getKey().matcher(material.toString()).matches())
-                return entry.getValue();
-
-        }
-
-        return null;
+    public boolean hasSkill(NamespacedKey skill) {
+        return skills.containsKey(skill);
     }
 
     @Override
