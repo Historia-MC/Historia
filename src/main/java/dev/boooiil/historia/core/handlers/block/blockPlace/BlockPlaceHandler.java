@@ -5,7 +5,7 @@ import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
@@ -59,7 +59,7 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players who do not have the skill
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.LADDER_BYPASS))
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.LADDER_BYPASS))
             return;
 
         // TODO: test this!!
@@ -95,7 +95,7 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players that do not have this skill
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_NO_CONSUME_BLOCK))
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_CONSUME_BLOCK))
             return;
 
         switch (this.getBlock().getType()) {

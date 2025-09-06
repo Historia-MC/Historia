@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityBreedEvent;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.CoreLogger;
 
 public class EntityBreedHandler {
@@ -45,7 +45,7 @@ public class EntityBreedHandler {
         Player breeder = (Player) event.getBreeder();
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(breeder.getUniqueId());
 
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.TAME_ANIMALS)) {
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.TAME_ANIMALS)) {
             CoreLogger.infoToPlayer("Unfortunately you were never told about the birds and bees.",
                     historiaPlayer.getUUID());
             event.setCancelled(true);

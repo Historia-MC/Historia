@@ -13,7 +13,7 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
 import dev.boooiil.historia.core.proficiency.experience.CombatSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 public class EntityDeathHandler {
@@ -120,7 +120,7 @@ public class EntityDeathHandler {
 
         List<ItemStack> drops = event.getDrops();
 
-        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillType.HARVEST_LEATHER)) {
+        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_LEATHER)) {
             List<ItemStack> newDrops = new ArrayList<>();
 
             for (ItemStack drop : drops) {
@@ -147,7 +147,7 @@ public class EntityDeathHandler {
 
     private void doHarvestBones() {
 
-        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillType.HARVEST_BONES)) {
+        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_BONES)) {
             return;
         }
 
@@ -159,7 +159,7 @@ public class EntityDeathHandler {
 
     private void doExtraFeathers() {
 
-        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_FEATHERS)) {
+        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_FEATHERS)) {
             return;
         }
 
@@ -174,7 +174,7 @@ public class EntityDeathHandler {
 
     private void doExtraWool() {
 
-        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOL)) {
+        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOL)) {
             return;
         }
 

@@ -10,7 +10,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 
@@ -105,7 +105,7 @@ public class SkillsTest {
         Skills skills = new Skills(config);
 
         for (String key : section.getKeys(false)) {
-            for (SkillType skill : SkillType.values()) {
+            for (SkillName skill : SkillName.values()) {
                 if (skill.getKey().equals(key)) {
                     System.out.println("Testing " + skill.getKey());
                     System.out.println("Expected: " + section.getBoolean(key) + " Actual: " + skills.hasSkill(skill));

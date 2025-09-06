@@ -4,7 +4,7 @@ import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.BlockSources;
 import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillType;
+import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
@@ -92,7 +92,7 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
     private void doExtraWoodChance() {
 
-        if (this.historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.CHANCE_EXTRA_WOOD)) {
+        if (this.historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOD)) {
 
             float doubleDropChance = 0.05f;
             float dropChanceRoll = NumberUtils.random(0, 1);
@@ -118,7 +118,7 @@ public class BlockBreakHandler extends BaseBlockHandler {
 
     private void doBreakBeehive() {
 
-        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillType.BREAK_BEEHIVE)) {
+        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.BREAK_BEEHIVE)) {
 
             breakEvent.setCancelled(true);
             CoreLogger.infoToPlayer("You have no idea what to do with this thing!", historiaPlayer.getUUID());
