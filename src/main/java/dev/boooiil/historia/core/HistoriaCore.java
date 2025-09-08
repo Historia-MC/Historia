@@ -50,24 +50,24 @@ public class HistoriaCore extends JavaPlugin {
     // proficiency_name:proficiency
     public static final Registry<@NotNull Proficiency> PROFICIENCY_REGISTRY = RegistryHolder.get(
             HistoriaCore.registryHolder.register(
-                    getNamespacedKey("proficiency"),
+                    NamespacedKey.fromString("historia:proficiency"),
                     new Registry<>(Proficiency.class)),
-            getNamespacedKey("proficiency"),
+            NamespacedKey.fromString("historia:proficiency"),
             Proficiency.class);
 
     public static final Registry<@NotNull ISkill> SKILL_REGISTRY = RegistryHolder.get(
             HistoriaCore.registryHolder.register(
-                    getNamespacedKey("skill"),
+                    NamespacedKey.fromString("historia:skill"),
                     new Registry<>(ISkill.class)),
-            getNamespacedKey("skill"),
+            NamespacedKey.fromString("historia:skill"),
             ISkill.class);
 
     // proficiency_name:stat_modifier
     public static final Registry<@NotNull StatModifiers> STAT_MODIFIERS_REGISTRY = RegistryHolder.get(
             HistoriaCore.registryHolder.register(
-                    getNamespacedKey("stat_modifiers"),
+                    NamespacedKey.fromString("historia:stat_modifiers"),
                     new Registry<>(StatModifiers.class)),
-            getNamespacedKey("stat_modifiers"),
+            NamespacedKey.fromString("historia:stat_modifiers"),
             StatModifiers.class);
 
     /** if the plugin is testing */
@@ -142,7 +142,7 @@ public class HistoriaCore extends JavaPlugin {
         registerCommand("set", new CommandSet());
         registerCommand("proficiency", new CommandProficiency());
 
-//        registerRunnable(new ClassEnchantsRunnable());
+        // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
