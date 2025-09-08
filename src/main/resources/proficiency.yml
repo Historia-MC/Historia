@@ -30,6 +30,8 @@ None:
     weaponProficiency: [Light]
     armorProficiency: [Light]
 
+  skills: {}
+  
 Warrior:
   stats:
     baseHealth: 26

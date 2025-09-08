@@ -30,6 +30,8 @@ None:
     weaponProficiency: [Light]
     armorProficiency: [Light]
 
+  skills: {}
+
 Warrior:
   stats:
     baseHealth: 26
@@ -42,9 +44,11 @@ Warrior:
     baseCrossbowProficiency: 0.5
     baseExperienceGain: 2.5
     harvestChance: 0.2
+    beheadChance: 0.10
+
+
     doubleHarvestChance: 0
     instantGrowChance: 0
-    beheadChance: 0.10
 
     weaponProficiency: [Light, Medium, Heavy]
     armorProficiency: [Light, Medium, Heavy]
@@ -143,7 +147,7 @@ Miner:
 
   skills:
     nametag: true
-    extraOreChance: true
+    chanceExtraOre: true
     enchants:
       1:
         regex: .*_PICKAXE|.*_SHOVEL
@@ -216,8 +220,8 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     nametag: false
     bonesFromAnimals: true
     tameAnimals: true
-    extraWool: true
-    extraFeathers: true
+    chanceExtraWool: true
+    chanceExtraFeathers: true
     shearChicken: true
     harvestLeather: true
     canBreed: true
