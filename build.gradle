@@ -1,8 +1,7 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '2.0.20' // or latest stable
     id 'java'
     id 'maven-publish'
-    id 'com.github.johnrengelman.shadow' version '8.1.1' // shade equivalent
+    id 'com.gradleup.shadow' version "9.1.0"
 }
 
 group = 'dev.boooiil.historia'
@@ -19,31 +18,26 @@ java {
 }
 
 repositories {
-    maven { url 'https://maven.boobot.org/releases' }
-    maven { url 'https://jitpack.io' }
-    maven { 
-        name = 'papermc' 
-        url 'https://repo.papermc.io/repository/maven-public/' 
-    }
-    maven { url 'https://maven.enginehub.org/repo/' }
-    maven { url 'https://repo.glaremasters.me/repository/towny/' }
     mavenCentral()
+    maven { url = 'https://maven.boobot.org/releases' }
+    maven { url = 'https://jitpack.io' }
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://maven.enginehub.org/repo/' }
+    maven { url = 'https://repo.glaremasters.me/repository/towny/' }
 }
 
 dependencies {
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
     // Test dependencies
     testImplementation 'org.yaml:snakeyaml:2.5'
-    testImplementation 'com.github.MockBukkit:MockBukkit:4.33.0'
+    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.76.0'
     testImplementation 'junit:junit:4.13.2'
 
     // Runtime + compile
     implementation 'com.mysql:mysql-connector-j:9.4.0'
     implementation 'org.xerial:sqlite-jdbc:3.48.0.0'
     compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
-    implementation 'com.sk89q.worldguard:worldguard-bukkit:7.0.9'
+    implementation 'com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT'
     compileOnly 'com.palmergames.bukkit.towny:towny:0.101.1.0'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7.1'
     implementation 'net.md-5:bungeecord-chat:1.16-R0.4'
