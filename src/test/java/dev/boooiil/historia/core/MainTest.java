@@ -6,10 +6,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.JSONUtils;
 
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import org.junit.jupiter.api.AfterEach;
@@ -27,8 +24,11 @@ public class MainTest {
         System.out.println("Setting up mock...");
         server = MockBukkit.mock();
         System.out.println("Loading plugin...");
+
+        assert server != null;
+
         try {
-            MockBukkit.load(HistoriaCore.class);
+            MockBukkit.load(dev.boooiil.historia.core.HistoriaCore.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
