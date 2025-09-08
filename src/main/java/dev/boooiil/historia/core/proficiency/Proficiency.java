@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.proficiency;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
-import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
+import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 
@@ -13,6 +13,8 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.HashMap;
 import java.util.Set;
+
+import javax.annotation.Nullable;
 
 /**
  * This class represents a proficiency that a character can have. It contains
@@ -65,6 +67,7 @@ public class Proficiency implements JSONSerializable {
 
         }
 
+        @Deprecated(forRemoval = true)
         public static ProficiencyName fromString(String key) {
 
             ProficiencyName proficiency = NONE;
@@ -72,6 +75,24 @@ public class Proficiency implements JSONSerializable {
             for (ProficiencyName proficiencyName : ProficiencyName.values()) {
 
                 if (proficiencyName.key.getKey().equalsIgnoreCase(key)) {
+
+                    proficiency = proficiencyName;
+
+                }
+
+            }
+
+            return proficiency;
+
+        }
+
+        public static ProficiencyName fromNSKey(NamespacedKey key) {
+
+            ProficiencyName proficiency = NONE;
+
+            for (ProficiencyName proficiencyName : ProficiencyName.values()) {
+
+                if (proficiencyName.key.equals(key)) {
 
                     proficiency = proficiencyName;
 
@@ -103,7 +124,7 @@ public class Proficiency implements JSONSerializable {
     @Deprecated(forRemoval = true)
     public Proficiency(String proficiencyName) {
 
-        NamespacedKey  key = HistoriaCore.getNamespacedKey("none");
+        NamespacedKey key = HistoriaCore.getNamespacedKey("none");
 
         if (HistoriaCore.PROFICIENCY_REGISTRY.contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
             key = HistoriaCore.getNamespacedKey(proficiencyName);
@@ -115,7 +136,12 @@ public class Proficiency implements JSONSerializable {
 
     }
 
-    public Proficiency(Proficiency proficiency) {
+    public Proficiency(@Nullable Proficiency proficiency) {
+
+        if (proficiency == null) {
+            throw new IllegalArgumentException("Provided proficiency is null.");
+        }
+
         this.name = proficiency.name;
         this.skills.clear();
         this.skills.putAll(proficiency.skills);
@@ -132,7 +158,9 @@ public class Proficiency implements JSONSerializable {
 
     public Proficiency(ConfigurationSection section) {
 
-        String sName = section.getString("proficiencyName");
+        CoreLogger.traceToConsole("Loading proficiency from section: " + section.getName());
+
+        String sName = section.getName();
 
         if (sName == null) {
             throw new IllegalArgumentException("Key 'proficiencyName' must be specified.");
@@ -149,7 +177,7 @@ public class Proficiency implements JSONSerializable {
         Set<String> skillKeys = skillSection.getKeys(false);
 
         for (String key : skillKeys) {
-            //TODO: Finish
+            // TODO: Finish
         }
     }
 
@@ -200,6 +228,7 @@ public class Proficiency implements JSONSerializable {
     public Stats getStats() {
         return new Stats();
     }
+
     /**
      * Returns a string representation of the Proficiency object.
      * 
