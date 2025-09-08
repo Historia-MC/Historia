@@ -32,6 +32,7 @@ dependencies {
     testImplementation 'org.yaml:snakeyaml:2.5'
     testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.76.0'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
 
     // Runtime + compile
     implementation 'com.mysql:mysql-connector-j:9.4.0'
