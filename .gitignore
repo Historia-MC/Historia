@@ -10,3 +10,8 @@ release/*
 Historia-Core.iml
 htmlReport/
 dependency-reduced-pom.xml
+gradlew
+gradlew.bat
+.gradle/*
+gradle/*
+build/*
