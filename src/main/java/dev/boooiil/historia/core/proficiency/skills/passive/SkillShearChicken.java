@@ -8,6 +8,7 @@ import dev.boooiil.historia.core.proficiency.skills.SkillSupplier;
 import dev.boooiil.historia.core.proficiency.skills.Skills;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Ageable;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -87,10 +88,9 @@ public class SkillShearChicken implements ISkillHandler {
         if (damageableItem.getDamage() == 1) {
             player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
             world.playSound(location, Sound.ENTITY_ITEM_BREAK, 1, 1);
-        }
-        else {
+        } else {
             damageableItem.setDamage(damageableItem.getDamage() + 1);
-            player.getInventory().setItemInMainHand((ItemStack)damageableItem);
+            player.getInventory().setItemInMainHand((ItemStack) damageableItem);
         }
 
         world.playSound(location, Sound.ENTITY_SHEEP_SHEAR, 1, 1);
@@ -116,5 +116,10 @@ public class SkillShearChicken implements ISkillHandler {
     @Override
     public String toJSON() {
         return "";
+    }
+
+    @Override
+    public SkillShearChicken create(ConfigurationSection section) {
+        return new SkillShearChicken();
     }
 }

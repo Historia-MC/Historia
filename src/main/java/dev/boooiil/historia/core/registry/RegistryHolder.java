@@ -22,6 +22,8 @@ public class RegistryHolder {
      * @param value The value to register.
      */
     public RegistryHolder register(NamespacedKey key, Registry<?> value) {
+        CoreLogger.traceToConsole(
+                "Registering " + key + " to registry holder with type " + value.getType().getTypeName());
         holder.register(key, value);
         return this;
     }
@@ -32,6 +34,7 @@ public class RegistryHolder {
      * @param key The key to deregister.
      */
     public RegistryHolder deregister(NamespacedKey key) {
+        CoreLogger.traceToConsole("Deregistering " + key + " from registry holder");
         holder.deregister(key);
         return this;
     }
@@ -43,6 +46,8 @@ public class RegistryHolder {
      * @param value The new value.
      */
     public RegistryHolder update(NamespacedKey key, Registry<?> value) {
+        CoreLogger.traceToConsole(
+                "Updating " + key + " in registry holder with type " + value.getType().getTypeName());
         holder.update(key, value);
         return this;
     }
@@ -59,6 +64,7 @@ public class RegistryHolder {
      */
     @Nullable
     public <T> Registry<T> get(NamespacedKey key, Type type) {
+        CoreLogger.traceToConsole("Getting " + key + " from registry holder with type " + type.getTypeName());
         return get(holder, key, type);
     }
 
@@ -77,6 +83,8 @@ public class RegistryHolder {
     @Nullable
     @SuppressWarnings("unchecked")
     public static <T> Registry<T> get(RegistryHolder registryHolder, NamespacedKey key, Type type) {
+
+        CoreLogger.traceToConsole("Getting " + key + " from registry holder with type " + type.getTypeName());
 
         Registry<?> raw = registryHolder.get(key, type);
 
@@ -111,6 +119,8 @@ public class RegistryHolder {
     @SuppressWarnings("unchecked")
     public static <T> Registry<T> get(Registry<Registry<?>> registry, NamespacedKey key, Type type) {
 
+        CoreLogger.traceToConsole("Getting " + key + " from registry of registries with type " + type.getTypeName());
+
         Registry<?> raw = registry.get(key);
 
         if (raw == null) {
@@ -134,6 +144,7 @@ public class RegistryHolder {
      * @return The internal registry holder.
      */
     public Registry<Registry<?>> getHolder() {
+        CoreLogger.traceToConsole("Getting internal registry holder");
         return holder;
     }
 
@@ -144,6 +155,7 @@ public class RegistryHolder {
      */
     @SuppressWarnings("unchecked")
     public static Registry<Registry<?>> generateHolder() {
+        CoreLogger.traceToConsole("Generating new registry holder");
         return new Registry<>(
                 (Class<Registry<?>>) (Class<?>) Registry.class);
     }

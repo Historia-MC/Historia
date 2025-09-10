@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.player.culture;
 /**
  * Enum storing all possible cultures.
  * 
+ * TODO: make this into a configuration class.
  */
 public enum Cultures {
 

@@ -205,4 +205,45 @@ public class CoreLogger {
 
     }
 
+    public static void verboseToConsole(String... messages) {
+
+        if (HistoriaCore.isTesting || GeneralConfig.verbose) {
+
+            StringBuilder built = new StringBuilder();
+
+            for (String message : messages) {
+
+                built.append(message).append(" ");
+
+            }
+
+            infoToConsole("[VERBOSE] " + built);
+
+        }
+
+    }
+
+    public static void traceToConsole(String... messages) {
+
+        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
+        String fullClassName = element.getClassName(); // dev.boooiil.historia.core.HistoriaCore
+        String simpleClassName = fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
+
+        int lineNumber = element.getLineNumber();
+
+        if (HistoriaCore.getInstance() == null || HistoriaCore.isTesting || GeneralConfig.trace) {
+
+            StringBuilder built = new StringBuilder();
+
+            for (String message : messages) {
+
+                built.append(message).append(" ");
+
+            }
+
+            infoToConsole(simpleClassName + ":" + lineNumber + " [TRACE] " + built);
+
+        }
+
+    }
 }

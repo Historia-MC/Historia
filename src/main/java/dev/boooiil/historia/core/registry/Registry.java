@@ -10,6 +10,8 @@ import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import dev.boooiil.historia.core.util.CoreLogger;
+
 @NullMarked
 public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
@@ -20,6 +22,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /** registry default constructor */
     public Registry(Type type) {
+        CoreLogger.traceToConsole("Creating registry of type " + type.getTypeName());
         this.type = type;
     }
 
@@ -30,6 +33,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
      * @param value The value to register.
      */
     public Registry<T> register(NamespacedKey key, T value) {
+        CoreLogger.traceToConsole("Registering " + key + " to registry of type " + type.getTypeName());
         registry.put(key, value);
         return this;
     }
@@ -40,6 +44,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
      * @param key The key to deregister.
      */
     public Registry<T> deregister(NamespacedKey key) {
+        CoreLogger.traceToConsole("Deregistering " + key + " from registry of type " + type.getTypeName());
         registry.remove(key);
         return this;
     }
@@ -51,6 +56,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
      * @param value The new value.
      */
     public Registry<T> update(NamespacedKey key, T value) {
+        CoreLogger.traceToConsole("Updating " + key + " in registry of type " + type.getTypeName());
         registry.put(key, value);
         return this;
     }
@@ -62,21 +68,25 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
      * @return True if the registry contains the key, false otherwise.
      */
     public boolean contains(NamespacedKey key) {
+        CoreLogger.traceToConsole("Checking if registry of type " + type.getTypeName() + " contains " + key);
         return registry.containsKey(key);
     }
 
     @Nullable
     @Override
     public T put(NamespacedKey key, T value) {
+        CoreLogger.traceToConsole("Putting " + key + " into registry of type " + type.getTypeName());
         return registry.put(key, value);
     }
 
     @Override
     public Set<Map.Entry<NamespacedKey, T>> entrySet() {
+        CoreLogger.traceToConsole("Getting entry set of registry of type " + type.getTypeName());
         return registry.entrySet();
     }
 
     public Type getType() {
+        CoreLogger.traceToConsole("Getting type of registry of type " + type.getTypeName());
         return type;
     }
 
@@ -87,6 +97,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
      * @return A new registry instance.
      */
     public static <T> Registry<T> of(TypeToken<T> token) {
+        CoreLogger.traceToConsole("Creating registry of type " + token.getType().getTypeName());
         return new Registry<>(token.getType());
     }
 

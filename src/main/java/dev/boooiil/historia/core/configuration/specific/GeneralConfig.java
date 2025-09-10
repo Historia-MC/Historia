@@ -23,6 +23,8 @@ public class GeneralConfig {
      * Debugging flag.
      */
     public static boolean debug;
+    public static boolean verbose;
+    public static boolean trace;
 
     /**
      * Username of the MYSQL database.

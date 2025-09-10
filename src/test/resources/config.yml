@@ -10,3 +10,5 @@ MySQL:
     port:
 
 debug: true
+verbose: true
+trace: true

@@ -5,23 +5,17 @@ import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
+import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.Set;
 import java.util.UUID;
 
 //TODO: Add a method to check the player's armor level and attack level.
@@ -61,8 +55,9 @@ public class HistoriaPlayer extends BasePlayer {
     private double maxExperience;
 
     /** The proficiency of the user. */
-    private Proficiency proficiency;
+    private NamespacedKey proficiency;
     private Stats stats;
+    private Set<ISkill> skills;
 
     /** When the user was last saved. */
     private long lastSaved;
@@ -92,7 +87,7 @@ public class HistoriaPlayer extends BasePlayer {
         // Experience max will just be experience * multiplier.
 
         this.culture = Cultures.NONE;
-        this.proficiency = new Proficiency(ProficiencyName.NONE.getKey());
+        this.proficiency = ProficiencyName.NONE.getKey();
         this.level = 1;
         this.currentExperience = 0;
         this.maxExperience = NumberUtils.roundDouble(Math.pow(this.level, 1.68), 2);
@@ -124,7 +119,7 @@ public class HistoriaPlayer extends BasePlayer {
 
         this.culture = culture;
         this.username = username;
-        this.proficiency = new Proficiency(proficiency.getKey());
+        this.proficiency = proficiency.getKey();
         this.level = level;
         this.currentExperience = experience;
         this.lastLogin = login;
@@ -138,8 +133,8 @@ public class HistoriaPlayer extends BasePlayer {
      * 
      * @param proficiency - Proficiency to be set.
      */
-    public void setProficiency(ProficiencyName proficiency) {
-        this.proficiency = new Proficiency(proficiency.getKey());
+    public void setProficiency(NamespacedKey proficiency) {
+        this.proficiency = proficiency;
     }
 
     /**
@@ -219,7 +214,9 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    public Stats getStats() {return this.stats; };
+    public Stats getStats() {
+        return this.stats;
+    };
 
     /**
      * Get the proficiency of the player.
@@ -228,7 +225,17 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public Proficiency getProficiency() {
 
-        return this.proficiency;
+        Proficiency proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(this.proficiency);
+
+        if (proficiency == null) {
+            CoreLogger.errorToConsole("Player " + this.getUsername() + "(" + this.getUUID().toString()
+                    + ") has an invalid proficiency " + this.proficiency.toString() + ". Setting to NONE.");
+
+            this.proficiency = ProficiencyName.NONE.getKey();
+            proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(this.proficiency);
+        }
+
+        return proficiency;
 
     }
 
@@ -248,7 +255,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public float getBaseHealth() {
 
-        return this.proficiency.getStats().getBodyStats().getLevel(BodyStatsType.HEALTH);
+        return this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH);
 
     }
 
@@ -399,14 +406,14 @@ public class HistoriaPlayer extends BasePlayer {
     public void changeProficiency(NamespacedKey proficiency) {
         CoreLogger
                 .debugToConsole("Player ", this.getUsername(), "(",
-                        this.getUUID().toString(),") is changing proficiency to ", proficiency.toString(), ".");
+                        this.getUUID().toString(), ") is changing proficiency to ", proficiency.toString(), ".");
 
         if (!HistoriaCore.PROFICIENCY_REGISTRY.contains(proficiency)) {
             throw new IllegalArgumentException("Tried to apply proficiency to player" + this.getUsername() +
                     " but the proficiency " + proficiency + " does not exist in the registry.");
         }
 
-        this.proficiency = new Proficiency(proficiency);
+        this.proficiency = proficiency;
 
         saveCharacter();
 
@@ -427,10 +434,10 @@ public class HistoriaPlayer extends BasePlayer {
 
         if (source == null)
             return;
-        if (!this.proficiency.getStats().hasIncomeSource(source))
+        if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
         double incomeModified = incomeValue * this.level / 10;
 
         if ((getCurrentExperience()) + incomeModified >= getMaxExperience()) {
@@ -461,10 +468,10 @@ public class HistoriaPlayer extends BasePlayer {
 
         if (source == null)
             return;
-        if (!this.proficiency.getStats().hasIncomeSource(source))
+        if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.proficiency.getStats().getIncomeValue(source);
+        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
         double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
 
         if ((getCurrentExperience()) - incomeModified <= 0 && getLevel() > 1) {
@@ -539,7 +546,7 @@ public class HistoriaPlayer extends BasePlayer {
         sb.append(JSONUtils.fromValue("maxTemperature", maxTemperature) + ", ");
         sb.append(JSONUtils.fromValue("currentExperience", currentExperience) + ", ");
         sb.append(JSONUtils.fromValue("maxExperience", maxExperience) + ", ");
-        sb.append("\"proficiency\":" + proficiency.toJSON() + ", ");
+        sb.append("\"proficiency\":" + this.getProficiency().toJSON() + ", ");
         sb.append(JSONUtils.fromValue("lastSaved", lastSaved));
         sb.append("}");
 
