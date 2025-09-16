@@ -7,7 +7,9 @@ public enum FileKeys {
     /** config.yml */
     CONFIG("config.yml"),
     /** plugin.yml */
-    PLUGIN("plugin.yml");
+    PLUGIN("plugin.yml"),
+    /** skills.yml */
+    SKILLS("skills.yml");
 
     private final String key;
 
