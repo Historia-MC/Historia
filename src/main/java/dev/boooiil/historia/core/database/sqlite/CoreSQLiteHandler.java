@@ -242,7 +242,7 @@ public class CoreSQLiteHandler extends SQLiteConnection implements ICoreDatabase
             }
 
             String username = getResult(result, "username", String.class);
-            ProficiencyName proficiencyName = ProficiencyName
+            ProficiencyName proficiencyName = ProficiencyName.Companion
                     .fromString(getResult(result, "proficiency", String.class));
             Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
             int level = getResult(result, "level", Integer.class);

@@ -221,7 +221,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
     public HistoriaPlayer getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
-
+        
         return queryExecutor(string, result -> {
 
             if (!nextResult(result)) {
@@ -231,7 +231,7 @@ public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHa
             }
 
             String username = getResult(result, "username", String.class);
-            ProficiencyName proficiencyName = ProficiencyName
+            ProficiencyName proficiencyName = ProficiencyName.Companion
                     .fromString(getResult(result, "proficiency", String.class));
             Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
             int level = getResult(result, "level", Integer.class);
