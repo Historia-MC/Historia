@@ -1,6 +1,8 @@
 package dev.boooiil.historia.core.proficiency;
 
 import dev.boooiil.historia.core.registry.Registry;
+import dev.boooiil.historia.core.util.CoreLogger;
+
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
@@ -39,8 +41,10 @@ public class ProficiencyTest {
         for (ProficiencyName name : ProficiencyName.values()) {
             Proficiency proficiency = getProficiency(name.getKeyLowercase());
 
+            CoreLogger.infoToConsole(proficiency.toJSON());
+
             // TODO: this should pass when we get skills back
-            // assert !proficiency.getSkills().isEmpty();
+            assert !proficiency.getSkills().isEmpty();
         }
     }
 
