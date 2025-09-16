@@ -254,8 +254,9 @@ public class HistoriaPlayer extends BasePlayer {
      * @return {@link Float} The class' base health.
      */
     public float getBaseHealth() {
-
-        return this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH);
+        return 20f;
+        // return
+        // this.getProficiency().getStats().getBodyStats().getLevel(BodyStatsType.HEALTH);
 
     }
 
