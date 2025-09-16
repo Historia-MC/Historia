@@ -72,7 +72,6 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
         return registry.containsKey(key);
     }
 
-    @Nullable
     @Override
     public T put(NamespacedKey key, T value) {
         CoreLogger.traceToConsole("Putting " + key + " into registry of type " + type.getTypeName());
