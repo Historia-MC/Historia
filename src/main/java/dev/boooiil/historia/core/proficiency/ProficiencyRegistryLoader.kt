@@ -14,7 +14,7 @@ object ProficiencyRegistryLoader {
         val config: FileConfiguration = FileIO.get(FileKeys.PROFICIENCY)
 
         config.getKeys(false)
-            .filter { it.contains("version") }
+            .filter { !it.contains("version") }
             .forEach { key ->
                 CoreLogger.debugToConsole("Found proficiency key: " + key)
 
