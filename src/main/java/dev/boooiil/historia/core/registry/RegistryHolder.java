@@ -1,8 +1,11 @@
 package dev.boooiil.historia.core.registry;
 
 import java.lang.reflect.Type;
+import java.util.AbstractMap;
+import java.util.Set;
 
 import org.bukkit.NamespacedKey;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 
 import dev.boooiil.historia.core.util.CoreLogger;
@@ -11,7 +14,7 @@ import dev.boooiil.historia.core.util.CoreLogger;
  * This class serves as a holder for any number of registries to be utilized
  * within the suite of plugins.
  */
-public class RegistryHolder {
+public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
 
     private final Registry<Registry<?>> holder = RegistryHolder.generateHolder();
 
@@ -160,4 +163,8 @@ public class RegistryHolder {
                 (Class<Registry<?>>) (Class<?>) Registry.class);
     }
 
+    @Override
+    public @NotNull Set<Entry<NamespacedKey, Registry<?>>> entrySet() {
+        return this.holder.entrySet();
+    }
 }
