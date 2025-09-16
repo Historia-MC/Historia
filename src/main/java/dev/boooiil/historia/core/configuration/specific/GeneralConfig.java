@@ -22,9 +22,9 @@ public class GeneralConfig {
     /**
      * Debugging flag.
      */
-    public static boolean debug;
-    public static boolean verbose;
-    public static boolean trace;
+    public static boolean debug = false;
+    public static boolean verbose = false;
+    public static boolean trace = false;
 
     /**
      * Username of the MYSQL database.
@@ -73,6 +73,8 @@ public class GeneralConfig {
         this.databaseType = DatabaseType.fromString(configuration.getString("type"));
 
         debug = configuration.getBoolean("debug");
+        verbose = configuration.getBoolean("verbose");
+        trace = configuration.getBoolean("trace");
 
     }
 

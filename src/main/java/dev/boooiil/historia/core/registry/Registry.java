@@ -28,7 +28,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /**
      * Register a new value to the registry.
-     * 
+     *
      * @param key   The key to register the value under.
      * @param value The value to register.
      */
@@ -40,7 +40,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /**
      * Deregister an item configuration from the registry.
-     * 
+     *
      * @param key The key to deregister.
      */
     public Registry<T> deregister(NamespacedKey key) {
@@ -51,7 +51,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /**
      * Update a value in the registry.
-     * 
+     *
      * @param key   The key to update.
      * @param value The new value.
      */
@@ -63,7 +63,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /**
      * Check if the registry contains a value with the given key.
-     * 
+     *
      * @param key The key to check for.
      * @return True if the registry contains the key, false otherwise.
      */
@@ -91,7 +91,7 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
 
     /**
      * Create a new registry with the specified type.
-     * 
+     *
      * @param <T> The type of the registry.
      * @return A new registry instance.
      */

@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 public class CommandDebug implements CommandExecutor {
 
     @Override
-
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         args[0] = args[0].toLowerCase();
