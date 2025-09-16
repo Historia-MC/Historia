@@ -90,7 +90,7 @@ public class SkillAttributeWithItem implements ISkillHandler {
      */
     @Override
     public void register() {
-        HistoriaCore.getInstance().registerEvent(this);
+        HistoriaCore.Companion.getInstance().registerEvent(this);
     }
 
     @Override

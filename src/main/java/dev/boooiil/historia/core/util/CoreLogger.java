@@ -52,7 +52,7 @@ public class CoreLogger {
      */
     public static void infoToServer(String message) {
 
-        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§7" + message));
+        HistoriaCore.Companion.getServer().broadcast(Component.text(announcePrefix + "§7" + message));
 
     }
 
@@ -64,7 +64,7 @@ public class CoreLogger {
      */
     public static void infoToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaCore.server().getPlayer(uuid);
+        Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
         if (player != null && player.isOnline())
             player.sendMessage(messagePrefix + "§7" + message);
@@ -79,7 +79,7 @@ public class CoreLogger {
      */
     public static void infoToPlayerNoPrefix(String message, UUID uuid) {
 
-        Player player = HistoriaCore.server().getPlayer(uuid);
+        Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
         if (player != null && player.isOnline())
             player.sendMessage("§7" + message);
@@ -116,7 +116,7 @@ public class CoreLogger {
      */
     public static void warnToServer(String message) {
 
-        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§6" + message));
+        HistoriaCore.Companion.getServer().broadcast(Component.text(announcePrefix + "§6" + message));
 
     }
 
@@ -128,7 +128,7 @@ public class CoreLogger {
      */
     public static void warnToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaCore.server().getPlayer(uuid);
+        Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
         if (player.isOnline())
             player.sendMessage(messagePrefix + "§6" + message);
@@ -163,7 +163,7 @@ public class CoreLogger {
      */
     public static void errorToServer(String message) {
 
-        HistoriaCore.server().broadcast(Component.text(announcePrefix + "§c" + message));
+        HistoriaCore.Companion.getServer().broadcast(Component.text(announcePrefix + "§c" + message));
 
     }
 
@@ -175,7 +175,7 @@ public class CoreLogger {
      */
     public static void errorToPlayer(String message, UUID uuid) {
 
-        Player player = HistoriaCore.server().getPlayer(uuid);
+        Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
         if (player.isOnline())
             player.sendMessage(messagePrefix + "§c" + message);
@@ -231,7 +231,7 @@ public class CoreLogger {
 
         int lineNumber = element.getLineNumber();
 
-        if (HistoriaCore.getInstance() == null || HistoriaCore.isTesting || GeneralConfig.trace) {
+        if (HistoriaCore.isTesting || GeneralConfig.trace) {
 
             StringBuilder built = new StringBuilder();
 

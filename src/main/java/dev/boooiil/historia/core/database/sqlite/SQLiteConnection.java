@@ -35,12 +35,12 @@ public class SQLiteConnection extends DatabaseConnection {
         if (dataSource == null || dataSource.isClosed()) {
             CoreLogger.infoToConsole("(SQLite) Initializing data source.");
             CoreLogger.infoToConsole(
-                    "(SQLite) Data source location: " + HistoriaCore.plugin().getDataFolder().getAbsolutePath()
+                    "(SQLite) Data source location: " + HistoriaCore.Companion.getInstance().getDataFolder().getAbsolutePath()
                             + "/database.db");
 
             HikariConfig config = new HikariConfig();
             config.setJdbcUrl(
-                    "jdbc:sqlite:" + HistoriaCore.plugin().getDataFolder().getAbsolutePath() + "/database.db");
+                    "jdbc:sqlite:" + HistoriaCore.Companion.getInstance().getDataFolder().getAbsolutePath() + "/database.db");
             config.setMaximumPoolSize(150); // Set max pool size
 
             dataSource = new HikariDataSource(config);

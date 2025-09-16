@@ -75,7 +75,7 @@ public class PlayerStorage {
 
         else {
 
-            HistoriaPlayer player = HistoriaCore.getDatabaseHandler().getUser(uuid);
+            HistoriaPlayer player = HistoriaCore.Companion.getDatabaseHandler().getUser(uuid);
             addPlayer(uuid, player);
             return player;
         }
@@ -87,13 +87,13 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
         }
 
-        UUID uuid = HistoriaCore.getDatabaseHandler().getUUID(username);
+        UUID uuid = HistoriaCore.Companion.getDatabaseHandler().getUUID(username);
 
         if (uuid == null) {
             return null;
         }
 
-        return HistoriaCore.getDatabaseHandler().getUser(uuid);
+        return HistoriaCore.Companion.getDatabaseHandler().getUser(uuid);
     }
 
     public static HashMap<UUID, HistoriaPlayer> getPlayerMap() {

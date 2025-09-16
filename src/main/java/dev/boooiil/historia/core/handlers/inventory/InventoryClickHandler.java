@@ -61,7 +61,7 @@ public class InventoryClickHandler {
         ItemStack newArrow = new ItemStack(Material.ARROW);
 
         ItemMeta flintSteelMeta = this.cursorItem.getItemMeta();
-        ItemMeta newArrowMeta = HistoriaCore.server().getItemFactory().getItemMeta(Material.ARROW);
+        ItemMeta newArrowMeta = HistoriaCore.Companion.getServer().getItemFactory().getItemMeta(Material.ARROW);
 
         Damageable flintAndSteelDamageable = (Damageable) flintSteelMeta;
         List<String> lore = new ArrayList<>();

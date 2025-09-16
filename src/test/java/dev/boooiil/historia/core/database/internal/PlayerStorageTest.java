@@ -108,7 +108,7 @@ public class PlayerStorageTest {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
-            System.out.println(HistoriaCore.getDatabaseHandler().getUsername(player.getUniqueId()));
+            System.out.println(HistoriaCore.Companion.getDatabaseHandler().getUsername(player.getUniqueId()));
 
             PlayerMock playerMock = (PlayerMock) player;
             playerMock.disconnect();

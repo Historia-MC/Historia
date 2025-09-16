@@ -30,7 +30,7 @@ public class ToolStats implements StatsComponent {
     private double hoeExperience;
 
     public ToolStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.STAT_MODIFIERS_REGISTRY
+        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
                 .get(proficiencyName.getKey());
         this.axe = section.getInt("axe");
         this.axeExperience = 0;

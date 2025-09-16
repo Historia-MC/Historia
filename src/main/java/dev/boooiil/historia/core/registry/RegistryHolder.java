@@ -26,11 +26,11 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      * @param key   The key to register the value under.s
      * @param value The value to register.
      */
-    public <T> RegistryHolder register(NamespacedKey key, Registry<T> value) {
+    public <T> Registry<T> register(NamespacedKey key, Registry<T> value) {
         CoreLogger.traceToConsole(
                 "Registering " + key + " to registry holder with type " + value.getType().getTypeName());
         holder.register(key, value);
-        return this;
+        return value;
     }
 
     @SuppressWarnings("unchecked")

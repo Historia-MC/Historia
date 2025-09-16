@@ -43,7 +43,7 @@ public class WeaponStats implements StatsComponent {
      * @param section The `proficiency.armor` configuration section.
      */
     public WeaponStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.STAT_MODIFIERS_REGISTRY
+        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
                 .get(proficiencyName.getKey());
         this.sword = section.getInt("sword");
         this.swordExperience = 0;

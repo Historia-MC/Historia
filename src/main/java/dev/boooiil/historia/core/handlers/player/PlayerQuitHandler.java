@@ -18,7 +18,7 @@ public class PlayerQuitHandler {
 
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
 
-        HistoriaCore.getDatabaseHandler().setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
+        HistoriaCore.Companion.getDatabaseHandler().setLogout(event.getPlayer().getUniqueId(), historiaPlayer.getLastLogin(),
                 historiaPlayer.getPlaytime());
     }
 

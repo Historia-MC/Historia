@@ -30,7 +30,7 @@ public class ProficiencyRegistryLoader {
             ConfigurationSection section = config.getConfigurationSection(key);
 
             Proficiency proficiency = new Proficiency(section);
-            HistoriaCore.PROFICIENCY_REGISTRY.register(proficiency.getName(), proficiency);
+            HistoriaCore.Companion.getPROFICIENCY_REGISTRY().register(proficiency.getName(), proficiency);
 
             // StatModifiers modifiers = new
             // StatModifiers(section.getConfigurationSection("modifiers"));

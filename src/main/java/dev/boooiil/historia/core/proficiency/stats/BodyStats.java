@@ -35,7 +35,7 @@ public class BodyStats implements StatsComponent {
     private double toughnessExperience;
 
     public BodyStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.STAT_MODIFIERS_REGISTRY
+        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
                 .get(proficiencyName.getKey());
         this.health = section.getInt("health");
         this.healthExperience = 0;

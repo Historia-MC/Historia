@@ -126,13 +126,13 @@ public class Proficiency implements JSONSerializable {
 
         NamespacedKey key = HistoriaCore.getNamespacedKey("none");
 
-        if (HistoriaCore.PROFICIENCY_REGISTRY.contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
+        if (HistoriaCore.Companion.getPROFICIENCY_REGISTRY().contains(HistoriaCore.getNamespacedKey(proficiencyName))) {
             key = HistoriaCore.getNamespacedKey(proficiencyName);
         }
 
         this.name = key;
         this.skills.clear();
-        this.skills.putAll(HistoriaCore.PROFICIENCY_REGISTRY.get(key).getSkills());
+        this.skills.putAll(HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(key).getSkills());
 
     }
 
@@ -153,7 +153,7 @@ public class Proficiency implements JSONSerializable {
      * @param name the name of the proficiency
      */
     public Proficiency(NamespacedKey name) {
-        this(HistoriaCore.PROFICIENCY_REGISTRY.get(name));
+        this(HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(name));
     }
 
     public Proficiency(ConfigurationSection section) {

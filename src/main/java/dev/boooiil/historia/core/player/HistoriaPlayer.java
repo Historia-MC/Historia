@@ -225,14 +225,14 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public Proficiency getProficiency() {
 
-        Proficiency proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(this.proficiency);
+        Proficiency proficiency = HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(this.proficiency);
 
         if (proficiency == null) {
             CoreLogger.errorToConsole("Player " + this.getUsername() + "(" + this.getUUID().toString()
                     + ") has an invalid proficiency " + this.proficiency.toString() + ". Setting to NONE.");
 
             this.proficiency = ProficiencyName.NONE.getKey();
-            proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(this.proficiency);
+            proficiency = HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(this.proficiency);
         }
 
         return proficiency;
@@ -363,7 +363,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        HistoriaCore.getDatabaseHandler().saveUser(this);
+        HistoriaCore.Companion.getDatabaseHandler().saveUser(this);
 
         // Main.getDatabaseHandler().setProficiency(this.getUUID(),
         // this.getProficiency().getName());
@@ -408,7 +408,7 @@ public class HistoriaPlayer extends BasePlayer {
                 .debugToConsole("Player ", this.getUsername(), "(",
                         this.getUUID().toString(), ") is changing proficiency to ", proficiency.toString(), ".");
 
-        if (!HistoriaCore.PROFICIENCY_REGISTRY.contains(proficiency)) {
+        if (!HistoriaCore.Companion.getPROFICIENCY_REGISTRY().contains(proficiency)) {
             throw new IllegalArgumentException("Tried to apply proficiency to player" + this.getUsername() +
                     " but the proficiency " + proficiency + " does not exist in the registry.");
         }

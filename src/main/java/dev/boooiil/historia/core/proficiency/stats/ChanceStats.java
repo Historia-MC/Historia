@@ -31,7 +31,7 @@ public class ChanceStats implements StatsComponent {
     private double beheadExperience;
 
     public ChanceStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.STAT_MODIFIERS_REGISTRY
+        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
                 .get(proficiencyName.getKey());
         this.harvest = section.getInt("harvest");
         this.harvestExperience = 0;

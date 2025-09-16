@@ -30,18 +30,18 @@ public class FileIO {
         CoreLogger.infoToConsole("Checking existence and version of config files.");
 
         for (String fileName : configFileNames) {
-            File diskFile = new File(HistoriaCore.plugin().getDataFolder(), fileName);
+            File diskFile = new File(HistoriaCore.Companion.getInstance().getDataFolder(), fileName);
 
             if (!diskFile.exists()) {
                 CoreLogger
                         .infoToConsole("Missing config file: " + fileName + " has been saved to disk from resources.");
                 CoreLogger.infoToConsole("Location: " + diskFile.getAbsolutePath());
-                HistoriaCore.plugin().saveResource(fileName, false);
+                HistoriaCore.Companion.getInstance().saveResource(fileName, false);
                 continue;
             }
 
             YamlConfiguration diskConfig = yamlFromSource(diskFile);
-            YamlConfiguration jarConfig = yamlFromSource(HistoriaCore.plugin().getResource(fileName));
+            YamlConfiguration jarConfig = yamlFromSource(HistoriaCore.Companion.getInstance().getResource(fileName));
 
             int diskVersion = diskConfig.getInt("version");
             int jarVersion = jarConfig.getInt("version");
@@ -49,7 +49,7 @@ public class FileIO {
             if (diskVersion < jarVersion) {
                 CoreLogger.infoToConsole("Outdated config file (" + diskVersion + "): " + fileName
                         + " has been replaced on disk by the newer version " + jarVersion + ".");
-                HistoriaCore.plugin().saveResource(fileName, true);
+                HistoriaCore.Companion.getInstance().saveResource(fileName, true);
             }
         }
 
@@ -104,12 +104,12 @@ public class FileIO {
 
         YamlConfiguration config;
 
-        if (find(HistoriaCore.plugin().getDataFolder().listFiles(), check)) {
+        if (find(HistoriaCore.Companion.getInstance().getDataFolder().listFiles(), check)) {
 
             CoreLogger.debugToConsole("Obtained file from external directory: ",
-                    HistoriaCore.plugin().getDataFolder().getPath() + "\\" + check.getKey());
+                    HistoriaCore.Companion.getInstance().getDataFolder().getPath() + "\\" + check.getKey());
 
-            File file = new File(HistoriaCore.plugin().getDataFolder().getPath(), check.getKey());
+            File file = new File(HistoriaCore.Companion.getInstance().getDataFolder().getPath(), check.getKey());
 
             config = YamlConfiguration.loadConfiguration(file);
         }

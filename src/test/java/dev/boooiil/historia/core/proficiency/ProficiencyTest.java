@@ -47,11 +47,11 @@ public class ProficiencyTest {
     private Proficiency getProficiency(String proficiency) {
 
         NamespacedKey key = HistoriaCore.getNamespacedKey(proficiency);
-        Registry<@NotNull Proficiency> registry = HistoriaCore.PROFICIENCY_REGISTRY;
+        Registry<@NotNull Proficiency> registry = HistoriaCore.Companion.getPROFICIENCY_REGISTRY();
 
         assert (registry != null);
 
-        return HistoriaCore.PROFICIENCY_REGISTRY.get(key);
+        return HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(key);
 
     }
 }

@@ -39,7 +39,7 @@ public abstract class BaseConfiguration<T> {
     public void loadConfiguration(String fileName) {
 
         // @sonatype-lift ignore
-        this.configuration = FileIO.yamlFromSource(new File(HistoriaCore.plugin().getDataFolder(), fileName));
+        this.configuration = FileIO.yamlFromSource(new File(HistoriaCore.Companion.getInstance().getDataFolder(), fileName));
         this.set = configuration.getKeys(false);
         this.map = new HashMap<>();
 

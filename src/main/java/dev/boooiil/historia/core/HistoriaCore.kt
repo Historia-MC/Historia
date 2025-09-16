@@ -1,370 +1,257 @@
-package dev.boooiil.historia.core;
+package dev.boooiil.historia.core
 
-import dev.boooiil.historia.core.commands.*;
-import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.database.DatabaseConnection;
-import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
-import dev.boooiil.historia.core.database.IDatabaseConnection;
-import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType;
-import dev.boooiil.historia.core.database.mysql.CoreMySQLHandler;
-import dev.boooiil.historia.core.database.sqlite.CoreSQLiteHandler;
-import dev.boooiil.historia.core.events.block.BlockBreakListener;
-import dev.boooiil.historia.core.events.block.BlockFromToListener;
-import dev.boooiil.historia.core.events.block.BlockPlaceListener;
-import dev.boooiil.historia.core.events.entity.EntityBreedListener;
-import dev.boooiil.historia.core.events.entity.EntityTameListener;
-import dev.boooiil.historia.core.events.inventory.InventoryClickListener;
-import dev.boooiil.historia.core.events.player.PlayeQuitListener;
-import dev.boooiil.historia.core.events.player.PlayerExpChangeListener;
-import dev.boooiil.historia.core.events.player.PlayerInteractEntityListener;
-import dev.boooiil.historia.core.events.player.PlayerInteractListener;
-import dev.boooiil.historia.core.events.player.PlayerJoinListener;
-import dev.boooiil.historia.core.file.FileIO;
-import dev.boooiil.historia.core.proficiency.Proficiency;
-import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader;
-import dev.boooiil.historia.core.proficiency.skills.ISkill;
-import dev.boooiil.historia.core.proficiency.stats.StatModifiers;
-import dev.boooiil.historia.core.registry.Registry;
-import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.runnable.SavePlayerRunnable;
-import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable;
-import dev.boooiil.historia.core.util.CoreLogger;
-
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Server;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.jetbrains.annotations.NotNull;
+import com.mojang.brigadier.tree.LiteralCommandNode
+import dev.boooiil.historia.core.commands.*
+import dev.boooiil.historia.core.configuration.ConfigurationLoader
+import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType
+import dev.boooiil.historia.core.database.ICoreDatabaseHandler
+import dev.boooiil.historia.core.database.mysql.CoreMySQLHandler
+import dev.boooiil.historia.core.database.sqlite.CoreSQLiteHandler
+import dev.boooiil.historia.core.events.block.BlockBreakListener
+import dev.boooiil.historia.core.events.block.BlockFromToListener
+import dev.boooiil.historia.core.events.block.BlockPlaceListener
+import dev.boooiil.historia.core.events.entity.EntityBreedListener
+import dev.boooiil.historia.core.events.entity.EntityTameListener
+import dev.boooiil.historia.core.events.inventory.InventoryClickListener
+import dev.boooiil.historia.core.events.player.*
+import dev.boooiil.historia.core.file.FileIO
+import dev.boooiil.historia.core.proficiency.Proficiency
+import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
+import dev.boooiil.historia.core.proficiency.skills.ISkill
+import dev.boooiil.historia.core.proficiency.stats.StatModifiers
+import dev.boooiil.historia.core.registry.Registry
+import dev.boooiil.historia.core.registry.RegistryHolder
+import dev.boooiil.historia.core.runnable.SavePlayerRunnable
+import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
+import dev.boooiil.historia.core.util.CoreLogger
+import io.papermc.paper.command.brigadier.CommandSourceStack
+import io.papermc.paper.command.brigadier.Commands
+import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler
+import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent
+import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
+import org.bukkit.Bukkit
+import org.bukkit.NamespacedKey
+import org.bukkit.Server
+import org.bukkit.command.CommandExecutor
+import org.bukkit.event.Listener
+import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.scheduler.BukkitRunnable
 
 /**
  * Historia-Core Main class
  */
-public class HistoriaCore extends JavaPlugin {
-
-    public static final RegistryHolder registryHolder = new RegistryHolder();
-
-    // proficiency_name:proficiency
-    public static final Registry<@NotNull Proficiency> PROFICIENCY_REGISTRY = RegistryHolder.get(
-            HistoriaCore.registryHolder.register(
-                    NamespacedKey.fromString("historia:proficiency"),
-                    new Registry<>(Proficiency.class)),
-            NamespacedKey.fromString("historia:proficiency"),
-            Proficiency.class);
-
-    public static final Registry<@NotNull ISkill> SKILL_REGISTRY = RegistryHolder.get(
-            HistoriaCore.registryHolder.register(
-                    NamespacedKey.fromString("historia:skill"),
-                    new Registry<>(ISkill.class)),
-            NamespacedKey.fromString("historia:skill"),
-            ISkill.class);
-
-    // proficiency_name:stat_modifier
-    public static final Registry<@NotNull StatModifiers> STAT_MODIFIERS_REGISTRY = RegistryHolder.get(
-            HistoriaCore.registryHolder.register(
-                    NamespacedKey.fromString("historia:stat_modifiers"),
-                    new Registry<>(StatModifiers.class)),
-            NamespacedKey.fromString("historia:stat_modifiers"),
-            StatModifiers.class);
-
-    /** if the plugin is testing */
-    public static boolean isTesting = true;
-    /** this plugin instance */
-    private static Plugin instance = null;
-    /** the database handler */
-    private static ICoreDatabaseHandler databaseHandler;
-
-    public HistoriaCore() {
-        super();
-    }
-
+open class HistoriaCore : JavaPlugin() {
     /**
      * Runs on plugin load.
      */
-    @Override
-    public void onLoad() {
+    override fun onLoad() {
+        instance = this
 
-        instance = this;
-
-        CoreLogger.infoToConsole("Plugin has loaded.");
-
-        deregisterRecipes();
+        CoreLogger.infoToConsole("Plugin has loaded.")
 
         // Check config files
-        FileIO.checkFiles();
+        FileIO.checkFiles()
 
-        CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion());
+        CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion())
 
         if (Bukkit.getVersion().contains("MockBukkit")) {
-            System.out.println("RUNNING IN TEST MODE");
-        }
-
-        else if (!Bukkit.getVersion().contains("Paper")) {
-            CoreLogger.errorToConsole("PAPER SPIGOT WAS NOT DETECTED");
-            CoreLogger.errorToConsole("DISABLING PLUGIN");
-            HistoriaCore.disable();
+            println("RUNNING IN TEST MODE")
+        } else if (!Bukkit.getVersion().contains("Paper")) {
+            CoreLogger.errorToConsole("PAPER SPIGOT WAS NOT DETECTED")
+            CoreLogger.errorToConsole("DISABLING PLUGIN")
+            disable()
         } else {
-            isTesting = false;
+            isTesting = false
         }
-
     }
 
     /**
      * Runs on plugin enable.
      */
-    @Override
-    public void onEnable() {
-
+    override fun onEnable() {
         // Save / Load the config in the Historia plugins folder.
-        this.saveDefaultConfig();
 
-        ConfigurationLoader.init();
+        this.saveDefaultConfig()
 
-        registerEvent(new EntityBreedListener());
-        registerEvent(new EntityTameListener());
-        registerEvent(new PlayerExpChangeListener());
-        registerEvent(new InventoryClickListener());
-        registerEvent(new BlockBreakListener());
-        registerEvent(new BlockPlaceListener());
-        registerEvent(new PlayerJoinListener());
-        registerEvent(new PlayeQuitListener());
+        ConfigurationLoader.init()
+
+        initDatabase()
+
+        registerEvent(EntityBreedListener())
+        registerEvent(EntityTameListener())
+        registerEvent(PlayerExpChangeListener())
+        registerEvent(InventoryClickListener())
+        registerEvent(BlockBreakListener())
+        registerEvent(BlockPlaceListener())
+        registerEvent(PlayerJoinListener())
+        registerEvent(PlayeQuitListener())
         // registerEvent(new PlayerRightClickAir());
-        registerEvent(new PlayerInteractEntityListener());
-        registerEvent(new BlockFromToListener());
-        registerEvent(new PlayerInteractListener());
+        registerEvent(PlayerInteractEntityListener())
+        registerEvent(BlockFromToListener())
+        registerEvent(PlayerInteractListener())
 
-        registerCommand("checkplayers", new CommandPlayers());
-        registerCommand("debug", new CommandDebug());
-        registerCommand("stats", new CommandStats());
-        registerCommand("set", new CommandSet());
-        registerCommand("proficiency", new CommandProficiency());
+        registerCommand("checkplayers", CommandPlayers())
+        registerCommand("debug", CommandDebug())
+        registerCommand("stats", CommandStats())
+        registerCommand("set", CommandSet())
+
+        if (!isTesting) { //TODO this is a temporary workaround since mockbukkit doesn't support the newest brigadier version
+            registerCommand(commandProficiency)
+        }
 
         // registerRunnable(new ClassEnchantsRunnable());
-        registerRunnable(new UpdateScoreboardRunnable());
-        registerRunnable(new SavePlayerRunnable(), 6000);
+        registerRunnable(UpdateScoreboardRunnable())
+        registerRunnable(SavePlayerRunnable(), 6000)
 
-        initDatabase();
+        CoreLogger.infoToConsole("Plugin Enabled.")
 
-        CoreLogger.infoToConsole("Plugin Enabled.");
-
-        ProficiencyRegistryLoader.load();
-
+        ProficiencyRegistryLoader.load()
     }
 
     /**
      * Runs on plugin disable.
      */
-    @Override
     // It's a method that is called when the plugin is disabled.
-    public void onDisable() {
+    override fun onDisable() {
+        closeDatabase()
 
-        closeDatabase();
+        CoreLogger.errorToConsole("The plugin has been disabled.")
+        CoreLogger.errorToConsole("Stopping the server to prevent potential harm.")
 
-        CoreLogger.errorToConsole("The plugin has been disabled.");
-        CoreLogger.errorToConsole("Stopping the server to prevent potential harm.");
-
-        if (!isTesting)
-            server().shutdown();
-    }
-
-    /**
-     * It returns the plugin instance
-     * 
-     * @return The plugin object.
-     */
-    public static Plugin plugin() {
-
-        return instance;
-
-    }
-
-    /**
-     * It returns the server instance
-     * 
-     * @return The server.
-     */
-    public static Server server() {
-
-        return plugin().getServer();
-
-    }
-
-    /**
-     * It disables the plugin
-     * 
-     *
-     */
-    public static void disable() {
-
-        server().getPluginManager().disablePlugin(plugin());
-
-    }
-
-    public static HistoriaCore getInstance() {
-        return (HistoriaCore) instance;
-    }
-
-    /**
-     * Get the database handler.
-     * 
-     * @return the database handler
-     */
-    public static ICoreDatabaseHandler getDatabaseHandler() {
-        return databaseHandler;
-    }
-
-    /**
-     * Get the database connection.
-     * 
-     * @return the database connection.
-     */
-    public static IDatabaseConnection getIDatabaseConnection() {
-        return databaseHandler;
-    }
-
-    /**
-     * Get the database connection.
-     * 
-     * @return the database connection.
-     */
-    public static DatabaseConnection getBaseDatabaseConnection() {
-        return (DatabaseConnection) databaseHandler;
-    }
-
-    /**
-     * Get a namespacedkey in the HistoriaCore namespace.
-     * 
-     * @param key - key to set.
-     * @return the namespaced key
-     */
-    public static NamespacedKey getNamespacedKey(String key) {
-        return new NamespacedKey(plugin(), key.toLowerCase());
-    }
-
-    public static void registerSkill(ISkill skill) {
-        skill.register();
+        if (!isTesting) server.shutdown()
     }
 
     /**
      * Initialize the database.
      */
-    private void initDatabase() {
-        DatabaseType DBType = ConfigurationLoader.getGeneralConfig().databaseType;
-
-        switch (DBType) {
-            case MYSQL:
-                databaseHandler = new CoreMySQLHandler();
-                break;
-            default:
-                CoreLogger.debugToConsole("Using default database type. Configured:", DBType.name());
-                databaseHandler = new CoreSQLiteHandler();
-                break;
+    private fun initDatabase() {
+        when (val dbType = ConfigurationLoader.getGeneralConfig().databaseType) {
+            DatabaseType.MYSQL -> databaseHandler = CoreMySQLHandler()
+            else -> {
+                CoreLogger.debugToConsole("Using default database type. Configured:", dbType.name)
+                databaseHandler = CoreSQLiteHandler()
+            }
         }
 
-        databaseHandler.initDataSource();
-        databaseHandler.connect();
-        databaseHandler.createTable();
+        databaseHandler.initDataSource()
+        databaseHandler.connect()
+        databaseHandler.createTable()
     }
 
     /**
      * Close the database.
      */
-    private void closeDatabase() {
-        databaseHandler.closeConnection();
-        databaseHandler.closeDataSource();
+    private fun closeDatabase() {
+        databaseHandler.closeConnection()
+        databaseHandler.closeDataSource()
     }
 
     /**
      * It registers an event
-     * 
+     *
      * @param event The event you want to register.
      */
-    public void registerEvent(Listener event) {
-
-        this.getServer().getPluginManager().registerEvents(event, this);
-
+    fun registerEvent(event: Listener) {
+        this.server.pluginManager.registerEvents(event, this)
     }
 
     /**
      * It registers a command to the server
-     * 
+     *
      * @param commandName The name of the command you want to register.
      * @param command     The command to register
      */
-    private void registerCommand(String commandName, CommandExecutor command) {
+    private fun registerCommand(commandName: String, command: CommandExecutor) {
+        this.getCommand(commandName)?.setExecutor(command)
+    }
 
-        if (commandName == null || command == null)
-            return;
-
-        this.getCommand(commandName).setExecutor(command);
-
+    /**
+     * It registers a brigadier command to the server
+     *
+     * @param command     The command to register
+     */
+    private fun registerCommand(command: LiteralCommandNode<CommandSourceStack>) {
+        this.lifecycleManager.registerEventHandler(
+            LifecycleEvents.COMMANDS,
+            LifecycleEventHandler { commands: ReloadableRegistrarEvent<Commands> ->
+                commands.registrar().register(command)
+            })
     }
 
     /**
      * It registers a runnable
-     * 
+     *
      * @param runnable The runnable you want to register.
      */
-    public void registerRunnable(BukkitRunnable runnable) {
-
-        runnable.runTaskTimer(this, 0, 20);
-
+    fun registerRunnable(runnable: BukkitRunnable) {
+        runnable.runTaskTimer(this, 0, 20)
     }
 
     /**
      * Registers a BukkitRunnable to be executed on a timer.
-     * 
+     *
      * @param runnable The BukkitRunnable to be executed.
      * @param time     The time in ticks between each execution of the runnable.
      */
-    public void registerRunnable(BukkitRunnable runnable, long time) {
-        runnable.runTaskTimer(this, 0, time);
+    fun registerRunnable(runnable: BukkitRunnable, time: Long) {
+        runnable.runTaskTimer(this, 0, time)
     }
 
-    private void deregisterRecipes() {
+    companion object {
+        /** if the plugin is testing  */
+        @JvmField
+        var isTesting: Boolean = true
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_nugget"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_nugget"));
+        val registryHolder: RegistryHolder = RegistryHolder()
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_sword"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_sword"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("stone_sword"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("wood_sword"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_sword"));
+        //TODO not sure if I'm a very big fan of the lazy but def works for now
+        val PROFICIENCY_REGISTRY: Registry<Proficiency> by lazy {
+            registryHolder.register(getNamespacedKey("proficiency"), Registry<Proficiency>(Proficiency::class.java))
+        }
+        val SKILL_REGISTRY: Registry<ISkill> by lazy {
+            registryHolder.register(getNamespacedKey("skill"), Registry<ISkill>(ISkill::class.java))
+        }
+        val STAT_MODIFIERS_REGISTRY: Registry<StatModifiers> by lazy {
+            registryHolder.register(getNamespacedKey("stat_modifiers"), Registry<StatModifiers>(StatModifiers::class.java))
+        }
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_axe"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_axe"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("stone_axe"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("wood_axe"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_axe"));
+        /** this plugin instance  */
+        lateinit var instance: HistoriaCore
+            private set
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_pickaxe"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_shovel"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_hoe"));
+        /** the database handler  */
+        lateinit var databaseHandler: ICoreDatabaseHandler
+            private set
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_helmet"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_chestplate"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_leggings"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("diamond_boots"));
+        /**
+         * It returns the server instance
+         *
+         * @return The server.
+         */
+        val server: Server get() = instance.server
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_helmet"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_chestplate"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_leggings"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("iron_boots"));
+        /**
+         * It disables the plugin
+         *
+         *
+         */
+        fun disable() {
+            server.pluginManager.disablePlugin(instance)
+        }
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_helmet"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_chestplate"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_leggings"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("gold_boots"));
+        /**
+         * Get a namespacedkey in the HistoriaCore namespace.
+         *
+         * @param key - key to set.
+         * @return the namespaced key
+         */
+        @JvmStatic
+        fun getNamespacedKey(key: String): NamespacedKey {
+            return NamespacedKey(instance, key.lowercase())
+        }
 
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_helmet"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_chestplate"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_leggings"));
-        // Bukkit.removeRecipe(NamespacedKey.minecraft("netherrite_boots"));
-
+        fun registerSkill(skill: ISkill) {
+            skill.register()
+        }
     }
-
 }
