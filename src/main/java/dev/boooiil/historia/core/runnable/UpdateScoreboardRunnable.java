@@ -39,12 +39,14 @@ public class UpdateScoreboardRunnable extends BukkitRunnable {
                                         ChatColor.DARK_AQUA + "Temperature: " + ChatColor.GRAY
                                                         + historiaPlayer.getCurrentTemperature());
                         scoreboardAdapter.addLine(5, ChatColor.AQUA + "Weight: " + ChatColor.GRAY + null);
-                        scoreboardAdapter.addLine(4, ChatColor.DARK_AQUA + "Weapon Class: " + ChatColor.GRAY
-                                        + historiaPlayer.getProficiency().getStats().getWeaponStats()
-                                                        .getUsableWeaponWeights());
-                        scoreboardAdapter.addLine(3, ChatColor.AQUA + "Armor Class: " + ChatColor.GRAY
-                                        + historiaPlayer.getProficiency().getStats().getArmorStats()
-                                                        .getUsableArmorWeights());
+                        // scoreboardAdapter.addLine(4, ChatColor.DARK_AQUA + "Weapon Class: " +
+                        // ChatColor.GRAY
+                        // + historiaPlayer.getProficiency().getStats().getWeaponStats()
+                        // .getUsableWeaponWeights());
+                        // scoreboardAdapter.addLine(3, ChatColor.AQUA + "Armor Class: " +
+                        // ChatColor.GRAY
+                        // + historiaPlayer.getProficiency().getStats().getArmorStats()
+                        // .getUsableArmorWeights());
 
                         scoreboardAdapter.addToPlayer(player);
 
