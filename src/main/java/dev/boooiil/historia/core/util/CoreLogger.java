@@ -225,11 +225,28 @@ public class CoreLogger {
 
     public static void traceToConsole(String... messages) {
 
-        StackTraceElement element = Thread.currentThread().getStackTrace()[2];
-        String fullClassName = element.getClassName(); // dev.boooiil.historia.core.HistoriaCore
-        String simpleClassName = fullClassName.substring(fullClassName.lastIndexOf('.') + 1);
+        String result = "";
 
-        int lineNumber = element.getLineNumber();
+        for (int i = 2; i < Thread.currentThread().getStackTrace().length; i++) {
+
+            StackTraceElement e = Thread.currentThread().getStackTrace()[i];
+
+            if (!e.getClassName().startsWith("dev.boooiil.historia")) {
+                continue;
+            }
+
+            String className = e.getClassName();
+            String simpleClassName = className.substring(className.lastIndexOf('.') + 1);
+            String methodName = e.getMethodName();
+            int lineNumber = e.getLineNumber();
+
+            result = simpleClassName + ":" + lineNumber + " " + methodName + " -> " + result;
+
+            if (methodName.equals("<clinit>")) {
+                break;
+            }
+
+        }
 
         if (HistoriaCore.isTesting || GeneralConfig.trace) {
 
@@ -241,7 +258,7 @@ public class CoreLogger {
 
             }
 
-            infoToConsole(simpleClassName + ":" + lineNumber + " [TRACE] " + built);
+            infoToConsole("[TRACE] " + result + built);
 
         }
 
