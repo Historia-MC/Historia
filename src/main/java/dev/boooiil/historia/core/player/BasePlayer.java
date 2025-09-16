@@ -86,7 +86,7 @@ abstract class BasePlayer implements JSONSerializable {
 
         }
 
-        if (this.uuid != null && !HistoriaCore.isTesting) {
+        if (this.uuid != null && !HistoriaCore.isTesting && Bukkit.getPluginManager().isPluginEnabled("Towny")) {
 
             this.resident = TownyHandler.getResident(uuid);
             this.town = TownyHandler.getTown(uuid);
