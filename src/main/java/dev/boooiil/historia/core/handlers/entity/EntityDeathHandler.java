@@ -13,7 +13,6 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.proficiency.experience.AnimalSources;
 import dev.boooiil.historia.core.proficiency.experience.CombatSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.NumberUtils;
 
 public class EntityDeathHandler {
@@ -71,25 +70,25 @@ public class EntityDeathHandler {
 
     private void doDetermineHarvestType() {
 
-//        switch (event.getEntity().getType()) {
-//            case SHEEP:
-//                doExtraWool();
-//                doHarvestBones();
-//                break;
-//            case COW:
-//            case PIG:
-//            case HORSE:
-//                doHarvestLeather();
-//                doHarvestBones();
-//                break;
-//            case CHICKEN:
-//                doExtraFeathers();
-//                doHarvestBones();
-//                break;
-//            default:
-//                doHarvestBones();
-//                break;
-//        }
+        // switch (event.getEntity().getType()) {
+        // case SHEEP:
+        // doExtraWool();
+        // doHarvestBones();
+        // break;
+        // case COW:
+        // case PIG:
+        // case HORSE:
+        // doHarvestLeather();
+        // doHarvestBones();
+        // break;
+        // case CHICKEN:
+        // doExtraFeathers();
+        // doHarvestBones();
+        // break;
+        // default:
+        // doHarvestBones();
+        // break;
+        // }
 
     }
 
@@ -120,19 +119,21 @@ public class EntityDeathHandler {
 
         List<ItemStack> drops = event.getDrops();
 
-//        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_LEATHER)) {
-//            List<ItemStack> newDrops = new ArrayList<>();
-//
-//            for (ItemStack drop : drops) {
-//                if (drop.getType() != Material.LEATHER) {
-//                    newDrops.add(drop);
-//                }
-//            }
-//
-//            event.getDrops().clear();
-//            event.getDrops().addAll(newDrops);
-//            return;
-//        }
+        // if
+        // (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_LEATHER))
+        // {
+        // List<ItemStack> newDrops = new ArrayList<>();
+        //
+        // for (ItemStack drop : drops) {
+        // if (drop.getType() != Material.LEATHER) {
+        // newDrops.add(drop);
+        // }
+        // }
+        //
+        // event.getDrops().clear();
+        // event.getDrops().addAll(newDrops);
+        // return;
+        // }
 
         // cow already drops leather
         if (event.getEntity().getType() == EntityType.COW) {
@@ -145,60 +146,68 @@ public class EntityDeathHandler {
 
     }
 
-//    private void doHarvestBones() {
-//
-//        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_BONES)) {
-//            return;
-//        }
-//
-//        event.getDrops().add(new ItemStack(Material.BONE, NumberUtils.randomInt(1, 3)));
-//
-//        historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_BONES.getKey());
-//
-//    }
+    // private void doHarvestBones() {
+    //
+    // if
+    // (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.HARVEST_BONES))
+    // {
+    // return;
+    // }
+    //
+    // event.getDrops().add(new ItemStack(Material.BONE, NumberUtils.randomInt(1,
+    // 3)));
+    //
+    // historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_BONES.getKey());
+    //
+    // }
 
-//    private void doExtraFeathers() {
-//
-//        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_FEATHERS)) {
-//            return;
-//        }
-//
-//        float chance = 0.1f;
-//        float random = NumberUtils.random(0, 1);
-//
-//        if (random <= chance) {
-//            event.getDrops().add(new ItemStack(Material.FEATHER, NumberUtils.randomInt(1, 3)));
-//            historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_FEATHERS.getKey());
-//        }
-//    }
-//
-//    private void doExtraWool() {
-//
-//        if (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOL)) {
-//            return;
-//        }
-//
-//        float chance = 0.1f;
-//        float random = NumberUtils.random(0, 1);
-//
-//        if (random <= chance) {
-//
-//            Material woolType = null;
-//
-//            for (ItemStack itemStack : event.getDrops()) {
-//                if (itemStack.getType().toString().contains("WOOL")) {
-//                    woolType = itemStack.getType();
-//                    break;
-//                }
-//            }
-//
-//            if (woolType == null) {
-//                return;
-//            }
-//
-//            event.getDrops().add(new ItemStack(woolType, NumberUtils.randomInt(1, 3)));
-//
-//            historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_WOOL.getKey());
-//        }
-//    }
+    // private void doExtraFeathers() {
+    //
+    // if
+    // (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_FEATHERS))
+    // {
+    // return;
+    // }
+    //
+    // float chance = 0.1f;
+    // float random = NumberUtils.random(0, 1);
+    //
+    // if (random <= chance) {
+    // event.getDrops().add(new ItemStack(Material.FEATHER, NumberUtils.randomInt(1,
+    // 3)));
+    // historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_FEATHERS.getKey());
+    // }
+    // }
+    //
+    // private void doExtraWool() {
+    //
+    // if
+    // (!historiaPlayerKiller.getProficiency().getSkills().hasSkill(SkillName.CHANCE_EXTRA_WOOL))
+    // {
+    // return;
+    // }
+    //
+    // float chance = 0.1f;
+    // float random = NumberUtils.random(0, 1);
+    //
+    // if (random <= chance) {
+    //
+    // Material woolType = null;
+    //
+    // for (ItemStack itemStack : event.getDrops()) {
+    // if (itemStack.getType().toString().contains("WOOL")) {
+    // woolType = itemStack.getType();
+    // break;
+    // }
+    // }
+    //
+    // if (woolType == null) {
+    // return;
+    // }
+    //
+    // event.getDrops().add(new ItemStack(woolType, NumberUtils.randomInt(1, 3)));
+    //
+    // historiaPlayerKiller.increaseExperience(AnimalSources.HARVEST_WOOL.getKey());
+    // }
+    // }
 }

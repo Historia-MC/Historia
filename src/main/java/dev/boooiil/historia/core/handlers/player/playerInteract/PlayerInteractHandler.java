@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.CoreLogger;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
@@ -96,13 +95,16 @@ public class PlayerInteractHandler extends BasePlayerInteract {
     }
 
     private void doAnvilInteraction() {
-//        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_ANVIL_DAMAGE)) {
-//
-//            event.setCancelled(true);
-//            CoreLogger.infoToPlayer("Maybe there is someone more skilled that can do this...",
-//                    this.getPlayer().getUniqueId());
-//
-//        }
+        // if
+        // (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_ANVIL_DAMAGE))
+        // {
+        //
+        // event.setCancelled(true);
+        // CoreLogger.infoToPlayer("Maybe there is someone more skilled that can do
+        // this...",
+        // this.getPlayer().getUniqueId());
+        //
+        // }
     }
 
     private void doStonecutterInteraction() {
@@ -116,12 +118,16 @@ public class PlayerInteractHandler extends BasePlayerInteract {
             return;
         }
 
-//        if (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.APPLY_SHARPNESS)) {
-//            CoreLogger.infoToPlayer("You don't know how to sharpen this item.", this.getPlayer().getUniqueId());
-//            CoreLogger.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
-//                    + " right clicked a stonecutter without the required skill.");
-//            return;
-//        }
+        // if
+        // (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.APPLY_SHARPNESS))
+        // {
+        // CoreLogger.infoToPlayer("You don't know how to sharpen this item.",
+        // this.getPlayer().getUniqueId());
+        // CoreLogger.debugToConsole("[PIH#doStonecutterInteraction] Player " +
+        // this.getPlayer().getName()
+        // + " right clicked a stonecutter without the required skill.");
+        // return;
+        // }
 
         increaseSharpness();
 

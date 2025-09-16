@@ -3,9 +3,6 @@ package dev.boooiil.historia.core.handlers.block.blockPlace;
 import dev.boooiil.historia.core.database.internal.BlockStorage;
 import dev.boooiil.historia.core.dependents.Permissions;
 import dev.boooiil.historia.core.handlers.block.BaseBlockHandler;
-import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
-import dev.boooiil.historia.core.proficiency.experience.FarmingSources;
-import dev.boooiil.historia.core.proficiency.skills.Skills.SkillName;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 
@@ -39,9 +36,9 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             case CACTUS:
             case BAMBOO:
             case NETHER_WART:
-//                if (this.historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
-//                    this.historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
-//                break;
+                // if (this.historiaPlayer.getProficiency().getName() == ProficiencyName.FARMER)
+                // this.historiaPlayer.increaseExperience(FarmingSources.CROP_PLACE.getKey());
+                // break;
 
             default:
                 doConsumptionBypass();
@@ -59,8 +56,9 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players who do not have the skill
-//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.LADDER_BYPASS))
-//            return;
+        // if
+        // (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.LADDER_BYPASS))
+        // return;
 
         // TODO: test this!!
 
@@ -95,8 +93,9 @@ public class BlockPlaceHandler extends BaseBlockHandler {
             return;
 
         // guard against players that do not have this skill
-//        if (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_CONSUME_BLOCK))
-//            return;
+        // if
+        // (!historiaPlayer.getProficiency().getSkills().hasSkill(SkillName.CHANCE_NO_CONSUME_BLOCK))
+        // return;
 
         switch (this.getBlock().getType()) {
 
