@@ -18,6 +18,7 @@ import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
+import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
 import dev.boooiil.historia.core.proficiency.stats.StatModifiers
 import dev.boooiil.historia.core.registry.Registry
 import dev.boooiil.historia.core.registry.RegistryHolder
@@ -95,7 +96,7 @@ open class HistoriaCore : JavaPlugin() {
         registerCommand("stats", CommandStats())
         registerCommand("set", CommandSet())
 
-        if (!isTesting) { //TODO this is a temporary workaround since mockbukkit doesn't support the newest brigadier version
+        if (!isTesting) { // TODO: this is a temporary workaround since mockbukkit doesn't support the newest brigadier version
             registerCommand(commandProficiency)
         }
 
@@ -105,6 +106,7 @@ open class HistoriaCore : JavaPlugin() {
 
         CoreLogger.infoToConsole("Plugin Enabled.")
 
+        SkillRegistryLoader.load()
         ProficiencyRegistryLoader.load()
     }
 
@@ -205,11 +207,11 @@ open class HistoriaCore : JavaPlugin() {
         val registryHolder: RegistryHolder = RegistryHolder()
 
         //TODO not sure if I'm a very big fan of the lazy but def works for now
-        val PROFICIENCY_REGISTRY: Registry<Proficiency> by lazy {
-            registryHolder.register(getNamespacedKey("proficiency"), Registry<Proficiency>(Proficiency::class.java))
-        }
         val SKILL_REGISTRY: Registry<ISkill> by lazy {
             registryHolder.register(getNamespacedKey("skill"), Registry<ISkill>(ISkill::class.java))
+        }
+        val PROFICIENCY_REGISTRY: Registry<Proficiency> by lazy {
+            registryHolder.register(getNamespacedKey("proficiency"), Registry<Proficiency>(Proficiency::class.java))
         }
         val STAT_MODIFIERS_REGISTRY: Registry<StatModifiers> by lazy {
             registryHolder.register(getNamespacedKey("stat_modifiers"), Registry<StatModifiers>(StatModifiers::class.java))
