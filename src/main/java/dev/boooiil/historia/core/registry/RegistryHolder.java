@@ -16,20 +16,27 @@ import dev.boooiil.historia.core.util.CoreLogger;
  */
 public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
 
-    private final Registry<Registry<?>> holder = RegistryHolder.generateHolder();
+    private final Registry<@NotNull Registry<?>> holder = RegistryHolder.generateHolder();
 
     /**
      * Register a new value to the registry holder.
      * 
-     * @param key   The key to register the value under.
+     * @param key   The key to register the value under.s
      * @param value The value to register.
      */
-    public RegistryHolder register(NamespacedKey key, Registry<?> value) {
+    public <T> RegistryHolder register(NamespacedKey key, Registry<@NotNull T> value) {
         CoreLogger.traceToConsole(
                 "Registering " + key + " to registry holder with type " + value.getType().getTypeName());
         holder.register(key, value);
         return this;
     }
+
+    @SuppressWarnings("unchecked")
+    public <T> Registry<@NotNull T> put(NamespacedKey key, Registry<@NotNull T> value) {
+        CoreLogger.traceToConsole("Putting " + key + " into registry of type " + value.getType());
+        return (Registry<@NotNull T>) holder.put(key, value);
+    }
+
 
     /**
      * Deregister an item configuration from the registry holder.
@@ -48,7 +55,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      * @param key   The key to update.
      * @param value The new value.
      */
-    public RegistryHolder update(NamespacedKey key, Registry<?> value) {
+    public <T> RegistryHolder update(NamespacedKey key, Registry<@NotNull T> value) {
         CoreLogger.traceToConsole(
                 "Updating " + key + " in registry holder with type " + value.getType().getTypeName());
         holder.update(key, value);
@@ -66,7 +73,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      * @return Registry<T> | null if not found.
      */
     @Nullable
-    public <T> Registry<T> get(NamespacedKey key, Type type) {
+    public <T> Registry<@NotNull T> get(NamespacedKey key, Type type) {
         CoreLogger.traceToConsole("Getting " + key + " from registry holder with type " + type.getTypeName());
         return get(holder, key, type);
     }
@@ -85,7 +92,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      */
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T> Registry<T> get(RegistryHolder registryHolder, NamespacedKey key, Type type) {
+    public static <T> Registry<@NotNull T> get(RegistryHolder registryHolder, NamespacedKey key, Type type) {
 
         CoreLogger.traceToConsole("Getting " + key + " from registry holder with type " + type.getTypeName());
 
@@ -103,7 +110,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
                             + raw.getType().getTypeName() + ">.");
         }
 
-        return (Registry<T>) raw;
+        return (Registry<@NotNull T>) raw;
     }
 
     /**
@@ -120,7 +127,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      */
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T> Registry<T> get(Registry<Registry<?>> registry, NamespacedKey key, Type type) {
+    public static <T> Registry<@NotNull T> get(Registry<@NotNull Registry<?>> registry, NamespacedKey key, Type type) {
 
         CoreLogger.traceToConsole("Getting " + key + " from registry of registries with type " + type.getTypeName());
 
@@ -138,7 +145,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
                             + raw.getType().getTypeName() + ">.");
         }
 
-        return (Registry<T>) raw;
+        return (Registry<@NotNull T>) raw;
     }
 
     /**
@@ -146,7 +153,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      * 
      * @return The internal registry holder.
      */
-    public Registry<Registry<?>> getHolder() {
+    public Registry<@NotNull Registry<?>> getHolder() {
         CoreLogger.traceToConsole("Getting internal registry holder");
         return holder;
     }
@@ -157,7 +164,7 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
      * @return A new registry holder.
      */
     @SuppressWarnings("unchecked")
-    public static Registry<Registry<?>> generateHolder() {
+    public static Registry<@NotNull Registry<?>> generateHolder() {
         CoreLogger.traceToConsole("Generating new registry holder");
         return new Registry<>(
                 (Class<Registry<?>>) (Class<?>) Registry.class);
