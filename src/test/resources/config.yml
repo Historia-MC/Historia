@@ -9,6 +9,6 @@ MySQL:
     ip:
     port:
 
-debug: true
-verbose: true
-trace: true
+debug: false
+verbose: false
+trace: false

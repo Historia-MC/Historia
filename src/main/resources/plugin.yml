@@ -10,7 +10,8 @@ loadbefore:
   - Historia-Spawnkill
   - Historia-RMushroom
   - Historia-Combat
-depend: [WorldGuard, Towny, Vault, Historia-Spawnkill]
+softdepend: [WorldGuard, Towny, Vault, Historia-Spawnkill]
+
 
 commands:
   checkplayers:
@@ -33,3 +34,7 @@ commands:
     description: Adjust stuff.
     usage: /<command> set <player> <proficiency>
     permission: historia.proficiency
+  dump:
+    description: Dump data to console.
+    usage: /<command> <player>
+    permission: historia.dump

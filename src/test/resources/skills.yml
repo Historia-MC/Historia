@@ -1,0 +1,79 @@
+version: 0
+
+# attributes:
+#   armor, armor_toughness, attack_damage, attack_knockback, attack_reach, block_break_speed, block_interaction_range
+#   burning_time, camera_distance, entity_interaction_range, explosion_knockback_resistance, fall_damage_multiplier
+#   flying_speed, follow_range, gravity, jump_strength, knockback_resistance, luck, max_absorption, max_health,
+#   mining_efficiency, movement_efficiency, movement_speed, oxygen_bonus, safe_fall_distance, scale,
+#   spawn_reinforcements, sneaking_speed, step_height, submerged_mining_speed, sweeping_damage_ratio, tempt_range,
+#   water_movement_efficiency, waypoint_receive_range, waypoint_transmit_range
+
+# operations:
+#   add_number, add_scalar, multiply_scalar_1
+
+# skill types:
+# attribute_with_item, attribute_on_item
+
+enhanced_axe_efficiency:
+  type: attribute_with_item
+  description: "Enhanced ability with an axe."
+  material:
+    - wooden_axe
+  attributes:
+    attribute: block_break_speed
+    operation: add_number
+    factor: 1
+
+enhanced_shovel_efficiency:
+  type: attribute_with_item
+  description: "Enhanced ability with a shovel."
+  material:
+    - wooden_shovel
+  attributes:
+    attribute: block_break_speed
+    operation: add_number
+    factor: 1
+
+enhanced_pickaxe_efficiency:
+  type: attribute_with_item
+  description: "Enhanced ability with a pickaxe."
+  material:
+    - wooden_pickaxe
+  attributes:
+    attribute: block_break_speed
+    operation: add_number
+    factor: 1
+
+enhanced_boots_efficiency:
+  type: attribute_with_item
+  description: "Enhanced fall resistance boots."
+  material:
+    - leather_boots
+  attributes:
+    attribute: safe_fall_distance
+    operation: add_number
+    factor: 2
+
+enhanced_sword_sharpness:
+  type: attribute_on_item
+  description: "Enhanced sharpness with a sword."
+  material:
+    - wooden_sword
+  attributes:
+    attribute: attack_damage
+    operation: add_number
+    factor: 1
+
+enhanced_sword_sweeping_edge:
+  type: attribute_on_item
+  description: "Enhanced sweeping range with a sword."
+  material:
+    - wooden_sword
+  attributes:
+    attribute: sweeping_damage_ratio
+    operation: add_number
+    factor: 2
+
+nametag:
+  type: nametag
+  description: "Allows the use of nametags."

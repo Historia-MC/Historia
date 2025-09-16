@@ -30,7 +30,8 @@ None:
     weaponProficiency: [Light]
     armorProficiency: [Light]
 
-  skills: {}
+  skills:
+    nametag: 0
 
 Warrior:
   stats:
@@ -55,13 +56,10 @@ Warrior:
     experienceSources: [ATTACK, DEFEND, EVADE, KILL, DEATH]
 
   skills:
-    nametag: true
-    sweepingEdge: true
-    enchants:
-      1:
-        regex: .*_SWORD|.*_AXE
-        values:
-          - "sharpness"
+    nametag: 0
+    enhanced_axe_sharpness: 0
+    enhanced_sword_sharpness: 0
+    enhanced_sword_sweeping_edge: 0
 
 Archer: #ADD SWIFT_SNEAK for 1.20
   stats:
@@ -84,13 +82,9 @@ Archer: #ADD SWIFT_SNEAK for 1.20
     experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
 
   skills:
-    nametag: true
-    igniteOil: true
-    enchants:
-      1:
-        regex: CROSSBOW
-        values:
-          - "quick_charge"
+    nametag: 0
+    offhand_item_ignite_oil: 0
+    enhanced_crossbow_quick_charge: 0
 
 Fisherman:
   stats:
@@ -113,17 +107,10 @@ Fisherman:
     experienceSources: [KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE]
 
   skills:
-    nametag: true
-    specialFishingDrops: true
-    enchants:
-      1:
-        regex: .*_HELMET
-        values:
-          - "aqua_affinity"
-      2:
-        regex: .*_BOOTS
-        values:
-          - "depth_strider"
+    nametag: 0
+    loot_table_enhanced_fish_drops: 0
+    enhanced_helmet: 0
+    enhanced_boots_depth_strider: 0
 
 Miner:
   stats:
@@ -146,29 +133,14 @@ Miner:
     experienceSources: [EVADE, DEATH, ORE_BREAK]
 
   skills:
-    nametag: true
-    chanceExtraOre: true
-    enchants:
-      1:
-        regex: .*_PICKAXE|.*_SHOVEL
-        values:
-          - "efficiency"
-      2:
-        regex: .*_HELMET
-        values:
-          - "blast_protection"
-      3:
-        regex: .*_CHESTPLATE
-        values:
-          - "blast_protection"
-      4:
-        regex: .*_LEGGINGS
-        values:
-          - "blast_protection"
-      5:
-        regex: .*_BOOTS
-        values:
-          - "blast_protection"
+    nametag: 0
+    block_drops_increase_ores: 0
+    enhanced_pickaxe_efficiency: 0
+    enhanced_shovel_efficiency: 0
+    enhanced_helmet_blast_protection: 0
+    enhanced_chestplate_blast_protection: 0
+    enhanced_leggings_blast_protection: 0
+    enhanced_boots_blast_protection: 0
 
 Blacksmith:
   stats:
@@ -191,10 +163,10 @@ Blacksmith:
     experienceSources: [EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT]
 
   skills:
-    nametag: true
-    applyUnbreaking: true
-    applySharpness: true
-    chanceNoAnvilDamage: true
+    nametag: 0
+    enhance_item_unbreaking: 0
+    enhance_item_sharpness: 0
+    ignore_anvil_damage: 0
 
 Huntsman: #ADD SWIFT_SNEAK for 1.20
   stats:
@@ -217,14 +189,14 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
 
   skills:
-    nametag: false
-    bonesFromAnimals: true
-    tameAnimals: true
-    chanceExtraWool: true
-    chanceExtraFeathers: true
-    shearChicken: true
-    harvestLeather: true
-    canBreed: true
+    nametag: 0
+    tame_animals: 0
+    animal_breed_all: 0
+    animal_drops_bones_all: 0
+    animal_drops_increase_wool: 0
+    animal_drops_increase_feather: 0
+    animal_drops_chicken_shear: 0
+    animal_drops_leather: 0
 
 Apothecary: #BREWERY CLASS
   stats:
@@ -247,9 +219,9 @@ Apothecary: #BREWERY CLASS
     experienceSources: [KILL, DEATH, EVADE]
 
   skills:
-    nametag: true
-    makeKnowledgeBook: true
-    igniteOil: true
+    nametag: 0
+    transfer_experience_book: 0
+    offhand_item_ignite_oil: 0
 
 Architect:
   stats:
@@ -272,14 +244,10 @@ Architect:
     experienceSources: [KILL, DEATH, EVADE, BLOCK_PLACE]
 
   skills:
-    nametag: true
-    chanceNoConsumeBlock: true
-    ladderBypass: true
-    enchants:
-      1:
-        regex: .*_BOOTS
-        values:
-          - "feather_falling"
+    nametag: 0
+    chance_no_consume_item_builder: 0
+    bypass_block_ladder: 0
+    enhanced_boots: 0
 
 Lumberjack:
   stats:
@@ -302,15 +270,11 @@ Lumberjack:
     experienceSources: [KILL, DEATH, EVADE, BLOCK_BREAK]
 
   skills:
-    nametag: true
-    chanceExtraWood: true
-    applySharpness: true
-    canClimbLogs: true
-    enchants:
-      1:
-        regex: .*_AXE
-        values:
-          - "efficiency"
+    nametag: 0
+    chance_extra_block_wood: 0
+    apply_sharpness: 0
+    can_climb_logs: 0
+    enhanced_axe_efficiency: 0
 
 Farmer: #ARMOR TRIM CLASS
   stats:
@@ -333,9 +297,9 @@ Farmer: #ARMOR TRIM CLASS
     experienceSources: [EVADE, DEATH, CROP_BREAK, CROP_PLACE]
 
   skills:
-    nametag: true
-    breakBeehive: true
-    breakGrass: true
-    shearChicken: true
-    harvestLeather: true
-    canBreed: true
+    nametag: 0
+    break_beehive: 0
+    break_grass: 0
+    shear_chicken: 0
+    harvest_leather: 0
+    can_breed: 0
