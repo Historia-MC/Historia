@@ -84,3 +84,66 @@ nametag:
   name: Placeholder
   type: nametag
   description: "Allows the use of nametags."
+
+animal_drops_bones_all:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases bone drops from all animals."
+  entity:
+    - cow
+    - pig
+    - sheep
+    - chicken
+    - horse
+    - donkey
+    - mule
+    - llama
+    - rabbit
+    - fox
+    - wolf
+  drops:
+    bone:
+      min: 1
+      max: 2
+
+animal_drops_increase_wool:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases wool drops from sheep."
+  entity:
+    - sheep
+  drops:
+    wool:
+      min: 0
+      max: 6
+
+animal_drops_increase_feather:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases feather drops from chickens."
+  entity:
+    - chicken
+  drops:
+    feather:
+      min: 0
+      max: 5
+
+animal_drops_chicken_shear:
+  name: Placeholder
+  type: chicken_shear
+  description: "Allows shearing of chickens for feathers."
+
+animal_drops_leather:
+  name: Placeholder
+  type: entity_drop_restriction
+  description: "Allows leather drops from animal sources."
+  entity:
+    - cow
+    - horse
+    - donkey
+    - mule
+    - llama
+  drops:
+    leather:
+      min: 1
+      max: 3

@@ -15,7 +15,6 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerItemHeldEvent
-import org.bukkit.inventory.Inventory
 import java.util.*
 
 class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
@@ -38,8 +37,8 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
         require(section.contains("attributes")) { "Key 'attributes' must be specified." }
         require(section.contains("material")) { "Key 'material' must be specified." }
 
-        this.material = section.getStringList("material").map() {
-            mat -> requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
+        this.material = section.getStringList("material").map { mat ->
+            requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
         }.toSet()
 
         val sModifier = section.getConfigurationSection("attributes")
@@ -69,7 +68,7 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
 
     @EventHandler
     fun handle(event: PlayerItemHeldEvent?) {
-        execute(SkillSupplier<PlayerItemHeldEvent?>(event))
+        execute(SkillSupplier(event))
     }
 
 

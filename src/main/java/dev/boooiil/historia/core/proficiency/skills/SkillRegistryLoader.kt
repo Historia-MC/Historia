@@ -4,6 +4,8 @@ import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.file.FileKeys
+import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
+import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDropRestriction
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeWithItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillUseNametag
@@ -17,7 +19,7 @@ object SkillRegistryLoader {
         config.getKeys(false)
             .filter { it != "version" }
             .forEach { key ->
-                 val section = config.getConfigurationSection(key) ?: run {
+                val section = config.getConfigurationSection(key) ?: run {
                     CoreLogger.errorToConsole("Configuration section is null for skill: $key")
                     return@forEach
                 }
@@ -50,8 +52,22 @@ object SkillRegistryLoader {
                         }
                     }
 
+                    "entity_drop" -> {
+                        SkillEntityDrop(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "entity_drop_restriction" -> {
+                        SkillEntityDropRestriction(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
                     else -> CoreLogger.errorToConsole("Unknown skill type: $skillType for skill: $key")
+                }
             }
-        }
     }
 }

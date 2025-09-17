@@ -3,13 +3,11 @@ package dev.boooiil.historia.core.player;
 import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
-
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.dependents.towny.TownyHandler;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
-
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -27,27 +25,39 @@ import java.util.UUID;
 @NullMarked
 abstract class BasePlayer implements JSONSerializable {
 
-    /** The unique identifier for the player. */
-    private UUID uuid;
+    /**
+     * The unique identifier for the player.
+     */
+    private @Nullable UUID uuid;
 
-    /** The username of the player, if available. */
+    /**
+     * The username of the player, if available.
+     */
     protected @Nullable String username;
 
-    /** Indicates whether the player is currently online. */
+    /**
+     * Indicates whether the player is currently online.
+     */
     protected boolean isOnline;
 
-    /** The resident associated with the player, if applicable. */
+    /**
+     * The resident associated with the player, if applicable.
+     */
     private @Nullable Resident resident;
 
-    /** The town associated with the player, if applicable. */
+    /**
+     * The town associated with the player, if applicable.
+     */
     private @Nullable Town town;
 
-    /** The nation associated with the player, if applicable. */
+    /**
+     * The nation associated with the player, if applicable.
+     */
     private @Nullable Nation nation;
 
     /**
      * Constructs a new BasePlayer object with the given UUID.
-     * 
+     *
      * @param uuid the UUID of the player
      */
     public BasePlayer(UUID uuid) {
@@ -57,7 +67,7 @@ abstract class BasePlayer implements JSONSerializable {
             return;
         }
 
-        CoreLogger.debugToConsole("Constructing new BasePlayer object with UUID " + uuid.toString() + ".");
+        CoreLogger.debugToConsole("Constructing new BasePlayer object with UUID " + uuid + ".");
 
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         Player player = Bukkit.getPlayer(uuid);
@@ -68,17 +78,13 @@ abstract class BasePlayer implements JSONSerializable {
             this.username = player.getName();
             this.isOnline = true;
 
-        }
-
-        else if (offlinePlayer.hasPlayedBefore()) {
+        } else if (offlinePlayer.hasPlayedBefore()) {
 
             this.uuid = uuid;
             this.username = offlinePlayer.getName();
             this.isOnline = false;
 
-        }
-
-        else {
+        } else {
 
             this.uuid = uuid;
             this.username = null;
@@ -98,7 +104,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns the UUID of the player.
-     * 
+     *
      * @return the UUID of the player
      */
     public UUID getUUID() {
@@ -107,7 +113,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns the username of the player.
-     * 
+     *
      * @return the username of the player
      */
     public String getUsername() {
@@ -116,7 +122,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Sets the username of the player.
-     * 
+     *
      * @param username the new username of the player
      */
     public void setUsername(String username) {
@@ -125,7 +131,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns whether the player is online.
-     * 
+     *
      * @return true if the player is online, false otherwise
      */
     public boolean isOnline() {
@@ -134,7 +140,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Sets whether the player is online.
-     * 
+     *
      * @param isOnline true if the player is online, false otherwise
      */
     public void setOnline(boolean isOnline) {
@@ -143,7 +149,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns the resident object associated with the player.
-     * 
+     *
      * @return the resident object associated with the player
      */
     public Resident getResident() {
@@ -152,7 +158,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Get the town ranks assocuated with this user.
-     * 
+     *
      * @return A list of town ranks.
      */
     public List<String> getTownRanks() {
@@ -161,13 +167,13 @@ abstract class BasePlayer implements JSONSerializable {
             return List.of("None");
 
         else
-            return getResident().getTownRanks();
+            return resident.getTownRanks();
 
     }
 
     /**
      * Get the nation ranks assocuated with this user.
-     * 
+     *
      * @return A list of nation ranks.
      */
     public List<String> getNationRanks() {
@@ -176,13 +182,13 @@ abstract class BasePlayer implements JSONSerializable {
             return List.of("None");
 
         else
-            return getResident().getNationRanks();
+            return resident.getNationRanks();
 
     }
 
     /**
      * Get the town name that the current user is in.
-     * 
+     *
      * @return The name of the town, or "Wilderness" if not in a town.
      */
     public String getTownName() {
@@ -193,7 +199,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Sets the resident object associated with the player.
-     * 
+     *
      * @param resident the new resident object associated with the player
      */
     public void setResident(Resident resident) {
@@ -202,7 +208,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns the town object associated with the player.
-     * 
+     *
      * @return the town object associated with the player
      */
     public Town getTown() {
@@ -211,7 +217,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Sets the town object associated with the player.
-     * 
+     *
      * @param town the new town object associated with the player
      */
     public void setTown(Town town) {
@@ -220,7 +226,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Returns the nation object associated with the player.
-     * 
+     *
      * @return the nation object associated with the player
      */
     public Nation getNation() {
@@ -229,7 +235,7 @@ abstract class BasePlayer implements JSONSerializable {
 
     /**
      * Sets the nation object associated with the player.
-     * 
+     *
      * @param nation the new nation object associated with the player
      */
     public void setNation(Nation nation) {
@@ -246,26 +252,26 @@ abstract class BasePlayer implements JSONSerializable {
         sb.append("BasePlayer");
 
         sb.append("{");
-        sb.append(JSONUtils.fromValue("uuid", getUUID().toString()) + ", ");
+        sb.append(JSONUtils.fromValue("uuid", uuid == null ? "" : uuid.toString()) + ", ");
         sb.append(JSONUtils.fromValue("username", username) + ", ");
         sb.append(JSONUtils.fromValue("isOnline", isOnline) + ", ");
 
-        if (getResident() != null) {
-            sb.append(JSONUtils.fromValue("resident", getResident().getName()) + ", ");
+        if (resident != null) {
+            sb.append(JSONUtils.fromValue("resident", resident.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("resident", "None") + ", ");
         }
 
-        if (getTown() != null) {
-            sb.append(JSONUtils.fromValue("town", getTown().getName()) + ", ");
+        if (town != null) {
+            sb.append(JSONUtils.fromValue("town", town.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("town", "None") + ", ");
         }
 
         sb.append(JSONUtils.fromStringList("townRanks", getTownRanks()) + ", ");
 
-        if (getNation() != null) {
-            sb.append(JSONUtils.fromValue("nation", getNation().getName()) + ", ");
+        if (nation != null) {
+            sb.append(JSONUtils.fromValue("nation", nation.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("nation", "None") + ", ");
         }
@@ -285,26 +291,26 @@ abstract class BasePlayer implements JSONSerializable {
         StringBuilder sb = new StringBuilder();
 
         sb.append("{");
-        sb.append(JSONUtils.fromValue("uuid", getUUID().toString()) + ", ");
+        sb.append(JSONUtils.fromValue("uuid", uuid == null ? "" : uuid.toString()) + ", ");
         sb.append(JSONUtils.fromValue("username", username) + ", ");
         sb.append(JSONUtils.fromValue("isOnline", isOnline) + ", ");
 
-        if (getResident() != null) {
-            sb.append(JSONUtils.fromValue("resident", getResident().getName()) + ", ");
+        if (resident != null) {
+            sb.append(JSONUtils.fromValue("resident", resident.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("resident", "None") + ", ");
         }
 
-        if (getTown() != null) {
-            sb.append(JSONUtils.fromValue("town", getTown().getName()) + ", ");
+        if (town != null) {
+            sb.append(JSONUtils.fromValue("town", town.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("town", "None") + ", ");
         }
 
         sb.append(JSONUtils.fromStringList("townRanks", getTownRanks()) + ", ");
 
-        if (getNation() != null) {
-            sb.append(JSONUtils.fromValue("nation", getNation().getName()) + ", ");
+        if (nation != null) {
+            sb.append(JSONUtils.fromValue("nation", nation.getName()) + ", ");
         } else {
             sb.append(JSONUtils.fromValue("nation", "None") + ", ");
         }

@@ -1,26 +1,32 @@
 package dev.boooiil.historia.core.registry;
 
+import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.NamespacedKey;
+import org.jspecify.annotations.NullMarked;
+
 import java.lang.reflect.Type;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.bukkit.NamespacedKey;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
-
-import dev.boooiil.historia.core.util.CoreLogger;
-
 @NullMarked
-public class Registry<T> extends AbstractMap<NamespacedKey, T> {
+public class Registry<T> extends AbstractMap<NamespacedKey, T> implements JSONSerializable {
 
-    /** The registry holder. */
+    /**
+     * The registry holder.
+     */
     private final HashMap<NamespacedKey, T> registry = new HashMap<>();
-    /** The type of the registry values. */
+    /**
+     * The type of the registry values.
+     */
     private final Type type;
 
-    /** registry default constructor */
+    /**
+     * registry default constructor
+     */
     public Registry(Type type) {
         CoreLogger.traceToConsole("Creating registry of type " + type.getTypeName());
         this.type = type;
@@ -100,4 +106,11 @@ public class Registry<T> extends AbstractMap<NamespacedKey, T> {
         return new Registry<>(token.getType());
     }
 
+    @Override
+    public String toJSON() {
+
+        return "{" +
+                JSONUtils.fromMap(this.type.getTypeName(), this.registry) +
+                "}";
+    }
 }

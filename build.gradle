@@ -36,6 +36,7 @@ dependencies {
     testImplementation 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
 
     // Runtime + compile
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'com.mysql:mysql-connector-j:9.4.0'
     implementation 'org.xerial:sqlite-jdbc:3.48.0.0'
     compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
@@ -69,6 +70,7 @@ tasks.shadowJar {
     archiveClassifier.set('')
     dependencies {
         include(dependency('com.zaxxer:HikariCP'))
+        include(dependency('org.jetbrains.kotlin:kotlin-stdlib'))
     }
 }
 
