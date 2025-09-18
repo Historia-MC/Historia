@@ -4,6 +4,9 @@ import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.file.FileKeys
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillBypassBlockRestriction
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillNoConsumeBlock
+import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillAnimalBreed
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDropRestriction
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeOnItem
@@ -61,6 +64,34 @@ object SkillRegistryLoader {
 
                     "entity_drop_restriction" -> {
                         SkillEntityDropRestriction(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "entity_breed_restriction" -> {
+                        SkillAnimalBreed(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "entity_tame_restriction" -> {
+                        SkillAnimalBreed(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "no_consume_place" -> {
+                        SkillNoConsumeBlock(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "bypass_block_restriction" -> {
+                        SkillBypassBlockRestriction(section).also {
                             HistoriaCore.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }
