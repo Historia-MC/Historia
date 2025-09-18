@@ -26,29 +26,25 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : ISkillHandler 
          */
         get() = SkillType.PASSIVE
 
-    private val entities: Set<EntityType>
+    private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
+        requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
+    }.toSet()
     private var materialMap: Map<Material, IntRange>
 
     init {
-        require(section.contains("entity")) { "Key 'entity' must be specified." }
-        require(section.contains("drops")) { "Key 'drops' must be specified." }
-
-        this.entities = section.getStringList("entity").map { entity ->
-            requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
-        }.toSet()
 
         val sDrops = section.getConfigurationSection("drops")
             ?: error("Key 'attributes' must be specified.")
 
         this.materialMap = sDrops.getKeys(false).associate { key ->
-            val sMaterial = section.getConfigurationSection(key)!!
+            val sMaterial = sDrops.getConfigurationSection(key)!!
 
             val material = requireNotNull(Material.matchMaterial(sMaterial.name)) {
                 "Invalid material provided with $key in ${section.name}."
             }
 
-            val min = section.getInt("min")
-            val max = section.getInt("max")
+            val min = sMaterial.getInt("min")
+            val max = sMaterial.getInt("max")
 
             require(max > 0) { "Max value for $key in ${section.name} was 0 or less." }
 
