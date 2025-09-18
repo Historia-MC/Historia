@@ -30,15 +30,11 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
 
     private val attribute: Attribute
     private val modifier: AttributeModifier
-    private var material: Set<Material>
-
-
+    private var material: Set<Material> = section.getStringList("material").map { mat ->
+        requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
+    }.toSet()
+    
     init {
-        require(section.contains("material")) { "Key 'material' must be specified." }
-
-        this.material = section.getStringList("material").map { mat ->
-            requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
-        }.toSet()
 
         val sModifier = section.getConfigurationSection("attributes")
             ?: error("Key 'attributes' must be specified.")

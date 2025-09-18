@@ -25,14 +25,11 @@ class SkillAnimalTame(section: ConfigurationSection) : ISkillHandler {
     override val type: SkillType
         get() = SkillType.PASSIVE
 
-    private val entities: Set<EntityType>
+    private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
+        requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
+    }.toSet()
 
     init {
-        require(section.contains("entity")) { "Key 'entity' must be specified." }
-
-        this.entities = section.getStringList("entity").map { entity ->
-            requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
-        }.toSet()
 
         this.name = HistoriaCore.getNamespacedKey(section.name)
 
