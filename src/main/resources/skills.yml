@@ -147,3 +147,65 @@ animal_drops_leather:
     leather:
       min: 1
       max: 3
+
+# TODO: unfortunately we might want to refine this
+#   to allow for more granular control
+animal_breed_all:
+  name: Placeholder
+  type: entity_breed_restriction
+  description: "Allows breeding of all animal types."
+  entity:
+    - cow
+    - pig
+    - chicken
+    - sheep
+    - horse
+    - donkey
+    - llama
+    - rabbit
+    - mooshroom
+    - goat
+    - wolf
+    - cat
+    - ocelot
+    - axolotl
+    - turtle
+    - panda
+    - fox
+    - bee
+    - frog
+    - camel
+
+# TODO: Same as above
+animals_tame_all:
+  name: Placeholder
+  type: entity_tame_restriction
+  description: "Allows taming of all animals."
+  entity:
+    - horse
+    - wolf
+    - ocelot
+    - donkey
+    - camel
+
+chance_no_consume_block_place_builder:
+  name: Placeholder
+  type: no_consume_block
+  description: "Chance to not consume the block when placing it."
+  action:
+    - block_place
+  blocks:
+    bricks:
+      chance: 0.1
+      cooldown: 20 #seconds
+
+bypass_block_place_ladder:
+  name: Placeholder
+  type: bypass_block_place_restriction
+  description: "Ability to place ladders in any territory."
+  action:
+    - block_place
+    - block_destroy
+  blocks:
+    ladder:
+      cooldown: 1

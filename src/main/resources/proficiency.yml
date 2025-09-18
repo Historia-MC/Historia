@@ -27,8 +27,8 @@ None:
     instantGrowChance: 0
     beheadChance: 0.10
 
-    weaponProficiency: [Light]
-    armorProficiency: [Light]
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
 
   skills:
     nametag: 0
@@ -51,9 +51,9 @@ Warrior:
     doubleHarvestChance: 0
     instantGrowChance: 0
 
-    weaponProficiency: [Light, Medium, Heavy]
-    armorProficiency: [Light, Medium, Heavy]
-    experienceSources: [ATTACK, DEFEND, EVADE, KILL, DEATH]
+    weaponProficiency: [ Light, Medium, Heavy ]
+    armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ ATTACK, DEFEND, EVADE, KILL, DEATH ]
 
   skills:
     nametag: 0
@@ -77,9 +77,9 @@ Archer: #ADD SWIFT_SNEAK for 1.20
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Bow, Crossbow, Light]
-    armorProficiency: [Light]
-    experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
+    weaponProficiency: [ Bow, Crossbow, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: 0
@@ -102,9 +102,9 @@ Fisherman:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Trident, Light]
-    armorProficiency: [Light]
-    experienceSources: [KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE]
+    weaponProficiency: [ Trident, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, EVADE, DEATH, FISH, FISH_TRASH, FISH_TREASURE ]
 
   skills:
     nametag: 0
@@ -128,9 +128,9 @@ Miner:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Light, Medium]
-    armorProficiency: [Light, Medium]
-    experienceSources: [EVADE, DEATH, ORE_BREAK]
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, ORE_BREAK ]
 
   skills:
     nametag: 0
@@ -158,9 +158,9 @@ Blacksmith:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Light, Medium]
-    armorProficiency: [Light, Medium, Heavy]
-    experienceSources: [EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT]
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium, Heavy ]
+    experienceSources: [ EVADE, DEATH, TOOL_CRAFT, WEAPON_CRAFT, ARMOR_CRAFT ]
 
   skills:
     nametag: 0
@@ -184,13 +184,13 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
     instantGrowChance: 0
     beheadChance: 0.07
 
-    weaponProficiency: [Bow, Light]
-    armorProficiency: [Light]
-    experienceSources: [KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL]
+    weaponProficiency: [ Bow, Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, RANGED_HIT, RANGED_KILL ]
 
   skills:
     nametag: 0
-    tame_animals: 0
+    tame_animals_all: 0
     animal_breed_all: 0
     animal_drops_bones_all: 0
     animal_drops_increase_wool: 0
@@ -214,9 +214,9 @@ Apothecary: #BREWERY CLASS
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Light]
-    armorProficiency: [Light]
-    experienceSources: [KILL, DEATH, EVADE]
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE ]
 
   skills:
     nametag: 0
@@ -239,14 +239,15 @@ Architect:
     instantGrowChance: 0
     beheadChance: 0.05
 
-    weaponProficiency: [Light]
-    armorProficiency: [Light]
-    experienceSources: [KILL, DEATH, EVADE, BLOCK_PLACE]
+    weaponProficiency: [ Light ]
+    armorProficiency: [ Light ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_PLACE ]
 
   skills:
     nametag: 0
-    chance_no_consume_item_builder: 0
-    bypass_block_ladder: 0
+    chance_no_consume_place_builder: 0
+    bypass_block_place_ladder: 0
+    bypass_block_break_ladder: 0
     enhanced_boots: 0
 
 Lumberjack:
@@ -265,9 +266,9 @@ Lumberjack:
     instantGrowChance: 0
     beheadChance: 0.08
 
-    weaponProficiency: [Light, Medium]
-    armorProficiency: [Light, Medium]
-    experienceSources: [KILL, DEATH, EVADE, BLOCK_BREAK]
+    weaponProficiency: [ Light, Medium ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ KILL, DEATH, EVADE, BLOCK_BREAK ]
 
   skills:
     nametag: 0
@@ -292,9 +293,9 @@ Farmer: #ARMOR TRIM CLASS
     instantGrowChance: 0.3
     beheadChance: 0.10
 
-    weaponProficiency: [Trident, Light]
-    armorProficiency: [Light, Medium]
-    experienceSources: [EVADE, DEATH, CROP_BREAK, CROP_PLACE]
+    weaponProficiency: [ Trident, Light ]
+    armorProficiency: [ Light, Medium ]
+    experienceSources: [ EVADE, DEATH, CROP_BREAK, CROP_PLACE ]
 
   skills:
     nametag: 0
