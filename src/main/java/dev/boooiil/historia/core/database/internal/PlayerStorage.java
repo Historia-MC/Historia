@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.database.internal;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
+import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -47,6 +48,10 @@ public class PlayerStorage {
 
     }
 
+    public static void addPlayer(Player player) {
+        addPlayer(player.getUniqueId(), new HistoriaPlayer(player.getUniqueId()));
+    }
+
     /**
      * Get a player from our stored player list.
      *
@@ -59,6 +64,10 @@ public class PlayerStorage {
 
         return getPlayer(uuid);
 
+    }
+
+    public static HistoriaPlayer getPlayer(Player player) {
+        return getPlayer(player.getUniqueId());
     }
 
     /**
