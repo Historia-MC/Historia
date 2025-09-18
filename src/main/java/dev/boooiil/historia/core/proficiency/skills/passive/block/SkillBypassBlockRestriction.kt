@@ -21,7 +21,7 @@ import org.bukkit.event.block.BlockPlaceEvent
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class SkillBypassBlockPlaceRestriction(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
+class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
 
