@@ -20,6 +20,7 @@ import java.util.*
 class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
+
     /**
      * Get the type of the skill.
      *
@@ -81,24 +82,20 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
 
         val player = event.player
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
+        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
+        val hasLevel = historiaPlayer.level
+        val wantedLevel = proficiency.skills.get(this) ?: return
 
         val inventory = player.inventory
         val previousItem = inventory.getItem(event.previousSlot)
         val newItem = inventory.getItem(event.newSlot)
 
+        if (wantedLevel > hasLevel)
+            return
+
         // Handle new item
         newItem?.takeIf { material.contains(it.type) }?.itemMeta?.also { meta ->
-
-            // Skip if player doesn't have this skill
-            val proficiency = historiaPlayer.proficiency
-            if (!proficiency.hasSkill(this)) return
-
-            val playerLevel = historiaPlayer.level
-            val skillLevel = proficiency.skills[this]
-                ?: return // safely handle missing skill entry
-
-            // Skip if player level is too low
-            if (playerLevel < skillLevel) return
 
             val attributeModifiers: Multimap<Attribute, AttributeModifier> =
                 if (!meta.hasAttributeModifiers() || meta.attributeModifiers == null) {

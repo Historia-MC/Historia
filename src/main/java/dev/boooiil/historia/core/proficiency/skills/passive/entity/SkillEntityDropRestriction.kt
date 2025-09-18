@@ -86,6 +86,14 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : ISkillHandler 
         val entity = event.entity
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
+        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
+        val hasLevel = historiaPlayer.level
+        val wantedLevel = proficiency.skills.get(this) ?: return
+
+        if (wantedLevel > hasLevel)
+            return
+
         val drops = event.drops
         // 1️⃣ Iterate over existing drops safely
         val iterator = drops.listIterator()

@@ -78,6 +78,13 @@ class SkillEntityDrop(section: ConfigurationSection) : ISkillHandler {
         val entity = event.entity
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
+        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
+        val hasLevel = historiaPlayer.level
+        val wantedLevel = proficiency.skills.get(this) ?: return
+
+        if (wantedLevel > hasLevel)
+            return
 
         if (historiaPlayer.proficiency.skills.contains(this) && entities.contains(entity.type)) {
 
