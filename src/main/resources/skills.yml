@@ -113,10 +113,54 @@ animal_drops_increase_wool:
   entity:
     - sheep
   drops:
-    wool:
+    white_wool:
       min: 0
       max: 6
-
+    orange_wool:
+      min: 0
+      max: 6
+    magenta_wool:
+      min: 0
+      max: 6
+    light_blue_wool:
+      min: 0
+      max: 6
+    yellow_wool:
+      min: 0
+      max: 6
+    lime_wool:
+      min: 0
+      max: 6
+    pink_wool:
+      min: 0
+      max: 6
+    gray_wool:
+      min: 0
+      max: 6
+    light_gray_wool:
+      min: 0
+      max: 6
+    cyan_wool:
+      min: 0
+      max: 6
+    purple_wool:
+      min: 0
+      max: 6
+    blue_wool:
+      min: 0
+      max: 6
+    brown_wool:
+      min: 0
+      max: 6
+    green_wool:
+      min: 0
+      max: 6
+    red_wool:
+      min: 0
+      max: 6
+    black_wool:
+      min: 0
+      max: 6
 animal_drops_increase_feather:
   name: Placeholder
   type: entity_drop
@@ -177,7 +221,7 @@ animal_breed_all:
     - camel
 
 # TODO: Same as above
-animals_tame_all:
+animal_tame_all:
   name: Placeholder
   type: entity_tame_restriction
   description: "Allows taming of all animals."
@@ -199,9 +243,9 @@ chance_no_consume_block_place_builder:
       chance: 0.1
       cooldown: 20 #seconds
 
-bypass_block_place_ladder:
+bypass_block_ladder:
   name: Placeholder
-  type: bypass_block_place_restriction
+  type: bypass_block_restriction
   description: "Ability to place ladders in any territory."
   action:
     - block_place

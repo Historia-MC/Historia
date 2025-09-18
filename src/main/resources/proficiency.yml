@@ -190,7 +190,7 @@ Huntsman: #ADD SWIFT_SNEAK for 1.20
 
   skills:
     nametag: 0
-    tame_animals_all: 0
+    animal_tame_all: 0
     animal_breed_all: 0
     animal_drops_bones_all: 0
     animal_drops_increase_wool: 0
@@ -245,9 +245,8 @@ Architect:
 
   skills:
     nametag: 0
-    chance_no_consume_place_builder: 0
-    bypass_block_place_ladder: 0
-    bypass_block_break_ladder: 0
+    chance_no_consume_block_place_builder: 0
+    bypass_block_ladder: 0
     enhanced_boots: 0
 
 Lumberjack:
@@ -301,6 +300,6 @@ Farmer: #ARMOR TRIM CLASS
     nametag: 0
     break_beehive: 0
     break_grass: 0
-    shear_chicken: 0
-    harvest_leather: 0
-    can_breed: 0
+    animal_drops_chicken_shear: 0
+    animal_drops_leather: 0
+    animal_breed_all: 0
