@@ -83,7 +83,7 @@ object SkillRegistryLoader {
                         }
                     }
 
-                    "no_consume_place" -> {
+                    "no_consume_block" -> {
                         SkillNoConsumeBlock(section).also {
                             HistoriaCore.SKILL_REGISTRY.register(skillName, it)
                             it.register()
