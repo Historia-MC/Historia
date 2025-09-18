@@ -87,7 +87,7 @@ abstract class BasePlayer implements JSONSerializable {
         } else {
 
             this.uuid = uuid;
-            this.username = null;
+            this.username = "null";
             this.isOnline = false;
 
         }
