@@ -20,13 +20,12 @@ import java.util.*
 class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
-    override val type: SkillType
-        /**
-         * Get the type of the skill.
-         *
-         * @return Type of the skill.
-         */
-        get() = SkillType.PASSIVE
+    /**
+     * Get the type of the skill.
+     *
+     * @return Type of the skill.
+     */
+    override val type: SkillType = SkillType.PASSIVE
 
     private val attribute: Attribute
     private val modifier: AttributeModifier
@@ -34,7 +33,6 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
 
 
     init {
-        require(section.contains("attributes")) { "Key 'attributes' must be specified." }
         require(section.contains("material")) { "Key 'material' must be specified." }
 
         this.material = section.getStringList("material").map { mat ->
@@ -77,8 +75,8 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
      *
      * @param skillSuppliers - Objects to be provided for this skill.
      */
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
-        val event = (skillSuppliers[0]?.get() as? PlayerItemHeldEvent)
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        val event = skillSuppliers[0].get() as? PlayerItemHeldEvent
             ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
 
         val player = event.player

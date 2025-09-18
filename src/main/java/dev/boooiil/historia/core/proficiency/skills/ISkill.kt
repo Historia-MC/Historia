@@ -6,7 +6,7 @@ import org.bukkit.configuration.ConfigurationSection
 import org.jspecify.annotations.NullMarked
 
 @NullMarked
-interface ISkill : JSONSerializable {
+interface ISkill: JSONSerializable {
     /**
      * Get the type of the skill.
      *
@@ -33,7 +33,7 @@ interface ISkill : JSONSerializable {
      *
      * @param skillSuppliers - Objects to be provided for this skill.
      */
-    fun execute(vararg skillSuppliers: SkillSupplier<*>?)
+    fun execute(vararg skillSuppliers: SkillSupplier<*>)
 
     /**
      * Register to be used to handle when the skill executes.

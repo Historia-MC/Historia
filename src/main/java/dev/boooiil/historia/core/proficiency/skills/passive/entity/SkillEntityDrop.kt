@@ -71,8 +71,8 @@ class SkillEntityDrop(section: ConfigurationSection) : ISkillHandler {
      *
      * @param skillSuppliers - Objects to be provided for this skill.
      */
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
-        val event = (skillSuppliers[0]?.get() as? EntityDeathEvent)
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        val event = skillSuppliers[0].get() as? EntityDeathEvent
             ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
 
         val entity = event.entity

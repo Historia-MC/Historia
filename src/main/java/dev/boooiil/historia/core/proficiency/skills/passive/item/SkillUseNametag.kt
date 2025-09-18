@@ -15,20 +15,19 @@ import org.bukkit.event.player.PlayerInteractEntityEvent
 class SkillUseNametag(section: ConfigurationSection) : ISkillHandler {
     override val name: NamespacedKey = getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
-    override val type: SkillType
-        /**
-         * Get the type of the skill.
-         *
-         * @return Type of the skill.
-         */
-        get() = SkillType.PASSIVE
+    /**
+     * Get the type of the skill.
+     *
+     * @return Type of the skill.
+     */
+    override val type: SkillType = SkillType.PASSIVE
 
     @EventHandler
     fun handle(event: PlayerInteractEntityEvent?) {
-        execute(SkillSupplier<PlayerInteractEntityEvent?>(event))
+        execute(SkillSupplier(event))
     }
 
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
         // TODO Auto-generated method stub
         throw UnsupportedOperationException("Unimplemented method 'execute'")
     }

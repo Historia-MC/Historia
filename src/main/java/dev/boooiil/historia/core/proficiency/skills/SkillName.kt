@@ -40,9 +40,6 @@ enum class SkillName(val key: NamespacedKey) {
 
     val instance: ISkill? = HistoriaCore.SKILL_REGISTRY[key]
 
-    val namespacedKey: String
-        get() = this.key.value()
-
     fun matches(name: String): Boolean {
         return this.key.value() == name.lowercase(Locale.getDefault())
     }

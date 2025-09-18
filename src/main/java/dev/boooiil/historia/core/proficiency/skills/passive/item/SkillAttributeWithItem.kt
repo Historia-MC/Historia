@@ -2,12 +2,10 @@ package dev.boooiil.historia.core.proficiency.skills.passive.item
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
-import dev.boooiil.historia.core.HistoriaCore.Companion.instance
 import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
-import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -16,19 +14,17 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerItemHeldEvent
-import org.bukkit.inventory.Inventory
 import java.util.*
 
 class SkillAttributeWithItem(section: ConfigurationSection) : ISkillHandler {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
-    override val type: SkillType
-        /**
-         * Get the type of the skill.
-         *
-         * @return Type of the skill.
-         */
-        get() = SkillType.PASSIVE
+    /**
+     * Get the type of the skill.
+     *
+     * @return Type of the skill.
+     */
+    override val type: SkillType = SkillType.PASSIVE
 
     private val attribute: Attribute
     private val modifier: AttributeModifier
@@ -70,7 +66,7 @@ class SkillAttributeWithItem(section: ConfigurationSection) : ISkillHandler {
 
     @EventHandler
     fun handle(event: PlayerItemHeldEvent?) {
-        execute(SkillSupplier<PlayerItemHeldEvent?>(event))
+        execute(SkillSupplier(event))
     }
 
     /**
@@ -78,8 +74,8 @@ class SkillAttributeWithItem(section: ConfigurationSection) : ISkillHandler {
      *
      * @param skillSuppliers - Objects to be provided for this skill.
      */
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
-        val event = (skillSuppliers[0]?.get() as? PlayerItemHeldEvent)
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        val event = skillSuppliers[0].get() as? PlayerItemHeldEvent
             ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
 
         val player = event.player

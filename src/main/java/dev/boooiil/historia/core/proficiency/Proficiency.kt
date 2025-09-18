@@ -87,53 +87,13 @@ class Proficiency : JSONSerializable {
      */
     val skills = HashMap<ISkill, Int>()
 
-    /**
-     * Constructs a new proficiency with the given name.
-     *
-     * @param proficiencyName the name of the proficiency
-     */
-    @Deprecated("")
-    constructor(proficiencyName: String) {
-
-        // this is deprecated
-        // not bothering converting it into kotlin
-
-        var key = getNamespacedKey("none")
-
-        if (PROFICIENCY_REGISTRY.contains(getNamespacedKey(proficiencyName))) {
-            key = getNamespacedKey(proficiencyName)
-        }
-
-        this.name = key
-        this.skills.clear()
-        this.skills.putAll(PROFICIENCY_REGISTRY.get(key)!!.skills)
-    }
-
-    constructor(proficiency: Proficiency?) {
-        requireNotNull(proficiency) { "Provided proficiency is null." }
-
-        this.name = proficiency.name
-        this.skills.clear()
-        this.skills.putAll(proficiency.skills)
-    }
-
-    /**
-     * Constructs a new proficiency with the given name.
-     *
-     * @param name the name of the proficiency
-     */
-    constructor(name: NamespacedKey) : this(PROFICIENCY_REGISTRY.get(name))
-
     constructor(section: ConfigurationSection) {
         CoreLogger.traceToConsole("Loading proficiency from section: " + section.name)
 
         val sName = section.name
-
-        requireNotNull(sName) { "Key 'proficiencyName' must be specified." }
-
         this.name = getNamespacedKey(sName)
 
-        require(section.contains("skills")) { "Key 'skills' must be specified for proficiency " + sName + "." }
+        require(section.contains("skills")) { "Key 'skills' must be specified for proficiency $sName." }
 
         // proficiency.skills
         val skillSection = section.getConfigurationSection("skills")
@@ -162,7 +122,7 @@ class Proficiency : JSONSerializable {
 
             val skill = HistoriaCore.SKILL_REGISTRY.get(skillName)
 
-            this.skills.put(skill!!, skillLevel)
+            this.skills[skill!!] = skillLevel
         }
     }
 

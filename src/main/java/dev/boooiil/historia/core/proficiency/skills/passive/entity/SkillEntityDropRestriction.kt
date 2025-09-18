@@ -69,7 +69,7 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : ISkillHandler 
      *
      * @param skillSuppliers - Objects to be provided for this skill.
      */
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
 
         /*
         We need to check these things:
@@ -80,7 +80,7 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : ISkillHandler 
          */
 
 
-        val event = (skillSuppliers[0]?.get() as? EntityDeathEvent)
+        val event = skillSuppliers[0].get() as? EntityDeathEvent
             ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
 
         val entity = event.entity

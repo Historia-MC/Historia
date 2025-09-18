@@ -16,7 +16,7 @@ object ProficiencyRegistryLoader {
         config.getKeys(false)
             .filter { !it.contains("version") }
             .forEach { key ->
-                CoreLogger.debugToConsole("Found proficiency key: " + key)
+                CoreLogger.debugToConsole("Found proficiency key: $key")
 
                 config.getConfigurationSection(key)?.let { section ->
                     val proficiency = Proficiency(section)

@@ -11,7 +11,7 @@ abstract class AbstractSkillRunnable : BukkitRunnable(), ISkillRunnable {
     override val name: NamespacedKey
         get() = throw UnsupportedOperationException()
 
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>?) {
+    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
         throw UnsupportedOperationException()
     }
 
