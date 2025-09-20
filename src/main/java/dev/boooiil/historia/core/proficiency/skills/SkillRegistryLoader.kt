@@ -11,6 +11,7 @@ import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDr
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDropRestriction
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeWithItem
+import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillEnchantOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillUseNametag
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.configuration.file.FileConfiguration
@@ -43,6 +44,13 @@ object SkillRegistryLoader {
 
                     "attribute_on_item" -> {
                         SkillAttributeOnItem(section).also {
+                            HistoriaCore.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "enchant_on_item" -> {
+                        SkillEnchantOnItem(section).also {
                             HistoriaCore.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }

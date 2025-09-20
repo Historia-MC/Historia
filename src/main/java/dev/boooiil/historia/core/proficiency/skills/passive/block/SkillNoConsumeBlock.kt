@@ -32,8 +32,7 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
      *
      * @return Type of the skill.
      */
-    override val type: SkillType
-        get() = SkillType.PASSIVE
+    override val type: SkillType = SkillType.PASSIVE
 
     private val actions: Set<GameEvent>
     private val blocks: HashMap<Material, Pair<Double, Int>> = HashMap()

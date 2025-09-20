@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.proficiency.skills.passive.entity
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import org.bukkit.Material
@@ -17,16 +17,16 @@ import org.bukkit.inventory.ItemStack
 import org.jspecify.annotations.NullMarked
 
 @NullMarked
-class SkillEntityDrop(section: ConfigurationSection) : ISkillHandler {
-    override val name: NamespacedKey
+class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler() {
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
-    override val type: SkillType
-        /**
-         * Get the type of the skill.
-         *
-         * @return Type of the skill.
-         */
-        get() = SkillType.PASSIVE
+
+    /**
+     * Get the type of the skill.
+     *
+     * @return Type of the skill.
+     */
+    override val type: SkillType = SkillType.PASSIVE
 
     private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
         requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
@@ -53,9 +53,6 @@ class SkillEntityDrop(section: ConfigurationSection) : ISkillHandler {
 
             material to min..max
         }
-
-        this.name = HistoriaCore.getNamespacedKey(section.name)
-
     }
 
     @EventHandler

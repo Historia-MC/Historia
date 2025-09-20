@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.proficiency.skills.passive.entity
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import org.bukkit.Material
@@ -15,16 +15,16 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
 
-class SkillEntityDropRestriction(section: ConfigurationSection) : ISkillHandler {
+class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillHandler() {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
-    override val type: SkillType
-        /**
-         * Get the type of the skill.
-         *
-         * @return Type of the skill.
-         */
-        get() = SkillType.PASSIVE
+
+    /**
+     * Get the type of the skill.
+     *
+     * @return Type of the skill.
+     */
+    override val type: SkillType = SkillType.PASSIVE
 
     private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
         requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }

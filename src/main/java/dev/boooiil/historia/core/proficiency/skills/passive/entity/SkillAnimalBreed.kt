@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.proficiency.skills.passive.entity
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import org.bukkit.NamespacedKey
@@ -13,8 +13,8 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityBreedEvent
 
-class SkillAnimalBreed(section: ConfigurationSection) : ISkillHandler {
-    override val name: NamespacedKey
+class SkillAnimalBreed(section: ConfigurationSection) : AbstractSkillHandler() {
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -22,18 +22,11 @@ class SkillAnimalBreed(section: ConfigurationSection) : ISkillHandler {
      *
      * @return Type of the skill.
      */
-    override val type: SkillType
-        get() = SkillType.PASSIVE
+    override val type: SkillType = SkillType.PASSIVE
 
     private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
         requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
     }.toSet()
-
-    init {
-
-        this.name = HistoriaCore.getNamespacedKey(section.name)
-
-    }
 
     @EventHandler
     fun handle(event: EntityBreedEvent) {

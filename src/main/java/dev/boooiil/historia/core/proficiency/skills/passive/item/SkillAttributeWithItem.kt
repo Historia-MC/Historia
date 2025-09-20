@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.proficiency.skills.passive.item
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
@@ -16,7 +16,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerItemHeldEvent
 import java.util.*
 
-class SkillAttributeWithItem(section: ConfigurationSection) : ISkillHandler {
+class SkillAttributeWithItem(section: ConfigurationSection) : AbstractSkillHandler() {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
 

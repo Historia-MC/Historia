@@ -4,7 +4,7 @@ import com.google.common.collect.ArrayListMultimap
 import com.google.common.collect.Multimap
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
@@ -17,7 +17,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerItemHeldEvent
 import java.util.*
 
-class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
+class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler() {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
 
@@ -33,7 +33,7 @@ class SkillAttributeOnItem(section: ConfigurationSection) : ISkillHandler {
     private var material: Set<Material> = section.getStringList("material").map { mat ->
         requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
     }.toSet()
-    
+
     init {
 
         val sModifier = section.getConfigurationSection("attributes")

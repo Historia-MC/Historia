@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.proficiency.skills.passive.item
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
+import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
-import dev.boooiil.historia.core.proficiency.skills.ISkillHandler
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
@@ -12,9 +12,10 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEntityEvent
 
-class SkillUseNametag(section: ConfigurationSection) : ISkillHandler {
+class SkillUseNametag(section: ConfigurationSection) : AbstractSkillHandler() {
     override val name: NamespacedKey = getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
+
     /**
      * Get the type of the skill.
      *
@@ -50,7 +51,7 @@ class SkillUseNametag(section: ConfigurationSection) : ISkillHandler {
 
         sb.append("{")
         sb.append(JSONUtils.fromValue("name", this.name)).append(",")
-        sb.append(JSONUtils.fromValue("description", this.description!!))
+        sb.append(JSONUtils.fromValue("description", this.description))
         sb.append("}")
 
         return sb.toString()
