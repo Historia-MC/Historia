@@ -47,16 +47,44 @@ enhanced_pickaxe_efficiency:
     operation: add_number
     factor: 1
 
-enhanced_boots:
+enhanced_boots_feather_fall:
   name: Placeholder
   type: attribute_with_item
   description: "Enhanced fall resistance boots."
   material:
     - leather_boots
+    - iron_boots
+    - gold_boots
+    - chainmail_boots
+    - netherite_boots
   attributes:
     attribute: safe_fall_distance
     operation: add_number
     factor: 2
+
+enhanced_boots_blast_protection:
+  name: Placeholder
+  type: enchant_on_item #TODO: This needs to be wearable
+  description: "Enhanced fall blast protection boots."
+  material:
+    - leather_boots
+    - iron_boots
+    - gold_boots
+    - chainmail_boots
+    - netherite_boots
+  enchants:
+    BLAST_PROTECTION: 1
+
+enhanced_axe_sharpness:
+  name: Placeholder
+  type: attribute_on_item
+  description: "Enhanced sharpness with an axe."
+  material:
+    - wooden_axe
+  attributes:
+    attribute: attack_damage
+    operation: add_number
+    factor: 1
 
 enhanced_sword_sharpness:
   name: Placeholder
@@ -79,6 +107,45 @@ enhanced_sword_sweeping_edge:
     attribute: sweeping_damage_ratio
     operation: add_number
     factor: 2
+
+enhanced_crossbow_quick_charge:
+  name: Placeholder
+  type: enchant_on_item
+  description: "Enhanced draw speed with a crossbow."
+  material:
+    - crossbow
+  enchants:
+    quick_charge: 1
+
+enhanced_helmet_aqua_affinity:
+  name: Placeholder
+  type: attribute_with_item
+  description: "Hold more breath."
+  material:
+    - leather_helmet
+    - iron_helmet
+    - gold_helmet
+    - chainmail_helmet
+    - netherite_helmet
+  attributes:
+    attribute: oxygen_bonus
+    modifier: add_number
+    factor: 20
+
+enhanced_boots_depth_strider:
+  name: Placeholder
+  type: attribute_with_item
+  description: "Walk faster with boots."
+  material:
+    - leather_boots
+    - iron_boots
+    - gold_boots
+    - chainmail_boots
+    - netherite_boots
+  attributes:
+    attribute: water_movement_efficiency
+    operation: add_number
+    factor: 0.4
 
 nametag:
   name: Placeholder
