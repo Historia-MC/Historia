@@ -1,12 +1,15 @@
 package dev.boooiil.historia.core.proficiency.skills
 
+import dev.boooiil.historia.core.player.HistoriaPlayer
+import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.util.JSONSerializable
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.entity.Player
 import org.jspecify.annotations.NullMarked
 
 @NullMarked
-interface ISkill: JSONSerializable {
+interface ISkill : JSONSerializable {
     /**
      * Get the type of the skill.
      *
@@ -41,6 +44,14 @@ interface ISkill: JSONSerializable {
     fun register()
 
     fun deregister()
+
+    fun hasSkill(historiaPlayer: HistoriaPlayer): Boolean
+
+    fun hasLevelRequirement(historiaPlayer: HistoriaPlayer): Boolean
+
+    fun getHistoriaPlayer(player: Player): HistoriaPlayer
+
+    fun getProficiency(historiaPlayer: HistoriaPlayer): Proficiency?
 
     fun create(section: ConfigurationSection): ISkill
 }
