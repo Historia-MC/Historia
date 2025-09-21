@@ -4,6 +4,7 @@ import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
+import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
@@ -31,7 +32,7 @@ abstract class AbstractSkillRunnable : BukkitRunnable(), ISkillRunnable {
     override fun run() {
         throw UnsupportedOperationException()
     }
-    
+
     override fun hasSkill(historiaPlayer: HistoriaPlayer): Boolean {
         return getProficiency(historiaPlayer)?.hasSkill(this) ?: false
     }
@@ -47,5 +48,22 @@ abstract class AbstractSkillRunnable : BukkitRunnable(), ISkillRunnable {
 
     override fun getProficiency(historiaPlayer: HistoriaPlayer): Proficiency? {
         return HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+    }
+
+    override fun <T> getOrThrow(skillSuppliers: Array<out SkillSupplier<*>>, index: Int): T {
+        @Suppress("UNCHECKED_CAST")
+        return skillSuppliers[index].get() as? T
+            ?: error("Tried to get value of type T at position $index in $name but was actually ${skillSuppliers[index]::class}.")
+    }
+
+    override fun <T> getOrDefault(skillSuppliers: Array<out SkillSupplier<*>>, index: Int, default: T): T {
+        @Suppress("UNCHECKED_CAST")
+        return (skillSuppliers[index].get() as? T)
+            ?: run {
+                CoreLogger.warnToConsole(
+                    "Tried to get value of type T at position $index in $name but was actually ${skillSuppliers[index]::class}."
+                )
+                default
+            }
     }
 }

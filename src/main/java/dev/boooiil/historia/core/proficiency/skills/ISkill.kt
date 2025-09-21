@@ -54,4 +54,8 @@ interface ISkill : JSONSerializable {
     fun getProficiency(historiaPlayer: HistoriaPlayer): Proficiency?
 
     fun create(section: ConfigurationSection): ISkill
+
+    fun <T> getOrThrow(skillSuppliers: Array<out SkillSupplier<*>>, index: Int): T
+
+    fun <T> getOrDefault(skillSuppliers: Array<out SkillSupplier<*>>, index: Int, default: T): T
 }
