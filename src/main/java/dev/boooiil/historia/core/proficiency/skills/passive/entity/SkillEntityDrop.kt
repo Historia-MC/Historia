@@ -66,21 +66,15 @@ class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler() {
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        val event = skillSuppliers[0].get() as? EntityDeathEvent
-            ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
+        val event: EntityDeathEvent = getOrThrow(skillSuppliers, 0)
 
         val entity = event.entity
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
 
-        if (wantedLevel > hasLevel)
-            return
+        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
 
-        if (historiaPlayer.proficiency.skills.contains(this) && entities.contains(entity.type)) {
+        if (entities.contains(entity.type)) {
 
             val drops = event.drops
 

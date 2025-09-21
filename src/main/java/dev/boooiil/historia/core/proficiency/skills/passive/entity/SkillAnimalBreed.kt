@@ -40,19 +40,13 @@ class SkillAnimalBreed(section: ConfigurationSection) : AbstractSkillHandler() {
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
 
-        val event = skillSuppliers[0].get() as? EntityBreedEvent
-            ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
-
+        val event: EntityBreedEvent = getOrThrow(skillSuppliers, 0)
+        
         val entity = event.entity
         val player = event.breeder as Player
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
 
-        if (wantedLevel > hasLevel)
-            event.isCancelled = true
+        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) event.isCancelled = true
 
         if (!entities.contains(entity.type))
             event.isCancelled = true

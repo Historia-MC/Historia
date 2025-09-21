@@ -95,22 +95,14 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
 
         skillSuppliers[0].get() as? Cancellable
             ?: error("Expected Block, but got null or wrong type.")
-        val block = skillSuppliers[1].get() as? Block
-            ?: error("Expected Block, but got null or wrong type.")
-        val player = skillSuppliers[2].get() as? Player
-            ?: error("Expected Player, but got null or wrong type.")
-        val eventType = skillSuppliers[3].get() as? GameEvent
-            ?: error("Expected GameEvent, but got null or wrong type.")
+        val block: Block = getOrThrow(skillSuppliers, 1)
+        val player: Player = getOrThrow(skillSuppliers, 2)
+        val eventType: GameEvent = getOrThrow(skillSuppliers, 3)
 
         val type = block.type
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
 
-        if (wantedLevel > hasLevel)
-            return
+        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
 
         blocks[type]?.also { pair ->
             val currentTime = System.currentTimeMillis()

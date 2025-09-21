@@ -1,7 +1,6 @@
 package dev.boooiil.historia.core.proficiency.skills.passive.block
 
 import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
@@ -89,24 +88,16 @@ class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkill
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
 
-        val event = skillSuppliers[0].get() as? Cancellable
-            ?: error("Expected Block, but got null or wrong type.")
-        val block = skillSuppliers[1].get() as? Block
-            ?: error("Expected Block, but got null or wrong type.")
-        val player = skillSuppliers[2].get() as? Player
-            ?: error("Expected Player, but got null or wrong type.")
+        val event: Cancellable = getOrThrow(skillSuppliers, 0)
+        val block: Block = getOrThrow(skillSuppliers, 1)
+        val player: Player = getOrThrow(skillSuppliers, 2)
         skillSuppliers[3].get() as? GameEvent
             ?: error("Expected GameEvent, but got null or wrong type.")
 
         val type = block.type
-        val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
+        val historiaPlayer = getHistoriaPlayer(player)
 
-        if (wantedLevel > hasLevel)
-            return
+        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
 
         blocks[type]?.also { cooldown ->
             val currentTime = System.currentTimeMillis()

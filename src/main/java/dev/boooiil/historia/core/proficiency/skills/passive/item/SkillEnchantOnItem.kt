@@ -41,7 +41,7 @@ class SkillEnchantOnItem(section: ConfigurationSection) : AbstractSkillHandler()
     }.toSet()
 
     @EventHandler
-    fun handle(event: PlayerItemHeldEvent?) {
+    fun handle(event: PlayerItemHeldEvent) {
         execute(SkillSupplier(event))
     }
 
@@ -52,8 +52,7 @@ class SkillEnchantOnItem(section: ConfigurationSection) : AbstractSkillHandler()
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        val event = skillSuppliers[0].get() as? PlayerItemHeldEvent
-            ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
+        val event: PlayerItemHeldEvent = getOrThrow(skillSuppliers, 0)
 
         val player = event.player
         val historiaPlayer = getHistoriaPlayer(player)

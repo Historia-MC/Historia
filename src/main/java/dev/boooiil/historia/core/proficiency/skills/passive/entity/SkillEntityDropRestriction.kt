@@ -76,25 +76,17 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillH
          */
 
 
-        val event = skillSuppliers[0].get() as? EntityDeathEvent
-            ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
-
+        val event: EntityDeathEvent = getOrThrow(skillSuppliers, 0)
+        
         val entity = event.entity
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
-
-        if (wantedLevel > hasLevel)
-            return
 
         val drops = event.drops
         // 1️⃣ Iterate over existing drops safely
         val iterator = drops.listIterator()
 
-        if (historiaPlayer.proficiency.skills.contains(this) && entities.contains(entity.type)) {
+        if (hasLevelRequirement(historiaPlayer) && hasSkill(historiaPlayer) && entities.contains(entity.type)) {
             // Keep track of which materials we've processed
             val processedMaterials = mutableSetOf<Material>()
 

@@ -15,8 +15,10 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerItemHeldEvent
+import org.jspecify.annotations.NullMarked
 import java.util.*
 
+@NullMarked
 class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler() {
     override val name: NamespacedKey
     override val description: String = section.getString("description") ?: "No description provided."
@@ -33,6 +35,7 @@ class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler
     private var material: Set<Material> = section.getStringList("material").map { mat ->
         requireNotNull(Material.matchMaterial(mat)) { "Invalid material specified $mat" }
     }.toSet()
+    private var checkWearable = section.getBoolean("wearable")
 
     init {
 
@@ -62,7 +65,7 @@ class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler
     }
 
     @EventHandler
-    fun handle(event: PlayerItemHeldEvent?) {
+    fun handle(event: PlayerItemHeldEvent) {
         execute(SkillSupplier(event))
     }
 
@@ -73,31 +76,26 @@ class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        val event = skillSuppliers[0].get() as? PlayerItemHeldEvent
-            ?: error("Expected PlayerItemHeldEvent, but got null or wrong type")
+        val event: PlayerItemHeldEvent = getOrThrow(skillSuppliers, 0)
 
         val player = event.player
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        val proficiency = HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
-            ?: error("Tried to get proficiency for player ${historiaPlayer.username} but it did not exist.")
-        val hasLevel = historiaPlayer.level
-        val wantedLevel = proficiency.skills.get(this) ?: return
 
         val inventory = player.inventory
         val previousItem = inventory.getItem(event.previousSlot)
         val newItem = inventory.getItem(event.newSlot)
 
-        if (wantedLevel > hasLevel)
-            return
 
         // Handle new item
         newItem?.takeIf { material.contains(it.type) }?.itemMeta?.also { meta ->
+
+            if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
 
             val attributeModifiers: Multimap<Attribute, AttributeModifier> =
                 if (!meta.hasAttributeModifiers() || meta.attributeModifiers == null) {
                     ArrayListMultimap.create()
                 } else {
-                    ArrayListMultimap.create(meta.attributeModifiers)
+                    ArrayListMultimap.create(meta.attributeModifiers!!)
                 }
 
             val modifiersForAttribute = attributeModifiers.get(attribute)
