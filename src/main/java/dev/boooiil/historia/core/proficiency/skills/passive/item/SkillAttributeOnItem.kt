@@ -89,7 +89,7 @@ class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler
         // Handle new item
         newItem?.takeIf { material.contains(it.type) }?.itemMeta?.also { meta ->
 
-            if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
+            if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
             val attributeModifiers: Multimap<Attribute, AttributeModifier> =
                 if (!meta.hasAttributeModifiers() || meta.attributeModifiers == null) {

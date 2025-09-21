@@ -41,12 +41,12 @@ class SkillAnimalBreed(section: ConfigurationSection) : AbstractSkillHandler() {
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
 
         val event: EntityBreedEvent = getOrThrow(skillSuppliers, 0)
-        
+
         val entity = event.entity
         val player = event.breeder as Player
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
-        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) event.isCancelled = true
+        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) event.isCancelled = true
 
         if (!entities.contains(entity.type))
             event.isCancelled = true

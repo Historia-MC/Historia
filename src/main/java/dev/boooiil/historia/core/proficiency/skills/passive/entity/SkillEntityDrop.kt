@@ -72,7 +72,7 @@ class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler() {
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
-        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
+        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
         if (entities.contains(entity.type)) {
 

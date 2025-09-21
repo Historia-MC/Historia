@@ -77,7 +77,7 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillH
 
 
         val event: EntityDeathEvent = getOrThrow(skillSuppliers, 0)
-        
+
         val entity = event.entity
         val player = event.damageSource.causingEntity as? Player ?: return
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
@@ -86,7 +86,7 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillH
         // 1️⃣ Iterate over existing drops safely
         val iterator = drops.listIterator()
 
-        if (hasLevelRequirement(historiaPlayer) && hasSkill(historiaPlayer) && entities.contains(entity.type)) {
+        if ((hasSkill(historiaPlayer) || hasLevelRequirement(historiaPlayer)) && entities.contains(entity.type)) {
             // Keep track of which materials we've processed
             val processedMaterials = mutableSetOf<Material>()
 

@@ -97,7 +97,7 @@ class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkill
         val type = block.type
         val historiaPlayer = getHistoriaPlayer(player)
 
-        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
+        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
         blocks[type]?.also { cooldown ->
             val currentTime = System.currentTimeMillis()

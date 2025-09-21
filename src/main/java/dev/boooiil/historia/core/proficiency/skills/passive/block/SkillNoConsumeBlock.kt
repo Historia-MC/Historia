@@ -102,7 +102,7 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
         val type = block.type
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
-        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
+        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
         blocks[type]?.also { pair ->
             val currentTime = System.currentTimeMillis()

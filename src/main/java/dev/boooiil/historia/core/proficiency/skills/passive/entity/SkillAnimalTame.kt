@@ -47,13 +47,13 @@ class SkillAnimalTame(section: ConfigurationSection) : AbstractSkillHandler() {
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
 
         val event: EntityTameEvent = getOrThrow(skillSuppliers, 0)
-        
+
         val entity = event.entity
         val player = event.owner as Player
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
 
-        if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) event.isCancelled = true
+        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) event.isCancelled = true
 
         if (!entities.contains(entity.type))
             event.isCancelled = true

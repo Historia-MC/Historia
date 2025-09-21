@@ -83,7 +83,7 @@ class SkillAttributeWithItem(section: ConfigurationSection) : AbstractSkillHandl
 
         newItem?.takeIf { material.contains(it.type) }?.also { _ ->
 
-            if (!hasSkill(historiaPlayer) && !hasLevelRequirement(historiaPlayer)) return
+            if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
             player.getAttribute(attribute)?.takeIf { !it.modifiers.contains(modifier) }?.addModifier(modifier)
         }
