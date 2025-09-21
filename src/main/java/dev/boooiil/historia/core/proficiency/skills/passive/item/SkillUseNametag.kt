@@ -7,6 +7,7 @@ import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
@@ -24,13 +25,20 @@ class SkillUseNametag(section: ConfigurationSection) : AbstractSkillHandler() {
     override val type: SkillType = SkillType.PASSIVE
 
     @EventHandler
-    fun handle(event: PlayerInteractEntityEvent?) {
+    fun handle(event: PlayerInteractEntityEvent) {
         execute(SkillSupplier(event))
     }
 
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        // TODO Auto-generated method stub
-        throw UnsupportedOperationException("Unimplemented method 'execute'")
+        val event: PlayerInteractEntityEvent = getOrThrow(skillSuppliers, 0)
+
+        val player = event.player
+        val historiaPlayer = getHistoriaPlayer(player)
+
+        if ((player.inventory.getItem(event.hand).type == Material.NAME_TAG)) {
+            if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer))
+                event.isCancelled = true
+        }
     }
 
     override fun register() {
