@@ -1,0 +1,47 @@
+Light_Bronze_Shovel:
+  material: GOLDEN_SHOVEL
+  amount: 1
+  display-name: §7Bronze Hatchet
+  loc-name: Light_Bronze_Shovel
+  type: light
+  weight: 25
+  recipe-id: bronze_shovel
+  canCraft: [ALL]
+
+  tool:
+    damage: [3.0, 6.0]
+    speed: [0.6, 1.0]
+    knockback: [0.0, 0.5]
+    durability: [75, 125]
+
+Moderate_Bronze_Shovel:
+  material: GOLDEN_SHOVEL
+  amount: 1
+  display-name: §7Bronze Shovel
+  loc-name: Moderate_Bronze_Shovel
+  type: moderate
+  weight: 30
+  recipe-id: bronze_shovel
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [4.0, 6.5]
+    speed: [0.6, 0.9]
+    knockback: [1.5, 3.0]
+    durability: [100, 150]
+
+Heavy_Bronze_Shovel:
+  material: GOLDEN_SHOVEL
+  amount: 1
+  display-name: §7Bronze Bardiche
+  loc-name: Heavy_Bronze_Shovel
+  type: heavy
+  weight: 35
+  recipe-id: bronze_shovel
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [4.0, 7.0]
+    speed: [0.5, 0.8]
+    knockback: [3.0, 4.5]
+    durability: [125, 160]

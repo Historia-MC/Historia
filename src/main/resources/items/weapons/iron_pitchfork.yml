@@ -1,0 +1,56 @@
+Light_Iron_Pitchfork:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Iron Pitchfork
+  loc-name: Light_Iron_Pitchfork
+  type: light
+  weight: 30
+  recipe-id: iron_pitchfork
+  canCraft: [Farmer, Fisherman]
+
+  tool:
+    damage: [5.5, 7.0]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [500, 625]
+
+  weapon:
+    sweeping: [2.65, 3.5]
+
+Moderate_Iron_Pitchfork:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Iron Pitchfork
+  loc-name: Moderate_Iron_Pitchfork
+  type: moderate
+  weight: 35
+  recipe-id: iron_pitchfork
+  canCraft: [Farmer, Fisherman]
+
+  tool:
+    damage: [5.5, 7.0]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [500, 625]
+
+  weapon:
+    sweeping: [2.65, 3.5]
+
+Heavy_Iron_Pitchfork:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Iron Pitchfork
+  loc-name: Heavy_Iron_Pitchfork
+  type: heavy
+  weight: 40
+  recipe-id: iron_pitchfork
+  canCraft: [Farmer, Fisherman]
+
+  tool:
+    damage: [5.5, 7.0]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [500, 625]
+
+  weapon:
+    sweeping: [2.65, 3.5]

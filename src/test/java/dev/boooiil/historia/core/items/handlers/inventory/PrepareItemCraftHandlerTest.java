@@ -1,0 +1,170 @@
+package dev.boooiil.historia.core.items.handlers.inventory;
+
+import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.items.HistoriaItem;
+import dev.boooiil.historia.core.items.component.ExecutorComponent;
+import dev.boooiil.historia.core.items.data.ArmorData;
+import dev.boooiil.historia.core.items.data.ExecutorData;
+import dev.boooiil.historia.core.items.data.ToolData;
+import dev.boooiil.historia.core.items.data.WeaponData;
+import dev.boooiil.historia.core.items.executor.ItemExecutable;
+import dev.boooiil.historia.core.items.types.Triggers;
+import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.NumberUtils;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class PrepareItemCraftHandlerTest {
+
+    private ServerMock server;
+    HistoriaCore plugin;
+
+    @BeforeEach
+    public void setUp() {
+        System.out.println("Setting up mock...");
+        server = MockBukkit.mock();
+        System.out.println("Loading plugin...");
+        try {
+            plugin = MockBukkit.load(HistoriaCore.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Finished setup.");
+
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.out.println("Tearing down mock...");
+        MockBukkit.unmock();
+    }
+
+    @Test
+    public void validateItems() {
+        for (NamespacedKey registeredItem : HistoriaCore.Companion.getITEM_REGISTRY().keySet()) {
+
+            HistoriaItem historiaItem = HistoriaCore.Companion.getITEM_REGISTRY().get(registeredItem);
+
+            CoreLogger.debugToConsole("item:", historiaItem.toString());
+
+            ItemStack item = historiaItem.createItemStack(); // logs "setting into container..."
+            CoreLogger.debugToConsole(item.getItemMeta().getPersistentDataContainer().getKeys() + "");
+
+            assertTrue(item.hasItemMeta());
+
+            ItemMeta meta = item.getItemMeta();
+
+            CoreLogger.debugToConsole(historiaItem.getConfigurationId().getKey(), "components:",
+                    historiaItem.getComponentHolder().toString());
+
+            for (NamespacedKey key : historiaItem.getComponentHolder().keySet()) {
+
+                switch (key.getKey()) {
+                    case "tool":
+                        ToolData td = ToolData.fromStack(item);
+
+                        AttributeModifier damageAttr = meta.getAttributeModifiers(Attribute.ATTACK_DAMAGE).iterator()
+                                .next();
+
+                        AttributeModifier speedAttr = meta.getAttributeModifiers(Attribute.ATTACK_SPEED).iterator()
+                                .next();
+
+                        AttributeModifier knockbackAttr = meta.getAttributeModifiers(Attribute.ATTACK_KNOCKBACK)
+                                .iterator().next();
+
+                        Damageable toolDamageable = (Damageable) item.getItemMeta();
+                        float damage = NumberUtils.roundFloat((float) damageAttr.getAmount(), 2);
+                        float speed = NumberUtils.roundFloat((float) speedAttr.getAmount(), 2);
+                        float knockback = NumberUtils.roundFloat((float) knockbackAttr.getAmount(), 2);
+
+                        CoreLogger.debugToConsole("Data:", td.toString());
+
+                        assertEquals(td.damage(), damage);
+                        assertEquals(td.speed(), speed);
+                        assertEquals(td.knockback(), knockback);
+                        assertEquals(td.maxDurability(), toolDamageable.getMaxDamage());
+                        break;
+
+                    case "weapon":
+                        WeaponData wd = WeaponData.fromStack(item);
+
+                        AttributeModifier sweepingAttr = meta.getAttributeModifiers(Attribute.SWEEPING_DAMAGE_RATIO)
+                                .iterator()
+                                .next();
+
+                        float sweeping = NumberUtils.roundFloat((float) sweepingAttr.getAmount(), 2);
+
+                        CoreLogger.debugToConsole("Data:", wd.toString());
+                        assertEquals(wd.sweeping(), sweeping);
+
+                        break;
+
+                    case "armor":
+                        ArmorData ad = ArmorData.fromStack(item);
+
+                        AttributeModifier defenseAttr = meta.getAttributeModifiers(Attribute.ARMOR).iterator()
+                                .next();
+
+                        Damageable armorDamageable = (Damageable) item.getItemMeta();
+                        float defense = NumberUtils.roundFloat((float) defenseAttr.getAmount(), 2);
+
+                        CoreLogger.debugToConsole("Data:", ad.toString());
+
+                        assertEquals(ad.defense(), defense);
+                        assertEquals(ad.maxDurability(), armorDamageable.getMaxDamage());
+                        break;
+
+                    case "executor":
+                        ExecutorComponent ec = (ExecutorComponent) historiaItem.getComponentHolder().get(key);
+                        ExecutorData ed = ExecutorData.fromStack(item);
+                        PlayerMock player = server.addPlayer();
+
+                        for (Triggers trigger : ec.executables().keySet()) {
+
+                            ItemExecutable executable = ec.executables().get(trigger);
+
+                            CoreLogger.debugToConsole("Executable:", executable.toString());
+
+                            assertNotSame(trigger, Triggers.UNKNOWN);
+                            assertTrue(ec.executables().containsKey(trigger));
+
+                            assertEquals(ed.executables().get(trigger).uses(), executable.uses());
+
+                            assertEquals(ed.executables().get(trigger).cooldown(), executable.cooldown());
+
+                            assertEquals(ed.executables().get(trigger).commands(), executable.commands());
+
+                            ed.execute(player, 0, item, trigger);
+
+                            if (ec.executables().size() > ed.executables().size()) {
+                                CoreLogger.debugToConsole("Executables size changed: " + ec.executables().size() + " -> "
+                                        + ed.executables().size(), "on trigger", trigger.getLowercase());
+                            } else {
+                                for (Triggers executedTrigger : ec.executables().keySet()) {
+                                    assertTrue(ed.executables().get(executedTrigger).uses() < ec.executables().get(trigger)
+                                            .uses());
+                                }
+                            }
+
+                        }
+
+                        break;
+
+                }
+            }
+        }
+    }
+
+}

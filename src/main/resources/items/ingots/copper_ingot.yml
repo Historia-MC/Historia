@@ -1,0 +1,32 @@
+Poor_Light_Copper_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §cCopper
+  loc-name: Poor_Light_Copper_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: poor
+
+Common_Light_Copper_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §2Copper
+  loc-name: Common_Light_Copper_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: common
+
+Perfect_Light_Copper_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §6Copper
+  loc-name: Perfect_Light_Copper_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: perfect

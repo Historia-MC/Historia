@@ -1,0 +1,15 @@
+Heavy_Stone_Pickaxe:
+  material: STONE_PICKAXE
+  amount: 1
+  display-name: §7Stone Club
+  loc-name: Heavy_Stone_Pickaxe
+  type: heavy
+  weight: 30
+  recipe-id: stone_pickaxe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [2.0, 5.0]
+    speed: [1.0, 1.3]
+    knockback: [2.0, 3.5]
+    durability: [100, 132]

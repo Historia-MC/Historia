@@ -1,0 +1,140 @@
+# Display name of the item:
+# $QUALITY_PREFIX$ $WEIGHT_PREFIX$ $DISPLAY_NAME$
+
+# Lore:
+
+# ARMOR:
+# A $WEIGHT_LORE_PREFIX$ $DISPLAY_NAME$.
+# $QUALITY_LORE_PREFIX$.
+# ---- STATS ----
+# Defense: $$$
+# Weight:  $$$
+# ---------------
+
+# WEAPONS/TOOLS:
+# A $WEIGHT_LORE_PREFIX$ $DISPLAY_NAME$.
+# $QUALITY_LORE_PREFIX$.
+# ---- STATS ----
+# Damage:    $$$
+# Speed:     $$$
+# Knockback: $$$
+# Sweeping:  $$$
+# Weight:    $$$
+# ---------------
+
+quality_prefix:
+  poor: # all stats are within > 50% of the base stats
+    - "Shoddy"
+    - "Poor"
+    - "Mangled"
+    - "Rusty"
+    - "Misshapen"
+    - "Dull"
+    - "Shameful"
+  common: # all stats are within ~50-90% of the base stats
+    - "Well Crafted"
+    - "Common"
+    - "Sharp"
+    - "Shiny"
+    - "Basic"
+    - "Pointy"
+  perfect: # all stats are within ~90-100% of the base stats
+    - "Perfect"
+    - "Masterwork"
+    - "Legendary"
+    - "Adorned"
+    - "Impressive"
+    - "Powerful"
+
+weight_prefix:
+  light:
+    - "Light"
+    - "Fast"
+    - "Agile"
+    - "Thin"
+  moderate:
+    - "Balanced"
+    - "Steady"
+    - "Even"
+    - "Stable"
+  heavy:
+    - "Heavy"
+    - "Bulky"
+    - "Gigantic"
+    - "Broad"
+    - "Dense"
+
+quality_lore_prefix:
+  weapon:
+    poor:
+      - "A poorly made weapon for the poorly made warrior."
+      - "A weapon that is an embarrassment to its creator."
+      - "Just barely better than nothing."
+      - "This weapon looks ready to fall apart."
+      - "This weapon looks unfit for battle."
+      - "Suitable for training, nothing more."
+    common:
+      - "An adequate weapon for your average warrior."
+      - "A weapon to be proud of."
+      - "A properly made weapon."
+      - "Ready to cut through your enemies."
+      - "Better made than most blades."
+    perfect:
+      - "A weapon to make a family heirloom."
+      - "One of the best weapons you have ever seen."
+      - "The weapon of a true warrior."
+      - "A weapon of indescribable beauty."
+      - "Powerful enough to defeat any who stand in your way."
+  armor:
+    poor:
+      - "Might hurt you more than what its blocking."
+      - "Covered in holes and divets."
+      - "Hardly protects from anything."
+      - "Already tattered to pieces."
+      - "An apprentices finest work."
+    common:
+      - "Available in the shops of many cities."
+      - "Armour suitable for your average battle."
+      - "Protects from most foes."
+      - "Sturdy enough and gets the job done."
+    perfect:
+      - "Deflects the blows of any and all foes."
+      - "Whoever made this should be famous."
+      - "Provides unheard of durability."
+      - "Armor worthy of only the most powerful warriors."
+      - "Legends will be told of this armor."
+  tool:
+    poor:
+      - "Hardly usable for its purpose."
+      - "A joke of a tool."
+      - "An apprentices first creation."
+      - "Better used as scrap."
+    common:
+      - "A fine tool for a hard job."
+      - "Just what you need to get the job done."
+      - "Average tool for its purpose."
+      - "An affordable tool for your work."
+    perfect:
+      - "You couldnt ask for a better tool."
+      - "Even an amateur could do the job with this."
+      - "Whoever made this knew what they are doing."
+      - "The perfect tool for the job."
+
+weight_lore_prefix:
+  light:
+    - "light"
+    - "dainty"
+    - "swift"
+    - "etherial"
+    - "weightless"
+  moderate:
+    - "moderate"
+    - "well balanced"
+    - "steady"
+    - "solid"
+  heavy:
+    - "heavy"
+    - "bulky"
+    - "massive"
+    - "weighted"
+    - "cumbersome"

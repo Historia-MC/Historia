@@ -1,0 +1,18 @@
+Light_Wood_Trident:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Wood Trident
+  loc-name: Light_Wood_Trident
+  type: light
+  weight: 25
+  recipe-id: wood_trident
+  canCraft: [Fisherman]
+
+  tool:
+    damage: [4.5, 6.0]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [300, 375]
+
+  weapon:
+    sweeping: [2.35, 3.0]

@@ -1,0 +1,11 @@
+Poor_Light_Coal:
+  material: COAL
+  amount: 1
+  display-name: §7Coal
+  loc-name: COAL
+  weight: 1
+  canCraft: [ALL]
+
+  modifier:
+    weight: light
+    quality: poor

@@ -1,0 +1,18 @@
+Light_Tin_Axe:
+  material: IRON_AXE
+  amount: 1
+  display-name: §7Tin Axe
+  loc-name: Light_Tin_Axe
+  type: light
+  weight: 15
+  recipe-id: tin_axe
+  canCraft: [ALL]
+
+  tool:
+    damage: [2.0, 4.0]
+    speed: [0.8, 1.2]
+    knockback: [0.0, 1.0]
+    durability: [50, 75]
+
+  weapon:
+    sweeping: [0.0, 0.0]

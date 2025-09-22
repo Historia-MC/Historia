@@ -1,0 +1,32 @@
+Poor_Light_Tin_Ingot:
+  material: IRON_INGOT
+  amount: 1
+  display-name: §cTin
+  loc-name: Poor_Light_Tin_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: poor
+
+Common_Light_Tin_Ingot:
+  material: IRON_INGOT
+  amount: 1
+  display-name: §2Tin
+  loc-name: Common_Light_Tin_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: common
+
+Perfect_Light_Tin_Ingot:
+  material: IRON_INGOT
+  amount: 1
+  display-name: §6Tin
+  loc-name: Perfect_Light_Tin_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: perfect

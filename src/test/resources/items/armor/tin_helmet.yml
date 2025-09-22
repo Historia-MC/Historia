@@ -1,0 +1,13 @@
+Light_Tin_Helmet:
+  material: IRON_HELMET
+  amount: 1
+  display-name: §7Tin Helmet
+  loc-name: Light_Tin_Helmet
+  type: light
+  weight: 15
+  recipe-id: tin_helmet
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.5]
+    durability: [60, 90]

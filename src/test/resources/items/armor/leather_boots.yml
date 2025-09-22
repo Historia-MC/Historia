@@ -1,0 +1,41 @@
+Light_Leather_Boots:
+  material: LEATHER_BOOTS
+  amount: 1
+  display-name: §7Leather Boots
+  loc-name: Light_Leather_Boots
+  type: light
+  weight: 15
+  recipe-id: leather_boots
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.0]
+    durability: [30, 60]
+
+Moderate_Leather_Boots:
+  material: LEATHER_BOOTS
+  amount: 1
+  display-name: §7Leather Boots
+  loc-name: Moderate_Leather_Boots
+  type: moderate
+  weight: 25
+  recipe-id: leather_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.0, 1.5]
+    durability: [40, 70]
+
+Heavy_Leather_Boots:
+  material: LEATHER_BOOTS
+  amount: 1
+  display-name: §7Leather Boots
+  loc-name: Heavy_Leather_Boots
+  type: heavy
+  weight: 35
+  recipe-id: leather_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.5, 2.0]
+    durability: [50, 80]

@@ -1,0 +1,13 @@
+Heavy_Turtle_Helmet:
+  material: TURTLE_HELMET
+  amount: 1
+  display-name: §7Turtle Shell
+  loc-name: Heavy_Turtle_Helmet
+  type: heavy
+  weight: 25
+  recipe-id: turtle_helmet
+  canCraft: [Farmer, Fisherman]
+
+  armor:
+    defense: [1.0, 2.0]
+    durability: [175, 300]

@@ -1,0 +1,15 @@
+Heavy_Stone_Shovel:
+  material: STONE_SHOVEL
+  amount: 1
+  display-name: §7Stone Shovel
+  loc-name: Heavy_Stone_Pickaxe
+  type: heavy
+  weight: 30
+  recipe-id: stone_shovel
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [2.0, 6.0]
+    speed: [0.4, 0.7]
+    knockback: [3.0, 4.5]
+    durability: [100, 132]

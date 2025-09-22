@@ -1,0 +1,41 @@
+Light_Bronze_Leggings:
+  material: GOLDEN_LEGGINGS
+  amount: 1
+  display-name: §7Bronze Leggings
+  loc-name: Light_Bronze_Leggings
+  type: light
+  weight: 25
+  recipe-id: bronze_leggings
+  canCraft: [ALL]
+
+  armor:
+    defense: [2.0, 3.0]
+    durability: [70, 125]
+
+Moderate_Bronze_Leggings:
+  material: GOLDEN_LEGGINGS
+  amount: 1
+  display-name: §7Bronze Leggings
+  loc-name: Moderate_Bronze_Leggings
+  type: moderate
+  weight: 35
+  recipe-id: bronze_leggings
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.5, 3.5]
+    durability: [80, 150]
+
+Heavy_Bronze_Leggings:
+  material: GOLDEN_LEGGINGS
+  amount: 1
+  display-name: §7Bronze Leggings
+  loc-name: Heavy_Bronze_Leggings
+  type: heavy
+  weight: 45
+  recipe-id: bronze_leggings
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [3.0, 4.0]
+    durability: [90, 175]
