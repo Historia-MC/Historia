@@ -17,21 +17,13 @@ abstract class AbstractSkillRunnable : BukkitRunnable(), ISkillRunnable {
     override val name: NamespacedKey
         get() = throw UnsupportedOperationException()
 
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun execute(vararg skillSuppliers: SkillSupplier<*>)
 
-    override fun register() {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun register()
 
-    override fun deregister() {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun deregister()
 
-    override fun run() {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun run()
 
     override fun hasSkill(historiaPlayer: HistoriaPlayer): Boolean {
         return getProficiency(historiaPlayer)?.hasSkill(this) ?: false
@@ -39,7 +31,6 @@ abstract class AbstractSkillRunnable : BukkitRunnable(), ISkillRunnable {
 
     override fun hasLevelRequirement(historiaPlayer: HistoriaPlayer): Boolean {
         return (getProficiency(historiaPlayer)?.skills?.get(this) ?: 0) > historiaPlayer.level
-
     }
 
     override fun getHistoriaPlayer(player: Player): HistoriaPlayer {

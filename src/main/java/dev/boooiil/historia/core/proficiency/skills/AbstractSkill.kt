@@ -16,17 +16,11 @@ abstract class AbstractSkill : ISkill {
     override val name: NamespacedKey
         get() = throw UnsupportedOperationException()
 
-    override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun execute(vararg skillSuppliers: SkillSupplier<*>)
 
-    override fun register() {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun register()
 
-    override fun deregister() {
-        throw UnsupportedOperationException()
-    }
+    abstract override fun deregister()
 
     override fun hasSkill(historiaPlayer: HistoriaPlayer): Boolean {
         return getProficiency(historiaPlayer)?.hasSkill(this) ?: false
