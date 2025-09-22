@@ -1,4 +1,4 @@
-version: 0
+version: 1
 
 # attributes:
 #   armor, armor_toughness, attack_damage, attack_knockback, attack_reach, block_break_speed, block_interaction_range
@@ -15,6 +15,7 @@ version: 0
 # attribute_with_item, attribute_on_item
 
 enhanced_axe_efficiency:
+  name: Placeholder
   type: attribute_with_item
   description: "Enhanced ability with an axe."
   material:
@@ -25,6 +26,7 @@ enhanced_axe_efficiency:
     factor: 1
 
 enhanced_shovel_efficiency:
+  name: Placeholder
   type: attribute_with_item
   description: "Enhanced ability with a shovel."
   material:
@@ -35,6 +37,7 @@ enhanced_shovel_efficiency:
     factor: 1
 
 enhanced_pickaxe_efficiency:
+  name: Placeholder
   type: attribute_with_item
   description: "Enhanced ability with a pickaxe."
   material:
@@ -44,17 +47,47 @@ enhanced_pickaxe_efficiency:
     operation: add_number
     factor: 1
 
-enhanced_boots_efficiency:
+enhanced_boots_feather_fall:
+  name: Placeholder
   type: attribute_with_item
   description: "Enhanced fall resistance boots."
   material:
     - leather_boots
+    - iron_boots
+    - golden_boots
+    - chainmail_boots
+    - netherite_boots
   attributes:
     attribute: safe_fall_distance
     operation: add_number
     factor: 2
 
+enhanced_boots_blast_protection:
+  name: Placeholder
+  type: enchant_on_item #TODO: This needs to be wearable
+  description: "Enhanced fall blast protection boots."
+  material:
+    - leather_boots
+    - iron_boots
+    - golden_boots
+    - chainmail_boots
+    - netherite_boots
+  enchants:
+    BLAST_PROTECTION: 1
+
+enhanced_axe_sharpness:
+  name: Placeholder
+  type: attribute_on_item
+  description: "Enhanced sharpness with an axe."
+  material:
+    - wooden_axe
+  attributes:
+    attribute: attack_damage
+    operation: add_number
+    factor: 1
+
 enhanced_sword_sharpness:
+  name: Placeholder
   type: attribute_on_item
   description: "Enhanced sharpness with a sword."
   material:
@@ -65,6 +98,7 @@ enhanced_sword_sharpness:
     factor: 1
 
 enhanced_sword_sweeping_edge:
+  name: Placeholder
   type: attribute_on_item
   description: "Enhanced sweeping range with a sword."
   material:
@@ -74,6 +108,215 @@ enhanced_sword_sweeping_edge:
     operation: add_number
     factor: 2
 
+enhanced_crossbow_quick_charge:
+  name: Placeholder
+  type: enchant_on_item
+  description: "Enhanced draw speed with a crossbow."
+  material:
+    - crossbow
+  enchants:
+    quick_charge: 1
+
+enhanced_helmet_aqua_affinity:
+  name: Placeholder
+  type: attribute_with_item
+  description: "Hold more breath."
+  material:
+    - leather_helmet
+    - iron_helmet
+    - golden_helmet
+    - chainmail_helmet
+    - netherite_helmet
+  attributes:
+    attribute: oxygen_bonus
+    operation: add_number
+    factor: 20
+
+enhanced_boots_depth_strider:
+  name: Placeholder
+  type: attribute_with_item
+  description: "Walk faster with boots."
+  material:
+    - leather_boots
+    - iron_boots
+    - golden_boots
+    - chainmail_boots
+    - netherite_boots
+  attributes:
+    attribute: water_movement_efficiency
+    operation: add_number
+    factor: 0.4
+
 nametag:
+  name: Placeholder
   type: nametag
   description: "Allows the use of nametags."
+
+animal_drops_bones_all:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases bone drops from all animals."
+  entity:
+    - cow
+    - pig
+    - sheep
+    - chicken
+    - horse
+    - donkey
+    - mule
+    - llama
+    - rabbit
+    - fox
+    - wolf
+  drops:
+    bone:
+      min: 1
+      max: 2
+
+animal_drops_increase_wool:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases wool drops from sheep."
+  entity:
+    - sheep
+  drops:
+    white_wool:
+      min: 0
+      max: 6
+    orange_wool:
+      min: 0
+      max: 6
+    magenta_wool:
+      min: 0
+      max: 6
+    light_blue_wool:
+      min: 0
+      max: 6
+    yellow_wool:
+      min: 0
+      max: 6
+    lime_wool:
+      min: 0
+      max: 6
+    pink_wool:
+      min: 0
+      max: 6
+    gray_wool:
+      min: 0
+      max: 6
+    light_gray_wool:
+      min: 0
+      max: 6
+    cyan_wool:
+      min: 0
+      max: 6
+    purple_wool:
+      min: 0
+      max: 6
+    blue_wool:
+      min: 0
+      max: 6
+    brown_wool:
+      min: 0
+      max: 6
+    green_wool:
+      min: 0
+      max: 6
+    red_wool:
+      min: 0
+      max: 6
+    black_wool:
+      min: 0
+      max: 6
+animal_drops_increase_feather:
+  name: Placeholder
+  type: entity_drop
+  description: "Increases feather drops from chickens."
+  entity:
+    - chicken
+  drops:
+    feather:
+      min: 0
+      max: 5
+
+animal_drops_chicken_shear:
+  name: Placeholder
+  type: chicken_shear
+  description: "Allows shearing of chickens for feathers."
+
+animal_drops_leather:
+  name: Placeholder
+  type: entity_drop_restriction
+  description: "Allows leather drops from animal sources."
+  entity:
+    - cow
+    - horse
+    - donkey
+    - mule
+    - llama
+  drops:
+    leather:
+      min: 1
+      max: 3
+
+# TODO: unfortunately we might want to refine this
+#   to allow for more granular control
+animal_breed_all:
+  name: Placeholder
+  type: entity_breed_restriction
+  description: "Allows breeding of all animal types."
+  entity:
+    - cow
+    - pig
+    - chicken
+    - sheep
+    - horse
+    - donkey
+    - llama
+    - rabbit
+    - mooshroom
+    - goat
+    - wolf
+    - cat
+    - ocelot
+    - axolotl
+    - turtle
+    - panda
+    - fox
+    - bee
+    - frog
+    - camel
+
+# TODO: Same as above
+animal_tame_all:
+  name: Placeholder
+  type: entity_tame_restriction
+  description: "Allows taming of all animals."
+  entity:
+    - horse
+    - wolf
+    - ocelot
+    - donkey
+    - camel
+
+chance_no_consume_block_place_builder:
+  name: Placeholder
+  type: no_consume_block
+  description: "Chance to not consume the block when placing it."
+  action:
+    - block_place
+  blocks:
+    bricks:
+      chance: 0.1
+      cooldown: 20 #seconds
+
+bypass_block_ladder:
+  name: Placeholder
+  type: bypass_block_restriction
+  description: "Ability to place ladders in any territory."
+  action:
+    - block_place
+    - block_destroy
+  blocks:
+    ladder:
+      cooldown: 1
