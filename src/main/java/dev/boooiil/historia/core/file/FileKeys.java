@@ -2,14 +2,42 @@ package dev.boooiil.historia.core.file;
 
 public enum FileKeys {
 
-    /** proficiency.yml */
+    /**
+     * proficiency.yml
+     */
     PROFICIENCY("proficiency.yml"),
-    /** config.yml */
+    /**
+     * config.yml
+     */
     CONFIG("config.yml"),
-    /** plugin.yml */
+    /**
+     * plugin.yml
+     */
     PLUGIN("plugin.yml"),
-    /** skills.yml */
-    SKILLS("skills.yml");
+    /**
+     * skills.yml
+     */
+    SKILLS("skills.yml"),
+    /**
+     * armor.yml
+     */
+    ARMOR("armor.yml"),
+    /**
+     * weapons.yml
+     */
+    WEAPONS("weapons.yml"),
+    /**
+     * tools.yml
+     */
+    TOOLS("tools.yml"),
+    /**
+     * customitems.yml
+     */
+    CUSTOM_ITEMS("items.yml"),
+    /**
+     * ingots.yml
+     */
+    INGOTS("ingots.yml");
 
     private final String key;
 
