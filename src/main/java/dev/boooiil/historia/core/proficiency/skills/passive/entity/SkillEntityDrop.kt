@@ -6,6 +6,7 @@ import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
+import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
@@ -128,6 +129,14 @@ class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler() {
     }
 
     override fun toJSON(): String {
-        TODO("Not yet implemented")
+        // TODO: finish
+        val sb = StringBuilder()
+
+        sb.append("{")
+        sb.append(JSONUtils.fromValue("name", this.name)).append(",")
+        sb.append(JSONUtils.fromValue("description", this.description))
+        sb.append("}")
+
+        return sb.toString()
     }
 }
