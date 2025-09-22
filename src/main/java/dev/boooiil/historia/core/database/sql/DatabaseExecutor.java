@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.database;
+package dev.boooiil.historia.core.database.sql;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -7,203 +7,34 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
+import javax.sql.DataSource;
 
-import com.zaxxer.hikari.HikariDataSource;
+import org.jspecify.annotations.Nullable;
 
 import dev.boooiil.historia.core.util.CoreLogger;
 
-/**
- * Abstract class to handle database connections.
- */
-@NullMarked
-public abstract class DatabaseConnection implements IDatabaseConnection {
+public class DatabaseExecutor {
+    private final DataSourceProvider dataSourceProvider;
 
-    /**
-     * The {@link HikariDataSource} data source for this connection.
-     */
-    protected HikariDataSource dataSource;
-
-    /**
-     * The {@link Connection} object for this class.
-     */
-    protected Connection connection;
-
-    /**
-     * If the connection has been errored.
-     */
-    protected boolean errored;
-
-    /**
-     * Enum containing types of databases.
-     */
-    public enum DatabaseType {
-        MYSQL("mysql"),
-        SQLITE("sqlite"),
-        UNKNOWN("unknown");
-
-        private final String key;
-
-        DatabaseType(String key) {
-
-            this.key = key;
-
-        }
-
-        public String getKey() {
-
-            return this.key;
-
-        }
-
-        public static DatabaseType fromString(String key) {
-
-            for (DatabaseType type : DatabaseType.values()) {
-
-                if (type.getKey().equalsIgnoreCase(key)) {
-
-                    return type;
-
-                }
-
-            }
-
-            return UNKNOWN;
-
-        }
-
+    public DatabaseExecutor(DataSourceProvider dataSourceProvider) {
+        this.dataSourceProvider = dataSourceProvider;
     }
 
-    /**
-     * Initialize the data source. This is essentially building the connection to
-     * the database.
-     */
-    public abstract boolean initDataSource();
-
-    public DatabaseConnection() {
-    };
-
-    /**
-     * Get the type of database.
-     */
-    public abstract DatabaseType getDatabaseType();
-
-    /**
-     * If this connection has been errored.
-     * 
-     * @return true if the connection has been errored.
-     */
-    public boolean isErrored() {
-        return errored;
-    };
-
-    /**
-     * Close the {@link Connection} associated with this object.
-     * 
-     * @return true if the connection was closed.
-     */
-    public boolean closeConnection() {
-
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                CoreLogger.debugToConsole("Closed", getDatabaseType().toString(), "connection.");
-            }
-            return true;
-        } catch (SQLException sqlException) {
-
-            exceptionLogger(sqlException, "Failed to close connection.");
-            return false;
-        }
-
+    private Connection getConnection() throws SQLException {
+        DataSource dataSource = dataSourceProvider.getActiveDataSource();
+        return dataSource.getConnection();
     }
 
-    /**
-     * Connect to the database.
-     * 
-     * @return true if the connection was created.
-     */
-    public boolean connect() {
-
-        CoreLogger.debugToConsole("Connecting to database...");
-
-        try {
-            connection = dataSource.getConnection();
-
-            if (connection != null) {
-                CoreLogger.debugToConsole("Connected to database.");
-                return true;
-            } else {
-                CoreLogger.errorToConsole("Failed to connect to database.");
-            }
-        }
-
-        catch (SQLException sqlException) {
-            exceptionLogger(sqlException, "Failed to connect to database.");
-
-        }
-
-        return false;
-
+    public DatabaseType getDatabaseType() {
+        return dataSourceProvider.getActiveDatabaseType();
     }
 
-    /**
-     * Close the {@link HikariDataSource} data source associated with this object.
-     * 
-     * @return true if the data source was closed.
-     */
-    public boolean closeDataSource() {
-
-        if (dataSource != null && !dataSource.isClosed()) {
-            dataSource.close();
-            CoreLogger.debugToConsole("Closed", getDatabaseType().toString(), "data source.");
-        }
-
-        return true;
-
+    public void setDatabaseType(DatabaseType databaseType) {
+        dataSourceProvider.setActiveDatabaseType(databaseType);
     }
 
-    /**
-     * Get the ${@link Connection} of this object.
-     */
-    public Connection getConnection() {
-
-        try {
-            if (dataSource != null && !dataSource.isClosed()) {
-                connection = dataSource.getConnection();
-                return connection;
-            }
-            return null;
-        } catch (SQLException sqlException) {
-            exceptionLogger(sqlException, "Failed to get connection.");
-            return null;
-        }
-
-    }
-
-    /**
-     * Attempt to reconnect to the database.
-     * 
-     * @return true if successful reconnection.
-     */
-    public boolean reconnect() {
-
-        try {
-
-            CoreLogger.warnToConsole("Attempting to close the connection...");
-            connection.close();
-            CoreLogger.warnToConsole("Connection closed.");
-
-            CoreLogger.warnToConsole("Attempting to reconnect...");
-            connection = dataSource.getConnection();
-            CoreLogger.warnToConsole("Reconnected to SQL Server.");
-            return true;
-        } catch (SQLException sqlException) {
-
-            exceptionLogger(sqlException, "Failed to reconnect.");
-            return false;
-        }
+    public void close() {
+        dataSourceProvider.close();
     }
 
     /**
@@ -229,10 +60,10 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
      */
     public void executor(String statement) {
 
-        CoreLogger.debugToConsole("Executing:", statement);
+        CoreLogger.debugToConsole(getDatabaseType().loggingPrefix() + "Executing:", statement);
 
-        try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
 
             preparedStatement.execute();
         } catch (SQLException sqlException) {
@@ -292,10 +123,9 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
      */
     public @Nullable <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor) {
 
-        try (Connection connection = getConnection()) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(statement);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
 
             return resultProcessor.process(resultSet);
 
@@ -409,17 +239,16 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
     public @Nullable <T> T queryExecutor(String statement, IResultProcessor<T> resultProcessor, int maxRetry,
             int curr) {
 
-        try (Connection connection = getConnection()) {
-
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(statement);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
 
             return resultProcessor.process(resultSet);
 
         } catch (SQLException sqlException) {
             exceptionLogger(sqlException, "Failed to execute query:" + statement);
 
-            return curr > maxRetry ? queryExecutor(statement, resultProcessor, maxRetry, curr) : null;
+            return curr > maxRetry ? queryExecutor(statement, resultProcessor, maxRetry, curr + 1) : null;
         }
 
     }
@@ -454,10 +283,10 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
      */
     public void updateExecutor(String statement) {
 
-        CoreLogger.debugToConsole("Executing update query:", statement);
+        CoreLogger.debugToConsole(getDatabaseType().loggingPrefix() + "Executing update query:", statement);
 
-        try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
 
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
@@ -537,11 +366,11 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
      */
     public void updateExecutor(String statement, int maxRetry, int curr) {
 
-        CoreLogger.debugToConsole("Executing update query:", statement, "with max retries: " + maxRetry,
-                "and current retries: " + curr);
+        CoreLogger.debugToConsole(getDatabaseType().loggingPrefix() + "Executing update query:", statement,
+                "with max retries: " + maxRetry, "and current retries: " + curr);
 
-        try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(statement);
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(statement)) {
 
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
@@ -584,6 +413,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
      */
     public boolean nextResult(ResultSet result) {
 
+        // TODO: make trace
         CoreLogger.debugToConsole("Trying next result...");
 
         try {
@@ -632,7 +462,7 @@ public abstract class DatabaseConnection implements IDatabaseConnection {
 
             ResultSetMetaData resultSetMetaData = result.getMetaData();
 
-            return getResult(result, resultSetMetaData.getColumnName(column), clazz);
+            return getResult(result, resultSetMetaData.getColumnLabel(column), clazz);
 
         } catch (SQLException sqlException) {
             exceptionLogger(sqlException, "Failed to get result: " + column);

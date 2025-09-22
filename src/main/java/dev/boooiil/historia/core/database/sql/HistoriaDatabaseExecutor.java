@@ -1,29 +1,23 @@
-package dev.boooiil.historia.core.database.mysql;
-
-import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.player.culture.Cultures;
-import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+package dev.boooiil.historia.core.database.sql;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import dev.boooiil.historia.core.player.HistoriaPlayer;
+import dev.boooiil.historia.core.player.culture.Cultures;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+
 /**
- * MySQL database query handler for Historia-Core.
+ * Creates additional methods for executing SQL statements specific to
+ * the Historia plugin.
  */
-@NullMarked
-public class CoreMySQLHandler extends MySQLConnection implements ICoreDatabaseHandler {
+public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
-    public CoreMySQLHandler() {
-
-    }
-
-    public DatabaseType getDatabaseType() {
-        return DatabaseType.MYSQL;
+    public HistoriaDatabaseExecutor(DataSourceProvider dataSourceProvider) {
+        super(dataSourceProvider);
     }
 
     /**
