@@ -17,7 +17,7 @@ import java.util.function.Supplier;
  * <p>
  * This is a utility class that is used to load the item configurations from the
  * plugin's YAML files and register them in the
- * {@link ItemRegistry}. It also provides a method to register
+ * {@link dev.boooiil.historia.core.registry.RegistryHolder RegistryHolder}. It also provides a method to register
  * other plugins' configurations with the registry.
  * </p>
  */
@@ -72,13 +72,13 @@ public class ItemRegistryLoader {
      * <p>
      * ... where str_key is the unique key that will be registered and configuration
      * is the passed {@link ConfigurationSection} to the
-     * {@link BaseItemConfiguration#fromConfigurationSection(ConfigurationSection)
+     * {@link HistoriaItem#fromConfig(NamespacedKey, ConfigurationSection)}
      * fromConfigurationSection} method.
      * </p>
      *
      * <p>
      * Assuming the overloaded method
-     * {@link BaseItemConfiguration#fromConfigurationSection(ConfigurationSection)}
+     * {@link HistoriaItem#fromConfig(NamespacedKey, ConfigurationSection)}
      * was correctly implemented, this method effectively runs as shown:
      * </p>
      *
@@ -97,12 +97,11 @@ public class ItemRegistryLoader {
      * </blockquote>
      * <p>
      * This method is unsafe and will throw an exception if the method
-     * {@link BaseItemConfiguration#fromConfigurationSection(ConfigurationSection)}
+     * {@link HistoriaItem#fromConfig(NamespacedKey, ConfigurationSection)}
      * does not exist or is not static. It is up to you to provide functionality
      * within your configuration classes to handle the configuration section.
      *
-     * @param configuration The YamlConfiguration to populate the registry with.
-     * @param type          The type of the configuration to populate the registry
+     * @param configurations The YamlConfiguration to populate the registry with.
      */
     public static void populate(List<YamlConfiguration> configurations) {
 

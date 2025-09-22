@@ -32,8 +32,6 @@ import java.util.List;
  * @see CommandSender
  * @see Player
  * @see Bukkit
- * @see BaseItemConfiguration
- * @see ItemRegistry
  */
 public class CommandGive implements TabExecutor {
 
