@@ -115,6 +115,7 @@ public class ExecutorTriggerHandlerTest {
         player.getInventory().setItemInMainHand(mhi);
         player.getInventory().setItemInOffHand(ohi);
 
+        @SuppressWarnings({"removal"})
         EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(player, player, DamageCause.ENTITY_ATTACK, 1.0);
 
         ExecutorTriggerHandler.executeAction(event);
@@ -507,6 +508,7 @@ public class ExecutorTriggerHandlerTest {
         player.getInventory().setItemInMainHand(mhi);
         player.getInventory().setItemInOffHand(ohi);
 
+        @SuppressWarnings({"removal"})
         PlayerItemConsumeEvent event = new PlayerItemConsumeEvent(player, new ItemStack(Material.APPLE));
 
         ExecutorTriggerHandler.executeAction(event);
@@ -1377,6 +1379,7 @@ public class ExecutorTriggerHandlerTest {
             throw new UnsupportedOperationException("Unimplemented method 'setInvulnerable'");
         }
 
+        @SuppressWarnings({"removal"})
         @Override
         public void setLastDamageCause(@Nullable EntityDamageEvent arg0) {
             // TODO Auto-generated method stub
@@ -1707,6 +1710,7 @@ public class ExecutorTriggerHandlerTest {
             throw new UnsupportedOperationException("Unimplemented method 'canHitEntity'");
         }
 
+        @SuppressWarnings({"removal"})
         @Override
         public boolean doesBounce() {
             // TODO Auto-generated method stub
@@ -1748,6 +1752,7 @@ public class ExecutorTriggerHandlerTest {
             throw new UnsupportedOperationException("Unimplemented method 'hitEntity'");
         }
 
+        @SuppressWarnings({"removal"})
         @Override
         public void setBounce(boolean arg0) {
             // TODO Auto-generated method stub
