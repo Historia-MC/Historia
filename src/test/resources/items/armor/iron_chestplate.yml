@@ -1,0 +1,41 @@
+Light_Iron_Chestplate:
+  material: CHAINMAIL_CHESTPLATE
+  amount: 1
+  display-name: §7Chainmail Chestplate
+  loc-name: Light_Iron_Chestplate
+  type: light
+  weight: 25
+  recipe-id: iron_chestplate
+  canCraft: [ALL]
+
+  armor:
+    defense: [2.5, 4.0]
+    durability: [140, 240]
+
+Moderate_Iron_Chestplate:
+  material: IRON_CHESTPLATE
+  amount: 1
+  display-name: §7Iron Chestplate
+  loc-name: Moderate_Iron_Chestplate
+  type: moderate
+  weight: 35
+  recipe-id: iron_chestplate
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [3.0, 5.0]
+    durability: [150, 275]
+
+Heavy_Iron_Chestplate:
+  material: IRON_CHESTPLATE
+  amount: 1
+  display-name: §7Iron Chestplate
+  loc-name: Heavy_Iron_Chestplate
+  type: heavy
+  weight: 45
+  recipe-id: iron_chestplate
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [3.5, 6.0]
+    durability: [175, 300]

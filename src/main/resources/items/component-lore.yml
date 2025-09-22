@@ -1,0 +1,25 @@
+tool:
+  head:
+    - "Intended to be used."
+  attribute:
+    - "<tool-damage> damage."
+    - "<tool-speed> speed."
+    - "<tool-knockback> knockback."
+
+weapon:
+  head:
+    - "Specialized for combat."
+  attribute:
+    - "<weapon-sweeping> sweep."
+
+armor:
+  head:
+    - "Specialized for combat."
+  attribute:
+    - "<armor-defense> defense."
+
+weight:
+  head:
+    - ""
+  attribute:
+    - "<item-weight> weight."

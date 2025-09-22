@@ -1,0 +1,632 @@
+# instead of having multiple types
+# we could check if the item is of ingot
+# and get the item from the ingot type and
+# weight modifier.
+
+# for the below example, we could do
+# style: axe
+# low_light_bronze_ingot would parse to
+# id: $WEIGHT$_$INGOT$_$STYLE$
+# id: light_bronze_axe
+
+# NEED TO MAKE GENERICS FOR MULTIPLE ITEM VARIANTS
+# SUCH AS WOOD
+
+recipe:
+  - example_generic_axe:
+    type: SHAPED
+    style: axe
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - $INGOT$
+      - STICK
+    result:
+      item: $WEGIHT$_$INGOT$_$STYLE$
+      amount: 1
+
+  - bronze_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - bronze_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - iron_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_pitchfork:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_trident:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - steel_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_pitchfork:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_trident:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - stone_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_pitchfork:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_trident:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - tin_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_pitchfork:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_trident:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - wood_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_pitchfork:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_sword:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "A"
+      - "B"
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_trident:
+    type: SHAPED
+    pattern:
+      - " AA"
+      - " BA"
+      - "B  "
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - bronze_boots:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "A A"
+    items:
+      - BRONZE_INGOT
+
+  - bronze_chestplate:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "AAA"
+      - "AAA"
+    items:
+      - BRONZE_INGOT
+
+  - bronze_helmet:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+    items:
+      - BRONZE_INGOT
+
+  - bronze_leggings:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+      - "A A"
+    items:
+      - BRONZE_INGOT
+
+  - iron_boots:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "A A"
+    items:
+      - IRON_INGOT
+
+  - iron_chestplate:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "AAA"
+      - "AAA"
+    items:
+      - IRON_INGOT
+
+  - iron_helmet:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+    items:
+      - IRON_INGOT
+
+  - iron_leggings:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+      - "A A"
+    items:
+      - IRON_INGOT
+
+  - steel_boots:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "A A"
+    items:
+      - STEEL_INGOT
+
+  - steel_chestplate:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "AAA"
+      - "AAA"
+    items:
+      - STEEL_INGOT
+
+  - steel_helmet:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+    items:
+      - STEEL_INGOT
+
+  - steel_leggings:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+      - "A A"
+    items:
+      - STEEL_INGOT
+
+  - tin_boots:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "A A"
+    items:
+      - TIN_INGOT
+
+  - tin_chestplate:
+    type: SHAPED
+    pattern:
+      - "A A"
+      - "AAA"
+      - "AAA"
+    items:
+      - TIN_INGOT
+
+  - tin_helmet:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+    items:
+      - TIN_INGOT
+
+  - tin_leggings:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+      - "A A"
+    items:
+      - TIN_INGOT
+
+  - turtle_helmet:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - "A A"
+    items:
+      - SCUTE
+
+  - wood_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - wood_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - OAK_PLANKS
+      - STICK
+
+  - bronze_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - bronze_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - bronze_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - bronze_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - BRONZE_INGOT
+      - STICK
+
+  - iron_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - iron_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - IRON_INGOT
+      - STICK
+
+  - steel_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - steel_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - STEEL_INGOT
+      - STICK
+
+  - stone_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - stone_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - COBBLESTONE
+      - STICK
+
+  - tin_pickaxe:
+    type: SHAPED
+    pattern:
+      - "AAA"
+      - " B "
+      - " B "
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_shovel:
+    type: SHAPED
+    pattern:
+      - "A"
+      - "B"
+      - "B"
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_hoe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - " B"
+      - " B"
+    items:
+      - TIN_INGOT
+      - STICK
+
+  - tin_axe:
+    type: SHAPED
+    pattern:
+      - "AA"
+      - "AB"
+      - " B"
+    items:
+      - TIN_INGOT
+      - STICK

@@ -1,0 +1,26 @@
+Light_Tin_Boots:
+  material: IRON_BOOTS
+  amount: 1
+  display-name: §7Tin Boots
+  loc-name: Light_Tin_Boots
+  type: light
+  weight: 15
+  recipe-id: tin_boots
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.5]
+    durability: [60, 90]
+
+  executor:
+    right_click:
+      commands:
+        - /time set day
+      uses: 1
+      cooldown: 1000
+    left_click:
+      commands:
+        - /time set day
+        - /time set night
+      uses: 1
+      cooldown: 500

@@ -1,0 +1,41 @@
+Light_Steel_Helmet:
+  material: NETHERITE_HELMET
+  amount: 1
+  display-name: §7Steel Helmet
+  loc-name: Light_Steel_Helmet
+  type: light
+  weight: 20
+  recipe-id: steel_helmet
+  canCraft: [ALL]
+
+  armor:
+    defense: [1.5, 2.0]
+    durability: [200, 350]
+
+Moderate_Steel_Helmet:
+  material: NETHERITE_HELMET
+  amount: 1
+  display-name: §7Steel Helmet
+  loc-name: Moderate_Steel_Helmet
+  type: moderate
+  weight: 25
+  recipe-id: steel_helmet
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.0, 3.0]
+    durability: [225, 375]
+
+Heavy_Steel_Helmet:
+  material: NETHERITE_HELMET
+  amount: 1
+  display-name: §7Steel Helmet
+  loc-name: Heavy_Steel_Helmet
+  type: heavy
+  weight: 35
+  recipe-id: steel_helmet
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.5, 3.5]
+    durability: [250, 400]

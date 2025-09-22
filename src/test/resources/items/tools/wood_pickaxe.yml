@@ -1,0 +1,15 @@
+Light_Wooden_Pickaxe:
+  material: WOODEN_PICKAXE
+  amount: 1
+  display-name: §7Light Pickaxe
+  loc-name: Light_Wooden_Pickaxe
+  type: light
+  weight: 25
+  recipe-id: wood_pickaxe
+  canCraft: [ALL]
+
+  tool:
+    damage: [1.0, 2.0]
+    speed: [1.4, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [40, 60]

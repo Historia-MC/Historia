@@ -1,0 +1,56 @@
+Light_Steel_Axe:
+  material: NETHERITE_AXE
+  amount: 1
+  display-name: §7Iron Hatchet
+  loc-name: Light_Iron_Axe
+  type: light
+  weight: 45
+  recipe-id: steel_axe
+  canCraft: [ALL]
+
+  tool:
+    damage: [7.0, 9.0]
+    speed: [0.6, 1.0]
+    knockback: [1.5, 3.0]
+    durability: [300, 375]
+
+  weapon:
+    sweeping: [0.0, 0.0]
+
+Moderate_Steel_Axe:
+  material: NETHERITE_AXE
+  amount: 1
+  display-name: §7Iron Axe
+  loc-name: Moderate_Iron_Axe
+  type: moderate
+  weight: 50
+  recipe-id: steel_axe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [7.5, 10]
+    speed: [0.7, 0.9]
+    knockback: [1.5, 3.0]
+    durability: [350, 400]
+
+  weapon:
+    sweeping: [0.0, 0.0]
+
+Heavy_Steel_Axe:
+  material: NETHERITE_AXE
+  amount: 1
+  display-name: §7Iron Mace
+  loc-name: Heavy_Iron_Axe
+  type: heavy
+  weight: 60
+  recipe-id: steel_axe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [5.0, 8.0]
+    speed: [0.5, 0.8]
+    knockback: [3.0, 4.5]
+    durability: [200, 275]
+
+  weapon:
+    sweeping: [0.0, 0.0]

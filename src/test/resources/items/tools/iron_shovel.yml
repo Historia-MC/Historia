@@ -1,0 +1,47 @@
+Light_Iron_Shovel:
+  material: IRON_SHOVEL
+  amount: 1
+  display-name: §7Iron Hatchet
+  loc-name: Light_Iron_Shovel
+  type: light
+  weight: 25
+  recipe-id: iron_shovel
+  canCraft: [ALL]
+
+  tool:
+    damage: [4.0, 7.0]
+    speed: [0.6, 1.0]
+    knockback: [1.0, 1.5]
+    durability: [145, 175]
+
+Moderate_Iron_Shovel:
+  material: IRON_SHOVEL
+  amount: 1
+  display-name: §7Iron Shovel
+  loc-name: Moderate_Iron_Shovel
+  type: moderate
+  weight: 30
+  recipe-id: iron_shovel
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [4.5, 7.5]
+    speed: [0.6, 0.9]
+    knockback: [1.5, 3.0]
+    durability: [175, 225]
+
+Heavy_Iron_Shovel:
+  material: IRON_SHOVEL
+  amount: 1
+  display-name: §7Iron Bardiche
+  loc-name: Heavy_Iron_Shovel
+  type: heavy
+  weight: 35
+  recipe-id: iron_shovel
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [5.0, 8.0]
+    speed: [0.5, 0.8]
+    knockback: [3.0, 4.5]
+    durability: [200, 275]

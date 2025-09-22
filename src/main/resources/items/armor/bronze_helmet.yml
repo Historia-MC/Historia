@@ -1,0 +1,41 @@
+Light_Bronze_Helmet:
+  material: GOLDEN_HELMET
+  amount: 1
+  display-name: §7Bronze Helmet
+  loc-name: Light_Bronze_Helmet
+  type: light
+  weight: 20
+  recipe-id: bronze_helmet
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.5]
+    durability: [75, 110]
+
+Moderate_Bronze_Helmet:
+  material: GOLDEN_HELMET
+  amount: 1
+  display-name: §7Bronze Helmet
+  loc-name: Moderate_Bronze_Helmet
+  type: moderate
+  weight: 25
+  recipe-id: bronze_helmet
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.0, 1.5]
+    durability: [80, 120]
+
+Heavy_Bronze_Helmet:
+  material: GOLDEN_HELMET
+  amount: 1
+  display-name: §7Bronze Helmet
+  loc-name: Heavy_Bronze_Helmet
+  type: heavy
+  weight: 35
+  recipe-id: bronze_helmet
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.0, 2.0]
+    durability: [85, 130]

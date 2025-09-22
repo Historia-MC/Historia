@@ -1,0 +1,56 @@
+Light_Iron_Axe:
+  material: IRON_AXE
+  amount: 1
+  display-name: §7Iron Hatchet
+  loc-name: Light_Iron_Axe
+  type: light
+  weight: 25
+  recipe-id: iron_axe
+  canCraft: [ALL]
+
+  tool:
+    damage: [4.0, 7.0]
+    speed: [0.6, 1.0]
+    knockback: [1.0, 1.5]
+    durability: [145, 175]
+
+  weapon:
+    sweeping: [0.0, 0.0]
+
+Moderate_Iron_Axe:
+  material: IRON_AXE
+  amount: 1
+  display-name: §7Iron Axe
+  loc-name: Moderate_Iron_Axe
+  type: moderate
+  weight: 30
+  recipe-id: iron_axe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [4.5, 7.5]
+    speed: [0.6, 0.9]
+    knockback: [1.5, 3.0]
+    durability: [175, 225]
+
+  weapon:
+    sweeping: [0.0, 0.0]
+
+Heavy_Iron_Axe:
+  material: IRON_AXE
+  amount: 1
+  display-name: §7Iron Bardiche
+  loc-name: Heavy_Iron_Axe
+  type: heavy
+  weight: 40
+  recipe-id: iron_axe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [5.0, 8.0]
+    speed: [0.5, 0.8]
+    knockback: [3.0, 4.5]
+    durability: [200, 275]
+
+  weapon:
+    sweeping: [0.0, 0.0]

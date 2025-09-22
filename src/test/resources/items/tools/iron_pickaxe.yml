@@ -1,0 +1,47 @@
+Light_Iron_Pickaxe:
+  material: IRON_PICKAXE
+  amount: 1
+  display-name: §7Iron Pickaxe
+  loc-name: Light_Iron_Pickaxe
+  type: light
+  weight: 25
+  recipe-id: iron_pickaxe
+  canCraft: [ALL]
+
+  tool:
+    damage: [3.5, 5.5]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [145, 175]
+
+Moderate_Iron_Pickaxe:
+  material: IRON_PICKAXE
+  amount: 1
+  display-name: §7Iron Pickaxe
+  loc-name: Moderate_Iron_Pickaxe
+  type: moderate
+  weight: 30
+  recipe-id: iron_pickaxe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [4.5, 6.0]
+    speed: [1.0, 1.4]
+    knockback: [0.5, 2.0]
+    durability: [175, 225]
+
+Heavy_Iron_Pickaxe:
+  material: IRON_PICKAXE
+  amount: 1
+  display-name: §7Iron Greatsword
+  loc-name: Heavy_Iron_Pickaxe
+  type: heavy
+  weight: 35
+  recipe-id: iron_pickaxe
+  canCraft: [Blacksmith]
+
+  tool:
+    damage: [5.0, 7.0]
+    speed: [0.8, 1.2]
+    knockback: [2.0, 3.5]
+    durability: [200, 250]

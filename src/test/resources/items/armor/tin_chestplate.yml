@@ -1,0 +1,13 @@
+Light_Tin_Chestplate:
+  material: IRON_CHESTPLATE
+  amount: 1
+  display-name: §7Tin Chestplate
+  loc-name: Light_Tin_Chestplate
+  type: light
+  weight: 25
+  recipe-id: tin_chestplate
+  canCraft: [ALL]
+
+  armor:
+    defense: [2.0, 3.0]
+    durability: [70, 125]

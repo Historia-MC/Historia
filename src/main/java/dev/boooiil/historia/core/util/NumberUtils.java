@@ -7,7 +7,7 @@ public class NumberUtils {
 
     /**
      * Generate a random number between the given values.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
@@ -18,51 +18,95 @@ public class NumberUtils {
 
     /**
      * Generate a random number between the given values.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
      */
     public static float random(float min, float max) {
-        return (float) (Math.random() * (max - min + 1) + min);
+        return (float) (Math.random() * (max - min) + min);
     }
 
     /**
      * Generate a random number between the given values.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
      */
     public static double random(double min, double max) {
-        return (Math.random() * (max - min + 1) + min);
+        return (Math.random() * (max - min) + min);
     }
 
     /**
      * Generate a random number between the given values to a tenth.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
      */
     public static float randomToTenth(int min, int max) {
-        return (float) (Math.round(Math.random() * (max - min + 1) + min) * 10) / 10;
+        return Math.round((Math.random() * (max - min) + min) * 10) / 10f;
+    }
+
+    /**
+     * Generate a random number between the given values to a tenth.
+     *
+     * @param min - Minimum number.
+     * @param max - Maximum number.
+     * @return number between the minimum and maximum.
+     */
+    public static float randomToTenth(float min, float max) {
+        return Math.round((Math.random() * (max - min) + min) * 10) / 10f;
+    }
+
+    /**
+     * Generate a random number between the given values to a tenth.
+     *
+     * @param min - Minimum number.
+     * @param max - Maximum number.
+     * @return number between the minimum and maximum.
+     */
+    public static float randomToTenth(double min, double max) {
+        return Math.round((Math.random() * (max - min) + min) * 10) / 10f;
     }
 
     /**
      * Generate a random number between the given values to a hundredth.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
      */
     public static float randomToHundredth(int min, int max) {
-        return (float) (Math.round(Math.random() * (max - min + 1) + min) * 100) / 100;
+        return Math.round((Math.random() * (max - min) + min) * 100) / 100f;
+    }
+
+    /**
+     * Generate a random number between the given values to a hundredth.
+     *
+     * @param min - Minimum number.
+     * @param max - Maximum number.
+     * @return number between the minimum and maximum.
+     */
+    public static float randomToHundredth(float min, float max) {
+        return Math.round((Math.random() * (max - min) + min) * 100) / 100f;
+    }
+
+    /**
+     * Generate a random number between the given values to a hundredth.
+     *
+     * @param min - Minimum number.
+     * @param max - Maximum number.
+     * @return number between the minimum and maximum.
+     */
+    public static float randomToHundredth(double min, double max) {
+        return Math.round((Math.random() * (max - min) + min) * 100) / 100f;
     }
 
     /**
      * Generate a random number between the given values.
-     * 
+     *
      * @param min - Minimum number.
      * @param max - Maximum number.
      * @return number between the minimum and maximum.
@@ -73,12 +117,12 @@ public class NumberUtils {
 
     /**
      * Round a number to the given places.
-     * 
+     *
      * <pre>
      * float f = 9.00001;
      * roundFloat(f, 2); // --> 9.00
      * </pre>
-     * 
+     *
      * @param value  - The value.
      * @param places - The number of places.
      * @return a number that is trimmed to a number of places.
@@ -89,12 +133,12 @@ public class NumberUtils {
 
     /**
      * Round a number to the given places.
-     * 
+     *
      * <pre>
      * double d = 9.00001;
      * roundDouble(d, 2); // --> 9.00
      * </pre>
-     * 
+     *
      * @param value  - The value.
      * @param places - The number of places.
      * @return a number that is trimmed to a number of places.

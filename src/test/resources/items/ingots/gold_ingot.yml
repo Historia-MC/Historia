@@ -1,0 +1,32 @@
+Poor_Light_Gold_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §cGold
+  loc-name: Poor_Light_Gold_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: poor
+
+Common_Light_Gold_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §2Gold
+  loc-name: Common_Light_Gold_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: common
+
+Perfect_Light_Gold_Ingot:
+  material: GOLD_INGOT
+  amount: 1
+  display-name: §6Gold
+  loc-name: Perfect_Light_Gold_Ingot
+  weight: 1
+
+  modifier:
+    weight: light
+    quality: perfect

@@ -1,0 +1,56 @@
+Light_Steel_Trident:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Steel Trident
+  loc-name: Light_Steel_Trident
+  type: light
+  weight: 90
+  recipe-id: steel_trident
+  canCraft: [Fisherman]
+
+  tool:
+    damage: [6.0, 7.5]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [600, 750]
+
+  weapon:
+    sweeping: [2.8, 3.75]
+
+Moderate_Steel_Trident:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Steel Trident
+  loc-name: Moderate_Steel_Trident
+  type: moderate
+  weight: 100
+  recipe-id: steel_trident
+  canCraft: [Fisherman]
+
+  tool:
+    damage: [6.0, 7.5]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [600, 750]
+
+  weapon:
+    sweeping: [2.8, 3.75]
+
+Heavy_Steel_Trident:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Steel Trident
+  loc-name: Heavy_Steel_Trident
+  type: heavy
+  weight: 110
+  recipe-id: steel_trident
+  canCraft: [Fisherman]
+
+  tool:
+    damage: [6.0, 7.5]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [600, 750]
+
+  weapon:
+    sweeping: [2.8, 3.75]

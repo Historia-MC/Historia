@@ -1,0 +1,18 @@
+Heavy_Stone_Trident:
+  material: TRIDENT
+  amount: 1
+  display-name: §7Stone Trident
+  loc-name: Heavy_Stone_Trident
+  type: heavy
+  weight: 25
+  recipe-id: stone_trident
+  canCraft: [Fisherman]
+
+  tool:
+    damage: [5.0, 6.5]
+    speed: [1.3, 1.6]
+    knockback: [0.0, 0.5]
+    durability: [400, 500]
+
+  weapon:
+    sweeping: [2.5, 3.25]

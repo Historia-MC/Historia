@@ -1,0 +1,41 @@
+Light_Steel_Boots:
+  material: NETHERITE_BOOTS
+  amount: 1
+  display-name: §7Steel Boots
+  loc-name: Light_Steel_Boots
+  type: light
+  weight: 15
+  recipe-id: steel_boots
+  canCraft: [ALL]
+
+  armor:
+    defense: [1.5, 2.5]
+    durability: [250, 350]
+
+Moderate_Steel_Boots:
+  material: NETHERITE_BOOTS
+  amount: 1
+  display-name: §7Steel Boots
+  loc-name: Moderate_Steel_Boots
+  type: moderate
+  weight: 25
+  recipe-id: steel_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.0, 3.0]
+    durability: [300, 385]
+
+Heavy_Steel_Boots:
+  material: NETHERITE_BOOTS
+  amount: 1
+  display-name: §7Steel Boots
+  loc-name: Heavy_Steel_Boots
+  type: heavy
+  weight: 35
+  recipe-id: steel_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.5, 3.5]
+    durability: [350, 450]

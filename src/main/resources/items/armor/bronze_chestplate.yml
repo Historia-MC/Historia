@@ -1,0 +1,41 @@
+Light_Bronze_Chestplate:
+  material: GOLDEN_CHESTPLATE
+  amount: 1
+  display-name: §7Bronze Chestplate
+  loc-name: Light_Bronze_Chestplate
+  type: light
+  weight: 25
+  recipe-id: bronze_chestplate
+  canCraft: [ALL]
+
+  armor:
+    defense: [2.5, 3.0]
+    durability: [70, 125]
+
+Moderate_Bronze_Chestplate:
+  material: GOLDEN_CHESTPLATE
+  amount: 1
+  display-name: §7Bronze Chestplate
+  loc-name: Moderate_Bronze_Chestplate
+  type: moderate
+  weight: 35
+  recipe-id: bronze_chestplate
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.5, 3.5]
+    durability: [75, 150]
+
+Heavy_Bronze_Chestplate:
+  material: GOLDEN_CHESTPLATE
+  amount: 1
+  display-name: §7Bronze Chestplate
+  loc-name: Heavy_Bronze_Chestplate
+  type: heavy
+  weight: 45
+  recipe-id: bronze_chestplate
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [2.5, 4.0]
+    durability: [90, 175]

@@ -1,0 +1,41 @@
+Light_Leather_Leggings:
+  material: LEATHER_LEGGINGS
+  amount: 1
+  display-name: §7Leather Leggings
+  loc-name: Light_Leather_Leggings
+  type: light
+  weight: 15
+  recipe-id: leather_leggings
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.0]
+    durability: [30, 60]
+
+Moderate_Leather_Leggings:
+  material: LEATHER_LEGGINGS
+  amount: 1
+  display-name: §7Leather Leggings
+  loc-name: Moderate_Leather_Leggings
+  type: moderate
+  weight: 25
+  recipe-id: leather_leggings
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.0, 2.0]
+    durability: [30, 60]
+
+Heavy_Leather_Leggings:
+  material: LEATHER_LEGGINGS
+  amount: 1
+  display-name: §7Leather Leggings
+  loc-name: Heavy_Leather_Leggings
+  type: heavy
+  weight: 35
+  recipe-id: leather_leggings
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.5, 2.5]
+    durability: [40, 70]

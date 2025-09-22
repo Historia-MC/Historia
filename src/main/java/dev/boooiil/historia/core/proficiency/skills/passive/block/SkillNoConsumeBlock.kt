@@ -5,6 +5,7 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
+import dev.boooiil.historia.core.util.JSONUtils
 import net.kyori.adventure.key.Key
 import org.bukkit.GameEvent
 import org.bukkit.Material
@@ -174,6 +175,14 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
     }
 
     override fun toJSON(): String {
-        TODO("Not yet implemented")
+        // TODO: finish
+        val sb = StringBuilder()
+
+        sb.append("{")
+        sb.append(JSONUtils.fromValue("name", this.name)).append(",")
+        sb.append(JSONUtils.fromValue("description", this.description))
+        sb.append("}")
+
+        return sb.toString()
     }
 }

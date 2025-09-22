@@ -1,0 +1,41 @@
+Light_Bronze_Boots:
+  material: GOLDEN_BOOTS
+  amount: 1
+  display-name: §7Bronze Boots
+  loc-name: Light_Bronze_Boots
+  type: light
+  weight: 15
+  recipe-id: bronze_boots
+  canCraft: [ALL]
+
+  armor:
+    defense: [0.5, 1.5]
+    durability: [70, 125]
+
+Moderate_Bronze_Boots:
+  material: GOLDEN_BOOTS
+  amount: 1
+  display-name: §7Bronze Boots
+  loc-name: Moderate_Bronze_Boots
+  type: moderate
+  weight: 25
+  recipe-id: bronze_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.5, 2.0]
+    durability: [80, 150]
+
+Heavy_Bronze_Boots:
+  material: GOLDEN_BOOTS
+  amount: 1
+  display-name: §7Bronze Boots
+  loc-name: Heavy_Bronze_Boots
+  type: heavy
+  weight: 35
+  recipe-id: bronze_boots
+  canCraft: [Blacksmith]
+
+  armor:
+    defense: [1.5, 2.5]
+    durability: [90, 175]

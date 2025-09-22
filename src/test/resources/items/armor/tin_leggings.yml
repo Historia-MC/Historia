@@ -1,0 +1,13 @@
+Light_Tin_Leggings:
+  material: IRON_LEGGINGS
+  amount: 1
+  display-name: §7Tin Leggings
+  loc-name: Light_Tin_Leggings
+  type: light
+  weight: 25
+  recipe-id: tin_leggings
+  canCraft: [ALL]
+
+  armor:
+    defense: [1.5, 3.0]
+    durability: [70, 125]

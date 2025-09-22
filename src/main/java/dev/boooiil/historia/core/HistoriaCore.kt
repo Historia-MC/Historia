@@ -3,6 +3,8 @@ package dev.boooiil.historia.core
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.commands.*
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
+import dev.boooiil.historia.core.configuration.ItemRegistryLoader
+import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
 import dev.boooiil.historia.core.database.sql.HistoriaDatabaseExecutor
 import dev.boooiil.historia.core.events.block.BlockBreakListener
@@ -13,6 +15,16 @@ import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
 import dev.boooiil.historia.core.file.FileIO
+import dev.boooiil.historia.core.items.HistoriaItem
+import dev.boooiil.historia.core.items.ItemComponent
+import dev.boooiil.historia.core.items.ItemComponentType
+import dev.boooiil.historia.core.items.events.entity.*
+import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
+import dev.boooiil.historia.core.items.events.inventory.InventoryOpenListener
+import dev.boooiil.historia.core.items.events.player.PlayerItemConsumeListener
+import dev.boooiil.historia.core.items.events.player.PlayerSwapHandItemsListener
+import dev.boooiil.historia.core.items.events.player.PlayerToggleSneakListener
+import dev.boooiil.historia.core.items.events.player.PlayerToggleSprintListener
 import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
@@ -49,7 +61,10 @@ open class HistoriaCore : JavaPlugin() {
         CoreLogger.infoToConsole("Plugin has loaded.")
 
         // Check config files
-        FileIO.checkFiles()
+        FileIO.checkAndSaveResources("config.yml")
+        FileIO.checkAndSaveResources("skills.yml")
+        FileIO.checkAndSaveResources("proficiency.yml")
+        FileIO.checkAndSaveResources("items")
 
         CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion())
 
@@ -91,6 +106,24 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(BlockFromToListener())
         registerEvent(PlayerInteractListener())
 
+        // historia items event listeners
+        registerEvent(EntityDamageByEntityListener())
+        registerEvent(EntityDropItemListener())
+        registerEvent(EntityInteractListener())
+        registerEvent(EntityPickupItemListener())
+        registerEvent(EntityToggleSwimListener())
+        registerEvent(ProjectileLaunchListener())
+        registerEvent(InventoryCloseListener())
+        registerEvent(InventoryOpenListener())
+        // registerEvent(new PlayerInteractListener());
+        registerEvent(PlayerItemConsumeListener())
+        registerEvent(PlayerSwapHandItemsListener())
+        registerEvent(PlayerToggleSneakListener())
+        registerEvent(PlayerToggleSprintListener())
+        // end
+
+
+        registerCommand("give", CommandGive())
         registerCommand("checkplayers", CommandPlayers())
         registerCommand("debug", CommandDebug())
         registerCommand("stats", CommandStats())
@@ -106,8 +139,18 @@ open class HistoriaCore : JavaPlugin() {
 
         CoreLogger.infoToConsole("Plugin Enabled.")
 
+
+        // TODO: figure out what to do with all of these 'loaders'
+
         SkillRegistryLoader.load()
         ProficiencyRegistryLoader.load()
+
+        // item related configurations merged from HistoriaItems
+        ItemComponentType.registerComponents()
+        LoreConfiguration.initLoreMap()
+        ItemRegistryLoader.load()
+        // RecipeLoader.load()
+        // end
     }
 
     /**
@@ -190,8 +233,20 @@ open class HistoriaCore : JavaPlugin() {
         }
         val STAT_MODIFIERS_REGISTRY: Registry<StatModifiers> by lazy {
             registryHolder.register(
-                getNamespacedKey("stat_modifiers"),
+                getNamespacedKey("stat_modifier"),
                 Registry<StatModifiers>(StatModifiers::class.java)
+            )
+        }
+        val ITEM_REGISTRY: Registry<HistoriaItem> by lazy {
+            registryHolder.register(
+                getNamespacedKey("item"),
+                Registry<HistoriaItem>(HistoriaItem::class.java)
+            )
+        }
+        val COMPONENT_REGISTRY: Registry<ItemComponentType<out ItemComponent>> by lazy {
+            registryHolder.register(
+                getNamespacedKey("component"),
+                Registry<ItemComponentType<out ItemComponent>>(ItemComponentType::class.java)
             )
         }
 
