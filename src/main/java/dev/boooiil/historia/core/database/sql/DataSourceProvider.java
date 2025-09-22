@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.database.sql;
 
-import com.palmergames.hikaricp.HikariConfig;
-import com.palmergames.hikaricp.HikariDataSource;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 
@@ -39,14 +39,11 @@ public class DataSourceProvider implements AutoCloseable {
     }
 
     public HikariDataSource getActiveDataSource() {
-        switch (activeDatabaseType) {
-            case MYSQL:
-                return mysqlDataSource;
-            case SQLITE:
-                return sqliteDataSource;
-            default:
-                throw new IllegalStateException("Unimplemented connection type value: " + activeDatabaseType);
-        }
+        return switch (activeDatabaseType) {
+            case MYSQL -> mysqlDataSource;
+            case SQLITE -> sqliteDataSource;
+            default -> throw new IllegalStateException("Unimplemented connection type value: " + activeDatabaseType);
+        };
     }
 
     public DatabaseType getActiveDatabaseType() {

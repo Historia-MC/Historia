@@ -390,7 +390,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        HistoriaCore.Companion.getDatabaseHandler().saveUser(this);
+        HistoriaCore.Companion.getDatabaseExecutor().saveUser(this);
 
         // Main.getDatabaseHandler().setProficiency(this.getUUID(),
         // this.getProficiency().getName());

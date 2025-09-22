@@ -3,10 +3,8 @@ package dev.boooiil.historia.core
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.commands.*
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
-import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType
-import dev.boooiil.historia.core.database.ICoreDatabaseHandler
-import dev.boooiil.historia.core.database.mysql.CoreMySQLHandler
-import dev.boooiil.historia.core.database.sqlite.CoreSQLiteHandler
+import dev.boooiil.historia.core.database.sql.DataSourceProvider
+import dev.boooiil.historia.core.database.sql.HistoriaDatabaseExecutor
 import dev.boooiil.historia.core.events.block.BlockBreakListener
 import dev.boooiil.historia.core.events.block.BlockFromToListener
 import dev.boooiil.historia.core.events.block.BlockPlaceListener
@@ -76,7 +74,9 @@ open class HistoriaCore : JavaPlugin() {
 
         ConfigurationLoader.init()
 
-        initDatabase()
+        val provider = DataSourceProvider()
+        databaseExecutor = HistoriaDatabaseExecutor(provider)
+        databaseExecutor.createTable()
 
         registerEvent(EntityBreedListener())
         registerEvent(EntityTameListener())
@@ -115,37 +115,12 @@ open class HistoriaCore : JavaPlugin() {
      */
     // It's a method that is called when the plugin is disabled.
     override fun onDisable() {
-        closeDatabase()
 
+        databaseExecutor.close()
         CoreLogger.errorToConsole("The plugin has been disabled.")
         CoreLogger.errorToConsole("Stopping the server to prevent potential harm.")
 
         if (!isTesting) server.shutdown()
-    }
-
-    /**
-     * Initialize the database.
-     */
-    private fun initDatabase() {
-        when (val dbType = ConfigurationLoader.getGeneralConfig().databaseType) {
-            DatabaseType.MYSQL -> databaseHandler = CoreMySQLHandler()
-            else -> {
-                CoreLogger.debugToConsole("Using default database type. Configured:", dbType.name)
-                databaseHandler = CoreSQLiteHandler()
-            }
-        }
-
-        databaseHandler.initDataSource()
-        databaseHandler.connect()
-        databaseHandler.createTable()
-    }
-
-    /**
-     * Close the database.
-     */
-    private fun closeDatabase() {
-        databaseHandler.closeConnection()
-        databaseHandler.closeDataSource()
     }
 
     /**
@@ -214,7 +189,10 @@ open class HistoriaCore : JavaPlugin() {
             registryHolder.register(getNamespacedKey("proficiency"), Registry<Proficiency>(Proficiency::class.java))
         }
         val STAT_MODIFIERS_REGISTRY: Registry<StatModifiers> by lazy {
-            registryHolder.register(getNamespacedKey("stat_modifiers"), Registry<StatModifiers>(StatModifiers::class.java))
+            registryHolder.register(
+                getNamespacedKey("stat_modifiers"),
+                Registry<StatModifiers>(StatModifiers::class.java)
+            )
         }
 
         /** this plugin instance  */
@@ -222,7 +200,7 @@ open class HistoriaCore : JavaPlugin() {
             private set
 
         /** the database handler  */
-        lateinit var databaseHandler: ICoreDatabaseHandler
+        lateinit var databaseExecutor: HistoriaDatabaseExecutor
             private set
 
         /**

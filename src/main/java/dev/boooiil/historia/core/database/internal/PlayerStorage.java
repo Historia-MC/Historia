@@ -83,7 +83,7 @@ public class PlayerStorage {
 
         else {
 
-            HistoriaPlayer player = HistoriaCore.Companion.getDatabaseHandler().getUser(uuid);
+            HistoriaPlayer player = HistoriaCore.Companion.getDatabaseExecutor().getUser(uuid);
             addPlayer(uuid, player);
             return player;
         }
@@ -95,13 +95,13 @@ public class PlayerStorage {
             return players.get(usernameMap.get(username));
         }
 
-        UUID uuid = HistoriaCore.Companion.getDatabaseHandler().getUUID(username);
+        UUID uuid = HistoriaCore.Companion.getDatabaseExecutor().getUUID(username);
 
         if (uuid == null) {
             return null;
         }
 
-        return HistoriaCore.Companion.getDatabaseHandler().getUser(uuid);
+        return HistoriaCore.Companion.getDatabaseExecutor().getUser(uuid);
     }
 
     public static ConcurrentHashMap<UUID, HistoriaPlayer> getPlayerMap() {
