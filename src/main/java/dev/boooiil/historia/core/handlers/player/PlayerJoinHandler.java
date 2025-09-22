@@ -19,7 +19,7 @@ public class PlayerJoinHandler {
     public void doPlayerDBInitialization() {
         historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
         historiaPlayer.setLastLogin(System.currentTimeMillis());
-        HistoriaCore.getDatabaseHandler().setLogin(historiaPlayer.getUUID());
+        HistoriaCore.getDatabaseExecutor().setLogin(historiaPlayer.getUUID());
     }
 
     public void doAddToInternalStorage() {
