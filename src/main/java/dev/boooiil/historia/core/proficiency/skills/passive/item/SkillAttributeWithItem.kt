@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent
 import java.util.*
 
 class SkillAttributeWithItem(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -37,13 +37,13 @@ class SkillAttributeWithItem(section: ConfigurationSection) : AbstractSkillHandl
     init {
 
         val sModifier = section.getConfigurationSection("attributes")
-            ?: error("Key 'attributes' must be specified.")
+            ?: error("Key 'attributes' must be specified in $name.")
 
         val sAttribute = sModifier.getString("attribute")
-            ?: error("Key 'attribute' in attributes must be specified.")
+            ?: error("Key 'attribute' in attributes must be specified in $name.")
 
         val sOperation = sModifier.getString("operation")
-            ?: error("Key 'operation' in attributes must be specified.")
+            ?: error("Key 'operation' in attributes  must be specified in $name.")
 
         val modifierLevel = sModifier.getDouble("factor", 1.0)
 
@@ -56,7 +56,6 @@ class SkillAttributeWithItem(section: ConfigurationSection) : AbstractSkillHandl
             operation
         )
 
-        this.name = getNamespacedKey(section.name)
         this.modifier = modifier
         this.attribute = attribute
     }

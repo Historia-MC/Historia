@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.inventory.ItemStack
 
 class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -50,8 +50,6 @@ class SkillEntityDropRestriction(section: ConfigurationSection) : AbstractSkillH
 
             material to min..max
         }
-
-        this.name = HistoriaCore.getNamespacedKey(section.name)
 
     }
 

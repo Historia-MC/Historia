@@ -20,7 +20,7 @@ import java.util.*
 
 @NullMarked
 class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -59,7 +59,6 @@ class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler
             operation
         )
 
-        this.name = HistoriaCore.getNamespacedKey(section.name)
         this.modifier = modifier
         this.attribute = attribute
     }

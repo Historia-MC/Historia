@@ -14,7 +14,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityTameEvent
 
 class SkillAnimalTame(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -27,12 +27,6 @@ class SkillAnimalTame(section: ConfigurationSection) : AbstractSkillHandler() {
     private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
         requireNotNull(EntityType.fromName(entity)) { "Invalid material specified $entity" }
     }.toSet()
-
-    init {
-
-        this.name = HistoriaCore.getNamespacedKey(section.name)
-
-    }
 
     @EventHandler
     fun handle(event: EntityTameEvent) {

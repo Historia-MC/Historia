@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
 
 class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -59,8 +59,6 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
 
             blocks[material] = pair
         }
-
-        this.name = HistoriaCore.getNamespacedKey(section.name)
 
     }
 

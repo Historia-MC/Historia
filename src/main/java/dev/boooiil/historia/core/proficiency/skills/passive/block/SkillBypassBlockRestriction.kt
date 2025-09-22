@@ -21,7 +21,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey
+    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
     override val description: String = section.getString("description") ?: "No description provided."
 
     /**
@@ -55,7 +55,6 @@ class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkill
             blocks[material] = cooldown
         }
 
-        this.name = HistoriaCore.getNamespacedKey(section.name)
 
     }
 
