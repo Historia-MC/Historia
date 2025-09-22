@@ -381,7 +381,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        HistoriaCore.getDatabaseHandler().saveUser(this);
+        HistoriaCore.getDatabaseExecutor().saveUser(this);
 
         // Main.getDatabaseHandler().setProficiency(this.getUUID(),
         // this.getProficiency().getName());

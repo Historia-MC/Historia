@@ -2,12 +2,8 @@ package dev.boooiil.historia.core;
 
 import dev.boooiil.historia.core.commands.*;
 import dev.boooiil.historia.core.configuration.ConfigurationLoader;
-import dev.boooiil.historia.core.database.DatabaseConnection;
-import dev.boooiil.historia.core.database.ICoreDatabaseHandler;
-import dev.boooiil.historia.core.database.IDatabaseConnection;
-import dev.boooiil.historia.core.database.DatabaseConnection.DatabaseType;
-import dev.boooiil.historia.core.database.mysql.CoreMySQLHandler;
-import dev.boooiil.historia.core.database.sqlite.CoreSQLiteHandler;
+import dev.boooiil.historia.core.database.sql.DataSourceProvider;
+import dev.boooiil.historia.core.database.sql.HistoriaDatabaseExecutor;
 import dev.boooiil.historia.core.events.block.BlockBreakListener;
 import dev.boooiil.historia.core.events.block.BlockFromToListener;
 import dev.boooiil.historia.core.events.block.BlockPlaceListener;
@@ -42,8 +38,8 @@ public class HistoriaCore extends JavaPlugin {
     public static boolean isTesting = true;
     /** this plugin instance */
     private static Plugin instance = null;
-    /** the database handler */
-    private static ICoreDatabaseHandler databaseHandler;
+    /** the database executor */
+    private static HistoriaDatabaseExecutor databaseExecutor;
 
     public HistoriaCore() {
         super();
@@ -114,7 +110,12 @@ public class HistoriaCore extends JavaPlugin {
         registerRunnable(new UpdateScoreboardRunnable());
         registerRunnable(new SavePlayerRunnable(), 6000);
 
-        initDatabase();
+        // sql initialization block
+        {
+            DataSourceProvider dataSourceProvider = new DataSourceProvider();
+            databaseExecutor = new HistoriaDatabaseExecutor(dataSourceProvider);
+            databaseExecutor.createTable();
+        }
 
         CoreLogger.infoToConsole("Plugin Enabled.");
 
@@ -127,7 +128,7 @@ public class HistoriaCore extends JavaPlugin {
     // It's a method that is called when the plugin is disabled.
     public void onDisable() {
 
-        closeDatabase();
+        databaseExecutor.close();
 
         CoreLogger.errorToConsole("The plugin has been disabled. This should not happen!");
         CoreLogger.errorToConsole("Stopping the server to prevent potential harm.");
@@ -169,31 +170,8 @@ public class HistoriaCore extends JavaPlugin {
 
     }
 
-    /**
-     * Get the database handler.
-     * 
-     * @return the database handler
-     */
-    public static ICoreDatabaseHandler getDatabaseHandler() {
-        return databaseHandler;
-    }
-
-    /**
-     * Get the database connection.
-     * 
-     * @return the database connection.
-     */
-    public static IDatabaseConnection getIDatabaseConnection() {
-        return databaseHandler;
-    }
-
-    /**
-     * Get the database connection.
-     * 
-     * @return the database connection.
-     */
-    public static DatabaseConnection getBaseDatabaseConnection() {
-        return (DatabaseConnection) databaseHandler;
+    public static HistoriaDatabaseExecutor getDatabaseExecutor() {
+        return databaseExecutor;
     }
 
     /**
@@ -204,35 +182,6 @@ public class HistoriaCore extends JavaPlugin {
      */
     public static NamespacedKey getNamespacedKey(String key) {
         return new NamespacedKey(plugin(), key);
-    }
-
-    /**
-     * Initialize the database.
-     */
-    private void initDatabase() {
-        DatabaseType DBType = ConfigurationLoader.getGeneralConfig().databaseType;
-
-        switch (DBType) {
-            case MYSQL:
-                databaseHandler = new CoreMySQLHandler();
-                break;
-            default:
-                CoreLogger.debugToConsole("Using default database type. Configured:", DBType.name());
-                databaseHandler = new CoreSQLiteHandler();
-                break;
-        }
-
-        databaseHandler.initDataSource();
-        databaseHandler.connect();
-        databaseHandler.createTable();
-    }
-
-    /**
-     * Close the database.
-     */
-    private void closeDatabase() {
-        databaseHandler.closeConnection();
-        databaseHandler.closeDataSource();
     }
 
     /**
