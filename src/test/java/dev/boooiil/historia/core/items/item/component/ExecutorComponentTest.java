@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.items.item.component;
 
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.items.component.ExecutorComponent;
 import dev.boooiil.historia.core.items.data.ExecutorData;
@@ -9,60 +9,34 @@ import dev.boooiil.historia.core.items.types.Triggers;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class ExecutorComponentTest {
+public class ExecutorComponentTest extends BaseTest {
 
-    static ServerMock server;
-    static HistoriaCore plugin;
     YamlConfiguration configuration = FileIO.findYamlConfiguration("bronze_leggings.yml");
     ConfigurationSection item_root = configuration.getConfigurationSection("Light_Bronze_Leggings");
     ConfigurationSection component_root = item_root.getConfigurationSection("executor");
     ExecutorComponent component = ExecutorComponent.fromConfig(component_root);
 
-    @BeforeAll
-    public static void setUp() {
-        System.out.println("Setting up mock...");
-        server = MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            plugin = MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
-    }
-
     @Test
     void testApply() {
         ExecutorData data = component.data();
         CoreLogger.debugToConsole("ExecutorComponentTest", "data", data.toJSON());
-        assertEquals(data.executables(), component.executables());
+        Assertions.assertEquals(data.executables(), component.executables());
     }
 
     @Test
     void testApply2() {
         ExecutorData data = component.data(1f);
 
-        assertEquals(data.executables(), component.executables());
+        Assertions.assertEquals(data.executables(), component.executables());
     }
 
     @Test
@@ -80,9 +54,9 @@ public class ExecutorComponentTest {
 
             ItemExecutable executable = component.executables().get(action);
 
-            assertEquals(commands, executable.commands());
-            assertEquals(uses, executable.uses());
-            assertEquals(cooldown, executable.cooldown());
+            Assertions.assertEquals(commands, executable.commands());
+            Assertions.assertEquals(uses, executable.uses());
+            Assertions.assertEquals(cooldown, executable.cooldown());
 
         }
 
@@ -90,13 +64,13 @@ public class ExecutorComponentTest {
 
     @Test
     void testGetKey() {
-        assertEquals("executor", component.getKey());
+        Assertions.assertEquals("executor", component.getKey());
     }
 
     @Test
     void testToJSON() {
 
-        assertEquals("{}", new ExecutorComponent(new HashMap<>()).toJSON());
+        Assertions.assertEquals("{}", new ExecutorComponent(new HashMap<>()).toJSON());
 
         StringBuilder sb = new StringBuilder();
 
@@ -127,14 +101,14 @@ public class ExecutorComponentTest {
         sb.append("}");
         sb.append("}");
 
-        assertEquals(sb.toString(), component.toJSON());
+        Assertions.assertEquals(sb.toString(), component.toJSON());
 
     }
 
     @Test
     void testToString() {
 
-        assertEquals("ExecutorComponent{}", new ExecutorComponent(new HashMap<>()).toString());
+        Assertions.assertEquals("ExecutorComponent{}", new ExecutorComponent(new HashMap<>()).toString());
 
         StringBuilder sb = new StringBuilder();
 
@@ -165,6 +139,6 @@ public class ExecutorComponentTest {
         sb.append("}");
         sb.append("}");
 
-        assertEquals(sb.toString(), component.toString());
+        Assertions.assertEquals(sb.toString(), component.toString());
     }
 }

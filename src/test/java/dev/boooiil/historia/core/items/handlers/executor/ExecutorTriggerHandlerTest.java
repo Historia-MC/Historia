@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.items.handlers.executor;
 
 import com.destroystokyo.paper.event.player.PlayerJumpEvent;
+import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.items.HistoriaItem;
 import dev.boooiil.historia.core.items.HistoriaItemData;
@@ -8,6 +9,7 @@ import dev.boooiil.historia.core.items.component.ExecutorComponent;
 import dev.boooiil.historia.core.items.data.ExecutorData;
 import dev.boooiil.historia.core.items.executor.ItemExecutable;
 import dev.boooiil.historia.core.items.types.Triggers;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
@@ -41,64 +43,45 @@ import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-public class ExecutorTriggerHandlerTest {
-
-    static ServerMock server;
-    static HistoriaCore plugin;
-    static Player player;
+public class ExecutorTriggerHandlerTest extends BaseTest {
 
     final NamespacedKey EXECUTOR_KEY = HistoriaCore.getNamespacedKey("executor");
 
-    HistoriaItem historiaItem1 = HistoriaCore.Companion.getITEM_REGISTRY().get(HistoriaCore.getNamespacedKey("Light_Bronze_Boots"));
-    HistoriaItem historiaItem2 = HistoriaCore.Companion.getITEM_REGISTRY().get(HistoriaCore.getNamespacedKey("Light_Tin_Sword"));
+    Player player = server.addPlayer();
+    HistoriaItem historiaItem1;
+    HistoriaItem historiaItem2;
     ExecutorComponent component1 = new ExecutorComponent(new HashMap<>());
     ExecutorComponent component2 = new ExecutorComponent(new HashMap<>());
 
-    @BeforeAll
-    public static void setUp() {
-        System.out.println("Setting up mock...");
-        server = MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            plugin = MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        player = server.addPlayer();
-        System.out.println("Finished setup.");
-
-    }
-
     @BeforeEach
-    public void clearExecutables() {
-        component1.executables().clear();
-        component2.executables().clear();
-        historiaItem1.getComponentHolder().put(EXECUTOR_KEY, component1);
-        historiaItem2.getComponentHolder().put(EXECUTOR_KEY, component2);
-
-        assertTrue(historiaItem1.getComponentHolder().containsKey(EXECUTOR_KEY));
-        assertTrue(historiaItem2.getComponentHolder().containsKey(EXECUTOR_KEY));
-        assertTrue(((ExecutorComponent) historiaItem1.getComponentHolder().get(EXECUTOR_KEY)).executables().isEmpty());
-        assertTrue(((ExecutorComponent) historiaItem2.getComponentHolder().get(EXECUTOR_KEY)).executables().isEmpty());
-    }
-
-    @AfterAll
-    public static void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
+    public void prepareItems() {
+        historiaItem1 = new HistoriaItem(
+                HistoriaCore.getNamespacedKey("light_bronze_boots"),
+                "light bronze boots",
+                Material.GOLDEN_BOOTS,
+                List.of(),
+                1d,
+                Map.of(
+                        HistoriaCore.getNamespacedKey("executor"), component1
+                )
+        );
+        historiaItem2 = new HistoriaItem(
+                HistoriaCore.getNamespacedKey("light_tin_sword"),
+                "light tin sword",
+                Material.IRON_SWORD,
+                List.of(),
+                1d,
+                Map.of(
+                        HistoriaCore.getNamespacedKey("executor"), component2
+                )
+        );
     }
 
     @Test
@@ -120,11 +103,21 @@ public class ExecutorTriggerHandlerTest {
 
         ExecutorTriggerHandler.executeAction(event);
 
+        System.out.println(RegistryHolder.COMPONENT_REGISTRY.get(HistoriaCore.getNamespacedKey("executor")).toJSON());
+
         HistoriaItemData mainHand = HistoriaItemData.fromStack(player.getInventory().getItemInMainHand());
+
+        System.out.println(mainHand.toJSON());
+
         HistoriaItemData offHand = HistoriaItemData.fromStack(player.getInventory().getItemInOffHand());
 
         ExecutorData mhdr = ExecutorData.fromStack(player.getInventory().getItemInMainHand());
+
+        System.out.println(mhdr.toJSON());
+
         ExecutorData ohdr = ExecutorData.fromStack(player.getInventory().getItemInOffHand());
+
+        System.out.println(ohdr.toJSON());
 
         ExecutorData mhd = mainHand.getData(EXECUTOR_KEY, ExecutorData.DATA_TYPE);
         ExecutorData ohd = offHand.getData(EXECUTOR_KEY, ExecutorData.DATA_TYPE);
@@ -137,11 +130,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
 
     }
 
@@ -182,11 +175,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -225,11 +218,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -269,11 +262,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -312,11 +305,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -355,11 +348,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
 
     }
 
@@ -399,11 +392,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -442,11 +435,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -486,11 +479,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -530,11 +523,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -575,11 +568,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -617,11 +610,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -659,11 +652,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -702,11 +695,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     @Test
@@ -749,11 +742,11 @@ public class ExecutorTriggerHandlerTest {
 
         // System.out.println(mhd.toString());
 
-        assertEquals(mhdr.toJSON(), mhd.toJSON());
-        assertEquals(ohdr.toJSON(), ohd.toJSON());
+        Assertions.assertEquals(mhdr.toJSON(), mhd.toJSON());
+        Assertions.assertEquals(ohdr.toJSON(), ohd.toJSON());
 
-        assertEquals(1, mhd.executables().get(trigger).uses());
-        assertEquals(1, ohd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, mhd.executables().get(trigger).uses());
+        Assertions.assertEquals(1, ohd.executables().get(trigger).uses());
     }
 
     class FakeProjectile implements Projectile {

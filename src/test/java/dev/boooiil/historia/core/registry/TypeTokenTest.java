@@ -1,12 +1,16 @@
 package dev.boooiil.historia.core.registry;
 
+import dev.boooiil.historia.core.BaseTest;
 import org.junit.Test;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import static org.junit.Assert.*;
 
-public class TypeTokenTest {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class TypeTokenTest extends BaseTest {
 
     @Test
     public void testGetTypeWithSimpleType() {

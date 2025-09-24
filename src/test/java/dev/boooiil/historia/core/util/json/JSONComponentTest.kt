@@ -1,10 +1,11 @@
 package dev.boooiil.historia.core.util.json
 
+import dev.boooiil.historia.core.BaseTest
 import dev.boooiil.historia.core.registry.Registry
 import org.bukkit.NamespacedKey
 import org.junit.jupiter.api.Test
 
-class JSONComponentTest {
+class JSONComponentTest : BaseTest() {
     @Test
     fun get() {
         val json = JSONComponent("something")

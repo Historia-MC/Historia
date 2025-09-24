@@ -1,61 +1,16 @@
 package dev.boooiil.historia.core;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
-
-import java.util.UUID;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MainTest {
-
-    private ServerMock server;
-    private PlayerMock player;
-    private PlayerMock rPlayer;
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Setting up mock...");
-        server = MockBukkit.mock();
-        System.out.println("Loading plugin...");
-
-        assert server != null;
-
-        try {
-            MockBukkit.load(dev.boooiil.historia.core.HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Creating player...");
-        player = new PlayerMock(server, "MockUser", UUID.fromString("00000000-0000-0000-0000-000000000001"));
-        rPlayer = new PlayerMock(server, "Random User", UUID.randomUUID());
-        System.out.println("Player created: " + player.getName());
-
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
-    }
+public class MainTest extends BaseTest {
 
     @Test
     public void testNewPlayerJoinLeave() {
-        server.addPlayer(rPlayer);
-
-        System.out.println("Player joined: " + player.getName());
-
-        rPlayer.disconnect();
-
-        System.out.println("Player left: " + player.getName());
+        server.addPlayer(player);
+        player.disconnect();
     }
 
     @Test

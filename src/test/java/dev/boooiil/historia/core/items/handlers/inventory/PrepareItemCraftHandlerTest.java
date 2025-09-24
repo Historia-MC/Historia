@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.items.handlers.inventory;
 
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.items.HistoriaItem;
 import dev.boooiil.historia.core.items.component.ExecutorComponent;
 import dev.boooiil.historia.core.items.data.ArmorData;
@@ -9,6 +9,7 @@ import dev.boooiil.historia.core.items.data.ToolData;
 import dev.boooiil.historia.core.items.data.WeaponData;
 import dev.boooiil.historia.core.items.executor.ItemExecutable;
 import dev.boooiil.historia.core.items.types.Triggers;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.NamespacedKey;
@@ -17,45 +18,16 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PrepareItemCraftHandlerTest {
-
-    private ServerMock server;
-    HistoriaCore plugin;
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Setting up mock...");
-        server = MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            plugin = MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
-    }
+public class PrepareItemCraftHandlerTest extends BaseTest {
 
     @Test
     public void validateItems() {
-        for (NamespacedKey registeredItem : HistoriaCore.Companion.getITEM_REGISTRY().keySet()) {
-
-            HistoriaItem historiaItem = HistoriaCore.Companion.getITEM_REGISTRY().get(registeredItem);
+        for (HistoriaItem historiaItem : RegistryHolder.ITEM_REGISTRY.values()) {
 
             CoreLogger.debugToConsole("item:", historiaItem.toString());
 

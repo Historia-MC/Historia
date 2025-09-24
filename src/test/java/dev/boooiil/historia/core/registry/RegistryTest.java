@@ -1,14 +1,17 @@
 package dev.boooiil.historia.core.registry;
 
-import static org.junit.Assert.*;
+import dev.boooiil.historia.core.BaseTest;
+import org.bukkit.NamespacedKey;
 import org.junit.Before;
 import org.junit.Test;
-import org.bukkit.NamespacedKey;
+
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 
-public class RegistryTest {
+import static org.junit.Assert.*;
+
+public class RegistryTest extends BaseTest {
 
     private Registry<String> registry;
     private NamespacedKey key1;

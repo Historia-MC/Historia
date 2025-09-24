@@ -1,47 +1,10 @@
 package dev.boooiil.historia.core.proficiency;
 
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import dev.boooiil.historia.core.BaseTest;
+import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import org.junit.jupiter.api.Test;
 
-import org.mockbukkit.mockbukkit.MockBukkit;
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.file.FileIO;
-import dev.boooiil.historia.core.file.FileKeys;
-import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
-import dev.boooiil.historia.core.proficiency.experience.AllSources;
-import dev.boooiil.historia.core.proficiency.stats.Stats;
-import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
-import dev.boooiil.historia.core.proficiency.stats.Stats.ChanceStatsType;
-import dev.boooiil.historia.core.proficiency.stats.Stats.WeaponStatsType;
-
-public class StatsTest {
-    FileConfiguration config;
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Setting up mock...");
-        MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        config = FileIO.get(FileKeys.PROFICIENCY);
-
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
-    }
+public class StatsTest extends BaseTest {
 
     @Test
     public void testNoneCompleteness() {
@@ -61,7 +24,6 @@ public class StatsTest {
     @Test
     public void testFarmerCompleteness() {
         assertStats(ProficiencyName.FARMER);
-
     }
 
     @Test
@@ -82,7 +44,6 @@ public class StatsTest {
     @Test
     public void testFishermanCompleteness() {
         assertStats(ProficiencyName.FISHERMAN);
-
     }
 
     @Test
@@ -103,7 +64,6 @@ public class StatsTest {
     private void assertStats(ProficiencyName proficiencyName) {
 
         // TODO: remove this when we get stats
-        return;
 
         // ConfigurationSection section =
         // config.getConfigurationSection(proficiencyName.getKey() + ".stats");

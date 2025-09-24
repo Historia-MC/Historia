@@ -1,45 +1,25 @@
 package dev.boooiil.historia.core.database.internal;
 
+import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 import java.util.UUID;
 
-public class PlayerStorageTest {
-
-    private ServerMock server;
+public class PlayerStorageTest extends BaseTest {
 
     @BeforeEach
-    public void setUp() {
-        System.out.println("Setting up mock...");
-        server = MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void clearStorage() {
+        if (PlayerStorage.getPlayerMap() != null) {
+            PlayerStorage.getPlayerMap().clear();
+            PlayerStorage.getUsernameMap().clear();
         }
-
-        PlayerStorage.getPlayerMap().clear();
-        PlayerStorage.getUsernameMap().clear();
-
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
     }
 
     @Test

@@ -1,11 +1,13 @@
 package dev.boooiil.historia.core.registry;
 
+import dev.boooiil.historia.core.BaseTest;
+import org.bukkit.NamespacedKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.bukkit.NamespacedKey;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class RegistryHolderTest {
+class RegistryHolderTest extends BaseTest {
 
     private RegistryHolder registryHolder;
 

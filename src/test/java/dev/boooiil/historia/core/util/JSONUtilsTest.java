@@ -1,33 +1,28 @@
 package dev.boooiil.historia.core.util;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
+import dev.boooiil.historia.core.BaseTest;
+import net.kyori.adventure.text.Component;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import net.kyori.adventure.text.Component;
+import java.util.*;
 
-public class JSONUtilsTest {
+import static org.junit.Assert.assertEquals;
+
+public class JSONUtilsTest extends BaseTest {
 
     private static final HashMap<Class<?>, List<?>> listMappings = new HashMap<>();
     private static final HashMap<Class<?>, Set<?>> setMappings = new HashMap<>();
 
     @BeforeAll
-    static void initalizeMaps() {
+    static void initializeMaps() {
 
         Set<Integer> intSet = new LinkedHashSet<>(Arrays.asList(1, 2, 3, 4));
         Set<Float> floatSet = new LinkedHashSet<>(Arrays.asList(1f, 2f, 3f, 4f));
         Set<Double> doubleSet = new LinkedHashSet<>(Arrays.asList(1d, 2d, 3d, 4d));
-        Set<Long> longSet = new LinkedHashSet<>(Arrays.asList(1l, 2l, 3l, 4l));
+        Set<Long> longSet = new LinkedHashSet<>(Arrays.asList(1L, 2L, 3L, 4L));
         Set<Boolean> booleanSet = new LinkedHashSet<>(Arrays.asList(false, true));
         Set<String> stringSet = new LinkedHashSet<>(Arrays.asList("one", "two", "three", "four"));
         Set<Component> componentSet = new LinkedHashSet<>(Arrays.asList(
@@ -339,7 +334,7 @@ public class JSONUtilsTest {
     @Test
     void testFromValue4() {
 
-        String r = JSONUtils.fromValue("value", 1l);
+        String r = JSONUtils.fromValue("value", 1L);
 
         assertEquals(r, "\"value\":1");
     }
@@ -410,7 +405,7 @@ public class JSONUtilsTest {
     void testFromListWithUnsupportedTypeThrows() {
         class Dummy {
         }
-        List<Dummy> dummyList = Arrays.asList(new Dummy());
+        List<Dummy> dummyList = List.of(new Dummy());
         try {
             JSONUtils.fromList("dummy", dummyList);
         } catch (IllegalArgumentException e) {
@@ -450,30 +445,28 @@ public class JSONUtilsTest {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append(this.getClass().getSimpleName() + "{");
-            sb.append(JSONUtils.fromValue("i", i) + ", ");
-            sb.append(JSONUtils.fromValue("f", f) + ", ");
-            sb.append(JSONUtils.fromValue("b", b) + ", ");
-            sb.append(JSONUtils.fromValue("s", s));
-            sb.append("}");
+            String sb = this.getClass().getSimpleName() + "{" +
+                    JSONUtils.fromValue("i", i) + ", " +
+                    JSONUtils.fromValue("f", f) + ", " +
+                    JSONUtils.fromValue("b", b) + ", " +
+                    JSONUtils.fromValue("s", s) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
         @Override
         public String toJSON() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append("{");
-            sb.append(JSONUtils.fromValue("i", i) + ", ");
-            sb.append(JSONUtils.fromValue("f", f) + ", ");
-            sb.append(JSONUtils.fromValue("b", b) + ", ");
-            sb.append(JSONUtils.fromValue("s", s));
-            sb.append("}");
+            String sb = "{" +
+                    JSONUtils.fromValue("i", i) + ", " +
+                    JSONUtils.fromValue("f", f) + ", " +
+                    JSONUtils.fromValue("b", b) + ", " +
+                    JSONUtils.fromValue("s", s) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
     }
@@ -491,24 +484,22 @@ public class JSONUtilsTest {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append(this.getClass().getSimpleName() + "{");
-            sb.append(JSONUtils.fromMap("test", map, true));
-            sb.append("}");
+            String sb = this.getClass().getSimpleName() + "{" +
+                    JSONUtils.fromMap("test", map, true) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
         @Override
         public String toJSON() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append("{");
-            sb.append(JSONUtils.fromMap("test", map));
-            sb.append("}");
+            String sb = "{" +
+                    JSONUtils.fromMap("test", map) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
     }
@@ -524,24 +515,22 @@ public class JSONUtilsTest {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append(this.getClass().getSimpleName() + "{");
-            sb.append(JSONUtils.fromList("test", list));
-            sb.append("}");
+            String sb = this.getClass().getSimpleName() + "{" +
+                    JSONUtils.fromList("test", list) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
         @Override
         public String toJSON() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append("{");
-            sb.append(JSONUtils.fromJSONSerializableList("test", list, true));
-            sb.append("}");
+            String sb = "{" +
+                    JSONUtils.fromJSONSerializableList("test", list, true) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
     }
 
@@ -556,24 +545,22 @@ public class JSONUtilsTest {
 
         @Override
         public String toString() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append(this.getClass().getSimpleName() + "{");
-            sb.append(JSONUtils.fromSet("test", set));
-            sb.append("}");
+            String sb = this.getClass().getSimpleName() + "{" +
+                    JSONUtils.fromSet("test", set) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
 
         @Override
         public String toJSON() {
-            StringBuilder sb = new StringBuilder();
 
-            sb.append("{");
-            sb.append(JSONUtils.fromJSONSerializableSet("test", set, true));
-            sb.append("}");
+            String sb = "{" +
+                    JSONUtils.fromJSONSerializableSet("test", set, true) +
+                    "}";
 
-            return sb.toString();
+            return sb;
         }
     }
 }

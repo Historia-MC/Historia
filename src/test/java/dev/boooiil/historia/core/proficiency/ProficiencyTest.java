@@ -1,40 +1,14 @@
 package dev.boooiil.historia.core.proficiency;
 
-import dev.boooiil.historia.core.registry.Registry;
-import dev.boooiil.historia.core.util.CoreLogger;
-
-import org.bukkit.NamespacedKey;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import org.mockbukkit.mockbukkit.MockBukkit;
+import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import dev.boooiil.historia.core.registry.RegistryHolder;
+import dev.boooiil.historia.core.util.CoreLogger;
+import org.bukkit.NamespacedKey;
+import org.junit.jupiter.api.Test;
 
-public class ProficiencyTest {
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Setting up mock...");
-        MockBukkit.mock();
-        System.out.println("Loading plugin...");
-        try {
-            MockBukkit.load(HistoriaCore.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Finished setup.");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.out.println("Tearing down mock...");
-        MockBukkit.unmock();
-    }
+public class ProficiencyTest extends BaseTest {
 
     @Test
     public void testConstructClasses() {
@@ -49,13 +23,8 @@ public class ProficiencyTest {
     }
 
     private Proficiency getProficiency(String proficiency) {
-
         NamespacedKey key = HistoriaCore.getNamespacedKey(proficiency);
-        Registry<@NotNull Proficiency> registry = HistoriaCore.Companion.getPROFICIENCY_REGISTRY();
 
-        assert (registry != null);
-
-        return HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(key);
-
+        return RegistryHolder.PROFICIENCY_REGISTRY.get(key);
     }
 }
