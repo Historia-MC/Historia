@@ -15,8 +15,6 @@ import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
 import dev.boooiil.historia.core.file.FileIO
-import dev.boooiil.historia.core.items.HistoriaItem
-import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
 import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
@@ -25,13 +23,9 @@ import dev.boooiil.historia.core.items.events.player.PlayerItemConsumeListener
 import dev.boooiil.historia.core.items.events.player.PlayerSwapHandItemsListener
 import dev.boooiil.historia.core.items.events.player.PlayerToggleSneakListener
 import dev.boooiil.historia.core.items.events.player.PlayerToggleSprintListener
-import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
-import dev.boooiil.historia.core.proficiency.stats.StatModifiers
-import dev.boooiil.historia.core.registry.Registry
-import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
@@ -221,34 +215,6 @@ open class HistoriaCore : JavaPlugin() {
         /** if the plugin is testing  */
         @JvmField
         var isTesting: Boolean = true
-
-        val registryHolder: RegistryHolder = RegistryHolder()
-
-        //TODO not sure if I'm a very big fan of the lazy but def works for now
-        val SKILL_REGISTRY: Registry<ISkill> by lazy {
-            registryHolder.register(getNamespacedKey("skill"), Registry<ISkill>(ISkill::class.java))
-        }
-        val PROFICIENCY_REGISTRY: Registry<Proficiency> by lazy {
-            registryHolder.register(getNamespacedKey("proficiency"), Registry<Proficiency>(Proficiency::class.java))
-        }
-        val STAT_MODIFIERS_REGISTRY: Registry<StatModifiers> by lazy {
-            registryHolder.register(
-                getNamespacedKey("stat_modifier"),
-                Registry<StatModifiers>(StatModifiers::class.java)
-            )
-        }
-        val ITEM_REGISTRY: Registry<HistoriaItem> by lazy {
-            registryHolder.register(
-                getNamespacedKey("item"),
-                Registry<HistoriaItem>(HistoriaItem::class.java)
-            )
-        }
-        val COMPONENT_REGISTRY: Registry<ItemComponentType<out ItemComponent>> by lazy {
-            registryHolder.register(
-                getNamespacedKey("component"),
-                Registry<ItemComponentType<out ItemComponent>>(ItemComponentType::class.java)
-            )
-        }
 
         /** this plugin instance  */
         lateinit var instance: HistoriaCore
