@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.configuration;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.items.HistoriaItem;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -116,7 +117,9 @@ public class ItemRegistryLoader {
                 NamespacedKey namespacedKey = HistoriaCore.getNamespacedKey(key);
                 ConfigurationSection section = configuration.getConfigurationSection(key);
 
-                HistoriaCore.Companion.getITEM_REGISTRY().register(namespacedKey,
+                assert section != null;
+                
+                RegistryHolder.ITEM_REGISTRY.register(namespacedKey,
                         HistoriaItem.fromConfig(namespacedKey, section));
 
             }

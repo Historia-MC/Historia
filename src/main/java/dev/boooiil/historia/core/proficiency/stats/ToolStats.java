@@ -1,37 +1,53 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
-import org.bukkit.configuration.ConfigurationSection;
-
-import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.stats.Stats.StatsType;
 import dev.boooiil.historia.core.proficiency.stats.Stats.ToolStatsType;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.configuration.ConfigurationSection;
 
 public class ToolStats implements StatsComponent {
 
-    /** The stat modifiers associated with these tool stats. */
-    private StatModifiers statModifiers;
-    /** Axe proficiency of the player. */
+    /**
+     * The stat modifiers associated with these tool stats.
+     */
+    private final StatModifiers statModifiers;
+    /**
+     * Axe proficiency of the player.
+     */
     private int axe;
-    /** Axe level experience of the player. */
+    /**
+     * Axe level experience of the player.
+     */
     private double axeExperience;
-    /** Pickaxe proficiency of the player. */
+    /**
+     * Pickaxe proficiency of the player.
+     */
     private int pickaxe;
-    /** Pickaxe level experience of the player. */
+    /**
+     * Pickaxe level experience of the player.
+     */
     private double pickaxeExperience;
-    /** Shovel proficiency of the player. */
+    /**
+     * Shovel proficiency of the player.
+     */
     private int shovel;
-    /** Shovel level experience of the player. */
+    /**
+     * Shovel level experience of the player.
+     */
     private double shovelExperience;
-    /** Hoe proficiency of the player. */
+    /**
+     * Hoe proficiency of the player.
+     */
     private int hoe;
-    /** Hoe level experience of the player. */
+    /**
+     * Hoe level experience of the player.
+     */
     private double hoeExperience;
 
     public ToolStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
-                .get(proficiencyName.getKey());
+        this.statModifiers = RegistryHolder.STAT_MODIFIERS_REGISTRY.get(proficiencyName.getKey());
         this.axe = section.getInt("axe");
         this.axeExperience = 0;
         this.pickaxe = section.getInt("pickaxe");
@@ -43,8 +59,8 @@ public class ToolStats implements StatsComponent {
     }
 
     public ToolStats(StatModifiers statModifiers, int axeLevel,
-            double axeExperience, int pickaxeLevel, double pickaxeExperience,
-            int shovelLevel, double shovelExperience, int hoeLevel, double hoeExperience) {
+                     double axeExperience, int pickaxeLevel, double pickaxeExperience,
+                     int shovelLevel, double shovelExperience, int hoeLevel, double hoeExperience) {
         this.statModifiers = statModifiers;
         this.axe = axeLevel;
         this.axeExperience = axeExperience;
@@ -220,16 +236,15 @@ public class ToolStats implements StatsComponent {
 
     @Override
     public String toJSON() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("{");
-        sb.append(JSONUtils.fromValue("axe", this.axe) + ", ");
-        sb.append(JSONUtils.fromValue("pickaxe", this.pickaxe) + ", ");
-        sb.append(JSONUtils.fromValue("shovel", this.shovel) + ", ");
-        sb.append(JSONUtils.fromValue("hoe", this.hoe) + ", ");
-        sb.append("}");
+        String sb = "{" +
+                JSONUtils.fromValue("axe", this.axe) + ", " +
+                JSONUtils.fromValue("pickaxe", this.pickaxe) + ", " +
+                JSONUtils.fromValue("shovel", this.shovel) + ", " +
+                JSONUtils.fromValue("hoe", this.hoe) + ", " +
+                "}";
 
-        return sb.toString();
+        return sb;
     }
 
 }

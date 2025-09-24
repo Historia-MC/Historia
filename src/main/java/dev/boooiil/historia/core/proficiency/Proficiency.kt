@@ -1,10 +1,9 @@
 package dev.boooiil.historia.core.proficiency
 
-import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.HistoriaCore.Companion.PROFICIENCY_REGISTRY
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.stats.Stats
+import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONSerializable
 import dev.boooiil.historia.core.util.JSONUtils
@@ -105,7 +104,7 @@ class Proficiency : JSONSerializable {
             // proficiency.skills.SkillName.Integer
             val skillLevel = skillSection.getInt(skillKey, -1)
 
-            if (!HistoriaCore.SKILL_REGISTRY.contains(skillName)) {
+            if (!RegistryHolder.SKILL_REGISTRY.contains(skillName)) {
                 CoreLogger.errorToConsole(
                     ("Skill '" + skillKey + "' not found in skill registry for proficiency "
                             + sName + ".")
@@ -120,7 +119,7 @@ class Proficiency : JSONSerializable {
                 )
             }
 
-            val skill = HistoriaCore.SKILL_REGISTRY.get(skillName)
+            val skill = RegistryHolder.SKILL_REGISTRY.get(skillName)
 
             this.skills[skill!!] = skillLevel
         }

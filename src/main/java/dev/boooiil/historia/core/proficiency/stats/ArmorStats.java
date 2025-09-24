@@ -1,42 +1,60 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
-import java.util.List;
-
-import org.bukkit.configuration.ConfigurationSection;
-
-import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.stats.Stats.ArmorStatsType;
 import dev.boooiil.historia.core.proficiency.stats.Stats.StatsType;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.configuration.ConfigurationSection;
+
+import java.util.List;
 
 public class ArmorStats implements StatsComponent {
 
-    /** The proficiency name of the player. */
-    private StatModifiers statModifiers;
-    /** Helmet proficiency of the player. */
+    /**
+     * The proficiency name of the player.
+     */
+    private final StatModifiers statModifiers;
+    /**
+     * Helmet proficiency of the player.
+     */
     private int helmet;
-    /** Helmet level experience of the player. */
+    /**
+     * Helmet level experience of the player.
+     */
     private double helmetExperience;
-    /** Chestplate proficiency of the player. */
+    /**
+     * Chestplate proficiency of the player.
+     */
     private int chestplate;
-    /** Chestplate level experience of the player. */
+    /**
+     * Chestplate level experience of the player.
+     */
     private double chestplateExperience;
-    /** Leggings proficiency of the player. */
+    /**
+     * Leggings proficiency of the player.
+     */
     private int leggings;
-    /** Leggings level experience of the player. */
+    /**
+     * Leggings level experience of the player.
+     */
     private double leggingsExperience;
-    /** Boots proficiency of the player. */
+    /**
+     * Boots proficiency of the player.
+     */
     private int boots;
-    /** Boots level experience of the player. */
+    /**
+     * Boots level experience of the player.
+     */
     private double bootsExperience;
 
-    /** The usable armor weights this player can use. */
+    /**
+     * The usable armor weights this player can use.
+     */
     private List<String> usableArmorWeights;
 
     public ArmorStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
-                .get(proficiencyName.getKey());
+        this.statModifiers = RegistryHolder.STAT_MODIFIERS_REGISTRY.get(proficiencyName.getKey());
         this.helmet = section.getInt("helmet");
         this.helmetExperience = 0;
         this.chestplate = section.getInt("chestplate");
@@ -50,9 +68,9 @@ public class ArmorStats implements StatsComponent {
     }
 
     public ArmorStats(StatModifiers statModifiers, int helmetLevel,
-            double helmetExperience, int chestplateLevel, double chestplateExperience,
-            int leggingsLevel, double leggingsExperience, int bootsLevel, double bootsExperience,
-            List<String> usableArmorWeights) {
+                      double helmetExperience, int chestplateLevel, double chestplateExperience,
+                      int leggingsLevel, double leggingsExperience, int bootsLevel, double bootsExperience,
+                      List<String> usableArmorWeights) {
         this.statModifiers = statModifiers;
         this.helmet = helmetLevel;
         this.helmetExperience = helmetExperience;
@@ -240,7 +258,7 @@ public class ArmorStats implements StatsComponent {
     /**
      * returns a list of strings that represent the armor proficiency
      * of the class
-     * 
+     *
      * @return A list of strings.
      */
     public List<String> getUsableArmorWeights() {
@@ -250,7 +268,7 @@ public class ArmorStats implements StatsComponent {
     /**
      * sets the armorProficiency of the player to the value of the
      * parameter armorProficiency
-     * 
+     *
      * @param armorProficiency List of armor types the character is proficient with.
      */
     public void setUsableArmorWeights(List<String> armorProficiency) {
@@ -259,21 +277,20 @@ public class ArmorStats implements StatsComponent {
 
     @Override
     public String toJSON() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("{");
-        sb.append(JSONUtils.fromValue("helmet", this.helmet) + ", ");
-        sb.append(JSONUtils.fromValue("chestplate", this.chestplate) + ", ");
-        sb.append(JSONUtils.fromValue("leggings", this.leggings) + ", ");
-        sb.append(JSONUtils.fromValue("boots", this.boots) + ", ");
-        sb.append(JSONUtils.fromValue("helmetExperience", this.helmetExperience) + ", ");
-        sb.append(JSONUtils.fromValue("chestplateExperience", this.chestplateExperience) + ", ");
-        sb.append(JSONUtils.fromValue("leggingsExperience", this.leggingsExperience) + ", ");
-        sb.append(JSONUtils.fromValue("bootsExperience", this.bootsExperience) + ", ");
-        sb.append(JSONUtils.fromStringList("usableArmorWeights", this.usableArmorWeights));
-        sb.append("}");
+        String sb = "{" +
+                JSONUtils.fromValue("helmet", this.helmet) + ", " +
+                JSONUtils.fromValue("chestplate", this.chestplate) + ", " +
+                JSONUtils.fromValue("leggings", this.leggings) + ", " +
+                JSONUtils.fromValue("boots", this.boots) + ", " +
+                JSONUtils.fromValue("helmetExperience", this.helmetExperience) + ", " +
+                JSONUtils.fromValue("chestplateExperience", this.chestplateExperience) + ", " +
+                JSONUtils.fromValue("leggingsExperience", this.leggingsExperience) + ", " +
+                JSONUtils.fromValue("bootsExperience", this.bootsExperience) + ", " +
+                JSONUtils.fromStringList("usableArmorWeights", this.usableArmorWeights) +
+                "}";
 
-        return sb.toString();
+        return sb;
     }
 
 }

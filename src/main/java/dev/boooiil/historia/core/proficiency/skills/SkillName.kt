@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.proficiency.skills
 
 import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.NamespacedKey
 import java.util.*
 
@@ -38,7 +39,7 @@ enum class SkillName(val key: NamespacedKey) {
     TRANSFER_EXPERIENCE_BOOK(HistoriaCore.getNamespacedKey("transfer_experience_book")),
     CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs"));
 
-    val instance: ISkill? = HistoriaCore.SKILL_REGISTRY[key]
+    val instance: ISkill? = RegistryHolder.SKILL_REGISTRY[key]
 
     fun matches(name: String): Boolean {
         return this.key.value() == name.lowercase(Locale.getDefault())

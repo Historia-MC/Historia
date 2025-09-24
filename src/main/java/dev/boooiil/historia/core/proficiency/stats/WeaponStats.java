@@ -1,50 +1,72 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
-import java.util.List;
-
-import org.bukkit.configuration.ConfigurationSection;
-
-import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.stats.Stats.StatsType;
 import dev.boooiil.historia.core.proficiency.stats.Stats.WeaponStatsType;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.configuration.ConfigurationSection;
+
+import java.util.List;
 
 public class WeaponStats implements StatsComponent {
 
-    /** The stat modifiers associated with these weapon stats. */
+    /**
+     * The stat modifiers associated with these weapon stats.
+     */
     private final StatModifiers statModifiers;
-    /** Sword proficiency of the player. */
+    /**
+     * Sword proficiency of the player.
+     */
     private int sword;
-    /** Sword level experience of the player. */
+    /**
+     * Sword level experience of the player.
+     */
     private double swordExperience;
-    /** Bow proficiency of the player. */
+    /**
+     * Bow proficiency of the player.
+     */
     private int bow;
-    /** Bow level experience of the player. */
+    /**
+     * Bow level experience of the player.
+     */
     private double bowExperience;
-    /** Crossbow proficiency of the player. */
+    /**
+     * Crossbow proficiency of the player.
+     */
     private int crossbow;
-    /** Crossbow level experience of the player. */
+    /**
+     * Crossbow level experience of the player.
+     */
     private double crossbowExperience;
-    /** Trident proficiency of the player. */
+    /**
+     * Trident proficiency of the player.
+     */
     private int trident;
-    /** Trident level experience of the player. */
+    /**
+     * Trident level experience of the player.
+     */
     private double tridentExperience;
-    /** Axe proficiency of the player. */
+    /**
+     * Axe proficiency of the player.
+     */
     private int axe;
-    /** Axe level experience of the player. */
+    /**
+     * Axe level experience of the player.
+     */
     private double axeExperience;
 
-    /** The usable weapon weights this player can use. */
+    /**
+     * The usable weapon weights this player can use.
+     */
     private List<String> usableWeaponWeights;
 
     /**
-     * 
+     *
      * @param section The `proficiency.armor` configuration section.
      */
     public WeaponStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
-                .get(proficiencyName.getKey());
+        this.statModifiers = RegistryHolder.STAT_MODIFIERS_REGISTRY.get(proficiencyName.getKey());
         this.sword = section.getInt("sword");
         this.swordExperience = 0;
         this.bow = section.getInt("bow");
@@ -59,12 +81,12 @@ public class WeaponStats implements StatsComponent {
     }
 
     public WeaponStats(StatModifiers statModifiers,
-            int swordLevel, double swordExperience,
-            int bowLevel, double bowExperience,
-            int crossbowLevel, double crossbowExperience,
-            int tridentLevel, double tridentExperience,
-            int axeLevel, double axeExperience,
-            List<String> usableWeaponTypes) {
+                       int swordLevel, double swordExperience,
+                       int bowLevel, double bowExperience,
+                       int crossbowLevel, double crossbowExperience,
+                       int tridentLevel, double tridentExperience,
+                       int axeLevel, double axeExperience,
+                       List<String> usableWeaponTypes) {
         this.statModifiers = statModifiers;
         this.sword = swordLevel;
         this.swordExperience = swordExperience;
@@ -272,7 +294,7 @@ public class WeaponStats implements StatsComponent {
     /**
      * returns a list of strings that represent the weapon proficiency
      * of the character
-     * 
+     *
      * @return The weaponProficiency list.
      */
     public List<String> getUsableWeaponWeights() {
@@ -281,8 +303,8 @@ public class WeaponStats implements StatsComponent {
 
     /**
      * sets the weapon proficiency of the character
-     * 
-     * @param weaponProficiency List of Strings
+     *
+     * @param weaponWeight List of Strings
      */
     public void setUsableWeaponWeights(List<String> weaponWeight) {
         this.usableWeaponWeights = weaponWeight;
@@ -290,17 +312,16 @@ public class WeaponStats implements StatsComponent {
 
     @Override
     public String toJSON() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("{");
-        sb.append(JSONUtils.fromValue("sword", this.sword) + ", ");
-        sb.append(JSONUtils.fromValue("bow", this.bow) + ", ");
-        sb.append(JSONUtils.fromValue("crossbow", this.crossbow) + ", ");
-        sb.append(JSONUtils.fromValue("trident", this.trident) + ", ");
-        sb.append(JSONUtils.fromValue("axe", this.axe) + ", ");
-        sb.append("}");
+        String sb = "{" +
+                JSONUtils.fromValue("sword", this.sword) + ", " +
+                JSONUtils.fromValue("bow", this.bow) + ", " +
+                JSONUtils.fromValue("crossbow", this.crossbow) + ", " +
+                JSONUtils.fromValue("trident", this.trident) + ", " +
+                JSONUtils.fromValue("axe", this.axe) + ", " +
+                "}";
 
-        return sb.toString();
+        return sb;
     }
 
 }

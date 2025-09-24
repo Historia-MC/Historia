@@ -1,42 +1,62 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
-import org.bukkit.configuration.ConfigurationSection;
-
-import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.stats.Stats.BodyStatsType;
 import dev.boooiil.historia.core.proficiency.stats.Stats.StatsType;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.configuration.ConfigurationSection;
 
 public class BodyStats implements StatsComponent {
 
-    /** The stat modifiers for the player. */
-    private StatModifiers statModifiers;
+    /**
+     * The stat modifiers for the player.
+     */
+    private final StatModifiers statModifiers;
 
-    /** Health of the player. */
+    /**
+     * Health of the player.
+     */
     private int health;
-    /** Health level experience of the player. */
+    /**
+     * Health level experience of the player.
+     */
     private double healthExperience;
-    /** Food consumption of the player. (How much hunger they can satiate) */
-    private int food;
-    /** Food level experience of the player. */
-    private double foodExperience;
-    /** Speed of the player. */
+    /**
+     * Food consumption of the player. (How much hunger they can satiate)
+     */
+    private final int food;
+    /**
+     * Food level experience of the player.
+     */
+    private final double foodExperience;
+    /**
+     * Speed of the player.
+     */
     private int speed;
-    /** Speed level experience of the player. */
+    /**
+     * Speed level experience of the player.
+     */
     private double speedExperience;
-    /** Evasion rate of the player. (How well they can dodge attacks) */
+    /**
+     * Evasion rate of the player. (How well they can dodge attacks)
+     */
     private int evasion;
-    /** Evasion level experience of the player. */
+    /**
+     * Evasion level experience of the player.
+     */
     private double evasionExperience;
-    /** Amount of damage to be absorbed by the user. */
+    /**
+     * Amount of damage to be absorbed by the user.
+     */
     private int toughness;
-    /** Toughness level experience of the player. */
+    /**
+     * Toughness level experience of the player.
+     */
     private double toughnessExperience;
 
     public BodyStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
-                .get(proficiencyName.getKey());
+        this.statModifiers = RegistryHolder.STAT_MODIFIERS_REGISTRY.get(proficiencyName.getKey());
         this.health = section.getInt("health");
         this.healthExperience = 0;
         this.food = section.getInt("food");
@@ -51,9 +71,9 @@ public class BodyStats implements StatsComponent {
     }
 
     public BodyStats(StatModifiers statModifiers, int healthLevel,
-            double healthExperience, int foodLevel, double foodExperience, int speedLevel,
-            double speedExperience, int evasionLevel, double evasionExperience, int toughnessLevel,
-            double toughnessExperience) {
+                     double healthExperience, int foodLevel, double foodExperience, int speedLevel,
+                     double speedExperience, int evasionLevel, double evasionExperience, int toughnessLevel,
+                     double toughnessExperience) {
 
         this.statModifiers = statModifiers;
         this.health = healthLevel;
@@ -232,16 +252,15 @@ public class BodyStats implements StatsComponent {
 
     @Override
     public String toJSON() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("{");
-        sb.append(JSONUtils.fromValue("health", this.health) + ", ");
-        sb.append(JSONUtils.fromValue("speed", this.speed) + ", ");
-        sb.append(JSONUtils.fromValue("evasion", this.evasion) + ", ");
-        sb.append(JSONUtils.fromValue("toughness", this.toughness) + ", ");
-        sb.append("}");
+        String sb = "{" +
+                JSONUtils.fromValue("health", this.health) + ", " +
+                JSONUtils.fromValue("speed", this.speed) + ", " +
+                JSONUtils.fromValue("evasion", this.evasion) + ", " +
+                JSONUtils.fromValue("toughness", this.toughness) + ", " +
+                "}";
 
-        return sb.toString();
+        return sb;
     }
 
 }

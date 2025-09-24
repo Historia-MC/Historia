@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.commands;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.items.HistoriaItem;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -55,7 +56,7 @@ public class CommandGive implements TabExecutor {
         }
 
         Player player = Bukkit.getPlayer(args[0]);
-        HistoriaItem historiaItem = HistoriaCore.Companion.getITEM_REGISTRY().get(HistoriaCore.getNamespacedKey(args[1]));
+        HistoriaItem historiaItem = RegistryHolder.ITEM_REGISTRY.get(HistoriaCore.getNamespacedKey(args[1]));
 
         if (historiaItem == null) {
             sender.sendMessage("Invalid item name.");
@@ -85,7 +86,7 @@ public class CommandGive implements TabExecutor {
         }
 
         if (args.length == 2) {
-            return HistoriaCore.Companion.getITEM_REGISTRY().keySet().stream()
+            return RegistryHolder.ITEM_REGISTRY.keySet().stream()
                     .map(NamespacedKey::getKey)
                     .filter(key -> key.startsWith(args[1].toLowerCase()))
                     .toList();

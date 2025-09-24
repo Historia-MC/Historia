@@ -1,38 +1,54 @@
 package dev.boooiil.historia.core.proficiency.stats;
 
-import org.bukkit.configuration.ConfigurationSection;
-
-import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.stats.Stats.ChanceStatsType;
 import dev.boooiil.historia.core.proficiency.stats.Stats.StatsType;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONUtils;
+import org.bukkit.configuration.ConfigurationSection;
 
 public class ChanceStats implements StatsComponent {
 
-    /** The stat modifiers associated with these chance stats. */
+    /**
+     * The stat modifiers associated with these chance stats.
+     */
     StatModifiers statModifiers;
 
-    /** Chance to harvest a crop successfully. */
+    /**
+     * Chance to harvest a crop successfully.
+     */
     private int harvest;
-    /** Harvest level experience. */
+    /**
+     * Harvest level experience.
+     */
     private double harvestExperience;
-    /** Chance to harvest a crop twice. */
+    /**
+     * Chance to harvest a crop twice.
+     */
     private int doubleHarvest;
-    /** Double harvest level experience. */
+    /**
+     * Double harvest level experience.
+     */
     private double doubleHarvestExperience;
-    /** Chance to grow a crop instantly. */
+    /**
+     * Chance to grow a crop instantly.
+     */
     private int instantGrowth;
-    /** Instant growth level experience. */
+    /**
+     * Instant growth level experience.
+     */
     private double instantGrowthExperience;
-    /** Chance to behead an enemy. */
+    /**
+     * Chance to behead an enemy.
+     */
     private int behead;
-    /** Behead level experience. */
+    /**
+     * Behead level experience.
+     */
     private double beheadExperience;
 
     public ChanceStats(ConfigurationSection section, ProficiencyName proficiencyName) {
-        this.statModifiers = HistoriaCore.Companion.getSTAT_MODIFIERS_REGISTRY()
-                .get(proficiencyName.getKey());
+        this.statModifiers = RegistryHolder.STAT_MODIFIERS_REGISTRY.get(proficiencyName.getKey());
         this.harvest = section.getInt("harvest");
         this.harvestExperience = 0;
         this.doubleHarvest = section.getInt("doubleHarvest");
@@ -44,8 +60,8 @@ public class ChanceStats implements StatsComponent {
     }
 
     public ChanceStats(StatModifiers statModifiers, int harvestLevel,
-            double harvestExperience, int doubleHarvestLevel, double doubleHarvestExperience,
-            int instantGrowthLevel, double instantGrowthExperience, int beheadLevel, double beheadExperience) {
+                       double harvestExperience, int doubleHarvestLevel, double doubleHarvestExperience,
+                       int instantGrowthLevel, double instantGrowthExperience, int beheadLevel, double beheadExperience) {
         this.statModifiers = statModifiers;
         this.harvest = harvestLevel;
         this.harvestExperience = harvestExperience;
@@ -223,14 +239,12 @@ public class ChanceStats implements StatsComponent {
     @Override
     public String toJSON() {
 
-        StringBuilder sb = new StringBuilder();
+        String sb = JSONUtils.fromValue("harvest", this.harvest) + ", " +
+                JSONUtils.fromValue("doubleHarvest", this.doubleHarvest) + ", " +
+                JSONUtils.fromValue("instantGrowth", this.instantGrowth) + ", " +
+                JSONUtils.fromValue("behead", this.behead) + ", ";
 
-        sb.append(JSONUtils.fromValue("harvest", this.harvest) + ", ");
-        sb.append(JSONUtils.fromValue("doubleHarvest", this.doubleHarvest) + ", ");
-        sb.append(JSONUtils.fromValue("instantGrowth", this.instantGrowth) + ", ");
-        sb.append(JSONUtils.fromValue("behead", this.behead) + ", ");
-
-        return sb.toString();
+        return sb;
     }
 
 }
