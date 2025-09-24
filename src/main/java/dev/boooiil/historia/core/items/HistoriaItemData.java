@@ -1,7 +1,10 @@
 package dev.boooiil.historia.core.items;
 
 import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.CoreLogger;
+import dev.boooiil.historia.core.util.JSONSerializable;
+import dev.boooiil.historia.core.util.JSONUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NullMarked
-public class HistoriaItemData {
+public class HistoriaItemData implements JSONSerializable {
 
     private final NamespacedKey id;
     private final List<NamespacedKey> itemData;
@@ -64,7 +67,7 @@ public class HistoriaItemData {
     }
 
     public HistoriaItem getHistoriaItem() {
-        return HistoriaCore.Companion.getITEM_REGISTRY().get(id);
+        return RegistryHolder.ITEM_REGISTRY.get(id);
     }
 
     public ItemStack getStack() {
@@ -79,11 +82,22 @@ public class HistoriaItemData {
             CoreLogger.debugToConsole("No data found for key " + key, "creating one...");
             String s_regKey = key.getKey();
             NamespacedKey regKey = new NamespacedKey(key.getNamespace(), s_regKey);
-            Object itemData = HistoriaCore.Companion.getCOMPONENT_REGISTRY().get(regKey).getData();
+            Object itemData = RegistryHolder.COMPONENT_REGISTRY.get(regKey).getData();
             return type.getComplexType().cast(itemData);
         }
 
         return stack.getItemMeta().getPersistentDataContainer().get(key, type);
     }
 
+    @Override
+    public String toJSON() {
+
+        String sb = "{" +
+                JSONUtils.fromValue("id", id) + "," +
+                JSONUtils.fromList("item_data", itemData) + "," +
+                JSONUtils.fromValue("item_stack", stack.toString()) +
+                "}";
+
+        return sb;
+    }
 }

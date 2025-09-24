@@ -1,9 +1,9 @@
 package dev.boooiil.historia.core.proficiency.skills
 
-import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
+import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
@@ -36,7 +36,7 @@ abstract class AbstractSkill : ISkill {
     }
 
     override fun getProficiency(historiaPlayer: HistoriaPlayer): Proficiency? {
-        return HistoriaCore.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+        return RegistryHolder.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
     }
 
     override fun <T> getOrThrow(skillSuppliers: Array<out SkillSupplier<*>>, index: Int): T {

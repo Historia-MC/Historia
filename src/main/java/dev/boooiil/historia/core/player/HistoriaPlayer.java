@@ -7,6 +7,7 @@ import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
 import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -175,9 +176,9 @@ public class HistoriaPlayer extends BasePlayer {
 
     /**
      *
-     * Set the username of the player.
+     * Set the level of the player.
      *
-     * @param username - Username to be set.
+     * @param level - Level to be set.
      */
 
     public void setLevel(int level) {
@@ -251,14 +252,14 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public Proficiency getProficiency() {
 
-        Proficiency proficiency = HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(this.proficiency);
+        Proficiency proficiency = RegistryHolder.PROFICIENCY_REGISTRY.get(this.proficiency);
 
         if (proficiency == null) {
             CoreLogger.errorToConsole("Player " + this.getUsername() + "(" + this.getUUID()
                     + ") has an invalid proficiency " + this.proficiency + ". Setting to NONE.");
 
             this.proficiency = ProficiencyName.NONE.getKey();
-            proficiency = HistoriaCore.Companion.getPROFICIENCY_REGISTRY().get(this.proficiency);
+            proficiency = RegistryHolder.PROFICIENCY_REGISTRY.get(this.proficiency);
         }
 
         return proficiency;
@@ -435,7 +436,7 @@ public class HistoriaPlayer extends BasePlayer {
                 .debugToConsole("Player ", this.getUsername(), "(",
                         this.getUUID().toString(), ") is changing proficiency to ", proficiency.toString(), ".");
 
-        if (!HistoriaCore.Companion.getPROFICIENCY_REGISTRY().contains(proficiency)) {
+        if (!RegistryHolder.PROFICIENCY_REGISTRY.contains(proficiency)) {
             throw new IllegalArgumentException("Tried to apply proficiency to player" + this.getUsername() +
                     " but the proficiency " + proficiency + " does not exist in the registry.");
         }

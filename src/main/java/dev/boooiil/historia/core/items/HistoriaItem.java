@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.items;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration;
+import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
@@ -59,14 +60,15 @@ public class HistoriaItem implements JSONSerializable {
         CoreLogger.debugToConsole(baseMaterial.toString(), displayName, weight.toString(),
                 section.getKeys(false).toString());
 
-        CoreLogger.debugToConsole("COMPONENT_REGISTRY KEYS:", HistoriaCore.Companion.getCOMPONENT_REGISTRY().keySet().toString());
+        CoreLogger.debugToConsole("COMPONENT_REGISTRY KEYS:", RegistryHolder.COMPONENT_REGISTRY.keySet().toString());
 
         Map<NamespacedKey, ItemComponent> components = new HashMap<>();
-        for (NamespacedKey key : HistoriaCore.Companion.getCOMPONENT_REGISTRY().keySet()) {
+        for (Map.Entry<NamespacedKey, ItemComponentType<? extends ItemComponent>> entry : RegistryHolder.COMPONENT_REGISTRY.entrySet()) {
+            NamespacedKey key = entry.getKey();
             CoreLogger.debugToConsole("Checking", id.getKey(), " for component:", key.getKey());
             if (section.contains(key.getKey())) {
                 CoreLogger.debugToConsole(displayName, "has a component of type", key.getKey());
-                ItemComponentType<?> type = HistoriaCore.Companion.getCOMPONENT_REGISTRY().get(key);
+                ItemComponentType<?> type = entry.getValue();
                 ConfigurationSection componentSection = section.getConfigurationSection(key.getKey());
                 components.put(key, type.fromConfig(componentSection));
             }
