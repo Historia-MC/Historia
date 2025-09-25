@@ -1,14 +1,13 @@
 package dev.boooiil.historia.core.database.sql;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.jspecify.annotations.Nullable;
-
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
+import org.jspecify.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Creates additional methods for executing SQL statements specific to
@@ -22,16 +21,16 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Create the table in the database if it does not exist.
-     * 
+     *
      */
     public void createTable() {
 
         String string = "CREATE TABLE IF NOT EXISTS " +
                 "historia(uuid varchar(36), " +
                 "username varchar(16), " +
-                "proficiency varchar(30), " +
-                "culture varchar(30), " +
-                "level int, " +
+                "proficiency varchar(10), " +
+                "culture varchar(17), " +
+                //"level int, " +
                 "experience int, " +
                 "login bigint, " +
                 "logout bigint, " +
@@ -44,14 +43,14 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Create the user in the database.
-     * 
+     *
      * @param uuid       - UUID of the player.
      * @param playerName - Name of the player.
      */
 
     public void createUser(UUID uuid, String playerName) {
 
-        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'none', 'none', 1, 0, "
+        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'none', 'none', 0, "
                 + System.currentTimeMillis() + ", 0, 0)";
 
         executor(string);
@@ -60,7 +59,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the username for the given user.
-     * 
+     *
      * @param uuid - UUID of the player.
      */
 
@@ -74,7 +73,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the proficiency name for the given user.
-     * 
+     *
      * @param uuid - UUID of the player.
      */
 
@@ -89,7 +88,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the proficiency name for the given user.
-     * 
+     *
      * @param uuid - UUID of the player.
      */
 
@@ -104,21 +103,21 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the proficiency level for the given user.
-     * 
+     *
      * @param uuid - UUID of the player.
      */
 
     public void setProficiencyLevel(UUID uuid, int proficiencyLevel) {
 
-        String string = ("UPDATE historia SET level = '" + proficiencyLevel + "' WHERE uuid = '" + uuid + "'");
-
-        updateExecutor(string, 5);
+//        String string = ("UPDATE historia SET level = '" + proficiencyLevel + "' WHERE uuid = '" + uuid + "'");
+//
+//        updateExecutor(string, 5);
 
     }
 
     /**
      * Set the login time for the given user.
-     * 
+     *
      * @param uuid - UUID of the player.
      */
 
@@ -133,7 +132,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the current experience for the given user.
-     * 
+     *
      * @param uuid       - UUID of the player.
      * @param experience - Provided experience of the player.
      */
@@ -148,7 +147,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Set the logout time for the given user.
-     * 
+     *
      * @param uuid             - UUID of the player.
      * @param lastLogin        - Provided last login of the player.
      * @param previousPlaytime - Provided playtime of the player.
@@ -171,9 +170,8 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
      * Get a list of usernames from the database.
      *
      * @return List of usernames.
-     * 
      * @see <a href=
-     *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     * "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      */
 
     public List<String> getUsernames() {
@@ -194,7 +192,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Get the username with a given UUID.
-     * 
+     *
      * @param uuid - UUID of the player.
      * @return username of the player.
      */
@@ -215,7 +213,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
     public HistoriaPlayer getUser(UUID uuid) {
 
         String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
-        
+
         return queryExecutor(string, result -> {
 
             if (!nextResult(result)) {
@@ -228,13 +226,13 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
             ProficiencyName proficiencyName = ProficiencyName.Companion
                     .fromString(getResult(result, "proficiency", String.class));
             Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
-            int level = getResult(result, "level", Integer.class);
+            //int level = getResult(result, "level", Integer.class);
             double experience = getResult(result, "experience", Double.class);
             long login = getResult(result, "login", Long.class);
             long logout = getResult(result, "logout", Long.class);
             long playtime = getResult(result, "playtime", Long.class);
 
-            return new HistoriaPlayer(uuid, username, proficiencyName, culture, level, experience, login, logout,
+            return new HistoriaPlayer(uuid, username, proficiencyName, culture, 0, experience, login, logout,
                     playtime);
         }, 1, 1);
 
@@ -248,11 +246,10 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
      * Get a list of UUIDs from the database.
      *
      * @return List of UUIDs.
-     * 
      * @see <a href=
-     *      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+     * "https://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
      * @see <a href=
-     *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     * "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
 
     public List<UUID> getUUIDs() {
@@ -273,13 +270,11 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Get a specific UUID from the database using a username.
-     * 
-     * @param playerName - Name of the player.
      *
+     * @param playerName - Name of the player.
      * @return UUID of the given username.
-     * 
      * @see <a href=
-     *      "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
+     * "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html">UUID</a>
      */
     public @Nullable UUID getUUID(String playerName) {
 
@@ -297,7 +292,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     /**
      * Save a user to the database.
-     * 
+     *
      * @param historiaPlayer - Player to save.
      */
     public void saveUser(HistoriaPlayer historiaPlayer) {
@@ -306,20 +301,20 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
         String username = historiaPlayer.getUsername();
         String proficiency = historiaPlayer.getProficiency().getName().getKey().toLowerCase();
         String culture = historiaPlayer.getCulture().name().toLowerCase();
-        int level = historiaPlayer.getLevel();
+        //int level = historiaPlayer.getLevel();
         double experience = historiaPlayer.getCurrentExperience();
 
         String query = "UPDATE historia " +
                 "SET proficiency = '" + proficiency + "', " +
                 "culture = '" + culture + "', " +
                 "username = '" + username + "', " +
-                "level = '" + level + "', " +
+                //"level = '" + level + "', " +
                 "experience = '" + experience + "' " +
                 "WHERE uuid = '" + uuid + "' AND " +
                 "(proficiency != '" + proficiency + "' OR " +
                 "culture != '" + culture + "' OR " +
                 "username != '" + username + "' OR " +
-                "level != '" + level + "' OR " +
+                //"level != '" + level + "' OR " +
                 "experience != '" + experience + "')";
 
         updateExecutor(query, 5);
