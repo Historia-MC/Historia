@@ -1,0 +1,117 @@
+version: 5
+
+# Global temperature limits
+minimum: -5
+maximum: 45
+
+# Player status effects on temperature
+playerstatus:
+  ON_FIRE: 30
+
+# Armor temperature modifiers
+armor:
+  tier1:
+    weight: 10
+    temp: 5
+  tier2:
+    weight: 20
+    temp: 7
+  tier3:
+    weight: 30
+    temp: 9
+
+# Global modifier multipliers
+modifier:
+  BIOME: 1
+  LIGHT: 1
+  WATER: 1
+  WEATHER: 1
+  HEAT: 1
+
+# Base biome temperatures
+biome:
+  BADLANDS: 10
+  BAMBOO_JUNGLE: 10
+  BASALT_DELTAS: 0
+  BEACH: 5
+  BIRCH_FOREST: 0
+  CHERRY_GROVE: 0
+  COLD_OCEAN: -3
+  DARK_FOREST: 0
+  DEEP_COLD_OCEAN: -5
+  DEEP_DARK: -3
+  DEEP_FROZEN_OCEAN: -7
+  DEEP_LUKEWARM_OCEAN: 3
+  DEEP_OCEAN: -3
+  DESERT: 10
+  DRIPSTONE_CAVES: -4
+  ERODED_BADLANDS: 10
+  FLOWER_FOREST: 0
+  FOREST: 0
+  FROZEN_OCEAN: -10
+  FROZEN_PEAKS: -10
+  FROZEN_RIVER: -10
+  GROVE: 0
+  ICE_SPIKES: -10
+  JAGGED_PEAKS: -10
+  JUNGLE: 6
+  LUKEWARM_OCEAN: 3
+  LUSH_CAVES: -2
+  MANGROVE_SWAMP: 3
+  MEADOW: 0
+  MUSHROOM_FIELDS: 0
+  OCEAN: -3
+  OLD_GROWTH_BIRCH_FOREST: 0
+  OLD_GROWTH_PINE_TAIGA: -3
+  OLD_GROWTH_SPRUCE_TAIGA: -3
+  PLAINS: 0
+  RIVER: -2
+  SAVANNA: 3
+  SAVANNA_PLATEAU: 3
+  SNOWY_BEACH: -7
+  SNOWY_PLAINS: -7
+  SNOWY_SLOPES: -7
+  SNOWY_TAIGA: -7
+  SPARSE_JUNGLE: 6
+  STONY_PEAKS: -2
+  STONY_SHORE: 2
+  SUNFLOWER_PLAINS: 0
+  SWAMP: 2
+  TAIGA: -3
+  WARM_OCEAN: 3
+  WINDSWEPT_FOREST: 0
+  WINDSWEPT_GRAVELLY_HILLS: -1
+  WINDSWEPT_HILLS: -2
+  WINDSWEPT_SAVANNA: 2
+  WOODED_BADLANDS: 7
+
+
+heat_sources:
+  LAVA: 80.0        # Lava is extremely hot
+  FIRE: 50.0        # Fire provides significant heat
+  MAGMA_BLOCK: 40.0 # Magma blocks are very hot
+  CAMPFIRE: 25.0    # Campfires provide moderate heat
+  TORCH: 25.0       # Torches provide mild heat
+
+# Weather effects
+weather:
+  CLEAR: 0
+  DOWNFALL: -5
+
+room_temp: 15.0  # Standard room temperature in Celsius
+underground:
+  base_temp: 12.0      # Base cave temperature in Celsius
+  biome_influence: 0.2 # How much biome affects underground temp
+    
+light:
+  min_modifier: 0.7    # Minimum light temperature modifier
+  max_modifier: 1.3    # Maximum light temperature modifier
+    
+time:
+  night_modifier: 0.8  # Night temperature modifier
+  noon_modifier: 1.2   # Noon temperature modifier
+
+potions:
+  fire_resistance: 3.0
+  weakness: -1.5
+  poison: 2.0

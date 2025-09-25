@@ -2,7 +2,7 @@ main: dev.boooiil.historia.core.HistoriaCore
 name: Historia
 version: 1.0
 description: Something simple, I guess!
-authors: [boooiil, RedSkilZZ, UnholyRuby]
+authors: [ boooiil, RedSkilZZ, UnholyRuby ]
 api-version: 1.19
 author: boooiil
 load: STARTUP
@@ -10,7 +10,7 @@ loadbefore:
   - Historia-Spawnkill
   - Historia-RMushroom
   - Historia-Combat
-softdepend: [WorldGuard, Towny, Vault, Historia-Spawnkill]
+softdepend: [ WorldGuard, Towny, Vault, Historia-Spawnkill ]
 
 
 commands:
@@ -38,3 +38,16 @@ commands:
     description: Dump data to console.
     usage: /<command> <player>
     permission: historia.dump
+  settemperature:
+    description: Set temperature for a player
+    usage: /settemperature <player> <temperature>
+  tempreload:
+    description: Reload the temperature plugin configuration
+    usage: /tempreload
+    permission: temperature.reload
+    aliases: [ treload ]
+
+permissions:
+  temperature.reload:
+    description: Allows reloading the temperature plugin configuration
+    default: op

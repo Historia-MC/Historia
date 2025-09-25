@@ -27,6 +27,7 @@ import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
+import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
 import io.papermc.paper.command.brigadier.CommandSourceStack
@@ -117,6 +118,8 @@ open class HistoriaCore : JavaPlugin() {
         // end
 
 
+        registerCommand("settemperature", CommandTemperature())
+        registerCommand("tempreload", CommandReload())
         registerCommand("give", CommandGive())
         registerCommand("checkplayers", CommandPlayers())
         registerCommand("debug", CommandDebug())
@@ -130,9 +133,9 @@ open class HistoriaCore : JavaPlugin() {
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
+        registerRunnable(TemperaturePollRunnable(), 20L)
 
         CoreLogger.infoToConsole("Plugin Enabled.")
-
 
         // TODO: figure out what to do with all of these 'loaders'
 
