@@ -33,9 +33,7 @@ class CauldronBlockListener : Listener {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        CoreLogger.infoToConsole("block broken")
         val cauldron = HCauldrons.get(event.block) ?: return
-        CoreLogger.infoToConsole("cauldron broken")
         cauldron.isMarkedForRemoval = true
     }
 
