@@ -1,6 +1,8 @@
 package dev.boooiil.historia.core.items;
 
 import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.expiry.item.ConsumableComponent;
+import dev.boooiil.historia.core.expiry.item.ConsumableData;
 import dev.boooiil.historia.core.items.component.*;
 import dev.boooiil.historia.core.items.data.*;
 import dev.boooiil.historia.core.registry.RegistryHolder;
@@ -8,6 +10,7 @@ import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -68,6 +71,12 @@ public class ItemComponentType<T extends ItemComponent> implements JSONSerializa
                 new ItemComponentType<>(
                         EnchantComponent::fromConfig,
                         () -> new EnchantData(new HashMap<>())));
+
+        RegistryHolder.COMPONENT_REGISTRY.register(
+                HistoriaCore.getNamespacedKey("consumable"),
+                new ItemComponentType<>(
+                        ConsumableComponent.Companion::fromConfig,
+                        () -> new ConsumableData(0, 1, 0, new ArrayList<>())));
     }
 
     @Override
