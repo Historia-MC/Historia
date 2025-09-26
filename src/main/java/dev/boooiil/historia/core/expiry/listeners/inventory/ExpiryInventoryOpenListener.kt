@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryOpenEvent
 
-class InventoryOpenListener : Listener {
+class ExpiryInventoryOpenListener : Listener {
     @EventHandler
     fun onInventoryOpen(event: InventoryOpenEvent) {
         val inventory = event.inventory
