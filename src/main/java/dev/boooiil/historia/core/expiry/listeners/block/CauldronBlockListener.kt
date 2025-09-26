@@ -4,9 +4,11 @@ import com.destroystokyo.paper.event.block.BlockDestroyEvent
 import dev.boooiil.historia.core.expiry.block.FluidContent
 import dev.boooiil.historia.core.expiry.block.HCauldrons
 import dev.boooiil.historia.core.expiry.block.fluidContentOf
+import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPistonExtendEvent
 import org.bukkit.event.block.BlockPistonRetractEvent
 import org.bukkit.event.block.CauldronLevelChangeEvent
@@ -30,8 +32,10 @@ class CauldronBlockListener : Listener {
     }
 
     @EventHandler
-    fun onBlockDestroy(event: BlockDestroyEvent) {
+    fun onBlockBreak(event: BlockBreakEvent) {
+        CoreLogger.infoToConsole("block broken")
         val cauldron = HCauldrons.get(event.block) ?: return
+        CoreLogger.infoToConsole("cauldron broken")
         cauldron.isMarkedForRemoval = true
     }
 
