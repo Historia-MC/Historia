@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.expiry.util.datatypes
 
+import dev.boooiil.historia.core.HistoriaCore
 import org.bukkit.NamespacedKey
 import org.bukkit.persistence.PersistentDataAdapterContext
 import org.bukkit.persistence.PersistentDataContainer
@@ -39,6 +40,6 @@ class PotionEffectDataType : PersistentDataType<PersistentDataContainer, PotionE
     }
 }
 
-private val TYPE_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("type")
-private val DURATION_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("duration")
-private val AMPLIFIER_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("amplifier")
+private val TYPE_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("type")
+private val DURATION_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("duration")
+private val AMPLIFIER_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("amplifier")

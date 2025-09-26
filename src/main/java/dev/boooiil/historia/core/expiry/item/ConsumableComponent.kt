@@ -17,9 +17,9 @@ class ConsumableComponent(
     val effects: MutableList<PotionEffect>
 ) : ItemComponent {
 
-    override fun apply(v: Float): ItemData = apply()
+    override fun data(qualityModifier: Float): ItemData = data()
 
-    override fun apply(): ItemData {
+    override fun data(): ItemData {
         val expireEpoch = when {
             expireDays < 0 -> -1
             expireDays == 0 -> 0

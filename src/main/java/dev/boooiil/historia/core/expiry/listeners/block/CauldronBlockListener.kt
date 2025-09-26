@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.expiry.listeners.block
 
 import com.destroystokyo.paper.event.block.BlockDestroyEvent
-import dev.boooiil.historia.expiry.HistoriaExpiry
 import dev.boooiil.historia.core.expiry.block.FluidContent
+import dev.boooiil.historia.core.expiry.block.HCauldrons
 import dev.boooiil.historia.core.expiry.block.fluidContentOf
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -14,7 +14,7 @@ import org.bukkit.event.block.CauldronLevelChangeEvent
 class CauldronBlockListener : Listener {
     @EventHandler
     fun onCauldronLevelChange(event: CauldronLevelChangeEvent) {
-        val cauldron = HistoriaExpiry.cauldrons.get(event.block) ?: return
+        val cauldron = HCauldrons.get(event.block) ?: return
 
         //Cauldron emptied
         if (event.newState.type == Material.CAULDRON) {
@@ -31,14 +31,14 @@ class CauldronBlockListener : Listener {
 
     @EventHandler
     fun onBlockDestroy(event: BlockDestroyEvent) {
-        val cauldron = HistoriaExpiry.cauldrons.get(event.block) ?: return
+        val cauldron = HCauldrons.get(event.block) ?: return
         cauldron.isMarkedForRemoval = true
     }
 
     @EventHandler
     fun onPistonExtend(event: BlockPistonExtendEvent) {
         for (block in event.blocks) {
-            val cauldron = HistoriaExpiry.cauldrons.get(block)
+            val cauldron = HCauldrons.get(block)
             cauldron?.isMarkedForRemoval = true
         }
     }
@@ -46,7 +46,7 @@ class CauldronBlockListener : Listener {
     @EventHandler
     fun onPistonRetract(event: BlockPistonRetractEvent) {
         for (block in event.blocks) {
-            val cauldron = HistoriaExpiry.cauldrons.get(block)
+            val cauldron = HCauldrons.get(block)
             cauldron?.isMarkedForRemoval = true
         }
     }

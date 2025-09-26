@@ -2,7 +2,6 @@ package dev.boooiil.historia.core.expiry.configuration
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.util.CoreLogger
-import dev.boooiil.historia.expiry.HistoriaExpiry
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.io.IOException

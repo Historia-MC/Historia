@@ -8,7 +8,7 @@ import org.bukkit.persistence.PersistentDataType
 
 private val cauldronKey: NamespacedKey = HistoriaCore.getNamespacedKey("cauldron")
 
-class HCauldrons {
+object HCauldrons {
     private val cauldrons: MutableMap<Location, HCauldron> = mutableMapOf()
     private val markedForRemoval: MutableSet<HCauldron> = mutableSetOf()
     private val tickFrequency = 10
