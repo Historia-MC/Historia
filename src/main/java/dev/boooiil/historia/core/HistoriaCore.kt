@@ -6,7 +6,8 @@ import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.ItemRegistryLoader
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
-import dev.boooiil.historia.core.database.sql.HistoriaDatabaseExecutor
+import dev.boooiil.historia.core.database.sql.DatabaseExecutor
+import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields
 import dev.boooiil.historia.core.events.block.BlockBreakListener
 import dev.boooiil.historia.core.events.block.BlockFromToListener
 import dev.boooiil.historia.core.events.block.BlockPlaceListener
@@ -92,8 +93,8 @@ open class HistoriaCore : JavaPlugin() {
         ConfigurationLoader.init()
 
         val provider = DataSourceProvider()
-        databaseExecutor = HistoriaDatabaseExecutor(provider)
-        databaseExecutor.createTable()
+        databaseExecutor = DatabaseExecutor(provider)
+        HistoriaDBFields.TABLE.insert(null)
 
         registerEvent(EntityBreedListener())
         registerEvent(EntityTameListener())
@@ -132,7 +133,6 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(PlayerItemConsumeListener())
         registerEvent(ChunkLoadListener())
         // end
-
 
         registerCommand("settemperature", CommandTemperature())
         registerCommand("tempreload", CommandReload())
@@ -244,7 +244,7 @@ open class HistoriaCore : JavaPlugin() {
             private set
 
         /** the database handler  */
-        lateinit var databaseExecutor: HistoriaDatabaseExecutor
+        lateinit var databaseExecutor: DatabaseExecutor
             private set
 
         /**
