@@ -13,10 +13,17 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.potion.PotionType;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TemperatureConfig {
+
+    /**
+     * ALL TEMPERATURES ARE GOING TO BE IN C
+     */
+
+    public static final double INITIAL_CONSTANT_TEMP = 37d;
 
     /**
      * Enum for the different modifiers that can be applied to the temperature.
@@ -36,16 +43,16 @@ public class TemperatureConfig {
         NIGHT
     }
 
-    public enum Playerstatus {
+    public enum StatusEffect {
         ON_FIRE
     }
 
-    private final Map<Playerstatus, Double> playerstatus = new HashMap<>();
-    private final Map<Modifier, Double> modifiers = new HashMap<>();
+    private final Map<StatusEffect, Double> statusEffects = new EnumMap<>(StatusEffect.class);
+    private final Map<Modifier, Double> modifiers = new EnumMap<>(Modifier.class);
     private final Map<Biome, Double> biome = new HashMap<>();
-    private final Map<Material, Double> heatSource = new HashMap<>();
-    private final Map<WeatherType, Double> weather = new HashMap<>();
-    private final Map<PotionType, Double> potions = new HashMap<>();
+    private final Map<Material, Double> heatSource = new EnumMap<>(Material.class);
+    private final Map<WeatherType, Double> weather = new EnumMap<>(WeatherType.class);
+    private final Map<PotionType, Double> potions = new EnumMap<>(PotionType.class);
     private final Map<Integer, Double> time = new HashMap<>();
     private final Map<String, Map<Integer, Double>> armor = new HashMap<>();
     private double minimum;
@@ -86,19 +93,19 @@ public class TemperatureConfig {
         CoreLogger.debugToConsole("Time night modifier: " + nightModifier);
         double noonModifier = configuration.getDouble("time.noon_modifier");
         CoreLogger.debugToConsole("Time noon modifier: " + noonModifier);
-        for (String playerstat : configuration.getConfigurationSection("playerstatus").getKeys(false)) {
+        for (String statusEffect : configuration.getConfigurationSection("status_effect").getKeys(false)) {
 
-            Playerstatus mod = Playerstatus.valueOf(playerstat.toUpperCase());
+            StatusEffect mod = StatusEffect.valueOf(statusEffect.toUpperCase());
 
-            playerstatus.put(mod, configuration.getDouble("playerstatus." + playerstat));
+            statusEffects.put(mod, configuration.getDouble("playerstatus." + statusEffect));
 
             CoreLogger.debugToConsole(
                     "Adding playerstatus ",
-                    playerstat,
+                    statusEffect,
                     " as playerstatus ",
                     mod.toString(),
                     " with value ",
-                    configuration.getDouble("playerstatus." + playerstat) + "");
+                    configuration.getDouble("playerstatus." + statusEffect) + "");
 
         }
 
@@ -177,6 +184,7 @@ public class TemperatureConfig {
                     configuration.getDouble("weather." + weather) + "");
 
         }
+
         for (String potion : configuration.getConfigurationSection("potions").getKeys(false)) {
 
             //PotionEffectType m = PotionEffectType.getByName(heatSource);
@@ -204,10 +212,6 @@ public class TemperatureConfig {
             }
         }
         return 0;
-    }
-
-    public double getPlayerValue(Playerstatus playerstat) {
-        return playerstatus.get(playerstat);
     }
 
     public Map<Modifier, Double> getModifiers() {
