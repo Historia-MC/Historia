@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.expiry.handlers
 
 import dev.boooiil.historia.expiry.HistoriaExpiry
 import dev.boooiil.historia.core.expiry.block.FluidContent
-import dev.boooiil.historia.core.expiry.util.Logging
 import dev.boooiil.historia.core.expiry.util.PlayerInteractUtil
+import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
@@ -41,7 +41,7 @@ object PlayerUseCauldronHandler {
         val cauldron = HistoriaExpiry.cauldrons.get(block) ?: return false
 
         val fluid = FluidContent.fromItem(usedStack)
-        Logging.debugToConsole(fluid.toString())
+        CoreLogger.debugToConsole(fluid.toString())
 
         //set bottle/bucket values
         var fluidAmount = 3

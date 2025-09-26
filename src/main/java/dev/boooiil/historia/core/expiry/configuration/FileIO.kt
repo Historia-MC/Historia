@@ -1,7 +1,8 @@
 package dev.boooiil.historia.core.expiry.configuration
 
+import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.expiry.HistoriaExpiry
-import dev.boooiil.historia.core.expiry.util.Logging
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.io.IOException
@@ -13,16 +14,16 @@ object FileIO {
 
     fun get(path: String): YamlConfiguration {
         val config: YamlConfiguration
-        val dataFolder: File = HistoriaExpiry.plugin.dataFolder
+        val dataFolder: File = HistoriaCore.instance.dataFolder
         if (find(dataFolder.listFiles(), path)) {
             val var10000 = arrayOf("Obtained file from external directory: ", null)
             val var10003 = dataFolder.getPath()
             var10000[1] = var10003 + "\\" + path
-            Logging.debugToConsole(*var10000)
+            // CoreLogger.debugToConsole(*var10000)
             val file = File(dataFolder.getPath(), path)
             config = YamlConfiguration.loadConfiguration(file)
         } else {
-            Logging.debugToConsole("Obtained file from internal directory: $path")
+            CoreLogger.debugToConsole("Obtained file from internal directory: $path")
             val stream = FileIO::class.java.getClassLoader().getResourceAsStream(path) ?: throw IOException("Could not find $path")
             val reader: Reader = InputStreamReader(stream)
             config = YamlConfiguration.loadConfiguration(reader)

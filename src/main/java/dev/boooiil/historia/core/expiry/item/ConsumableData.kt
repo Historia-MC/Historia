@@ -1,15 +1,14 @@
 package dev.boooiil.historia.core.expiry.item
 
+import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.time.GameCalendar
 import dev.boooiil.historia.core.time.GameDate
 import dev.boooiil.historia.core.util.JSONUtils
 import dev.boooiil.historia.core.util.PDCUtils
-import dev.boooiil.historia.expiry.HistoriaExpiry
 import dev.boooiil.historia.core.expiry.util.CustomDataType
-import dev.boooiil.historia.core.expiry.util.Logging
-import dev.boooiil.historia.items.Main
-import dev.boooiil.historia.items.util.KyoriUtils
+import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.KyoriUtils
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataAdapterContext
@@ -39,13 +38,13 @@ class ConsumableData(
     private fun applyLore(stack: ItemStack) {
         val configId = PDCUtils.getFromContainer(
             stack,
-            Main.getNamespacedKey("config-id"),
+            HistoriaCore.getNamespacedKey("config-id"),
             PersistentDataType.STRING
         ).orElse("")
 
         val lore = stack.lore()
         if (lore.isNullOrEmpty()) {
-            Logging.debugToConsole(configId, "has no lore, skipping placeholder.")
+            CoreLogger.debugToConsole(configId, "has no lore, skipping placeholder.")
             return
         }
 
@@ -80,7 +79,7 @@ class ConsumableData(
 
     object DataType : CustomDataComponentType<PersistentDataContainer, ConsumableData> {
 
-        override val key = HistoriaExpiry.getNamespacedKey(ID)
+        override val key = HistoriaCore.getNamespacedKey(ID)
 
         override fun fromPrimitive(
             container: PersistentDataContainer,
@@ -120,14 +119,14 @@ class ConsumableData(
             return container
         }
 
-        private val HUNGER_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("hunger")
-        private val SATURATION_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("saturation")
-        private val EXPIRE_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("expire_epoch")
-        private val EFFECTS_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey("effects")
+        private val HUNGER_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("hunger")
+        private val SATURATION_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("saturation")
+        private val EXPIRE_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("expire_epoch")
+        private val EFFECTS_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("effects")
     }
 
     companion object {
         const val ID: String = "consumable"
-        private val COMPONENT_KEY: NamespacedKey = HistoriaExpiry.getNamespacedKey(ID)
+        private val COMPONENT_KEY: NamespacedKey = HistoriaCore.getNamespacedKey(ID)
     }
 }

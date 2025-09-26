@@ -1,9 +1,9 @@
 package dev.boooiil.historia.core.expiry.block
 
+import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.expiry.item.ExpiryItems.seawaterBottle
 import dev.boooiil.historia.core.expiry.item.ExpiryItems.seawaterBucket
 import dev.boooiil.historia.core.expiry.item.ExpiryItems.waterBottle
-import dev.boooiil.historia.items.Main
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
@@ -46,8 +46,8 @@ enum class FluidContent(
         fun fromItem(stack: ItemStack): FluidContent {
             val itemMeta = stack.itemMeta
             val dataContainer = itemMeta.persistentDataContainer
-            if (dataContainer.has(Main.getNamespacedKey("item-id"))) {
-                val id = dataContainer.get<String, String>(Main.getNamespacedKey("item-id"), PersistentDataType.STRING)
+            if (dataContainer.has(HistoriaCore.getNamespacedKey("item-id"))) {
+                val id = dataContainer.get<String, String>(HistoriaCore.getNamespacedKey("item-id"), PersistentDataType.STRING)
                 if (id != null && (id == "seawater_bucket" || id == "seawater_bottle")) {
                     return SALT_WATER
                 }

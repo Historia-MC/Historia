@@ -1,12 +1,12 @@
 package dev.boooiil.historia.core.expiry.block
 
-import dev.boooiil.historia.expiry.HistoriaExpiry
-import dev.boooiil.historia.core.expiry.util.Logging
+import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.*
 import org.bukkit.block.Block
 import org.bukkit.persistence.PersistentDataType
 
-private val cauldronKey: NamespacedKey = HistoriaExpiry.getNamespacedKey("cauldron")
+private val cauldronKey: NamespacedKey = HistoriaCore.getNamespacedKey("cauldron")
 
 class HCauldrons {
     private val cauldrons: MutableMap<Location, HCauldron> = mutableMapOf()
@@ -19,7 +19,7 @@ class HCauldrons {
 
     private fun tickCauldrons() {
         val scheduler = Bukkit.getScheduler()
-        scheduler.runTaskTimer(HistoriaExpiry.plugin, Runnable {
+        scheduler.runTaskTimer(HistoriaCore.instance, Runnable {
             for (cauldron in cauldrons.values) {
                 cauldron.tick(tickFrequency)
                 if (cauldron.isMarkedForRemoval) {
@@ -41,7 +41,7 @@ class HCauldrons {
                 || type == Material.LAVA_CAULDRON || type == Material.POWDER_SNOW_CAULDRON
 
         if (!isCauldron) {
-            Logging.errorToConsole("Tried to get cauldron entity at position with no cauldron")
+            CoreLogger.errorToConsole("Tried to get cauldron entity at position with no cauldron")
             return null
         }
 
@@ -63,21 +63,21 @@ class HCauldrons {
 
     fun load(chunk: Chunk) {
         val chunkKey = "${chunk.world.name}_${chunk.x}_${chunk.z}"
-        Logging.infoToConsole("Loading chunk: $chunkKey")
+        CoreLogger.infoToConsole("Loading chunk: $chunkKey")
         val dataContainer = chunk.persistentDataContainer
         val chunkCauldrons = dataContainer.get(cauldronKey, PersistentDataType.LIST.listTypeFrom(HCauldron.DataType()))
             ?: return
 
-        Logging.infoToConsole("Found ${chunkCauldrons.size} cauldrons in chunk data for $chunkKey")
+        CoreLogger.infoToConsole("Found ${chunkCauldrons.size} cauldrons in chunk data for $chunkKey")
 
         for (cauldron in chunkCauldrons) {
             if (cauldron.location in cauldrons) {
-                Logging.infoToConsole("Skipping cauldron at ${cauldron.location} - already in memory")
+                CoreLogger.infoToConsole("Skipping cauldron at ${cauldron.location} - already in memory")
                 continue
             }
             cauldrons[cauldron.location] = cauldron
 
-            Logging.infoToConsole("Successfully loaded cauldron at ${cauldron.location} with content ${cauldron.content}")
+            CoreLogger.infoToConsole("Successfully loaded cauldron at ${cauldron.location} with content ${cauldron.content}")
         }
     }
 
@@ -94,7 +94,7 @@ class HCauldrons {
         )
 
         chunkCauldrons.forEach {
-            Logging.infoToConsole("Saving cauldron with content ${it.content}")
+            CoreLogger.infoToConsole("Saving cauldron with content ${it.content}")
             cauldrons.remove(it.location)
         }
     }

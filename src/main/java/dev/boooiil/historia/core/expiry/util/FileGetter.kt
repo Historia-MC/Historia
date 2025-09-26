@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.expiry.util
 
-import dev.boooiil.historia.expiry.HistoriaExpiry
+import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.expiry.configuration.FileMap.ResourceKeys
-import dev.boooiil.historia.core.expiry.util.Logging.Companion.debugToConsole
+import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 import java.io.IOException
@@ -44,17 +44,17 @@ object FileGetter {
     fun get(check: ResourceKeys): YamlConfiguration {
         val config: YamlConfiguration
 
-        if (find(HistoriaExpiry.plugin.dataFolder.listFiles(), check)) {
-            debugToConsole(
+        if (find(HistoriaCore.instance.dataFolder.listFiles(), check)) {
+            CoreLogger.debugToConsole(
                 "Obtained file from external directory: ",
-                HistoriaExpiry.plugin.dataFolder.path + "\\" + check.key
+                HistoriaCore.instance.dataFolder.path + "\\" + check.key
             )
 
-            val file: File = File(HistoriaExpiry.plugin.dataFolder.path, check.key)
+            val file: File = File(HistoriaCore.instance.dataFolder.path, check.key)
 
             config = YamlConfiguration.loadConfiguration(file)
         } else {
-            debugToConsole("Obtained file from internal directory: " + check.key)
+            CoreLogger.debugToConsole("Obtained file from internal directory: " + check.key)
 
             val stream = FileGetter::class.java.getClassLoader().getResourceAsStream(check.key)
                 ?: throw IOException("Could not find $check.key")

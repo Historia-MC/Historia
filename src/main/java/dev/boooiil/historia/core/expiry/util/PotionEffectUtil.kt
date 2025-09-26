@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.expiry.util
 
+import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.potion.PotionEffect
@@ -14,7 +15,7 @@ fun potionEffectsFromConfig(section: ConfigurationSection?): MutableList<PotionE
 
         val type = PotionEffectType.getByName(key)
         if (type == null) {
-            Logging.errorToConsole("$key is not a valid potion effect")
+            CoreLogger.errorToConsole("$key is not a valid potion effect")
             continue
         }
 
