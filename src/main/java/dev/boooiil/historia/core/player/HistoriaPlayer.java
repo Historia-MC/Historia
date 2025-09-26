@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.player;
 
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
@@ -391,7 +391,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        HistoriaCore.Companion.getDatabaseExecutor().saveUser(this);
+        HistoriaDBFields.PLAYER.update(this, this.getUUID());
 
         // Main.getDatabaseHandler().setProficiency(this.getUUID(),
         // this.getProficiency().getName());

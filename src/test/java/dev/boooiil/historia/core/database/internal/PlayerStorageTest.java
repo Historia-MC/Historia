@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.internal;
 
 import dev.boooiil.historia.core.BaseTest;
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
@@ -87,7 +87,7 @@ public class PlayerStorageTest extends BaseTest {
             HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
             assert historiaPlayer.isOnline();
 
-            System.out.println(HistoriaCore.Companion.getDatabaseExecutor().getUsername(player.getUniqueId()));
+            System.out.println(HistoriaDBFields.USERNAME.get(player.getUniqueId()));
 
             PlayerMock playerMock = (PlayerMock) player;
             playerMock.disconnect();
