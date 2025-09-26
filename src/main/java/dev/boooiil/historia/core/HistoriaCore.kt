@@ -14,6 +14,8 @@ import dev.boooiil.historia.core.events.entity.EntityBreedListener
 import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
+import dev.boooiil.historia.core.expiry.configuration.ExpiryConfig
+import dev.boooiil.historia.core.expiry.item.ConsumableUpdater
 import dev.boooiil.historia.core.expiry.listeners.block.CauldronBlockListener
 import dev.boooiil.historia.core.expiry.listeners.inventory.ExpiryInventoryOpenListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerBucketFillListener
@@ -162,6 +164,10 @@ open class HistoriaCore : JavaPlugin() {
         ItemRegistryLoader.load()
         // RecipeLoader.load()
         // end
+
+        val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS
+        val scheduler = this.server.scheduler
+        scheduler.runTaskTimer(instance, ConsumableUpdater(), 0, updatePeriod)
     }
 
     /**
