@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.expiry.util
+package dev.boooiil.historia.core.util
 
 import org.bukkit.Location
 import org.bukkit.Particle

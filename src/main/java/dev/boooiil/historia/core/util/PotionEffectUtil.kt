@@ -1,7 +1,5 @@
-package dev.boooiil.historia.core.expiry.util
+package dev.boooiil.historia.core.util
 
-import dev.boooiil.historia.core.util.CoreLogger
-import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType

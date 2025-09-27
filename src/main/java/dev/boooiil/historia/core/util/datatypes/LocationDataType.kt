@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.expiry.util.datatypes
+package dev.boooiil.historia.core.util.datatypes
 
 import org.bukkit.Bukkit
 import org.bukkit.Location
