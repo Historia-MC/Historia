@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.expiry.item
+package dev.boooiil.historia.core.expiry.runnable
 
 import dev.boooiil.historia.core.items.component.ConsumableComponent
 import org.bukkit.Bukkit

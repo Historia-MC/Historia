@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.expiry.listeners.player
 
-import dev.boooiil.historia.core.expiry.item.ExpiryItems
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import org.bukkit.block.Biome
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -11,7 +11,7 @@ class PlayerBucketFillListener : Listener {
     fun onPlayerBucketFill(event: PlayerBucketFillEvent) {
         val biome = event.blockClicked.biome
         if (biome in seawaterBiomes) {
-            event.itemStack = ExpiryItems.seawaterBucket
+            event.itemStack = ExpiryConfig.seawaterBucket
         }
     }
 }

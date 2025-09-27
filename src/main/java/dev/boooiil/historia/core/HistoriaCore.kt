@@ -16,11 +16,12 @@ import dev.boooiil.historia.core.events.entity.EntityBreedListener
 import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
-import dev.boooiil.historia.core.expiry.item.ConsumableUpdater
+import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.expiry.listeners.block.CauldronBlockListener
 import dev.boooiil.historia.core.expiry.listeners.inventory.ExpiryInventoryOpenListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerBucketFillListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerCauldronInteractListener
+import dev.boooiil.historia.core.expiry.listeners.player.PlayerConsumableConsumeListener
 import dev.boooiil.historia.core.expiry.listeners.world.ChunkLoadListener
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.items.ItemComponentType
@@ -130,7 +131,7 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ExpiryInventoryOpenListener())
         registerEvent(PlayerBucketFillListener())
         registerEvent(PlayerCauldronInteractListener())
-        registerEvent(PlayerItemConsumeListener())
+        registerEvent(PlayerConsumableConsumeListener())
         registerEvent(ChunkLoadListener())
         // end
 

@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.expiry.item
+package dev.boooiil.historia.core.expiry.extensions
 
 import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.items.data.ConsumableData

@@ -1,9 +1,8 @@
 package dev.boooiil.historia.core.expiry.block
 
 import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.expiry.item.ExpiryItems.seawaterBottle
-import dev.boooiil.historia.core.expiry.item.ExpiryItems.seawaterBucket
-import dev.boooiil.historia.core.expiry.item.ExpiryItems.waterBottle
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig.seawaterBottle
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig.waterBottle
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
@@ -27,7 +26,7 @@ enum class FluidContent(
     ),
     SALT_WATER(
         Material.WATER_CAULDRON,
-        { seawaterBucket },
+        { seawaterBottle },
         { seawaterBottle }
     ),
     LAVA(

@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.items.component
 
-import dev.boooiil.historia.core.expiry.item.getCustomData
 import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.items.data.ConsumableData
@@ -55,7 +54,7 @@ class ConsumableComponent(
         }
 
         fun update(stack: ItemStack): ItemStack {
-            val consumable = stack.getCustomData(ConsumableData.DataType) ?: return stack
+            val consumable = ConsumableData.fromStack(stack) ?: return stack
             if (consumable.isExpired) {
                 consumable.expireEpoch = 0
                 return stack.withType(Material.ROTTEN_FLESH)

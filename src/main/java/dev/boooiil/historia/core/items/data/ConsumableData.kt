@@ -1,7 +1,6 @@
 package dev.boooiil.historia.core.items.data
 
 import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.expiry.item.CustomDataComponentType
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.time.GameCalendar
 import dev.boooiil.historia.core.time.GameDate
@@ -12,13 +11,14 @@ import org.bukkit.persistence.PersistentDataAdapterContext
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
+import kotlin.jvm.optionals.getOrNull
 
 class ConsumableData(
     var hunger: Int,
     var saturation: Float,
     var expireEpoch: Long,
     val effects: MutableList<PotionEffect>
-) : ItemData, CustomDataComponentType<PersistentDataContainer, ConsumableData> by DataType {
+) : ItemData {
 
     constructor(hunger: Int, saturation: Float, expirationDate: GameDate, effects: MutableList<PotionEffect>) : this(
         hunger,
@@ -74,9 +74,18 @@ class ConsumableData(
                 "}"
     }
 
-    object DataType : CustomDataComponentType<PersistentDataContainer, ConsumableData> {
+    companion object {
+        const val ID: String = "consumable"
+        val COMPONENT_KEY: NamespacedKey = HistoriaCore.getNamespacedKey(ID)
 
-        override val key = HistoriaCore.getNamespacedKey(ID)
+        fun fromStack(stack: ItemStack): ConsumableData? {
+            return PDCUtils
+                .getFromComplexContainer(stack, COMPONENT_KEY, DataType)
+                .getOrNull()
+        }
+    }
+
+    object DataType : PersistentDataType<PersistentDataContainer, ConsumableData> {
 
         override fun fromPrimitive(
             container: PersistentDataContainer,
@@ -122,10 +131,5 @@ class ConsumableData(
         private val SATURATION_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("saturation")
         private val EXPIRE_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("expire_epoch")
         private val EFFECTS_KEY: NamespacedKey = HistoriaCore.getNamespacedKey("effects")
-    }
-
-    companion object {
-        const val ID: String = "consumable"
-        private val COMPONENT_KEY: NamespacedKey = HistoriaCore.getNamespacedKey(ID)
     }
 }

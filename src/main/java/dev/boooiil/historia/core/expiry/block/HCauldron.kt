@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.expiry.block
 
 import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.expiry.item.ExpiryItems.getSalt
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.CustomDataType
 import dev.boooiil.historia.core.util.ParticleUtil
@@ -71,7 +71,7 @@ class HCauldron(
             doEvaporationEffects(insideCauldron)
 
             block.type = Material.CAULDRON
-            val salt = getSalt(2)
+            val salt = ExpiryConfig.getSalt(2)
             block.world.dropItem(insideCauldron, salt)
 
             isBoiling = false

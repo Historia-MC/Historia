@@ -11,7 +11,7 @@ class ChunkLoadListener : Listener {
     @EventHandler
     fun onChunkLoad(event: ChunkLoadEvent) {
         val chunkKey = "${event.chunk.world.name}_${event.chunk.x}_${event.chunk.z}"
-        CoreLogger.infoToConsole("ChunkLoadEvent fired for $chunkKey (isNewChunk: ${event.isNewChunk})")
+        CoreLogger.verboseToConsole("ChunkLoadEvent fired for $chunkKey (isNewChunk: ${event.isNewChunk})")
 
         HCauldrons.load(event.getChunk())
     }
@@ -19,7 +19,7 @@ class ChunkLoadListener : Listener {
     @EventHandler
     fun onChunkUnload(event: ChunkUnloadEvent) {
         val chunkKey = "${event.chunk.world.name}_${event.chunk.x}_${event.chunk.z}"
-        CoreLogger.infoToConsole("ChunkSaveEvent fired for $chunkKey (isSaveChunk: ${event.isSaveChunk})")
+        CoreLogger.verboseToConsole("ChunkSaveEvent fired for $chunkKey (isSaveChunk: ${event.isSaveChunk})")
 
         HCauldrons.save(event.getChunk())
     }

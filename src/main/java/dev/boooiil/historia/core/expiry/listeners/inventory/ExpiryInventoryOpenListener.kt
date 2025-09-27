@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.expiry.listeners.inventory
 
-import dev.boooiil.historia.core.expiry.item.getCustomData
 import dev.boooiil.historia.core.items.component.ConsumableComponent
 import dev.boooiil.historia.core.items.data.ConsumableData
 import dev.boooiil.historia.core.util.CoreLogger
@@ -19,7 +18,7 @@ class ExpiryInventoryOpenListener : Listener {
 
             CoreLogger.infoToConsole("Found item: $stack")
 
-            val consumable = stack.getCustomData(ConsumableData.DataType) ?: return
+            val consumable = ConsumableData.fromStack(stack) ?: return
             if (!consumable.canExpire) continue
 
             CoreLogger.infoToConsole("Found consumable: $consumable")
