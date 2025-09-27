@@ -1,10 +1,12 @@
-package dev.boooiil.historia.core.expiry.item
+package dev.boooiil.historia.core.items.component
 
+import dev.boooiil.historia.core.expiry.item.getCustomData
 import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.ItemData
+import dev.boooiil.historia.core.items.data.ConsumableData
 import dev.boooiil.historia.core.time.GameCalendar
 import dev.boooiil.historia.core.util.JSONUtils
-import dev.boooiil.historia.core.expiry.util.potionEffectsFromConfig
+import dev.boooiil.historia.core.util.potionEffectsFromConfig
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.ItemStack
