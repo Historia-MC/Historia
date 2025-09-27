@@ -1,14 +1,11 @@
-package dev.boooiil.historia.core.expiry.item
+package dev.boooiil.historia.core.items.data
 
 import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.expiry.item.CustomDataComponentType
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.time.GameCalendar
 import dev.boooiil.historia.core.time.GameDate
-import dev.boooiil.historia.core.util.JSONUtils
-import dev.boooiil.historia.core.util.PDCUtils
-import dev.boooiil.historia.core.expiry.util.CustomDataType
-import dev.boooiil.historia.core.util.CoreLogger
-import dev.boooiil.historia.core.util.KyoriUtils
+import dev.boooiil.historia.core.util.*
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataAdapterContext
@@ -91,7 +88,8 @@ class ConsumableData(
                 ?: 1f
             val expireEpoch = container.get(EXPIRE_KEY, PersistentDataType.LONG)
                 ?: 0
-            val effects = container.get(EFFECTS_KEY,
+            val effects = container.get(
+                EFFECTS_KEY,
                 PersistentDataType.LIST.listTypeFrom(CustomDataType.POTION_EFFECT)
             ) ?: mutableListOf()
 
@@ -111,7 +109,8 @@ class ConsumableData(
             container.set(HUNGER_KEY, PersistentDataType.INTEGER, data.hunger)
             container.set(SATURATION_KEY, PersistentDataType.FLOAT, data.saturation)
             container.set(EXPIRE_KEY, PersistentDataType.LONG, data.expireEpoch)
-            container.set(EFFECTS_KEY,
+            container.set(
+                EFFECTS_KEY,
                 PersistentDataType.LIST.listTypeFrom(CustomDataType.POTION_EFFECT),
                 data.effects
             )
