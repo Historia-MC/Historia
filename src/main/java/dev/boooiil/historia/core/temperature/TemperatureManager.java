@@ -238,10 +238,10 @@ public class TemperatureManager {
 
         // Light level modification
         double lightModifier = getLightModifier(block);
-        CoreLogger.infoToPlayer("Light modifier: " + lightModifier, uuid);
+        // CoreLogger.infoToPlayer("Light modifier: " + lightModifier, uuid);
         // Time of day affects surface temperature
         double timeModifier = getTimeModifier(world);
-        CoreLogger.infoToPlayer("Time modifier: " + timeModifier, uuid);
+        // CoreLogger.infoToPlayer("Time modifier: " + timeModifier, uuid);
         return biomeTemp * lightModifier * timeModifier;
     }
 
