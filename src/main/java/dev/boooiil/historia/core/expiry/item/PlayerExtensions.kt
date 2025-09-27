@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.expiry.item
 
-import dev.boooiil.historia.core.expiry.configuration.ExpiryConfig
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
+import dev.boooiil.historia.core.items.data.ConsumableData
 import org.bukkit.entity.Player
 import kotlin.math.ceil
 

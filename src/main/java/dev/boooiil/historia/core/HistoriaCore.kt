@@ -4,6 +4,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.commands.*
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.ItemRegistryLoader
+import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
 import dev.boooiil.historia.core.database.sql.DatabaseExecutor
@@ -15,7 +16,6 @@ import dev.boooiil.historia.core.events.entity.EntityBreedListener
 import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
-import dev.boooiil.historia.core.expiry.configuration.ExpiryConfig
 import dev.boooiil.historia.core.expiry.item.ConsumableUpdater
 import dev.boooiil.historia.core.expiry.listeners.block.CauldronBlockListener
 import dev.boooiil.historia.core.expiry.listeners.inventory.ExpiryInventoryOpenListener

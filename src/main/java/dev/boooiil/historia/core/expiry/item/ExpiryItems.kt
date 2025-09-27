@@ -56,9 +56,10 @@ object ExpiryItems {
         get() {
             val stack = ItemStack(Material.POTION)
             val potionMeta =
-                stack.getItemMeta() as PotionMeta
+                stack.itemMeta as PotionMeta
 
-            potionMeta.setBasePotionData(PotionData(PotionType.WATER))
+            @Suppress("deprecation", "removal")
+            potionMeta.basePotionData = PotionData(PotionType.WATER)
             stack.setItemMeta(potionMeta)
 
             return stack

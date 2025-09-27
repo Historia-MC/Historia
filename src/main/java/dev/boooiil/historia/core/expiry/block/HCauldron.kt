@@ -2,9 +2,9 @@ package dev.boooiil.historia.core.expiry.block
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.expiry.item.ExpiryItems.getSalt
-import dev.boooiil.historia.core.expiry.util.CustomDataType
-import dev.boooiil.historia.core.expiry.util.ParticleUtil
 import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.CustomDataType
+import dev.boooiil.historia.core.util.ParticleUtil
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -216,7 +216,11 @@ class HCauldron(
             val dataContainer = context.newPersistentDataContainer()
 
             dataContainer.set(HistoriaCore.getNamespacedKey("location"), CustomDataType.LOCATION, cauldron.location)
-            dataContainer.set(HistoriaCore.getNamespacedKey("content"), PersistentDataType.STRING, cauldron.content.name)
+            dataContainer.set(
+                HistoriaCore.getNamespacedKey("content"),
+                PersistentDataType.STRING,
+                cauldron.content.name
+            )
             dataContainer.set(HistoriaCore.getNamespacedKey("boil-time"), PersistentDataType.INTEGER, cauldron.boilTime)
 
             CoreLogger.infoToConsole("Serialized cauldron at ${cauldron.location} with content ${cauldron.content}")
@@ -234,7 +238,8 @@ class HCauldron(
                 ?: throw IllegalStateException("Cauldron data missing: content")
             val content = FluidContent.valueOf(contentString)
 
-            val boilTime: Int = dataContainer.getOrDefault(HistoriaCore.getNamespacedKey("boil-time"), PersistentDataType.INTEGER, 0)
+            val boilTime: Int =
+                dataContainer.getOrDefault(HistoriaCore.getNamespacedKey("boil-time"), PersistentDataType.INTEGER, 0)
 
             CoreLogger.infoToConsole("Deserialized cauldron at $location with content $contentString")
 

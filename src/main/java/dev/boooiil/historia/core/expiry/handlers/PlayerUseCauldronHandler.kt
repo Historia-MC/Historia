@@ -2,8 +2,8 @@ package dev.boooiil.historia.core.expiry.handlers
 
 import dev.boooiil.historia.core.expiry.block.FluidContent
 import dev.boooiil.historia.core.expiry.block.HCauldrons
-import dev.boooiil.historia.core.expiry.util.PlayerInteractUtil
 import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.PlayerInteractUtil
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
@@ -24,12 +24,12 @@ object PlayerUseCauldronHandler {
         val itemType = usedStack.type
 
         if (itemType == Material.GLASS_BOTTLE || itemType == Material.BUCKET) {
-            val success = tryEmptyCauldron(player, block, hand)
+            tryEmptyCauldron(player, block, hand)
             return true
         }
 
         if (itemType == Material.POTION || itemType == Material.WATER_BUCKET) {
-            val success = tryFillCauldron(player, block, hand)
+            tryFillCauldron(player, block, hand)
             return true
         }
 
@@ -84,13 +84,13 @@ object PlayerUseCauldronHandler {
 
     private fun playItemEmptySound(block: Block, usedStack: ItemStack) {
         val sound = if (usedStack.type == Material.POTION) Sound.ITEM_BOTTLE_EMPTY
-                    else Sound.ITEM_BUCKET_EMPTY
+        else Sound.ITEM_BUCKET_EMPTY
         block.world.playSound(block.location, sound, 1f, 1f)
     }
 
     private fun playItemFillSound(block: Block, usedStack: ItemStack) {
         val sound = if (usedStack.type == Material.POTION) Sound.ITEM_BOTTLE_FILL
-                    else Sound.ITEM_BUCKET_FILL
+        else Sound.ITEM_BUCKET_FILL
         block.world.playSound(block.location, sound, 1f, 1f)
     }
 }

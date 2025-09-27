@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.expiry.listeners.player
 
-import dev.boooiil.historia.core.expiry.item.ConsumableData
 import dev.boooiil.historia.core.expiry.item.consume
 import dev.boooiil.historia.core.expiry.item.getCustomData
+import dev.boooiil.historia.core.items.data.ConsumableData
 import org.bukkit.GameMode
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

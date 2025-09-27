@@ -1,8 +1,6 @@
 package dev.boooiil.historia.core.items;
 
 import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.expiry.item.ConsumableComponent;
-import dev.boooiil.historia.core.expiry.item.ConsumableData;
 import dev.boooiil.historia.core.items.component.*;
 import dev.boooiil.historia.core.items.data.*;
 import dev.boooiil.historia.core.registry.RegistryHolder;

@@ -1,8 +1,8 @@
 package dev.boooiil.historia.core.expiry.listeners.inventory
 
-import dev.boooiil.historia.core.expiry.item.ConsumableComponent
-import dev.boooiil.historia.core.expiry.item.ConsumableData
 import dev.boooiil.historia.core.expiry.item.getCustomData
+import dev.boooiil.historia.core.items.component.ConsumableComponent
+import dev.boooiil.historia.core.items.data.ConsumableData
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

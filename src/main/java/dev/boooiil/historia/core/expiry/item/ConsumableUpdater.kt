@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.expiry.item
 
+import dev.boooiil.historia.core.items.component.ConsumableComponent
 import org.bukkit.Bukkit
 import org.bukkit.inventory.Inventory
 
