@@ -8,7 +8,7 @@ import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
 import dev.boooiil.historia.core.database.sql.DatabaseExecutor
-import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable
 import dev.boooiil.historia.core.events.block.BlockBreakListener
 import dev.boooiil.historia.core.events.block.BlockFromToListener
 import dev.boooiil.historia.core.events.block.BlockPlaceListener
@@ -16,13 +16,13 @@ import dev.boooiil.historia.core.events.entity.EntityBreedListener
 import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
-import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.expiry.listeners.block.CauldronBlockListener
 import dev.boooiil.historia.core.expiry.listeners.inventory.ExpiryInventoryOpenListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerBucketFillListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerCauldronInteractListener
 import dev.boooiil.historia.core.expiry.listeners.player.PlayerConsumableConsumeListener
 import dev.boooiil.historia.core.expiry.listeners.world.ChunkLoadListener
+import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
@@ -95,7 +95,7 @@ open class HistoriaCore : JavaPlugin() {
 
         val provider = DataSourceProvider()
         databaseExecutor = DatabaseExecutor(provider)
-        HistoriaDBFields.TABLE.insert(null)
+        HistoriaTable.TABLE.insert(null)
 
         registerEvent(EntityBreedListener())
         registerEvent(EntityTameListener())

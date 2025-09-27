@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.database.internal;
 
-import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.entity.Player;
@@ -84,11 +84,11 @@ public class PlayerStorage {
         if (players.containsKey(uuid))
             player = players.get(uuid);
         else {
-            player = HistoriaDBFields.PLAYER.get(uuid);
+            player = HistoriaTable.PLAYER.get(uuid);
 
             if (player == null) {
                 player = new HistoriaPlayer(uuid);
-                HistoriaDBFields.UUID.insert(Map.of("uuid", uuid, "username", player.getUsername()));
+                HistoriaTable.UUID.insert(Map.of("uuid", uuid, "username", player.getUsername()));
             }
 
             addPlayer(uuid, player);
@@ -106,10 +106,10 @@ public class PlayerStorage {
         if (usernameMap.containsKey(username)) {
             player = players.get(usernameMap.get(username));
         } else {
-            UUID uuid = HistoriaDBFields.UUID.get(username);
+            UUID uuid = HistoriaTable.UUID.get(username);
 
             if (uuid != null) {
-                player = HistoriaDBFields.PLAYER.get(uuid);
+                player = HistoriaTable.PLAYER.get(uuid);
             }
         }
 

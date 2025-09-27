@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.UUID;
 
 @NullMarked
-public class HistoriaDBFields {
+public class HistoriaTable {
 
     private static final DatabaseExecutor HISTORIA_EXECUTOR = HistoriaCore.Companion.getDatabaseExecutor();
 
@@ -134,7 +134,7 @@ public class HistoriaDBFields {
                                     playtime);
                         });
                     },
-                    HistoriaDBFields.UUID::insert
+                    HistoriaTable.UUID::insert
             );
 
     public static final DatabaseFields<String, UUID> USERNAME =

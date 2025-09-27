@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.handlers.player;
 
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.database.sql.tables.HistoriaDBFields;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,7 +19,7 @@ public class PlayerJoinHandler {
     public void doPlayerDBInitialization() {
         historiaPlayer = PlayerStorage.getPlayer(event.getPlayer().getUniqueId());
         historiaPlayer.setLastLogin(System.currentTimeMillis());
-        HistoriaDBFields.LOGIN.update(
+        HistoriaTable.LOGIN.update(
                 historiaPlayer.getLastLogin(),
                 historiaPlayer.getUUID());
     }
