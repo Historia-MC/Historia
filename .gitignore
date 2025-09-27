@@ -11,6 +11,7 @@ release
 target
 gradle
 build
+run
 bin
 
 dependency-reduced-pom.xml
