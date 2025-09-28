@@ -16,9 +16,6 @@ val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.litera
     .build()
 
 private fun commandSet() = Commands.literal("set")
-    .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
-        .executes(::executeSet)
-    )
     .then(Commands.argument("player", ArgumentTypes.player())
         .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
             .executes(::executeSet)
@@ -32,7 +29,7 @@ private fun commandGet() = Commands.literal("get")
     )
 
 private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
-    val players = ctx.getPlayersOrExecutor("player")
+    val players = ctx.getPlayers("player")
     val proficiency = ctx.getArgument<Proficiency>("proficiency")
 
     players.forEach { player ->

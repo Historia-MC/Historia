@@ -11,12 +11,6 @@ import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import net.kyori.adventure.text.Component
 
 val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give")
-    .then(Commands.argument("item", HistoriaArgumentTypes.item())
-        .executes(::executeGive)
-        .then(Commands.argument("amount", IntegerArgumentType.integer(1))
-            .executes(::executeGive)
-        )
-    )
     .then(Commands.argument("player", ArgumentTypes.player())
         .then(Commands.argument("item", HistoriaArgumentTypes.item())
             .executes(::executeGive)
@@ -27,7 +21,7 @@ val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give
     ).build()
 
 private fun executeGive(ctx: CommandContext<CommandSourceStack>): Int {
-    val players = ctx.getPlayersOrExecutor("player")
+    val players = ctx.getPlayers("player")
     val item = ctx.getArgument<HistoriaItem>("item")
     val amount = ctx.getOptionalArgument("amount", 1)
 

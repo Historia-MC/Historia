@@ -19,14 +19,18 @@ inline fun <reified V> CommandContext<*>.getOptionalArgument(name: String, defau
     }
 }
 
+fun CommandContext<CommandSourceStack>.getPlayers(argumentName: String): List<Player> {
+    val playerSelector = this.getArgument<PlayerSelectorArgumentResolver>(argumentName)
+    return playerSelector.resolve(this.source)
+}
+
 fun CommandContext<CommandSourceStack>.requirePlayerExecutor() = this.source.executor as? Player ?: throw SimpleCommandExceptionType(
     MessageComponentSerializer.message().serialize(Component.text("Command must be executed on or as a player!"))
 ).create()
 
 fun CommandContext<CommandSourceStack>.getPlayersOrExecutor(argumentName: String): List<Player> {
     return try {
-        val playerSelector = this.getArgument<PlayerSelectorArgumentResolver>(argumentName)
-        playerSelector.resolve(this.source)
+        this.getPlayers(argumentName)
     } catch (_: IllegalArgumentException) {
         listOf(this.requirePlayerExecutor())
     }
