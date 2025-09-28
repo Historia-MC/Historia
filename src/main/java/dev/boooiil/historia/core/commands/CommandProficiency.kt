@@ -4,6 +4,7 @@ import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
+import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.plus
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
@@ -13,6 +14,7 @@ import net.kyori.adventure.text.Component
 val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.literal("proficiency")
     .then(commandSet())
     .then(commandGet())
+    .then(commandList())
     .build()
 
 private fun commandSet() = Commands.literal("set")
@@ -27,6 +29,17 @@ private fun commandGet() = Commands.literal("get")
     .then(Commands.argument("player", ArgumentTypes.player())
         .executes(::executeGet)
     )
+
+private fun commandList() = Commands.literal("list")
+    .executes { ctx ->
+        val proficiencies = RegistryHolder.PROFICIENCY_REGISTRY.values
+
+        val message = Component.text("Available proficiencies: ") +
+                Component.text(proficiencies.joinToString(", ") { it.name.toString() })
+
+        ctx.source.sender.sendMessage(message)
+        1
+    }
 
 private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
     val players = ctx.getPlayers("player")
