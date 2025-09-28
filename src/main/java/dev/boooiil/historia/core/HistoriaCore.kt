@@ -1,7 +1,5 @@
 package dev.boooiil.historia.core
 
-import com.mojang.brigadier.tree.LiteralCommandNode
-import dev.boooiil.historia.core.commands.*
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.ItemRegistryLoader
 import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
@@ -16,12 +14,6 @@ import dev.boooiil.historia.core.events.entity.EntityBreedListener
 import dev.boooiil.historia.core.events.entity.EntityTameListener
 import dev.boooiil.historia.core.events.inventory.InventoryClickListener
 import dev.boooiil.historia.core.events.player.*
-import dev.boooiil.historia.core.expiry.listeners.block.CauldronBlockListener
-import dev.boooiil.historia.core.expiry.listeners.inventory.ExpiryInventoryOpenListener
-import dev.boooiil.historia.core.expiry.listeners.player.PlayerBucketFillListener
-import dev.boooiil.historia.core.expiry.listeners.player.PlayerCauldronInteractListener
-import dev.boooiil.historia.core.expiry.listeners.player.PlayerConsumableConsumeListener
-import dev.boooiil.historia.core.expiry.listeners.world.ChunkLoadListener
 import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.items.ItemComponentType
@@ -39,15 +31,9 @@ import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
-import io.papermc.paper.command.brigadier.CommandSourceStack
-import io.papermc.paper.command.brigadier.Commands
-import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler
-import io.papermc.paper.plugin.lifecycle.event.registrar.ReloadableRegistrarEvent
-import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.Server
-import org.bukkit.command.CommandExecutor
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
@@ -149,6 +135,7 @@ open class HistoriaCore : JavaPlugin() {
         val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS
         val scheduler = this.server.scheduler
         scheduler.runTaskTimer(instance, ConsumableUpdater(), 0, updatePeriod)
+        isLoaded = true
     }
 
     /**
@@ -198,6 +185,9 @@ open class HistoriaCore : JavaPlugin() {
         /** if the plugin is testing  */
         @JvmField
         var isTesting: Boolean = true
+
+        @JvmField
+        var isLoaded: Boolean = false
 
         /** this plugin instance  */
         lateinit var instance: HistoriaCore
