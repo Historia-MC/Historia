@@ -14,7 +14,11 @@ import java.util.UUID;
 @NullMarked
 public class HistoriaTable {
 
-    private static final DatabaseExecutor HISTORIA_EXECUTOR = HistoriaCore.Companion.getDatabaseExecutor();
+    //private static final DatabaseExecutor HISTORIA_EXECUTOR = HistoriaCore.Companion.getDatabaseExecutor();
+
+    private static DatabaseExecutor getExecutor() {
+        return HistoriaCore.Companion.getDatabaseExecutor();
+    }
 
     public static final DatabaseFields<Void, UUID> TABLE =
             DatabaseFields.of(
@@ -35,7 +39,7 @@ public class HistoriaTable {
                                 "playtime bigint, " +
                                 "PRIMARY KEY (uuid))";
 
-                        HISTORIA_EXECUTOR.executor(string);
+                        getExecutor().executor(string);
                     }
             );
 
@@ -51,7 +55,7 @@ public class HistoriaTable {
                                     "uuid",
                                     username,
                                     result -> {
-                                        String sUUID = HISTORIA_EXECUTOR.getResult(result, "uuid", String.class);
+                                        String sUUID = getExecutor().getResult(result, "uuid", String.class);
 
                                         if (sUUID == null) return null;
                                         return java.util.UUID.fromString(sUUID);
@@ -77,7 +81,7 @@ public class HistoriaTable {
                                 "0, " + // logout
                                 "0)"; // playtime
 
-                        HISTORIA_EXECUTOR.executor(string);
+                        getExecutor().executor(string);
 
                     }
             );
@@ -109,27 +113,27 @@ public class HistoriaTable {
                                 "temperature != " + temperature + " OR " +
                                 "experience != " + experience + ")";
 
-                        HISTORIA_EXECUTOR.updateExecutor(query, 1);
+                        getExecutor().updateExecutor(query, 1);
                     },
                     uuid -> {
                         String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
 
-                        return HISTORIA_EXECUTOR.queryExecutor(string, result -> {
+                        return getExecutor().queryExecutor(string, result -> {
 
-                            if (!HISTORIA_EXECUTOR.nextResult(result)) {
+                            if (!getExecutor().nextResult(result)) {
                                 return null;
                             }
 
-                            String username = HISTORIA_EXECUTOR.getResult(result, "username", String.class);
+                            String username = getExecutor().getResult(result, "username", String.class);
                             Proficiency.ProficiencyName proficiencyName = Proficiency.ProficiencyName.Companion
-                                    .fromString(HISTORIA_EXECUTOR.getResult(result, "proficiency", String.class));
-                            Cultures culture = Cultures.getCulture(HISTORIA_EXECUTOR.getResult(result, "culture", String.class));
+                                    .fromString(getExecutor().getResult(result, "proficiency", String.class));
+                            Cultures culture = Cultures.getCulture(getExecutor().getResult(result, "culture", String.class));
                             //int level = getResult(result, "level", Integer.class);
-                            int experience = HISTORIA_EXECUTOR.getResult(result, "experience", Integer.class);
-                            double temperature = HISTORIA_EXECUTOR.getResult(result, "temperature", Double.class);
-                            long login = HISTORIA_EXECUTOR.getResult(result, "login", Long.class);
-                            long logout = HISTORIA_EXECUTOR.getResult(result, "logout", Long.class);
-                            long playtime = HISTORIA_EXECUTOR.getResult(result, "playtime", Long.class);
+                            int experience = getExecutor().getResult(result, "experience", Integer.class);
+                            double temperature = getExecutor().getResult(result, "temperature", Double.class);
+                            long login = getExecutor().getResult(result, "login", Long.class);
+                            long logout = getExecutor().getResult(result, "logout", Long.class);
+                            long playtime = getExecutor().getResult(result, "playtime", Long.class);
 
                             return new HistoriaPlayer(uuid, username, proficiencyName, culture, temperature, experience, login, logout,
                                     playtime);
@@ -156,7 +160,7 @@ public class HistoriaTable {
                                     "historia",
                                     "username",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "username", String.class)
+                                    result -> getExecutor().getResult(result, "username", String.class)
                             ),
                     null
             );
@@ -179,7 +183,7 @@ public class HistoriaTable {
                                     "historia",
                                     "proficiency",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "proficiency", String.class)
+                                    result -> getExecutor().getResult(result, "proficiency", String.class)
                             ),
                     null
             );
@@ -202,7 +206,7 @@ public class HistoriaTable {
                                     "historia",
                                     "culture",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "culture", String.class)
+                                    result -> getExecutor().getResult(result, "culture", String.class)
                             ),
                     null
             );
@@ -226,7 +230,7 @@ public class HistoriaTable {
                                     "historia",
                                     "experience",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "experience", Integer.class)
+                                    result -> getExecutor().getResult(result, "experience", Integer.class)
                             ),
                     null
             );
@@ -250,7 +254,7 @@ public class HistoriaTable {
                                     "historia",
                                     "temperature",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "temperature", Float.class)
+                                    result -> getExecutor().getResult(result, "temperature", Float.class)
                             ),
                     null
             );
@@ -273,7 +277,7 @@ public class HistoriaTable {
                                     "historia",
                                     "login",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "login", Long.class)
+                                    result -> getExecutor().getResult(result, "login", Long.class)
                             ),
                     null
             );
@@ -296,7 +300,7 @@ public class HistoriaTable {
                                     "historia",
                                     "logout",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "logout", Long.class)
+                                    result -> getExecutor().getResult(result, "logout", Long.class)
                             ),
                     null
             );
@@ -319,7 +323,7 @@ public class HistoriaTable {
                                     "historia",
                                     "playtime",
                                     uuid,
-                                    result -> HISTORIA_EXECUTOR.getResult(result, "playtime", Long.class)
+                                    result -> getExecutor().getResult(result, "playtime", Long.class)
                             ),
                     null
             );
