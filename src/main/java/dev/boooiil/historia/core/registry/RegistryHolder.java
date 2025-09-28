@@ -25,7 +25,6 @@ import java.util.Set;
 public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
 
     private static final Registry<Registry<?>> holder = RegistryHolder.generateHolder();
-    private final String HISTORIA_NAMESPACE = "historia";
 
     public static final Registry<ISkill> SKILL_REGISTRY =
             RegistryHolder.register(

@@ -158,17 +158,25 @@ public class HistoriaItem implements JSONSerializable {
     }
 
     /**
-     * Creates a default {@link ItemStack} with this configuration.
+     * Creates a default {@link ItemStack} of this configuration.
      *
      * @return the created {@link ItemStack}.
-     *
      */
     public ItemStack createItemStack() {
+        return createItemStack(1);
+    }
+
+    /**
+     * Creates a default {@link ItemStack} of this configuration with the specified amount.
+     *
+     * @return the created {@link ItemStack}.
+     */
+    public ItemStack createItemStack(int amount) {
 
         // invalid material
         assert (baseMaterial != null && baseMaterial != Material.AIR);
 
-        ItemStack stack = new ItemStack(baseMaterial);
+        ItemStack stack = new ItemStack(baseMaterial, amount);
         ItemMeta meta = stack.getItemMeta();
         TextComponent textComponent = Component.text(displayName);
 

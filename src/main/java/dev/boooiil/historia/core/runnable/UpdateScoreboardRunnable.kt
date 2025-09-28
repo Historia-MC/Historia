@@ -23,7 +23,7 @@ class UpdateScoreboardRunnable : BukkitRunnable() {
                 .addLine(Component.empty())
 
                 .addLine(Component.text("Proficiency: ", NamedTextColor.AQUA)
-                        + Component.text(historiaPlayer.getProficiency().name.key, NamedTextColor.GRAY))
+                        + historiaPlayer.getProficiency().displayName.color(NamedTextColor.GRAY))
 
                 .addLine(Component.text("Level: ", NamedTextColor.DARK_AQUA)
                         + Component.text(historiaPlayer.level, NamedTextColor.GRAY))

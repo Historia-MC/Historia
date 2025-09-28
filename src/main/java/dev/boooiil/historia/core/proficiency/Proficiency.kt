@@ -7,6 +7,7 @@ import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONSerializable
 import dev.boooiil.historia.core.util.JSONUtils
+import net.kyori.adventure.text.Component
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.jspecify.annotations.NullMarked
@@ -79,7 +80,7 @@ class Proficiency : JSONSerializable {
     /**
      * The name of the proficiency.
      */
-    val name: NamespacedKey
+    val key: NamespacedKey
 
     /**
      * The skills associated with the proficiency.
@@ -90,7 +91,7 @@ class Proficiency : JSONSerializable {
         CoreLogger.traceToConsole("Loading proficiency from section: " + section.name)
 
         val sName = section.name
-        this.name = getNamespacedKey(sName)
+        this.key = getNamespacedKey(sName)
 
         require(section.contains("skills")) { "Key 'skills' must be specified for proficiency $sName." }
 
@@ -154,6 +155,11 @@ class Proficiency : JSONSerializable {
     val stats: Stats
         get() = Stats()
 
+    // TODO read from config
+    val displayName: Component get() {
+        return Component.text(key.key.replaceFirstChar { it.uppercaseChar() })
+    }
+
     /**
      * Returns a string representation of the Proficiency object.
      *
@@ -165,7 +171,7 @@ class Proficiency : JSONSerializable {
 
         sb.append("Proficiency")
         sb.append("{")
-        sb.append(JSONUtils.fromValue("proficiencyName", name.key.lowercase(Locale.getDefault())) + ", ")
+        sb.append(JSONUtils.fromValue("proficiencyName", key.key.lowercase(Locale.getDefault())) + ", ")
         sb.append("\"skills\": $skills")
         sb.append("}")
 
@@ -176,7 +182,7 @@ class Proficiency : JSONSerializable {
         val sb = StringBuilder()
 
         sb.append("{")
-        sb.append(JSONUtils.fromValue("proficiencyName", name.key.lowercase(Locale.getDefault())) + ", ")
+        sb.append(JSONUtils.fromValue("proficiencyName", key.key.lowercase(Locale.getDefault())) + ", ")
         sb.append("\"skills\":[")
 
         for (entry in skills.entries) {
