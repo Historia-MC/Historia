@@ -1,6 +1,6 @@
 package dev.boooiil.historia.core.expiry
 
-import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.BaseTest
 import dev.boooiil.historia.core.expiry.block.FluidContent
 import dev.boooiil.historia.core.expiry.block.HCauldron
 import dev.boooiil.historia.core.expiry.block.HCauldrons
@@ -11,32 +11,22 @@ import org.bukkit.event.world.ChunkUnloadEvent
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockbukkit.mockbukkit.MockBukkit
-import org.mockbukkit.mockbukkit.ServerMock
 import org.mockbukkit.mockbukkit.block.BlockMock
 import org.mockbukkit.mockbukkit.world.ChunkMock
 import org.mockbukkit.mockbukkit.world.Coordinate
+import org.mockbukkit.mockbukkit.world.WorldMock
 
-class CauldronTest {
-    private lateinit var server: ServerMock
-    private lateinit var plugin: HistoriaCore
+class CauldronTest : BaseTest() {
     private lateinit var chunk: ChunkMock
     private lateinit var block: BlockMock
+    private lateinit var world: WorldMock
 
     @BeforeEach
     fun setUp() {
-        println("Setting up mock...")
-        this.server = MockBukkit.mock()
-        println("Loading plugin...")
-        try {
-            this.plugin = MockBukkit.load(HistoriaCore::class.java)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
         println("Setting up world...")
 
-        val world = server.addSimpleWorld("world")
+        world = server.addSimpleWorld("world")
 
         this.chunk = world.getChunkAt(0, 0)
 
@@ -48,8 +38,7 @@ class CauldronTest {
 
     @AfterEach
     fun tearDown() {
-        println("Tearing down mock...")
-        MockBukkit.unmock()
+        server.removeWorld(world)
     }
 
     @Test
