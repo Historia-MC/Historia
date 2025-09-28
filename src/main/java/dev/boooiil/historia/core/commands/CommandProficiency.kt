@@ -35,7 +35,7 @@ private fun commandList() = Commands.literal("list")
         val proficiencies = RegistryHolder.PROFICIENCY_REGISTRY.values
 
         val message = Component.text("Available proficiencies: ") +
-                Component.text(proficiencies.joinToString(", ") { it.name.toString() })
+                Component.text(proficiencies.joinToString(", ") { it.key.toString() })
 
         ctx.source.sender.sendMessage(message)
         1
@@ -47,9 +47,9 @@ private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
 
     players.forEach { player ->
         val hPlayer = HistoriaPlayer(player.uniqueId)
-        hPlayer.changeProficiency(proficiency.name)
+        hPlayer.changeProficiency(proficiency.key)
         ctx.source.sender.sendMessage(
-            Component.text("Set proficiency for ") + player.name() + Component.text(" to ${proficiency.name}")
+            Component.text("Set proficiency for ") + player.name() + Component.text(" to ${proficiency.key}")
         )
     }
     return 1
@@ -61,7 +61,7 @@ private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
     players.forEach { player ->
         val hPlayer = HistoriaPlayer(player.uniqueId)
         val proficiency = hPlayer.proficiency
-        ctx.source.sender.sendMessage(player.name() + Component.text(" has proficiency: ${proficiency.name}"))
+        ctx.source.sender.sendMessage(player.name() + Component.text(" has proficiency: ${proficiency.key}"))
     }
     return 1
 }

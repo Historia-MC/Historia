@@ -299,7 +299,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
         UUID uuid = historiaPlayer.getUUID();
         String username = historiaPlayer.getUsername();
-        String proficiency = historiaPlayer.getProficiency().getName().getKey().toLowerCase();
+        String proficiency = historiaPlayer.getProficiency().getKey().getKey().toLowerCase();
         String culture = historiaPlayer.getCulture().name().toLowerCase();
         //int level = historiaPlayer.getLevel();
         double experience = historiaPlayer.getCurrentExperience();

@@ -20,7 +20,7 @@ object ProficiencyRegistryLoader {
 
                 config.getConfigurationSection(key)?.let { section ->
                     val proficiency = Proficiency(section)
-                    RegistryHolder.PROFICIENCY_REGISTRY.register(proficiency.name, proficiency)
+                    RegistryHolder.PROFICIENCY_REGISTRY.register(proficiency.key, proficiency)
                 } ?: run {
                     CoreLogger.errorToConsole("Configuration section is null for key: $key")
                 }
