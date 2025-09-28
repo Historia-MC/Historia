@@ -30,11 +30,11 @@ commands:
     description: Adjust stuff.
     usage: /<command> <number>
     permission: historia.set
-  proficiency:
-    description: Adjust stuff.
-    usage: /<command> set <player> <proficiency>
-    permission: historia.proficiency
   dump:
     description: Dump data to console.
     usage: /<command> <player>
     permission: historia.dump
+  give:
+    description: Give an item to the player.
+    usage: /<command> <player> <item>
+    permission: historia.give
