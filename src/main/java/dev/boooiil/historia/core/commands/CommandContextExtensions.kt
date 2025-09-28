@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 inline fun <reified V> CommandContext<*>.getArgument(name: String): V =
     this.getArgument(name, V::class.java)
 
-inline fun <reified V> CommandContext<*>.getArgumentOrDefault(name: String, default: V): V {
+inline fun <reified V> CommandContext<*>.getOptionalArgument(name: String, default: V): V {
     return try {
         this.getArgument<V>(name)
     } catch (_: IllegalArgumentException) {
