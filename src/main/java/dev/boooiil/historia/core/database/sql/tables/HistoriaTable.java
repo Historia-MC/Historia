@@ -125,12 +125,13 @@ public class HistoriaTable {
                                     .fromString(HISTORIA_EXECUTOR.getResult(result, "proficiency", String.class));
                             Cultures culture = Cultures.getCulture(HISTORIA_EXECUTOR.getResult(result, "culture", String.class));
                             //int level = getResult(result, "level", Integer.class);
+                            double temperature = HISTORIA_EXECUTOR.getResult(result, "temperature", Double.class);
                             double experience = HISTORIA_EXECUTOR.getResult(result, "experience", Double.class);
                             long login = HISTORIA_EXECUTOR.getResult(result, "login", Long.class);
                             long logout = HISTORIA_EXECUTOR.getResult(result, "logout", Long.class);
                             long playtime = HISTORIA_EXECUTOR.getResult(result, "playtime", Long.class);
 
-                            return new HistoriaPlayer(uuid, username, proficiencyName, culture, 0, experience, login, logout,
+                            return new HistoriaPlayer(uuid, username, proficiencyName, culture, temperature, experience, login, logout,
                                     playtime);
                         });
                     },

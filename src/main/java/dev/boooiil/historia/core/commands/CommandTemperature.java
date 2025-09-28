@@ -26,7 +26,7 @@ public class CommandTemperature implements CommandExecutor {
             try {
                 int temperature = Integer.parseInt(args[1]);
                 HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-                historiaPlayer.setTemperature(temperature);
+                historiaPlayer.getTemperature().setMin(temperature);
                 player.sendMessage("Temperature set to " + temperature + ".");
                 CoreLogger.infoToConsole("Temperature set to " + temperature + ".");
             } catch (NumberFormatException e) {

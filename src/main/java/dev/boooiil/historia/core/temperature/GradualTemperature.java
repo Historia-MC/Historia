@@ -92,18 +92,7 @@ public class GradualTemperature {
     }
 
     public double doStep() {
-        double change;
-        boolean isDecreasing = max < min;
-        double currentRate = isDecreasing ? coolingRate : heatingRate;
-
-        // Calculate temperature change
-        if (isDecreasing) {
-            // Start from current player temp (min) and approach target (max)
-            change = min - (min - max) * Math.exp(-currentRate * step);
-        } else {
-            // Start from current player temp (min) and approach target (max)  
-            change = min + (max - min) * (1 - Math.exp(-currentRate * step));
-        }
+        double change = getCurrentTemperature();
 
         step += 1;
         return change;

@@ -418,7 +418,7 @@ public class TemperatureManager {
         double temperature = getTemperature(player);
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(uuid);
         df.setRoundingMode(RoundingMode.DOWN);
-        historiaPlayer.setTemperature(Double.valueOf(df.format(temperature)));
+        historiaPlayer.getTemperature().setMin(Double.valueOf(df.format(temperature)));
 
         applyDebuff(player, temperature, temperatureConfig.getMinimum(), temperatureConfig.getMaximum());
 

@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.player;
 
+import dev.boooiil.historia.core.configuration.specific.TemperatureConfig;
 import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
@@ -8,6 +9,7 @@ import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.registry.RegistryHolder;
+import dev.boooiil.historia.core.temperature.GradualTemperature;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -58,13 +60,9 @@ public class HistoriaPlayer extends BasePlayer {
     private float modifiedHealth;
 
     /**
-     * The current temperature of the user.
+     * The gradual temperature of the user.
      */
-    private double currentTemperature;
-    /**
-     * The max temperature of the user.
-     */
-    private double maxTemperature;
+    private final GradualTemperature temperature;
 
     /**
      * The current experience of the user.
@@ -94,6 +92,10 @@ public class HistoriaPlayer extends BasePlayer {
         super(null);
 
         culture = Cultures.NONE;
+        temperature = new GradualTemperature(
+                TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                0.1);
 
         CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
@@ -121,6 +123,11 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogin = 0;
         this.lastLogout = 0;
         this.playtime = 0;
+        this.temperature = new GradualTemperature(
+                TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                0.1
+        );
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
@@ -134,20 +141,27 @@ public class HistoriaPlayer extends BasePlayer {
      * @param username    - Username of the player.
      * @param proficiency - Proficiency of the player.
      * @param culture     - Culture of the player.
-     * @param level       - Level of the player.
+     * @param temperature - Temperature of the player.
      * @param experience  - Experience of the player.
      * @param login       - Time of the last login.
      * @param logout      - Time of the last logout.
      * @param playtime    - Playtime of the player in seconds.
      */
-    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, Cultures culture,
-                          int level, double experience, long login, long logout, long playtime) {
+    public HistoriaPlayer(UUID uuid,
+                          String username,
+                          ProficiencyName proficiency,
+                          Cultures culture,
+                          double temperature,
+                          double experience,
+                          long login,
+                          long logout,
+                          long playtime) {
         super(uuid);
 
         this.culture = culture;
         this.username = username;
         this.proficiency = proficiency.getKey();
-        this.level = level;
+        this.temperature = new GradualTemperature(temperature, temperature, 0.1);
         this.currentExperience = experience;
         this.lastLogin = login;
         this.lastLogout = logout;
@@ -371,7 +385,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getCurrentTemperature() {
 
-        return this.currentTemperature;
+        return this.temperature.getCurrentTemperature();
 
     }
 
@@ -382,7 +396,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getMaxTemperature() {
 
-        return this.maxTemperature;
+        return 43;
 
     }
 
@@ -415,15 +429,8 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    /**
-     * Set the temperature of the player.
-     *
-     * @param temperature The temperature to set.
-     */
-    public void setTemperature(double temperature) {
-
-        this.currentTemperature = temperature;
-
+    public GradualTemperature getTemperature() {
+        return this.temperature;
     }
 
     /**
@@ -542,8 +549,8 @@ public class HistoriaPlayer extends BasePlayer {
                 JSONUtils.fromValue("playtime", playtime) + ", " +
                 JSONUtils.fromValue("maxHealth", maxHealth) + ", " +
                 JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", " +
-                JSONUtils.fromValue("currentTemperature", currentTemperature) + ", " +
-                JSONUtils.fromValue("maxTemperature", maxTemperature) + ", " +
+                JSONUtils.fromValue("currentTemperature", getCurrentTemperature()) + ", " +
+                JSONUtils.fromValue("maxTemperature", getMaxTemperature()) + ", " +
                 JSONUtils.fromValue("currentExperience", currentExperience) + ", " +
                 JSONUtils.fromValue("maxExperience", maxExperience) + ", " +
                 "\"proficiency\":" + proficiency + ", " +
@@ -567,8 +574,8 @@ public class HistoriaPlayer extends BasePlayer {
                 JSONUtils.fromValue("playtime", playtime) + ", " +
                 JSONUtils.fromValue("maxHealth", maxHealth) + ", " +
                 JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", " +
-                JSONUtils.fromValue("currentTemperature", currentTemperature) + ", " +
-                JSONUtils.fromValue("maxTemperature", maxTemperature) + ", " +
+                JSONUtils.fromValue("currentTemperature", getCurrentTemperature()) + ", " +
+                JSONUtils.fromValue("maxTemperature", getMaxTemperature()) + ", " +
                 JSONUtils.fromValue("currentExperience", currentExperience) + ", " +
                 JSONUtils.fromValue("maxExperience", maxExperience) + ", " +
                 //"\"proficiency\":" + this.getProficiency().toJSON() + ", " +
