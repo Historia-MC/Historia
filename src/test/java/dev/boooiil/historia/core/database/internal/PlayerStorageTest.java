@@ -43,7 +43,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testPlayerSetOnlineOnJoin() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -58,7 +58,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testPlayerSetOfflineOnQuit() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -76,7 +76,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testDatabaseFallback() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -110,7 +110,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testStorageHasPlayerValid() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -132,7 +132,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testGetOnlinePlayerUsername() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
 
         CoreLogger
