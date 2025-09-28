@@ -92,7 +92,7 @@ public class HistoriaTable {
                     (v, u) -> {
                         UUID uuid = v.getUUID();
                         String username = v.getUsername();
-                        String proficiency = v.getProficiency().getName().getKey().toLowerCase();
+                        String proficiency = v.getProficiency().getKey().getKey().toLowerCase();
                         String culture = v.getCulture().name().toLowerCase();
                         //int level = historiaPlayer.getLevel();
                         int experience = v.getCurrentExperience();
