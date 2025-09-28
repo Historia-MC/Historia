@@ -4,6 +4,9 @@ version: 5
 minimum: -5
 maximum: 45
 
+search_distance: 12
+diminish_distance: 8
+
 # Player status effects on temperature
 playerstatus:
   ON_FIRE: 30
@@ -102,11 +105,11 @@ room_temp: 15.0  # Standard room temperature in Celsius
 underground:
   base_temp: 12.0      # Base cave temperature in Celsius
   biome_influence: 0.2 # How much biome affects underground temp
-    
+
 light:
   min_modifier: 0.7    # Minimum light temperature modifier
   max_modifier: 1.3    # Maximum light temperature modifier
-    
+
 time:
   night_modifier: 0.8  # Night temperature modifier
   noon_modifier: 1.2   # Noon temperature modifier

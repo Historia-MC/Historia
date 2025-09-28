@@ -55,6 +55,8 @@ public class TemperatureConfig {
     private final Map<PotionType, Double> potions = new EnumMap<>(PotionType.class);
     private final Map<Integer, Double> time = new HashMap<>();
     private final Map<String, Map<Integer, Double>> armor = new HashMap<>();
+    private final double searchDistance;
+    private final double diminishDistance;
     private double minimum;
     private double maximum;
     private final double roomTemp;
@@ -69,6 +71,8 @@ public class TemperatureConfig {
     public TemperatureConfig() {
 
         FileConfiguration configuration = FileIO.get(FileKeys.TEMPERATURE);
+        searchDistance = configuration.getDouble("search_distance");
+        diminishDistance = configuration.getDouble("diminish_distance");
         minimum = configuration.getDouble("minimum");
         maximum = configuration.getDouble("maximum");
         minimum = configuration.getDouble("minimum");
@@ -252,6 +256,14 @@ public class TemperatureConfig {
 
     public Double getTimeValue(Integer time) {
         return this.time.get(time);
+    }
+
+    public double getSearchDistance() {
+        return searchDistance;
+    }
+
+    public double getDiminishDistance() {
+        return diminishDistance;
     }
 
     public double getMinimum() {
