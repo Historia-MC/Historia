@@ -429,7 +429,7 @@ public class DatabaseExecutor {
      *
      */
     public void updateExecutor(String statement, int maxRetry) {
-        updateExecutor(statement, maxRetry, 0);
+        updateExecutor(statement, maxRetry, 0, null);
     }
 
     /**
@@ -463,10 +463,10 @@ public class DatabaseExecutor {
      * @param curr      The current amount of retries.
      *
      */
-    private void updateExecutor(String statement, int maxRetry, int curr) {
+    private void updateExecutor(String statement, int maxRetry, int curr, Exception e) {
 
         if (curr >= maxRetry) {
-            throw new RuntimeException("Could not update the database. " + statement);
+            throw new RuntimeException("Could not update the database. " + e.toString());
         }
 
         CoreLogger.debugToConsole(getDatabaseType().loggingPrefix() + "Executing update query:", statement,
@@ -481,7 +481,7 @@ public class DatabaseExecutor {
             exceptionLogger(sqlException, "Failed to execute update: " + statement + "Retry " + ++curr + "/"
                     + maxRetry);
 
-            updateExecutor(statement, maxRetry, curr + 1);
+            updateExecutor(statement, maxRetry, curr + 1, sqlException);
 
         }
 
