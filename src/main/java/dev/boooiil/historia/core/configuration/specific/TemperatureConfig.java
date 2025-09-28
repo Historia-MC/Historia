@@ -89,14 +89,14 @@ public class TemperatureConfig {
 
         // // Time settings
         timeNightModifier = configuration.getDouble("time.night_modifier");
-        CoreLogger.debugToConsole("Time night modifier: " + timeNightModifier);
+        CoreLogger.verboseToConsole("Time night modifier: " + timeNightModifier);
         timeNoonModifier = configuration.getDouble("time.noon_modifier");
-        CoreLogger.debugToConsole("Time noon modifier: " + timeNoonModifier);
+        CoreLogger.verboseToConsole("Time noon modifier: " + timeNoonModifier);
         // Load time modifiers
         double nightModifier = configuration.getDouble("time.night_modifier");
-        CoreLogger.debugToConsole("Time night modifier: " + nightModifier);
+        CoreLogger.verboseToConsole("Time night modifier: " + nightModifier);
         double noonModifier = configuration.getDouble("time.noon_modifier");
-        CoreLogger.debugToConsole("Time noon modifier: " + noonModifier);
+        CoreLogger.verboseToConsole("Time noon modifier: " + noonModifier);
         for (String statusEffect : configuration.getConfigurationSection("status_effects").getKeys(false)) {
 
             StatusEffect mod = StatusEffect.valueOf(statusEffect.toUpperCase());
@@ -104,7 +104,7 @@ public class TemperatureConfig {
 
             statusEffects.put(mod, value);
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding playerstatus ",
                     statusEffect,
                     " as playerstatus ",
@@ -132,7 +132,7 @@ public class TemperatureConfig {
 
             modifiers.put(mod, configuration.getDouble("modifier." + modifier));
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding modifier ",
                     modifier,
                     " as modifier ",
@@ -148,7 +148,7 @@ public class TemperatureConfig {
 
             this.biome.put(b, configuration.getDouble("biome." + biome));
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding biome ",
                     biome,
                     " as modifier ",
@@ -164,7 +164,7 @@ public class TemperatureConfig {
 
             this.heatSource.put(m, configuration.getDouble("heat_sources." + heatSource));
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding material ",
                     heatSource,
                     " as modifier ",
@@ -180,7 +180,7 @@ public class TemperatureConfig {
 
             this.weather.put(w, configuration.getDouble("weather." + weather));
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding weather ",
                     weather,
                     " as modifier ",
@@ -196,7 +196,7 @@ public class TemperatureConfig {
             PotionType p = RegistryAccess.registryAccess().getRegistry(RegistryKey.POTION).get(Key.key(potion.toLowerCase()));
             this.potions.put(p, configuration.getDouble("potions." + potion.toLowerCase()));
 
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                     "Adding material ",
                     potion,
                     " as modifier ",
