@@ -10,39 +10,25 @@ import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import net.kyori.adventure.text.Component
-import kotlin.collections.sorted
 
 val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.literal("proficiency")
-    .then(commandSet())
-    .then(commandGet())
-    .then(commandList())
-    .build()
-
-private fun commandSet() = Commands.literal("set")
-    .then(Commands.argument("player", ArgumentTypes.player())
-        .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
-            .executes(::executeSet)
+    .then(Commands.literal("set")
+        .then(Commands.argument("player", ArgumentTypes.player())
+            .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
+                .executes { executeSet(it) }
+            )
         )
     )
-
-private fun commandGet() = Commands.literal("get")
-    .executes(::executeGet)
-    .then(Commands.argument("player", ArgumentTypes.player())
-        .executes(::executeGet)
+    .then(Commands.literal("get")
+        .executes { executeGet(it) }
+        .then(Commands.argument("player", ArgumentTypes.player())
+            .executes { executeGet(it) }
+        )
     )
-
-private fun commandList() = Commands.literal("list")
-    .executes { ctx ->
-        val message = Component.text("Proficiencies: ")
-            .append(RegistryHolder.PROFICIENCY_REGISTRY.values
-                .sortedBy { it.displayName.toString().lowercase() }
-                .map { it.displayName }
-                .reduceOrNull { acc, comp -> acc.append(Component.text(", ") + comp) }
-                ?: Component.text("")
-            )
-        ctx.source.sender.sendMessage(message)
-        1
-    }
+    .then(Commands.literal("list")
+        .executes { executeList(it) }
+    )
+    .build()
 
 private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
     val players = ctx.getPlayers("player")
@@ -66,5 +52,17 @@ private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
         val proficiency = hPlayer.proficiency
         ctx.source.sender.sendMessage(player.displayName() + Component.text(" has proficiency: ") + proficiency.displayName)
     }
+    return 1
+}
+
+private fun executeList(ctx: CommandContext<CommandSourceStack>): Int {
+    val message = Component.text("Proficiencies: ")
+        .append(RegistryHolder.PROFICIENCY_REGISTRY.values
+            .sortedBy { it.displayName.toString().lowercase() }
+            .map { it.displayName }
+            .reduceOrNull { acc, comp -> acc.append(Component.text(", ") + comp) }
+            ?: Component.text("")
+        )
+    ctx.source.sender.sendMessage(message)
     return 1
 }

@@ -13,9 +13,9 @@ import net.kyori.adventure.text.Component
 val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give")
     .then(Commands.argument("player", ArgumentTypes.player())
         .then(Commands.argument("item", HistoriaArgumentTypes.item())
-            .executes(::executeGive)
+            .executes { executeGive(it) }
             .then(Commands.argument("amount", IntegerArgumentType.integer(1))
-                .executes(::executeGive)
+                .executes { executeGive(it) }
             )
         )
     ).build()
