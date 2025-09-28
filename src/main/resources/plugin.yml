@@ -34,7 +34,3 @@ commands:
     description: Dump data to console.
     usage: /<command> <player>
     permission: historia.dump
-  give:
-    description: Give an item to the player.
-    usage: /<command> <player> <item>
-    permission: historia.give

@@ -1,97 +1,37 @@
-package dev.boooiil.historia.core.commands;
+package dev.boooiil.historia.core.commands
 
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.items.HistoriaItem;
-import dev.boooiil.historia.core.registry.RegistryHolder;
-import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import com.mojang.brigadier.tree.LiteralCommandNode
+import dev.boooiil.historia.core.items.HistoriaItem
+import dev.boooiil.historia.core.player.HistoriaPlayer
+import dev.boooiil.historia.core.proficiency.Proficiency
+import dev.boooiil.historia.core.util.CoreLogger
+import io.papermc.paper.command.brigadier.CommandSourceStack
+import io.papermc.paper.command.brigadier.Commands
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes
+import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver
 
-import java.util.List;
+val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give")
+    .then(Commands.argument("player", ArgumentTypes.player())
+        .then(Commands.argument("item", HistoriaArgumentTypes.item())
+            .executes { ctx ->
+                val playerSelector = ctx.getArgument<PlayerSelectorArgumentResolver>("player")
+                val item = ctx.getArgument<HistoriaItem>("item")
 
-/**
- * <p>
- * The CommandGive class is a subclass of the {@link CommandExecutor} class and
- * is responsible for managing and executing the /give command within the
- * Historia plugin.
- * </p>
- * <p>
- * CommandGive provides methods to give items to players using the /give
- * command.
- * </p>
- *
- * @see CommandExecutor
- * @see Command
- * @see CommandSender
- * @see Player
- * @see Bukkit
- */
-public class CommandGive implements TabExecutor {
+                playerSelector.resolve(ctx.source).forEach { player ->
+                    val stack = item.createItemStack()
+                    player.inventory.addItem(stack)
+                }
+                return@executes 1
+            }
+        )
+    )
+    .then(Commands.argument("item", HistoriaArgumentTypes.item())
+        .executes { ctx ->
+            val player = ctx.requirePlayerExecutor()
+            val item = ctx.getArgument<HistoriaItem>("item")
 
-    /**
-     * command give default constructor
-     */
-    public CommandGive() {
-    }
-
-    @Override
-    // It's a method that is called when a command is executed.
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length > 2) {
-            sender.sendMessage("Syntax: /give <player> <item name>");
-            return false;
+            val stack = item.createItemStack()
+            player.inventory.addItem(stack)
+            return@executes 1
         }
-
-        if (Bukkit.getPlayer(args[0]) == null) {
-            sender.sendMessage("That player could not be found.");
-            return false;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
-        HistoriaItem historiaItem = RegistryHolder.ITEM_REGISTRY.get(HistoriaCore.getNamespacedKey(args[1]));
-
-        if (historiaItem == null) {
-            sender.sendMessage("Invalid item name.");
-            return false;
-        }
-
-        ItemStack stack = historiaItem.createItemStack();
-        player.getInventory().addItem(stack);
-
-        Component message = Component.text("Gave " + stack.getAmount() + " ")
-                .append(stack.displayName())
-                .append(Component.text(" to "))
-                .append(Component.text(player.getName()).hoverEvent(player));
-
-        player.sendMessage(message);
-        return true;
-    }
-
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
-                                                @NotNull String label, @NotNull String[] args) {
-        if (args.length == 1) {
-            return Bukkit.getServer().getOnlinePlayers().stream()
-                    .map(Player::getName)
-                    .filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .toList();
-        }
-
-        if (args.length == 2) {
-            return RegistryHolder.ITEM_REGISTRY.keySet().stream()
-                    .map(NamespacedKey::getKey)
-                    .filter(key -> key.startsWith(args[1].toLowerCase()))
-                    .toList();
-        }
-
-        return null;
-    }
-}
+    ).build()

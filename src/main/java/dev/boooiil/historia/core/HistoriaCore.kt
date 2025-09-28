@@ -117,7 +117,6 @@ open class HistoriaCore : JavaPlugin() {
         // end
 
 
-        registerCommand("give", CommandGive())
         registerCommand("checkplayers", CommandPlayers())
         registerCommand("debug", CommandDebug())
         registerCommand("stats", CommandStats())
@@ -172,7 +171,7 @@ open class HistoriaCore : JavaPlugin() {
      * @param command     The command to register
      */
     private fun registerCommand(commandName: String, command: CommandExecutor) {
-        this.getCommand(commandName)?.setExecutor(command)
+//        this.getCommand(commandName)?.setExecutor(command)
     }
 
     /**
