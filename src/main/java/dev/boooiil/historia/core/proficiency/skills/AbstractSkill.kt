@@ -36,7 +36,7 @@ abstract class AbstractSkill : ISkill {
     }
 
     override fun getProficiency(historiaPlayer: HistoriaPlayer): Proficiency? {
-        return RegistryHolder.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.name)
+        return RegistryHolder.PROFICIENCY_REGISTRY.get(historiaPlayer.proficiency.key)
     }
 
     override fun <T> getOrThrow(skillSuppliers: Array<out SkillSupplier<*>>, index: Int): T {

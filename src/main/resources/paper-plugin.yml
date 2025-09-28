@@ -1,0 +1,5 @@
+name: Historia
+version: '1.0'
+main: dev.boooiil.historia.core.HistoriaCore
+api-version: '1.19'
+bootstrapper: dev.boooiil.historia.core.HistoriaBootstrap
