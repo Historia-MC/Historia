@@ -99,8 +99,8 @@ public class HistoriaTable {
                                 "culture = '" + culture + "', " +
                                 "username = '" + username + "', " +
                                 //"level = '" + level + "', " +
+                                "experience = " + experience + ", " +
                                 "temperature = " + temperature + " " +
-                                "experience = " + experience + " " +
                                 "WHERE uuid = '" + uuid + "' AND " +
                                 "(proficiency != '" + proficiency + "' OR " +
                                 "culture != '" + culture + "' OR " +
@@ -125,8 +125,8 @@ public class HistoriaTable {
                                     .fromString(HISTORIA_EXECUTOR.getResult(result, "proficiency", String.class));
                             Cultures culture = Cultures.getCulture(HISTORIA_EXECUTOR.getResult(result, "culture", String.class));
                             //int level = getResult(result, "level", Integer.class);
-                            double temperature = HISTORIA_EXECUTOR.getResult(result, "temperature", Double.class);
                             double experience = HISTORIA_EXECUTOR.getResult(result, "experience", Double.class);
+                            double temperature = HISTORIA_EXECUTOR.getResult(result, "temperature", Double.class);
                             long login = HISTORIA_EXECUTOR.getResult(result, "login", Long.class);
                             long logout = HISTORIA_EXECUTOR.getResult(result, "logout", Long.class);
                             long playtime = HISTORIA_EXECUTOR.getResult(result, "playtime", Long.class);
