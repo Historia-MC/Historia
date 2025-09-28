@@ -45,7 +45,7 @@ private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
 }
 
 private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
-    val players = ctx.getPlayersOrExecutor("player")
+    val players = ctx.getOptionalPlayers("player")
 
     players.forEach { player ->
         val hPlayer = HistoriaPlayer(player.uniqueId)
