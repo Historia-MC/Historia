@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.util
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.ComponentLike
 
-operator fun Component.plus(component: Component) = append(component)
+operator fun Component.plus(component: ComponentLike) = append(component)
