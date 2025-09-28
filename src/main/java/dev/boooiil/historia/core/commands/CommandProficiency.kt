@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.commands
 
+import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
@@ -14,27 +15,22 @@ val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.litera
     .then(Commands.literal("set")
         .then(Commands.argument("player", ArgumentTypes.player())
             .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
-                .executes { ctx ->
-                    val playerSelector = ctx.getArgument<PlayerSelectorArgumentResolver>("player")
-                    val proficiency = ctx.getArgument<Proficiency>("proficiency")
-
-                    playerSelector.resolve(ctx.source).forEach { player ->
-                        val hPlayer = HistoriaPlayer(player.uniqueId)
-                        hPlayer.changeProficiency(proficiency.name)
-                        CoreLogger.infoToPlayer("Changed proficiency to ${proficiency.name}", player.uniqueId)
-                    }
-                    return@executes 1
-                }
+                .executes(::executeSet)
             )
         )
         .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
-            .executes { ctx ->
-                val player = ctx.requirePlayerExecutor()
-                val proficiency = ctx.getArgument<Proficiency>("proficiency")
-
-                val hPlayer = HistoriaPlayer(player.uniqueId)
-                hPlayer.changeProficiency(proficiency.name)
-                return@executes 1
-            }
+            .executes(::executeSet)
         )
     ).build()
+
+private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
+    val players = ctx.getPlayersOrExecutor("player")
+    val proficiency = ctx.getArgument<Proficiency>("proficiency")
+
+    players.forEach { player ->
+        val hPlayer = HistoriaPlayer(player.uniqueId)
+        hPlayer.changeProficiency(proficiency.name)
+        CoreLogger.infoToPlayer("Changed proficiency to ${proficiency.name}", player.uniqueId)
+    }
+    return 1
+}
