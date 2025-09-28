@@ -116,12 +116,6 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(PlayerToggleSprintListener())
         // end
 
-
-        registerCommand("checkplayers", CommandPlayers())
-        registerCommand("debug", CommandDebug())
-        registerCommand("stats", CommandStats())
-        registerCommand("set", CommandSet())
-
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
@@ -162,16 +156,6 @@ open class HistoriaCore : JavaPlugin() {
      */
     fun registerEvent(event: Listener) {
         this.server.pluginManager.registerEvents(event, this)
-    }
-
-    /**
-     * It registers a command to the server
-     *
-     * @param commandName The name of the command you want to register.
-     * @param command     The command to register
-     */
-    private fun registerCommand(commandName: String, command: CommandExecutor) {
-//        this.getCommand(commandName)?.setExecutor(command)
     }
 
     /**
