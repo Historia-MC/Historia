@@ -48,7 +48,7 @@ fun CommandContext<CommandSourceStack>.getPlayers(argumentName: String): List<Pl
  * @throws CommandSyntaxException if the executor is not a player
  */
 fun CommandContext<CommandSourceStack>.requirePlayerExecutor() = this.source.executor as? Player ?: throw SimpleCommandExceptionType(
-    MessageComponentSerializer.message().serialize(Component.text("Command must be executed on or as a player!"))
+    MessageComponentSerializer.message().serialize(Component.text("Command must be executed as a player!"))
 ).create()
 
 /**
@@ -61,6 +61,8 @@ fun CommandContext<CommandSourceStack>.getOptionalPlayers(argumentName: String):
     return try {
         this.getPlayers(argumentName)
     } catch (_: IllegalArgumentException) {
-        listOf(this.requirePlayerExecutor())
+        listOf(this.source.executor as? Player ?: throw SimpleCommandExceptionType(
+            MessageComponentSerializer.message().serialize(Component.text("Command must be executed on or as a player!"))
+        ).create())
     }
 }
