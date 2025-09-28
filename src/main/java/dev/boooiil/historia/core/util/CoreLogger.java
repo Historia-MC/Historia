@@ -213,8 +213,8 @@ public class CoreLogger {
     public static void verboseToConsole(String... messages) {
 
         if (
-            // HistoriaCore.isTesting ||
-                GeneralConfig.verbose) {
+                HistoriaCore.isLoaded &&
+                        GeneralConfig.verbose) {
 
             StringBuilder built = new StringBuilder();
 
@@ -256,8 +256,8 @@ public class CoreLogger {
         }
 
         if (
-            //HistoriaCore.isTesting ||
-                GeneralConfig.trace) {
+                HistoriaCore.isLoaded &&
+                        GeneralConfig.trace) {
 
             StringBuilder built = new StringBuilder();
 
