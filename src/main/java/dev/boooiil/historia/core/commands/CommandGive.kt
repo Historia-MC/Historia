@@ -9,6 +9,11 @@ import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 
 val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give")
+    .then(Commands.argument("item", HistoriaArgumentTypes.item())
+        .executes(::executeGive)
+        .then(Commands.argument("amount", IntegerArgumentType.integer(1))
+            .executes(::executeGive)
+        )
     .then(Commands.argument("player", ArgumentTypes.player())
         .then(Commands.argument("item", HistoriaArgumentTypes.item())
             .executes(::executeGive)
@@ -17,11 +22,6 @@ val commandGive: LiteralCommandNode<CommandSourceStack> = Commands.literal("give
             )
         )
     )
-    .then(Commands.argument("item", HistoriaArgumentTypes.item())
-        .executes(::executeGive)
-        .then(Commands.argument("amount", IntegerArgumentType.integer(1))
-            .executes(::executeGive)
-        )
     ).build()
 
 private fun executeGive(ctx: CommandContext<CommandSourceStack>): Int {

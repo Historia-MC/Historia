@@ -13,13 +13,13 @@ import org.bukkit.entity.Player
 
 val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.literal("proficiency")
     .then(Commands.literal("set")
+        .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
+            .executes(::executeSet)
+        )
         .then(Commands.argument("player", ArgumentTypes.player())
             .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
                 .executes(::executeSet)
             )
-        )
-        .then(Commands.argument("proficiency", HistoriaArgumentTypes.proficiency())
-            .executes(::executeSet)
         )
     ).build()
 
