@@ -10,6 +10,7 @@ import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import net.kyori.adventure.text.Component
+import kotlin.collections.sorted
 
 val commandProficiency: LiteralCommandNode<CommandSourceStack> = Commands.literal("proficiency")
     .then(commandSet())
@@ -32,11 +33,13 @@ private fun commandGet() = Commands.literal("get")
 
 private fun commandList() = Commands.literal("list")
     .executes { ctx ->
-        val proficiencies = RegistryHolder.PROFICIENCY_REGISTRY.values
-
-        val message = Component.text("Available proficiencies: ") +
-                Component.text(proficiencies.joinToString(", ") { it.key.toString() })
-
+        val message = Component.text("Proficiencies: ")
+            .append(RegistryHolder.PROFICIENCY_REGISTRY.values
+                .sortedBy { it.displayName.toString().lowercase() }
+                .map { it.displayName }
+                .reduceOrNull { acc, comp -> acc.append(Component.text(", ") + comp) }
+                ?: Component.text("")
+            )
         ctx.source.sender.sendMessage(message)
         1
     }
@@ -49,7 +52,7 @@ private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
         val hPlayer = HistoriaPlayer(player.uniqueId)
         hPlayer.changeProficiency(proficiency.key)
         ctx.source.sender.sendMessage(
-            Component.text("Set proficiency for ") + player.name() + Component.text(" to ${proficiency.key}")
+            Component.text("Set proficiency for ") + player.displayName() + Component.text(" to ") + proficiency.displayName
         )
     }
     return 1
@@ -61,7 +64,7 @@ private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
     players.forEach { player ->
         val hPlayer = HistoriaPlayer(player.uniqueId)
         val proficiency = hPlayer.proficiency
-        ctx.source.sender.sendMessage(player.name() + Component.text(" has proficiency: ${proficiency.key}"))
+        ctx.source.sender.sendMessage(player.displayName() + Component.text(" has proficiency: ") + proficiency.displayName)
     }
     return 1
 }

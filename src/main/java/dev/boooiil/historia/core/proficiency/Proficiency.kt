@@ -7,6 +7,7 @@ import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONSerializable
 import dev.boooiil.historia.core.util.JSONUtils
+import net.kyori.adventure.text.Component
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.jspecify.annotations.NullMarked
@@ -153,6 +154,11 @@ class Proficiency : JSONSerializable {
 
     val stats: Stats
         get() = Stats()
+
+    // TODO read from config
+    val displayName: Component get() {
+        return Component.text(key.key.replaceFirstChar { it.uppercaseChar() })
+    }
 
     /**
      * Returns a string representation of the Proficiency object.
