@@ -97,11 +97,12 @@ public class TemperatureConfig {
         CoreLogger.debugToConsole("Time night modifier: " + nightModifier);
         double noonModifier = configuration.getDouble("time.noon_modifier");
         CoreLogger.debugToConsole("Time noon modifier: " + noonModifier);
-        for (String statusEffect : configuration.getConfigurationSection("status_effect").getKeys(false)) {
+        for (String statusEffect : configuration.getConfigurationSection("status_effects").getKeys(false)) {
 
             StatusEffect mod = StatusEffect.valueOf(statusEffect.toUpperCase());
+            Double value = configuration.getDouble("status_effects." + statusEffect);
 
-            statusEffects.put(mod, configuration.getDouble("playerstatus." + statusEffect));
+            statusEffects.put(mod, value);
 
             CoreLogger.debugToConsole(
                     "Adding playerstatus ",
@@ -109,7 +110,7 @@ public class TemperatureConfig {
                     " as playerstatus ",
                     mod.toString(),
                     " with value ",
-                    configuration.getDouble("playerstatus." + statusEffect) + "");
+                    value.toString());
 
         }
 

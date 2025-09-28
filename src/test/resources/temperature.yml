@@ -9,7 +9,7 @@ diminish_distance: 8
 
 # Player status effects on temperature
 status_effects:
-  ON_FIRE: 30.0
+  ON_FIRE: 30
 
 # Armor temperature modifiers
 armor:
