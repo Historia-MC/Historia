@@ -123,10 +123,6 @@ open class HistoriaCore : JavaPlugin() {
         registerCommand("stats", CommandStats())
         registerCommand("set", CommandSet())
 
-        if (!isTesting) { // TODO: this is a temporary workaround since mockbukkit doesn't support the newest brigadier version
-            registerCommand(commandProficiency)
-        }
-
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
@@ -180,19 +176,6 @@ open class HistoriaCore : JavaPlugin() {
     }
 
     /**
-     * It registers a brigadier command to the server
-     *
-     * @param command     The command to register
-     */
-    private fun registerCommand(command: LiteralCommandNode<CommandSourceStack>) {
-        this.lifecycleManager.registerEventHandler(
-            LifecycleEvents.COMMANDS,
-            LifecycleEventHandler { commands: ReloadableRegistrarEvent<Commands> ->
-                commands.registrar().register(command)
-            })
-    }
-
-    /**
      * It registers a runnable
      *
      * @param runnable The runnable you want to register.
@@ -212,6 +195,8 @@ open class HistoriaCore : JavaPlugin() {
     }
 
     companion object {
+        private const val PLUGIN_NAMESPACE = "historia"
+
         /** if the plugin is testing  */
         @JvmField
         var isTesting: Boolean = true
@@ -248,7 +233,7 @@ open class HistoriaCore : JavaPlugin() {
          */
         @JvmStatic
         fun getNamespacedKey(key: String): NamespacedKey {
-            return NamespacedKey(instance, key.lowercase())
+            return NamespacedKey(PLUGIN_NAMESPACE, key.lowercase())
         }
 
         fun registerSkill(skill: ISkill) {
