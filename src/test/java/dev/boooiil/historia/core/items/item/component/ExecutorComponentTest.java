@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import static org.junit.Assert.assertNotNull;
 
 public class ExecutorComponentTest extends BaseTest {
 
@@ -50,7 +49,7 @@ public class ExecutorComponentTest extends BaseTest {
             int uses = section.getInt("uses");
             int cooldown = section.getInt("cooldown");
 
-            assertNotNull(component.executables().get(action));
+            Assertions.assertNotNull(component.executables().get(action));
 
             ItemExecutable executable = component.executables().get(action);
 

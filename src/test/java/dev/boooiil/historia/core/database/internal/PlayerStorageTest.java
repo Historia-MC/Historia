@@ -4,8 +4,6 @@ import dev.boooiil.historia.core.BaseTest;
 import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -16,41 +14,35 @@ public class PlayerStorageTest extends BaseTest {
 
     @BeforeEach
     public void clearStorage() {
-        if (PlayerStorage.getPlayerMap() != null) {
+        if (!PlayerStorage.getPlayerMap().isEmpty()) {
+            CoreLogger.infoToConsole("Maps were not empty, clearing...");
             PlayerStorage.getPlayerMap().clear();
             PlayerStorage.getUsernameMap().clear();
         }
-
-        if (player.isOnline()) player.disconnect();
     }
 
     @Test
     public void testPlayerAddedOnJoin() {
-        assert PlayerStorage.getPlayerMap().size() == 0;
+        assert PlayerStorage.getPlayerMap().isEmpty();
 
         server.setPlayers(10);
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-        }
-
         assert PlayerStorage.getPlayerMap().size() == 10;
 
+        server.setPlayers(0);
     }
 
     @Test
     public void testPlayerSetOnlineOnJoin() {
-        assert PlayerStorage.getPlayerMap().size() == 0;
+        assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-        assert historiaPlayer.isOnline();
 
-        player.disconnect();
+        assert historiaPlayer.isOnline();
 
     }
 
@@ -58,7 +50,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testPlayerSetOfflineOnQuit() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -67,6 +59,7 @@ public class PlayerStorageTest extends BaseTest {
 
         player.disconnect();
         CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
+        CoreLogger.debugToConsole(historiaPlayer.toJSON());
 
         assert !historiaPlayer.isOnline();
 
@@ -76,7 +69,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testDatabaseFallback() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -87,6 +80,10 @@ public class PlayerStorageTest extends BaseTest {
 
         player.disconnect();
         CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
+
+        while (player.isOnline()) {
+            CoreLogger.debugToConsole("waiting for disconnect", player.getName());
+        }
 
         assert !historiaPlayer.isOnline();
 
@@ -110,7 +107,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testStorageHasPlayerValid() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -132,16 +129,14 @@ public class PlayerStorageTest extends BaseTest {
     public void testGetOnlinePlayerUsername() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.addPlayer(player);
-
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+
         assert historiaPlayer.isOnline();
-
         assert PlayerStorage.has(player.getUniqueId());
-
         assert PlayerStorage.getPlayer(player.getName()) != null;
 
     }
@@ -150,7 +145,7 @@ public class PlayerStorageTest extends BaseTest {
     public void testGetOfflinePlayerUsername() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.addPlayer(player);
+        PlayerMock player = server.addPlayer();
 
         CoreLogger
                 .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
@@ -171,12 +166,12 @@ public class PlayerStorageTest extends BaseTest {
         assert PlayerStorage.getUsernameMap().isEmpty();
 
         historiaPlayer = PlayerStorage.getPlayer(player.getName());
+        System.out.println(historiaPlayer);
 
         assert !historiaPlayer.isOnline();
         assert historiaPlayer.getUsername() != null;
         assert historiaPlayer.getUsername().equals(player.getName());
 
-        System.out.println(historiaPlayer);
     }
 
     @Test

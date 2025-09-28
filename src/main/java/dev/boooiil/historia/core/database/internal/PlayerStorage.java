@@ -156,9 +156,10 @@ public class PlayerStorage {
      */
     public static void markOffline(UUID uuid) {
 
-        players.get(uuid).saveCharacter();
+        HistoriaPlayer player = players.get(uuid);
 
-        players.get(uuid).setOnline(false);
+        player.saveCharacter();
+        player.setOnline(false);
 
     }
 

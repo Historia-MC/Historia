@@ -2,23 +2,22 @@ package dev.boooiil.historia.core.registry;
 
 import dev.boooiil.historia.core.BaseTest;
 import org.bukkit.NamespacedKey;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.*;
-
 public class RegistryTest extends BaseTest {
 
-    private Registry<String> registry;
-    private NamespacedKey key1;
-    private NamespacedKey key2;
+    private static Registry<String> registry;
+    private static NamespacedKey key1;
+    private static NamespacedKey key2;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         // Use String.class as the type for simplicity
         registry = new Registry<>(String.class);
         key1 = new NamespacedKey("test", "key1");
@@ -28,28 +27,28 @@ public class RegistryTest extends BaseTest {
     @Test
     public void testRegisterAndGet() {
         registry.register(key1, "value1");
-        assertEquals("value1", registry.get(key1));
+        Assertions.assertEquals("value1", registry.get(key1));
     }
 
     @Test
     public void testDeregister() {
         registry.register(key1, "value1");
         registry.deregister(key1);
-        assertNull(registry.get(key1));
+        Assertions.assertNull(registry.get(key1));
     }
 
     @Test
     public void testUpdate() {
         registry.register(key1, "value1");
         registry.update(key1, "value2");
-        assertEquals("value2", registry.get(key1));
+        Assertions.assertEquals("value2", registry.get(key1));
     }
 
     @Test
     public void testContains() {
         registry.register(key1, "value1");
-        assertTrue(registry.contains(key1));
-        assertFalse(registry.contains(key2));
+        Assertions.assertTrue(registry.contains(key1));
+        Assertions.assertFalse(registry.contains(key2));
     }
 
     @Test
@@ -57,28 +56,28 @@ public class RegistryTest extends BaseTest {
         registry.register(key1, "value1");
         registry.register(key2, "value2");
         Set<NamespacedKey> keys = registry.keySet();
-        assertTrue(keys.contains(key1));
-        assertTrue(keys.contains(key2));
-        assertEquals(2, keys.size());
+        Assertions.assertTrue(keys.contains(key1));
+        Assertions.assertTrue(keys.contains(key2));
+        Assertions.assertEquals(2, keys.size());
     }
 
     @Test
     public void testGetType() {
         Type type = registry.getType();
-        assertEquals(String.class, type);
+        Assertions.assertEquals(String.class, type);
     }
 
     @Test
     public void testGetNonExistentKeyReturnsNull() {
-        assertNull(registry.get(new NamespacedKey("test", "nonexistent")));
+        Assertions.assertNull(registry.get(new NamespacedKey("test", "nonexistent")));
     }
 
     @Test
     public void testOf() {
         Registry<List<String>> newRegistry = Registry.of(new TypeToken<List<String>>() {
         });
-        assertNotNull(newRegistry);
-        assertEquals(new TypeToken<List<String>>() {
+        Assertions.assertNotNull(newRegistry);
+        Assertions.assertEquals(new TypeToken<List<String>>() {
         }.getType(), newRegistry.getType());
     }
 }

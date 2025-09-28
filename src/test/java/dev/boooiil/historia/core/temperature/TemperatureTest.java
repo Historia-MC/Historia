@@ -9,6 +9,7 @@ import org.bukkit.block.Biome;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,17 +23,17 @@ public class TemperatureTest extends BaseTest {
     public static void setupTest() {
         world = new WorldMock(Material.WATER, 20);
         server.addWorld(world);
-        server.addPlayer(player);
     }
 
     @AfterAll
     public static void destroyTest() {
         server.removeWorld(world);
-        player.disconnect();
     }
 
     @Test
     public void testBaseTemperature() {
+        PlayerMock player = server.addPlayer();
+
         Location loc = new Location(world, 0, 64, 0);
         world.setBlockData(loc, Material.STONE.createBlockData());
         player.teleport(loc);
@@ -44,6 +45,8 @@ public class TemperatureTest extends BaseTest {
 
     @Test
     public void testHeatSourceEffect() {
+        PlayerMock player = server.addPlayer();
+
         Location playerLoc = new Location(world, 0, 64, 0);
         Location campfireLoc = playerLoc.clone().add(1, 0, 0);
 
@@ -58,6 +61,8 @@ public class TemperatureTest extends BaseTest {
 
     @Test
     public void testBiomeTemperature() {
+        PlayerMock player = server.addPlayer();
+
         Location loc = new Location(world, 0, 64, 0);
         world.setBiome(loc, Biome.DESERT);
         player.teleport(loc);
@@ -69,6 +74,8 @@ public class TemperatureTest extends BaseTest {
 
     @Test
     public void testUndergroundTemperature() {
+        PlayerMock player = server.addPlayer();
+
         Location loc = new Location(world, 0, 32, 0);
         // Create stone box around player location
         for (int x = -1; x <= 1; x++) {
@@ -93,6 +100,9 @@ public class TemperatureTest extends BaseTest {
 
     @Test
     public void testConfigReload() {
+
+        PlayerMock player = server.addPlayer();
+
         ConfigurationLoader.init();
         TemperatureManager manager = TemperatureStorage.getTemperatureManager(player.getUniqueId());
         double tempBefore = manager.getTemperature(player);
@@ -108,6 +118,8 @@ public class TemperatureTest extends BaseTest {
     // Test for temperature in water.
     @Test
     public void testTemperatureInWater() {
+        PlayerMock player = server.addPlayer();
+
         player.setInWater(true);
         TemperatureManager manager = TemperatureStorage.getTemperatureManager(player.getUniqueId());
         double temp = manager.getTemperature(player);
@@ -116,6 +128,8 @@ public class TemperatureTest extends BaseTest {
 
     @Test
     public void testTemperatureRunnable() {
+        PlayerMock player = server.addPlayer();
+        
         Location location = new Location(world, 10, 80, 20);
         player.teleport(location);
         world.setTime(3000);

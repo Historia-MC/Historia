@@ -143,7 +143,7 @@ public class TemperatureConfig {
         }
 
         for (String biome : configuration.getConfigurationSection("biome").getKeys(false)) {
-            CoreLogger.debugToConsole("Biome: " + biome);
+            CoreLogger.verboseToConsole("Biome: " + biome);
             Biome b = RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME).get(Key.key(biome.toLowerCase()));
 
             this.biome.put(b, configuration.getDouble("biome." + biome));

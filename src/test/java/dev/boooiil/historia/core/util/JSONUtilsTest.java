@@ -4,12 +4,11 @@ import dev.boooiil.historia.core.BaseTest;
 import net.kyori.adventure.text.Component;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-
-import static org.junit.Assert.assertEquals;
 
 public class JSONUtilsTest extends BaseTest {
 
@@ -63,7 +62,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[false, true]");
+        Assertions.assertEquals(r, "\"list\":[false, true]");
 
     }
 
@@ -74,7 +73,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[false, true]");
+        Assertions.assertEquals(r, "\"list\":[false, true]");
 
     }
 
@@ -95,7 +94,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
+        Assertions.assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
 
     }
 
@@ -104,10 +103,10 @@ public class JSONUtilsTest extends BaseTest {
 
         JSONListTestClass listTest = new JSONListTestClass();
 
-        assertEquals(listTest.toJSON(),
+        Assertions.assertEquals(listTest.toJSON(),
                 "{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
 
-        assertEquals(listTest.toString(),
+        Assertions.assertEquals(listTest.toString(),
                 "JSONListTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
 
     }
@@ -117,10 +116,10 @@ public class JSONUtilsTest extends BaseTest {
 
         JSONSetTestClass listTest = new JSONSetTestClass();
 
-        assertEquals(listTest.toJSON(),
+        Assertions.assertEquals(listTest.toJSON(),
                 "{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
 
-        assertEquals(listTest.toString(),
+        Assertions.assertEquals(listTest.toString(),
                 "JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}");
 
     }
@@ -132,7 +131,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
+        Assertions.assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
     }
 
     @Test
@@ -142,7 +141,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
+        Assertions.assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
 
     }
 
@@ -153,7 +152,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
+        Assertions.assertEquals(r, "\"list\":[1.0, 2.0, 3.0, 4.0]");
     }
 
     @Test
@@ -163,7 +162,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[1, 2, 3, 4]");
+        Assertions.assertEquals(r, "\"list\":[1, 2, 3, 4]");
 
     }
 
@@ -174,7 +173,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[1, 2, 3, 4]");
+        Assertions.assertEquals(r, "\"list\":[1, 2, 3, 4]");
     }
 
     @Test
@@ -184,7 +183,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[1, 2, 3, 4]");
+        Assertions.assertEquals(r, "\"list\":[1, 2, 3, 4]");
 
     }
 
@@ -195,7 +194,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[1, 2, 3, 4]");
+        Assertions.assertEquals(r, "\"list\":[1, 2, 3, 4]");
     }
 
     @Test
@@ -216,22 +215,22 @@ public class JSONUtilsTest extends BaseTest {
 
         String smr = JSONUtils.fromMap("map", simlpeMap);
 
-        assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
+        Assertions.assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
 
         String lmr = JSONUtils.fromMap("map", listMap);
 
-        assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
+        Assertions.assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
 
         String cmr = JSONUtils.fromMap("map", complexMap);
 
-        assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
+        Assertions.assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
 
         JSONMapTestClass mapTest = new JSONMapTestClass();
 
-        assertEquals(mapTest.toJSON(),
+        Assertions.assertEquals(mapTest.toJSON(),
                 "{\"test\":{\"set\":{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test\":{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, \"list\":{\"test\":[{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, {\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test1\":{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}}}");
 
-        assertEquals(mapTest.toString(),
+        Assertions.assertEquals(mapTest.toString(),
                 "JSONMapTestClass{\"test\":{\"set\":JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test\":JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, \"list\":JSONSetTestClass{\"test\":[JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}, JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}]}, \"test1\":JSONTestClass{\"i\":2, \"f\":2.0, \"b\":false, \"s\":\"test1\"}}}");
     }
 
@@ -253,15 +252,15 @@ public class JSONUtilsTest extends BaseTest {
 
         String smr = JSONUtils.fromMap("map", simlpeMap, true);
 
-        assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
+        Assertions.assertEquals(smr, "\"map\":{\"one\":1, \"two\":2}");
 
         String lmr = JSONUtils.fromMap("map", listMap, true);
 
-        assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
+        Assertions.assertEquals(lmr, "\"map\":{\"one\":[1], \"two\":[2]}");
 
         String cmr = JSONUtils.fromMap("map", complexMap, true);
 
-        assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
+        Assertions.assertEquals(cmr, "\"map\":{\"one\":{\"one\":[1], \"two\":[2]}, \"two\":{\"one\":[1], \"two\":[2]}}");
 
     }
 
@@ -272,7 +271,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r,
+        Assertions.assertEquals(r,
                 "\"list\":[{\"type\":\"minecraft:absorption\", \"duration\":0, \"amplifier\":1}, {\"type\":\"minecraft:strength\", \"duration\":0, \"amplifier\":21}]");
 
     }
@@ -283,7 +282,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r,
+        Assertions.assertEquals(r,
                 "\"list\":[{\"type\":\"minecraft:absorption\", \"duration\":0, \"amplifier\":1}, {\"type\":\"minecraft:strength\", \"duration\":0, \"amplifier\":21}]");
 
     }
@@ -295,7 +294,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromList("list", l);
 
-        assertEquals(r, "\"list\":[\"one\", \"two\", \"three\", \"four\"]");
+        Assertions.assertEquals(r, "\"list\":[\"one\", \"two\", \"three\", \"four\"]");
     }
 
     @Test
@@ -305,14 +304,14 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromSet("list", l);
 
-        assertEquals(r, "\"list\":[\"one\", \"two\", \"three\", \"four\"]");
+        Assertions.assertEquals(r, "\"list\":[\"one\", \"two\", \"three\", \"four\"]");
     }
 
     @Test
     void testFromValue() {
         String r = JSONUtils.fromValue("value", 1);
 
-        assertEquals(r, "\"value\":1");
+        Assertions.assertEquals(r, "\"value\":1");
     }
 
     @Test
@@ -320,7 +319,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromValue("value", 1f);
 
-        assertEquals(r, "\"value\":1.0");
+        Assertions.assertEquals(r, "\"value\":1.0");
     }
 
     @Test
@@ -328,7 +327,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromValue("value", 1d);
 
-        assertEquals(r, "\"value\":1.0");
+        Assertions.assertEquals(r, "\"value\":1.0");
     }
 
     @Test
@@ -336,7 +335,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromValue("value", 1L);
 
-        assertEquals(r, "\"value\":1");
+        Assertions.assertEquals(r, "\"value\":1");
     }
 
     @Test
@@ -344,7 +343,7 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromValue("value", false);
 
-        assertEquals(r, "\"value\":false");
+        Assertions.assertEquals(r, "\"value\":false");
     }
 
     @Test
@@ -352,17 +351,17 @@ public class JSONUtilsTest extends BaseTest {
 
         String r = JSONUtils.fromValue("value", "one");
 
-        assertEquals(r, "\"value\":\"one\"");
+        Assertions.assertEquals(r, "\"value\":\"one\"");
     }
 
     @Test
     void testFromValue7() {
         JSONTestClass testClass = new JSONTestClass();
 
-        assertEquals(JSONUtils.fromValue("test", testClass),
+        Assertions.assertEquals(JSONUtils.fromValue("test", testClass),
                 "\"test\":{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}");
 
-        assertEquals(JSONUtils.fromValue("test", testClass, true),
+        Assertions.assertEquals(JSONUtils.fromValue("test", testClass, true),
                 "\"test\":JSONTestClass{\"i\":1, \"f\":1.0, \"b\":true, \"s\":\"test\"}");
     }
 
@@ -370,35 +369,35 @@ public class JSONUtilsTest extends BaseTest {
     void testFromEmptyList() {
         List<Integer> emptyList = new ArrayList<>();
         String result = JSONUtils.fromList("empty", emptyList);
-        assertEquals("\"empty\": []", result);
+        Assertions.assertEquals("\"empty\": []", result);
     }
 
     @Test
     void testFromEmptySet() {
         Set<String> emptySet = new LinkedHashSet<>();
         String result = JSONUtils.fromSet("empty", emptySet);
-        assertEquals("\"empty\": []", result);
+        Assertions.assertEquals("\"empty\": []", result);
     }
 
     @Test
     void testFromEmptyMap() {
         HashMap<String, Integer> emptyMap = new HashMap<>();
         String result = JSONUtils.fromMap("empty", emptyMap);
-        assertEquals("\"empty\":{}", result);
+        Assertions.assertEquals("\"empty\":{}", result);
     }
 
     @Test
     void testFromStringListWithSpecialCharacters() {
         List<String> list = Arrays.asList("a", "b", "c\"d", "e\\f");
         String result = JSONUtils.fromStringList("special", list);
-        assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
+        Assertions.assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
     }
 
     @Test
     void testFromStringSetWithSpecialCharacters() {
         Set<String> set = new LinkedHashSet<>(Arrays.asList("a", "b", "c\"d", "e\\f"));
         String result = JSONUtils.fromStringSet("special", set);
-        assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
+        Assertions.assertEquals("\"special\":[\"a\", \"b\", \"c\"d\", \"e\\f\"]", result);
     }
 
     @Test
@@ -409,7 +408,7 @@ public class JSONUtilsTest extends BaseTest {
         try {
             JSONUtils.fromList("dummy", dummyList);
         } catch (IllegalArgumentException e) {
-            assertEquals("Key dummy provided a list type of " + Dummy.class.getName()
+            Assertions.assertEquals("Key dummy provided a list type of " + Dummy.class.getName()
                     + " which does not have a configured handler.", e.getMessage());
         }
     }
@@ -421,7 +420,7 @@ public class JSONUtilsTest extends BaseTest {
         try {
             JSONUtils.fromMap("badmap", map);
         } catch (IllegalArgumentException e) {
-            assertEquals("Key value in map badmap should have type Enum or String, but has type: java.lang.Integer",
+            Assertions.assertEquals("Key value in map badmap should have type Enum or String, but has type: java.lang.Integer",
                     e.getMessage());
         }
     }
