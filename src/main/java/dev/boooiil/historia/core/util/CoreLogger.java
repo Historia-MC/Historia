@@ -3,7 +3,6 @@ package dev.boooiil.historia.core.util;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import net.kyori.adventure.text.Component;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
@@ -17,18 +16,24 @@ import java.util.logging.Logger;
 @NullMarked
 public class CoreLogger {
 
-    /** Prefix for all logging messages that do not use the bukkit logger. */
+    /**
+     * Prefix for all logging messages that do not use the bukkit logger.
+     */
     private static final String messagePrefix = "§7[§9Historia§7] ";
-    /** Announcement prefix. */
+    /**
+     * Announcement prefix.
+     */
     private static final String announcePrefix = "§7[§9Announcement§7] ";
     // private static final String debugPrefix = "§7[§cDebug§7] ";
 
-    /** Bukkit logger to send messages to the console. */
+    /**
+     * Bukkit logger to send messages to the console.
+     */
     private static final Logger logger = Bukkit.getServer() != null ? Bukkit.getLogger() : Logger.getLogger("Historia");
 
     /**
      * Send an info message to the console.
-     * 
+     *
      * @param messages The message to be sent.
      */
     public static void infoToConsole(String... messages) {
@@ -47,7 +52,7 @@ public class CoreLogger {
 
     /**
      * Send an info message to server.
-     * 
+     *
      * @param message The message to be sent.
      */
     public static void infoToServer(String message) {
@@ -58,7 +63,7 @@ public class CoreLogger {
 
     /**
      * Send an info message to a player.
-     * 
+     *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
@@ -73,7 +78,7 @@ public class CoreLogger {
 
     /**
      * Send an info message to a player.
-     * 
+     *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
@@ -88,7 +93,7 @@ public class CoreLogger {
 
     /**
      * Send a warning message to the console.
-     * 
+     *
      * @param messages The message to be sent.
      */
     public static void warnToConsole(String... messages) {
@@ -111,7 +116,7 @@ public class CoreLogger {
 
     /**
      * Send a warning message to server.
-     * 
+     *
      * @param message The message to be sent.
      */
     public static void warnToServer(String message) {
@@ -122,7 +127,7 @@ public class CoreLogger {
 
     /**
      * Send a warning message to the player.
-     * 
+     *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
@@ -137,7 +142,7 @@ public class CoreLogger {
 
     /**
      * Send an error message to the console.
-     * 
+     *
      * @param messages The message to be sent.
      */
     public static void errorToConsole(String... messages) {
@@ -158,7 +163,7 @@ public class CoreLogger {
 
     /**
      * Send a warning message to server.
-     * 
+     *
      * @param message The message to be sent.
      */
     public static void errorToServer(String message) {
@@ -169,7 +174,7 @@ public class CoreLogger {
 
     /**
      * Send an error message to a player.
-     * 
+     *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
@@ -184,7 +189,7 @@ public class CoreLogger {
 
     /**
      * Send a warning message to server.
-     * 
+     *
      * @param messages The messages to be sent.
      */
     public static void debugToConsole(String... messages) {
@@ -207,7 +212,9 @@ public class CoreLogger {
 
     public static void verboseToConsole(String... messages) {
 
-        if (HistoriaCore.isTesting || GeneralConfig.verbose) {
+        if (
+            // HistoriaCore.isTesting ||
+                GeneralConfig.verbose) {
 
             StringBuilder built = new StringBuilder();
 
@@ -248,7 +255,9 @@ public class CoreLogger {
 
         }
 
-        if (HistoriaCore.isTesting || GeneralConfig.trace) {
+        if (
+            //HistoriaCore.isTesting ||
+                GeneralConfig.trace) {
 
             StringBuilder built = new StringBuilder();
 
