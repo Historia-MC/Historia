@@ -60,7 +60,7 @@ private fun executeList(ctx: CommandContext<CommandSourceStack>): Int {
         .append(RegistryHolder.PROFICIENCY_REGISTRY.values
             .sortedBy { it.displayName.toString().lowercase() }
             .map { it.displayName }
-            .reduceOrNull { acc, comp -> acc.append(Component.text(", ") + comp) }
+            .reduceOrNull { acc, comp -> acc + Component.text(", ") + comp }
             ?: Component.text("")
         )
     ctx.source.sender.sendMessage(message)

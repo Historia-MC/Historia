@@ -32,5 +32,6 @@ private fun executeGive(ctx: CommandContext<CommandSourceStack>): Int {
             Component.text("Gave $amount ") + stack.displayName() + Component.text(" to ") + player.displayName()
         )
     }
+
     return 1
 }
