@@ -51,7 +51,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
      */
 
     public void createUser(UUID uuid, String playerName) {
-        
+
         String string = "INSERT INTO historia VALUES ('" +
                 uuid + "', " +            // uuid
                 "'" + playerName + "', " + // username
@@ -243,7 +243,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
                     .fromString(getResult(result, "proficiency", String.class));
             Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
             //int level = getResult(result, "level", Integer.class);
-            double experience = getResult(result, "experience", Double.class);
+            int experience = getResult(result, "experience", Integer.class);
             long login = getResult(result, "login", Long.class);
             long logout = getResult(result, "logout", Long.class);
             long playtime = getResult(result, "playtime", Long.class);

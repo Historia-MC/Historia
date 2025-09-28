@@ -67,7 +67,7 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * The current experience of the user.
      */
-    private double currentExperience;
+    private int currentExperience;
     /**
      * The max experience of the user.
      */
@@ -152,7 +152,7 @@ public class HistoriaPlayer extends BasePlayer {
                           ProficiencyName proficiency,
                           Cultures culture,
                           double temperature,
-                          double experience,
+                          int experience,
                           long login,
                           long logout,
                           long playtime) {
@@ -231,7 +231,7 @@ public class HistoriaPlayer extends BasePlayer {
      *
      * @param currentExperience - Current experience to be set.
      */
-    public void setCurrentExperience(double currentExperience) {
+    public void setCurrentExperience(int currentExperience) {
         this.currentExperience = currentExperience;
     }
 
@@ -328,9 +328,9 @@ public class HistoriaPlayer extends BasePlayer {
      *
      * @return {@link Float} The class' current experience.
      */
-    public double getCurrentExperience() {
+    public Integer getCurrentExperience() {
 
-        return NumberUtils.roundDouble(this.currentExperience, 2);
+        return this.currentExperience;
 
     }
 
@@ -472,15 +472,15 @@ public class HistoriaPlayer extends BasePlayer {
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
-        double incomeModified = incomeValue * this.level / 10;
+        int incomeValue = (int) this.getProficiency().getStats().getIncomeValue(source);
+        int incomeModified = incomeValue * this.level / 10;
 
         if ((getCurrentExperience()) + incomeModified >= maxExperience) {
 
             double overflow = (getCurrentExperience() + incomeModified) - maxExperience;
 
             level = level + 1;
-            currentExperience = overflow;
+            currentExperience = (int) NumberUtils.roundDouble(overflow, 0);
             maxExperience = NumberUtils.roundDouble(Math.pow(level, 1.68), 2);
             saveCharacter();
 
@@ -506,8 +506,8 @@ public class HistoriaPlayer extends BasePlayer {
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
-        double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
+        int incomeValue = (int) this.getProficiency().getStats().getIncomeValue(source);
+        int incomeModified = (int) Math.pow(incomeValue * this.level / 10, 2);
 
         if ((getCurrentExperience()) - incomeModified <= 0 && level > 1) {
 
@@ -517,7 +517,7 @@ public class HistoriaPlayer extends BasePlayer {
             double overflow = (getCurrentExperience() - incomeModified) - maxExperience;
 
             if (overflow < maxExperience && level != 1)
-                currentExperience = maxExperience - overflow;
+                currentExperience = (int) NumberUtils.roundDouble(maxExperience - overflow, 0);
             else
                 currentExperience = 0;
 

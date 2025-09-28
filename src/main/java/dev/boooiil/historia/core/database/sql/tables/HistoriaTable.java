@@ -91,7 +91,7 @@ public class HistoriaTable {
                         String proficiency = v.getProficiency().getName().getKey().toLowerCase();
                         String culture = v.getCulture().name().toLowerCase();
                         //int level = historiaPlayer.getLevel();
-                        double experience = v.getCurrentExperience();
+                        int experience = v.getCurrentExperience();
                         double temperature = v.getCurrentTemperature();
 
                         String query = "UPDATE historia " +
@@ -109,7 +109,7 @@ public class HistoriaTable {
                                 "temperature != " + temperature + " OR " +
                                 "experience != " + experience + ")";
 
-                        HISTORIA_EXECUTOR.updateExecutor(query, 5);
+                        HISTORIA_EXECUTOR.updateExecutor(query, 1);
                     },
                     uuid -> {
                         String string = "SELECT * FROM historia WHERE uuid = '" + uuid + "'";
@@ -125,7 +125,7 @@ public class HistoriaTable {
                                     .fromString(HISTORIA_EXECUTOR.getResult(result, "proficiency", String.class));
                             Cultures culture = Cultures.getCulture(HISTORIA_EXECUTOR.getResult(result, "culture", String.class));
                             //int level = getResult(result, "level", Integer.class);
-                            double experience = HISTORIA_EXECUTOR.getResult(result, "experience", Double.class);
+                            int experience = HISTORIA_EXECUTOR.getResult(result, "experience", Integer.class);
                             double temperature = HISTORIA_EXECUTOR.getResult(result, "temperature", Double.class);
                             long login = HISTORIA_EXECUTOR.getResult(result, "login", Long.class);
                             long logout = HISTORIA_EXECUTOR.getResult(result, "logout", Long.class);
