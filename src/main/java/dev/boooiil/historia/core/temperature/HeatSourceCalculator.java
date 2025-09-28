@@ -16,77 +16,92 @@ import java.util.UUID;
 // configuration.
 
 public class HeatSourceCalculator {
-    private static final int SCAN_RADIUS = 12; // Increased to match MAX_HEAT_DISTANCE
-    private static final double MAX_HEAT_DISTANCE = 12.0; // Extended for smoother falloff
-    private static final double TRANSITION_DISTANCE = 8.0; // Distance where heat starts to blend with ambient
+    private final TemperatureConfig temperatureConfig;
 
-    private TemperatureConfig temperatureConfig;
-
-    public HeatSourceCalculator() {
-        // this.temperatureConfig = new TemperatureConfig();
-    }
+    private final int SCAN_RADIUS; // Increased to match MAX_HEAT_DISTANCE
+    private final double MAX_HEAT_DISTANCE = 12.0; // Extended for smoother falloff
+    private final double TRANSITION_DISTANCE; // Distance where heat starts to blend with ambient
 
     public HeatSourceCalculator(TemperatureConfig temperatureConfig) {
         this.temperatureConfig = temperatureConfig;
+        this.SCAN_RADIUS = (int) temperatureConfig.getSearchDistance();
+        this.TRANSITION_DISTANCE = temperatureConfig.getDiminishDistance();
     }
 
     public double getHeatSourceEffect(Player player) {
+        
+        Set<HeatSource> heatSources = new HashSet<>();
+        HeatSource highest = null;
+        Double calculated = 0.0;
+
         Location feetLoc = player.getLocation();
         Location bodyLoc = feetLoc.clone().add(0, 1.0, 0);
         Location headLoc = feetLoc.clone().add(0, 1.8, 0);
 
         double totalHeatEffect = 0.0;
         Block mostInfluentialSource = null;
-        Location closestBodyPart = null;
         double strongestIndividualEffect = 0.0;
 
         // Scan for heat sources
         for (int x = -SCAN_RADIUS; x <= SCAN_RADIUS; x++) {
             for (int y = -SCAN_RADIUS; y <= SCAN_RADIUS; y++) {
                 for (int z = -SCAN_RADIUS; z <= SCAN_RADIUS; z++) {
-                    Block block = feetLoc.getBlock().getRelative(x, y, z);
+                    Block block = player.getLocation().getBlock().getRelative(x, y, z);
 
-                    if (temperatureConfig.getHeatSourceValue(block.getType()) != null) {
-                        Location blockCenter = block.getLocation().add(0.5, 0.5, 0.5);
+                    HeatSource hs = new HeatSource(player.getLocation(), block);
 
-                        double feetEffect = calculateHeatEffect(block, feetLoc, blockCenter);
-                        double bodyEffect = calculateHeatEffect(block, bodyLoc, blockCenter);
-                        double headEffect = calculateHeatEffect(block, headLoc, blockCenter);
+                    // if heat source is highest
+                    if (highest == null || highest.getHeatValue() < hs.getHeatValue()) highest = hs;
+                    heatSources.add(hs);
 
-                        // Find the strongest effect for this source
-                        double maxEffect = Math.max(Math.max(feetEffect, bodyEffect), headEffect);
-
-                        if (maxEffect > 0) { // Only consider sources with actual effect
-                            Location blockCenterCheck = block.getLocation().add(0.5, 0.5, 0.5);
-                            Location closest = getClosestBodyPart(blockCenterCheck, feetLoc, bodyLoc, headLoc);
-
-                            // Check if this heat source can reach the player
-                            if (canHeatReachPlayer(blockCenterCheck, closest)) {
-                                // Use the strongest source as primary, add others with diminishing returns
-                                if (maxEffect > strongestIndividualEffect) {
-                                    // New strongest source - add difference to total
-                                    totalHeatEffect += (maxEffect - strongestIndividualEffect);
-                                    strongestIndividualEffect = maxEffect;
-                                    mostInfluentialSource = block;
-                                    closestBodyPart = closest;
-                                } else {
-                                    // Weaker source - add with diminishing returns based on current total
-                                    double diminishingFactor = Math.exp(-totalHeatEffect / 40.0);
-                                    totalHeatEffect += maxEffect * diminishingFactor * 0.3; // Weaker sources contribute less
-                                }
-                            }
-                        }
-                    }
+//                    if (temperatureConfig.getHeatSourceValue(block.getType()) != null) {
+//                        Location blockCenter = block.getLocation().add(0.5, 0.5, 0.5);
+//
+//                        double feetEffect = calculateHeatEffect(block, feetLoc, blockCenter);
+//                        double bodyEffect = calculateHeatEffect(block, bodyLoc, blockCenter);
+//                        double headEffect = calculateHeatEffect(block, headLoc, blockCenter);
+//
+//                        // Find the strongest effect for this source
+//                        double maxEffect = Math.max(Math.max(feetEffect, bodyEffect), headEffect);
+//
+//                        if (maxEffect > 0) { // Only consider sources with actual effect
+//                            Location blockCenterCheck = block.getLocation().add(0.5, 0.5, 0.5);
+//                            Location closest = getClosestBodyPart(blockCenterCheck, feetLoc, bodyLoc, headLoc);
+//
+//                            // Check if this heat source can reach the player
+//                            if (canHeatReachPlayer(blockCenterCheck, closest)) {
+//                                // Use the strongest source as primary, add others with diminishing returns
+//                                if (maxEffect > strongestIndividualEffect) {
+//                                    // New strongest source - add difference to total
+//                                    totalHeatEffect += (maxEffect - strongestIndividualEffect);
+//                                    strongestIndividualEffect = maxEffect;
+//                                    mostInfluentialSource = block;
+//                                } else {
+//                                    // Weaker source - add with diminishing returns based on current total
+//                                    double diminishingFactor = Math.exp(-totalHeatEffect / 40.0);
+//                                    totalHeatEffect += maxEffect * diminishingFactor * 0.3; // Weaker sources contribute less
+//                                }
+//                            }
+//                        }
+//                    }
                 }
             }
         }
 
-        // Show particle line to the most influential heat source
-        if (mostInfluentialSource != null && closestBodyPart != null) {
-            spawnParticleLine(player.getUniqueId(), mostInfluentialSource, closestBodyPart);
+        for (HeatSource source : heatSources) {
+            calculated += source.getHeatValue();
+
+            if (source.getHeatValue() > 0) {
+                spawnParticleLine(player.getUniqueId(), source.getBlock(), source.getPlayerPosition());
+            }
         }
 
-        return totalHeatEffect;
+        // Show particle line to the most influential heat source
+//        if (mostInfluentialSource != null) {
+//            spawnParticleLine(player.getUniqueId(), mostInfluentialSource, player.getLocation());
+//        }
+
+        return calculated;
     }
 
     private double calculateHeatEffect(Block source, Location playerLoc, Location blockCenter) {
@@ -126,6 +141,7 @@ public class HeatSourceCalculator {
         return baseEffect;
     }
 
+    // helper
     public void spawnParticleLine(UUID id, Block block, Location targetLoc) {
         Player player = Bukkit.getPlayer(id);
         if (block == null) {
@@ -145,6 +161,7 @@ public class HeatSourceCalculator {
         }
     }
 
+    // helper - incorporated
     private boolean canHeatReachPlayer(Location source, Location player) {
         // RayTracing is not supported in tests
         if (dev.boooiil.historia.core.HistoriaCore.isTesting) {
@@ -165,6 +182,7 @@ public class HeatSourceCalculator {
         return hasPathAroundObstacles(source, player);
     }
 
+    // helper - incorporated
     private boolean hasDirectPath(Location source, Location target) {
         // Get direction vector from source to target
         Vector direction = target.toVector().subtract(source.toVector());
@@ -192,11 +210,13 @@ public class HeatSourceCalculator {
                         result.getHitBlock().getLocation().equals(target.getBlock().getLocation()));
     }
 
+    // helper - incorporated
     private boolean hasPathAroundObstacles(Location source, Location target) {
 
         return findAirPath(source.getBlock(), target.getBlock(), new HashSet<>());
     }
 
+    // helper - incorporated
     private boolean findAirPath(Block start, Block end, Set<Block> visited) {
         if (visited.size() > 25)
             return false; // Prevent excessive searching
@@ -218,6 +238,7 @@ public class HeatSourceCalculator {
         return false;
     }
 
+    // helper
     private Location getClosestBodyPart(Location source, Location feet, Location body, Location head) {
         double feetDist = source.distance(feet);
         double bodyDist = source.distance(body);
