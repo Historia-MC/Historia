@@ -125,6 +125,7 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(PlayerCauldronInteractListener())
         registerEvent(PlayerConsumableConsumeListener())
         registerEvent(ChunkLoadListener())
+        // end
 
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())

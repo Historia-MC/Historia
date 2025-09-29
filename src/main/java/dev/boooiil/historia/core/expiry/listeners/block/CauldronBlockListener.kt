@@ -1,10 +1,8 @@
 package dev.boooiil.historia.core.expiry.listeners.block
 
-import com.destroystokyo.paper.event.block.BlockDestroyEvent
 import dev.boooiil.historia.core.expiry.block.FluidContent
 import dev.boooiil.historia.core.expiry.block.HCauldrons
 import dev.boooiil.historia.core.expiry.block.fluidContentOf
-import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
