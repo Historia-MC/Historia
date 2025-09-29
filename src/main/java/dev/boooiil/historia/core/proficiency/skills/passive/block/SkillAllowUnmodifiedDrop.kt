@@ -37,7 +37,6 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
 
     init {
         var sBlocks = section.getConfigurationSection("blocks") ?: error("Key 'blocks' must be specified.")
-        var lActions = section.getStringList("actions")
 
         sBlocks.getKeys(false).forEach { key ->
 
