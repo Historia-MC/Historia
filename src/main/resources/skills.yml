@@ -320,3 +320,17 @@ bypass_block_ladder:
   blocks:
     ladder:
       cooldown: 1
+
+allow_unmodified_grass_drop:
+  name: Placeholder
+  type: allow_unmodified_grass_drop
+  description: "Allows breaking grass related blocks like silk touch."
+  actions:
+    - block_destroy
+  blocks:
+    grass_block:
+      chance: 1.0  
+      cooldown: 1
+    tall_grass:
+      chance: 1.0  
+      cooldown: 1       

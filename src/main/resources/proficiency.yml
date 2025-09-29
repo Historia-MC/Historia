@@ -299,7 +299,7 @@ Farmer: #ARMOR TRIM CLASS
   skills:
     nametag: 0
     break_beehive: 0
-    break_grass: 0
+    allow_unmodified_grass_drop: 0
     animal_drops_chicken_shear: 0
     animal_drops_leather: 0
     animal_breed_all: 0

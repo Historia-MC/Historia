@@ -12,6 +12,7 @@ import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeO
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeWithItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillEnchantOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillUseNametag
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillAllowUnmodifedGrassDrop
 import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.configuration.file.FileConfiguration
@@ -100,6 +101,13 @@ object SkillRegistryLoader {
 
                     "bypass_block_restriction" -> {
                         SkillBypassBlockRestriction(section).also {
+                            RegistryHolder.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "allow_unmodified_grass_drop" -> {
+                        SkillAllowUnmodifedGrassDrop(section).also {
                             RegistryHolder.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }

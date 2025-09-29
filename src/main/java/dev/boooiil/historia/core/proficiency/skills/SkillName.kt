@@ -37,7 +37,8 @@ enum class SkillName(val key: NamespacedKey) {
     LOOT_TABLE_ENHANCED_FISH_DROPS(HistoriaCore.getNamespacedKey("loot_table_enhanced_fish_drops")),
     OFFHAND_ITEM_IGNITE_OIL(HistoriaCore.getNamespacedKey("offhand_item_ignite_oil")),
     TRANSFER_EXPERIENCE_BOOK(HistoriaCore.getNamespacedKey("transfer_experience_book")),
-    CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs"));
+    CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs")),
+    ALLOW_UNMODIFIED_GRASS_DROP(HistoriaCore.getNamespacedKey("allow_unmodified_grass_drop"));
 
     val instance: ISkill? = RegistryHolder.SKILL_REGISTRY[key]
 
