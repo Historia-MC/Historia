@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.proficiency.skills
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.file.FileKeys
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillAllowUnmodifiedDrop
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillBypassBlockRestriction
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillNoConsumeBlock
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillAnimalBreed
@@ -12,7 +13,6 @@ import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeO
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeWithItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillEnchantOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillUseNametag
-import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillAllowUnmodifedGrassDrop
 import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.configuration.file.FileConfiguration
@@ -107,7 +107,7 @@ object SkillRegistryLoader {
                     }
 
                     "allow_unmodified_grass_drop" -> {
-                        SkillAllowUnmodifedGrassDrop(section).also {
+                        SkillAllowUnmodifiedDrop(section).also {
                             RegistryHolder.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }
