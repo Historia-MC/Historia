@@ -6,13 +6,11 @@ import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
 import dev.boooiil.historia.core.util.JSONUtils
-import org.bukkit.GameEvent
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
-import org.bukkit.event.Cancellable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockBreakEvent
@@ -55,10 +53,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun handle(event: BlockBreakEvent) {
         execute(
-            SkillSupplier(event),
-            SkillSupplier(event.block),
-            SkillSupplier(event.player),
-            SkillSupplier(GameEvent.BLOCK_DESTROY)
+            SkillSupplier(event)
         )
     }
 
@@ -68,11 +63,9 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        val event = skillSuppliers[0].get() as? Cancellable
-            ?: error("Expected Cancellable event, but got null or wrong type.")
-        val block: Block = getOrThrow(skillSuppliers, 1)
-        val player: Player = getOrThrow(skillSuppliers, 2)
-        val eventType: GameEvent = getOrThrow(skillSuppliers, 3)
+        val event: BlockBreakEvent = getOrThrow(skillSuppliers, 0)
+        val block: Block = event.block
+        val player: Player = event.player
 
         val type = block.type
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
@@ -98,15 +91,10 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
                 // if we pass the chance
                 if (Random.nextDouble() < chance) {
                     (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
+                    val item: ItemStack = ItemStack(block.type)
 
-                    when (eventType) {
-                        GameEvent.BLOCK_DESTROY -> {
-                            // Cancel the event to prevent block modification
-                            event.isCancelled = true
-                            // Give the player the original block as a drop
-                            player.inventory.addItem(ItemStack(type, 1))
-                        }
-                    }
+                    event.block.drops.clear();
+                    event.block.drops.add(item)
                 }
             }
         }
