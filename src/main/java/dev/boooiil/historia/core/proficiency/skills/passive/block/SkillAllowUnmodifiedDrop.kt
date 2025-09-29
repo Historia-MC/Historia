@@ -84,6 +84,12 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
             val currentTime = System.currentTimeMillis()
             val lastTime = blockCooldowns[player.uniqueId]?.get(type) ?: 0
             val onCooldown = (lastTime > currentTime)
+            // TODO: uncomment this code and remove runnable after testing
+//                .also {
+//                    if (lastTime > 0 && !it) {
+//                        cleanup(player.uniqueId, type)
+//                    }
+//                }
 
             if (!onCooldown && Permissions.canPlaceBlock(player, block)) {
                 val chance = pair.first
