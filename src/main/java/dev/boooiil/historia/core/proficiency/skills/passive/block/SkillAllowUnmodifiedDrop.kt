@@ -17,7 +17,6 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import kotlin.random.Random
 
 class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
     override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
@@ -30,7 +29,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
      */
     override val type: SkillType = SkillType.PASSIVE
 
-    private val blocks: HashMap<Material, Pair<Double, Int>> = HashMap()
+    private val blocks: HashMap<Material, Int> = HashMap()
     private val blockCooldowns: ConcurrentHashMap<UUID, ConcurrentHashMap<Material, Long>> = ConcurrentHashMap()
 
     init {
@@ -41,11 +40,9 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
             val material = (Material.matchMaterial(key)?.takeIf { it.isBlock }
                 ?: error("Material $key is not a valid block."))
             val sMaterial = sBlocks.getConfigurationSection(key) ?: error("Key 'material' must be specified.")
-            val chance = sMaterial.getDouble("chance")
             val cooldown = sMaterial.getInt("cooldown")
-            val pair = Pair(chance, cooldown)
 
-            blocks[material] = pair
+            blocks[material] = cooldown
         }
 
     }
@@ -72,7 +69,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
 
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
-        blocks[type]?.also { pair ->
+        blocks[type]?.also { c ->
             val currentTime = System.currentTimeMillis()
             val lastTime = blockCooldowns[player.uniqueId]?.get(type) ?: 0
             val onCooldown = (lastTime > currentTime)
@@ -84,18 +81,15 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
 //                }
 
             if (!onCooldown && Permissions.canPlaceBlock(player, block)) {
-                val chance = pair.first
-                val cooldown = (pair.second * 1000).toLong()
+                val cooldown = (c * 1000).toLong()
                 val nextTime = currentTime + cooldown
 
                 // if we pass the chance
-                if (Random.nextDouble() < chance) {
-                    (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
-                    val item: ItemStack = ItemStack(block.type)
+                (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
+                val item: ItemStack = ItemStack(block.type)
 
-                    event.block.drops.clear();
-                    event.block.drops.add(item)
-                }
+                event.block.drops.clear()
+                event.block.drops.add(item)
             }
         }
     }
