@@ -9,7 +9,7 @@ fun potionEffectsFromConfig(section: ConfigurationSection?): MutableList<PotionE
     if (section == null) return effects
 
     for (key in section.getKeys(false)) {
-        val effectSection = section.getConfigurationSection(key)
+        val effectSection = section.getConfigurationSection(key)!!
 
         val type = PotionEffectType.getByName(key)
         if (type == null) {
@@ -17,8 +17,7 @@ fun potionEffectsFromConfig(section: ConfigurationSection?): MutableList<PotionE
             continue
         }
 
-        var duration = 20 * effectSection!!.getInt(".seconds")
-        duration += effectSection.getInt(".ticks")
+        var duration = effectSection.getInt(".duration")
 
         val amplifier = effectSection.getInt(".amplifier")
 

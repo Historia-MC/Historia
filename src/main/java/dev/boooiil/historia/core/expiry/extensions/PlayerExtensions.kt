@@ -8,7 +8,7 @@ import kotlin.math.ceil
 fun Player.consume(consumable: ConsumableData) {
     val expiredModifier = if (consumable.isExpired) ExpiryConfig.EXPIRED_HUNGER_MODIFIER else 1.0f
 
-    this.foodLevel += ceil((consumable.hunger * expiredModifier).toDouble()).toInt()
+    this.foodLevel += ceil(consumable.hunger * expiredModifier).toInt()
     this.saturation += consumable.hunger * consumable.saturation * expiredModifier
 
     consumable.effects.forEach(this::addPotionEffect)

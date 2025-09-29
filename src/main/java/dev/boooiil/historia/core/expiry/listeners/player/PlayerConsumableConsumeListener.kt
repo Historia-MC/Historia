@@ -15,7 +15,6 @@ class PlayerConsumableConsumeListener : Listener {
         val consumable = ConsumableData.fromStack(stack) ?: return
 
         player.consume(consumable)
-        player.sendMessage("Consumed ${consumable.toJSON()}")
 
         if (player.gameMode != GameMode.CREATIVE) {
             player.inventory.setItem(event.hand, stack.subtract(1))
