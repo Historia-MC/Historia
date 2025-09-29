@@ -6,11 +6,9 @@ import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
 import dev.boooiil.historia.core.util.JSONUtils
-import net.kyori.adventure.key.Key
 import org.bukkit.GameEvent
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.Registry
 import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
@@ -18,7 +16,6 @@ import org.bukkit.event.Cancellable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -35,19 +32,12 @@ class SkillAllowUnmodifedGrassDrop(section: ConfigurationSection) : AbstractSkil
      */
     override val type: SkillType = SkillType.PASSIVE
 
-    private val actions: Set<GameEvent>
     private val blocks: HashMap<Material, Pair<Double, Int>> = HashMap()
     private val blockCooldowns: ConcurrentHashMap<UUID, ConcurrentHashMap<Material, Long>> = ConcurrentHashMap()
 
     init {
         var sBlocks = section.getConfigurationSection("blocks") ?: error("Key 'blocks' must be specified.")
         var lActions = section.getStringList("actions")
-
-        actions = lActions
-            .map { action ->
-                Registry.GAME_EVENT.get(Key.key(Key.MINECRAFT_NAMESPACE, action)) ?: error("Invalid action $action.")
-            }
-            .toSet()
 
         sBlocks.getKeys(false).forEach { key ->
 
@@ -63,17 +53,14 @@ class SkillAllowUnmodifedGrassDrop(section: ConfigurationSection) : AbstractSkil
 
     }
 
-
-
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun handle(event: BlockBreakEvent) {
-        if (actions.contains(GameEvent.BLOCK_DESTROY))
-            execute(
-                SkillSupplier(event),
-                SkillSupplier(event.block),
-                SkillSupplier(event.player),
-                SkillSupplier(GameEvent.BLOCK_DESTROY)
-            )
+        execute(
+            SkillSupplier(event),
+            SkillSupplier(event.block),
+            SkillSupplier(event.player),
+            SkillSupplier(GameEvent.BLOCK_DESTROY)
+        )
     }
 
     /**
