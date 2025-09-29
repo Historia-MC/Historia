@@ -1,38 +1,52 @@
-package dev.boooiil.historia.core.commands;
+package dev.boooiil.historia.core.commands
 
-import dev.boooiil.historia.core.database.internal.PlayerStorage;
-import dev.boooiil.historia.core.player.HistoriaPlayer;
-import dev.boooiil.historia.core.util.CoreLogger;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import com.mojang.brigadier.arguments.DoubleArgumentType
+import com.mojang.brigadier.context.CommandContext
+import com.mojang.brigadier.tree.LiteralCommandNode
+import dev.boooiil.historia.core.database.internal.PlayerStorage
+import dev.boooiil.historia.core.player.HistoriaPlayer
+import dev.boooiil.historia.core.util.plus
+import io.papermc.paper.command.brigadier.CommandSourceStack
+import io.papermc.paper.command.brigadier.Commands
+import io.papermc.paper.command.brigadier.argument.ArgumentTypes
+import net.kyori.adventure.text.Component
 
-public class CommandTemperature implements CommandExecutor {
+val commandTemperature: LiteralCommandNode<CommandSourceStack> = Commands.literal("temperature")
+    .then(Commands.literal("set")
+        .then(Commands.argument("player", ArgumentTypes.player())
+            .then(Commands.argument("temperature", DoubleArgumentType.doubleArg())
+                .executes { executeSet(it) }
+            )
+        )
+    )
+    .then(Commands.literal("get")
+        .executes { executeGet(it) }
+        .then(Commands.argument("player", ArgumentTypes.player())
+            .executes { executeGet(it) }
+        )
+    )
+    .build()
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("temperature") && args.length > 0 && args[0].equalsIgnoreCase("set")) {
-            if (!(sender instanceof Player player)) {
-                sender.sendMessage("This command can only be run by a player.");
-                return true;
-            }
+private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
+    val players = ctx.getPlayers("player")
+    val temperature = ctx.getArgument<Double>("temperature")
 
-            if (args.length != 1) {
-                player.sendMessage("Usage: /settemperature <temperature>");
-                return true;
-            }
-
-            try {
-                int temperature = Integer.parseInt(args[1]);
-                HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-                historiaPlayer.getTemperature().setMin(temperature);
-                player.sendMessage("Temperature set to " + temperature + ".");
-                CoreLogger.infoToConsole("Temperature set to " + temperature + ".");
-            } catch (NumberFormatException e) {
-                player.sendMessage("Invalid temperature: " + args[1]);
-            }
-        }
-        return true;
+    players.forEach { player ->
+        val hPlayer = PlayerStorage.getPlayer(player.uniqueId)
+        hPlayer.temperature.setMin(temperature)
+        ctx.source.sender.sendMessage(
+            Component.text("Set temperature for ") + player.displayName() + Component.text(" to $temperature")
+        )
     }
+    return 1
+}
+
+private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
+    val players = ctx.getOptionalPlayers("player")
+
+    players.forEach { player ->
+        val hPlayer = HistoriaPlayer(player.uniqueId)
+        ctx.source.sender.sendMessage(player.displayName() + Component.text(" has temperature: ${hPlayer.currentTemperature}"))
+    }
+    return 1
 }
