@@ -106,7 +106,7 @@ object SkillRegistryLoader {
                         }
                     }
 
-                    "allow_unmodified_grass_drop" -> {
+                    "allow_unmodified_drop" -> {
                         SkillAllowUnmodifiedDrop(section).also {
                             RegistryHolder.SKILL_REGISTRY.register(skillName, it)
                             it.register()

@@ -323,14 +323,22 @@ bypass_block_ladder:
 
 allow_unmodified_grass_drop:
   name: Placeholder
-  type: allow_unmodified_grass_drop
+  type: allow_unmodified_drop
   description: "Allows breaking grass related blocks like silk touch."
   actions:
     - block_destroy
   blocks:
     grass_block:
-      chance: 1.0  
       cooldown: 1
     tall_grass:
-      chance: 1.0  
-      cooldown: 1       
+      cooldown: 1    
+
+allow_unmodified_beehive_drop:
+  name: Placeholder
+  type: allow_unmodified_drop
+  description: "Allows breaking beehive related blocks like silk touch."
+  actions:
+    - block_destroy
+  blocks:
+    beehive:
+      cooldown: 1  
