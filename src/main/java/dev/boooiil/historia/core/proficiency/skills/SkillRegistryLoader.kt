@@ -5,6 +5,7 @@ import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.file.FileKeys
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillAllowUnmodifiedDrop
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillBypassBlockRestriction
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillIgnoreAnvilDamage
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillNoConsumeBlock
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillAnimalBreed
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
@@ -108,6 +109,13 @@ object SkillRegistryLoader {
 
                     "allow_unmodified_drop" -> {
                         SkillAllowUnmodifiedDrop(section).also {
+                            RegistryHolder.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "ignore_anvil_damage" -> {
+                        SkillIgnoreAnvilDamage(section).also {
                             RegistryHolder.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }

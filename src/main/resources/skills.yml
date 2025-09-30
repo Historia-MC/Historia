@@ -341,4 +341,10 @@ allow_unmodified_beehive_drop:
     - block_destroy
   blocks:
     beehive:
-      cooldown: 1  
+      cooldown: 1
+
+ignore_anvil_damage:
+  name: Placeholder
+  type: ignore_anvil_damage
+  description: "Prevents anvil durability damage when using anvils."
+  cooldown: 1  
