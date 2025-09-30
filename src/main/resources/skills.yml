@@ -239,10 +239,6 @@ animal_drops_increase_feather:
       min: 0
       max: 5
 
-animal_drops_chicken_shear:
-  name: Placeholder
-  type: chicken_shear
-  description: "Allows shearing of chickens for feathers."
 
 animal_drops_leather:
   name: Placeholder
@@ -348,3 +344,11 @@ ignore_anvil_damage:
   type: ignore_anvil_damage
   description: "Prevents anvil durability damage when using anvils."
   cooldown: 1  
+
+animal_drops_chicken_shear:
+  name: Placeholder
+  type: animal_drops_shear
+  description: "Allows the use of shears on chickens."
+  entity:
+    - chicken
+  cooldown: 1

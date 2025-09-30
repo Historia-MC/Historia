@@ -8,6 +8,7 @@ import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillBypassBlo
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillIgnoreAnvilDamage
 import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillNoConsumeBlock
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillAnimalBreed
+import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillAnimalDropsShear
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDropRestriction
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeOnItem
@@ -120,7 +121,13 @@ object SkillRegistryLoader {
                             it.register()
                         }
                     }
-
+                    
+                    "animal_drops_shear" -> {
+                        SkillAnimalDropsShear(section).also {
+                            RegistryHolder.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
                     else -> CoreLogger.errorToConsole("Unknown skill type: $skillType for skill: $key")
                 }
             }
