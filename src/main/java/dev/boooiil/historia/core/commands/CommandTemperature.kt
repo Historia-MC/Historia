@@ -12,18 +12,23 @@ import io.papermc.paper.command.brigadier.argument.ArgumentTypes
 import net.kyori.adventure.text.Component
 
 val commandTemperature: LiteralCommandNode<CommandSourceStack> = Commands.literal("temperature")
-    .then(Commands.literal("set")
-        .then(Commands.argument("player", ArgumentTypes.player())
-            .then(Commands.argument("temperature", DoubleArgumentType.doubleArg())
-                .executes { executeSet(it) }
+    .then(
+        Commands.literal("set")
+            .then(
+                Commands.argument("player", ArgumentTypes.player())
+                    .then(
+                        Commands.argument("temperature", DoubleArgumentType.doubleArg())
+                            .executes { executeSet(it) }
+                    )
             )
-        )
     )
-    .then(Commands.literal("get")
-        .executes { executeGet(it) }
-        .then(Commands.argument("player", ArgumentTypes.player())
+    .then(
+        Commands.literal("get")
             .executes { executeGet(it) }
-        )
+            .then(
+                Commands.argument("player", ArgumentTypes.player())
+                    .executes { executeGet(it) }
+            )
     )
     .build()
 
@@ -33,7 +38,7 @@ private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
 
     players.forEach { player ->
         val hPlayer = PlayerStorage.getPlayer(player.uniqueId)
-        hPlayer.temperature.setMin(temperature)
+        hPlayer.temperatureCalculator.setTemperature(temperature)
         ctx.source.sender.sendMessage(
             Component.text("Set temperature for ") + player.displayName() + Component.text(" to $temperature")
         )
