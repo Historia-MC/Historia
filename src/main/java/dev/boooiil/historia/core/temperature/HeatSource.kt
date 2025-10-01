@@ -2,8 +2,9 @@ package dev.boooiil.historia.core.temperature
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.specific.TemperatureConfig
-import org.bukkit.*
-import org.bukkit.Particle.DustOptions
+import org.bukkit.FluidCollisionMode
+import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import kotlin.math.exp
@@ -32,7 +33,7 @@ class HeatSource(val playerPosition: Location, val block: Block) {
         // if existing value, return value
         if (calculated > 0) {
             value = calculated
-        } else if (inRange && CONFIGURED_HEAT_LEVEL != null) {
+        } else if (inRange) {
             // Calculate base heat effect using smoother exponential decay
             val effectiveDistance: Double = max(DISTANCE_FROM_PLAYER, 0.5)
             value = CONFIGURED_HEAT_LEVEL * exp(-1.0 * (effectiveDistance / temperatureConfig.searchDistance))
@@ -63,12 +64,12 @@ class HeatSource(val playerPosition: Location, val block: Block) {
         // Check all adjacent blocks
         for (face in BlockFace.entries) {
             val adjacent = start.getRelative(face)
-            if (!visited.contains(adjacent) && !adjacent.type.isOccluding()) {
+            if (!visited.contains(adjacent) && !adjacent.type.isOccluding) {
                 if (findAirPath(adjacent, end, visited)) {
-                    adjacent.world.spawnParticle<DustOptions?>(
-                        Particle.DUST, adjacent.location.add(0.5, 0.5, 0.5), 1,
-                        DustOptions(Color.RED, 1.0f)
-                    )
+//                    adjacent.world.spawnParticle<DustOptions?>(
+//                        Particle.DUST, adjacent.location.add(0.5, 0.5, 0.5), 1,
+//                        DustOptions(Color.RED, 1.0f)
+//                    )
                     return true
                 }
             }
@@ -88,7 +89,7 @@ class HeatSource(val playerPosition: Location, val block: Block) {
         val distance = direction.length()
 
         // Perform rayTrace from source to target
-        val result = source.getWorld().rayTraceBlocks(
+        val result = source.world.rayTraceBlocks(
             source,
             direction.normalize(),
             distance,
