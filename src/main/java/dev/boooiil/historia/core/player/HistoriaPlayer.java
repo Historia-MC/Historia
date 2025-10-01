@@ -16,6 +16,7 @@ import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.UUID;
@@ -63,6 +64,7 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * The gradual temperature of the user.
      */
+    @Nullable
     private final TemperatureCalculator temperature;
 
     /**
@@ -126,12 +128,14 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogin = 0;
         this.lastLogout = 0;
         this.playtime = 0;
-        this.temperature = new TemperatureCalculator(
+        
+        if (this.isOnline) this.temperature = new TemperatureCalculator(
                 new GradualTemperature(
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
                         0.1
                 ), uuid);
+        else this.temperature = null;
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
@@ -165,12 +169,15 @@ public class HistoriaPlayer extends BasePlayer {
         this.culture = culture;
         this.username = username;
         this.proficiency = proficiency.getKey();
-        this.temperature = new TemperatureCalculator(
+
+        if (this.isOnline) this.temperature = new TemperatureCalculator(
                 new GradualTemperature(
                         temperature,
                         temperature,
                         0.1
                 ), uuid);
+        else this.temperature = null;
+
         this.currentExperience = experience;
         this.lastLogin = login;
         this.lastLogout = logout;
@@ -394,8 +401,13 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getCurrentTemperature() {
 
-        return this.temperature.temperature();
+        Double temperature = TemperatureConfig.INITIAL_CONSTANT_TEMP;
 
+        if (this.temperature != null) {
+            temperature = this.temperature.temperature();
+        }
+
+        return temperature;
     }
 
     /**
@@ -439,6 +451,11 @@ public class HistoriaPlayer extends BasePlayer {
     }
 
     public TemperatureCalculator getTemperatureCalculator() {
+        if (this.temperature == null) {
+            throw new IllegalStateException("Tried to get temperature calculator for offline player "
+                    + this.getUsername() + "(" + this.getUUID() + ").");
+        }
+
         return this.temperature;
     }
 
@@ -476,8 +493,6 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void increaseExperience(AllSources source) {
 
-        if (source == null)
-            return;
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
@@ -510,8 +525,6 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void decreaseExperience(AllSources source) {
 
-        if (source == null)
-            return;
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
@@ -548,7 +561,7 @@ public class HistoriaPlayer extends BasePlayer {
         CoreLogger.debugToConsole("HP TS");
         CoreLogger.debugToConsole("super", super.toString());
 
-        String sb = "HistoriaPlayer" +
+        return "HistoriaPlayer" +
                 "{" +
                 "\"basePlayer\":" + super.toString() + ", " +
                 JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", " +
@@ -566,15 +579,13 @@ public class HistoriaPlayer extends BasePlayer {
                 JSONUtils.fromValue("lastSaved", lastSaved) +
                 "}";
 
-        return sb;
-
     }
 
     @Override
     public String toJSON() {
         CoreLogger.debugToConsole("HP TJ");
 
-        String sb = "{" +
+        return "{" +
                 "\"basePlayer\":" + super.toJSON() + ", " +
                 JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", " +
                 JSONUtils.fromValue("level", level) + ", " +
@@ -590,7 +601,5 @@ public class HistoriaPlayer extends BasePlayer {
                 //"\"proficiency\":" + this.getProficiency().toJSON() + ", " +
                 JSONUtils.fromValue("lastSaved", lastSaved) +
                 "}";
-
-        return sb;
     }
 }
