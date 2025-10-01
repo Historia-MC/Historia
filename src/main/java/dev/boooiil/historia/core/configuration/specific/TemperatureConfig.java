@@ -7,16 +7,17 @@ import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
-import org.bukkit.WeatherType;
 import org.bukkit.block.Biome;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.potion.PotionType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+@NullMarked
 public class TemperatureConfig {
 
     /**
@@ -51,7 +52,6 @@ public class TemperatureConfig {
     private final Map<Modifier, Double> modifiers = new EnumMap<>(Modifier.class);
     private final Map<Biome, Double> biome = new HashMap<>();
     private final Map<Material, Double> heatSource = new EnumMap<>(Material.class);
-    private final Map<WeatherType, Double> weather = new EnumMap<>(WeatherType.class);
     private final Map<PotionType, Double> potions = new EnumMap<>(PotionType.class);
     private final Map<Integer, Double> time = new HashMap<>();
     private final Map<String, Map<Integer, Double>> armor = new HashMap<>();
@@ -67,6 +67,8 @@ public class TemperatureConfig {
     private final double timeNightModifier;
     private final double timeNoonModifier;
     private final double waterTemperature;
+    private final double clearWeather;
+    private final double rainWeather;
 
     public TemperatureConfig() {
 
@@ -174,21 +176,8 @@ public class TemperatureConfig {
 
         }
 
-        for (String weather : configuration.getConfigurationSection("weather").getKeys(false)) {
-
-            WeatherType w = WeatherType.valueOf(weather.toUpperCase());
-
-            this.weather.put(w, configuration.getDouble("weather." + weather));
-
-            CoreLogger.verboseToConsole(
-                    "Adding weather ",
-                    weather,
-                    " as modifier ",
-                    w.toString(),
-                    " with value ",
-                    configuration.getDouble("weather." + weather) + "");
-
-        }
+        rainWeather = configuration.getDouble("weather.rain");
+        clearWeather = configuration.getDouble("weather.clear");
 
         for (String potion : configuration.getConfigurationSection("potions").getKeys(false)) {
 
@@ -243,12 +232,12 @@ public class TemperatureConfig {
         return heatSource.get(material);
     }
 
-    public Map<WeatherType, Double> getWeather() {
-        return weather;
+    public Double rainValue() {
+        return rainWeather;
     }
 
-    public Double getWeatherValue(WeatherType weather) {
-        return this.weather.get(weather);
+    public Double clearValue() {
+        return clearWeather;
     }
 
     public Map<Integer, Double> getTime() {
