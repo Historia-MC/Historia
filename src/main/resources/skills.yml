@@ -129,7 +129,7 @@ enhanced_helmet_aqua_affinity:
     - netherite_helmet
   attributes:
     attribute: oxygen_bonus
-    modifier: add_number
+    operation: add_number
     factor: 20
 
 enhanced_boots_depth_strider:
