@@ -1,6 +1,5 @@
 package dev.boooiil.historia.core.events.player;
 
-import dev.boooiil.historia.core.database.internal.TemperatureStorage;
 import dev.boooiil.historia.core.handlers.player.PlayerQuitHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,9 +19,7 @@ public class PlayeQuitListener implements Listener {
 
         playerQuitHandler.doPlayerDBLogout();
         playerQuitHandler.doMarkAsOffline();
-
-        TemperatureStorage.removeTemperatureManager(event.getPlayer().getUniqueId());
-
+        
     }
 
 }
