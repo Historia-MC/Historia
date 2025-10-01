@@ -2,33 +2,35 @@ package dev.boooiil.historia.core.temperature;
 
 public class GradualTemperature {
     private int step;
-    private double max;      // target temperature
-    private double min;      // starting temperature
+    private double target;      // target temperature
+    private double start;      // starting temperature
+    private double current;  // current temperature
     private double heatingRate;   // rate for temperature increases
     private double coolingRate;   // rate for temperature decreases (slower)
 
 
-    public GradualTemperature(double max, double min, double heatingRate, double coolingRate) {
+    public GradualTemperature(double target, double start, double heatingRate, double coolingRate) {
         this.step = 0;
-        this.max = max;
-        this.min = min;
+        this.target = target;
+        this.start = start;
+        this.current = start;
         this.heatingRate = heatingRate;
         this.coolingRate = coolingRate;
 
     }
 
     // Backward compatibility constructor (uses same rate for both)
-    public GradualTemperature(double max, double min, double rate) {
-        this(max, min, rate, rate * 0.6); // Cooling is 60% of heating rate (slower)
+    public GradualTemperature(double target, double start, double rate) {
+        this(target, start, rate, rate * 0.6); // Cooling is 60% of heating rate (slower)
     }
 
-    public void setMax(double max) {
-        this.max = max;
+    public void setTarget(double target) {
+        this.target = target;
         this.step = 0;
     }
 
-    public void setMin(double min) {
-        this.min = min;
+    public void setStart(double start) {
+        this.start = start;
         // Don't reset step when just updating starting point during target changes
         // Step should only reset when starting a completely new temperature progression
     }
@@ -58,12 +60,12 @@ public class GradualTemperature {
         this.step = step;
     }
 
-    public double min() {
-        return min;
+    public double start() {
+        return start;
     }
 
-    public double max() {
-        return max;
+    public double target() {
+        return target;
     }
 
     public double heatingRate() {
@@ -80,21 +82,21 @@ public class GradualTemperature {
     }
 
     public double getCurrentTemperature() {
-        // Calculate current temperature without incrementing step
-        boolean isDecreasing = max < min;
+        return current;
+    }
+
+    // Calculate current temperature without incrementing step
+    public double doStep() {
+        boolean isDecreasing = target < start;
         double currentRate = isDecreasing ? coolingRate : heatingRate;
 
         if (isDecreasing) {
-            return min - (min - max) * Math.exp(-currentRate * step);
+            current = start - (start - target) * Math.exp(-currentRate * step);
         } else {
-            return min + (max - min) * (1 - Math.exp(-currentRate * step));
+            current = start + (target - start) * (1 - Math.exp(-currentRate * step));
         }
-    }
-
-    public double doStep() {
-        double change = getCurrentTemperature();
 
         step += 1;
-        return change;
+        return current;
     }
 } 
