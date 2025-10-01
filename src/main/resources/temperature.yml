@@ -98,8 +98,8 @@ heat_sources:
 
 # Weather effects
 weather:
-  CLEAR: 0
-  DOWNFALL: -5
+  clear: 0
+  rain: -5
 
 room_temp: 15.0  # Standard room temperature in Celsius
 underground:
