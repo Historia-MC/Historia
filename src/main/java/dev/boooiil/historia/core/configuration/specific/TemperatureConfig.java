@@ -145,7 +145,7 @@ public class TemperatureConfig {
         }
 
         for (String biome : configuration.getConfigurationSection("biome").getKeys(false)) {
-            CoreLogger.debugToConsole("Biome: " + biome);
+            CoreLogger.verboseToConsole("Biome: " + biome);
             Biome b = RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME).get(Key.key(biome.toLowerCase()));
 
             this.biome.put(b, configuration.getDouble("biome." + biome));
@@ -229,7 +229,13 @@ public class TemperatureConfig {
     }
 
     public Double getHeatSourceValue(Material material) {
-        return heatSource.get(material);
+        Double hs = heatSource.get(material);
+
+        if (hs == null) {
+            hs = 0d;
+        }
+
+        return hs;
     }
 
     public Double rainValue() {
