@@ -2,7 +2,6 @@ package dev.boooiil.historia.core.proficiency.skills.passive.block
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
@@ -12,9 +11,7 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryType
-import org.bukkit.event.inventory.PrepareAnvilEvent
+import com.destroystokyo.paper.event.block.AnvilDamagedEvent
 import org.bukkit.inventory.AnvilInventory
 import org.bukkit.inventory.ItemStack
 import java.util.*
@@ -35,7 +32,7 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
     private val cooldown: Long = (section.getInt("cooldown", 1) * 1000).toLong()
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    fun handle(event: PrepareAnvilEvent) {
+    fun handle(event: AnvilDamagedEvent) {
         execute(
             SkillSupplier(event)
         )
@@ -47,9 +44,8 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        val event: PrepareAnvilEvent = getOrThrow(skillSuppliers, 0)
-        val player: Player = event.viewers.firstOrNull() as? Player ?: return
-        val inventory = event.inventory
+        val event: AnvilDamagedEvent = getOrThrow(skillSuppliers, 0)
+        val player: Player = getOrThrow(skillSuppliers, 2)
 
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
@@ -59,12 +55,12 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
         val lastTime = anvilCooldowns[player.uniqueId] ?: 0
         val onCooldown = (lastTime > currentTime)
 
-        if (!onCooldown && Permissions.canUseAnvil(player)) {
+        if (!onCooldown) {
             val nextTime = currentTime + cooldown
             anvilCooldowns[player.uniqueId] = nextTime
 
-            // Prevent anvil durability damage by setting repair cost to 0
-            inventory.repairCost = 0
+            // Prevent anvil durability damage by cancelling the event
+            event.isCancelled = true
         }
     }
 

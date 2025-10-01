@@ -29,12 +29,52 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
      */
     override val type: SkillType = SkillType.PASSIVE
 
-    private val entities: Set<EntityType> = section.getStringList("entity").map { entity ->
-        requireNotNull(EntityType.fromName(entity)) { "Invalid entity type specified $entity" }
-    }.toSet()
-    
+    private val entityConfigs: Map<EntityType, EntityShearConfig>
     private val shearCooldowns: ConcurrentHashMap<UUID, Long> = ConcurrentHashMap()
-    private val cooldown: Long = (section.getInt("cooldown", 1) * 1000).toLong()
+
+    data class EntityShearConfig(
+        val drops: Map<Material, IntRange>,
+        val cooldown: Long
+    )
+
+    init {
+        val entitiesSection = section.getConfigurationSection("entities")
+            ?: error("Key 'entities' must be specified.")
+
+        this.entityConfigs = entitiesSection.getKeys(false).associate { entityName ->
+            val entityType = requireNotNull(EntityType.fromName(entityName)) { 
+                "Invalid entity type specified $entityName" 
+            }
+            
+            val entitySection = entitiesSection.getConfigurationSection(entityName)
+                ?: error("Entity section for $entityName must be specified.")
+            
+            val dropsSection = entitySection.getConfigurationSection("drops")
+                ?: error("Drops section for $entityName must be specified.")
+            
+            val drops = dropsSection.getKeys(false).associate { dropName ->
+                val dropSection = dropsSection.getConfigurationSection(dropName)
+                    ?: error("Drop section for $dropName must be specified.")
+                
+                val material = requireNotNull(Material.matchMaterial(dropName)) {
+                    "Invalid material specified $dropName"
+                }
+                
+                val amountList = dropSection.getIntegerList("amount")
+                require(amountList.size == 2) { "Amount must be a list of exactly 2 integers [min, max]" }
+                
+                val min = amountList[0]
+                val max = amountList[1]
+                require(max >= min) { "Max amount must be >= min amount" }
+                
+                material to min..max
+            }
+            
+            val cooldown = (entitySection.getInt("cooldown", 1) * 1000).toLong()
+            
+            entityType to EntityShearConfig(drops, cooldown)
+        }
+    }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun handle(event: PlayerInteractEntityEvent) {
@@ -54,7 +94,7 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         val entity = event.rightClicked
 
         // Check if entity is in the allowed list
-        if (!entities.contains(entity.type)) return
+        val entityConfig = entityConfigs[entity.type] ?: return
 
         // Check if player is holding shears
         val heldItem = player.inventory.itemInMainHand
@@ -75,12 +115,18 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         val lastTime = shearCooldowns[player.uniqueId] ?: 0
         val onCooldown = (lastTime > currentTime)
 
-        if (!onCooldown && Permissions.canShearAnimal(player)) {
-            val nextTime = currentTime + cooldown
+        if (!onCooldown) {
+            val nextTime = currentTime + entityConfig.cooldown
             shearCooldowns[player.uniqueId] = nextTime
 
-            // Allow the shearing to proceed (don't cancel the event)
-            // The default Minecraft shearing behavior will handle the rest
+
+            entityConfig.drops.forEach { (material, range) ->
+                val dropAmount = range.random()
+                if (dropAmount > 0) {
+                    val dropItem = ItemStack(material, dropAmount)
+                    entity.world.dropItemNaturally(entity.location, dropItem)
+                }
+            }
         } else if (onCooldown) {
             // Cancel if on cooldown
             event.isCancelled = true

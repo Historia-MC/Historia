@@ -9,7 +9,7 @@ enum class SkillName(val key: NamespacedKey) {
     ANIMAL_TAME(HistoriaCore.getNamespacedKey("animal_tame")),
     ANIMAL_BREED_ALL(HistoriaCore.getNamespacedKey("animal_breed_all")),
     ANIMAL_DROPS_BONES_ALL(HistoriaCore.getNamespacedKey("animal_drops_bones_all")),
-    ANIMAL_DROPS_CHICKEN_SHEAR(HistoriaCore.getNamespacedKey("animal_drops_chicken_shear")),
+    ANIMAL_DROPS_SHEAR_CHICKEN(HistoriaCore.getNamespacedKey("animal_drops_shear_chicken")),
     ANIMAL_DROPS_INCREASE_FEATHERS(HistoriaCore.getNamespacedKey("animal_drops_increase_feathers")),
     ANIMAL_DROPS_INCREASE_WOOL(HistoriaCore.getNamespacedKey("animal_drops_increase_wool")),
     ANIMAL_DROPS_LEATHER(HistoriaCore.getNamespacedKey("animal_drops_leather")),
@@ -40,6 +40,7 @@ enum class SkillName(val key: NamespacedKey) {
     CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs")),
     ALLOW_UNMODIFIED_GRASS_DROP(HistoriaCore.getNamespacedKey("allow_unmodified_grass_drop")),
     IGNORE_ANVIL_DAMAGE(HistoriaCore.getNamespacedKey("ignore_anvil_damage"));
+
     
 
     val instance: ISkill? = RegistryHolder.SKILL_REGISTRY[key]

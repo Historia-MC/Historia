@@ -321,8 +321,6 @@ allow_unmodified_grass_drop:
   name: Placeholder
   type: allow_unmodified_drop
   description: "Allows breaking grass related blocks like silk touch."
-  actions:
-    - block_destroy
   blocks:
     grass_block:
       cooldown: 1
@@ -333,8 +331,6 @@ allow_unmodified_beehive_drop:
   name: Placeholder
   type: allow_unmodified_drop
   description: "Allows breaking beehive related blocks like silk touch."
-  actions:
-    - block_destroy
   blocks:
     beehive:
       cooldown: 1
@@ -345,10 +341,13 @@ ignore_anvil_damage:
   description: "Prevents anvil durability damage when using anvils."
   cooldown: 1  
 
-animal_drops_chicken_shear:
+animal_drops_shear_chicken:
   name: Placeholder
   type: animal_drops_shear
-  description: "Allows the use of shears on chickens."
-  entity:
-    - chicken
-  cooldown: 1
+  description: "Allows for shearing adult chickens."
+  entities:
+    chicken:
+      drops:
+        feather:
+          amount: [1, 4]
+      cooldown: 1
