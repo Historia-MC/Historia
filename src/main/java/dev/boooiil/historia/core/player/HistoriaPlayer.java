@@ -10,6 +10,7 @@ import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.temperature.GradualTemperature;
+import dev.boooiil.historia.core.temperature.TemperatureCalculator;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
@@ -62,7 +63,7 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * The gradual temperature of the user.
      */
-    private final GradualTemperature temperature;
+    private final TemperatureCalculator temperature;
 
     /**
      * The current experience of the user.
@@ -92,10 +93,12 @@ public class HistoriaPlayer extends BasePlayer {
         super(null);
 
         culture = Cultures.NONE;
-        temperature = new GradualTemperature(
-                TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                0.1);
+        temperature = new TemperatureCalculator(
+                new GradualTemperature(
+                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                        0.1
+                ), null);
 
         CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
     }
@@ -123,11 +126,12 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogin = 0;
         this.lastLogout = 0;
         this.playtime = 0;
-        this.temperature = new GradualTemperature(
-                TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                0.1
-        );
+        this.temperature = new TemperatureCalculator(
+                new GradualTemperature(
+                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
+                        0.1
+                ), uuid);
 
         // Set this explicitly in the config
         this.modifiedHealth = 0;
@@ -161,7 +165,12 @@ public class HistoriaPlayer extends BasePlayer {
         this.culture = culture;
         this.username = username;
         this.proficiency = proficiency.getKey();
-        this.temperature = new GradualTemperature(temperature, temperature, 0.1);
+        this.temperature = new TemperatureCalculator(
+                new GradualTemperature(
+                        temperature,
+                        temperature,
+                        0.1
+                ), uuid);
         this.currentExperience = experience;
         this.lastLogin = login;
         this.lastLogout = logout;
@@ -385,7 +394,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getCurrentTemperature() {
 
-        return this.temperature.getCurrentTemperature();
+        return this.temperature.temperature();
 
     }
 
@@ -429,7 +438,7 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    public GradualTemperature getTemperature() {
+    public TemperatureCalculator getTemperatureCalculator() {
         return this.temperature;
     }
 
