@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.temperature
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.specific.TemperatureConfig
 import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.NumberUtils
 import org.bukkit.*
 import org.bukkit.Particle.DustOptions
 import org.bukkit.block.Block
@@ -22,7 +23,6 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
     private val player: Player =
         Bukkit.getPlayer(uuid) ?: throw IllegalArgumentException("Player with UUID $uuid not found")
 
-
     /**
      * Entry method for temperature calculation. This is called by the
      * temperature runnable every x seconds as defined.
@@ -38,9 +38,8 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
 
         if (result != gradualTemperature.target()) {
             CoreLogger.debugToConsole(
-                "Temperature change for " + player.name + ": " + String.format(
-                    "%.2f", gradualTemperature.target()
-                ) + " -> " + String.format("%.2f", result)
+                "Temperature change for " + player.name + ": " + gradualTemperature.target()
+                        + " -> " + result
             )
 
             gradualTemperature.setTarget(result)
@@ -64,7 +63,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
      * @return current temperature
      */
     fun temperature(): Double {
-        return gradualTemperature.currentTemperature
+        return NumberUtils.roundDouble(gradualTemperature.current(), 2)
     }
 
     /**
@@ -135,6 +134,10 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
             calculated += source.getHeatValue()
 
             if (source.getHeatValue() > 0) {
+                CoreLogger.debugToConsole(
+                    "drawing to heat source: " + source.block.type,
+                    "with distance " + source.playerPosition.distance(source.block.location).toInt()
+                )
                 spawnParticleLine(player.uniqueId, source.block, source.playerPosition)
             }
         }
