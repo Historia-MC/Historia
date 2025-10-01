@@ -34,13 +34,13 @@ dependencies {
     testImplementation 'org.yaml:snakeyaml:2.5'
     testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.76.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
+    testImplementation 'io.papermc.paper:paper-api:1.21.9-R0.1-SNAPSHOT'
 
     // Runtime + compile
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'com.mysql:mysql-connector-j:9.4.0'
     implementation 'org.xerial:sqlite-jdbc:3.48.0.0'
-    compileOnly 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.21.9-R0.1-SNAPSHOT'
     implementation 'com.sk89q.worldguard:worldguard-bukkit:7.1.0-SNAPSHOT'
     compileOnly 'com.palmergames.bukkit.towny:towny:0.101.1.0'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7.1'
@@ -53,7 +53,7 @@ dependencies {
 }
 
 tasks.runServer {
-    minecraftVersion("1.21.8")
+    minecraftVersion("1.21.9")
 
     downloadPlugins {
         modrinth("worldedit", "Jk1z2u7n")
