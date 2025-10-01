@@ -6,7 +6,10 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import net.kyori.adventure.text.Component;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.Waterlogged;
@@ -91,16 +94,16 @@ public class TemperatureManager {
         // Update target temperature if it has changed
         double newTemp;
 
-        if (Math.abs(intendedTemp - gradualTemp.max()) > 0.1) { // Only update for changes > 0.1°C
+        if (Math.abs(intendedTemp - gradualTemp.target()) > 0.1) { // Only update for changes > 0.1°C
             // Get the current progress temperature before changing target
             double currentProgressTemp = gradualTemp.getCurrentTemperature();
 
             // Apply thermal memory for large temperature changes only
-            double tempDiff = Math.abs(intendedTemp - gradualTemp.max());
+            double tempDiff = Math.abs(intendedTemp - gradualTemp.target());
             if (tempDiff > 10.0) { // Increased threshold to prevent cascading
                 // Large temperature change - apply thermal memory to smooth the transition
                 double memoryFactor = Math.max(0.3, Math.min(0.6, 1.0 / (tempDiff / 20.0))); // Less aggressive
-                double smoothedTarget = intendedTemp * (1 - memoryFactor) + gradualTemp.max() * memoryFactor;
+                double smoothedTarget = intendedTemp * (1 - memoryFactor) + gradualTemp.target() * memoryFactor;
                 CoreLogger.infoToConsole("Thermal memory: " + String.format("%.1f", intendedTemp) + "°C → " + String.format("%.1f", smoothedTarget) + "°C");
                 intendedTemp = smoothedTarget;
             }
@@ -146,7 +149,7 @@ public class TemperatureManager {
         bodyTempModifier += getActivityTemperature(player);
 
         // Potion effects
-        bodyTempModifier += getPotionTemperature(player);
+        //bodyTempModifier += getPotionTemperature(player);
 
         return bodyTempModifier;
     }
@@ -312,12 +315,12 @@ public class TemperatureManager {
             return 0.0;
 
         // Get weather temperature from config
-        double rainTemp = temperatureConfig.getWeatherValue(WeatherType.DOWNFALL);
+        //double rainTemp = temperatureConfig.getWeatherValue(WeatherType.DOWNFALL);
 
         // If player is exposed to sky
-        if (isExposedToSky(player.getLocation().getBlock())) {
-            return rainTemp;
-        }
+//        if (isExposedToSky(player.getLocation().getBlock())) {
+//            return rainTemp;
+//        }
 
         return 0.0;
     }
@@ -418,7 +421,7 @@ public class TemperatureManager {
         double temperature = getTemperature(player);
         HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(uuid);
         df.setRoundingMode(RoundingMode.DOWN);
-        historiaPlayer.getTemperature().setMin(Double.valueOf(df.format(temperature)));
+        //historiaPlayer.getTemperature().setStart(Double.valueOf(df.format(temperature)));
 
         applyDebuff(player, temperature, temperatureConfig.getMinimum(), temperatureConfig.getMaximum());
 
