@@ -1,71 +1,52 @@
-package dev.boooiil.historia.core.temperature;
+package dev.boooiil.historia.core.temperature
 
-public class GradualTemperature {
-    private double target;      // target temperature
-    private double current;  // current temperature
-    private double heatingRate;   // rate for temperature increases
-    private double coolingRate;   // rate for temperature decreases (slower)
+class GradualTemperature(
 
-    public GradualTemperature(double start, double target, double heatingRate, double coolingRate) {
-        this.current = start;
-        this.target = target;
-        this.heatingRate = heatingRate;
-        this.coolingRate = coolingRate;
+    /**
+     * Current temperature value.
+     *
+     * This value is updated gradually towards the [target] temperature
+     * based on the [heatingRate] and [coolingRate] in [progress].
+     */
+    var current: Double,
 
+    /**
+     * Target temperature value.
+     */
+    var target: Double,
+
+    /**
+     * Rate of change for heating.
+     */
+    var heatingRate: Double,
+
+    /**
+     * Rate of change for cooling.
+     */
+    var coolingRate: Double
+) {
+
+    /**
+     * Set a new rate of change for both heating and cooling.
+     * Cooling rate is automatically set to 60% of the heating rate.
+     *
+     * @param rate - The new rate to set for heating (and 60% for cooling).
+     */
+    fun setRate(rate: Double) {
+        this.heatingRate = rate
+        this.coolingRate = rate * 0.6 // Cooling is 60% of heating rate
     }
 
-    // Backward compatibility constructor (uses same rate for both)
-    public GradualTemperature(double start, double target, double rate) {
-        this(start, target, rate, rate * 0.6); // Cooling is 60% of heating rate (slower)
-    }
+    /**
+     * Perform a single step towards the target temperature.
+     *
+     * @return The updated current temperature after the step.
+     */
+    fun progress(): Double {
+        val delta = target - current
+        val rate = if (delta > 0) heatingRate else coolingRate
 
-    public void setTarget(double target) {
-        this.target = target;
+        current += delta * rate
+        return current
     }
-
-    public void setStart(double start) {
-        this.current = start;
-        // Don't reset step when just updating starting point during target changes
-        // Step should only reset when starting a completely new temperature progression
-    }
-
-    public void setHeatingRate(double heatingRate) {
-        this.heatingRate = heatingRate;
-    }
-
-    public void setCoolingRate(double coolingRate) {
-        this.coolingRate = coolingRate;
-    }
-
-    // Backward compatibility
-    public void setRate(double rate) {
-        this.heatingRate = rate;
-        this.coolingRate = rate * 0.6; // Cooling is 60% of heating rate
-    }
-
-    public double target() {
-        return target;
-    }
-
-    public double heatingRate() {
-        return heatingRate;
-    }
-
-    public double coolingRate() {
-        return coolingRate;
-    }
-
-    public double current() {
-        return current;
-    }
-
-    // Calculate current temperature without incrementing step
-    public double doStep() {
-        double delta = target - current;
-        double rate = delta > 0 ? heatingRate : coolingRate;
-
-        // move fraction of the remaining difference per step
-        current += delta * rate;
-        return current;
-    }
-} 
+}
