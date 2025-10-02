@@ -7,7 +7,6 @@ import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
 import dev.boooiil.historia.core.database.sql.DatabaseExecutor
 import dev.boooiil.historia.core.database.sql.tables.HistoriaTable
-import dev.boooiil.historia.core.date.ServerCalendar
 import dev.boooiil.historia.core.events.block.BlockBreakListener
 import dev.boooiil.historia.core.events.block.BlockFromToListener
 import dev.boooiil.historia.core.events.block.BlockPlaceListener
@@ -34,6 +33,7 @@ import dev.boooiil.historia.core.items.events.player.PlayerToggleSprintListener
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
+import dev.boooiil.historia.core.runnable.SyncDayTimeRunnable
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
@@ -129,6 +129,7 @@ open class HistoriaCore : JavaPlugin() {
         // end
 
         // registerRunnable(new ClassEnchantsRunnable());
+        registerRunnable(SyncDayTimeRunnable())
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
         registerRunnable(TemperaturePollRunnable(), 20L)
@@ -151,7 +152,6 @@ open class HistoriaCore : JavaPlugin() {
         val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS
         val scheduler = this.server.scheduler
         scheduler.runTaskTimer(instance, ConsumableUpdater(), 0, updatePeriod)
-        scheduler.runTaskTimer(instance, ServerCalendar.customDayTimeRunnable, 0, 0)
         isLoaded = true
     }
 
