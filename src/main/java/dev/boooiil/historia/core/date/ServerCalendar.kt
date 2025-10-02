@@ -5,11 +5,19 @@ import org.bukkit.GameRule
 
 /** Keeps track of the server time. */
 object ServerCalendar {
-    /** The number of ticks in one game day. */
+    /** Number of ticks in one vanilla day. */
     const val VANILLA_DAY_TICKS: Int = 24000
-    const val CUSTOM_DAY_TICKS: Int = 144000
 
-    /** Offset applied when calculating the current day. */
+    /** Number of ticks in one custom day. */
+    const val CUSTOM_DAY_TICKS: Int = 80 //144000
+
+    /** Weight of the day in day/night ratio. */
+    const val dayWeight: Double = 3.0
+
+    /** Weight of the night in day/night ratio. */
+    const val nightWeight: Double = 1.0
+
+    /** Day offset applied to the start date when calculating dates. */
     var dayOffset = 0
 
     /** Number of days since server start. */
@@ -23,8 +31,24 @@ object ServerCalendar {
 
     val customDayTimeRunnable = Runnable {
         if (HistoriaCore.server.worlds[0].getGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE) == true) {
-            val dayTicks = HistoriaCore.server.worlds[0].gameTime % CUSTOM_DAY_TICKS
-            HistoriaCore.server.worlds[0].time = dayTicks * VANILLA_DAY_TICKS / CUSTOM_DAY_TICKS
+            val customTicks = HistoriaCore.server.worlds[0].gameTime % CUSTOM_DAY_TICKS
+
+            val totalWeight = dayWeight + nightWeight
+
+            val customDayTicks = CUSTOM_DAY_TICKS * (dayWeight / totalWeight)
+            val customNightTicks = CUSTOM_DAY_TICKS * (nightWeight / totalWeight)
+
+            val dayTicks = VANILLA_DAY_TICKS / 2
+            val nightTicks = VANILLA_DAY_TICKS / 2
+
+            val vanillaTicks = if (customTicks < customDayTicks) {
+                customTicks * dayTicks / customDayTicks
+            } else {
+                val nightProgress = customTicks - customDayTicks
+                dayTicks + (nightProgress * nightTicks / customNightTicks)
+            }
+
+            HistoriaCore.server.worlds[0].time = vanillaTicks.toLong()
         }
     }
 }
