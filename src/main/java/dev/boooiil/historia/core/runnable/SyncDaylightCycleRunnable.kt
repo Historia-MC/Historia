@@ -12,8 +12,6 @@ class SyncDaylightCycleRunnable : BukkitRunnable() {
     private val vanillaDayLength: Int = 24000
 
     override fun run() {
-        if (HistoriaCore.server.worlds[0].getGameRuleValue(GameRule.DO_DAYLIGHT_CYCLE) == true) {
-        }
         val customTicks = HistoriaCore.server.worlds[0].gameTime % CUSTOM_DAY_LENGTH
 
         val totalWeight = DAY_WEIGHT + NIGHT_WEIGHT
