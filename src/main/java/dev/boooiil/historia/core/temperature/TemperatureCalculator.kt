@@ -17,13 +17,15 @@ import java.util.*
 import kotlin.math.exp
 
 @NullMarked
-class TemperatureCalculator(private val internalTemperature: GradualTemperature, private val uuid: UUID) {
+class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
 
     private val player: Player =
         Bukkit.getPlayer(uuid) ?: throw IllegalArgumentException("Player with UUID $uuid not found")
     private val tempConfig: TemperatureConfig = ConfigurationLoader.getTemperatureConfig()
     private var extremeTemperatureCount = 0
-    var ambientTemperature = GradualTemperature(internalTemperature.current, internalTemperature.current, 0.1, 0.1)
+
+    private val internalTemperature = GradualTemperature(initialTemperature, initialTemperature, 0.05, 0.02)
+    private val ambientTemperature = GradualTemperature(initialTemperature, initialTemperature, 0.1, 0.1)
 
     /**
      * Entry method for temperature calculation. This is called by the

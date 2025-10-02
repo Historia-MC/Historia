@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.temperature.GradualTemperature;
 import dev.boooiil.historia.core.temperature.TemperatureCalculator;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
@@ -113,11 +112,7 @@ public class HistoriaPlayer extends BasePlayer {
         this.playtime = 0;
 
         if (this.isOnline) this.temperature = new TemperatureCalculator(
-                new GradualTemperature(
-                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        0.01, 0.005
-                ), uuid);
+                TemperatureConfig.INITIAL_CONSTANT_TEMP, uuid);
         else this.temperature = null;
 
         // Set this explicitly in the config
@@ -154,11 +149,7 @@ public class HistoriaPlayer extends BasePlayer {
         this.proficiency = proficiency.getKey();
 
         if (this.isOnline) this.temperature = new TemperatureCalculator(
-                new GradualTemperature(
-                        temperature,
-                        temperature,
-                        0.01, 0.005
-                ), uuid);
+                temperature, uuid);
         else this.temperature = null;
 
         this.currentExperience = experience;
