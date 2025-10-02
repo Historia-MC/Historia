@@ -7,7 +7,7 @@ import dev.boooiil.historia.core.configuration.specific.DateConfig.NIGHT_WEIGHT
 import org.bukkit.GameRule
 import org.bukkit.scheduler.BukkitRunnable
 
-class SyncDayTimeRunnable : BukkitRunnable() {
+class SyncDayCycleRunnable : BukkitRunnable() {
     /** Number of ticks in one vanilla day. */
     private val vanillaDayLength: Int = 24000
 

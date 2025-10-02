@@ -33,7 +33,7 @@ import dev.boooiil.historia.core.items.events.player.PlayerToggleSprintListener
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
-import dev.boooiil.historia.core.runnable.SyncDayTimeRunnable
+import dev.boooiil.historia.core.runnable.SyncDayCycleRunnable
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
@@ -129,7 +129,7 @@ open class HistoriaCore : JavaPlugin() {
         // end
 
         // registerRunnable(new ClassEnchantsRunnable());
-        registerRunnable(SyncDayTimeRunnable(), 0)
+        registerRunnable(SyncDayCycleRunnable(), 0)
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
         registerRunnable(TemperaturePollRunnable(), 20L)
