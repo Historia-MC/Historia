@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.jspecify.annotations.NullMarked
 import java.util.*
+import kotlin.math.exp
 
 @NullMarked
 class TemperatureCalculator(private val gradualTemperature: GradualTemperature, private val uuid: UUID) {
@@ -22,6 +23,10 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
     private var extremeTemperatureCount = 0
     private val player: Player =
         Bukkit.getPlayer(uuid) ?: throw IllegalArgumentException("Player with UUID $uuid not found")
+    var ambientTemperature: Double = 0.0
+        get() {
+            return NumberUtils.roundDouble(field, 2)
+        }
 
     /**
      * Entry method for temperature calculation. This is called by the
@@ -46,14 +51,15 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
         }
 
         when {
-            result > tempConfig.maximum -> extremeTemperatureCount++
-            result < tempConfig.minimum -> extremeTemperatureCount--
+            gradualTemperature.current > tempConfig.maximum -> extremeTemperatureCount++
+            gradualTemperature.current < tempConfig.minimum -> extremeTemperatureCount--
             extremeTemperatureCount > 0 -> extremeTemperatureCount--
             extremeTemperatureCount < 0 -> extremeTemperatureCount++
         }
 
         tryDebuff()
 
+        ambientTemperature = result
         return gradualTemperature.progress()
     }
 
@@ -107,22 +113,42 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
 
     private fun heatBlocksValue(): Double {
         val searchDistance = tempConfig.searchDistance.toInt()
-        val heatSources: MutableSet<HeatSource> = HashSet<HeatSource>()
-        var highest: HeatSource? = null
+        HashSet<HeatSource>()
         var calculated = 0.0
 
-        // Scan for heat sources
+        val feetLoc = player.location
+        val bodyLoc = feetLoc.clone().add(0.0, 1.0, 0.0)
+        val headLoc = feetLoc.clone().add(0.0, 1.8, 0.0)
+        val parts = listOf(feetLoc, bodyLoc, headLoc)
+
         for (x in -searchDistance..searchDistance) {
             for (y in -searchDistance..searchDistance) {
                 for (z in -searchDistance..searchDistance) {
-                    val block: Block = player.location.block.getRelative(x, y, z)
 
-                    val hs = HeatSource(player.location, block)
+                    var greatestPart: HeatSource? = null
 
-                    // if heat source is highest
-                    if (highest == null || highest.getHeatValue() < hs.getHeatValue()) highest = hs
-                    heatSources.add(hs)
+                    for (part in parts) {
+                        val block = part.block.getRelative(x, y, z)
+                        val heatSource = HeatSource(part, block)
+                        val heatValue = heatSource.getHeatValue()
 
+                        if (greatestPart == null || heatValue > greatestPart.getHeatValue()) {
+                            greatestPart = heatSource
+                        }
+                    }
+
+                    if (greatestPart == null) {
+                        continue
+                    }
+                    
+                    // Only add if heat can reach player and value is significant
+                    if (greatestPart.getHeatValue() > 0 && greatestPart.canReachPlayer()) {
+                        // Stronger exponential decay for realism
+                        val distance = player.location.distance(greatestPart.block.location)
+                        val decay = exp(-2.0 * (distance / tempConfig.searchDistance))
+                        calculated += greatestPart.getHeatValue() * decay
+                        spawnParticleLine(player.uniqueId, greatestPart.block, greatestPart.playerPosition)
+                    }
                 }
             }
         }
@@ -130,17 +156,24 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
         // this is here in case we want to do something with
         // low vs highest heat sources, else we would just
         // add the sources in the loop above
-        for (source in heatSources) {
-            calculated += source.getHeatValue()
-
-            if (source.getHeatValue() > 0) {
-                CoreLogger.debugToConsole(
-                    "drawing to heat source: " + source.block.type,
-                    "with distance " + source.playerPosition.distance(source.block.location).toInt()
-                )
-                spawnParticleLine(player.uniqueId, source.block, source.playerPosition)
-            }
-        }
+//        for (source in heatSources) {
+//            if (highest != null && source.getHeatValue() > 0) {
+//                calculated += 0.0
+//
+//                if (source == highest) {
+//                    calculated += highest.getHeatValue()
+//                } else {
+//                    val factor = exp(highest.getHeatValue() / 40.0) // magic number
+//                    calculated += source.getHeatValue() * factor
+//                }
+//
+//                CoreLogger.debugToConsole(
+//                    "drawing to heat source: " + source.block.type,
+//                    "with distance " + source.playerPosition.distance(source.block.location).toInt()
+//                )
+//                spawnParticleLine(player.uniqueId, source.block, source.playerPosition)
+//            }
+//        }
 
         return calculated
     }
@@ -158,7 +191,26 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
     }
 
     private fun biomeValue(): Double {
-        return tempConfig.getBiomeValue(player.location.block.biome)
+        val world = player.world
+        val time = world.time
+        val biomePair = tempConfig.getBiomeValue(player.location.block.biome)
+
+        // Get time modifier values from config
+        val noonMod: Double = biomePair.first
+        val nightMod: Double = biomePair.second
+        val range = noonMod - nightMod
+
+        return if (time < 6000) {
+            // Morning warming
+            nightMod + (range * (time / 6000.0))
+        } else if (time < 18000) {
+            // Afternoon cooling
+            noonMod - (range * ((time - 6000) / 12000.0))
+        } else {
+            // Night
+            nightMod
+        }
+
     }
 
     private fun timeValue(): Double {
@@ -249,8 +301,14 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
 
     private fun tryDebuff() {
 
+        val extremeHeat = 10
+        val heat = 5
+        val cold = -5
+        val extremeCold = -10
+
         // handle extreme hot
-        if (extremeTemperatureCount >= 10) {
+        if (extremeTemperatureCount >= extremeHeat) {
+            extremeTemperatureCount = extremeHeat // cap it so we don't do too much damage
             CoreLogger.warnToPlayer("You are extremely hot!", player.uniqueId)
             player.damage(extremeTemperatureCount * 0.1)
             val playerLoc = player.location // Player's feet location
@@ -270,21 +328,21 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
         }
 
         // handle extreme cold
-        else if (extremeTemperatureCount <= -10) {
-            // COLD
+        else if (extremeTemperatureCount <= extremeCold) {
+            extremeTemperatureCount = extremeCold // cap it so we don't do too much damage
             CoreLogger.warnToPlayer("You are freezing!", player.uniqueId)
-            player.freezeTicks = 40
+            player.freezeTicks += 45
         }
 
         // handle hot
-        else if (extremeTemperatureCount > 5) {
+        else if (extremeTemperatureCount > heat) {
             player.addPotionEffect(PotionEffect(PotionEffectType.NAUSEA, 20 * 10, 1))
             player.addPotionEffect(PotionEffect(PotionEffectType.MINING_FATIGUE, 20 * 10, 1))
             CoreLogger.warnToPlayer("You are feeling very warm.", player.uniqueId)
         }
 
         // handle cold
-        else if (extremeTemperatureCount < -5) {
+        else if (extremeTemperatureCount < cold) {
             player.addPotionEffect(PotionEffect(PotionEffectType.SLOWNESS, 20 * 10, 1))
             player.addPotionEffect(PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 1))
             CoreLogger.warnToPlayer("You are feeling very cold.", player.uniqueId)
