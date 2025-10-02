@@ -17,20 +17,19 @@ import java.util.*
 import kotlin.math.exp
 
 @NullMarked
-class TemperatureCalculator(private val gradualTemperature: GradualTemperature, private val uuid: UUID) {
+class TemperatureCalculator(private val internalTemperature: GradualTemperature, private val uuid: UUID) {
 
-    private val tempConfig: TemperatureConfig = ConfigurationLoader.getTemperatureConfig()
-    private var extremeTemperatureCount = 0
     private val player: Player =
         Bukkit.getPlayer(uuid) ?: throw IllegalArgumentException("Player with UUID $uuid not found")
-    var ambientTemperature: Double = 0.0
-        get() {
-            return NumberUtils.roundDouble(field, 2)
-        }
+    private val tempConfig: TemperatureConfig = ConfigurationLoader.getTemperatureConfig()
+    private var extremeTemperatureCount = 0
+    var ambientTemperature = GradualTemperature(internalTemperature.current, internalTemperature.current, 0.1, 0.1)
 
     /**
      * Entry method for temperature calculation. This is called by the
      * temperature runnable every x seconds as defined.
+     *
+     * @return the current internal temperature after calculation
      */
     fun poll(): Double {
 
@@ -41,35 +40,44 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
             result += sunValue() + weatherValue()
         }
 
-        if (result != gradualTemperature.target) {
+        if (result != ambientTemperature.target) {
             CoreLogger.debugToConsole(
-                "Temperature change for " + player.name + ": " + gradualTemperature.target
+                "Temperature change for " + player.name + ": " + internalTemperature.target
                         + " -> " + result
             )
 
-            gradualTemperature.target = result
+            ambientTemperature.target = result
+            internalTemperature.target = ambientTemperature.progress()
         }
 
         when {
-            gradualTemperature.current > tempConfig.maximum -> extremeTemperatureCount++
-            gradualTemperature.current < tempConfig.minimum -> extremeTemperatureCount--
+            internalTemperature.current > tempConfig.maximum -> extremeTemperatureCount++
+            internalTemperature.current < tempConfig.minimum -> extremeTemperatureCount--
             extremeTemperatureCount > 0 -> extremeTemperatureCount--
             extremeTemperatureCount < 0 -> extremeTemperatureCount++
         }
 
         tryDebuff()
 
-        ambientTemperature = result
-        return gradualTemperature.progress()
+        return internalTemperature.progress()
     }
 
     /**
      * Get the current temperature for this calculator.
      *
-     * @return current temperature
+     * @return current temperature rounded to 2 decimal places
      */
     fun temperature(): Double {
-        return NumberUtils.roundDouble(gradualTemperature.current, 2)
+        return NumberUtils.roundDouble(internalTemperature.current, 2)
+    }
+
+    /**
+     * Get the current ambient temperature for this calculator.
+     *
+     * @return current ambient temperature rounded to 2 decimal places
+     */
+    fun ambient(): Double {
+        return NumberUtils.roundDouble(ambientTemperature.current, 2)
     }
 
     /**
@@ -78,7 +86,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
      * @param temperature new temperature
      */
     fun setTemperature(temperature: Double) {
-        gradualTemperature.current = temperature
+        internalTemperature.current = temperature
     }
 
     /**
@@ -140,7 +148,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
                     if (greatestPart == null) {
                         continue
                     }
-                    
+
                     // Only add if heat can reach player and value is significant
                     if (greatestPart.getHeatValue() > 0 && greatestPart.canReachPlayer()) {
                         // Stronger exponential decay for realism
