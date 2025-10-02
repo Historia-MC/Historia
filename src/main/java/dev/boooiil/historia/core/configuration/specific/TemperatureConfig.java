@@ -5,6 +5,7 @@ import dev.boooiil.historia.core.file.FileKeys;
 import dev.boooiil.historia.core.util.CoreLogger;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
+import kotlin.Pair;
 import net.kyori.adventure.key.Key;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -15,6 +16,7 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @NullMarked
@@ -50,7 +52,10 @@ public class TemperatureConfig {
 
     private final Map<StatusEffect, Double> statusEffects = new EnumMap<>(StatusEffect.class);
     private final Map<Modifier, Double> modifiers = new EnumMap<>(Modifier.class);
-    private final Map<Biome, Double> biome = new HashMap<>();
+    /**
+     * Biome temperature modifiers (noon and midnight)
+     */
+    private final Map<Biome, Pair<Double, Double>> biome = new HashMap<>();
     private final Map<Material, Double> heatSource = new EnumMap<>(Material.class);
     private final Map<PotionType, Double> potions = new EnumMap<>(PotionType.class);
     private final Map<Integer, Double> time = new HashMap<>();
@@ -147,8 +152,9 @@ public class TemperatureConfig {
         for (String biome : configuration.getConfigurationSection("biome").getKeys(false)) {
             CoreLogger.verboseToConsole("Biome: " + biome);
             Biome b = RegistryAccess.registryAccess().getRegistry(RegistryKey.BIOME).get(Key.key(biome.toLowerCase()));
+            List<Double> temps = configuration.getDoubleList("biome." + biome);
 
-            this.biome.put(b, configuration.getDouble("biome." + biome));
+            this.biome.put(b, new Pair<>(temps.get(0), temps.get(1)));
 
             CoreLogger.verboseToConsole(
                     "Adding biome ",
@@ -216,11 +222,17 @@ public class TemperatureConfig {
         return modifiers.get(modifier);
     }
 
-    public Map<Biome, Double> getBiome() {
+    public Map<Biome, Pair<Double, Double>> getBiome() {
         return biome;
     }
 
-    public Double getBiomeValue(Biome biome) {
+    /**
+     * Get the biome temperature modifier for a specific biome.
+     *
+     * @param biome The biome to get the modifier for.
+     * @return A pair of doubles, the first is the noon modifier, the second is the midnight modifier.
+     */
+    public Pair<Double, Double> getBiomeValue(Biome biome) {
         return this.biome.get(biome);
     }
 
