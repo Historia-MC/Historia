@@ -68,7 +68,7 @@ class UpdateScoreboardRunnable : BukkitRunnable() {
                 .addLine(
                     Component.text("Ambient Temp: ", NamedTextColor.DARK_AQUA)
                             + Component.text(
-                        historiaPlayer.temperatureCalculator.ambientTemperature.toString(),
+                        historiaPlayer.temperatureCalculator.ambient().toString(),
                         NamedTextColor.GRAY
                     )
                 )
