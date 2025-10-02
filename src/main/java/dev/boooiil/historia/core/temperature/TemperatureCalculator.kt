@@ -35,6 +35,9 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
      */
     fun poll(): Double {
 
+        // TODO: take in saturation/hunger level to affect temp change
+        //  lower food level = faster temp change
+
         var result = heatBlocksValue() + potionValue() + activityValue() +
                 weatherValue() + biomeValue() + timeValue()
 
@@ -49,7 +52,6 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
             )
 
             ambientTemperature.target = result
-            internalTemperature.target = ambientTemperature.progress()
         }
 
         when {
@@ -61,6 +63,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
 
         tryDebuff()
 
+        internalTemperature.target = ambientTemperature.progress()
         return internalTemperature.progress()
     }
 
