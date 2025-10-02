@@ -186,6 +186,7 @@ public class FileIO {
                             "items.yml",
                             "component-lore.yml",
                             "proficiency.yml",
+                            "date.yml",
                             "skills.yml"
                     );
 
