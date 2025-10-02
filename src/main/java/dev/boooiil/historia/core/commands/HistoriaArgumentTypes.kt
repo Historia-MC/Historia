@@ -9,4 +9,5 @@ object HistoriaArgumentTypes {
     fun proficiency(): RegistryArgument<Proficiency> = RegistryArgument(RegistryHolder.PROFICIENCY_REGISTRY)
     fun skill(): RegistryArgument<ISkill> = RegistryArgument(RegistryHolder.SKILL_REGISTRY)
     fun item(): RegistryArgument<HistoriaItem> = RegistryArgument(RegistryHolder.ITEM_REGISTRY)
+    fun calendar(): CalendarArgument = CalendarArgument()
 }
