@@ -50,7 +50,7 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * The playtime of the user.
      */
-    private long playtime;
+    private final long playtime;
 
     /**
      * The max health of the user.
@@ -89,23 +89,6 @@ public class HistoriaPlayer extends BasePlayer {
     private long lastSaved;
 
     /**
-     * Default constructor, will return invalid player.
-     */
-    public HistoriaPlayer() {
-        super(null);
-
-        culture = Cultures.NONE;
-        temperature = new TemperatureCalculator(
-                new GradualTemperature(
-                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        0.1
-                ), null);
-
-        CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
-    }
-
-    /**
      * Create a default HistoriaUser.
      *
      * @param uuid - UUID of the player.
@@ -128,12 +111,12 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogin = 0;
         this.lastLogout = 0;
         this.playtime = 0;
-        
+
         if (this.isOnline) this.temperature = new TemperatureCalculator(
                 new GradualTemperature(
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        0.1
+                        0.1, 0.05
                 ), uuid);
         else this.temperature = null;
 
@@ -174,7 +157,7 @@ public class HistoriaPlayer extends BasePlayer {
                 new GradualTemperature(
                         temperature,
                         temperature,
-                        0.1
+                        0.1, 0.05
                 ), uuid);
         else this.temperature = null;
 
