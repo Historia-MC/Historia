@@ -129,7 +129,7 @@ open class HistoriaCore : JavaPlugin() {
         // end
 
         // registerRunnable(new ClassEnchantsRunnable());
-        registerRunnable(SyncDayTimeRunnable())
+        registerRunnable(SyncDayTimeRunnable(), 0)
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
         registerRunnable(TemperaturePollRunnable(), 20L)
