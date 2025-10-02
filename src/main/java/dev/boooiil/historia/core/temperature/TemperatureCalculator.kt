@@ -36,13 +36,13 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
             result += sunValue() + weatherValue()
         }
 
-        if (result != gradualTemperature.target()) {
+        if (result != gradualTemperature.target) {
             CoreLogger.debugToConsole(
-                "Temperature change for " + player.name + ": " + gradualTemperature.target()
+                "Temperature change for " + player.name + ": " + gradualTemperature.target
                         + " -> " + result
             )
 
-            gradualTemperature.setTarget(result)
+            gradualTemperature.target = result
         }
 
         when {
@@ -54,7 +54,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
 
         tryDebuff()
 
-        return gradualTemperature.doStep()
+        return gradualTemperature.progress()
     }
 
     /**
@@ -63,7 +63,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
      * @return current temperature
      */
     fun temperature(): Double {
-        return NumberUtils.roundDouble(gradualTemperature.current(), 2)
+        return NumberUtils.roundDouble(gradualTemperature.current, 2)
     }
 
     /**
@@ -72,7 +72,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
      * @param temperature new temperature
      */
     fun setTemperature(temperature: Double) {
-        gradualTemperature.setStart(temperature())
+        gradualTemperature.current = temperature
     }
 
     /**
@@ -196,7 +196,7 @@ class TemperatureCalculator(private val gradualTemperature: GradualTemperature, 
         for (y in block.y + 1..world.maxHeight) {
             val aboveBlock = block.world.getBlockAt(block.x, y, block.z)
 
-            if (aboveBlock.type.isAir()) {
+            if (aboveBlock.type.isAir) {
                 continue  // Air blocks don't prevent exposure to the sky
             }
 
