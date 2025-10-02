@@ -1,8 +1,8 @@
 version: 5
 
 # Global temperature limits
-minimum: 11
-maximum: 43
+minimum: 30
+maximum: 44
 
 search_distance: 12
 diminish_distance: 8
