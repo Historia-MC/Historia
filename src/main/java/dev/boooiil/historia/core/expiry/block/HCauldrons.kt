@@ -62,22 +62,22 @@ object HCauldrons {
     }
 
     fun load(chunk: Chunk) {
-        val chunkKey = "${chunk.world.name}_${chunk.x}_${chunk.z}"
-        CoreLogger.infoToConsole("Loading chunk: $chunkKey")
+        "${chunk.world.name}_${chunk.x}_${chunk.z}"
+        //CoreLogger.verboseToConsole("Loading chunk: $chunkKey")
         val dataContainer = chunk.persistentDataContainer
         val chunkCauldrons = dataContainer.get(cauldronKey, PersistentDataType.LIST.listTypeFrom(HCauldron.DataType()))
             ?: return
 
-        CoreLogger.infoToConsole("Found ${chunkCauldrons.size} cauldrons in chunk data for $chunkKey")
+        //CoreLogger.verboseToConsole("Found ${chunkCauldrons.size} cauldrons in chunk data for $chunkKey")
 
         for (cauldron in chunkCauldrons) {
             if (cauldron.location in cauldrons) {
-                CoreLogger.infoToConsole("Skipping cauldron at ${cauldron.location} - already in memory")
+                CoreLogger.verboseToConsole("Skipping cauldron at ${cauldron.location} - already in memory")
                 continue
             }
             cauldrons[cauldron.location] = cauldron
 
-            CoreLogger.infoToConsole("Successfully loaded cauldron at ${cauldron.location} with content ${cauldron.content}")
+            CoreLogger.verboseToConsole("Successfully loaded cauldron at ${cauldron.location} with content ${cauldron.content}")
         }
     }
 

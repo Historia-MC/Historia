@@ -112,13 +112,13 @@ public class ItemRegistryLoader {
 
             for (String key : keys) {
 
-                CoreLogger.debugToConsole("Key", key);
+                CoreLogger.verboseToConsole("Item Registry Key", key);
 
                 NamespacedKey namespacedKey = HistoriaCore.getNamespacedKey(key);
                 ConfigurationSection section = configuration.getConfigurationSection(key);
 
                 assert section != null;
-                
+
                 RegistryHolder.ITEM_REGISTRY.register(namespacedKey,
                         HistoriaItem.fromConfig(namespacedKey, section));
 

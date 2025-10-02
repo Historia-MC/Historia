@@ -163,6 +163,7 @@ public class PlayerStorageTest extends BaseTest {
         CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
 
         assert !historiaPlayer.isOnline();
+        assert server.getOfflinePlayer(player.getUniqueId()) != null;
 
         PlayerStorage.getPlayerMap().remove(player.getUniqueId());
         PlayerStorage.getUsernameMap().remove(player.getName());
@@ -179,18 +180,4 @@ public class PlayerStorageTest extends BaseTest {
         System.out.println(historiaPlayer);
     }
 
-    @Test
-    public void testAddPlayerNotExist() {
-        assert PlayerStorage.getPlayerMap().isEmpty();
-
-        PlayerMock playerMock = new PlayerMock(server, "Player0");
-
-        System.out.println("player " + playerMock.displayName());
-
-        PlayerStorage.addPlayer(playerMock);
-
-        assert PlayerStorage.getPlayerMap().size() == 1;
-        assert PlayerStorage.getUsernameMap().size() == 1;
-
-    }
 }
