@@ -116,7 +116,7 @@ public class HistoriaPlayer extends BasePlayer {
                 new GradualTemperature(
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
                         TemperatureConfig.INITIAL_CONSTANT_TEMP,
-                        0.1, 0.05
+                        0.01, 0.005
                 ), uuid);
         else this.temperature = null;
 
@@ -157,7 +157,7 @@ public class HistoriaPlayer extends BasePlayer {
                 new GradualTemperature(
                         temperature,
                         temperature,
-                        0.1, 0.05
+                        0.01, 0.005
                 ), uuid);
         else this.temperature = null;
 
