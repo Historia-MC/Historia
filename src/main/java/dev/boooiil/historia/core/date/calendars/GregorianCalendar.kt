@@ -4,7 +4,7 @@ import dev.boooiil.historia.core.date.CalendarDate
 import kotlin.math.abs
 
 object GregorianCalendar : LeapYearCalendar() {
-    override val epoch = CalendarDate(1212, 1, 1, this)
+    override val startDate = CalendarDate(1212, 1, 1, this)
 
     override fun daysInMonth(month: Int, year: Int): Int {
         return when (month) {

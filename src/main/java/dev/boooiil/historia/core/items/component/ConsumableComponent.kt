@@ -24,7 +24,7 @@ class ConsumableComponent(
         val expireDay = when {
             expireDays < 0 -> -1
             expireDays == 0 -> 0
-            else -> GameDate.daysSinceEpoch + expireDays
+            else -> GameDate.daysSinceStart + expireDays
         }
         return ConsumableData(this.hunger, this.saturationModifier, expireDay, this.effects)
     }

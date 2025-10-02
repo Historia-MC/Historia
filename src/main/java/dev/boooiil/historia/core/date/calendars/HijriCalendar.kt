@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.date.calendars
 import dev.boooiil.historia.core.date.CalendarDate
 
 object HijriCalendar : LeapYearCalendar() {
-    override val epoch = CalendarDate(622, 7, 19, this)
+    override val startDate = CalendarDate(622, 7, 19, this)
 
     override fun daysInMonth(month: Int, year: Int): Int {
         return when {

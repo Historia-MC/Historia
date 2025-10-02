@@ -3,12 +3,11 @@ package dev.boooiil.historia.core.date
 import dev.boooiil.historia.core.date.calendars.GregorianCalendar
 import dev.boooiil.historia.core.date.calendars.HijriCalendar
 import dev.boooiil.historia.core.date.calendars.JulianCalendar
-import net.kyori.adventure.text.Component
 
 interface Calendar {
-    val epoch: CalendarDate
+    val startDate: CalendarDate
 
-    fun dateOf(daysSinceEpoch: Int): CalendarDate
+    fun dateOf(daysSinceStart: Int): CalendarDate
     fun format(date: CalendarDate): String
 
     companion object {

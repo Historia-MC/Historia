@@ -63,7 +63,7 @@ class ConsumableData(
     }
 
     val canExpire: Boolean = expireDay >= 0
-    val isExpired: Boolean get() = canExpire && GameDate.daysSinceEpoch > expireDay
+    val isExpired: Boolean get() = canExpire && GameDate.daysSinceStart > expireDay
 
     override fun toJSON(): String {
         return "{" +

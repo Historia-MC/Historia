@@ -5,12 +5,12 @@ import dev.boooiil.historia.core.date.CalendarDate
 
 abstract class LeapYearCalendar : Calendar {
 
-    override fun dateOf(daysSinceEpoch: Int): CalendarDate {
-        require(daysSinceEpoch >= 0) { "daysSinceEpoch must be >= 0" }
+    override fun dateOf(daysSinceStart: Int): CalendarDate {
+        require(daysSinceStart >= 0) { "daysSinceStart must be >= 0" }
 
-        var year = epoch.year
-        var month = epoch.month
-        var day = epoch.day + daysSinceEpoch
+        var year = startDate.year
+        var month = startDate.month
+        var day = startDate.day + daysSinceStart
 
         while (day > daysInMonth(month, year)) {
             day -= daysInMonth(month, year)
