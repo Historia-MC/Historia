@@ -4,7 +4,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.date.Calendar
-import dev.boooiil.historia.core.date.GameDate
+import dev.boooiil.historia.core.date.ServerCalendar
 import dev.boooiil.historia.core.util.plus
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
@@ -25,13 +25,13 @@ val commandDate: LiteralCommandNode<CommandSourceStack> = Commands.literal("date
     .build()
 
 private fun executeAdd(ctx: CommandContext<CommandSourceStack>): Int {
-    GameDate.dayOffset += ctx.getArgument<Int>("days")
-    ctx.source.sender.sendMessage(Component.text("Set the date to ") + GameDate.current())
+    ServerCalendar.dayOffset += ctx.getArgument<Int>("days")
+    ctx.source.sender.sendMessage(Component.text("Set the date to ") + ServerCalendar.current())
     return 1
 }
 
 private fun executeQuery(ctx: CommandContext<CommandSourceStack>): Int {
     val calendar = ctx.getOptionalArgument<Calendar>("calendar", Calendar.Gregorian)
-    ctx.source.sender.sendMessage(Component.text("The date is ") + GameDate.current(calendar))
+    ctx.source.sender.sendMessage(Component.text("The date is ") + ServerCalendar.current(calendar))
     return 1
 }

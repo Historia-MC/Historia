@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.items.data
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.date.Calendar
 import dev.boooiil.historia.core.items.ItemData
-import dev.boooiil.historia.core.date.GameDate
+import dev.boooiil.historia.core.date.ServerCalendar
 import dev.boooiil.historia.core.util.*
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
@@ -63,7 +63,7 @@ class ConsumableData(
     }
 
     val canExpire: Boolean = expireDay >= 0
-    val isExpired: Boolean get() = canExpire && GameDate.daysSinceStart > expireDay
+    val isExpired: Boolean get() = canExpire && ServerCalendar.daysSinceStart > expireDay
 
     override fun toJSON(): String {
         return "{" +

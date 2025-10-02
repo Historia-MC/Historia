@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.items.component
 import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.items.data.ConsumableData
-import dev.boooiil.historia.core.date.GameDate
+import dev.boooiil.historia.core.date.ServerCalendar
 import dev.boooiil.historia.core.util.JSONUtils
 import dev.boooiil.historia.core.util.potionEffectsFromConfig
 import org.bukkit.Material
@@ -24,7 +24,7 @@ class ConsumableComponent(
         val expireDay = when {
             expireDays < 0 -> -1
             expireDays == 0 -> 0
-            else -> GameDate.daysSinceStart + expireDays
+            else -> ServerCalendar.daysSinceStart + expireDays
         }
         return ConsumableData(this.hunger, this.saturationModifier, expireDay, this.effects)
     }
