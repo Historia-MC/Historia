@@ -31,71 +31,125 @@ modifier:
   WEATHER: 1
   HEAT: 1
 
-# Base biome temperatures
+  # Base biome temperatures
 biome:
-  BADLANDS: [ 40, 10 ]
-  BAMBOO_JUNGLE: [ 30, 22 ]
-  BASALT_DELTAS: [ 15, 5 ]
-  BEACH: [ 32, 22 ]
-  BIRCH_FOREST: [ 24, 10 ]
-  CHERRY_GROVE: [ 22, 8 ]
-  COLD_OCEAN: [ 4, 0 ]
-  DARK_FOREST: [ 22, 8 ]
-  DEEP_COLD_OCEAN: [ 2, -2 ]
-  DEEP_DARK: [ 12, 6 ]
+  # Badlands/Mesa regions typically have a semi-arid, hot climate with large daily temp swings.
+  BADLANDS: [ 45, -5 ]
+  # Tropical biomes have very stable, warm temperatures, rarely dropping below 20°C.
+  BAMBOO_JUNGLE: [ 35, 20 ]
+  # Volcanic rock biomes, likely basaltic, are geologically hot but can be at high altitude. Widened range for a more dynamic environment.
+  BASALT_DELTAS: [ 25, -5 ]
+  # Beaches can be hot during the day, but coastal areas moderate extremes.
+  BEACH: [ 38, 10 ]
+  # Temperate forest with a distinct cold season. Extended the cold extreme.
+  BIRCH_FOREST: [ 30, -15 ]
+  # A forest type, likely temperate to sub-temperate.
+  CHERRY_GROVE: [ 32, -10 ]
+  # Cold oceans have stable, near-freezing but non-freezing temperatures at the surface.
+  COLD_OCEAN: [ 8, -1 ]
+  # Temperate forest with less direct sun, keeping it slightly cooler on average.
+  DARK_FOREST: [ 30, -10 ]
+  # Water temperatures deep in the ocean are consistently very cold, near freezing.
+  DEEP_COLD_OCEAN: [ 4, -2 ]
+  # Subterranean environment. Stable, cool-to-cold temperatures, independent of surface weather.
+  DEEP_DARK: [ 15, 5 ]
+  # Extremely cold water biome, below freezing.
   DEEP_FROZEN_OCEAN: [ -2, -15 ]
-  DEEP_LUKEWARM_OCEAN: [ 16, 10 ]
-  DEEP_OCEAN: [ 8, 2 ]
-  DESERT: [ 45, 15 ]
-  DRIPSTONE_CAVES: [ 18, 12 ]
-  ERODED_BADLANDS: [ 42, 12 ]
-  FLOWER_FOREST: [ 22, 10 ]
-  FOREST: [ 20, 8 ]
-  FROZEN_OCEAN: [ -5, -18 ]
-  FROZEN_PEAKS: [ -8, -25 ]
-  FROZEN_RIVER: [ -10, -20 ]
-  GROVE: [ 20, 10 ]
-  ICE_SPIKES: [ -8, -28 ]
-  JAGGED_PEAKS: [ 2, -15 ]
-  JUNGLE: [ 32, 24 ]
-  LUKEWARM_OCEAN: [ 18, 12 ]
-  LUSH_CAVES: [ 18, 14 ]
-  MANGROVE_SWAMP: [ 28, 20 ]
-  MEADOW: [ 25, 10 ]
-  MUSHROOM_FIELDS: [ 14, 6 ]
-  OCEAN: [ 10, 2 ]
-  OLD_GROWTH_BIRCH_FOREST: [ 22, 8 ]
-  OLD_GROWTH_PINE_TAIGA: [ 12, -8 ]
-  OLD_GROWTH_SPRUCE_TAIGA: [ 10, -10 ]
-  PLAINS: [ 28, 12 ]
-  RIVER: [ 25, 10 ]
-  SAVANNA: [ 38, 18 ]
-  SAVANNA_PLATEAU: [ 40, 20 ]
-  SNOWY_BEACH: [ 0, -10 ]
-  SNOWY_PLAINS: [ -5, -18 ]
-  SNOWY_SLOPES: [ -10, -22 ]
-  SNOWY_TAIGA: [ -8, -20 ]
-  SPARSE_JUNGLE: [ 30, 22 ]
-  STONY_PEAKS: [ 5, -10 ]
-  STONY_SHORE: [ 20, 10 ]
-  SUNFLOWER_PLAINS: [ 30, 12 ]
-  SWAMP: [ 28, 18 ]
-  TAIGA: [ 10, -6 ]
-  WARM_OCEAN: [ 28, 22 ]
-  WINDSWEPT_FOREST: [ 16, 6 ]
-  WINDSWEPT_GRAVELLY_HILLS: [ 12, -5 ]
-  WINDSWEPT_HILLS: [ 14, -8 ]
-  WINDSWEPT_SAVANNA: [ 32, 18 ]
-  WOODED_BADLANDS: [ 40, 18 ]
+  # A warmer, deep-water zone.
+  DEEP_LUKEWARM_OCEAN: [ 20, 5 ]
+  # Deep ocean water is generally cold.
+  DEEP_OCEAN: [ 10, 0 ]
+  # Hot deserts have high daily extremes and can be scorching hot with below-freezing nights.
+  DESERT: [ 50, -10 ]
+  # Cave biomes maintain stable, cool temperatures.
+  DRIPSTONE_CAVES: [ 20, 8 ]
+  # Similar to badlands, semi-arid and prone to temperature swings.
+  ERODED_BADLANDS: [ 45, 0 ]
+  # Temperate forest, slightly warmer peak than a standard forest.
+  FLOWER_FOREST: [ 32, -10 ]
+  # Standard temperate forest extremes.
+  FOREST: [ 30, -15 ]
+  # Polar ocean conditions.
+  FROZEN_OCEAN: [ -10, -30 ]
+  # High altitude and polar conditions, very severe cold extremes.
+  FROZEN_PEAKS: [ 0, -40 ]
+  # Rivers freeze easily in very cold climates.
+  FROZEN_RIVER: [ -5, -25 ]
+  # Likely a temperate, open area.
+  GROVE: [ 30, -10 ]
+  # Very cold, high-latitude or high-altitude formations.
+  ICE_SPIKES: [ -10, -45 ]
+  # High altitude, low peak temperature, and severe cold.
+  JAGGED_PEAKS: [ 5, -30 ]
+  # Tropical rainforests are warm and humid with very little temperature fluctuation.
+  JUNGLE: [ 35, 20 ]
+  # Lukewarm ocean, a wide, mid-range temperature.
+  LUKEWARM_OCEAN: [ 25, 10 ]
+  # Subterranean, very stable and slightly warmer than deep cold caves due to humidity.
+  LUSH_CAVES: [ 20, 10 ]
+  # Tropical/Subtropical swamp, high peak temperature, and high low temperature.
+  MANGROVE_SWAMP: [ 38, 15 ]
+  # Temperate grassland/open area.
+  MEADOW: [ 32, -10 ]
+  # Likely a coastal or island environment, moderating extremes, cool to mild.
+  MUSHROOM_FIELDS: [ 25, 0 ]
+  # Standard open ocean, moderate extremes.
+  OCEAN: [ 20, 0 ]
+  # Similar to birch forest.
+  OLD_GROWTH_BIRCH_FOREST: [ 30, -15 ]
+  # Boreal/Taiga forest, a cold-climate forest.
+  OLD_GROWTH_PINE_TAIGA: [ 20, -30 ]
+  # Colder sub-type of Taiga.
+  OLD_GROWTH_SPRUCE_TAIGA: [ 18, -35 ]
+  # Temperate grassland/plains.
+  PLAINS: [ 35, -10 ]
+  # Rivers generally follow their surrounding biome but can be cold in all climates.
+  RIVER: [ 30, -5 ]
+  # Tropical/Subtropical grassland with high heat.
+  SAVANNA: [ 40, 10 ]
+  # Higher altitude savanna, which tends to be slightly cooler at night/winter.
+  SAVANNA_PLATEAU: [ 42, 5 ]
+  # Temperate coastal area that gets snow/freezes.
+  SNOWY_BEACH: [ 15, -15 ]
+  # Mid-latitude to high-latitude plains, severe winters.
+  SNOWY_PLAINS: [ 20, -35 ]
+  # High altitude, significant snow and cold.
+  SNOWY_SLOPES: [ 5, -30 ]
+  # Boreal/Taiga with severe cold.
+  SNOWY_TAIGA: [ 15, -40 ]
+  # Similar to standard jungle, but possibly with a slightly wider range.
+  SPARSE_JUNGLE: [ 35, 18 ]
+  # High altitude, very exposed, with a wide range of extremes.
+  STONY_PEAKS: [ 10, -20 ]
+  # Coastal area, moderate extremes.
+  STONY_SHORE: [ 25, 0 ]
+  # Similar to plains, possibly slightly warmer.
+  SUNFLOWER_PLAINS: [ 35, -8 ]
+  # Swampy, humid areas are often hot and rarely freeze hard.
+  SWAMP: [ 35, 5 ]
+  # Boreal/Taiga forest, cold climate.
+  TAIGA: [ 20, -25 ]
+  # Tropical ocean, very stable and warm.
+  WARM_OCEAN: [ 30, 20 ]
+  # Windswept areas often have greater temperature extremes, especially the lows.
+  WINDSWEPT_FOREST: [ 25, -10 ]
+  # Exposed, high altitude, greater temperature variation.
+  WINDSWEPT_GRAVELLY_HILLS: [ 20, -15 ]
+  # Exposed, high altitude.
+  WINDSWEPT_HILLS: [ 25, -15 ]
+  # Savanna conditions but more exposed to wind, potentially lowering the extreme low.
+  WINDSWEPT_SAVANNA: [ 40, 5 ]
+  # Badlands with trees, perhaps slightly more moderate lows due to the tree cover.
+  WOODED_BADLANDS: [ 45, 5 ]
 
 
 
 heat_sources:
-  LAVA: 80.0        # Lava is extremely hot
-  FIRE: 50.0        # Fire provides significant heat
-  MAGMA_BLOCK: 40.0 # Magma blocks are very hot
-  CAMPFIRE: 25.0    # Campfires provide moderate heat
-  TORCH: 25.0       # Torches provide mild heat
+  LAVA: 200.0        # Lava is extremely hot
+  FIRE: 70.0        # Fire provides significant heat
+  MAGMA_BLOCK: 100.0 # Magma blocks are very hot
+  CAMPFIRE: 45.0    # Campfires provide moderate heat
+  TORCH: 15.0       # Torches provide mild heat
 
 # Weather effects
 weather:
