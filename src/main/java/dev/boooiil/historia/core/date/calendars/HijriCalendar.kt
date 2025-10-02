@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.date.calendars
 
 import dev.boooiil.historia.core.date.CalendarDate
+import net.kyori.adventure.text.Component
 
 object HijriCalendar : StandardCalendar() {
     override val startDate = CalendarDate(622, 7, 19, this)
@@ -20,9 +21,9 @@ object HijriCalendar : StandardCalendar() {
         return (year % 30) in leapYears
     }
 
-    override fun format(date: CalendarDate): String {
+    override fun format(date: CalendarDate): Component {
         val month = monthName(date.month)
-        return "${date.day} $month ${date.year} AH"
+        return Component.text("${date.day} $month ${date.year} AH")
     }
 
     fun monthName(month: Int): String {

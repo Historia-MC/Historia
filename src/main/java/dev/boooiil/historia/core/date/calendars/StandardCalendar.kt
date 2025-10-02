@@ -3,6 +3,10 @@ package dev.boooiil.historia.core.date.calendars
 import dev.boooiil.historia.core.date.Calendar
 import dev.boooiil.historia.core.date.CalendarDate
 
+/**
+ * Provides common logic to convert a number of days since start to a [CalendarDate].
+ * Should be useful for most calendar systems.
+ */
 abstract class StandardCalendar : Calendar {
 
     override fun dateOf(daysSinceStart: Int): CalendarDate {

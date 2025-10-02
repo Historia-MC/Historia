@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.date.calendars
 
 import dev.boooiil.historia.core.date.CalendarDate
+import net.kyori.adventure.text.Component
 import kotlin.math.abs
 
 object GregorianCalendar : StandardCalendar() {
@@ -23,11 +24,11 @@ object GregorianCalendar : StandardCalendar() {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
     }
 
-    override fun format(date: CalendarDate): String {
+    override fun format(date: CalendarDate): Component {
         val month = monthName(date.month)
         val year = if (date.year >= 1) date.year else abs(date.year - 1)
         val era = if (date.year >= 1) "AD" else "BC"
-        return "${date.day} $month $year $era"
+        return Component.text("${date.day} $month $year $era")
     }
 
     fun monthName(month: Int): String {
