@@ -7,6 +7,7 @@ import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
 import dev.boooiil.historia.core.database.sql.DatabaseExecutor
 import dev.boooiil.historia.core.database.sql.tables.HistoriaTable
+import dev.boooiil.historia.core.date.ServerCalendar
 import dev.boooiil.historia.core.events.block.BlockBreakListener
 import dev.boooiil.historia.core.events.block.BlockFromToListener
 import dev.boooiil.historia.core.events.block.BlockPlaceListener
@@ -150,6 +151,7 @@ open class HistoriaCore : JavaPlugin() {
         val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS
         val scheduler = this.server.scheduler
         scheduler.runTaskTimer(instance, ConsumableUpdater(), 0, updatePeriod)
+        scheduler.runTaskTimer(instance, ServerCalendar.customDayTimeRunnable, 0, 0)
         isLoaded = true
     }
 
