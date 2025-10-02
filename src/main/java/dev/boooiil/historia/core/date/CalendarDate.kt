@@ -14,5 +14,7 @@ data class CalendarDate(
 ) : ComponentLike {
 
     override fun toString(): String = "$year-$month-$day"
-    override fun asComponent(): Component = Component.text(toString())
+    fun toLongString(): String = calendar.format(this)
+
+    override fun asComponent(): Component = Component.text(toLongString())
 }
