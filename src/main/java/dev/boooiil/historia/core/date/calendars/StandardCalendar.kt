@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.date.calendars
 import dev.boooiil.historia.core.date.Calendar
 import dev.boooiil.historia.core.date.CalendarDate
 
-abstract class LeapYearCalendar : Calendar {
+abstract class StandardCalendar : Calendar {
 
     override fun dateOf(daysSinceStart: Int): CalendarDate {
         require(daysSinceStart >= 0) { "daysSinceStart must be >= 0" }

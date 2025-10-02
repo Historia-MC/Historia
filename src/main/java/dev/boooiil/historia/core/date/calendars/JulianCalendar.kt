@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.date.calendars
 import dev.boooiil.historia.core.date.CalendarDate
 import kotlin.math.abs
 
-object JulianCalendar : LeapYearCalendar() {
+object JulianCalendar : StandardCalendar() {
     override val startDate = CalendarDate(1211, 12, 25, this)
 
     override fun daysInMonth(month: Int, year: Int): Int {
