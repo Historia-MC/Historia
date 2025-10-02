@@ -24,7 +24,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
     private val tempConfig: TemperatureConfig = ConfigurationLoader.getTemperatureConfig()
     private var extremeTemperatureCount = 0
 
-    private val internalTemperature = GradualTemperature(initialTemperature, initialTemperature, 0.05, 0.02)
+    private val internalTemperature = GradualTemperature(initialTemperature, initialTemperature, 0.0005, 0.0002)
     private val ambientTemperature = GradualTemperature(initialTemperature, initialTemperature, 0.1, 0.1)
 
     /**
@@ -73,7 +73,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
      * @return current temperature rounded to 2 decimal places
      */
     fun temperature(): Double {
-        return NumberUtils.roundDouble(internalTemperature.current, 2)
+        return NumberUtils.roundDouble(internalTemperature.current, 1)
     }
 
     /**
@@ -82,7 +82,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
      * @return current ambient temperature rounded to 2 decimal places
      */
     fun ambient(): Double {
-        return NumberUtils.roundDouble(ambientTemperature.current, 2)
+        return NumberUtils.roundDouble(ambientTemperature.current, 1)
     }
 
     /**
