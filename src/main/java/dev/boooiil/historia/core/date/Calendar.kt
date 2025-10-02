@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component
 
 /** A calendar system used to calculate and format dates. */
 interface Calendar {
+
     /** The server start date represented in this calendar system. */
     val startDate: CalendarDate
 

@@ -5,6 +5,7 @@ import dev.boooiil.historia.core.configuration.specific.DateConfig
 
 /** Keeps track of the server date. */
 object ServerCalendar {
+
     /** Day offset applied to the start date when calculating dates. */
     var dayOffset = 0
 

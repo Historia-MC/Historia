@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component
 import kotlin.math.abs
 
 object JulianCalendar : StandardCalendar() {
+
     override val startDate = CalendarDate(1211, 12, 25, this)
 
     override fun daysInMonth(month: Int, year: Int): Int {
