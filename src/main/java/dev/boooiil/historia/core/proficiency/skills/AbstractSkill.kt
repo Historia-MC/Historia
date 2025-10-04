@@ -27,6 +27,8 @@ abstract class AbstractSkill : ISkill {
     }
 
     override fun hasLevelRequirement(historiaPlayer: HistoriaPlayer): Boolean {
+        // console log the skill and the skill level
+        CoreLogger.debugToConsole("AbstractSkill hasLevelRequirement: ${this.name} ${getProficiency(historiaPlayer)?.skills?.get(this) ?: 0} ${historiaPlayer.level}")
         return (getProficiency(historiaPlayer)?.skills?.get(this) ?: 0) > historiaPlayer.level
 
     }

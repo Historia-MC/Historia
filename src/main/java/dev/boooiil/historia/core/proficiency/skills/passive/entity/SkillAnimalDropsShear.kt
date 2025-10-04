@@ -11,12 +11,14 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Ageable
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
+import io.papermc.paper.entity.Shearable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import dev.boooiil.historia.core.util.CoreLogger
 
 class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
     override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
@@ -89,6 +91,7 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        CoreLogger.debugToConsole("SkillAnimalDropsShear being executed")
         val event: PlayerInteractEntityEvent = getOrThrow(skillSuppliers, 0)
         val player: Player = event.player
         val entity = event.rightClicked
@@ -98,16 +101,25 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
 
         // Check if player is holding shears
         val heldItem = player.inventory.itemInMainHand
-        if (heldItem.type != Material.SHEARS) return
+        if (heldItem.type != Material.SHEARS)  {
+            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player is not holding shears")
+            return
+        }
 
-        // Check if entity is an adult (for ageable entities)
-        if (entity is Ageable && !entity.isAdult) return
+        // Check if entity can be sheared using Paper API
+        if (entity is Shearable && !entity.readyToBeSheared()) {
+            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because entity is not ready to be sheared ${entity.name}")
+            return
+        }
 
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
         // If player doesn't have the skill, cancel the event (prevent shearing)
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) {
+            // console log historiaPlayer name and skill level
+            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player doesn't have the skill ${hasSkill(historiaPlayer)} & ${hasLevelRequirement(historiaPlayer)}")
             event.isCancelled = true
+            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player doesn't have the skill")
             return
         }
 

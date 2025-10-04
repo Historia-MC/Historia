@@ -300,6 +300,6 @@ Farmer: #ARMOR TRIM CLASS
     nametag: 0
     allow_unmodified_beehive_drop: 0
     allow_unmodified_grass_drop: 0
-    animal_drops_chicken_shear: 0
+    animal_drops_shear_chicken: 0
     animal_drops_leather: 0
     animal_breed_all: 0

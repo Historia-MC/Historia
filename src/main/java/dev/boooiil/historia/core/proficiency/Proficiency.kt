@@ -139,6 +139,8 @@ class Proficiency : JSONSerializable {
     }
 
     fun hasSkill(skill: ISkill): Boolean {
+        // console log the skill and the skills map
+        CoreLogger.debugToConsole("Proficiency hasSkill: ${skill.name} ${skills.containsKey(skill)}")
         return skills.containsKey(skill)
     }
 
