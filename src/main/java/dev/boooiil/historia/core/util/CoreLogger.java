@@ -3,7 +3,7 @@ package dev.boooiil.historia.core.util;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.configuration.specific.GeneralConfig;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 
@@ -19,7 +19,22 @@ public class CoreLogger {
     /**
      * Prefix for all logging messages that do not use the bukkit logger.
      */
-    private static final String messagePrefix = "§7[§9Historia§7] ";
+    private static final Component HISTORIA_PREFIX =
+            Component.text("[")
+                    .color(NamedTextColor.GRAY)
+                    .append(Component.text("Historia")
+                            .color(NamedTextColor.BLUE))
+                    .append(Component.text("]")
+                            .color(NamedTextColor.GRAY));
+
+    private static final Component ANNOUNCE_PREFIX =
+            Component.text("[")
+                    .color(NamedTextColor.GRAY)
+                    .append(Component.text("Announcement")
+                            .color(NamedTextColor.RED))
+                    .append(Component.text("]")
+                            .color(NamedTextColor.GRAY));
+    
     /**
      * Announcement prefix.
      */
@@ -29,7 +44,7 @@ public class CoreLogger {
     /**
      * Bukkit logger to send messages to the console.
      */
-    private static final Logger logger = Bukkit.getServer() != null ? Bukkit.getLogger() : Logger.getLogger("Historia");
+    private static final Logger logger = Logger.getLogger("Historia");
 
     /**
      * Send an info message to the console.
@@ -67,28 +82,29 @@ public class CoreLogger {
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
+    @Deprecated(forRemoval = true)
     public static void infoToPlayer(String message, UUID uuid) {
-
-        Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
-
-        if (player != null && player.isOnline())
-            player.sendMessage(messagePrefix + "§7" + message);
-
+        infoToPlayer(Component.text(message), uuid);
     }
 
     /**
-     * Send an info message to a player.
+     * Sends an info message to the player. The message will be prefixed
+     * with [Historia] while the default body color will be [NamedTextColor.GRAY]
      *
-     * @param message The message to be sent.
-     * @param uuid    The UUID of the player.
+     * @param component The Text Component to append to the prefix.
+     * @param uuid      The UUID of the player.
      */
-    public static void infoToPlayerNoPrefix(String message, UUID uuid) {
+    public static void infoToPlayer(Component component, UUID uuid) {
 
         Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
-        if (player != null && player.isOnline())
-            player.sendMessage("§7" + message);
-
+        if (player != null && player.isOnline()) {
+            player.sendMessage(
+                    HISTORIA_PREFIX
+                            .append(Component.text(" ")
+                                    .color(NamedTextColor.GRAY)
+                                    .append(component)));
+        }
     }
 
     /**
@@ -106,11 +122,7 @@ public class CoreLogger {
 
         }
 
-        if (logger != null) {
-            logger.warning(built.toString());
-        } else {
-            System.out.println(built.toString());
-        }
+        logger.warning(built.toString());
 
     }
 
@@ -131,13 +143,29 @@ public class CoreLogger {
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
+    @Deprecated(forRemoval = true)
     public static void warnToPlayer(String message, UUID uuid) {
+        warnToPlayer(Component.text(message), uuid);
+    }
+
+    /**
+     * Sends a warning message to the player. The message will be prefixed
+     * with [Historia] while the default body color will be [NamedTextColor.YELLOW]
+     *
+     * @param component The Text Component to append to the prefix.
+     * @param uuid      The UUID of the player.
+     */
+    public static void warnToPlayer(Component component, UUID uuid) {
 
         Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
-        if (player.isOnline())
-            player.sendMessage(messagePrefix + "§6" + message);
-
+        if (player != null && player.isOnline()) {
+            player.sendMessage(
+                    HISTORIA_PREFIX
+                            .append(Component.text(" ")
+                                    .color(NamedTextColor.GOLD)
+                                    .append(component)));
+        }
     }
 
     /**
@@ -155,10 +183,8 @@ public class CoreLogger {
 
         }
 
-        if (logger != null)
-            logger.severe(built.toString());
-        else
-            System.err.println(built.toString());
+        logger.severe(built.toString());
+
     }
 
     /**
@@ -167,9 +193,7 @@ public class CoreLogger {
      * @param message The message to be sent.
      */
     public static void errorToServer(String message) {
-
         HistoriaCore.Companion.getServer().broadcast(Component.text(announcePrefix + "§c" + message));
-
     }
 
     /**
@@ -178,13 +202,29 @@ public class CoreLogger {
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
      */
+    @Deprecated(forRemoval = true)
     public static void errorToPlayer(String message, UUID uuid) {
+        errorToPlayer(Component.text(message), uuid);
+    }
+
+    /**
+     * Sends an error message to the player. The message will be prefixed
+     * with "[Historia]" while the default body color will be [NamedTextColor.RED]
+     *
+     * @param component The Text Component to append to the prefix.
+     * @param uuid      The UUID of the player.
+     */
+    public static void errorToPlayer(Component component, UUID uuid) {
 
         Player player = HistoriaCore.Companion.getServer().getPlayer(uuid);
 
-        if (player.isOnline())
-            player.sendMessage(messagePrefix + "§c" + message);
-
+        if (player != null && player.isOnline()) {
+            player.sendMessage(
+                    HISTORIA_PREFIX
+                            .append(Component.text(" ")
+                                    .color(NamedTextColor.RED)
+                                    .append(component)));
+        }
     }
 
     /**
@@ -194,7 +234,9 @@ public class CoreLogger {
      */
     public static void debugToConsole(String... messages) {
 
-        if (HistoriaCore.isTesting || GeneralConfig.debug) {
+        if (
+                HistoriaCore.isTesting ||
+                        GeneralConfig.debug) {
 
             StringBuilder built = new StringBuilder();
 
