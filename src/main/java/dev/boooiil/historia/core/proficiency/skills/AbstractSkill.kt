@@ -27,7 +27,7 @@ abstract class AbstractSkill : ISkill {
     }
 
     override fun hasLevelRequirement(historiaPlayer: HistoriaPlayer): Boolean {
-        return (getProficiency(historiaPlayer)?.skills?.get(this) ?: 0) > historiaPlayer.level
+        return (getProficiency(historiaPlayer)?.skills?.get(this) ?: 0) >= historiaPlayer.level
 
     }
 
