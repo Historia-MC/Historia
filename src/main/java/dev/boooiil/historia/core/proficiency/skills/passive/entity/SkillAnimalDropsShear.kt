@@ -5,7 +5,6 @@ import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
-import io.papermc.paper.entity.Shearable
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
@@ -90,7 +89,6 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        CoreLogger.debugToConsole("SkillAnimalDropsShear being executed")
         val event: PlayerInteractEntityEvent = getOrThrow(skillSuppliers, 0)
         val player: Player = event.player
         val entity = event.rightClicked
@@ -101,16 +99,12 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         // Check if player is holding shears
         val heldItem = player.inventory.itemInMainHand
         if (heldItem.type != Material.SHEARS) {
-            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player is not holding shears")
             return
         }
 
-        CoreLogger.debugToConsole("ageable? ${entity is Ageable}")
-        CoreLogger.debugToConsole("adult? ${(entity as Ageable).isAdult}")
-
         // Check if entity can be sheared using Paper API
-        if (entity is Shearable && !entity.readyToBeSheared()) {
-            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because entity is not ready to be sheared ${entity.name}")
+        if (entity is Ageable && !entity.isAdult) {
+            CoreLogger.debugToConsole("entity ${entity.name} not sheared as it is a child")
             return
         }
 
@@ -120,14 +114,8 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) {
             // console log historiaPlayer name and skill level
             CoreLogger.debugToConsole(
-                "SkillAnimalDropsShear not being executed because player doesn't have the skill ${
-                    hasSkill(
-                        historiaPlayer
-                    )
-                } & ${hasLevelRequirement(historiaPlayer)}"
+                "skill? ${hasSkill(historiaPlayer)} level? ${hasLevelRequirement(historiaPlayer)}"
             )
-            event.isCancelled = true
-            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player doesn't have the skill")
             return
         }
 
@@ -139,17 +127,14 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
             val nextTime = currentTime + entityConfig.cooldown
             shearCooldowns[player.uniqueId] = nextTime
 
-
             entityConfig.drops.forEach { (material, range) ->
                 val dropAmount = range.random()
                 if (dropAmount > 0) {
                     val dropItem = ItemStack(material, dropAmount)
                     entity.world.dropItemNaturally(entity.location, dropItem)
+                    (entity as Ageable).setBaby()
                 }
             }
-        } else if (onCooldown) {
-            // Cancel if on cooldown
-            event.isCancelled = true
         }
     }
 
