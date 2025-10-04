@@ -2,23 +2,22 @@ package dev.boooiil.historia.core.proficiency.skills.passive.entity
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
+import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
+import io.papermc.paper.entity.Shearable
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Ageable
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
-import io.papermc.paper.entity.Shearable
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import dev.boooiil.historia.core.util.CoreLogger
 
 class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
     override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
@@ -44,36 +43,36 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
             ?: error("Key 'entities' must be specified.")
 
         this.entityConfigs = entitiesSection.getKeys(false).associate { entityName ->
-            val entityType = requireNotNull(EntityType.fromName(entityName)) { 
-                "Invalid entity type specified $entityName" 
+            val entityType = requireNotNull(EntityType.fromName(entityName)) {
+                "Invalid entity type specified $entityName"
             }
-            
+
             val entitySection = entitiesSection.getConfigurationSection(entityName)
                 ?: error("Entity section for $entityName must be specified.")
-            
+
             val dropsSection = entitySection.getConfigurationSection("drops")
                 ?: error("Drops section for $entityName must be specified.")
-            
+
             val drops = dropsSection.getKeys(false).associate { dropName ->
                 val dropSection = dropsSection.getConfigurationSection(dropName)
                     ?: error("Drop section for $dropName must be specified.")
-                
+
                 val material = requireNotNull(Material.matchMaterial(dropName)) {
                     "Invalid material specified $dropName"
                 }
-                
+
                 val amountList = dropSection.getIntegerList("amount")
                 require(amountList.size == 2) { "Amount must be a list of exactly 2 integers [min, max]" }
-                
+
                 val min = amountList[0]
                 val max = amountList[1]
                 require(max >= min) { "Max amount must be >= min amount" }
-                
+
                 material to min..max
             }
-            
+
             val cooldown = (entitySection.getInt("cooldown", 1) * 1000).toLong()
-            
+
             entityType to EntityShearConfig(drops, cooldown)
         }
     }
@@ -101,10 +100,13 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
 
         // Check if player is holding shears
         val heldItem = player.inventory.itemInMainHand
-        if (heldItem.type != Material.SHEARS)  {
+        if (heldItem.type != Material.SHEARS) {
             CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player is not holding shears")
             return
         }
+
+        CoreLogger.debugToConsole("ageable? ${entity is Ageable}")
+        CoreLogger.debugToConsole("adult? ${(entity as Ageable).isAdult}")
 
         // Check if entity can be sheared using Paper API
         if (entity is Shearable && !entity.readyToBeSheared()) {
@@ -117,7 +119,13 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         // If player doesn't have the skill, cancel the event (prevent shearing)
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) {
             // console log historiaPlayer name and skill level
-            CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player doesn't have the skill ${hasSkill(historiaPlayer)} & ${hasLevelRequirement(historiaPlayer)}")
+            CoreLogger.debugToConsole(
+                "SkillAnimalDropsShear not being executed because player doesn't have the skill ${
+                    hasSkill(
+                        historiaPlayer
+                    )
+                } & ${hasLevelRequirement(historiaPlayer)}"
+            )
             event.isCancelled = true
             CoreLogger.debugToConsole("SkillAnimalDropsShear not being executed because player doesn't have the skill")
             return
