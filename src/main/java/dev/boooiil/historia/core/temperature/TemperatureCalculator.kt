@@ -46,7 +46,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
         }
 
         if (result != ambientTemperature.target) {
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                 "Temperature change for " + player.name + ": " + internalTemperature.target
                         + " -> " + result
             )
