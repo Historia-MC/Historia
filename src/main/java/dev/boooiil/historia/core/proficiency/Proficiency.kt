@@ -140,7 +140,6 @@ class Proficiency : JSONSerializable {
 
     fun hasSkill(skill: ISkill): Boolean {
         // console log the skill and the skills map
-        CoreLogger.debugToConsole("Proficiency hasSkill: ${skill.name} ${skills.containsKey(skill)}")
         return skills.containsKey(skill)
     }
 
@@ -158,9 +157,10 @@ class Proficiency : JSONSerializable {
         get() = Stats()
 
     // TODO read from config
-    val displayName: Component get() {
-        return Component.text(key.key.replaceFirstChar { it.uppercaseChar() })
-    }
+    val displayName: Component
+        get() {
+            return Component.text(key.key.replaceFirstChar { it.uppercaseChar() })
+        }
 
     /**
      * Returns a string representation of the Proficiency object.
