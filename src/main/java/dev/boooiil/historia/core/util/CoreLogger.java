@@ -34,7 +34,7 @@ public class CoreLogger {
                             .color(NamedTextColor.RED))
                     .append(Component.text("]")
                             .color(NamedTextColor.GRAY));
-    
+
     /**
      * Announcement prefix.
      */
@@ -78,6 +78,9 @@ public class CoreLogger {
 
     /**
      * Send an info message to a player.
+     * <p>
+     * Deprecated only for backwards compatibility,
+     * use {@link #infoToPlayer(Component, UUID)} instead.
      *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
@@ -89,10 +92,10 @@ public class CoreLogger {
 
     /**
      * Sends an info message to the player. The message will be prefixed
-     * with [Historia] while the default body color will be [NamedTextColor.GRAY]
+     * with [Historia] while the default body color will be {@link NamedTextColor#GRAY}
      *
-     * @param component The Text Component to append to the prefix.
-     * @param uuid      The UUID of the player.
+     * @param component The text {@link Component} to append to the prefix.
+     * @param uuid      The {@link UUID} of the player.
      */
     public static void infoToPlayer(Component component, UUID uuid) {
 
@@ -139,6 +142,9 @@ public class CoreLogger {
 
     /**
      * Send a warning message to the player.
+     * <p>
+     * Deprecated only for backwards compatibility,
+     * use {@link #warnToPlayer(Component, UUID)} instead.
      *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
@@ -149,11 +155,11 @@ public class CoreLogger {
     }
 
     /**
-     * Sends a warning message to the player. The message will be prefixed
-     * with [Historia] while the default body color will be [NamedTextColor.YELLOW]
+     * Sends a warn message to the player. The message will be prefixed
+     * with [Historia] while the default body color will be {@link NamedTextColor#GOLD}
      *
-     * @param component The Text Component to append to the prefix.
-     * @param uuid      The UUID of the player.
+     * @param component The text {@link Component} to append to the prefix.
+     * @param uuid      The {@link UUID} of the player.
      */
     public static void warnToPlayer(Component component, UUID uuid) {
 
@@ -198,6 +204,9 @@ public class CoreLogger {
 
     /**
      * Send an error message to a player.
+     * <p>
+     * Deprecated only for backwards compatibility,
+     * use {@link #errorToPlayer(Component, UUID)} instead.
      *
      * @param message The message to be sent.
      * @param uuid    The UUID of the player.
@@ -209,10 +218,10 @@ public class CoreLogger {
 
     /**
      * Sends an error message to the player. The message will be prefixed
-     * with "[Historia]" while the default body color will be [NamedTextColor.RED]
+     * with [Historia] while the default body color will be {@link NamedTextColor#RED}
      *
-     * @param component The Text Component to append to the prefix.
-     * @param uuid      The UUID of the player.
+     * @param component The text {@link Component} to append to the prefix.
+     * @param uuid      The {@link UUID} of the player.
      */
     public static void errorToPlayer(Component component, UUID uuid) {
 
