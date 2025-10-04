@@ -135,6 +135,10 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
                     (entity as Ageable).setBaby()
                 }
             }
+        } else {
+            val timeLeftMillis = lastTime - currentTime
+            val timeLeftSeconds = (timeLeftMillis / 1000).coerceAtLeast(1)
+            CoreLogger.infoToPlayer("You must wait $timeLeftSeconds seconds before using this skill again.", player.uniqueId)
         }
     }
 
