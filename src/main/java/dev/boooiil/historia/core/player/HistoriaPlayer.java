@@ -1,6 +1,7 @@
 package dev.boooiil.historia.core.player;
 
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.configuration.specific.TemperatureConfig;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
@@ -8,11 +9,13 @@ import dev.boooiil.historia.core.proficiency.experience.AllSources;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.Stats;
 import dev.boooiil.historia.core.registry.RegistryHolder;
+import dev.boooiil.historia.core.temperature.TemperatureCalculator;
 import dev.boooiil.historia.core.util.CoreLogger;
 import dev.boooiil.historia.core.util.JSONUtils;
 import dev.boooiil.historia.core.util.NumberUtils;
 import org.bukkit.NamespacedKey;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 import java.util.UUID;
@@ -46,7 +49,7 @@ public class HistoriaPlayer extends BasePlayer {
     /**
      * The playtime of the user.
      */
-    private long playtime;
+    private final long playtime;
 
     /**
      * The max health of the user.
@@ -58,18 +61,15 @@ public class HistoriaPlayer extends BasePlayer {
     private float modifiedHealth;
 
     /**
-     * The current temperature of the user.
+     * The gradual temperature of the user.
      */
-    private double currentTemperature;
-    /**
-     * The max temperature of the user.
-     */
-    private double maxTemperature;
+    @Nullable
+    private final TemperatureCalculator temperature;
 
     /**
      * The current experience of the user.
      */
-    private double currentExperience;
+    private int currentExperience;
     /**
      * The max experience of the user.
      */
@@ -86,17 +86,6 @@ public class HistoriaPlayer extends BasePlayer {
      * When the user was last saved.
      */
     private long lastSaved;
-
-    /**
-     * Default constructor, will return invalid player.
-     */
-    public HistoriaPlayer() {
-        super(null);
-
-        culture = Cultures.NONE;
-
-        CoreLogger.debugToConsole("Constructing new HistoriaPlayer object with UUID null.");
-    }
 
     /**
      * Create a default HistoriaUser.
@@ -122,6 +111,10 @@ public class HistoriaPlayer extends BasePlayer {
         this.lastLogout = 0;
         this.playtime = 0;
 
+        if (this.isOnline) this.temperature = new TemperatureCalculator(
+                TemperatureConfig.INITIAL_CONSTANT_TEMP, uuid);
+        else this.temperature = null;
+
         // Set this explicitly in the config
         this.modifiedHealth = 0;
 
@@ -134,20 +127,31 @@ public class HistoriaPlayer extends BasePlayer {
      * @param username    - Username of the player.
      * @param proficiency - Proficiency of the player.
      * @param culture     - Culture of the player.
-     * @param level       - Level of the player.
+     * @param temperature - Temperature of the player.
      * @param experience  - Experience of the player.
      * @param login       - Time of the last login.
      * @param logout      - Time of the last logout.
      * @param playtime    - Playtime of the player in seconds.
      */
-    public HistoriaPlayer(UUID uuid, String username, ProficiencyName proficiency, Cultures culture,
-                          int level, double experience, long login, long logout, long playtime) {
+    public HistoriaPlayer(UUID uuid,
+                          String username,
+                          ProficiencyName proficiency,
+                          Cultures culture,
+                          double temperature,
+                          int experience,
+                          long login,
+                          long logout,
+                          long playtime) {
         super(uuid);
 
         this.culture = culture;
         this.username = username;
         this.proficiency = proficiency.getKey();
-        this.level = level;
+
+        if (this.isOnline) this.temperature = new TemperatureCalculator(
+                temperature, uuid);
+        else this.temperature = null;
+
         this.currentExperience = experience;
         this.lastLogin = login;
         this.lastLogout = logout;
@@ -217,7 +221,7 @@ public class HistoriaPlayer extends BasePlayer {
      *
      * @param currentExperience - Current experience to be set.
      */
-    public void setCurrentExperience(double currentExperience) {
+    public void setCurrentExperience(int currentExperience) {
         this.currentExperience = currentExperience;
     }
 
@@ -314,9 +318,9 @@ public class HistoriaPlayer extends BasePlayer {
      *
      * @return {@link Float} The class' current experience.
      */
-    public double getCurrentExperience() {
+    public Integer getCurrentExperience() {
 
-        return NumberUtils.roundDouble(this.currentExperience, 2);
+        return this.currentExperience;
 
     }
 
@@ -371,8 +375,13 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getCurrentTemperature() {
 
-        return this.currentTemperature;
+        Double temperature = TemperatureConfig.INITIAL_CONSTANT_TEMP;
 
+        if (this.temperature != null) {
+            temperature = this.temperature.temperature();
+        }
+
+        return temperature;
     }
 
     /**
@@ -382,7 +391,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public double getMaxTemperature() {
 
-        return this.maxTemperature;
+        return 43;
 
     }
 
@@ -391,7 +400,7 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void saveCharacter() {
 
-        HistoriaCore.Companion.getDatabaseExecutor().saveUser(this);
+        HistoriaTable.PLAYER.update(this, this.getUUID());
 
         // Main.getDatabaseHandler().setProficiency(this.getUUID(),
         // this.getProficiency().getName());
@@ -415,15 +424,13 @@ public class HistoriaPlayer extends BasePlayer {
 
     }
 
-    /**
-     * Set the temperature of the player.
-     *
-     * @param temperature The temperature to set.
-     */
-    public void setTemperature(double temperature) {
+    public TemperatureCalculator getTemperatureCalculator() {
+        if (this.temperature == null) {
+            throw new IllegalStateException("Tried to get temperature calculator for offline player "
+                    + this.getUsername() + "(" + this.getUUID() + ").");
+        }
 
-        this.currentTemperature = temperature;
-
+        return this.temperature;
     }
 
     /**
@@ -460,20 +467,18 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void increaseExperience(AllSources source) {
 
-        if (source == null)
-            return;
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
-        double incomeModified = incomeValue * this.level / 10;
+        int incomeValue = (int) this.getProficiency().getStats().getIncomeValue(source);
+        int incomeModified = incomeValue * this.level / 10;
 
         if ((getCurrentExperience()) + incomeModified >= maxExperience) {
 
             double overflow = (getCurrentExperience() + incomeModified) - maxExperience;
 
             level = level + 1;
-            currentExperience = overflow;
+            currentExperience = (int) NumberUtils.roundDouble(overflow, 0);
             maxExperience = NumberUtils.roundDouble(Math.pow(level, 1.68), 2);
             saveCharacter();
 
@@ -494,13 +499,11 @@ public class HistoriaPlayer extends BasePlayer {
      */
     public void decreaseExperience(AllSources source) {
 
-        if (source == null)
-            return;
         if (!this.getProficiency().getStats().hasIncomeSource(source))
             return;
 
-        double incomeValue = this.getProficiency().getStats().getIncomeValue(source);
-        double incomeModified = Math.pow(incomeValue * this.level / 10, 2);
+        int incomeValue = (int) this.getProficiency().getStats().getIncomeValue(source);
+        int incomeModified = (int) Math.pow(incomeValue * this.level / 10, 2);
 
         if ((getCurrentExperience()) - incomeModified <= 0 && level > 1) {
 
@@ -510,7 +513,7 @@ public class HistoriaPlayer extends BasePlayer {
             double overflow = (getCurrentExperience() - incomeModified) - maxExperience;
 
             if (overflow < maxExperience && level != 1)
-                currentExperience = maxExperience - overflow;
+                currentExperience = (int) NumberUtils.roundDouble(maxExperience - overflow, 0);
             else
                 currentExperience = 0;
 
@@ -532,7 +535,7 @@ public class HistoriaPlayer extends BasePlayer {
         CoreLogger.debugToConsole("HP TS");
         CoreLogger.debugToConsole("super", super.toString());
 
-        String sb = "HistoriaPlayer" +
+        return "HistoriaPlayer" +
                 "{" +
                 "\"basePlayer\":" + super.toString() + ", " +
                 JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", " +
@@ -542,15 +545,13 @@ public class HistoriaPlayer extends BasePlayer {
                 JSONUtils.fromValue("playtime", playtime) + ", " +
                 JSONUtils.fromValue("maxHealth", maxHealth) + ", " +
                 JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", " +
-                JSONUtils.fromValue("currentTemperature", currentTemperature) + ", " +
-                JSONUtils.fromValue("maxTemperature", maxTemperature) + ", " +
+                JSONUtils.fromValue("currentTemperature", getCurrentTemperature()) + ", " +
+                JSONUtils.fromValue("maxTemperature", getMaxTemperature()) + ", " +
                 JSONUtils.fromValue("currentExperience", currentExperience) + ", " +
                 JSONUtils.fromValue("maxExperience", maxExperience) + ", " +
                 "\"proficiency\":" + proficiency + ", " +
                 JSONUtils.fromValue("lastSaved", lastSaved) +
                 "}";
-
-        return sb;
 
     }
 
@@ -558,7 +559,7 @@ public class HistoriaPlayer extends BasePlayer {
     public String toJSON() {
         CoreLogger.debugToConsole("HP TJ");
 
-        String sb = "{" +
+        return "{" +
                 "\"basePlayer\":" + super.toJSON() + ", " +
                 JSONUtils.fromValue("culture", culture.getNoun().toLowerCase()) + ", " +
                 JSONUtils.fromValue("level", level) + ", " +
@@ -567,14 +568,12 @@ public class HistoriaPlayer extends BasePlayer {
                 JSONUtils.fromValue("playtime", playtime) + ", " +
                 JSONUtils.fromValue("maxHealth", maxHealth) + ", " +
                 JSONUtils.fromValue("modifiedHealth", modifiedHealth) + ", " +
-                JSONUtils.fromValue("currentTemperature", currentTemperature) + ", " +
-                JSONUtils.fromValue("maxTemperature", maxTemperature) + ", " +
+                JSONUtils.fromValue("currentTemperature", getCurrentTemperature()) + ", " +
+                JSONUtils.fromValue("maxTemperature", getMaxTemperature()) + ", " +
                 JSONUtils.fromValue("currentExperience", currentExperience) + ", " +
                 JSONUtils.fromValue("maxExperience", maxExperience) + ", " +
                 //"\"proficiency\":" + this.getProficiency().toJSON() + ", " +
                 JSONUtils.fromValue("lastSaved", lastSaved) +
                 "}";
-
-        return sb;
     }
 }

@@ -34,12 +34,12 @@ public class FileIO {
     public static void checkAndSaveResources(String resourcePath) {
         URL resourceURL = HistoriaCore.class.getClassLoader().getResource(resourcePath);
         if (resourceURL == null) {
-            System.out.println("Resource path not found: " + resourcePath);
+            CoreLogger.errorToConsole("Resource path not found: " + resourcePath);
             return;
         }
 
-        System.out.println("Resource URL: " + resourceURL);
-        System.out.println("Protocol: " + resourceURL.getProtocol());
+        CoreLogger.verboseToConsole("Resource URL: " + resourceURL);
+        CoreLogger.verboseToConsole("Protocol: " + resourceURL.getProtocol());
 
         if (resourceURL.getProtocol().equals("jar")) {
             scanJarResources(resourcePath); // Only use this when running from a JAR
@@ -70,19 +70,19 @@ public class FileIO {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading JAR file: " + e.getMessage());
+            CoreLogger.errorToConsole("Error reading JAR file: " + e.getMessage());
         }
     }
 
     private static void scanFileSystemResources(File directory, String baseResourcePath) {
         if (directory == null || !directory.exists() || !directory.isDirectory()) {
-            System.out.println("Directory does not exist or is not a folder: " + directory);
+            CoreLogger.errorToConsole("Directory does not exist or is not a folder: " + directory);
             return;
         }
 
         File[] files = directory.listFiles();
         if (files == null) {
-            System.out.println("No files found in directory: " + directory);
+            CoreLogger.errorToConsole("No files found in directory: " + directory);
             return;
         }
 
@@ -101,14 +101,14 @@ public class FileIO {
         File pluginFile = new File(HistoriaCore.Companion.getInstance().getDataFolder(), resourcePath);
         if (!pluginFile.exists()) {
             HistoriaCore.Companion.getInstance().saveResource(resourcePath, false);
-            System.out.println("Saved missing resource: " + resourcePath + " to "
+            CoreLogger.infoToConsole("Saved missing resource: " + resourcePath + " to "
                     + pluginFile);
         } else {
             if (isVersionMismatch(pluginFile, resourcePath)) {
                 HistoriaCore.Companion.getInstance().saveResource(resourcePath, true);
-                System.out.println("Updated resource due to version mismatch: " + resourcePath);
+                CoreLogger.infoToConsole("Updated resource due to version mismatch: " + resourcePath);
             } else {
-                System.out.println("File is up to date: " + resourcePath);
+                CoreLogger.verboseToConsole("File is up to date: " + resourcePath);
             }
         }
     }
@@ -153,7 +153,7 @@ public class FileIO {
 
         // Check if the plugins directory exists
         if (!pluginsDirectory.exists() || !pluginsDirectory.isDirectory()) {
-            System.out.println("Plugins directory does not exist or is not a directory.");
+            CoreLogger.errorToConsole("Plugins directory does not exist or is not a directory.");
             return configurations;
         }
 
@@ -197,9 +197,9 @@ public class FileIO {
                         // Load the YML file into a YamlConfiguration
                         YamlConfiguration yamlConfig = YamlConfiguration.loadConfiguration(file);
                         configurations.add(yamlConfig);
-                        System.out.println("Loaded YML file: " + file.getAbsolutePath());
+                        CoreLogger.verboseToConsole("Loaded YML file: " + file.getAbsolutePath());
                     } catch (Exception e) {
-                        System.out.println(
+                        CoreLogger.errorToConsole(
                                 "Failed to load YML file: " + file.getName() + " due to " + e.getMessage());
                     }
                 }
@@ -336,17 +336,17 @@ public class FileIO {
 
         // Validate that the plugins directory exists
         if (!pluginsDirectory.exists() || !pluginsDirectory.isDirectory()) {
-            System.out.println("Plugins directory does not exist or is not a directory.");
+            CoreLogger.errorToConsole("Plugins directory does not exist or is not a directory.");
             return null;
         }
 
         // Search for the file
         File yamlFile = searchYamlFile(pluginsDirectory, fileName);
         if (yamlFile != null) {
-            System.out.println("Found YAML file: " + yamlFile.getAbsolutePath());
+            CoreLogger.verboseToConsole("Found YAML file: " + yamlFile.getAbsolutePath());
             return YamlConfiguration.loadConfiguration(yamlFile);
         } else {
-            System.out.println("YAML file not found: " + fileName);
+            CoreLogger.errorToConsole("YAML file not found: " + fileName);
             return null;
         }
     }

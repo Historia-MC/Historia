@@ -2,6 +2,7 @@ package dev.boooiil.historia.core.commands
 
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
+import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.registry.RegistryHolder
@@ -35,7 +36,7 @@ private fun executeSet(ctx: CommandContext<CommandSourceStack>): Int {
     val proficiency = ctx.getArgument<Proficiency>("proficiency")
 
     players.forEach { player ->
-        val hPlayer = HistoriaPlayer(player.uniqueId)
+        val hPlayer = PlayerStorage.getPlayer(player.uniqueId)
         hPlayer.changeProficiency(proficiency.key)
         ctx.source.sender.sendMessage(
             Component.text("Set proficiency for ") + player.displayName() + Component.text(" to ") + proficiency.displayName
@@ -48,7 +49,7 @@ private fun executeGet(ctx: CommandContext<CommandSourceStack>): Int {
     val players = ctx.getOptionalPlayers("player")
 
     players.forEach { player ->
-        val hPlayer = HistoriaPlayer(player.uniqueId)
+        val hPlayer = PlayerStorage.getPlayer(player.uniqueId)
         val proficiency = hPlayer.proficiency
         ctx.source.sender.sendMessage(player.displayName() + Component.text(" has proficiency: ") + proficiency.displayName)
     }

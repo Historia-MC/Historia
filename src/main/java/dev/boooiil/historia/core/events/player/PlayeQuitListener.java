@@ -1,7 +1,6 @@
 package dev.boooiil.historia.core.events.player;
 
 import dev.boooiil.historia.core.handlers.player.PlayerQuitHandler;
-
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -20,7 +19,7 @@ public class PlayeQuitListener implements Listener {
 
         playerQuitHandler.doPlayerDBLogout();
         playerQuitHandler.doMarkAsOffline();
-
+        
     }
 
 }

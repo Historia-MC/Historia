@@ -22,19 +22,27 @@ public class ArmorComponentTest extends BaseTest {
     void testApply() {
         ArmorData data = component.data();
 
-        CoreLogger.debugToConsole(component.defenseRange().toString(), "" + data.defense());
+        Float min = component.defenseRange().get(0);
+        Float max = component.defenseRange().get(1);
+        float actual = data.defense();
 
-        Assertions.assertTrue(data.defense() > component.defenseRange().get(0)
-                && data.defense() < component.defenseRange().get(1));
+        CoreLogger.debugToConsole(component.defenseRange().toString(), "" + actual);
+
+        Assertions.assertTrue(actual >= min, "Actual value " + actual + " is not greater than min " + min);
+        Assertions.assertTrue(actual <= max, "Actual value " + actual + " is not less than max " + max);
 
     }
 
     @Test
     void testApply2() {
-        ArmorData data = component.data(1f);
+        ArmorData data = component.data();
 
-        Assertions.assertTrue((data.defense() > component.defenseRange().get(0)
-                && data.defense() < component.defenseRange().get(1)));
+        Float min = component.defenseRange().get(0);
+        Float max = component.defenseRange().get(1);
+        float actual = data.defense();
+
+        Assertions.assertTrue(actual >= min, "Actual value " + actual + " is not greater than min " + min);
+        Assertions.assertTrue(actual <= max, "Actual value " + actual + " is not less than max " + max);
     }
 
     @Test

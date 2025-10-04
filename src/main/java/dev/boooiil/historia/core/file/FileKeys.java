@@ -37,7 +37,11 @@ public enum FileKeys {
     /**
      * ingots.yml
      */
-    INGOTS("ingots.yml");
+    INGOTS("ingots.yml"),
+
+    TEMPERATURE("temperature.yml"),
+
+    EXPIRY("expiry.yml");
 
     private final String key;
 

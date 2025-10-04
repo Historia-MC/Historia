@@ -54,7 +54,7 @@ enhanced_boots_feather_fall:
   material:
     - leather_boots
     - iron_boots
-    - gold_boots
+    - golden_boots
     - chainmail_boots
     - netherite_boots
   attributes:
@@ -69,7 +69,7 @@ enhanced_boots_blast_protection:
   material:
     - leather_boots
     - iron_boots
-    - gold_boots
+    - golden_boots
     - chainmail_boots
     - netherite_boots
   enchants:
@@ -124,12 +124,12 @@ enhanced_helmet_aqua_affinity:
   material:
     - leather_helmet
     - iron_helmet
-    - gold_helmet
+    - golden_helmet
     - chainmail_helmet
     - netherite_helmet
   attributes:
     attribute: oxygen_bonus
-    modifier: add_number
+    operation: add_number
     factor: 20
 
 enhanced_boots_depth_strider:
@@ -139,7 +139,7 @@ enhanced_boots_depth_strider:
   material:
     - leather_boots
     - iron_boots
-    - gold_boots
+    - golden_boots
     - chainmail_boots
     - netherite_boots
   attributes:

@@ -22,26 +22,64 @@ class UpdateScoreboardRunnable : BukkitRunnable() {
 
                 .addLine(Component.empty())
 
-                .addLine(Component.text("Proficiency: ", NamedTextColor.AQUA)
-                        + historiaPlayer.getProficiency().displayName.color(NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Proficiency: ", NamedTextColor.AQUA)
+                            + historiaPlayer.getProficiency().displayName.color(NamedTextColor.GRAY)
+                )
 
-                .addLine(Component.text("Level: ", NamedTextColor.DARK_AQUA)
-                        + Component.text(historiaPlayer.level, NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Level: ", NamedTextColor.DARK_AQUA)
+                            + Component.text(historiaPlayer.level, NamedTextColor.GRAY)
+                )
 
-                .addLine(Component.text("Health: ", NamedTextColor.AQUA)
-                        + Component.text("${NumberUtils.roundDouble(player.health, 2)}/${historiaPlayer.baseHealth}", NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Health: ", NamedTextColor.AQUA)
+                            + Component.text(
+                        "${
+                            NumberUtils.roundDouble(
+                                player.health,
+                                2
+                            )
+                        }/${historiaPlayer.baseHealth}", NamedTextColor.GRAY
+                    )
+                )
 
-                .addLine(Component.text("Hunger: ", NamedTextColor.DARK_AQUA)
-                        + Component.text("${NumberUtils.roundDouble(player.foodLevel.toDouble(), 2)}/0", NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Hunger: ", NamedTextColor.DARK_AQUA)
+                            + Component.text(
+                        "${NumberUtils.roundDouble(player.foodLevel.toDouble(), 2)}/0",
+                        NamedTextColor.GRAY
+                    )
+                )
 
-                .addLine(Component.text("Experience: ", NamedTextColor.AQUA)
-                        + Component.text("${historiaPlayer.currentExperience}/${historiaPlayer.maxExperience}", NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Experience: ", NamedTextColor.AQUA)
+                            + Component.text(
+                        "${historiaPlayer.currentExperience}/${historiaPlayer.maxExperience}",
+                        NamedTextColor.GRAY
+                    )
+                )
 
-                .addLine(Component.text("Temperature: ", NamedTextColor.DARK_AQUA)
-                        + Component.text(historiaPlayer.currentTemperature.toString(), NamedTextColor.GRAY))
+                .addLine(
+                    Component.text("Internal Temp: ", NamedTextColor.DARK_AQUA)
+                            + Component.text(
+                        historiaPlayer.currentTemperature.toString() + "°C",
+                        NamedTextColor.GRAY
+                    )
+                )
 
-                .addLine(Component.text("Weight: ", NamedTextColor.AQUA)
-                        + Component.text("0", NamedTextColor.GRAY)) // TODO placeholder weight value
+                .addLine(
+                    Component.text("Ambient Temp: ", NamedTextColor.DARK_AQUA)
+                            + Component.text(
+                        historiaPlayer.temperatureCalculator.ambient().toString() + "°C",
+                        NamedTextColor.GRAY
+                    )
+                )
+
+                .addLine(
+                    Component.text("Weight: ", NamedTextColor.AQUA)
+                            + Component.text("0", NamedTextColor.GRAY)
+                ) // TODO placeholder weight value
 
                 .build()
 

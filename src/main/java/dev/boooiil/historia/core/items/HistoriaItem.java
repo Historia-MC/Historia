@@ -57,17 +57,17 @@ public class HistoriaItem implements JSONSerializable {
         String displayName = section.getString("display-name");
         Double weight = section.getDouble("weight");
 
-        CoreLogger.debugToConsole(baseMaterial.toString(), displayName, weight.toString(),
+        CoreLogger.verboseToConsole(baseMaterial.toString(), displayName, weight.toString(),
                 section.getKeys(false).toString());
 
-        CoreLogger.debugToConsole("COMPONENT_REGISTRY KEYS:", RegistryHolder.COMPONENT_REGISTRY.keySet().toString());
+        CoreLogger.verboseToConsole("COMPONENT_REGISTRY KEYS:", RegistryHolder.COMPONENT_REGISTRY.keySet().toString());
 
         Map<NamespacedKey, ItemComponent> components = new HashMap<>();
         for (Map.Entry<NamespacedKey, ItemComponentType<? extends ItemComponent>> entry : RegistryHolder.COMPONENT_REGISTRY.entrySet()) {
             NamespacedKey key = entry.getKey();
-            CoreLogger.debugToConsole("Checking", id.getKey(), " for component:", key.getKey());
+            CoreLogger.verboseToConsole("Checking", id.getKey(), " for component:", key.getKey());
             if (section.contains(key.getKey())) {
-                CoreLogger.debugToConsole(displayName, "has a component of type", key.getKey());
+                CoreLogger.verboseToConsole(displayName, "has a component of type", key.getKey());
                 ItemComponentType<?> type = entry.getValue();
                 ConfigurationSection componentSection = section.getConfigurationSection(key.getKey());
                 components.put(key, type.fromConfig(componentSection));

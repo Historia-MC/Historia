@@ -1,10 +1,9 @@
 package dev.boooiil.historia.core.handlers.player.playerInteract;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
+import dev.boooiil.historia.core.util.CoreLogger;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -12,10 +11,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import dev.boooiil.historia.core.proficiency.experience.CraftingSources;
-import dev.boooiil.historia.core.util.CoreLogger;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PlayerInteractHandler extends BasePlayerInteract {
 
@@ -40,12 +39,17 @@ public class PlayerInteractHandler extends BasePlayerInteract {
 
     private void doAirInteraction() {
 
+        if (getHeldItem() == null || getOffHandItem() == null) {
+            CoreLogger.debugToConsole("[PIH#doAirInteraction] Player: " + getPlayer().getName()
+                    + " has a null item in either main hand or off hand.");
+            return;
+        }
+
         // if arrow in main hand and flint and steel in offhand, ignite arrow
         if (getHeldItem().getType() == Material.ARROW && getOffHandItem().getType() == Material.FLINT_AND_STEEL) {
             CoreLogger.debugToConsole("[PIH#doAirInteraction] Player: " + getPlayer().getName()
                     + " is igniting an arrow with a flint and steel.");
             doIgniteArrow();
-            return;
         }
 
     }
@@ -71,9 +75,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
         if (flintSteelDamageable.getDamage() >= getHeldItem().getType().getMaxDurability()) {
             getHeldItem().setAmount(0);
             getPlayer().playSound(getPlayer().getLocation(), "entity.item.break", 1, 1);
-        }
-
-        else {
+        } else {
             this.getOffHandItem().setItemMeta(flintSteelMeta);
         }
     }
@@ -114,7 +116,7 @@ public class PlayerInteractHandler extends BasePlayerInteract {
 
         if (!matcher.matches()) {
             CoreLogger.debugToConsole("[PIH#doStonecutterInteraction] Player " + this.getPlayer().getName()
-                    + " right clicked a stonecutter with an invalid item " + this.getHeldItem().getType().toString());
+                    + " right clicked a stonecutter with an invalid item " + this.getHeldItem().getType());
             return;
         }
 

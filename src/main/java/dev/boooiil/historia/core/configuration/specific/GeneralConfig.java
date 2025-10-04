@@ -3,7 +3,6 @@ package dev.boooiil.historia.core.configuration.specific;
 import dev.boooiil.historia.core.database.sql.DatabaseType;
 import dev.boooiil.historia.core.file.FileIO;
 import dev.boooiil.historia.core.file.FileKeys;
-
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -63,7 +62,7 @@ public class GeneralConfig {
 
     public GeneralConfig() {
 
-        System.out.print(configuration.toString());
+        System.out.print(configuration);
 
         this.username = configuration.getString("MySQL.user");
         this.password = configuration.getString("MySQL.password");
@@ -72,9 +71,9 @@ public class GeneralConfig {
         this.port = configuration.getString("MySQL.port");
         this.databaseType = DatabaseType.fromString(configuration.getString("type"));
 
-        debug = configuration.getBoolean("debug");
-        verbose = configuration.getBoolean("verbose");
-        trace = configuration.getBoolean("trace");
+        debug = configuration.getBoolean("debug", false);
+        verbose = configuration.getBoolean("verbose", false);
+        trace = configuration.getBoolean("trace", false);
 
     }
 

@@ -73,7 +73,7 @@ public class PDCUtils {
         if (item.hasItemMeta()) {
             return getFromComplexContainer(getContainer(item).get(), key, type);
         } else {
-            CoreLogger.debugToConsole("Tried to obtain data from the data container for", item.getType().name(),
+            CoreLogger.traceToConsole("Tried to obtain data from the data container for", item.getType().name(),
                     "but it did not have any meta.");
             return Optional.empty();
         }

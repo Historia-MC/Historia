@@ -47,12 +47,12 @@ public class ExecutorTriggerHandler {
 
     public static void executeAction(EntityToggleSwimEvent event) {
 
-        CoreLogger.debugToConsole("" + (event.getEntity() instanceof HumanEntity),
-                " " + ((HumanEntity) event.getEntity()).isSwimming());
-
         if (!(event.getEntity() instanceof HumanEntity humanEntity)) {
             return;
         }
+        
+        CoreLogger.debugToConsole("" + (event.getEntity() instanceof HumanEntity),
+                " " + ((HumanEntity) event.getEntity()).isSwimming());
 
         if (!event.isSwimming()) {
             return;
@@ -235,7 +235,7 @@ public class ExecutorTriggerHandler {
 
                 boolean hasExecutor = historiaItemData.hasData(EXECUTOR_KEY);
 
-                CoreLogger.debugToConsole("Checking item in slot " + item.getKey() + " for trigger " + trigger);
+                CoreLogger.verboseToConsole("Checking item in slot " + item.getKey() + " for trigger " + trigger);
 
                 if (!hasExecutor) {
                     continue;

@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.database.sql;
 
+import dev.boooiil.historia.core.configuration.specific.TemperatureConfig;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.player.culture.Cultures;
 import dev.boooiil.historia.core.proficiency.Proficiency.ProficiencyName;
@@ -32,6 +33,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
                 "culture varchar(17), " +
                 //"level int, " +
                 "experience int, " +
+                "temperature float, " +
                 "login bigint, " +
                 "logout bigint, " +
                 "playtime bigint, " +
@@ -50,8 +52,17 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
     public void createUser(UUID uuid, String playerName) {
 
-        String string = "INSERT INTO historia VALUES ('" + uuid + "', '" + playerName + "', 'none', 'none', 0, "
-                + System.currentTimeMillis() + ", 0, 0)";
+        String string = "INSERT INTO historia VALUES ('" +
+                uuid + "', " +            // uuid
+                "'" + playerName + "', " + // username
+                "'none', " + // proficiency
+                "'none', " + // culture
+                // "0, " + // level
+                "0, " + // experience
+                TemperatureConfig.INITIAL_CONSTANT_TEMP + ", " + // temperature
+                System.currentTimeMillis() + ", " + // login
+                "0, " + // logout
+                "0)"; // playtime
 
         executor(string);
 
@@ -87,11 +98,10 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
     }
 
     /**
-     * Set the proficiency name for the given user.
+     * Set the culture name for the given user.
      *
      * @param uuid - UUID of the player.
      */
-
     public void setCulture(UUID uuid, Cultures culture) {
 
         String string = ("UPDATE historia SET culture = '" + culture.name().toLowerCase() + "' WHERE uuid = '"
@@ -143,6 +153,12 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
 
         updateExecutor(string, 5);
 
+    }
+
+    public void setCurrentTemperature(UUID uuid, double temperature) {
+        String string = ("UPDATE historia SET temperature = '" + temperature + "' WHERE uuid = '" + uuid + "'");
+
+        updateExecutor(string, 5);
     }
 
     /**
@@ -227,7 +243,7 @@ public class HistoriaDatabaseExecutor extends DatabaseExecutor {
                     .fromString(getResult(result, "proficiency", String.class));
             Cultures culture = Cultures.getCulture(getResult(result, "culture", String.class));
             //int level = getResult(result, "level", Integer.class);
-            double experience = getResult(result, "experience", Double.class);
+            int experience = getResult(result, "experience", Integer.class);
             long login = getResult(result, "login", Long.class);
             long logout = getResult(result, "logout", Long.class);
             long playtime = getResult(result, "playtime", Long.class);
