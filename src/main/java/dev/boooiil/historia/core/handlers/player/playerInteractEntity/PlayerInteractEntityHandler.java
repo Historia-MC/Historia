@@ -1,13 +1,6 @@
 package dev.boooiil.historia.core.handlers.player.playerInteractEntity;
 
-import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.NumberUtils;
-import org.bukkit.Material;
-import org.bukkit.entity.Ageable;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
 
@@ -110,9 +103,6 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
     private void doDetermineAnimalInteraction() {
 
         switch (getEntity().getType()) {
-            case CHICKEN:
-                doShearChicken();
-                break;
 
             default:
                 break;
@@ -136,51 +126,6 @@ public class PlayerInteractEntityHandler extends BasePlayerInteractEntity {
 
         // always gonna be player
 
-    }
-
-    private void doShearChicken() {
-
-        // guard against player not having skill
-        // if
-        // (!this.getHistoriaPlayer().getProficiency().getSkills().hasSkill(SkillName.SHEAR_CHICKEN))
-        // {
-        // CoreLogger.debugToConsole(
-        // "[PIEH#doShearChicken] Player " + this.getPlayer().getName()
-        // + " does not have the skill to shear chickens.");
-        // return;
-        // }
-
-        // guard against player not holding shears
-        if (getHeldItem().getType() != Material.SHEARS) {
-            CoreLogger.debugToConsole(
-                    "[PIEH#doShearChicken] Player " + this.getPlayer().getName() + " is not holding shears.");
-            return;
-        }
-
-        Ageable ageableEntity = (Ageable) getEntity();
-
-        // guard against entity not being an adult
-        if (!ageableEntity.isAdult()) {
-            CoreLogger.debugToConsole(
-                    "[PIEH#doShearChicken] Entity is not an adult.");
-            return;
-        }
-
-        Damageable damageableItem = (Damageable) getHeldItem().getItemMeta();
-
-        damageableItem.setDamage(damageableItem.getDamage() + 16);
-
-        if (damageableItem.getDamage() >= getHeldItem().getType().getMaxDurability()) {
-            getHeldItem().setAmount(0);
-            getPlayer().playSound(getLocation(), "entity.item.break", 1, 1);
-        }
-
-        getHeldItem().setItemMeta((ItemMeta) damageableItem);
-        ageableEntity.setBaby();
-        getWorld().dropItemNaturally(getLocation(), new ItemStack(Material.FEATHER, NumberUtils.randomInt(1, 3)));
-
-        CoreLogger.debugToConsole(
-                "[PIEH#doShearChicken] Player " + this.getPlayer().getName() + " sheared a chicken.");
     }
 
 }
