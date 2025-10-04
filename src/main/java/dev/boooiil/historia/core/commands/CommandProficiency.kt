@@ -3,7 +3,6 @@ package dev.boooiil.historia.core.commands
 import com.mojang.brigadier.context.CommandContext
 import com.mojang.brigadier.tree.LiteralCommandNode
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.player.HistoriaPlayer
 import dev.boooiil.historia.core.proficiency.Proficiency
 import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.plus

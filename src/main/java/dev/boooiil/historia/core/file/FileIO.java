@@ -180,13 +180,18 @@ public class FileIO {
                 } else if (file.isFile() && file.getName().endsWith(".yml")) {
 
                     List<String> fileBlacklist = List.of(
-                            "config.yml",
                             "recipe.yml",
                             "item_descriptor.yml",
                             "items.yml",
                             "component-lore.yml",
+
+                            "config.yml",
+                            "date.yml",
+                            "expiry.yml",
+                            "plugin.yml",
                             "proficiency.yml",
-                            "skills.yml"
+                            "skills.yml",
+                            "temperature.yml"
                     );
 
                     // ignore non-item files

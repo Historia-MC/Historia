@@ -22,6 +22,7 @@ import dev.boooiil.historia.core.expiry.listeners.player.PlayerConsumableConsume
 import dev.boooiil.historia.core.expiry.listeners.world.ChunkLoadListener
 import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.file.FileIO
+import dev.boooiil.historia.core.file.FileKeys
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
 import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
@@ -33,11 +34,13 @@ import dev.boooiil.historia.core.items.events.player.PlayerToggleSprintListener
 import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
+import dev.boooiil.historia.core.runnable.SyncDaylightCycleRunnable
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.Bukkit
+import org.bukkit.GameRule
 import org.bukkit.NamespacedKey
 import org.bukkit.Server
 import org.bukkit.event.Listener
@@ -56,11 +59,9 @@ open class HistoriaCore : JavaPlugin() {
 
         CoreLogger.infoToConsole("Plugin has loaded.")
 
-        // Check config files
-        FileIO.checkAndSaveResources("config.yml")
-        FileIO.checkAndSaveResources("skills.yml")
-        FileIO.checkAndSaveResources("proficiency.yml")
-        FileIO.checkAndSaveResources("items")
+        for (key: FileKeys in FileKeys.entries) {
+            FileIO.checkAndSaveResources(key.key)
+        }
 
         CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion())
 
@@ -127,6 +128,8 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ChunkLoadListener())
         // end
 
+        server.worlds[0].setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false) // set false in favour of custom daylight cycle
+        registerRunnable(SyncDaylightCycleRunnable(), 0)
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
