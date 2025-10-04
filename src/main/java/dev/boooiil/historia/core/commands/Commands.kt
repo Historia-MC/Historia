@@ -10,6 +10,7 @@ object Commands {
     fun register(event: ReloadableRegistrarEvent<Commands>) {
         event.register(commandProficiency)
         event.register(commandGive)
+        event.register(commandTemperature)
     }
 
     fun ReloadableRegistrarEvent<Commands>.register(command: LiteralCommandNode<CommandSourceStack>) {

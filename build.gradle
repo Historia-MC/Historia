@@ -32,7 +32,7 @@ dependencies {
 
     // Test dependencies
     testImplementation 'org.yaml:snakeyaml:2.5'
-    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.76.0'
+    testImplementation 'org.mockbukkit.mockbukkit:mockbukkit-v1.21:4.79.0'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT'
 
@@ -53,7 +53,7 @@ dependencies {
 }
 
 tasks.runServer {
-    minecraftVersion("1.21.8")
+    minecraftVersion("1.21.9")
 
     downloadPlugins {
         modrinth("worldedit", "Jk1z2u7n")

@@ -1,12 +1,13 @@
 package dev.boooiil.historia.core.database.internal;
 
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.entity.Player;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -78,30 +79,41 @@ public class PlayerStorage {
      */
     public static HistoriaPlayer getPlayer(UUID uuid) {
 
+        HistoriaPlayer player;
+
         if (players.containsKey(uuid))
-            return players.get(uuid);
-
+            player = players.get(uuid);
         else {
+            player = HistoriaTable.PLAYER.get(uuid);
 
-            HistoriaPlayer player = HistoriaCore.Companion.getDatabaseExecutor().getUser(uuid);
+            if (player == null) {
+                player = new HistoriaPlayer(uuid);
+                HistoriaTable.UUID.insert(Map.of("uuid", uuid, "username", player.getUsername()));
+            }
+
             addPlayer(uuid, player);
             return player;
         }
 
+        return player;
+
     }
 
     public static @Nullable HistoriaPlayer getPlayer(String username) {
+
+        HistoriaPlayer player = null;
+
         if (usernameMap.containsKey(username)) {
-            return players.get(usernameMap.get(username));
+            player = players.get(usernameMap.get(username));
+        } else {
+            UUID uuid = HistoriaTable.UUID.get(username);
+
+            if (uuid != null) {
+                player = HistoriaTable.PLAYER.get(uuid);
+            }
         }
 
-        UUID uuid = HistoriaCore.Companion.getDatabaseExecutor().getUUID(username);
-
-        if (uuid == null) {
-            return null;
-        }
-
-        return HistoriaCore.Companion.getDatabaseExecutor().getUser(uuid);
+        return player;
     }
 
     public static ConcurrentHashMap<UUID, HistoriaPlayer> getPlayerMap() {

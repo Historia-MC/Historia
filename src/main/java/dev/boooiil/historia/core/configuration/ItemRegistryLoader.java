@@ -40,7 +40,7 @@ public class ItemRegistryLoader {
      */
     @ApiStatus.Experimental
     public static void load(Supplier<List<YamlConfiguration>> configSupplier) {
-        CoreLogger.debugToConsole("Initializing ItemRegistryLoader...");
+        CoreLogger.verboseToConsole("Initializing ItemRegistryLoader...");
         configurations = configSupplier.get();
         populate(configurations);
     }
@@ -51,7 +51,7 @@ public class ItemRegistryLoader {
      * configurations with
      */
     public static void load() {
-        CoreLogger.debugToConsole("Initializing ItemRegistryLoader...");
+        CoreLogger.verboseToConsole("Initializing ItemRegistryLoader...");
         configurations = FileIO.loadYamlConfigurationsFromPlugins();
         populate(configurations);
     }
@@ -112,13 +112,13 @@ public class ItemRegistryLoader {
 
             for (String key : keys) {
 
-                CoreLogger.debugToConsole("Key", key);
+                CoreLogger.verboseToConsole("Item Registry Key", key);
 
                 NamespacedKey namespacedKey = HistoriaCore.getNamespacedKey(key);
                 ConfigurationSection section = configuration.getConfigurationSection(key);
 
                 assert section != null;
-                
+
                 RegistryHolder.ITEM_REGISTRY.register(namespacedKey,
                         HistoriaItem.fromConfig(namespacedKey, section));
 

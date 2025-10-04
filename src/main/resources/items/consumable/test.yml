@@ -1,0 +1,27 @@
+questionable_meat:
+  material: MUTTON
+  display-name: §7Meat?
+  weight: 1
+  lore:
+    - please don't eat this
+    - <consumable-expiration>
+  consumable:
+    hunger: 1
+    saturation: 0.5
+    expire-days: 0
+
+test_carrot:
+  material: CARROT
+  display-name: §7Cool Carrot
+  weight: 1
+  lore:
+    - please eat me! said the carrot
+    - <consumable-expiration>
+  consumable:
+    hunger: 1
+    saturation: 0.5
+    expire-days: 20
+    effects:
+      absorption:
+        duration: 160
+        amplifier: 0

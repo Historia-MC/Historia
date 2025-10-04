@@ -1,7 +1,7 @@
 package dev.boooiil.historia.core.database.internal;
 
 import dev.boooiil.historia.core.BaseTest;
-import dev.boooiil.historia.core.HistoriaCore;
+import dev.boooiil.historia.core.database.sql.tables.HistoriaTable;
 import dev.boooiil.historia.core.player.HistoriaPlayer;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.Bukkit;
@@ -20,6 +20,8 @@ public class PlayerStorageTest extends BaseTest {
             PlayerStorage.getPlayerMap().clear();
             PlayerStorage.getUsernameMap().clear();
         }
+
+        if (player.isOnline()) player.disconnect();
     }
 
     @Test
@@ -41,93 +43,82 @@ public class PlayerStorageTest extends BaseTest {
     public void testPlayerSetOnlineOnJoin() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.setPlayers(1);
+        PlayerMock player = server.addPlayer();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
-        }
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
+
+        player.disconnect();
 
     }
 
     @Test
     public void testPlayerSetOfflineOnQuit() {
-        assert PlayerStorage.getPlayerMap().size() == 0;
+        assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.setPlayers(1);
+        PlayerMock player = server.addPlayer();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
 
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
+        player.disconnect();
+        CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
 
-            PlayerMock playerMock = (PlayerMock) player;
-            playerMock.disconnect();
-            CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
-
-            assert !historiaPlayer.isOnline();
-        }
+        assert !historiaPlayer.isOnline();
 
     }
 
     @Test
     public void testDatabaseFallback() {
-        assert PlayerStorage.getPlayerMap().size() == 0;
+        assert PlayerStorage.getPlayerMap().isEmpty();
 
-        server.setPlayers(1);
+        PlayerMock player = server.addPlayer();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
 
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
+        System.out.println(HistoriaTable.USERNAME.get(player.getUniqueId()));
 
-            System.out.println(HistoriaCore.Companion.getDatabaseExecutor().getUsername(player.getUniqueId()));
+        player.disconnect();
+        CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
 
-            PlayerMock playerMock = (PlayerMock) player;
-            playerMock.disconnect();
-            CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
+        assert !historiaPlayer.isOnline();
 
-            assert !historiaPlayer.isOnline();
+        PlayerStorage.getPlayerMap().remove(player.getUniqueId());
+        PlayerStorage.getUsernameMap().remove(player.getName());
 
-            PlayerStorage.getPlayerMap().remove(player.getUniqueId());
-            PlayerStorage.getUsernameMap().remove(player.getName());
+        assert PlayerStorage.getPlayerMap().isEmpty();
+        assert PlayerStorage.getUsernameMap().isEmpty();
 
-            assert PlayerStorage.getPlayerMap().size() == 0;
-            assert PlayerStorage.getUsernameMap().size() == 0;
+        historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
 
-            historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert !historiaPlayer.isOnline();
+        assert historiaPlayer.getUsername() != null;
+        assert historiaPlayer.getUsername().equals(player.getName());
 
-            assert !historiaPlayer.isOnline();
-            assert historiaPlayer.getUsername() != null;
-            assert historiaPlayer.getUsername().equals(player.getName());
+        System.out.println(historiaPlayer);
 
-            System.out.println(historiaPlayer);
-
-        }
     }
 
     @Test
     public void testStorageHasPlayerValid() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.setPlayers(1);
+        PlayerMock player = server.addPlayer();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
 
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
+        assert PlayerStorage.has(player.getUniqueId());
 
-            assert PlayerStorage.has(player.getUniqueId());
-
-        }
     }
 
     @Test
@@ -141,72 +132,52 @@ public class PlayerStorageTest extends BaseTest {
     public void testGetOnlinePlayerUsername() {
         assert PlayerStorage.getPlayerMap().size() == 0;
 
-        server.setPlayers(1);
+        PlayerMock player = server.addPlayer();
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
 
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
 
-            assert PlayerStorage.has(player.getUniqueId());
+        assert PlayerStorage.has(player.getUniqueId());
 
-            assert PlayerStorage.getPlayer(player.getName()) != null;
+        assert PlayerStorage.getPlayer(player.getName()) != null;
 
-        }
     }
 
     @Test
     public void testGetOfflinePlayerUsername() {
-        assert PlayerStorage.getPlayerMap().size() == 0;
-
-        server.setPlayers(1);
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-
-            CoreLogger
-                    .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
-            HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
-            assert historiaPlayer.isOnline();
-
-            assert PlayerStorage.has(player.getUniqueId());
-
-            PlayerMock playerMock = (PlayerMock) player;
-            playerMock.disconnect();
-            CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
-
-            assert !historiaPlayer.isOnline();
-
-            PlayerStorage.getPlayerMap().remove(player.getUniqueId());
-            PlayerStorage.getUsernameMap().remove(player.getName());
-
-            assert PlayerStorage.getPlayerMap().size() == 0;
-            assert PlayerStorage.getUsernameMap().size() == 0;
-
-            historiaPlayer = PlayerStorage.getPlayer(player.getName());
-
-            assert !historiaPlayer.isOnline();
-            assert historiaPlayer.getUsername() != null;
-            assert historiaPlayer.getUsername().equals(player.getName());
-
-            System.out.println(historiaPlayer);
-
-        }
-    }
-
-    @Test
-    public void testAddPlayerNotExist() {
         assert PlayerStorage.getPlayerMap().isEmpty();
 
-        PlayerMock playerMock = new PlayerMock(server, "Player0");
+        server.addPlayer(player);
 
-        System.out.println("player " + playerMock.displayName());
+        CoreLogger
+                .debugToConsole("Player joined: " + player.getName() + " UUID: " + player.getUniqueId());
+        HistoriaPlayer historiaPlayer = PlayerStorage.getPlayer(player.getUniqueId());
+        assert historiaPlayer.isOnline();
 
-        PlayerStorage.addPlayer(playerMock);
+        assert PlayerStorage.has(player.getUniqueId());
 
-        assert PlayerStorage.getPlayerMap().size() == 1;
-        assert PlayerStorage.getUsernameMap().size() == 1;
+        player.disconnect();
+        CoreLogger.debugToConsole("Player left: " + player.getName() + " UUID: " + player.getUniqueId());
 
+        assert !historiaPlayer.isOnline();
+        assert server.getOfflinePlayer(player.getUniqueId()) != null;
+
+        PlayerStorage.getPlayerMap().remove(player.getUniqueId());
+        PlayerStorage.getUsernameMap().remove(player.getName());
+
+        assert PlayerStorage.getPlayerMap().isEmpty();
+        assert PlayerStorage.getUsernameMap().isEmpty();
+
+        historiaPlayer = PlayerStorage.getPlayer(player.getName());
+
+        assert !historiaPlayer.isOnline();
+        assert historiaPlayer.getUsername() != null;
+        assert historiaPlayer.getUsername().equals(player.getName());
+
+        System.out.println(historiaPlayer);
     }
+
 }

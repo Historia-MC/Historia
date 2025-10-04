@@ -1,0 +1,175 @@
+version: 5
+
+# Global temperature limits
+minimum: 30
+maximum: 44
+
+search_distance: 12
+diminish_distance: 8
+
+# Player status effects on temperature
+status_effects:
+  ON_FIRE: 30
+
+# Armor temperature modifiers
+armor:
+  tier1:
+    weight: 10
+    temp: 5
+  tier2:
+    weight: 20
+    temp: 7
+  tier3:
+    weight: 30
+    temp: 9
+
+# Global modifier multipliers
+modifier:
+  BIOME: 1
+  LIGHT: 1
+  WATER: 1
+  WEATHER: 1
+  HEAT: 1
+
+  # Base biome temperatures
+biome:
+  # Badlands/Mesa regions typically have a semi-arid, hot climate with large daily temp swings.
+  BADLANDS: [ 45, -5 ]
+  # Tropical biomes have very stable, warm temperatures, rarely dropping below 20°C.
+  BAMBOO_JUNGLE: [ 35, 20 ]
+  # Volcanic rock biomes, likely basaltic, are geologically hot but can be at high altitude. Widened range for a more dynamic environment.
+  BASALT_DELTAS: [ 25, -5 ]
+  # Beaches can be hot during the day, but coastal areas moderate extremes.
+  BEACH: [ 38, 10 ]
+  # Temperate forest with a distinct cold season. Extended the cold extreme.
+  BIRCH_FOREST: [ 30, -15 ]
+  # A forest type, likely temperate to sub-temperate.
+  CHERRY_GROVE: [ 32, -10 ]
+  # Cold oceans have stable, near-freezing but non-freezing temperatures at the surface.
+  COLD_OCEAN: [ 8, -1 ]
+  # Temperate forest with less direct sun, keeping it slightly cooler on average.
+  DARK_FOREST: [ 30, -10 ]
+  # Water temperatures deep in the ocean are consistently very cold, near freezing.
+  DEEP_COLD_OCEAN: [ 4, -2 ]
+  # Subterranean environment. Stable, cool-to-cold temperatures, independent of surface weather.
+  DEEP_DARK: [ 15, 5 ]
+  # Extremely cold water biome, below freezing.
+  DEEP_FROZEN_OCEAN: [ -2, -15 ]
+  # A warmer, deep-water zone.
+  DEEP_LUKEWARM_OCEAN: [ 20, 5 ]
+  # Deep ocean water is generally cold.
+  DEEP_OCEAN: [ 10, 0 ]
+  # Hot deserts have high daily extremes and can be scorching hot with below-freezing nights.
+  DESERT: [ 50, -10 ]
+  # Cave biomes maintain stable, cool temperatures.
+  DRIPSTONE_CAVES: [ 20, 8 ]
+  # Similar to badlands, semi-arid and prone to temperature swings.
+  ERODED_BADLANDS: [ 45, 0 ]
+  # Temperate forest, slightly warmer peak than a standard forest.
+  FLOWER_FOREST: [ 32, -10 ]
+  # Standard temperate forest extremes.
+  FOREST: [ 30, -15 ]
+  # Polar ocean conditions.
+  FROZEN_OCEAN: [ -10, -30 ]
+  # High altitude and polar conditions, very severe cold extremes.
+  FROZEN_PEAKS: [ 0, -40 ]
+  # Rivers freeze easily in very cold climates.
+  FROZEN_RIVER: [ -5, -25 ]
+  # Likely a temperate, open area.
+  GROVE: [ 30, -10 ]
+  # Very cold, high-latitude or high-altitude formations.
+  ICE_SPIKES: [ -10, -45 ]
+  # High altitude, low peak temperature, and severe cold.
+  JAGGED_PEAKS: [ 5, -30 ]
+  # Tropical rainforests are warm and humid with very little temperature fluctuation.
+  JUNGLE: [ 35, 20 ]
+  # Lukewarm ocean, a wide, mid-range temperature.
+  LUKEWARM_OCEAN: [ 25, 10 ]
+  # Subterranean, very stable and slightly warmer than deep cold caves due to humidity.
+  LUSH_CAVES: [ 20, 10 ]
+  # Tropical/Subtropical swamp, high peak temperature, and high low temperature.
+  MANGROVE_SWAMP: [ 38, 15 ]
+  # Temperate grassland/open area.
+  MEADOW: [ 32, -10 ]
+  # Likely a coastal or island environment, moderating extremes, cool to mild.
+  MUSHROOM_FIELDS: [ 25, 0 ]
+  # Standard open ocean, moderate extremes.
+  OCEAN: [ 20, 0 ]
+  # Similar to birch forest.
+  OLD_GROWTH_BIRCH_FOREST: [ 30, -15 ]
+  # Boreal/Taiga forest, a cold-climate forest.
+  OLD_GROWTH_PINE_TAIGA: [ 20, -30 ]
+  # Colder sub-type of Taiga.
+  OLD_GROWTH_SPRUCE_TAIGA: [ 18, -35 ]
+  # Temperate grassland/plains.
+  PLAINS: [ 35, -10 ]
+  # Rivers generally follow their surrounding biome but can be cold in all climates.
+  RIVER: [ 30, -5 ]
+  # Tropical/Subtropical grassland with high heat.
+  SAVANNA: [ 40, 10 ]
+  # Higher altitude savanna, which tends to be slightly cooler at night/winter.
+  SAVANNA_PLATEAU: [ 42, 5 ]
+  # Temperate coastal area that gets snow/freezes.
+  SNOWY_BEACH: [ 15, -15 ]
+  # Mid-latitude to high-latitude plains, severe winters.
+  SNOWY_PLAINS: [ 20, -35 ]
+  # High altitude, significant snow and cold.
+  SNOWY_SLOPES: [ 5, -30 ]
+  # Boreal/Taiga with severe cold.
+  SNOWY_TAIGA: [ 15, -40 ]
+  # Similar to standard jungle, but possibly with a slightly wider range.
+  SPARSE_JUNGLE: [ 35, 18 ]
+  # High altitude, very exposed, with a wide range of extremes.
+  STONY_PEAKS: [ 10, -20 ]
+  # Coastal area, moderate extremes.
+  STONY_SHORE: [ 25, 0 ]
+  # Similar to plains, possibly slightly warmer.
+  SUNFLOWER_PLAINS: [ 35, -8 ]
+  # Swampy, humid areas are often hot and rarely freeze hard.
+  SWAMP: [ 35, 5 ]
+  # Boreal/Taiga forest, cold climate.
+  TAIGA: [ 20, -25 ]
+  # Tropical ocean, very stable and warm.
+  WARM_OCEAN: [ 30, 20 ]
+  # Windswept areas often have greater temperature extremes, especially the lows.
+  WINDSWEPT_FOREST: [ 25, -10 ]
+  # Exposed, high altitude, greater temperature variation.
+  WINDSWEPT_GRAVELLY_HILLS: [ 20, -15 ]
+  # Exposed, high altitude.
+  WINDSWEPT_HILLS: [ 25, -15 ]
+  # Savanna conditions but more exposed to wind, potentially lowering the extreme low.
+  WINDSWEPT_SAVANNA: [ 40, 5 ]
+  # Badlands with trees, perhaps slightly more moderate lows due to the tree cover.
+  WOODED_BADLANDS: [ 45, 5 ]
+
+
+
+heat_sources:
+  LAVA: 200.0        # Lava is extremely hot
+  FIRE: 70.0        # Fire provides significant heat
+  MAGMA_BLOCK: 100.0 # Magma blocks are very hot
+  CAMPFIRE: 45.0    # Campfires provide moderate heat
+  TORCH: 15.0       # Torches provide mild heat
+
+# Weather effects
+weather:
+  CLEAR: 0
+  DOWNFALL: -5
+
+room_temp: 15.0  # Standard room temperature in Celsius
+underground:
+  base_temp: 12.0      # Base cave temperature in Celsius
+  biome_influence: 0.2 # How much biome affects underground temp
+
+light:
+  min_modifier: 0.7    # Minimum light temperature modifier
+  max_modifier: 1.3    # Maximum light temperature modifier
+
+time:
+  night_modifier: 0.8  # Night temperature modifier
+  noon_modifier: 1.2   # Noon temperature modifier
+
+potions:
+  fire_resistance: 3.0
+  weakness: -1.5
+  poison: 2.0

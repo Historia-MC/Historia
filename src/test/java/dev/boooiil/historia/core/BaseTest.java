@@ -38,6 +38,7 @@ public abstract class BaseTest {
     @AfterAll
     public static void teardown() {
         System.out.println("Tearing down mock...");
+        if (player.isOnline()) player.disconnect();
         MockBukkit.unmock();
     }
 
