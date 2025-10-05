@@ -14,6 +14,8 @@ import org.bukkit.event.EventPriority
 import com.destroystokyo.paper.event.block.AnvilDamagedEvent
 import org.bukkit.inventory.AnvilInventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.GameEvent
+import dev.boooiil.historia.core.util.CoreLogger
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -33,8 +35,10 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     fun handle(event: AnvilDamagedEvent) {
+        val player = event.view.player as? Player ?: return
         execute(
-            SkillSupplier(event)
+            SkillSupplier(event),
+            SkillSupplier(player)
         )
     }
 
@@ -44,21 +48,22 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        CoreLogger.debugToConsole("anvil damaged event")
         val event: AnvilDamagedEvent = getOrThrow(skillSuppliers, 0)
-        val player: Player = getOrThrow(skillSuppliers, 2)
+        val player: Player = getOrThrow(skillSuppliers, 1)
 
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
+        // I removed the cooldown as I don't think it's required
+        //val currentTime = System.currentTimeMillis()
+        //val lastTime = anvilCooldowns[player.uniqueId] ?: 0
+        //val onCooldown = (lastTime > currentTime)
 
-        val currentTime = System.currentTimeMillis()
-        val lastTime = anvilCooldowns[player.uniqueId] ?: 0
-        val onCooldown = (lastTime > currentTime)
-
-        if (!onCooldown) {
-            val nextTime = currentTime + cooldown
-            anvilCooldowns[player.uniqueId] = nextTime
-
+        //if (!onCooldown) {
+          //  val nextTime = currentTime + cooldown
+            //anvilCooldowns[player.uniqueId] = nextTime
+            //CoreLogger.debugToConsole("anvil cooldown set to $nextTime")
             // Prevent anvil durability damage by cancelling the event
             event.isCancelled = true
         }
