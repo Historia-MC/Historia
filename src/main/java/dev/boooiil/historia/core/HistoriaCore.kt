@@ -36,7 +36,6 @@ import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
 import dev.boooiil.historia.core.runnable.SyncDaylightCycleRunnable
-import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask
@@ -48,7 +47,6 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
 
 /**
  * Historia-Core Main class
@@ -136,17 +134,7 @@ open class HistoriaCore : JavaPlugin() {
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
-        registerAsyncRunnable(TemperaturePollRunnable())
-
-        Bukkit.getAsyncScheduler().runAtFixedRate(
-            this,  // plugin
-            Consumer { scheduledTask: ScheduledTask? ->
-                TemperaturePollRunnable().run() // call your runnable
-            },
-            0,  // initial delay
-            1,  // repeat delay
-            TimeUnit.SECONDS // unit (can be TICKS, SECONDS, etc.)
-        )
+        // registerAsyncRunnable(TemperaturePollRunnable())
 
 //        Bukkit.getScheduler().runTaskAsynchronously(this, TemperaturePollRunnable())
 //        registerRunnable(TemperaturePollRunnable(), 20L)
