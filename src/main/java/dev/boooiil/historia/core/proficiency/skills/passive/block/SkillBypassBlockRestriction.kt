@@ -151,7 +151,7 @@ class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkill
      */
     override fun register() {
         HistoriaCore.instance.registerEvent(this)
-        HistoriaCore.instance.registerRunnable(this)
+        HistoriaCore.instance.registerRunnable(this.runnable())
     }
 
     override fun deregister() {

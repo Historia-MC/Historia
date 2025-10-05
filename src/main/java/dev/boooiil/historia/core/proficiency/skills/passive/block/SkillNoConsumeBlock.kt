@@ -163,7 +163,7 @@ class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable
      */
     override fun register() {
         HistoriaCore.instance.registerEvent(this)
-        HistoriaCore.instance.registerRunnable(this)
+        HistoriaCore.instance.registerRunnable(this.runnable())
     }
 
     override fun deregister() {

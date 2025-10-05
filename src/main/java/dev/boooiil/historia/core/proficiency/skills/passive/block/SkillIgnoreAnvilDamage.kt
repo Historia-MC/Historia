@@ -1,21 +1,15 @@
 package dev.boooiil.historia.core.proficiency.skills.passive.block
 
+import com.destroystokyo.paper.event.block.AnvilDamagedEvent
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.util.JSONUtils
-import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
-import com.destroystokyo.paper.event.block.AnvilDamagedEvent
-import org.bukkit.inventory.AnvilInventory
-import org.bukkit.inventory.ItemStack
-import org.bukkit.GameEvent
-import dev.boooiil.historia.core.util.CoreLogger
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -60,12 +54,12 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
         //val onCooldown = (lastTime > currentTime)
 
         //if (!onCooldown) {
-          //  val nextTime = currentTime + cooldown
-            //anvilCooldowns[player.uniqueId] = nextTime
-            //CoreLogger.debugToConsole("anvil cooldown set to $nextTime")
-            // Prevent anvil durability damage by cancelling the event
-            event.isCancelled = true
-       //}
+        //  val nextTime = currentTime + cooldown
+        //anvilCooldowns[player.uniqueId] = nextTime
+        //CoreLogger.debugToConsole("anvil cooldown set to $nextTime")
+        // Prevent anvil durability damage by cancelling the event
+        event.isCancelled = true
+        //}
     }
 
     override fun run() {
@@ -80,7 +74,7 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
      */
     override fun register() {
         HistoriaCore.instance.registerEvent(this)
-        HistoriaCore.instance.registerRunnable(this)
+        HistoriaCore.instance.registerRunnable(this.runnable())
     }
 
     override fun deregister() {
