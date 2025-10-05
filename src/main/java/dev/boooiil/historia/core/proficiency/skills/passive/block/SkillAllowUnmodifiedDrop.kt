@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
+import dev.boooiil.historia.core.util.CoreLogger
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -60,6 +61,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
+        CoreLogger.debugToConsole("allow unmodified drop event")
         val event: BlockBreakEvent = getOrThrow(skillSuppliers, 0)
         val block: Block = event.block
         val player: Player = event.player
@@ -70,6 +72,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
         if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
 
         blocks[type]?.also { c ->
+            CoreLogger.debugToConsole("allow unmodified drop event 2")
             val currentTime = System.currentTimeMillis()
             val lastTime = blockCooldowns[player.uniqueId]?.get(type) ?: 0
             val onCooldown = (lastTime > currentTime)
@@ -80,17 +83,27 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
 //                    }
 //                }
 
-            if (!onCooldown && Permissions.canPlaceBlock(player, block)) {
+            if (!onCooldown) {
                 val cooldown = (c * 1000).toLong()
                 val nextTime = currentTime + cooldown
 
-                // if we pass the chance
                 (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
-                val item: ItemStack = ItemStack(block.type)
-
-                event.block.drops.clear()
-                event.block.drops.add(item)
+                
+                // Cancel the event to prevent normal drops
+                event.isCancelled = true
+                
+                // Set block to air
+                block.type = Material.AIR
+                
+                // Drop only the configured item (the block itself)
+                val item: ItemStack = ItemStack(type)
+                block.world.dropItemNaturally(block.location, item)
+                
+                // unsure of these block.drops.clear() and block.drops.add(item)
+                //event.block.drops.clear()
+                //event.block.drops.add(item)
             }
+
         }
     }
 
