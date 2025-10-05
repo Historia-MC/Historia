@@ -48,7 +48,6 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
      * @param skillSuppliers - Objects to be provided for this skill.
      */
     override fun execute(vararg skillSuppliers: SkillSupplier<*>) {
-        CoreLogger.debugToConsole("anvil damaged event")
         val event: AnvilDamagedEvent = getOrThrow(skillSuppliers, 0)
         val player: Player = getOrThrow(skillSuppliers, 1)
 
@@ -66,7 +65,7 @@ class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunna
             //CoreLogger.debugToConsole("anvil cooldown set to $nextTime")
             // Prevent anvil durability damage by cancelling the event
             event.isCancelled = true
-        }
+       //}
     }
 
     override fun run() {
