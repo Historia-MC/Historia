@@ -1,4 +1,4 @@
-Poor_Light_Sulphur:
+Light_Sulphur:
   material: GLOWSTONE_DUST
   amount: 1
   display-name: §7Sulphur
@@ -8,4 +8,4 @@ Poor_Light_Sulphur:
 
   modifier:
     weight: light
-    quality: poor
+    quality: false

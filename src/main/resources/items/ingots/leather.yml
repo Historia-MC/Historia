@@ -1,61 +1,61 @@
-Poor_Light_Sheep_Leather:
+Light_Sheep_Leather:
   material: LEATHER
   amount: 1
-  display-name: §cSheep Leather
-  loc-name: Poor_Light_Sheep_Leather
+  display-name: §7Sheep Leather
+  loc-name: Light_Sheep_Leather
   weight: 1
 
   modifier:
     weight: light
-    quality: poor
+    quality: true
 
   smelting:
     time: 30
     fail: 15
     smelt_times: 1
 
-Poor_Light_Cow_Leather:
+Light_Cow_Leather:
   material: LEATHER
   amount: 1
-  display-name: §cCow Leather
-  loc-name: Poor_Light_Cow_Leather
+  display-name: §7Cow Leather
+  loc-name: Light_Cow_Leather
   weight: 1
 
   modifier:
     weight: light
-    quality: poor
+    quality: true
 
   smelting:
     time: 30
     fail: 15
     smelt_times: 1
 
-Poor_Light_Pig_Leather:
+Light_Pig_Leather:
   material: LEATHER
   amount: 1
-  display-name: §cPig Leather
-  loc-name: Poor_Light_Pig_Leather
+  display-name: §7Pig Leather
+  loc-name: Light_Pig_Leather
   weight: 1
 
   modifier:
     weight: light
-    quality: poor
+    quality: true
 
   smelting:
     time: 30
     fail: 15
     smelt_times: 1
 
-Poor_Light_Horse_Leather:
+Light_Horse_Leather:
   material: LEATHER
   amount: 1
-  display-name: §cHorse Leather
-  loc-name: Poor_Light_Horse_Leather
+  display-name: §7Horse Leather
+  loc-name: Light_Horse_Leather
   weight: 1
 
   modifier:
     weight: light
-    quality: poor
+    quality: true
 
   smelting:
     time: 30

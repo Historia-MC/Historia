@@ -1,4 +1,4 @@
-Poor_Light_Coal:
+Light_Coal:
   material: COAL
   amount: 1
   display-name: §7Coal
@@ -8,4 +8,4 @@ Poor_Light_Coal:
 
   modifier:
     weight: light
-    quality: poor
+    quality: false

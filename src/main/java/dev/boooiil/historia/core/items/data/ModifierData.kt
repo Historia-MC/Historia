@@ -1,160 +1,150 @@
-package dev.boooiil.historia.core.items.data;
+package dev.boooiil.historia.core.items.data
 
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.items.ItemData;
-import dev.boooiil.historia.core.items.types.Qualities;
-import dev.boooiil.historia.core.items.types.Weights;
-import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.JSONUtils;
-import dev.boooiil.historia.core.util.KyoriUtils;
-import dev.boooiil.historia.core.util.PDCUtils;
-import net.kyori.adventure.text.Component;
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataAdapterContext;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.jspecify.annotations.NullMarked;
-
-import java.util.ArrayList;
-import java.util.List;
+import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
+import dev.boooiil.historia.core.items.ItemData
+import dev.boooiil.historia.core.items.types.Qualities
+import dev.boooiil.historia.core.items.types.Weights
+import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.JSONUtils
+import dev.boooiil.historia.core.util.KyoriUtils
+import dev.boooiil.historia.core.util.PDCUtils
+import net.kyori.adventure.text.Component
+import org.bukkit.NamespacedKey
+import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataAdapterContext
+import org.bukkit.persistence.PersistentDataContainer
+import org.bukkit.persistence.PersistentDataType
 
 /**
  * @param weight private String id;
  */
-public record ModifierData(Weights weight, Qualities quality) implements ItemData {
+@JvmRecord
+data class ModifierData(
+    val weight: Weights,
+    val quality: Qualities?
+) : ItemData {
 
-    public static final PersistentDataType<PersistentDataContainer, ModifierData> DATA_TYPE = new DataType();
-    public static final NamespacedKey KEY = HistoriaCore.getNamespacedKey("modifier");
-
-    // String id,
-    // this.id = id;
-
-    public static ModifierData fromStack(ItemStack stack) {
-
-        return PDCUtils.getFromComplexContainer(stack, ModifierData.KEY, ModifierData.DATA_TYPE)
-                .orElse(new ModifierData(Weights.LIGHT, Qualities.POOR));
-
+    override fun apply(stack: ItemStack) {
+        writeData(stack)
+        writeLore(stack)
     }
 
-    @Override
-    public void apply(ItemStack stack) {
-        writeData(stack);
-        writeLore(stack);
+    private fun writeData(stack: ItemStack) {
+        PDCUtils.setInComplexContainer(stack, KEY, DataType, this)
     }
 
-    private void writeData(ItemStack stack) {
+    private fun writeLore(stack: ItemStack) {
+        val configId = PDCUtils.getFromContainer<String>(
+            stack,
+            getNamespacedKey("item-id"), PersistentDataType.STRING
+        ).orElse("")
 
-        PDCUtils.setInComplexContainer(stack, ModifierData.KEY,
-                ModifierData.DATA_TYPE, this);
+        val meta = stack.itemMeta
 
-    }
-
-    private void writeLore(ItemStack stack) {
-
-        String configId = PDCUtils.getFromContainer(stack,
-                HistoriaCore.getNamespacedKey("item-id"), PersistentDataType.STRING).orElse("");
-
-        ItemMeta meta = stack.getItemMeta();
-
-        if (!meta.hasLore() || meta.lore().isEmpty()) {
-            CoreLogger.debugToConsole(configId, "has no lore, skipping placeholder.");
-            return;
+        if (!meta.hasLore() || meta.lore()!!.isEmpty()) {
+            CoreLogger.debugToConsole(configId, "has no lore, skipping placeholder.")
+            return
         }
 
-        List<Component> lore = meta.lore();
-        List<Component> nLore = new ArrayList<>();
+        val lore = meta.lore()
+        val nLore: MutableList<Component?> = ArrayList()
 
-        for (Component component : lore) {
-
+        for (component in lore!!) {
             if (KyoriUtils.contains(component, "<modifier-weight>")) {
+                CoreLogger.debugToConsole(configId, "has modifier weight placeholder.")
 
-                CoreLogger.debugToConsole(configId, "has modifier weight placeholder.");
+                nLore.add(KyoriUtils.replaceComponent(component, "modifier-weight", this.weight.displayName))
 
-                nLore.add(KyoriUtils.replaceComponent(component, "modifier-weight", this.weight.getDisplayName()));
-
-                continue;
+                continue
             }
 
-            if (KyoriUtils.contains(component, "<modifier-quality>")) {
+            if (KyoriUtils.contains(component, "<modifier-quality>") && quality != null) {
+                CoreLogger.debugToConsole(configId, "has modifier quality placeholder.")
 
-                CoreLogger.debugToConsole(configId, "has modifier quality placeholder.");
+                nLore.add(KyoriUtils.replaceComponent(component, "modifier-quality", this.quality.displayName))
 
-                nLore.add(KyoriUtils.replaceComponent(component, "modifier-quality", this.quality.getDisplayName()));
-
-                continue;
+                continue
             }
 
-            nLore.add(component);
+            // TODO temp test
+            if (quality != null) {
+                nLore.add(Component.text("Quality: ${this.quality.displayName}"))
+            }
 
+            nLore.add(component)
         }
 
-        meta.lore(nLore);
-        stack.setItemMeta(meta);
+        meta.lore(nLore)
+        stack.setItemMeta(meta)
     }
 
-    public String id() {
-        throw new UnsupportedOperationException("Not implemented.");
+    fun id(): String {
+        throw UnsupportedOperationException("Not implemented.")
     }
 
-    @Override
-    public String toString() {
+    override fun toString(): String {
+        val sb = "ModifierData" +
+                toJSON()
 
-        String sb = "ModifierData" +
-                toJSON();
-
-        return sb;
+        return sb
     }
 
-    @Override
-    public String toJSON() {
+    override fun toJSON(): String {
+        val sb = "{" +
+                JSONUtils.fromValue("weight", weight.lowercase()) +
+                (quality?.let { ", " + JSONUtils.fromValue("quality", it.lowercase()) } ?: "") +
+                "}"
 
-        String sb = "{" +
-                JSONUtils.fromValue("weight", weight.lowercase()) + ", " +
-                JSONUtils.fromValue("quality", quality.lowercase()) +
-                "}";
-
-        return sb;
+        return sb
     }
 
-    @NullMarked
-    private static class DataType implements PersistentDataType<PersistentDataContainer, ModifierData> {
+    companion object {
+        val KEY: NamespacedKey = getNamespacedKey("modifier")
 
-        private static final NamespacedKey WEIGHT_KEY = HistoriaCore.getNamespacedKey("weight");
-        private static final NamespacedKey QUALITY_KEY = HistoriaCore.getNamespacedKey("quality");
+        fun fromStack(stack: ItemStack): ModifierData {
+            return PDCUtils
+                .getFromComplexContainer(stack, KEY, DataType)
+                .orElse(ModifierData(Weights.LIGHT, Qualities.POOR))
+        }
+    }
 
-        @Override
-        public ModifierData fromPrimitive(PersistentDataContainer container,
-                                          PersistentDataAdapterContext adapterContext) {
+    object DataType : PersistentDataType<PersistentDataContainer, ModifierData> {
 
-            Weights weight = Weights
-                    .fromString(container.get(WEIGHT_KEY, PersistentDataType.STRING));
-            Qualities quality = Qualities
-                    .fromString(container.get(QUALITY_KEY, PersistentDataType.STRING));
+        override fun fromPrimitive(
+            container: PersistentDataContainer,
+            adapterContext: PersistentDataAdapterContext
+        ): ModifierData {
+            val weight = Weights
+                .fromString(container.get<String, String>(WEIGHT_KEY, PersistentDataType.STRING))
+            val quality = Qualities
+                .fromString(container.get<String, String>(QUALITY_KEY, PersistentDataType.STRING))
 
-            return new ModifierData(weight, quality);
+            return ModifierData(weight, quality)
         }
 
-        @Override
-        public Class<ModifierData> getComplexType() {
-            return ModifierData.class;
+        override fun getComplexType(): Class<ModifierData> {
+            return ModifierData::class.java
         }
 
-        @Override
-        public Class<PersistentDataContainer> getPrimitiveType() {
-            return PersistentDataContainer.class;
+        override fun getPrimitiveType(): Class<PersistentDataContainer> {
+            return PersistentDataContainer::class.java
         }
 
-        @Override
-        public PersistentDataContainer toPrimitive(ModifierData data, PersistentDataAdapterContext adapterContext) {
+        override fun toPrimitive(
+            data: ModifierData,
+            adapterContext: PersistentDataAdapterContext
+        ): PersistentDataContainer {
+            val container = adapterContext.newPersistentDataContainer()
 
-            PersistentDataContainer container = adapterContext.newPersistentDataContainer();
+            container.set(WEIGHT_KEY, PersistentDataType.STRING, data.weight.lowercase())
+            if (data.quality != null) {
+                container.set(QUALITY_KEY, PersistentDataType.STRING, data.quality.lowercase())
+            }
 
-            container.set(WEIGHT_KEY, PersistentDataType.STRING, data.weight.lowercase());
-            container.set(QUALITY_KEY, PersistentDataType.STRING, data.quality().lowercase());
-
-            return container;
+            return container
         }
+
+        private val WEIGHT_KEY = getNamespacedKey("weight")
+        private val QUALITY_KEY = getNamespacedKey("quality")
     }
 }

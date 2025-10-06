@@ -3,6 +3,7 @@ package dev.boooiil.historia.core.items;
 import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.items.component.*;
 import dev.boooiil.historia.core.items.data.*;
+import dev.boooiil.historia.core.items.types.Weights;
 import dev.boooiil.historia.core.registry.RegistryHolder;
 import dev.boooiil.historia.core.util.JSONSerializable;
 import dev.boooiil.historia.core.util.JSONUtils;
@@ -34,6 +35,12 @@ public class ItemComponentType<T extends ItemComponent> implements JSONSerializa
     }
 
     public static void registerComponents() {
+        RegistryHolder.COMPONENT_REGISTRY.register(
+                ModifierData.Companion.getKEY(),
+                new ItemComponentType<>(
+                        ModifierComponent.Companion::fromConfig,
+                        () -> new ModifierData(Weights.LIGHT, null)));
+
         RegistryHolder.COMPONENT_REGISTRY.register(
                 HistoriaCore.getNamespacedKey("tool"),
                 new ItemComponentType<>(

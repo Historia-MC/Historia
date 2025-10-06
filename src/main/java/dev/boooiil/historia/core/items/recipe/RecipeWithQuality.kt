@@ -13,8 +13,8 @@ class RecipeWithQuality<C: Inventory>(
     // TODO currently takes random quality from input items, calculation should be changed
     override fun getResult(inventory: C, ctx: CustomRecipe.Context): ItemStack {
         val quality = base.getInput(inventory)
-            .mapNotNull { ModifierData.fromStack(it) }
-            .map { it.quality }
+            .map { ModifierData.fromStack(it) }
+            .mapNotNull { it.quality }
             .random()
         return resultFactory(quality)
     }

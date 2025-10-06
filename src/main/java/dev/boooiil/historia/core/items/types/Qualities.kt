@@ -1,31 +1,19 @@
-package dev.boooiil.historia.core.items.types;
+package dev.boooiil.historia.core.items.types
 
-public enum Qualities {
+import java.util.*
 
+enum class Qualities(val displayName: String) {
     POOR("Poor"),
     COMMON("Common"),
     PERFECT("Perfect");
 
-    private final String displayName;
-
-    Qualities(String displayName) {
-        this.displayName = displayName;
+    fun lowercase(): String {
+        return displayName.lowercase(Locale.getDefault())
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public String lowercase() {
-        return displayName.toLowerCase();
-    }
-
-    public static Qualities fromString(String str) {
-        for (Qualities quality : Qualities.values()) {
-            if (quality.name().equalsIgnoreCase(str)) {
-                return quality;
-            }
+    companion object {
+        fun fromString(str: String?): Qualities? {
+            return entries.find { it.name.lowercase() == str }
         }
-        return Qualities.POOR;
     }
 }
