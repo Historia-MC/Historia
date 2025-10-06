@@ -5,7 +5,6 @@ import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.util.JSONUtils
-import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -13,9 +12,7 @@ import org.bukkit.event.EventPriority
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillIgnoreAnvilDamage(section: ConfigurationSection) : AbstractSkillRunnable(section), ISkillHandler {
 
     /**
      * Get the type of the skill.

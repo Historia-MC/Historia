@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.ConfigurationSection
@@ -19,9 +18,7 @@ import org.jspecify.annotations.NullMarked
 import java.util.*
 
 @NullMarked
-class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillAttributeOnItem(section: ConfigurationSection) : AbstractSkillHandler(section) {
 
     /**
      * Get the type of the skill.

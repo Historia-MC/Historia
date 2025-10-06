@@ -8,7 +8,6 @@ import dev.boooiil.historia.core.util.JSONUtils
 import net.kyori.adventure.key.Key
 import org.bukkit.GameEvent
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.Registry
 import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
@@ -21,9 +20,7 @@ import org.bukkit.event.block.BlockPlaceEvent
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillBypassBlockRestriction(section: ConfigurationSection) : AbstractSkillRunnable(section), ISkillHandler {
 
     /**
      * Get the type of the skill.

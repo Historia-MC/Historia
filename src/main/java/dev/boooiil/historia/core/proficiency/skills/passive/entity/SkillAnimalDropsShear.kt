@@ -6,7 +6,6 @@ import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Ageable
 import org.bukkit.entity.EntityType
@@ -18,9 +17,7 @@ import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnable(section), ISkillHandler {
 
     /**
      * Get the type of the skill.
@@ -138,7 +135,10 @@ class SkillAnimalDropsShear(section: ConfigurationSection) : AbstractSkillRunnab
         } else {
             val timeLeftMillis = lastTime - currentTime
             val timeLeftSeconds = (timeLeftMillis / 1000).coerceAtLeast(1)
-            CoreLogger.infoToPlayer("You must wait $timeLeftSeconds seconds before using this skill again.", player.uniqueId)
+            CoreLogger.infoToPlayer(
+                "You must wait $timeLeftSeconds seconds before using this skill again.",
+                player.uniqueId
+            )
         }
     }
 

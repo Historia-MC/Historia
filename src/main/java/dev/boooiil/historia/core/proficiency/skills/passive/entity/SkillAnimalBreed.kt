@@ -7,16 +7,13 @@ import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
-import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityBreedEvent
 
-class SkillAnimalBreed(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillAnimalBreed(section: ConfigurationSection) : AbstractSkillHandler(section) {
 
     /**
      * Get the type of the skill.

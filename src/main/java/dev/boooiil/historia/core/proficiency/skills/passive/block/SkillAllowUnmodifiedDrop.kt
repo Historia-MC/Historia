@@ -2,12 +2,11 @@ package dev.boooiil.historia.core.proficiency.skills.passive.block
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.database.internal.PlayerStorage
-import dev.boooiil.historia.core.dependents.Permissions
 import dev.boooiil.historia.core.proficiency.skills.*
 import dev.boooiil.historia.core.proficiency.skills.passive.entity.SkillEntityDrop
+import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.Player
@@ -15,13 +14,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import dev.boooiil.historia.core.util.CoreLogger
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRunnable(section), ISkillHandler {
 
     /**
      * Get the type of the skill.
@@ -88,17 +84,17 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
                 val nextTime = currentTime + cooldown
 
                 (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
-                
+
                 // Cancel the event to prevent normal drops
                 event.isCancelled = true
-                
+
                 // Set block to air
                 block.type = Material.AIR
-                
+
                 // Drop only the configured item (the block itself)
                 val item: ItemStack = ItemStack(type)
                 block.world.dropItemNaturally(block.location, item)
-                
+
                 // unsure of these block.drops.clear() and block.drops.add(item)
                 //event.block.drops.clear()
                 //event.block.drops.add(item)
@@ -138,7 +134,7 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
      */
     override fun register() {
         HistoriaCore.instance.registerEvent(this)
-        HistoriaCore.instance.registerRunnable(this)
+        HistoriaCore.instance.registerRunnable(this.runnable())
     }
 
     override fun deregister() {

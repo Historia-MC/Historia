@@ -1,21 +1,17 @@
 package dev.boooiil.historia.core.proficiency.skills.passive.item
 
 import dev.boooiil.historia.core.HistoriaCore
-import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.proficiency.skills.AbstractSkillHandler
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerInteractEntityEvent
 
-class SkillUseNametag(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey = getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillUseNametag(section: ConfigurationSection) : AbstractSkillHandler(section) {
 
     /**
      * Get the type of the skill.

@@ -9,7 +9,6 @@ import dev.boooiil.historia.core.util.JSONUtils
 import net.kyori.adventure.key.Key
 import org.bukkit.GameEvent
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.Registry
 import org.bukkit.block.Block
 import org.bukkit.configuration.ConfigurationSection
@@ -24,9 +23,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.random.Random
 
-class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable(), ISkillHandler {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillNoConsumeBlock(section: ConfigurationSection) : AbstractSkillRunnable(section), ISkillHandler {
 
     /**
      * Get the type of the skill.

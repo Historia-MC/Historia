@@ -8,7 +8,6 @@ import dev.boooiil.historia.core.proficiency.skills.SkillSupplier
 import dev.boooiil.historia.core.proficiency.skills.SkillType
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
@@ -18,9 +17,7 @@ import org.bukkit.inventory.ItemStack
 import org.jspecify.annotations.NullMarked
 
 @NullMarked
-class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler() {
-    override val name: NamespacedKey = HistoriaCore.getNamespacedKey(section.name)
-    override val description: String = section.getString("description") ?: "No description provided."
+class SkillEntityDrop(section: ConfigurationSection) : AbstractSkillHandler(section) {
 
     /**
      * Get the type of the skill.
