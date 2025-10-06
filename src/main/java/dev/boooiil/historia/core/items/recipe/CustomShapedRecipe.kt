@@ -13,6 +13,7 @@ class CustomShapedRecipe(
     val pattern = pattern.trim { !it.isEmpty }
 
     override val resultPreview = result
+    override val hasRandomResult = false
 
     override fun matches(inventory: CraftingInventory, ctx: CustomRecipe.Context): Boolean {
         val matrix = inventory.matrix

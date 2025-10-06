@@ -24,6 +24,7 @@ import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
+import dev.boooiil.historia.core.items.events.inventory.ResultSlotClickListener
 import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
 import dev.boooiil.historia.core.items.events.inventory.InventoryOpenListener
 import dev.boooiil.historia.core.items.events.inventory.PrepareCraftListener
@@ -112,7 +113,8 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ProjectileLaunchListener())
         registerEvent(InventoryCloseListener())
         registerEvent(InventoryOpenListener())
-        registerEvent(PrepareCraftListener())
+        registerEvent(PrepareCraftListener)
+        registerEvent(ResultSlotClickListener)
         // registerEvent(new PlayerInteractListener());
         registerEvent(PlayerItemConsumeListener())
         registerEvent(PlayerSwapHandItemsListener())

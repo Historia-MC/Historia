@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataAdapterContext
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import kotlin.jvm.optionals.getOrNull
 
 /**
  * @param weight private String id;
@@ -101,10 +102,10 @@ data class ModifierData(
     companion object {
         val KEY: NamespacedKey = getNamespacedKey("modifier")
 
-        fun fromStack(stack: ItemStack): ModifierData {
+        fun fromStack(stack: ItemStack): ModifierData? {
             return PDCUtils
                 .getFromComplexContainer(stack, KEY, DataType)
-                .orElse(ModifierData(Weights.LIGHT, Qualities.POOR))
+                .getOrNull()
         }
     }
 

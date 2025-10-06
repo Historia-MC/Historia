@@ -11,6 +11,7 @@ class CustomShapelessRecipe(
 ) : CustomRecipe<CraftingInventory> {
 
     override val resultPreview = result
+    override val hasRandomResult = false
 
     override fun matches(inventory: CraftingInventory, ctx: CustomRecipe.Context): Boolean {
         val stacks = inventory.matrix.filterNotNull().toTypedArray()
