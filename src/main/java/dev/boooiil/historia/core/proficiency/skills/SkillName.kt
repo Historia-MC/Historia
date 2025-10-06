@@ -40,7 +40,6 @@ enum class SkillName(val key: NamespacedKey) {
     CAN_CLIMB_LOGS(HistoriaCore.getNamespacedKey("can_climb_logs")),
     ALLOW_UNMODIFIED_GRASS_DROP(HistoriaCore.getNamespacedKey("allow_unmodified_grass_drop")),
     IGNORE_ANVIL_DAMAGE(HistoriaCore.getNamespacedKey("ignore_anvil_damage"));
-
     
 
     val instance: ISkill? = RegistryHolder.SKILL_REGISTRY[key]

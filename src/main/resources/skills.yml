@@ -334,6 +334,7 @@ allow_unmodified_beehive_drop:
   blocks:
     beehive:
       cooldown: 1
+      restrict: true
 
 ignore_anvil_damage:
   name: Placeholder
@@ -351,3 +352,13 @@ animal_drops_shear_chicken:
         feather:
           amount: [1, 4]
       cooldown: 1
+
+
+chance_extra_block_wood:
+  name: Placeholder
+  type: greater_block_drop
+  description: "Give block drop chance"
+  blocks:
+    oak_log:
+      chance: 0.5
+      amount: [1,4]

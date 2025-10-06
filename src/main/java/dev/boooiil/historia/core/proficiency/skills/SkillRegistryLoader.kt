@@ -15,6 +15,7 @@ import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeO
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillAttributeWithItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillEnchantOnItem
 import dev.boooiil.historia.core.proficiency.skills.passive.item.SkillUseNametag
+import dev.boooiil.historia.core.proficiency.skills.passive.block.SkillGreaterBlockDrop
 import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.CoreLogger
 import org.bukkit.configuration.file.FileConfiguration
@@ -124,6 +125,13 @@ object SkillRegistryLoader {
                     
                     "animal_drops_shear" -> {
                         SkillAnimalDropsShear(section).also {
+                            RegistryHolder.SKILL_REGISTRY.register(skillName, it)
+                            it.register()
+                        }
+                    }
+
+                    "greater_block_drop" -> {
+                        SkillGreaterBlockDrop(section).also {
                             RegistryHolder.SKILL_REGISTRY.register(skillName, it)
                             it.register()
                         }
