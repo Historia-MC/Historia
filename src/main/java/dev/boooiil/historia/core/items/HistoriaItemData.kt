@@ -1,103 +1,78 @@
-package dev.boooiil.historia.core.items;
+package dev.boooiil.historia.core.items
 
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.JSONSerializable;
-import dev.boooiil.historia.core.util.JSONUtils;
-import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.jspecify.annotations.NullMarked;
+import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.registry.RegistryHolder
+import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.JSONSerializable
+import dev.boooiil.historia.core.util.JSONUtils
+import dev.boooiil.historia.core.util.PDCUtils
+import org.bukkit.NamespacedKey
+import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
+import java.util.*
+import kotlin.jvm.optionals.getOrNull
 
-import java.util.ArrayList;
-import java.util.List;
+class HistoriaItemData(
+    val itemId: NamespacedKey,
+    private val itemData: MutableList<NamespacedKey>,
+    val stack: ItemStack
+) : JSONSerializable {
 
-@NullMarked
-public class HistoriaItemData implements JSONSerializable {
-
-    private final NamespacedKey id;
-    private final List<NamespacedKey> itemData;
-    private final ItemStack stack;
-
-    public HistoriaItemData(
-            NamespacedKey id,
-            List<NamespacedKey> itemData,
-            ItemStack stack) {
-        this.id = id;
-        this.itemData = itemData;
-        this.stack = stack;
+    fun hasData(key: NamespacedKey): Boolean {
+        return itemData.contains(key)
     }
 
-    public static HistoriaItemData fromStack(ItemStack stack) {
-
-        if (stack == null || stack.getItemMeta() == null) {
-            return new HistoriaItemData(HistoriaCore.getNamespacedKey("invalid"), new ArrayList<>(), stack);
-        }
-
-        PersistentDataContainer container = stack.getItemMeta().getPersistentDataContainer();
-        String id = "";
-        List<NamespacedKey> itemData = new ArrayList<>();
-
-        for (NamespacedKey key : container.getKeys()) {
-            String s_key = key.getKey().toLowerCase();
-
-            if (s_key.equals("item-id")) {
-                id = container.get(key, PersistentDataType.STRING);
-            }
-
-            // else if (s_key.endsWith("-data")) {
-            // itemData.add(key);
-            // }
-            else {
-                itemData.add(key);
-            }
-        }
-
-        return new HistoriaItemData(HistoriaCore.getNamespacedKey(id), itemData, stack);
+    fun getHistoriaItem(): HistoriaItem {
+        return RegistryHolder.ITEM_REGISTRY.get(itemId)!!
     }
 
-    public boolean isHistoriaItem() {
-        return this.id != null && this.id != HistoriaCore.getNamespacedKey("invalid");
-    }
-
-    public boolean hasData(NamespacedKey key) {
-        return itemData.contains(key);
-    }
-
-    public HistoriaItem getHistoriaItem() {
-        return RegistryHolder.ITEM_REGISTRY.get(id);
-    }
-
-    public ItemStack getStack() {
-        return stack;
-    }
-
-    public <C, T extends ItemData> T getData(
-            NamespacedKey key,
-            PersistentDataType<C, T> type) {
-
+    fun <C : Any, T : ItemData> getData(
+        key: NamespacedKey,
+        type: PersistentDataType<C, T>
+    ): T? {
         if (!hasData(key)) {
-            CoreLogger.debugToConsole("No data found for key " + key, "creating one...");
-            String s_regKey = key.getKey();
-            NamespacedKey regKey = new NamespacedKey(key.getNamespace(), s_regKey);
-            Object itemData = RegistryHolder.COMPONENT_REGISTRY.get(regKey).getData();
-            return type.getComplexType().cast(itemData);
+            CoreLogger.debugToConsole("No data found for key $key, creating one...")
+            val sRegkey = key.key
+            val regKey = NamespacedKey(key.namespace, sRegkey)
+            val itemData: Any? = RegistryHolder.COMPONENT_REGISTRY.get(regKey)!!.data
+            return type.getComplexType().cast(itemData)
         }
 
-        return stack.getItemMeta().getPersistentDataContainer().get(key, type);
+        return stack.itemMeta.persistentDataContainer.get(key, type)
     }
 
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
-                JSONUtils.fromValue("id", id) + "," +
+    override fun toJSON(): String {
+        val sb = "{" +
+                JSONUtils.fromValue("id", itemId) + "," +
                 JSONUtils.fromList("item_data", itemData) + "," +
                 JSONUtils.fromValue("item_stack", stack.toString()) +
-                "}";
+                "}"
 
-        return sb;
+        return sb
+    }
+
+    companion object {
+        @JvmStatic
+        fun fromStack(stack: ItemStack): HistoriaItemData? {
+            if (stack.itemMeta == null) {
+                return null
+            }
+
+            val container = stack.itemMeta.persistentDataContainer
+            val itemData = mutableListOf<NamespacedKey>()
+
+            for (key in container.keys) {
+                val sKey = key.key.lowercase(Locale.getDefault())
+
+                if (sKey != "item-id") {
+                    itemData.add(key)
+                }
+            }
+
+            val id = PDCUtils.getFromContainer(stack, HistoriaCore.getNamespacedKey("item-id"), PersistentDataType.STRING).getOrNull()
+                ?: return null
+
+            return HistoriaItemData(HistoriaCore.getNamespacedKey(id), itemData, stack)
+        }
     }
 }

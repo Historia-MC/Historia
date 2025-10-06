@@ -26,6 +26,7 @@ import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
 import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
 import dev.boooiil.historia.core.items.events.inventory.InventoryOpenListener
+import dev.boooiil.historia.core.items.events.inventory.PrepareCraftListener
 import dev.boooiil.historia.core.items.events.player.PlayerItemConsumeListener
 import dev.boooiil.historia.core.items.events.player.PlayerSwapHandItemsListener
 import dev.boooiil.historia.core.items.events.player.PlayerToggleSneakListener
@@ -111,6 +112,7 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ProjectileLaunchListener())
         registerEvent(InventoryCloseListener())
         registerEvent(InventoryOpenListener())
+        registerEvent(PrepareCraftListener())
         // registerEvent(new PlayerInteractListener());
         registerEvent(PlayerItemConsumeListener())
         registerEvent(PlayerSwapHandItemsListener())
