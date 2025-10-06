@@ -1,8 +1,9 @@
 package dev.boooiil.historia.core.proficiency.skills
 
+import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.scheduler.BukkitRunnable
 
-abstract class AbstractSkillRunnable : AbstractSkill(), ISkillRunnable {
+abstract class AbstractSkillRunnable(section: ConfigurationSection) : AbstractSkill(section), ISkillRunnable {
 
     abstract override fun run()
 

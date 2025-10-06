@@ -1,3 +1,5 @@
 package dev.boooiil.historia.core.proficiency.skills
 
-abstract class AbstractSkillHandler : AbstractSkill(), ISkillHandler
+import org.bukkit.configuration.ConfigurationSection
+
+abstract class AbstractSkillHandler(section: ConfigurationSection) : AbstractSkill(section), ISkillHandler
