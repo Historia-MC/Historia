@@ -26,22 +26,53 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
      */
     override val type: SkillType = SkillType.PASSIVE
 
-    private val blocks: HashMap<Material, Int> = HashMap()
+    // Data class to hold block configuration
+    data class BlockConfig(
+        val cooldown: Int,
+        val noDrop: Boolean = false,
+        val restrict: Boolean = false,
+        val alternate: Map<Material, IntRange>? = null
+    )
+
+    private val blocks: HashMap<Material, BlockConfig> = HashMap()
     private val blockCooldowns: ConcurrentHashMap<UUID, ConcurrentHashMap<Material, Long>> = ConcurrentHashMap()
 
     init {
-        var sBlocks = section.getConfigurationSection("blocks") ?: error("Key 'blocks' must be specified.")
+        val sBlocks = section.getConfigurationSection("blocks") ?: error("Key 'blocks' must be specified.")
 
         sBlocks.getKeys(false).forEach { key ->
-
             val material = (Material.matchMaterial(key)?.takeIf { it.isBlock }
                 ?: error("Material $key is not a valid block."))
             val sMaterial = sBlocks.getConfigurationSection(key) ?: error("Key 'material' must be specified.")
+            
             val cooldown = sMaterial.getInt("cooldown")
+            val noDrop = sMaterial.getBoolean("no_drop", false)
+            val restrict = sMaterial.getBoolean("restrict", false)
+            
+            // Parse alternate drops if present
+            val alternate = sMaterial.getConfigurationSection("alternate")?.let { altSection ->
+                altSection.getKeys(false).associate { altKey ->
+                    val altMaterial = Material.matchMaterial(altKey) 
+                        ?: error("Invalid alternate material: $altKey")
+                    val amount = altSection.get("$altKey.amount") ?: error("Amount must be specified for alternate material: $altKey")
+                    val (minAmount, maxAmount) = when (amount) {
+                        is Int -> amount to amount
+                        is List<*> -> {
+                            val amounts = amount.filterIsInstance<Int>()
+                            if (amounts.size == 2) {
+                                amounts[0] to amounts[1]
+                            } else {
+                                error("Amount must be a single integer or a list of two integers [min, max]")
+                            }
+                        }
+                        else -> error("Amount must be an integer or a list of two integers [min, max]")
+                    }
+                    altMaterial to minAmount..maxAmount
+                }
+            }
 
-            blocks[material] = cooldown
+            blocks[material] = BlockConfig(cooldown, noDrop, restrict, alternate)
         }
-
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
@@ -65,22 +96,39 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
         val type = block.type
         val historiaPlayer = PlayerStorage.getPlayer(player.uniqueId)
 
-        if (!hasSkill(historiaPlayer) || !hasLevelRequirement(historiaPlayer)) return
+        // Check if player has skill and level requirement
+        val hasSkillAndLevel = hasSkill(historiaPlayer) && hasLevelRequirement(historiaPlayer)
 
-        blocks[type]?.also { c ->
+        blocks[type]?.also { config ->
             CoreLogger.debugToConsole("allow unmodified drop event 2")
+            
+            // Handle restriction - if restrict is true and player doesn't have skill, prevent breaking
+            if (config.restrict && !hasSkillAndLevel) {
+                event.isCancelled = true
+                CoreLogger.debugToConsole("Block breaking restricted - player lacks skill")
+                return
+            }
+
+            // Handle no_drop - if no_drop is true and player doesn't have skill, allow breaking but no drops
+            if (config.noDrop && !hasSkillAndLevel) {
+                block.type = Material.AIR
+                CoreLogger.debugToConsole("No drop for player without skill - cleared drops")
+                return
+            }
+
+            // If player doesn't have skill and it's not restricted/no_drop, let normal behavior happen
+            if (!hasSkillAndLevel) {
+                return
+            }
+
+            // Player has skill - give them silk touch behavior
+            // Check cooldown
             val currentTime = System.currentTimeMillis()
             val lastTime = blockCooldowns[player.uniqueId]?.get(type) ?: 0
             val onCooldown = (lastTime > currentTime)
-            // TODO: uncomment this code and remove runnable after testing
-//                .also {
-//                    if (lastTime > 0 && !it) {
-//                        cleanup(player.uniqueId, type)
-//                    }
-//                }
 
             if (!onCooldown) {
-                val cooldown = (c * 1000).toLong()
+                val cooldown = (config.cooldown * 1000).toLong()
                 val nextTime = currentTime + cooldown
 
                 (blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
@@ -91,15 +139,30 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
                 // Set block to air
                 block.type = Material.AIR
 
-                // Drop only the configured item (the block itself)
-                val item: ItemStack = ItemStack(type)
-                block.world.dropItemNaturally(block.location, item)
-
-                // unsure of these block.drops.clear() and block.drops.add(item)
-                //event.block.drops.clear()
-                //event.block.drops.add(item)
+                // Handle different drop scenarios for skilled players
+                when {
+                    config.alternate != null -> {
+                        // Drop alternate items
+                        config.alternate.forEach { (material, range) ->
+                            val amount = if (range.first == range.last) {
+                                range.first
+                            } else {
+                                Random().nextInt(range.first, range.last + 1)
+                            }
+                            val item = ItemStack(material, amount)
+                            block.world.dropItemNaturally(block.location, item)
+                        }
+                        CoreLogger.debugToConsole("Alternate drops configured - dropped ${config.alternate.size} different items")
+                    }
+                    
+                    else -> {
+                        // Default behavior - drop the block itself (silk touch effect)
+                        val item: ItemStack = ItemStack(type)
+                        block.world.dropItemNaturally(block.location, item)
+                        CoreLogger.debugToConsole("Silk touch effect - dropped ${type.name}")
+                    }
+                }
             }
-
         }
     }
 

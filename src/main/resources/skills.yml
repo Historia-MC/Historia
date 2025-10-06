@@ -323,9 +323,15 @@ allow_unmodified_grass_drop:
   description: "Allows breaking grass related blocks like silk touch."
   blocks:
     grass_block:
+      no_drop: true  # Breaks block without returning anything
       cooldown: 1
     tall_grass:
-      cooldown: 1    
+      no_drop: false 
+      restrict: true 
+      alternate:  # This prevents non-skilled from breaking it
+        WHEAT_SEEDS:
+          amount: [0, 2]
+      cooldown: 1
 
 allow_unmodified_beehive_drop:
   name: Placeholder
@@ -334,7 +340,7 @@ allow_unmodified_beehive_drop:
   blocks:
     beehive:
       cooldown: 1
-      restrict: true
+      restrict: true # This prevents non-skilled from breaking it
 
 ignore_anvil_damage:
   name: Placeholder
