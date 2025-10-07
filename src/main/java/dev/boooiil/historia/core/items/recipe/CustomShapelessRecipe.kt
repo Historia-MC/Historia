@@ -2,6 +2,8 @@ package dev.boooiil.historia.core.items.recipe
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.condition.Condition
+import dev.boooiil.historia.core.items.recipe.ingredient.Ingredient
+import dev.boooiil.historia.core.items.recipe.result.Result
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.CraftingInventory
@@ -10,10 +12,10 @@ import org.bukkit.inventory.ItemStack
 class CustomShapelessRecipe(
     override val key: NamespacedKey,
     val ingredients: Array<Ingredient>,
-    val result: ItemStack,
+    val result: Result,
 ) : CustomRecipe<CraftingInventory> {
 
-    override val resultPreview = result
+    override val resultPreview = result.preview
     override val hasRandomResult = false
 
     override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
@@ -32,11 +34,10 @@ class CustomShapelessRecipe(
         return canMatchAll(matches, ingredients.toList())
     }
 
-    override fun getInput(inventory: CraftingInventory): Array<ItemStack> {
-        return inventory.matrix.filterNotNull().toTypedArray()
+    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
+        val inputs = inventory.matrix.toList().filterNotNull()
+        return result.get(inputs)
     }
-
-    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack = result.clone()
 
     private fun canMatchAll(
         possibleMatches: Map<Ingredient, List<Int>>,

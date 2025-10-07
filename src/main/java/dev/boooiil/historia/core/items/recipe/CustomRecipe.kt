@@ -11,6 +11,5 @@ interface CustomRecipe<C: Inventory> {
     val hasRandomResult: Boolean
 
     fun matches(inventory: C, ctx: Condition.Context = Condition.Context()): Boolean
-    fun getInput(inventory: C): Array<ItemStack>
     fun getResult(inventory: C, ctx: Condition.Context = Condition.Context()): ItemStack
 }

@@ -2,7 +2,8 @@ package dev.boooiil.historia.core.items.recipe
 
 import dev.boooiil.historia.core.HistoriaCore
 import dev.boooiil.historia.core.condition.Condition
-import org.bukkit.Material
+import dev.boooiil.historia.core.items.recipe.ingredient.Ingredient
+import dev.boooiil.historia.core.items.recipe.result.Result
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.InvalidConfigurationException
@@ -12,12 +13,12 @@ import org.bukkit.inventory.ItemStack
 class CustomShapedRecipe(
     override val key: NamespacedKey,
     pattern: Array<Array<Ingredient>>,
-    val result: ItemStack,
+    val result: Result,
 ) : CustomRecipe<CraftingInventory> {
 
     val pattern = pattern.trim { !it.isEmpty }
 
-    override val resultPreview = result
+    override val resultPreview = result.preview
     override val hasRandomResult = false
 
     override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
@@ -31,11 +32,10 @@ class CustomShapedRecipe(
         return pattern.matches(grid) || pattern.matches(grid.flip())
     }
 
-    override fun getInput(inventory: CraftingInventory): Array<ItemStack> {
-        return inventory.matrix.filterNotNull().toTypedArray()
+    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
+        val inputs = inventory.matrix.toList().filterNotNull()
+        return result.get(inputs)
     }
-
-    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack = result.clone()
 
     object Type : RecipeType<CustomShapedRecipe> {
         override val key = "shaped"

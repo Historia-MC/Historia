@@ -1,6 +1,9 @@
 package dev.boooiil.historia.core.items.recipe
 
 import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.items.recipe.ingredient.TypeIngredient
+import dev.boooiil.historia.core.items.recipe.result.Result
+import dev.boooiil.historia.core.items.recipe.result.SimpleResult
 import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -32,7 +35,7 @@ interface RecipeType<C: CustomRecipe<*>> {
         throw InvalidConfigurationException("Invalid item id: $itemKey")
     }
 
-    fun getResult(section: ConfigurationSection): ItemStack {
+    fun getResult(section: ConfigurationSection): Result {
 
         val resultSection = section.getConfigurationSection(RESULT_KEY)
             ?: throw InvalidConfigurationException("Shaped recipe must have a result")
@@ -45,7 +48,7 @@ interface RecipeType<C: CustomRecipe<*>> {
 //            )
         val amount = resultSection.getInt(AMOUNT_KEY, 1)
 
-        return ItemStack.of(Material.valueOf(resultString), amount)
+        return SimpleResult(ItemStack.of(Material.valueOf(resultString), amount))
     }
 
     companion object {
