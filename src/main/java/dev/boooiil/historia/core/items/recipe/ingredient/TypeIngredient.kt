@@ -1,5 +1,6 @@
-package dev.boooiil.historia.core.items.recipe
+package dev.boooiil.historia.core.items.recipe.ingredient
 
+import dev.boooiil.historia.core.items.recipe.itemId
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 

@@ -1,4 +1,4 @@
-package dev.boooiil.historia.core.items.recipe
+package dev.boooiil.historia.core.items.recipe.ingredient
 
 import org.bukkit.inventory.ItemStack
 
