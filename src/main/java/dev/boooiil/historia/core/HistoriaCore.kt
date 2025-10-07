@@ -2,6 +2,7 @@ package dev.boooiil.historia.core
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.ItemRegistryLoader
+import dev.boooiil.historia.core.configuration.RecipeLoader
 import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
@@ -148,7 +149,7 @@ open class HistoriaCore : JavaPlugin() {
         ItemComponentType.registerComponents()
         LoreConfiguration.initLoreMap()
         ItemRegistryLoader.load()
-        // RecipeLoader.load()
+        RecipeLoader.load()
         // end
 
         val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS

@@ -1,6 +1,10 @@
 package dev.boooiil.historia.core.items.events.inventory
 
+import dev.boooiil.historia.core.condition.Condition
 import dev.boooiil.historia.core.items.recipe.CustomRecipe
+import dev.boooiil.historia.core.items.recipe.CustomShapedRecipe
+import dev.boooiil.historia.core.items.recipe.CustomShapelessRecipe
+import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -20,7 +24,10 @@ object ResultSlotClickListener : Listener {
 
         if (event.slotType != SlotType.RESULT) return
 
-        val recipe = getRecipe(inventory) ?: return
+        val recipe = RegistryHolder.RECIPE_REGISTRY.values
+            .filterIsInstance<CustomRecipe<CraftingInventory>>()
+            .firstOrNull { it.matches(inventory) }
+            ?: return
 
         event.isCancelled = true
         val amount = takeResults(event, recipe)
@@ -31,7 +38,7 @@ object ResultSlotClickListener : Listener {
     fun takeResults(
         event: InventoryClickEvent,
         recipe: CustomRecipe<CraftingInventory>,
-        ctx: CustomRecipe.Context = CustomRecipe.Context()
+        ctx: Condition.Context = Condition.Context()
     ): Int {
         val craftingInv = event.inventory as? CraftingInventory ?: return 0
         val cursor = event.cursor
@@ -71,14 +78,6 @@ object ResultSlotClickListener : Listener {
 
     fun PlayerInventory.addShiftClick(vararg items: ItemStack): HashMap<Int, ItemStack> {
         return this.addItem(*items)
-    }
-
-    fun getRecipe(inventory: CraftingInventory): CustomRecipe<CraftingInventory>? {
-        return when {
-            PrepareCraftListener.shaped.matches(inventory) -> PrepareCraftListener.shaped
-            PrepareCraftListener.shapeless.matches(inventory) -> PrepareCraftListener.shapeless
-            else -> null
-        }
     }
 
     fun decrementStacks(view: InventoryView, amount: Int = 1) {

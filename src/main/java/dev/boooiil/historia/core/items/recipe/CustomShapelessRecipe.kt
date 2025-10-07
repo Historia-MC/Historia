@@ -1,6 +1,9 @@
 package dev.boooiil.historia.core.items.recipe
 
+import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.condition.Condition
 import org.bukkit.NamespacedKey
+import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
 
@@ -13,7 +16,7 @@ class CustomShapelessRecipe(
     override val resultPreview = result
     override val hasRandomResult = false
 
-    override fun matches(inventory: CraftingInventory, ctx: CustomRecipe.Context): Boolean {
+    override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
         val stacks = inventory.matrix.filterNotNull().toTypedArray()
 
         if (stacks.size != ingredients.size) return false
@@ -33,7 +36,7 @@ class CustomShapelessRecipe(
         return inventory.matrix.filterNotNull().toTypedArray()
     }
 
-    override fun getResult(inventory: CraftingInventory, ctx: CustomRecipe.Context): ItemStack = result.clone()
+    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack = result.clone()
 
     private fun canMatchAll(
         possibleMatches: Map<Ingredient, List<Int>>,
@@ -55,5 +58,29 @@ class CustomShapelessRecipe(
             usedIndices.remove(index)
         }
         return false
+    }
+
+    object Type : RecipeType<CustomShapelessRecipe> {
+        override val key = "shapeless"
+
+        override fun fromConfig(
+            recipeKey: String,
+            section: ConfigurationSection
+        ): CustomShapelessRecipe {
+            val ingredientStrings = section.getStringList(INGREDIENTS_KEY)
+
+            require(ingredientStrings.isNotEmpty()) { "Shapeless recipe must have at least one ingredient" }
+            require(ingredientStrings.size <= 9) { "Shapeless recipe must have at most 9 ingredients" }
+
+            val ingredients = ingredientStrings.map { parseIngredient(it) }.toTypedArray<Ingredient>()
+
+            return CustomShapelessRecipe(
+                HistoriaCore.getNamespacedKey(recipeKey),
+                ingredients,
+                getResult(section),
+            )
+        }
+
+        private const val INGREDIENTS_KEY = "ingredients"
     }
 }

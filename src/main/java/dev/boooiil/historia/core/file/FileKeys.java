@@ -41,6 +41,8 @@ public enum FileKeys {
 
     TEMPERATURE("temperature.yml"),
 
+    RECIPE("recipe.yml"),
+
     EXPIRY("expiry.yml");
 
     private final String key;

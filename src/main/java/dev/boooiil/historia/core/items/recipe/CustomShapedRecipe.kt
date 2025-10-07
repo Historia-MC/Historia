@@ -1,6 +1,11 @@
 package dev.boooiil.historia.core.items.recipe
 
+import dev.boooiil.historia.core.HistoriaCore
+import dev.boooiil.historia.core.condition.Condition
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.configuration.InvalidConfigurationException
 import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
 
@@ -15,7 +20,7 @@ class CustomShapedRecipe(
     override val resultPreview = result
     override val hasRandomResult = false
 
-    override fun matches(inventory: CraftingInventory, ctx: CustomRecipe.Context): Boolean {
+    override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
         val matrix = inventory.matrix
         val grid = gridOf(matrix).trim { !it.isEmpty }
 
@@ -30,7 +35,52 @@ class CustomShapedRecipe(
         return inventory.matrix.filterNotNull().toTypedArray()
     }
 
-    override fun getResult(inventory: CraftingInventory, ctx: CustomRecipe.Context): ItemStack = result.clone()
+    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack = result.clone()
+
+    object Type : RecipeType<CustomShapedRecipe> {
+        override val key = "shaped"
+
+        override fun fromConfig(
+            recipeKey: String,
+            section: ConfigurationSection
+        ): CustomShapedRecipe {
+            val patternStrings = section.getStringList(PATTERN_KEY)
+            val keySection = section.getConfigurationSection(KEY_KEY)
+                ?: throw InvalidConfigurationException("Shaped recipe must have a key section")
+
+            val patternArray = patternStrings
+                .map { it.toCharArray() }
+                .toTypedArray()
+
+            require(patternArray.isNotEmpty()) { "Pattern must have at least 1 row" }
+            require(patternArray.size <= 3) { "Pattern must have at most 3 rows" }
+
+            val rowLength = patternArray[0].size
+            require(rowLength in 1..3) { "Each row must have between 1 and 3 columns" }
+            require(patternArray.all { it.size == rowLength }) { "All rows must be of equal length" }
+
+            val pattern = patternArray.map { row ->
+                row.map { when (it) {
+                    ' ' -> Ingredient.Empty
+                    else -> {
+                        val itemKey = keySection.getString(it.toString())?.lowercase() ?: throw InvalidConfigurationException(
+                            "All pattern characters must be present in the key section"
+                        )
+                        parseIngredient(itemKey)
+                    }
+                } }.toTypedArray()
+            }.toTypedArray()
+
+            return CustomShapedRecipe(
+                HistoriaCore.getNamespacedKey(recipeKey),
+                pattern,
+                getResult(section),
+            )
+        }
+
+        private const val PATTERN_KEY = "pattern"
+        private const val KEY_KEY = "key"
+    }
 }
 
 // HELPER FUNCTIONS

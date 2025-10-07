@@ -119,6 +119,7 @@ public class ItemRegistryLoader {
 
                 assert section != null;
 
+                CoreLogger.infoToConsole("Item Registry Section", key);
                 RegistryHolder.ITEM_REGISTRY.register(namespacedKey,
                         HistoriaItem.fromConfig(namespacedKey, section));
 
