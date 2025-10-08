@@ -46,7 +46,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
         }
 
         if (result != ambientTemperature.target) {
-            CoreLogger.debugToConsole(
+            CoreLogger.verboseToConsole(
                 "Temperature change for " + player.name + ": " + internalTemperature.target
                         + " -> " + result
             )
@@ -363,7 +363,6 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
 
     }
 
-
     // helper
     private fun spawnParticleLine(id: UUID, block: Block?, targetLoc: Location) {
         if (block == null) {
@@ -381,7 +380,7 @@ class TemperatureCalculator(initialTemperature: Double, uuid: UUID) {
         var i = 0.0
         while (i < distance) {
             val particleLoc = targetLoc.clone().add(direction.clone().multiply(i))
-            player.spawnParticle(Particle.DUST, particleLoc, 1, DustOptions(Color.RED, 1.0f))
+            player.spawnParticle(Particle.DUST, particleLoc, 1, DustOptions(Color.RED, 0.5f))
             i += 0.1
         }
     }

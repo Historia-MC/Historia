@@ -9,6 +9,7 @@ object Commands {
 
     fun register(event: ReloadableRegistrarEvent<Commands>) {
         event.register(commandProficiency)
+        event.register(commandDate)
         event.register(commandGive)
         event.register(commandTemperature)
     }

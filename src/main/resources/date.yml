@@ -1,0 +1,7 @@
+version: 1
+
+# Custom day length in ticks.
+day-length: 144000
+
+# Ratio for relative day-night length in "<day>:<night>" format. Must be in quotation marks.
+day-night-ratio: "2:1"
