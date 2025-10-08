@@ -1,5 +1,6 @@
 package dev.boooiil.historia.core.proficiency.skills.component
 
+import dev.boooiil.historia.core.util.CoreLogger
 import net.kyori.adventure.key.Key
 import org.bukkit.GameEvent
 import org.bukkit.Material
@@ -61,20 +62,23 @@ class BlockComponent(
                         altSection.getKeys(false).associate { altKey ->
                             val altMaterial = Material.matchMaterial(altKey)
                                 ?: error("Invalid alternate material: $altKey")
-                            val amount = altSection.get(altKey)?.let {
-                                when (it) {
-                                    is Int -> it to it
-                                    is List<*> -> {
-                                        val intList = it.filterIsInstance<Int>()
-                                        if (intList.size != 2) {
-                                            error("Amount list for $altKey must contain exactly two integers.")
+                            val amount = altSection.getConfigurationSection(altKey)?.let { materialSection ->
+                                materialSection.get("amount").let {
+                                    CoreLogger.debugToConsole(materialSection.toString())
+                                    when (it) {
+                                        is Int -> it to it
+                                        is List<*> -> {
+                                            val intList = it.filterIsInstance<Int>()
+                                            if (intList.size != 2) {
+                                                error("Amount list for $altKey must contain exactly two integers.")
+                                            }
+                                            intList[0] to intList[1]
                                         }
-                                        intList[0] to intList[1]
-                                    }
 
-                                    else -> error("Amount for $altKey must be an integer or a list of two integers.")
+                                        else -> error("Amount for $altKey must be an integer or a list of two integers.")
+                                    }
                                 }
-                            } ?: error("Amount must be specified for alternate material: $altKey")
+                            } ?: Pair(1, 1)
                             altMaterial to (amount.first..amount.second)
                         }
                     } ?: EnumMap(Material::class.java) // same as your logic
@@ -103,7 +107,7 @@ class BlockComponent(
 
         }
     }
-    
+
     private fun cleanup(uuid: UUID, material: Material) {
         blockCooldowns[uuid]?.also {
             it.remove(material)
