@@ -32,7 +32,7 @@ interface Result {
             val amount = section.getInt(AMOUNT_KEY, 1)
 
             return when (resultId.namespace) {
-                HistoriaCore.instance.namespace() -> return QualityResult(resultId, amount)
+                HistoriaCore.instance.namespace() -> return HistoriaResult(resultId, amount)
                 else -> createSimpleResult(resultId, amount)
             }
         }

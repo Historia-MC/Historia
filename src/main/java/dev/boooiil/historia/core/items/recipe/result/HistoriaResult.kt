@@ -7,7 +7,7 @@ import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 
-class QualityResult(
+class HistoriaResult(
     itemKey: NamespacedKey,
     val amount: Int,
 ) : Result {
