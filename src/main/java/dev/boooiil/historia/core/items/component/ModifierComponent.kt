@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.items.component
 
 import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.data.ModifierData
-import dev.boooiil.historia.core.items.types.Qualities
+import dev.boooiil.historia.core.items.types.Quality
 import dev.boooiil.historia.core.items.types.Weights
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.configuration.ConfigurationSection
@@ -17,7 +17,7 @@ class ModifierComponent(
     override fun data(): ModifierData {
         return ModifierData(
             weight,
-            if (hasQuality) Qualities.entries.random() else null
+            if (hasQuality) Quality.entries.random() else null
         )
     }
 

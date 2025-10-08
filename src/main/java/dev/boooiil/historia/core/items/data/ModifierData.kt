@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.items.data
 
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
 import dev.boooiil.historia.core.items.ItemData
-import dev.boooiil.historia.core.items.types.Qualities
+import dev.boooiil.historia.core.items.types.Quality
 import dev.boooiil.historia.core.items.types.Weights
 import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONUtils
@@ -22,7 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 @JvmRecord
 data class ModifierData(
     val weight: Weights,
-    val quality: Qualities?
+    val quality: Quality?
 ) : ItemData {
 
     override fun apply(stack: ItemStack) {
@@ -117,7 +117,7 @@ data class ModifierData(
         ): ModifierData {
             val weight = Weights
                 .fromString(container.get<String, String>(WEIGHT_KEY, PersistentDataType.STRING))
-            val quality = Qualities
+            val quality = Quality
                 .fromString(container.get<String, String>(QUALITY_KEY, PersistentDataType.STRING))
 
             return ModifierData(weight, quality)

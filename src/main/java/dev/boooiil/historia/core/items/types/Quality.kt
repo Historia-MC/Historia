@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.items.types
 
 import java.util.*
 
-enum class Qualities(val displayName: String) {
+enum class Quality(val displayName: String) {
     POOR("Poor"),
     COMMON("Common"),
     PERFECT("Perfect");
@@ -12,7 +12,7 @@ enum class Qualities(val displayName: String) {
     }
 
     companion object {
-        fun fromString(str: String?): Qualities? {
+        fun fromString(str: String?): Quality? {
             return entries.find { it.name.lowercase() == str }
         }
     }

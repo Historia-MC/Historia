@@ -2,7 +2,7 @@ package dev.boooiil.historia.core.items.recipe.result
 
 import dev.boooiil.historia.core.items.HistoriaItem
 import dev.boooiil.historia.core.items.data.ModifierData
-import dev.boooiil.historia.core.items.types.Qualities
+import dev.boooiil.historia.core.items.types.Quality
 import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
@@ -22,9 +22,9 @@ class QualityResult(
             .mapNotNull { ModifierData.fromStack(it) }
             .mapNotNull { it.quality }
             .map { when(it) {
-                Qualities.POOR -> 0.0
-                Qualities.COMMON -> 0.5
-                Qualities.PERFECT -> 1.0
+                Quality.POOR -> 0.0
+                Quality.COMMON -> 0.5
+                Quality.PERFECT -> 1.0
             } }
             .average()
 
@@ -36,9 +36,9 @@ class QualityResult(
             .mapNotNull { ModifierData.fromStack(it) }
             .mapNotNull { it.quality }
             .map { when(it) {
-                Qualities.POOR -> 0.0
-                Qualities.COMMON -> 0.5
-                Qualities.PERFECT -> 1.0
+                Quality.POOR -> 0.0
+                Quality.COMMON -> 0.5
+                Quality.PERFECT -> 1.0
             } }
             .average()
 
