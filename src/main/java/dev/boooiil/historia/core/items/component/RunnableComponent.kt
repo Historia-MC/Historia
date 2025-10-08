@@ -13,7 +13,7 @@ class RunnableComponent(
 
     override val key = "runnable"
 
-    override fun data(qualityModifier: Double?): RunnableData {
+    override fun data(): RunnableData {
         return RunnableData(this.ticks, this.command, this.permission)
     }
 

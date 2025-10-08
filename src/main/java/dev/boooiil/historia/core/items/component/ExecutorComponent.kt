@@ -14,7 +14,7 @@ class ExecutorComponent(
 
     override val key = "executor"
 
-    override fun data(qualityModifier: Double?): ExecutorData {
+    override fun data(): ExecutorData {
         return ExecutorData(executables)
     }
 

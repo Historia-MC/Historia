@@ -14,7 +14,7 @@ class ModifierComponent(
 
     override val key = "modifier"
 
-    override fun data(qualityModifier: Double?): ModifierData {
+    override fun data(): ModifierData {
         return ModifierData(
             weight,
             if (hasQuality) Qualities.entries.random() else null

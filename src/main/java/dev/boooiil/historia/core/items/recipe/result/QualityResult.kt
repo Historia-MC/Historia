@@ -16,7 +16,20 @@ class QualityResult(
         ?: throw IllegalArgumentException("Could not find item with key $itemKey")
 
     override val isStatic = false
-    override val preview: ItemStack = item.createItemStack(amount)
+
+    override fun preview(inputs: List<ItemStack>): ItemStack {
+        val qualityModifier = inputs
+            .mapNotNull { ModifierData.fromStack(it) }
+            .mapNotNull { it.quality }
+            .map { when(it) {
+                Qualities.POOR -> 0.0
+                Qualities.COMMON -> 0.5
+                Qualities.PERFECT -> 1.0
+            } }
+            .average()
+
+        return item.createPreviewStack(amount, qualityModifier)
+    }
 
     override fun get(inputs: List<ItemStack>): ItemStack {
         val qualityModifier = inputs

@@ -12,7 +12,7 @@ class WeaponComponent(
 
     override val key = "weapon"
 
-    override fun data(qualityModifier: Double?): WeaponData {
+    override fun data(): WeaponData {
         val sweeping = NumberUtils.roundFloat(NumberUtils.random(this.sweepingRange[0], this.sweepingRange[1]), 2)
 
         return WeaponData(sweeping)

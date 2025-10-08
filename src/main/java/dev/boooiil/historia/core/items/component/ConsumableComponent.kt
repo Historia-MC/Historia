@@ -20,7 +20,7 @@ class ConsumableComponent(
 
     override val key = "consumable"
 
-    override fun data(qualityModifier: Double?): ItemData {
+    override fun data(): ItemData {
         val expireEpoch = when {
             expireDays < 0 -> -1
             expireDays == 0 -> 0

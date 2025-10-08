@@ -13,7 +13,7 @@ class EnchantComponent(
 
     override val key = "enchant"
 
-    override fun data(qualityModifier: Double?): EnchantData {
+    override fun data(): EnchantData {
         return EnchantData(this.enchantments)
     }
 

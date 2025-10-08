@@ -13,7 +13,7 @@ class ArmorComponent(
 
     override val key = "armor"
 
-    override fun data(qualityModifier: Double?): ArmorData {
+    override fun data(): ArmorData {
         val defense = NumberUtils
             .roundFloat(NumberUtils.random(this.defenseRange[0], this.defenseRange[1]), 2)
         val durability = NumberUtils.randomInt(this.durabilityRange[0], this.durabilityRange[1])

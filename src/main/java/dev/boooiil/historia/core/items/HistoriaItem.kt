@@ -47,6 +47,30 @@ class HistoriaItem(
         this.componentHolder.putAll(components)
     }
 
+    fun createPreviewStack(amount: Int = 1, qualityModifier: Double = 0.0): ItemStack {
+        assert(baseMaterial != Material.AIR)
+
+        val stack = ItemStack(baseMaterial, amount)
+        val meta = stack.itemMeta
+        val textComponent = Component.text(displayName)
+
+        PDCUtils.setInContainer<String>(
+            meta, getNamespacedKey("item-id"),
+            PersistentDataType.STRING, configurationId.key
+        )
+
+        val lore = mutableListOf<Component>()
+        for (component in this.componentHolder.values) {
+            lore.addAll(component.previewLore(qualityModifier))
+        }
+
+        meta.displayName(textComponent)
+        meta.lore(lore)
+        stack.setItemMeta(meta)
+
+        return stack
+    }
+
     /**
      * Creates a default [ItemStack] of this configuration with the specified amount.
      *
@@ -58,7 +82,7 @@ class HistoriaItem(
      * @return the created [ItemStack].
      */
     @JvmOverloads
-    fun createItemStack(amount: Int = 1, qualityModifier: Double? = null): ItemStack {
+    fun createItemStack(amount: Int = 1, qualityModifier: Double = 0.0): ItemStack {
         // invalid material
 
         assert(baseMaterial != Material.AIR)

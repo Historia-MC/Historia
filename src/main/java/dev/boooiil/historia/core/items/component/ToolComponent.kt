@@ -4,6 +4,7 @@ import dev.boooiil.historia.core.items.ItemComponent
 import dev.boooiil.historia.core.items.data.ToolData
 import dev.boooiil.historia.core.util.JSONUtils
 import dev.boooiil.historia.core.util.NumberUtils
+import net.kyori.adventure.text.Component
 import org.bukkit.configuration.ConfigurationSection
 
 class ToolComponent(
@@ -15,7 +16,7 @@ class ToolComponent(
 
     override val key = "tool"
 
-    override fun data(qualityModifier: Double?): ToolData {
+    override fun data(): ToolData {
         val damage = NumberUtils
             .roundFloat(NumberUtils.random(this.damageRange[0], this.damageRange[1]), 2)
         val speed = NumberUtils
@@ -25,6 +26,10 @@ class ToolComponent(
         val durability = NumberUtils.randomInt(this.durabilityRange[0], this.durabilityRange[1])
 
         return ToolData(damage, speed, knockback, durability)
+    }
+
+    override fun previewLore(qualityModifier: Double): List<Component> {
+        return listOf(Component.text("Quality: $qualityModifier"))
     }
 
     override fun toString(): String {
