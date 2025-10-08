@@ -323,14 +323,15 @@ allow_unmodified_grass_drop:
   description: "Allows breaking grass related blocks like silk touch."
   blocks:
     grass_block:
-      no_drop: true  # Non skilled players breaks block without returning anything
-      cooldown: 1
+      alternate:
+        dirt:
+          amount: 1
     tall_grass:
       no_drop: false # Non skilled players breaks block without returning anything
       restrict: true # Non skilled players will be unable to break the block
-      alternate:  # Skilled players will get a different drop
+      alternate: # Skilled players will get a different drop
         WHEAT_SEEDS:
-          amount: [0, 2]
+          amount: [ 0, 2 ]
       cooldown: 1
 
 allow_unmodified_beehive_drop:
@@ -346,7 +347,7 @@ ignore_anvil_damage:
   name: Placeholder
   type: ignore_anvil_damage
   description: "Prevents anvil durability damage when using anvils."
-  cooldown: 1  
+  cooldown: 1
 
 animal_drops_shear_chicken:
   name: Placeholder
@@ -356,7 +357,7 @@ animal_drops_shear_chicken:
     chicken:
       drops:
         feather:
-          amount: [1, 4]
+          amount: [ 1, 4 ]
       cooldown: 1
 
 
@@ -367,4 +368,4 @@ chance_extra_block_wood:
   blocks:
     oak_log:
       chance: 0.5
-      amount: [1,4]
+      amount: [ 1,4 ]
