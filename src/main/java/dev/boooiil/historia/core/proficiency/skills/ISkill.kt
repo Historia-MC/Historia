@@ -32,6 +32,15 @@ interface ISkill : JSONSerializable {
     val description: String
 
     /**
+     * Whether the skill is global or not.
+     *
+     * Global skills can be used by any proficiency, while non-global skills are restricted to specific proficiencies.
+     *
+     * @return Whether the skill is global or not.
+     */
+    val global: Boolean
+
+    /**
      * Execute the skill with a given set of supplied objects.
      *
      * @param skillSuppliers - Objects to be provided for this skill.
