@@ -96,47 +96,19 @@ class SkillAllowUnmodifiedDrop(section: ConfigurationSection) : AbstractSkillRun
 
                 (blockComponent.blockCooldowns.getOrPut(player.uniqueId) { ConcurrentHashMap() })[type] = nextTime
 
-                // Cancel the event to prevent normal drops
-//                event.isCancelled = true
-
                 // Set block to air
-//                block.type = Material.AIR
-
-                block.drops.clear()
+                block.type = Material.AIR
 
                 if (!config.alternateDrops.isEmpty()) {
-                    val drops = config.alternateDrops.map { drop ->
-                        ItemStack(drop.key, drop.value.random())
-                    }.toSet()
+                    config.alternateDrops.forEach { drop ->
+                        val loc = block.location.clone().add(0.5, 0.5, 0.5)
+                        block.world.dropItemNaturally(loc, ItemStack(drop.key, drop.value.random()))
+                    }
 
-                    block.drops.addAll(drops)
                 } else {
-                    block.drops.add(ItemStack(type, config.amount.random()))
+                    val loc = block.location.clone().add(0.5, 0.5, 0.5)
+                    block.world.dropItemNaturally(loc, ItemStack(type, config.amount.random()))
                 }
-
-                // Handle different drop scenarios for skilled players
-//                when {
-//                    !config.alternateDrops.isEmpty() -> {
-//                        // Drop alternate items
-//                        config.alternateDrops.forEach { (material, range) ->
-//                            val amount = if (range.first == range.last) {
-//                                range.first
-//                            } else {
-//                                Random().nextInt(range.first, range.last + 1)
-//                            }
-//                            val item = ItemStack(material, amount)
-//                            block.world.dropItemNaturally(block.location, item)
-//                        }
-//                        CoreLogger.debugToConsole("Alternate drops configured - dropped ${config.alternateDrops.size} different items")
-//                    }
-//
-//                    else -> {
-//                        // Default behavior - drop the block itself (silk touch effect)
-//                        val item: ItemStack = ItemStack(type)
-//                        block.world.dropItemNaturally(block.location, item)
-//                        CoreLogger.debugToConsole("Silk touch effect - dropped ${type.name}")
-//                    }
-//                }
             }
         }
     }
