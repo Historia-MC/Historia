@@ -1,13 +1,8 @@
-package dev.boooiil.historia.core.items;
+package dev.boooiil.historia.core.items
 
-import dev.boooiil.historia.core.util.JSONSerializable;
-import org.jspecify.annotations.NullMarked;
+import dev.boooiil.historia.core.util.JSONSerializable
 
-@NullMarked
-public interface ItemComponent extends JSONSerializable {
-    ItemData data();
-
-    ItemData data(float qualityModifier);
-
-    String getKey();
+interface ItemComponent : JSONSerializable {
+    val key: String
+    fun data(qualityModifier: Double? = null): ItemData
 }

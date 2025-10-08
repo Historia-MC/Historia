@@ -21,7 +21,9 @@ import java.util.HashMap;
 /**
  * @param executables private String id;
  */
-public record ExecutorData(HashMap<Triggers, ItemExecutable> executables) implements ItemData {
+public record ExecutorData(
+        HashMap<Triggers, ItemExecutable> executables
+) implements ItemData {
 
     public static final PersistentDataType<PersistentDataContainer, ExecutorData> DATA_TYPE = new DataType();
     public static final NamespacedKey KEY = HistoriaCore.getNamespacedKey("executor");

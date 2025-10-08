@@ -18,6 +18,6 @@ object PrepareCraftListener : Listener {
             .firstOrNull { it.matches(inventory) }
             ?: return
 
-        inventory.result = recipe.resultPreview
+        inventory.result = recipe.result.preview
     }
 }

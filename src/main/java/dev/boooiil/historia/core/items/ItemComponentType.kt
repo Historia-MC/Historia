@@ -1,101 +1,104 @@
-package dev.boooiil.historia.core.items;
+package dev.boooiil.historia.core.items
 
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.items.component.*;
-import dev.boooiil.historia.core.items.data.*;
-import dev.boooiil.historia.core.items.types.Weights;
-import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.util.JSONSerializable;
-import dev.boooiil.historia.core.util.JSONUtils;
-import org.bukkit.configuration.ConfigurationSection;
+import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
+import dev.boooiil.historia.core.items.component.*
+import dev.boooiil.historia.core.items.data.*
+import dev.boooiil.historia.core.items.data.ModifierData.Companion.KEY
+import dev.boooiil.historia.core.items.executor.ItemExecutable
+import dev.boooiil.historia.core.items.types.Triggers
+import dev.boooiil.historia.core.items.types.Weights
+import dev.boooiil.historia.core.registry.RegistryHolder
+import dev.boooiil.historia.core.util.JSONSerializable
+import dev.boooiil.historia.core.util.JSONUtils
+import io.papermc.paper.datacomponent.item.Consumable
+import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.enchantments.Enchantment
+import org.bukkit.potion.PotionEffect
+import java.util.function.Function
+import java.util.function.Supplier
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.function.Function;
-import java.util.function.Supplier;
+class ItemComponentType<T : ItemComponent>(
+    private val fromConfig: Function<ConfigurationSection, T>,
+    private val defaultData: Supplier<out ItemData>
+) : JSONSerializable {
 
-public class ItemComponentType<T extends ItemComponent> implements JSONSerializable {
-
-    private final Function<ConfigurationSection, T> fromConfig;
-    private final Supplier<? extends ItemData> defaultData;
-
-    public ItemComponentType(
-            Function<ConfigurationSection, T> fromConfig,
-            Supplier<? extends ItemData> defaultData) {
-        this.fromConfig = fromConfig;
-        this.defaultData = defaultData;
+    fun fromConfig(section: ConfigurationSection): T {
+        return fromConfig.apply(section)
     }
 
-    public T fromConfig(ConfigurationSection section) {
-        return fromConfig.apply(section);
+    val data: ItemData
+        get() = defaultData.get()
+
+    override fun toJSON(): String {
+        val sb = "{" +
+                JSONUtils.fromValue("armor", ArmorData(1f, 1)) + "," +
+                JSONUtils.fromValue("tool", ToolData(1f, 1f, 1f, 1)) + "," +
+                JSONUtils.fromValue("weapon", WeaponData(1f)) + "," +
+                JSONUtils.fromValue("executor", ExecutorData(HashMap<Triggers?, ItemExecutable?>())) + "," +
+                JSONUtils.fromValue("runnable", RunnableData(0, "", "")) + "," +
+                JSONUtils.fromValue("enchant", EnchantData(HashMap<Enchantment?, Int?>())) +
+                "}"
+
+        return sb
     }
 
-    public ItemData getData() {
-        return defaultData.get();
-    }
+    companion object {
+        fun registerComponents() {
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                KEY,
+                ItemComponentType(
+                    ModifierComponent::fromConfig
+                ) { ModifierData(Weights.LIGHT, null) }
+            )
 
-    public static void registerComponents() {
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                ModifierData.Companion.getKEY(),
-                new ItemComponentType<>(
-                        ModifierComponent.Companion::fromConfig,
-                        () -> new ModifierData(Weights.LIGHT, null)));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("tool"),
+                ItemComponentType(
+                    ToolComponent::fromConfig
+                ) { ToolData(1f, 1f, 1f, 1) }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("tool"),
-                new ItemComponentType<>(
-                        ToolComponent::fromConfig,
-                        () -> new ToolData(1, 1, 1, 1)));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("weapon"),
+                ItemComponentType(
+                    WeaponComponent::fromConfig
+                ) { WeaponData(1f) }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("weapon"),
-                new ItemComponentType<>(
-                        WeaponComponent::fromConfig,
-                        () -> new WeaponData(1)));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("armor"),
+                ItemComponentType(
+                    ArmorComponent::fromConfig
+                ) { ArmorData(1f, 1) }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("armor"),
-                new ItemComponentType<>(
-                        ArmorComponent::fromConfig,
-                        () -> new ArmorData(1, 1)));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("executor"),
+                ItemComponentType(
+                    ExecutorComponent::fromConfig
+                ) { ExecutorData(HashMap<Triggers, ItemExecutable>()) }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("executor"),
-                new ItemComponentType<>(
-                        ExecutorComponent::fromConfig,
-                        () -> new ExecutorData(new HashMap<>())));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("runnable"),
+                ItemComponentType(
+                    RunnableComponent::fromConfig
+                ) { RunnableData(0, "", "") }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("runnable"),
-                new ItemComponentType<>(
-                        RunnableComponent::fromConfig,
-                        () -> new RunnableData(0, "", "")));
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("enchant"),
+                ItemComponentType(
+                    EnchantComponent::fromConfig
+                ) { EnchantData(HashMap<Enchantment, Int>()) }
+            )
 
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("enchant"),
-                new ItemComponentType<>(
-                        EnchantComponent::fromConfig,
-                        () -> new EnchantData(new HashMap<>())));
-
-        RegistryHolder.COMPONENT_REGISTRY.register(
-                HistoriaCore.getNamespacedKey("consumable"),
-                new ItemComponentType<>(
-                        ConsumableComponent.Companion::fromConfig,
-                        () -> new ConsumableData(0, 1, 0, new ArrayList<>())));
-    }
-
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
-                JSONUtils.fromValue("armor", new ArmorData(1, 1)) + "," +
-                JSONUtils.fromValue("tool", new ToolData(1, 1, 1, 1)) + "," +
-                JSONUtils.fromValue("weapon", new WeaponData(1)) + "," +
-                JSONUtils.fromValue("executor", new ExecutorData(new HashMap<>())) + "," +
-                JSONUtils.fromValue("runnable", new RunnableData(0, "", "")) + "," +
-                JSONUtils.fromValue("enchant", new EnchantData(new HashMap<>())) +
-                "}";
-
-        return sb;
+            RegistryHolder.COMPONENT_REGISTRY.register(
+                getNamespacedKey("consumable"),
+                ItemComponentType(
+                    ConsumableComponent::fromConfig
+                ) { ConsumableData(0, 1f, 0, mutableListOf()) }
+            )
+        }
     }
 }

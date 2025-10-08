@@ -12,11 +12,8 @@ import org.bukkit.inventory.ItemStack
 class CustomShapelessRecipe(
     override val key: NamespacedKey,
     val ingredients: Array<Ingredient>,
-    val result: Result,
+    override val result: Result,
 ) : CustomRecipe<CraftingInventory> {
-
-    override val resultPreview = result.preview
-    override val hasRandomResult = false
 
     override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
         val stacks = inventory.matrix.filterNotNull().toTypedArray()
@@ -34,7 +31,7 @@ class CustomShapelessRecipe(
         return canMatchAll(matches, ingredients.toList())
     }
 
-    override fun getResult(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
+    override fun getResultStack(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
         val inputs = inventory.matrix.toList().filterNotNull()
         return result.get(inputs)
     }

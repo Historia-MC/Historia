@@ -18,9 +18,9 @@ class ConsumableComponent(
     val effects: MutableList<PotionEffect>
 ) : ItemComponent {
 
-    override fun data(qualityModifier: Float): ItemData = data()
+    override val key = "consumable"
 
-    override fun data(): ItemData {
+    override fun data(qualityModifier: Double?): ItemData {
         val expireEpoch = when {
             expireDays < 0 -> -1
             expireDays == 0 -> 0
@@ -31,8 +31,6 @@ class ConsumableComponent(
         }
         return ConsumableData(this.hunger, this.saturationModifier, expireEpoch, this.effects)
     }
-
-    override fun getKey(): String = "consumable"
 
     override fun toJSON(): String {
         return "{" +

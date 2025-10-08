@@ -11,7 +11,6 @@ object Commands {
         event.register(commandProficiency)
         event.register(commandGive)
         event.register(commandTemperature)
-        event.register(commandTest)
     }
 
     fun ReloadableRegistrarEvent<Commands>.register(command: LiteralCommandNode<CommandSourceStack>) {

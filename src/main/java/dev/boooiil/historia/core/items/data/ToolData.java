@@ -38,7 +38,6 @@ public record ToolData(float damage, float speed, float knockback, int maxDurabi
      * @param knockback     Knockback of the tool.
      * @param maxDurability Max durability of the tool.
      */
-
     public ToolData {
         // this.id = id;
     }
@@ -50,10 +49,8 @@ public record ToolData(float damage, float speed, float knockback, int maxDurabi
      * @return ToolData object containing the tool data.
      */
     public static ToolData fromStack(ItemStack stack) {
-
         return PDCUtils.getFromComplexContainer(stack, ToolData.DATA_KEY, ToolData.DATA_TYPE)
                 .orElse(new ToolData(0, 0, 0, 1));
-
     }
 
     /**

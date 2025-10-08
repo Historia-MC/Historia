@@ -50,14 +50,14 @@ object ResultSlotClickListener : Listener {
         if (event.isShiftClick) {
             val playerInv = event.whoClicked.inventory
             var added = 0
-            if (recipe.hasRandomResult) {
+            if (!recipe.result.isStatic) {
                 while (added < maxAmount && playerInv.firstEmpty() != -1) {
-                    playerInv.addShiftClick(recipe.getResult(craftingInv))
+                    playerInv.addShiftClick(recipe.getResultStack(craftingInv))
                     added++
                 }
             } else {
                 while (added < maxAmount) {
-                    val leftOver = playerInv.addShiftClick(recipe.getResult(craftingInv))
+                    val leftOver = playerInv.addShiftClick(recipe.getResultStack(craftingInv))
                     if (!leftOver.isEmpty()) break
                     added++
                 }
@@ -66,10 +66,10 @@ object ResultSlotClickListener : Listener {
         }
 
         if (cursor.isEmpty) {
-            event.setCursor(recipe.getResult(craftingInv))
+            event.setCursor(recipe.getResultStack(craftingInv))
             return 1
         }
-        if (!recipe.hasRandomResult) {
+        if (recipe.result.isStatic) {
             event.cursor.amount++
             return 1
         }

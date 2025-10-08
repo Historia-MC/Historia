@@ -1,56 +1,41 @@
-package dev.boooiil.historia.core.items.component;
+package dev.boooiil.historia.core.items.component
 
-import dev.boooiil.historia.core.items.ItemComponent;
-import dev.boooiil.historia.core.items.data.WeaponData;
-import dev.boooiil.historia.core.util.JSONUtils;
-import dev.boooiil.historia.core.util.NumberUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.jspecify.annotations.NullMarked;
+import dev.boooiil.historia.core.items.ItemComponent
+import dev.boooiil.historia.core.items.data.WeaponData
+import dev.boooiil.historia.core.util.JSONUtils
+import dev.boooiil.historia.core.util.NumberUtils
+import org.bukkit.configuration.ConfigurationSection
 
-import java.util.List;
+class WeaponComponent(
+    val sweepingRange: MutableList<Float>
+) : ItemComponent {
 
-@NullMarked
-public record WeaponComponent(List<Float> sweepingRange) implements ItemComponent {
+    override val key = "weapon"
 
-    public static WeaponComponent fromConfig(ConfigurationSection section) {
-        return new WeaponComponent(section.getFloatList("sweeping"));
+    override fun data(qualityModifier: Double?): WeaponData {
+        val sweeping = NumberUtils.roundFloat(NumberUtils.random(this.sweepingRange[0], this.sweepingRange[1]), 2)
+
+        return WeaponData(sweeping)
     }
 
-    @Override
-    public WeaponData data() {
-        float sweeping = NumberUtils
-                .roundFloat(NumberUtils.random(this.sweepingRange().get(0), this.sweepingRange().get(1)), 2);
+    override fun toString(): String {
+        val sb = "WeaponComponent" +
+                toJSON()
 
-        return new WeaponData(sweeping);
+        return sb
     }
 
-    @Override
-    public WeaponData data(float qualityModifier) {
-        return data();
-    }
-
-    @Override
-    public String getKey() {
-        return "weapon";
-    }
-
-    @Override
-    public String toString() {
-
-        String sb = "WeaponComponent" +
-                toJSON();
-
-        return sb;
-    }
-
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
+    override fun toJSON(): String {
+        val sb = "{" +
                 JSONUtils.fromList("sweepRange", sweepingRange) +
-                "}";
+                "}"
 
-        return sb;
+        return sb
     }
 
+    companion object {
+        fun fromConfig(section: ConfigurationSection): WeaponComponent {
+            return WeaponComponent(section.getFloatList("sweeping"))
+        }
+    }
 }

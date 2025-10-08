@@ -1,198 +1,87 @@
-package dev.boooiil.historia.core.items;
+package dev.boooiil.historia.core.items
 
-import dev.boooiil.historia.core.HistoriaCore;
-import dev.boooiil.historia.core.configuration.specific.LoreConfiguration;
-import dev.boooiil.historia.core.registry.RegistryHolder;
-import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.JSONSerializable;
-import dev.boooiil.historia.core.util.JSONUtils;
-import dev.boooiil.historia.core.util.PDCUtils;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-import org.jspecify.annotations.NullMarked;
+import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
+import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
+import dev.boooiil.historia.core.registry.RegistryHolder
+import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.JSONSerializable
+import dev.boooiil.historia.core.util.JSONUtils
+import dev.boooiil.historia.core.util.PDCUtils
+import net.kyori.adventure.text.Component
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataType
+import java.util.*
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-@NullMarked
-public class HistoriaItem implements JSONSerializable {
-
-    private final NamespacedKey id;
-    private final String displayName;
-    private final Material baseMaterial;
-    private final List<Component> lore;
-
-    /**
-     * The weight of the item in KG. We are a metric society, damn the imperialists.
-     */
-    private final double weight;
-
-    private final Map<NamespacedKey, ItemComponent> components;
-
-    public HistoriaItem(
-            NamespacedKey id,
-            String displayName,
-            Material baseMaterial,
-            List<Component> lore,
-            double weight,
-            Map<NamespacedKey, ItemComponent> components) {
-        this.id = id;
-        this.displayName = displayName;
-        this.baseMaterial = baseMaterial;
-        this.lore = lore;
-        this.weight = weight;
-        this.components = components;
-    }
-
-    public static HistoriaItem fromConfig(NamespacedKey id, ConfigurationSection section) {
-        Material baseMaterial = Material.valueOf(section.getString("material"));
-        String displayName = section.getString("display-name");
-        Double weight = section.getDouble("weight");
-
-        CoreLogger.verboseToConsole(baseMaterial.toString(), displayName, weight.toString(),
-                section.getKeys(false).toString());
-
-        CoreLogger.verboseToConsole("COMPONENT_REGISTRY KEYS:", RegistryHolder.COMPONENT_REGISTRY.keySet().toString());
-
-        Map<NamespacedKey, ItemComponent> components = new HashMap<>();
-        for (Map.Entry<NamespacedKey, ItemComponentType<? extends ItemComponent>> entry : RegistryHolder.COMPONENT_REGISTRY.entrySet()) {
-            NamespacedKey key = entry.getKey();
-            CoreLogger.verboseToConsole("Checking", id.getKey(), " for component:", key.getKey());
-            if (section.contains(key.getKey())) {
-                CoreLogger.verboseToConsole(displayName, "has a component of type", key.getKey());
-                ItemComponentType<?> type = entry.getValue();
-                ConfigurationSection componentSection = section.getConfigurationSection(key.getKey());
-                components.put(key, type.fromConfig(componentSection));
-            }
-        }
-
-        List<Component> lore = new ArrayList<>();
-        if (section.contains("lore")) {
-            List<String> loreList = section.getStringList("lore");
-            for (String sLore : loreList) {
-                lore.add(Component.text(sLore));
-            }
-        }
-        if (!components.isEmpty()) {
-
-            for (NamespacedKey key : components.keySet()) {
-
-                String s_key = key.getKey();
-
-                if (LoreConfiguration.contains(s_key)) {
-                    lore.add(Component.text("[" + s_key.toUpperCase() + "]"));
-
-                    HashMap<String, List<String>> cLore = LoreConfiguration.get(s_key);
-
-                    for (String sLore : cLore.get("head")) {
-                        lore.add(Component.text(sLore));
-                    }
-
-                    lore.add(Component.text(""));
-
-                    for (String sLore : cLore.get("attribute")) {
-                        lore.add(Component.text(sLore));
-                    }
-
-                    lore.add(Component.text(""));
-
-                }
-            }
-
-            List<String> loreList = LoreConfiguration.get("weight").get("attribute");
-            for (String sLore : loreList) {
-                lore.add(Component.text(sLore));
-            }
-
-        }
-
-        return new HistoriaItem(id, displayName, baseMaterial, lore, weight, components);
-    }
-
-    public void putComponent(NamespacedKey key, ItemComponent components) {
-        this.components.put(key, components);
-    }
-
-    public void putComponents(HashMap<NamespacedKey, ItemComponent> components) {
-        this.components.putAll(components);
-    }
-
-    public NamespacedKey getConfigurationId() {
-        return this.id;
-    }
-
+class HistoriaItem(
+    val configurationId: NamespacedKey,
     /**
      * @return the displayName
      */
-    public String getDisplayName() {
-        return displayName;
-    }
-
+    val displayName: String,
     /**
      * @return the baseMaterial
      */
-    public Material getBaseMaterial() {
-        return baseMaterial;
-    }
-
+    val baseMaterial: Material,
+    private val lore: MutableList<Component>,
     /**
-     * @return the weight
+     * The weight of the item in KG. We are a metric society, damn the imperialists.
      */
-    public double getWeight() {
-        return weight;
-    }
-
+    val weight: Double,
     /**
      * @return the components
      */
-    public Map<NamespacedKey, ItemComponent> getComponentHolder() {
-        return this.components;
+    val componentHolder: MutableMap<NamespacedKey, ItemComponent>
+) : JSONSerializable {
+    /**
+     * @return the weight
+     */
+
+    fun putComponent(key: NamespacedKey, components: ItemComponent) {
+        this.componentHolder.put(key, components)
+    }
+
+    fun putComponents(components: HashMap<NamespacedKey, ItemComponent>) {
+        this.componentHolder.putAll(components)
     }
 
     /**
-     * Creates a default {@link ItemStack} of this configuration.
+     * Creates a default [ItemStack] of this configuration with the specified amount.
      *
-     * @return the created {@link ItemStack}.
+     * @return the created [ItemStack].
      */
-    public ItemStack createItemStack() {
-        return createItemStack(1);
-    }
-
     /**
-     * Creates a default {@link ItemStack} of this configuration with the specified amount.
+     * Creates a default [ItemStack] of this configuration.
      *
-     * @return the created {@link ItemStack}.
+     * @return the created [ItemStack].
      */
-    public ItemStack createItemStack(int amount) {
-
+    @JvmOverloads
+    fun createItemStack(amount: Int = 1, qualityModifier: Double? = null): ItemStack {
         // invalid material
-        assert (baseMaterial != null && baseMaterial != Material.AIR);
 
-        ItemStack stack = new ItemStack(baseMaterial, amount);
-        ItemMeta meta = stack.getItemMeta();
-        TextComponent textComponent = Component.text(displayName);
+        assert(baseMaterial != Material.AIR)
 
-        PDCUtils.setInContainer(meta, HistoriaCore.getNamespacedKey("item-id"),
-                PersistentDataType.STRING, id.getKey());
+        val stack = ItemStack(baseMaterial, amount)
+        val meta = stack.itemMeta
+        val textComponent = Component.text(displayName)
 
-        meta.displayName(textComponent);
-        meta.lore(lore);
-        stack.setItemMeta(meta);
+        PDCUtils.setInContainer<String>(
+            meta, getNamespacedKey("item-id"),
+            PersistentDataType.STRING, configurationId.key
+        )
 
-        for (ItemComponent component : this.components.values()) {
-            ItemData data = component.data();
-            data.apply(stack);
+        meta.displayName(textComponent)
+        meta.lore(lore)
+        stack.setItemMeta(meta)
+
+        for (component in this.componentHolder.values) {
+            val data = component.data(qualityModifier)
+            data.apply(stack)
         }
 
-        return stack;
+        return stack
 
         // for (ItemComponent component : componentHolder.values()) {
         // component.setDefaultsToMeta(item);
@@ -204,39 +93,98 @@ public class HistoriaItem implements JSONSerializable {
         // HistoriaItem.getValue(weapon.sweeping)
 
         // return item;
-
     }
 
-    @Override
-    public String toString() {
-
-        String sb = "HistoriaItem" +
+    override fun toString(): String {
+        val sb = "HistoriaItem" +
                 "{" +
-                JSONUtils.fromValue("id", id.getKey()) + ", " +
+                JSONUtils.fromValue("id", configurationId.key) + ", " +
                 JSONUtils.fromValue("displayName", displayName) + ", " +
-                JSONUtils.fromValue("baseMaterial", baseMaterial.name().toLowerCase()) + ", " +
+                JSONUtils.fromValue("baseMaterial", baseMaterial.name.lowercase(Locale.getDefault())) + ", " +
                 JSONUtils.fromValue("weight", weight) + ", " +
                 JSONUtils.fromComponentList("lore", lore) + ", " +
-                JSONUtils.fromMap("components", components, true) +
-                "}";
+                JSONUtils.fromMap<NamespacedKey, ItemComponent>("components", this.componentHolder, true) +
+                "}"
 
-        return sb;
-
+        return sb
     }
 
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
-                JSONUtils.fromValue("id", id.getKey()) + ", " +
+    override fun toJSON(): String {
+        val sb = "{" +
+                JSONUtils.fromValue("id", configurationId.key) + ", " +
                 JSONUtils.fromValue("displayName", displayName) + ", " +
-                JSONUtils.fromValue("baseMaterial", baseMaterial.name().toLowerCase()) + ", " +
+                JSONUtils.fromValue("baseMaterial", baseMaterial.name.lowercase(Locale.getDefault())) + ", " +
                 JSONUtils.fromValue("weight", weight) + ", " +
                 JSONUtils.fromComponentList("lore", lore) + ", " +
-                JSONUtils.fromMap("components", components) +
-                "}";
+                JSONUtils.fromMap<NamespacedKey, ItemComponent>("components", this.componentHolder) +
+                "}"
 
-        return sb;
+        return sb
     }
 
+    companion object {
+        @JvmStatic
+        fun fromConfig(id: NamespacedKey, section: ConfigurationSection): HistoriaItem {
+            val baseMaterial = Material.valueOf(section.getString("material")!!)
+            val displayName = section.getString("display-name")
+            val weight = section.getDouble("weight")
+
+            CoreLogger.verboseToConsole(
+                baseMaterial.toString(), displayName!!, weight.toString(),
+                section.getKeys(false).toString()
+            )
+
+            CoreLogger.verboseToConsole("COMPONENT_REGISTRY KEYS:", RegistryHolder.COMPONENT_REGISTRY.keys.toString())
+
+            val components: MutableMap<NamespacedKey, ItemComponent> = HashMap<NamespacedKey, ItemComponent>()
+            for (entry in RegistryHolder.COMPONENT_REGISTRY.entries) {
+                val key = entry.key
+                CoreLogger.verboseToConsole("Checking", id.key, " for component:", key.key)
+                if (section.contains(key.key)) {
+                    CoreLogger.verboseToConsole(displayName, "has a component of type", key.key)
+                    val type = entry.value
+                    val componentSection = section.getConfigurationSection(key.key)
+                    components.put(key, type.fromConfig(componentSection!!))
+                }
+            }
+
+            val lore: MutableList<Component> = ArrayList<Component>()
+            if (section.contains("lore")) {
+                val loreList = section.getStringList("lore")
+                for (sLore in loreList) {
+                    lore.add(Component.text(sLore))
+                }
+            }
+            if (!components.isEmpty()) {
+                for (key in components.keys) {
+                    val sKey = key.key
+
+                    if (LoreConfiguration.contains(sKey)) {
+                        lore.add(Component.text("[${sKey.uppercase()}]"))
+
+                        val cLore = LoreConfiguration.get(sKey)
+
+                        for (sLore in cLore!!.get("head")!!) {
+                            lore.add(Component.text(sLore))
+                        }
+
+                        lore.add(Component.text(""))
+
+                        for (sLore in cLore.get("attribute")!!) {
+                            lore.add(Component.text(sLore))
+                        }
+
+                        lore.add(Component.text(""))
+                    }
+                }
+
+                val loreList: MutableList<String> = LoreConfiguration.get("weight").get("attribute")!!
+                for (sLore in loreList) {
+                    lore.add(Component.text(sLore))
+                }
+            }
+
+            return HistoriaItem(id, displayName, baseMaterial, lore, weight, components)
+        }
+    }
 }

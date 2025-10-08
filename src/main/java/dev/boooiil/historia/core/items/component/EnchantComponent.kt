@@ -1,99 +1,78 @@
-package dev.boooiil.historia.core.items.component;
+package dev.boooiil.historia.core.items.component
 
-import dev.boooiil.historia.core.items.ItemComponent;
-import dev.boooiil.historia.core.items.data.EnchantData;
-import dev.boooiil.historia.core.util.CoreLogger;
-import dev.boooiil.historia.core.util.JSONUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.enchantments.Enchantment;
+import dev.boooiil.historia.core.items.ItemComponent
+import dev.boooiil.historia.core.items.data.EnchantData
+import dev.boooiil.historia.core.util.CoreLogger
+import dev.boooiil.historia.core.util.JSONUtils
+import org.bukkit.configuration.ConfigurationSection
+import org.bukkit.enchantments.Enchantment
 
-import java.util.HashMap;
-import java.util.Map.Entry;
+class EnchantComponent(
+    val enchantments: HashMap<Enchantment, Int>
+) : ItemComponent {
 
-public record EnchantComponent(HashMap<Enchantment, Integer> enchantments) implements ItemComponent {
+    override val key = "enchant"
 
-    public static EnchantComponent fromConfig(ConfigurationSection section) {
+    override fun data(qualityModifier: Double?): EnchantData {
+        return EnchantData(this.enchantments)
+    }
 
-        HashMap<Enchantment, Integer> map = new HashMap<>();
+    override fun toString(): String {
+        val sb = StringBuilder()
 
-        for (String enchant : section.getKeys(false)) {
-            Enchantment enchantment = Enchantment.getByName(enchant);
+        sb.append("EnchantComponent")
+        sb.append("{")
+        sb.append("\"enchantments\":")
+        sb.append("{")
 
-            if (enchantment == null) {
-                CoreLogger.errorToConsole("Tried to get enchantment",
-                        enchant, "from enchantment component but it does not exist.");
-                continue;
+        for (enchants in enchantments.entries) {
+            sb.append(JSONUtils.fromValue(enchants.key.key.key, enchants.value))
+            sb.append(", ")
+        }
+        sb.setLength(sb.length - 2)
+        sb.append("}")
+        sb.append("}")
 
+        return sb.toString()
+    }
+
+    override fun toJSON(): String {
+        val sb = StringBuilder()
+
+        sb.append("{")
+        sb.append("\"enchantments\":")
+        sb.append("{")
+
+        for (enchants in enchantments.entries) {
+            sb.append(JSONUtils.fromValue(enchants.key.key.key, enchants.value))
+            sb.append(", ")
+        }
+        sb.setLength(sb.length - 2)
+        sb.append("}")
+        sb.append("}")
+
+        return sb.toString()
+    }
+
+    companion object {
+        fun fromConfig(section: ConfigurationSection): EnchantComponent {
+            val map = HashMap<Enchantment, Int>()
+
+            for (enchant in section.getKeys(false)) {
+                val enchantment = Enchantment.getByName(enchant)
+
+                if (enchantment == null) {
+                    CoreLogger.errorToConsole(
+                        "Tried to get enchantment",
+                        enchant, "from enchantment component but it does not exist."
+                    )
+                    continue
+                }
+
+                map[enchantment] = section.getInt(enchant)
             }
 
-            map.put(enchantment, section.getInt(enchant));
-
+            return EnchantComponent(map)
         }
-
-        return new EnchantComponent(map);
-
     }
-
-    @Override
-    public EnchantData data() {
-        return new EnchantData(this.enchantments);
-    }
-
-    @Override
-    public EnchantData data(float qualityModifier) {
-        return data();
-    }
-
-    @Override
-    public String getKey() {
-        return "enchant";
-    }
-
-    @Override
-    public String toString() {
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("EnchantComponent");
-        sb.append("{");
-        sb.append("\"enchantments\":");
-        sb.append("{");
-
-        for (Entry<Enchantment, Integer> enchants : enchantments.entrySet()) {
-
-            sb.append(JSONUtils.fromValue(enchants.getKey().getKey().getKey(), enchants.getValue()));
-            sb.append(", ");
-
-        }
-        sb.setLength(sb.length() - 2);
-        sb.append("}");
-        sb.append("}");
-
-        return sb.toString();
-
-    }
-
-    @Override
-    public String toJSON() {
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("{");
-        sb.append("\"enchantments\":");
-        sb.append("{");
-
-        for (Entry<Enchantment, Integer> enchants : enchantments.entrySet()) {
-
-            sb.append(JSONUtils.fromValue(enchants.getKey().getKey().getKey(), enchants.getValue()));
-            sb.append(", ");
-
-        }
-        sb.setLength(sb.length() - 2);
-        sb.append("}");
-        sb.append("}");
-
-        return sb.toString();
-
-    }
-
 }

@@ -1,60 +1,48 @@
-package dev.boooiil.historia.core.items.component;
+package dev.boooiil.historia.core.items.component
 
-import dev.boooiil.historia.core.items.ItemComponent;
-import dev.boooiil.historia.core.items.data.ArmorData;
-import dev.boooiil.historia.core.util.JSONUtils;
-import dev.boooiil.historia.core.util.NumberUtils;
-import org.bukkit.configuration.ConfigurationSection;
-import org.jspecify.annotations.NullMarked;
+import dev.boooiil.historia.core.items.ItemComponent
+import dev.boooiil.historia.core.items.data.ArmorData
+import dev.boooiil.historia.core.util.JSONUtils
+import dev.boooiil.historia.core.util.NumberUtils
+import org.bukkit.configuration.ConfigurationSection
 
-import java.util.List;
+class ArmorComponent(
+    val defenseRange: MutableList<Float>,
+    val durabilityRange: MutableList<Int>
+) : ItemComponent {
 
-@NullMarked
-public record ArmorComponent(List<Float> defenseRange, List<Integer> durabilityRange) implements ItemComponent {
+    override val key = "armor"
 
-    public static ArmorComponent fromConfig(ConfigurationSection section) {
-        return new ArmorComponent(
-                section.getFloatList("defense"),
-                section.getIntegerList("durability"));
+    override fun data(qualityModifier: Double?): ArmorData {
+        val defense = NumberUtils
+            .roundFloat(NumberUtils.random(this.defenseRange[0], this.defenseRange[1]), 2)
+        val durability = NumberUtils.randomInt(this.durabilityRange[0], this.durabilityRange[1])
+
+        return ArmorData(defense, durability)
     }
 
-    @Override
-    public ArmorData data() {
+    override fun toString(): String {
+        val sb = "ArmorComponent" +
+                toJSON()
 
-        float defense = NumberUtils
-                .roundFloat(NumberUtils.random(this.defenseRange().get(0), this.defenseRange().get(1)), 2);
-        int durability = NumberUtils.randomInt(this.durabilityRange().get(0), this.durabilityRange().get(1));
-
-        return new ArmorData(defense, durability);
+        return sb
     }
 
-    @Override
-    public ArmorData data(float qualityModifier) {
-        return data();
-    }
-
-    @Override
-    public String getKey() {
-        return "armor";
-    }
-
-    @Override
-    public String toString() {
-
-        String sb = "ArmorComponent" +
-                toJSON();
-
-        return sb;
-    }
-
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
+    override fun toJSON(): String {
+        val sb = "{" +
                 JSONUtils.fromList("defenseRange", defenseRange) + ", " +
                 JSONUtils.fromList("durabilityRange", durabilityRange) +
-                "}";
+                "}"
 
-        return sb;
+        return sb
+    }
+
+    companion object {
+        fun fromConfig(section: ConfigurationSection): ArmorComponent {
+            return ArmorComponent(
+                section.getFloatList("defense"),
+                section.getIntegerList("durability")
+            )
+        }
     }
 }

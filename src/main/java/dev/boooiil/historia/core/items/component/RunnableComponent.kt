@@ -1,72 +1,50 @@
-package dev.boooiil.historia.core.items.component;
+package dev.boooiil.historia.core.items.component
 
-import dev.boooiil.historia.core.items.ItemComponent;
-import dev.boooiil.historia.core.items.data.RunnableData;
-import dev.boooiil.historia.core.util.JSONUtils;
-import org.bukkit.configuration.ConfigurationSection;
+import dev.boooiil.historia.core.items.ItemComponent
+import dev.boooiil.historia.core.items.data.RunnableData
+import dev.boooiil.historia.core.util.JSONUtils
+import org.bukkit.configuration.ConfigurationSection
 
-public class RunnableComponent implements ItemComponent {
+class RunnableComponent(
+    private val ticks: Int,
+    private val command: String,
+    private val permission: String
+) : ItemComponent {
 
-    private final int ticks;
-    private final String command;
-    private final String permission;
+    override val key = "runnable"
 
-    public RunnableComponent(int ticks, String command, String permission) {
-        this.ticks = ticks;
-        this.command = command;
-        this.permission = permission;
+    override fun data(qualityModifier: Double?): RunnableData {
+        return RunnableData(this.ticks, this.command, this.permission)
     }
 
-    public static RunnableComponent fromConfig(ConfigurationSection section) {
-
-        int ticks = section.getInt("ticks");
-        String command = section.getString("command");
-        String permission = section.getString("permission");
-
-        return new RunnableComponent(ticks, command, permission);
-
-    }
-
-    @Override
-    public RunnableData data() {
-        return new RunnableData(this.ticks, this.command, this.permission);
-    }
-
-    @Override
-    public RunnableData data(float qualityModifier) {
-        return data();
-    }
-
-    @Override
-    public String getKey() {
-        return "runnable";
-    }
-
-    @Override
-    public String toString() {
-
-        String sb = "RunnableComponent" +
+    override fun toString(): String {
+        val sb = "RunnableComponent" +
                 "{" +
                 JSONUtils.fromValue("ticks", ticks) + ", " +
                 JSONUtils.fromValue("command", command) + ", " +
                 JSONUtils.fromValue("permission", permission) +
-                "}";
+                "}"
 
-        return sb;
-
+        return sb
     }
 
-    @Override
-    public String toJSON() {
-
-        String sb = "{" +
+    override fun toJSON(): String {
+        val sb = "{" +
                 JSONUtils.fromValue("ticks", ticks) + ", " +
                 JSONUtils.fromValue("command", command) + ", " +
                 JSONUtils.fromValue("permission", permission) +
-                "}";
+                "}"
 
-        return sb;
-
+        return sb
     }
 
+    companion object {
+        fun fromConfig(section: ConfigurationSection): RunnableComponent {
+            val ticks = section.getInt("ticks")
+            val command = section.getString("command")
+            val permission = section.getString("permission")
+
+            return RunnableComponent(ticks, command!!, permission!!)
+        }
+    }
 }

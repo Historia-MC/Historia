@@ -7,24 +7,18 @@ import dev.boooiil.historia.core.items.types.Weights
 import dev.boooiil.historia.core.util.JSONUtils
 import org.bukkit.configuration.ConfigurationSection
 
-@JvmRecord
-data class ModifierComponent(
+class ModifierComponent(
     val weight: Weights,
     val hasQuality: Boolean
 ) : ItemComponent {
-    override fun data(): ModifierData {
+
+    override val key = "modifier"
+
+    override fun data(qualityModifier: Double?): ModifierData {
         return ModifierData(
             weight,
             if (hasQuality) Qualities.entries.random() else null
         )
-    }
-
-    override fun data(qualityModifier: Float): ModifierData {
-        return data()
-    }
-
-    override fun getKey(): String {
-        return "modifier"
     }
 
     override fun toString(): String {
