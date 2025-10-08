@@ -17,6 +17,7 @@ abstract class AbstractSkill(section: ConfigurationSection) : ISkill {
 
     override val name: NamespacedKey = HistoriaCore.getNamespacedKey(requireNotNull(section.name))
     override val description: String = section.getString("description") ?: "No description provided."
+    override val global: Boolean = section.getBoolean("global", false)
 
     abstract override fun execute(vararg skillSuppliers: SkillSupplier<*>)
 
