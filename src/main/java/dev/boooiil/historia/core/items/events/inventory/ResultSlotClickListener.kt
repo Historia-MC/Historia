@@ -76,6 +76,7 @@ object ResultSlotClickListener : Listener {
         return 0
     }
 
+    // TODO mimic standard shift-click behaviour
     fun PlayerInventory.addShiftClick(vararg items: ItemStack): HashMap<Int, ItemStack> {
         return this.addItem(*items)
     }
