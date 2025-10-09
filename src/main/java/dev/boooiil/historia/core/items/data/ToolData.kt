@@ -1,9 +1,14 @@
 package dev.boooiil.historia.core.items.data
 
 import dev.boooiil.historia.core.HistoriaCore.Companion.getNamespacedKey
+import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.items.ItemData
 import dev.boooiil.historia.core.util.*
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
+import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
@@ -51,7 +56,7 @@ data class ToolData(
      * @param stack the [ItemStack] to apply the data to.
      */
     private fun applyData(stack: ItemStack) {
-        PDCUtils.setInComplexContainer<PersistentDataContainer, ToolData>(stack, DATA_KEY, DATA_TYPE, this)
+        PDCUtils.setInComplexContainer(stack, DATA_KEY, DATA_TYPE, this)
 
         val damageAttr = AttributeModifier(
             getNamespacedKey("tool-damage"),
@@ -96,71 +101,27 @@ data class ToolData(
      * @param stack the [ItemStack] to apply the lore to.
      */
     private fun applyLore(stack: ItemStack) {
-        val configId = PDCUtils.getFromContainer<String>(
-            stack,
-            getNamespacedKey("item-id"), PersistentDataType.STRING
-        ).orElse("")
+        val meta = stack.itemMeta
+        val raw = LoreConfiguration.get("tool").get("attribute")!!
 
-        val meta = stack.getItemMeta()
-
-        if (!meta.hasLore() || meta.lore()!!.isEmpty()) {
-            CoreLogger.debugToConsole(configId, "has no lore, skipping placeholder.")
-            return
+        val parsed = raw.map { line ->
+            Component.text()
+                .decoration(TextDecoration.ITALIC, false)
+                .color(NamedTextColor.GRAY)
+                .append(
+                    MiniMessage.miniMessage().deserialize(
+                        line,
+                        Placeholder.parsed("tool-damage",
+                            "%.2f".format(damage)),
+                        Placeholder.parsed("tool-speed",
+                            "%.2f".format(speed)),
+                        Placeholder.parsed("tool-knockback",
+                            "%.2f".format(knockback)),
+                    )
+                )
+                .build()
         }
-
-        val lore = meta.lore()
-        val nLore: MutableList<Component> = ArrayList<Component>()
-
-        for (component in lore!!) {
-            if (KyoriUtils.contains(component, "<tool-damage>")) {
-                CoreLogger.debugToConsole(configId, "has damage placeholder.")
-
-                nLore.add(
-                    KyoriUtils.replaceComponent(
-                        component, "tool-damage",
-                        damage
-                    )
-                )
-                continue
-            }
-            if (KyoriUtils.contains(component, "<tool-speed>")) {
-                CoreLogger.debugToConsole(configId, "has speed placeholder.")
-
-                nLore.add(
-                    KyoriUtils.replaceComponent(
-                        component, "tool-speed",
-                        speed
-                    )
-                )
-                continue
-            }
-            if (KyoriUtils.contains(component, "<tool-knockback>")) {
-                CoreLogger.debugToConsole(configId, "has knockback placeholder.")
-
-                nLore.add(
-                    KyoriUtils.replaceComponent(
-                        component, "tool-knockback",
-                        knockback
-                    )
-                )
-                continue
-            }
-            if (KyoriUtils.contains(component, "<tool-durability>")) {
-                CoreLogger.debugToConsole(configId, "has durability placeholder.")
-
-                nLore.add(
-                    KyoriUtils.replaceComponent(
-                        component, "tool-durability",
-                        maxDurability
-                    )
-                )
-                continue
-            }
-
-            nLore.add(component)
-        }
-
-        meta.lore(nLore)
+        meta.lore(parsed)
         stack.setItemMeta(meta)
     }
 
