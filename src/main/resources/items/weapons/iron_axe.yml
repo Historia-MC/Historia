@@ -1,7 +1,7 @@
 Light_Iron_Axe:
   material: IRON_AXE
   amount: 1
-  display-name: §7Iron Hatchet
+  display-name: Iron Hatchet
   loc-name: Light_Iron_Axe
   type: light
   weight: 25
@@ -20,7 +20,7 @@ Light_Iron_Axe:
 Moderate_Iron_Axe:
   material: IRON_AXE
   amount: 1
-  display-name: §7Iron Axe
+  display-name: Iron Axe
   loc-name: Moderate_Iron_Axe
   type: moderate
   weight: 30
@@ -39,7 +39,7 @@ Moderate_Iron_Axe:
 Heavy_Iron_Axe:
   material: IRON_AXE
   amount: 1
-  display-name: §7Iron Bardiche
+  display-name: Iron Bardiche
   loc-name: Heavy_Iron_Axe
   type: heavy
   weight: 40

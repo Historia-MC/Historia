@@ -1,7 +1,7 @@
 Light_Bronze_Hoe:
   material: GOLDEN_HOE
   amount: 1
-  display-name: §7Light Bronze Hoe
+  display-name: Light Bronze Hoe
   loc-name: Light_Bronze_Hoe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Bronze_Hoe:
 Moderate_Bronze_Hoe:
   material: GOLDEN_HOE
   amount: 1
-  display-name: §7Moderate Bronze Hoe
+  display-name: Moderate Bronze Hoe
   loc-name: Moderate_Bronze_Hoe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Bronze_Hoe:
 Heavy_Bronze_Hoe:
   material: GOLDEN_HOE
   amount: 1
-  display-name: §7Heavy Bronze Hoe
+  display-name: Heavy Bronze Hoe
   loc-name: Heavy_Bronze_Hoe
   type: heavy
   weight: 35

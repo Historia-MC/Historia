@@ -1,7 +1,7 @@
 Light_Leather_Boots:
   material: LEATHER_BOOTS
   amount: 1
-  display-name: §7Leather Boots
+  display-name: Leather Boots
   loc-name: Light_Leather_Boots
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Leather_Boots:
 Moderate_Leather_Boots:
   material: LEATHER_BOOTS
   amount: 1
-  display-name: §7Leather Boots
+  display-name: Leather Boots
   loc-name: Moderate_Leather_Boots
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Leather_Boots:
 Heavy_Leather_Boots:
   material: LEATHER_BOOTS
   amount: 1
-  display-name: §7Leather Boots
+  display-name: Leather Boots
   loc-name: Heavy_Leather_Boots
   type: heavy
   weight: 35

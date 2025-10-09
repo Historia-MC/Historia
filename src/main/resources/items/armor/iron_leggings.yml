@@ -1,7 +1,7 @@
 Light_Iron_Leggings:
   material: CHAINMAIL_LEGGINGS
   amount: 1
-  display-name: §7Chainmail Leggings
+  display-name: Chainmail Leggings
   loc-name: Light_Iron_Leggings
   type: light
   weight: 25
@@ -15,7 +15,7 @@ Light_Iron_Leggings:
 Moderate_Iron_Leggings:
   material: IRON_LEGGINGS
   amount: 1
-  display-name: §7Iron Leggings
+  display-name: Iron Leggings
   loc-name: Moderate_Iron_Leggings
   type: moderate
   weight: 35
@@ -29,7 +29,7 @@ Moderate_Iron_Leggings:
 Heavy_Iron_Leggings:
   material: IRON_LEGGINGS
   amount: 1
-  display-name: §7Iron Leggings
+  display-name: Iron Leggings
   loc-name: Heavy_Iron_Leggings
   type: heavy
   weight: 45

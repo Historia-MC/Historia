@@ -1,7 +1,7 @@
 Heavy_Stone_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Stone Pitchfork
+  display-name: Stone Pitchfork
   loc-name: Heavy_Stone_Pitchfork
   type: heavy
   weight: 25

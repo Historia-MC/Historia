@@ -1,7 +1,7 @@
 Light_Steel_Boots:
   material: NETHERITE_BOOTS
   amount: 1
-  display-name: §7Steel Boots
+  display-name: Steel Boots
   loc-name: Light_Steel_Boots
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Steel_Boots:
 Moderate_Steel_Boots:
   material: NETHERITE_BOOTS
   amount: 1
-  display-name: §7Steel Boots
+  display-name: Steel Boots
   loc-name: Moderate_Steel_Boots
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Steel_Boots:
 Heavy_Steel_Boots:
   material: NETHERITE_BOOTS
   amount: 1
-  display-name: §7Steel Boots
+  display-name: Steel Boots
   loc-name: Heavy_Steel_Boots
   type: heavy
   weight: 35

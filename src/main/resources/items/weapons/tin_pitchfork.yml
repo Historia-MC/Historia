@@ -1,7 +1,7 @@
 Light_Tin_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Pitchfork
+  display-name: Tin Pitchfork
   loc-name: Light_Tin_Pitchfork
   type: light
   weight: 20
@@ -20,7 +20,7 @@ Light_Tin_Pitchfork:
 Moderate_Tin_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Pitchfork
+  display-name: Tin Pitchfork
   loc-name: Moderate_Tin_Pitchfork
   type: moderate
   weight: 25
@@ -39,7 +39,7 @@ Moderate_Tin_Pitchfork:
 Heavy_Tin_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Pitchfork
+  display-name: Tin Pitchfork
   loc-name: Heavy_Tin_Pitchfork
   type: heavy
   weight: 30

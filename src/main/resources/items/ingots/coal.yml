@@ -1,7 +1,7 @@
 Light_Coal:
   material: COAL
   amount: 1
-  display-name: §7Coal
+  display-name: Coal
   loc-name: COAL
   weight: 1
   canCraft: [ALL]

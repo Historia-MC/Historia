@@ -1,7 +1,7 @@
 Light_Copper_Ingot:
   material: COPPER_INGOT
   amount: 1
-  display-name: §7Copper
+  display-name: Copper
   loc-name: Light_Copper_Ingot
   weight: 1
 

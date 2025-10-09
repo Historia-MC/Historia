@@ -1,7 +1,7 @@
 Light_Steel_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Steel Pitchfork
+  display-name: Steel Pitchfork
   loc-name: Light_Steel_Pitchfork
   type: light
   weight: 60
@@ -20,7 +20,7 @@ Light_Steel_Pitchfork:
 Moderate_Steel_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Steel Pitchfork
+  display-name: Steel Pitchfork
   loc-name: Moderate_Steel_Pitchfork
   type: moderate
   weight: 70
@@ -39,7 +39,7 @@ Moderate_Steel_Pitchfork:
 Heavy_Steel_Pitchfork:
   material: TRIDENT
   amount: 1
-  display-name: §7Steel Pitchfork
+  display-name: Steel Pitchfork
   loc-name: Heavy_Steel_Pitchfork
   type: heavy
   weight: 80

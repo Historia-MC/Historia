@@ -1,7 +1,7 @@
 Heavy_Stone_Axe:
   material: STONE_AXE
   amount: 1
-  display-name: §7Stone Axe
+  display-name: Stone Axe
   loc-name: Heavy_Stone_Sword
   type: heavy
   weight: 25

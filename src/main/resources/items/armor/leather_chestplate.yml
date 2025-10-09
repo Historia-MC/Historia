@@ -1,7 +1,7 @@
 Light_Leather_Chestplate:
   material: LEATHER_CHESTPLATE
   amount: 1
-  display-name: §7Leather Chestplate
+  display-name: Leather Chestplate
   loc-name: Light_Leather_Chestplate
   type: light
   weight: 25
@@ -15,7 +15,7 @@ Light_Leather_Chestplate:
 Moderate_Leather_Chestplate:
   material: LEATHER_CHESTPLATE
   amount: 1
-  display-name: §7Leather Chestplate
+  display-name: Leather Chestplate
   loc-name: Moderate_Leather_Chestplate
   type: moderate
   weight: 35
@@ -29,7 +29,7 @@ Moderate_Leather_Chestplate:
 Heavy_Leather_Chestplate:
   material: LEATHER_CHESTPLATE
   amount: 1
-  display-name: §7Leather Chestplate
+  display-name: Leather Chestplate
   loc-name: Heavy_Leather_Chestplate
   type: heavy
   weight: 45

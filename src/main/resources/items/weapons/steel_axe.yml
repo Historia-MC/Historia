@@ -1,7 +1,7 @@
 Light_Steel_Axe:
   material: NETHERITE_AXE
   amount: 1
-  display-name: §7Iron Hatchet
+  display-name: Iron Hatchet
   loc-name: Light_Iron_Axe
   type: light
   weight: 45
@@ -20,7 +20,7 @@ Light_Steel_Axe:
 Moderate_Steel_Axe:
   material: NETHERITE_AXE
   amount: 1
-  display-name: §7Iron Axe
+  display-name: Iron Axe
   loc-name: Moderate_Iron_Axe
   type: moderate
   weight: 50
@@ -39,7 +39,7 @@ Moderate_Steel_Axe:
 Heavy_Steel_Axe:
   material: NETHERITE_AXE
   amount: 1
-  display-name: §7Iron Mace
+  display-name: Iron Mace
   loc-name: Heavy_Iron_Axe
   type: heavy
   weight: 60

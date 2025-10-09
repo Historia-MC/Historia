@@ -1,7 +1,7 @@
 Light_Iron_Sword:
   material: IRON_SWORD
   amount: 1
-  display-name: §7Iron Dagger
+  display-name: Iron Dagger
   loc-name: Light_Iron_Sword
   type: light
   weight: 20
@@ -20,7 +20,7 @@ Light_Iron_Sword:
 Moderate_Iron_Sword:
   material: IRON_SWORD
   amount: 1
-  display-name: §7Iron Sword
+  display-name: Iron Sword
   loc-name: Moderate_Iron_Sword
   type: moderate
   weight: 25
@@ -39,7 +39,7 @@ Moderate_Iron_Sword:
 Heavy_Iron_Sword:
   material: IRON_SWORD
   amount: 1
-  display-name: §7Iron Greatsword
+  display-name: Iron Greatsword
   loc-name: Heavy_Iron_Sword
   type: heavy
   weight: 30

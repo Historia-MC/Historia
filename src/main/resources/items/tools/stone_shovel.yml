@@ -1,7 +1,7 @@
 Heavy_Stone_Shovel:
   material: STONE_SHOVEL
   amount: 1
-  display-name: §7Stone Shovel
+  display-name: Stone Shovel
   loc-name: Heavy_Stone_Pickaxe
   type: heavy
   weight: 30

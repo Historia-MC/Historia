@@ -1,7 +1,7 @@
 Light_Bronze_Chestplate:
   material: GOLDEN_CHESTPLATE
   amount: 1
-  display-name: §7Bronze Chestplate
+  display-name: Bronze Chestplate
   loc-name: Light_Bronze_Chestplate
   type: light
   weight: 25
@@ -15,7 +15,7 @@ Light_Bronze_Chestplate:
 Moderate_Bronze_Chestplate:
   material: GOLDEN_CHESTPLATE
   amount: 1
-  display-name: §7Bronze Chestplate
+  display-name: Bronze Chestplate
   loc-name: Moderate_Bronze_Chestplate
   type: moderate
   weight: 35
@@ -29,7 +29,7 @@ Moderate_Bronze_Chestplate:
 Heavy_Bronze_Chestplate:
   material: GOLDEN_CHESTPLATE
   amount: 1
-  display-name: §7Bronze Chestplate
+  display-name: Bronze Chestplate
   loc-name: Heavy_Bronze_Chestplate
   type: heavy
   weight: 45

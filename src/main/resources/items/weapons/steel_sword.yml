@@ -1,7 +1,7 @@
 Light_Steel_Sword:
   material: NETHERITE_SWORD
   amount: 1
-  display-name: §7Steel Dagger
+  display-name: Steel Dagger
   loc-name: Light_Steel_Sword
   type: light
   weight: 80
@@ -20,7 +20,7 @@ Light_Steel_Sword:
 Moderate_Steel_Sword:
   material: NETHERITE_SWORD
   amount: 1
-  display-name: §7Steel Sword
+  display-name: Steel Sword
   loc-name: Moderate_Steel_Sword
   type: moderate
   weight: 90
@@ -39,7 +39,7 @@ Moderate_Steel_Sword:
 Heavy_Steel_Sword:
   material: NETHERITE_SWORD
   amount: 1
-  display-name: §7Steel Greatsword
+  display-name: Steel Greatsword
   loc-name: Heavy_Steel_Sword
   type: heavy
   weight: 100

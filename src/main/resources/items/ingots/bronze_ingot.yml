@@ -1,7 +1,7 @@
 Light_Bronze_Ingot:
   material: GOLD_INGOT
   amount: 1
-  display-name: §7Bronze
+  display-name: Bronze
   loc-name: Light_Bronze_Ingot
   weight: 1
 

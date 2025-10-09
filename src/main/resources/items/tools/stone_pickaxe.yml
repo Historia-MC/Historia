@@ -1,7 +1,7 @@
 Heavy_Stone_Pickaxe:
   material: STONE_PICKAXE
   amount: 1
-  display-name: §7Stone Club
+  display-name: Stone Club
   loc-name: Heavy_Stone_Pickaxe
   type: heavy
   weight: 30

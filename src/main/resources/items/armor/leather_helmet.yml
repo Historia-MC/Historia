@@ -1,7 +1,7 @@
 Light_Leather_Helmet:
   material: LEATHER_HELMET
   amount: 1
-  display-name: §7Leather Helmet
+  display-name: Leather Helmet
   loc-name: Light_Leather_Helmet
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Leather_Helmet:
 Moderate_Leather_Helmet:
   material: LEATHER_HELMET
   amount: 1
-  display-name: §7Leather Helmet
+  display-name: Leather Helmet
   loc-name: Moderate_Leather_Helmet
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Leather_Helmet:
 Heavy_Leather_Helmet:
   material: LEATHER_HELMET
   amount: 1
-  display-name: §7Leather Helmet
+  display-name: Leather Helmet
   loc-name: Heavy_Leather_Helmet
   type: heavy
   weight: 30

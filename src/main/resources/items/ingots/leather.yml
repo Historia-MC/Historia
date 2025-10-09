@@ -1,7 +1,7 @@
 Light_Sheep_Leather:
   material: LEATHER
   amount: 1
-  display-name: §7Sheep Leather
+  display-name: Sheep Leather
   loc-name: Light_Sheep_Leather
   weight: 1
 
@@ -17,7 +17,7 @@ Light_Sheep_Leather:
 Light_Cow_Leather:
   material: LEATHER
   amount: 1
-  display-name: §7Cow Leather
+  display-name: Cow Leather
   loc-name: Light_Cow_Leather
   weight: 1
 
@@ -33,7 +33,7 @@ Light_Cow_Leather:
 Light_Pig_Leather:
   material: LEATHER
   amount: 1
-  display-name: §7Pig Leather
+  display-name: Pig Leather
   loc-name: Light_Pig_Leather
   weight: 1
 
@@ -49,7 +49,7 @@ Light_Pig_Leather:
 Light_Horse_Leather:
   material: LEATHER
   amount: 1
-  display-name: §7Horse Leather
+  display-name: Horse Leather
   loc-name: Light_Horse_Leather
   weight: 1
 

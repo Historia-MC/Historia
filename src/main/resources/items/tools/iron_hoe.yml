@@ -1,7 +1,7 @@
 Light_Iron_Hoe:
   material: IRON_HOE
   amount: 1
-  display-name: §7Light Iron Hoe
+  display-name: Light Iron Hoe
   loc-name: Light_Iron_Hoe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Iron_Hoe:
 Moderate_Iron_Hoe:
   material: IRON_HOE
   amount: 1
-  display-name: §7Moderate Iron Hoe
+  display-name: Moderate Iron Hoe
   loc-name: Moderate_Iron_Hoe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Iron_Hoe:
 Heavy_Iron_Hoe:
   material: IRON_HOE
   amount: 1
-  display-name: §7Heavy Iron Hoe
+  display-name: Heavy Iron Hoe
   loc-name: Heavy_Iron_Hoe
   type: heavy
   weight: 35

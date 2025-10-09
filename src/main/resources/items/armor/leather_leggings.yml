@@ -1,7 +1,7 @@
 Light_Leather_Leggings:
   material: LEATHER_LEGGINGS
   amount: 1
-  display-name: §7Leather Leggings
+  display-name: Leather Leggings
   loc-name: Light_Leather_Leggings
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Leather_Leggings:
 Moderate_Leather_Leggings:
   material: LEATHER_LEGGINGS
   amount: 1
-  display-name: §7Leather Leggings
+  display-name: Leather Leggings
   loc-name: Moderate_Leather_Leggings
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Leather_Leggings:
 Heavy_Leather_Leggings:
   material: LEATHER_LEGGINGS
   amount: 1
-  display-name: §7Leather Leggings
+  display-name: Leather Leggings
   loc-name: Heavy_Leather_Leggings
   type: heavy
   weight: 35

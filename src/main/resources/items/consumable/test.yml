@@ -1,6 +1,6 @@
 questionable_meat:
   material: MUTTON
-  display-name: §7Meat?
+  display-name: Meat?
   weight: 1
   lore:
     - please don't eat this
@@ -12,7 +12,7 @@ questionable_meat:
 
 test_carrot:
   material: CARROT
-  display-name: §7Cool Carrot
+  display-name: Cool Carrot
   weight: 1
   lore:
     - please eat me! said the carrot

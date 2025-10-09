@@ -2,9 +2,9 @@ tool:
   head:
     - "Intended to be used."
   attribute:
-    - "<tool-damage> damage."
-    - "<tool-speed> speed."
-    - "<tool-knockback> knockback."
+    - "<tool-damage> damage"
+    - "<tool-speed> speed"
+    - "<tool-knockback> knockback"
 
 weapon:
   head:

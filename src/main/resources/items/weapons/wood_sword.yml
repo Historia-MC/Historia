@@ -1,7 +1,7 @@
 Light_Wood_Sword:
   material: WOODEN_SWORD
   amount: 1
-  display-name: §7Light Sword
+  display-name: Light Sword
   loc-name: Light_Wood_Sword
   type: light
   weight: 10

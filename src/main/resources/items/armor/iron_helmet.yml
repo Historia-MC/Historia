@@ -1,7 +1,7 @@
 Light_Iron_Helmet:
   material: CHAINMAIL_HELMET
   amount: 1
-  display-name: §7Chainmail Helmet
+  display-name: Chainmail Helmet
   loc-name: Light_Iron_Helmet
   type: light
   weight: 20
@@ -15,7 +15,7 @@ Light_Iron_Helmet:
 Moderate_Iron_Helmet:
   material: IRON_HELMET
   amount: 1
-  display-name: §7Iron Helmet
+  display-name: Iron Helmet
   loc-name: Moderate_Iron_Helmet
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Iron_Helmet:
 Heavy_Iron_Helmet:
   material: IRON_HELMET
   amount: 1
-  display-name: §7Iron Helmet
+  display-name: Iron Helmet
   loc-name: Heavy_Iron_Helmet
   type: heavy
   weight: 35

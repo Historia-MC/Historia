@@ -1,7 +1,7 @@
 Light_Bronze_Helmet:
   material: GOLDEN_HELMET
   amount: 1
-  display-name: §7Bronze Helmet
+  display-name: Bronze Helmet
   loc-name: Light_Bronze_Helmet
   type: light
   weight: 20
@@ -15,7 +15,7 @@ Light_Bronze_Helmet:
 Moderate_Bronze_Helmet:
   material: GOLDEN_HELMET
   amount: 1
-  display-name: §7Bronze Helmet
+  display-name: Bronze Helmet
   loc-name: Moderate_Bronze_Helmet
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Bronze_Helmet:
 Heavy_Bronze_Helmet:
   material: GOLDEN_HELMET
   amount: 1
-  display-name: §7Bronze Helmet
+  display-name: Bronze Helmet
   loc-name: Heavy_Bronze_Helmet
   type: heavy
   weight: 35

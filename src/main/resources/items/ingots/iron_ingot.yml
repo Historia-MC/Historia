@@ -1,7 +1,7 @@
 Light_Iron_Ingot:
   material: IRON_INGOT
   amount: 1
-  display-name: §7Iron
+  display-name: Iron
   loc-name: Light_Iron_Ingot
   weight: 1
 

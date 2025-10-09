@@ -1,7 +1,7 @@
 Light_Bronze_Axe:
   material: GOLDEN_AXE
   amount: 1
-  display-name: §7Bronze Hatchet
+  display-name: Bronze Hatchet
   loc-name: Light_Bronze_Axe
   type: light
   weight: 25
@@ -20,7 +20,7 @@ Light_Bronze_Axe:
 Moderate_Bronze_Axe:
   material: GOLDEN_AXE
   amount: 1
-  display-name: §7Bronze Axe
+  display-name: Bronze Axe
   loc-name: Moderate_Bronze_Axe
   type: moderate
   weight: 30
@@ -39,7 +39,7 @@ Moderate_Bronze_Axe:
 Heavy_Bronze_Axe:
   material: GOLDEN_AXE
   amount: 1
-  display-name: §7Bronze Bardiche
+  display-name: Bronze Bardiche
   loc-name: Heavy_Bronze_Axe
   type: heavy
   weight: 40

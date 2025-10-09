@@ -1,7 +1,7 @@
 Light_Sulphur:
   material: GLOWSTONE_DUST
   amount: 1
-  display-name: §7Sulphur
+  display-name: Sulphur
   loc-name: SULPHUR
   weight: 1
   lore: ["", §7What an unpleasant smell.]

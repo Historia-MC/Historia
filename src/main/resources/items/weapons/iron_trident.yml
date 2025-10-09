@@ -1,7 +1,7 @@
 Light_Iron_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Iron Trident
+  display-name: Iron Trident
   loc-name: Light_Iron_Trident
   type: light
   weight: 35
@@ -20,7 +20,7 @@ Light_Iron_Trident:
 Moderate_Iron_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Iron Trident
+  display-name: Iron Trident
   loc-name: Moderate_Iron_Trident
   type: moderate
   weight: 40
@@ -39,7 +39,7 @@ Moderate_Iron_Trident:
 Heavy_Iron_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Iron Trident
+  display-name: Iron Trident
   loc-name: Heavy_Iron_Trident
   type: heavy
   weight: 45
