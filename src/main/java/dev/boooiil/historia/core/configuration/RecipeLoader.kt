@@ -20,7 +20,6 @@ object RecipeLoader {
     )
 
     fun load() {
-        CoreLogger.infoToConsole("Loading recipes...")
         for (key in configuration.getKeys(false)) {
             if (key == "version") continue
 
@@ -37,8 +36,6 @@ object RecipeLoader {
             if (recipe is RecipeBookDisplayable) {
                 HistoriaCore.server.addRecipe(recipe.display("display_"))
             }
-
-            CoreLogger.infoToConsole("Registered recipe $key")
         }
     }
 }
