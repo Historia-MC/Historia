@@ -1,16 +1,18 @@
 package dev.boooiil.historia.core.items.recipe.ingredient
 
+import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.RecipeChoice
 
 interface Ingredient {
     fun matches(stack: ItemStack): Boolean
-    val exampleStacks: List<ItemStack>
+    fun display(): RecipeChoice
 
     val isEmpty: Boolean
         get() = this == Empty
 
     object Empty : Ingredient {
         override fun matches(stack: ItemStack): Boolean = stack.isEmpty
-        override val exampleStacks: List<ItemStack> = listOf(ItemStack.empty())
+        override fun display(): RecipeChoice = RecipeChoice.MaterialChoice(Material.AIR)
     }
 }

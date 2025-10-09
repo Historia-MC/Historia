@@ -10,6 +10,7 @@ import dev.boooiil.historia.core.items.types.Weights
 import dev.boooiil.historia.core.registry.RegistryHolder
 import dev.boooiil.historia.core.util.JSONSerializable
 import dev.boooiil.historia.core.util.JSONUtils
+import io.papermc.paper.datacomponent.DataComponentTypes
 import io.papermc.paper.datacomponent.item.Consumable
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.enchantments.Enchantment
@@ -32,7 +33,7 @@ class ItemComponentType<T : ItemComponent>(
     override fun toJSON(): String {
         val sb = "{" +
                 JSONUtils.fromValue("armor", ArmorData(1f, 1)) + "," +
-                JSONUtils.fromValue("tool", ToolData(1f, 1f, 1f, 1)) + "," +
+                JSONUtils.fromValue("tool", ToolData(1.0, 1.0, 1.0, 1)) + "," +
                 JSONUtils.fromValue("weapon", WeaponData(1f)) + "," +
                 JSONUtils.fromValue("executor", ExecutorData(HashMap<Triggers?, ItemExecutable?>())) + "," +
                 JSONUtils.fromValue("runnable", RunnableData(0, "", "")) + "," +
@@ -55,7 +56,7 @@ class ItemComponentType<T : ItemComponent>(
                 getNamespacedKey("tool"),
                 ItemComponentType(
                     ToolComponent::fromConfig
-                ) { ToolData(1f, 1f, 1f, 1) }
+                ) { ToolData(1.0, 1.0, 1.0, 1) }
             )
 
             RegistryHolder.COMPONENT_REGISTRY.register(

@@ -7,7 +7,7 @@ class SimpleResult(
 ) : Result {
     override val isStatic = true
 
-    override fun preview(inputs: List<ItemStack>): ItemStack = get(inputs)
+    override fun display(): ItemStack = stack.clone()
 
     override fun get(inputs: List<ItemStack>): ItemStack {
         return stack.clone()

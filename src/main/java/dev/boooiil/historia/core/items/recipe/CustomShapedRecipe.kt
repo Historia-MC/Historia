@@ -9,12 +9,15 @@ import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.InvalidConfigurationException
 import org.bukkit.inventory.CraftingInventory
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.Recipe
+import org.bukkit.inventory.RecipeChoice
+import org.bukkit.inventory.ShapedRecipe
 
 class CustomShapedRecipe(
     override val key: NamespacedKey,
     pattern: Array<Array<Ingredient>>,
     override val result: Result,
-) : CustomRecipe<CraftingInventory> {
+) : CustomRecipe<CraftingInventory>, RecipeBookDisplayable {
 
     val pattern = pattern.trim { !it.isEmpty }
 
@@ -29,9 +32,33 @@ class CustomShapedRecipe(
         return pattern.matches(grid) || pattern.matches(grid.flip())
     }
 
-    override fun getResultStack(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
-        val inputs = inventory.matrix.toList().filterNotNull()
-        return result.get(inputs)
+    override fun display(keyPrefix: String): Recipe {
+        val displayKey = NamespacedKey(key.namespace, "display_${key.key}")
+        val recipe = ShapedRecipe(displayKey, result.display())
+
+        val shapeList = mutableListOf<List<Char>>()
+        val keyMap = mutableMapOf<Char, RecipeChoice>()
+
+        var i = 0
+        for (row in pattern) {
+            val shapeRow = mutableListOf<Char>()
+            for (ingredient in row) {
+                if (ingredient.isEmpty) {
+                    shapeRow.add(' ')
+                } else {
+                    val char = ('A' + i++)
+                    shapeRow.add(char)
+                    keyMap[char] = ingredient.display()
+                }
+            }
+            shapeList.add(shapeRow)
+        }
+
+        val shape = shapeList.map { it.joinToString("") }.toTypedArray()
+        recipe.shape(*shape)
+        keyMap.forEach { (char, choice) -> recipe.setIngredient(char, choice) }
+
+        return recipe
     }
 
     object Type : RecipeType<CustomShapedRecipe> {

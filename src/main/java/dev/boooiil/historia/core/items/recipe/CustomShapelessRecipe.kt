@@ -7,13 +7,14 @@ import dev.boooiil.historia.core.items.recipe.result.Result
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.CraftingInventory
-import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.Recipe
+import org.bukkit.inventory.ShapelessRecipe
 
 class CustomShapelessRecipe(
     override val key: NamespacedKey,
     val ingredients: Array<Ingredient>,
     override val result: Result,
-) : CustomRecipe<CraftingInventory> {
+) : CustomRecipe<CraftingInventory>, RecipeBookDisplayable {
 
     override fun matches(inventory: CraftingInventory, ctx: Condition.Context): Boolean {
         val stacks = inventory.matrix.filterNotNull().toTypedArray()
@@ -31,9 +32,13 @@ class CustomShapelessRecipe(
         return canMatchAll(matches, ingredients.toList())
     }
 
-    override fun getResultStack(inventory: CraftingInventory, ctx: Condition.Context): ItemStack {
-        val inputs = inventory.matrix.toList().filterNotNull()
-        return result.get(inputs)
+    override fun display(keyPrefix: String): Recipe {
+        val displayKey = NamespacedKey(key.namespace, keyPrefix + key.key)
+        val recipe = ShapelessRecipe(displayKey, result.display())
+
+        ingredients.forEach { recipe.addIngredient(it.display()) }
+
+        return recipe
     }
 
     private fun canMatchAll(

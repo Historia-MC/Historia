@@ -41,7 +41,6 @@ interface RecipeType<C: CustomRecipe<*>> {
     }
 
     companion object {
-
         private const val RESULT_KEY = "result"
     }
 }

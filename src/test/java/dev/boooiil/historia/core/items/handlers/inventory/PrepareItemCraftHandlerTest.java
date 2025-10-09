@@ -63,10 +63,10 @@ public class PrepareItemCraftHandlerTest extends BaseTest {
 
                         CoreLogger.debugToConsole("Data:", td.toString());
 
-                        assertEquals(td.damage(), damage);
-                        assertEquals(td.speed(), speed);
-                        assertEquals(td.knockback(), knockback);
-                        assertEquals(td.maxDurability(), toolDamageable.getMaxDamage());
+                        assertEquals(td.damage, damage);
+                        assertEquals(td.speed, speed);
+                        assertEquals(td.knockback, knockback);
+                        assertEquals(td.maxDurability, toolDamageable.getMaxDamage());
                         break;
 
                     case "weapon":

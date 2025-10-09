@@ -2,8 +2,6 @@ package dev.boooiil.historia.core.items.events.inventory
 
 import dev.boooiil.historia.core.condition.Condition
 import dev.boooiil.historia.core.items.recipe.CustomRecipe
-import dev.boooiil.historia.core.items.recipe.CustomShapedRecipe
-import dev.boooiil.historia.core.items.recipe.CustomShapelessRecipe
 import dev.boooiil.historia.core.registry.RegistryHolder
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -47,17 +45,19 @@ object ResultSlotClickListener : Listener {
             .filterNotNull()
             .minOf { it.amount }
 
+        val inputs = craftingInv.matrix.filterNotNull().toList()
+
         if (event.isShiftClick) {
             val playerInv = event.whoClicked.inventory
             var added = 0
             if (!recipe.result.isStatic) {
                 while (added < maxAmount && playerInv.firstEmpty() != -1) {
-                    playerInv.addShiftClick(recipe.getResultStack(craftingInv))
+                    playerInv.addShiftClick(recipe.result.get(inputs))
                     added++
                 }
             } else {
                 while (added < maxAmount) {
-                    val leftOver = playerInv.addShiftClick(recipe.getResultStack(craftingInv))
+                    val leftOver = playerInv.addShiftClick(recipe.result.get(inputs))
                     if (!leftOver.isEmpty()) break
                     added++
                 }
@@ -66,7 +66,7 @@ object ResultSlotClickListener : Listener {
         }
 
         if (cursor.isEmpty) {
-            event.setCursor(recipe.getResultStack(craftingInv))
+            event.setCursor(recipe.result.get(inputs))
             return 1
         }
         if (recipe.result.isStatic) {

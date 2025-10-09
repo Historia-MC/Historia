@@ -7,7 +7,10 @@ import dev.boooiil.historia.core.util.CoreLogger
 import dev.boooiil.historia.core.util.JSONSerializable
 import dev.boooiil.historia.core.util.JSONUtils
 import dev.boooiil.historia.core.util.PDCUtils
+import io.papermc.paper.datacomponent.DataComponentTypes
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextDecoration
+import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.configuration.ConfigurationSection
@@ -52,7 +55,7 @@ class HistoriaItem(
 
         val stack = ItemStack(baseMaterial, amount)
         val meta = stack.itemMeta
-        val textComponent = Component.text(displayName)
+        val nameComponent = MiniMessage.miniMessage().deserialize(displayName)
 
         PDCUtils.setInContainer<String>(
             meta, getNamespacedKey("item-id"),
@@ -64,7 +67,31 @@ class HistoriaItem(
             lore.addAll(component.previewLore(qualityModifier))
         }
 
-        meta.displayName(textComponent)
+        stack.setData(DataComponentTypes.ITEM_NAME, nameComponent)
+        meta.lore(lore)
+        stack.setItemMeta(meta)
+
+        return stack
+    }
+
+    fun createDisplayStack(amount: Int): ItemStack {
+        assert(baseMaterial != Material.AIR)
+
+        val stack = ItemStack(baseMaterial, amount)
+        val meta = stack.itemMeta
+        val nameComponent = MiniMessage.miniMessage().deserialize(displayName)
+
+        PDCUtils.setInContainer<String>(
+            meta, getNamespacedKey("item-id"),
+            PersistentDataType.STRING, configurationId.key
+        )
+
+        val lore = mutableListOf<Component>()
+        for (component in this.componentHolder.values) {
+            lore.addAll(component.displayLore())
+        }
+
+        stack.setData(DataComponentTypes.ITEM_NAME, nameComponent)
         meta.lore(lore)
         stack.setItemMeta(meta)
 
@@ -89,14 +116,14 @@ class HistoriaItem(
 
         val stack = ItemStack(baseMaterial, amount)
         val meta = stack.itemMeta
-        val textComponent = Component.text(displayName)
+        val nameComponent = MiniMessage.miniMessage().deserialize(displayName)
 
         PDCUtils.setInContainer<String>(
             meta, getNamespacedKey("item-id"),
             PersistentDataType.STRING, configurationId.key
         )
 
-        meta.displayName(textComponent)
+        stack.setData(DataComponentTypes.ITEM_NAME, nameComponent)
         meta.lore(lore)
         stack.setItemMeta(meta)
 

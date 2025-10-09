@@ -12,7 +12,8 @@ import org.bukkit.inventory.ItemStack
 interface Result {
     val isStatic: Boolean
 
-    fun preview(inputs: List<ItemStack>): ItemStack
+    fun display(): ItemStack
+    fun preview(inputs: List<ItemStack>): ItemStack = display()
     fun get(inputs: List<ItemStack>): ItemStack
 
     companion object {

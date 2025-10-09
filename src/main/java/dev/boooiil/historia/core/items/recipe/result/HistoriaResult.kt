@@ -17,6 +17,10 @@ class HistoriaResult(
 
     override val isStatic = false
 
+    override fun display(): ItemStack {
+        return item.createDisplayStack(amount)
+    }
+
     override fun preview(inputs: List<ItemStack>): ItemStack {
         val qualityModifier = inputs
             .mapNotNull { ModifierData.fromStack(it) }

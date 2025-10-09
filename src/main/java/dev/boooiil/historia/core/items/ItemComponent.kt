@@ -10,4 +10,5 @@ interface ItemComponent : JSONSerializable {
     fun data(qualityModifier: Double): ItemData = data()
 
     fun previewLore(qualityModifier: Double): List<Component> = emptyList()
+    fun displayLore(): List<Component> = emptyList()
 }
