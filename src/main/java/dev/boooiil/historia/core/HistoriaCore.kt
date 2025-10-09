@@ -23,6 +23,7 @@ import dev.boooiil.historia.core.expiry.listeners.player.PlayerConsumableConsume
 import dev.boooiil.historia.core.expiry.listeners.world.ChunkLoadListener
 import dev.boooiil.historia.core.expiry.runnable.ConsumableUpdater
 import dev.boooiil.historia.core.file.FileIO
+import dev.boooiil.historia.core.file.FileKeys
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
 import dev.boooiil.historia.core.items.events.inventory.ResultSlotClickListener
@@ -37,15 +38,18 @@ import dev.boooiil.historia.core.proficiency.ProficiencyRegistryLoader
 import dev.boooiil.historia.core.proficiency.skills.ISkill
 import dev.boooiil.historia.core.proficiency.skills.SkillRegistryLoader
 import dev.boooiil.historia.core.runnable.SavePlayerRunnable
-import dev.boooiil.historia.core.runnable.TemperaturePollRunnable
+import dev.boooiil.historia.core.runnable.SyncDaylightCycleRunnable
 import dev.boooiil.historia.core.runnable.UpdateScoreboardRunnable
 import dev.boooiil.historia.core.util.CoreLogger
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask
 import org.bukkit.Bukkit
+import org.bukkit.GameRule
 import org.bukkit.NamespacedKey
 import org.bukkit.Server
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
+import java.util.concurrent.TimeUnit
 
 /**
  * Historia-Core Main class
@@ -59,11 +63,9 @@ open class HistoriaCore : JavaPlugin() {
 
         CoreLogger.infoToConsole("Plugin has loaded.")
 
-        // Check config files
-        FileIO.checkAndSaveResources("config.yml")
-        FileIO.checkAndSaveResources("skills.yml")
-        FileIO.checkAndSaveResources("proficiency.yml")
-        FileIO.checkAndSaveResources("items")
+        for (key: FileKeys in FileKeys.entries) {
+            FileIO.checkAndSaveResources(key.key)
+        }
 
         CoreLogger.infoToConsole("RUNNING VERSION: " + Bukkit.getVersion())
 
@@ -132,13 +134,17 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ChunkLoadListener())
         // end
 
+        server.worlds[0].setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false) // set false in favour of custom daylight cycle
+        registerRunnable(SyncDaylightCycleRunnable(), 0)
         // registerRunnable(new ClassEnchantsRunnable());
         registerRunnable(UpdateScoreboardRunnable())
         registerRunnable(SavePlayerRunnable(), 6000)
-        registerRunnable(TemperaturePollRunnable(), 20L)
+        // registerAsyncRunnable(TemperaturePollRunnable())
+
+//        Bukkit.getScheduler().runTaskAsynchronously(this, TemperaturePollRunnable())
+//        registerRunnable(TemperaturePollRunnable(), 20L)
 
         CoreLogger.infoToConsole("Plugin Enabled.")
-
 
         // TODO: figure out what to do with all of these 'loaders'
 
@@ -195,8 +201,61 @@ open class HistoriaCore : JavaPlugin() {
      * @param runnable The BukkitRunnable to be executed.
      * @param time     The time in ticks between each execution of the runnable.
      */
-    fun registerRunnable(runnable: BukkitRunnable, time: Long) {
-        runnable.runTaskTimer(this, 0, time)
+    fun registerRunnable(runnable: BukkitRunnable, period: Long) {
+        runnable.runTaskTimer(this, 0, period)
+    }
+
+    /**
+     * Registers a BukkitRunnable to be executed on a timer every second with no delay.
+     *
+     * @param runnable     The BukkitRunnable to be executed.
+     */
+    fun registerAsyncRunnable(runnable: BukkitRunnable) {
+        registerAsyncRunnable(runnable, TimeUnit.SECONDS, 1, 0)
+    }
+
+    /**
+     * Registers a BukkitRunnable to be executed on a timer with no delay.
+     *
+     * @param runnable     The BukkitRunnable to be executed.
+     * @param period       The time in seconds between each execution of the runnable.
+     */
+    fun registerAsyncRunnable(runnable: BukkitRunnable, period: Long) {
+        registerAsyncRunnable(runnable, TimeUnit.MILLISECONDS, period * 50, 0)
+    }
+
+    /**
+     * Registers a BukkitRunnable to be executed on a timer.
+     *
+     * @param runnable     The BukkitRunnable to be executed.
+     * @param period       The time in seconds between each execution of the runnable.
+     * @param initialDelay The initial delay in seconds before the first execution of the runnable.
+     */
+    fun registerAsyncRunnable(runnable: BukkitRunnable, period: Long, initialDelay: Long) {
+        registerAsyncRunnable(runnable, TimeUnit.MILLISECONDS, period * 50, initialDelay * 50L)
+    }
+
+    /**
+     * Registers a BukkitRunnable to be executed on a timer with no delay.
+     *
+     * @param runnable     The BukkitRunnable to be executed.
+     * @param unit         The time unit of the period and initial delay.
+     * @param period       The time between each execution of the runnable.
+     */
+    fun registerAsyncRunnable(runnable: BukkitRunnable, unit: TimeUnit, period: Long) {
+        registerAsyncRunnable(runnable, unit, period, 0)
+    }
+
+    fun registerAsyncRunnable(runnable: BukkitRunnable, unit: TimeUnit, period: Long, initialDelay: Long) {
+        Bukkit.getAsyncScheduler().runAtFixedRate(
+            this,
+            { scheduledTask: ScheduledTask? ->
+                runnable.run()
+            },
+            initialDelay,
+            period,
+            unit
+        )
     }
 
     companion object {
