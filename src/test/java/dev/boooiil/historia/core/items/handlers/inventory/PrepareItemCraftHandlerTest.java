@@ -63,10 +63,10 @@ public class PrepareItemCraftHandlerTest extends BaseTest {
 
                         CoreLogger.debugToConsole("Data:", td.toString());
 
-                        assertEquals(td.damage, damage);
-                        assertEquals(td.speed, speed);
-                        assertEquals(td.knockback, knockback);
-                        assertEquals(td.maxDurability, toolDamageable.getMaxDamage());
+                        assertEquals(td.damage(), damage);
+                        assertEquals(td.speed(), speed);
+                        assertEquals(td.knockback(), knockback);
+                        assertEquals(td.maxDurability(), toolDamageable.getMaxDamage());
                         break;
 
                     case "weapon":
@@ -103,14 +103,14 @@ public class PrepareItemCraftHandlerTest extends BaseTest {
                         ExecutorData ed = ExecutorData.fromStack(item);
                         PlayerMock player = server.addPlayer();
 
-                        for (Triggers trigger : ec.executables().keySet()) {
+                        for (Triggers trigger : ec.getExecutables().keySet()) {
 
-                            ItemExecutable executable = ec.executables().get(trigger);
+                            ItemExecutable executable = ec.getExecutables().get(trigger);
 
                             CoreLogger.debugToConsole("Executable:", executable.toString());
 
                             assertNotSame(trigger, Triggers.UNKNOWN);
-                            assertTrue(ec.executables().containsKey(trigger));
+                            assertTrue(ec.getExecutables().containsKey(trigger));
 
                             assertEquals(ed.executables().get(trigger).uses(), executable.uses());
 
@@ -120,12 +120,12 @@ public class PrepareItemCraftHandlerTest extends BaseTest {
 
                             ed.execute(player, 0, item, trigger);
 
-                            if (ec.executables().size() > ed.executables().size()) {
-                                CoreLogger.debugToConsole("Executables size changed: " + ec.executables().size() + " -> "
+                            if (ec.getExecutables().size() > ed.executables().size()) {
+                                CoreLogger.debugToConsole("Executables size changed: " + ec.getExecutables().size() + " -> "
                                         + ed.executables().size(), "on trigger", trigger.getLowercase());
                             } else {
-                                for (Triggers executedTrigger : ec.executables().keySet()) {
-                                    assertTrue(ed.executables().get(executedTrigger).uses() < ec.executables().get(trigger)
+                                for (Triggers executedTrigger : ec.getExecutables().keySet()) {
+                                    assertTrue(ed.executables().get(executedTrigger).uses() < ec.getExecutables().get(trigger)
                                             .uses());
                                 }
                             }

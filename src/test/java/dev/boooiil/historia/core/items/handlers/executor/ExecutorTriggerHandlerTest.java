@@ -89,8 +89,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
     void testExecuteAction() {
         Triggers trigger = Triggers.DAMAGE_ENTITY;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -144,8 +144,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.DROP;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -188,8 +188,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.INTERACT_ENTITY;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -231,8 +231,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.PICKUP;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -275,8 +275,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.SWIM;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -318,8 +318,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.THROW;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -362,8 +362,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.CLOSE_INVENTORY;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -405,8 +405,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.OPEN_INVENTORY;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -449,8 +449,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
         // TODO: add other triggers
         Triggers trigger = Triggers.RIGHT_CLICK;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -492,8 +492,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
 
         Triggers trigger = Triggers.EAT;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -537,8 +537,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
         // TODO: add other triggers
         Triggers trigger = Triggers.SWAP_TO_OFFHAND;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -580,8 +580,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
     void testExecuteAction12() {
         Triggers trigger = Triggers.CROUCH;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -622,8 +622,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
     void testExecuteAction13() {
         Triggers trigger = Triggers.SPRINT;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -664,8 +664,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
     void testExecuteAction14() {
         Triggers trigger = Triggers.JUMP;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();
@@ -707,8 +707,8 @@ public class ExecutorTriggerHandlerTest extends BaseTest {
     void testExecuteAction15() {
         Triggers trigger = Triggers.PLACE;
 
-        component1.executables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
-        component2.executables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
+        component1.getExecutables().put(trigger, new ItemExecutable(List.of("boot"), 200, 2, false, false));
+        component2.getExecutables().put(trigger, new ItemExecutable(List.of("sword"), 200, 2, false, false));
 
         ItemStack mhi = historiaItem1.createItemStack();
         ItemStack ohi = historiaItem2.createItemStack();

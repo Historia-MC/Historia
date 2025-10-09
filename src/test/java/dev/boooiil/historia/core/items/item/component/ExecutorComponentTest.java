@@ -23,20 +23,20 @@ public class ExecutorComponentTest extends BaseTest {
     YamlConfiguration configuration = FileIO.findYamlConfiguration("bronze_leggings.yml");
     ConfigurationSection item_root = configuration.getConfigurationSection("Light_Bronze_Leggings");
     ConfigurationSection component_root = item_root.getConfigurationSection("executor");
-    ExecutorComponent component = ExecutorComponent.fromConfig(component_root);
+    ExecutorComponent component = ExecutorComponent.Companion.fromConfig(component_root);
 
     @Test
     void testApply() {
         ExecutorData data = component.data();
         CoreLogger.debugToConsole("ExecutorComponentTest", "data", data.toJSON());
-        Assertions.assertEquals(data.executables(), component.executables());
+        Assertions.assertEquals(data.executables(), component.getExecutables());
     }
 
     @Test
     void testApply2() {
-        ExecutorData data = component.data(1f);
+        ExecutorData data = component.data();
 
-        Assertions.assertEquals(data.executables(), component.executables());
+        Assertions.assertEquals(data.executables(), component.getExecutables());
     }
 
     @Test
@@ -50,9 +50,9 @@ public class ExecutorComponentTest extends BaseTest {
             int uses = section.getInt("uses");
             int cooldown = section.getInt("cooldown");
 
-            assertNotNull(component.executables().get(action));
+            assertNotNull(component.getExecutables().get(action));
 
-            ItemExecutable executable = component.executables().get(action);
+            ItemExecutable executable = component.getExecutables().get(action);
 
             Assertions.assertEquals(commands, executable.commands());
             Assertions.assertEquals(uses, executable.uses());
@@ -78,7 +78,7 @@ public class ExecutorComponentTest extends BaseTest {
         sb.append("\"executables\":");
         sb.append("{");
 
-        for (Entry<Triggers, ItemExecutable> executables : component.executables().entrySet()) {
+        for (Entry<Triggers, ItemExecutable> executables : component.getExecutables().entrySet()) {
 
             sb.append("\"" + executables.getKey().getLowercase() + "\":{");
             sb.append("\"commands\":[");
@@ -116,7 +116,7 @@ public class ExecutorComponentTest extends BaseTest {
         sb.append("\"executables\":");
         sb.append("{");
 
-        for (Entry<Triggers, ItemExecutable> executables : component.executables().entrySet()) {
+        for (Entry<Triggers, ItemExecutable> executables : component.getExecutables().entrySet()) {
 
             sb.append("\"" + executables.getKey().getLowercase() + "\":ItemExecutable{");
             sb.append("\"commands\":[");

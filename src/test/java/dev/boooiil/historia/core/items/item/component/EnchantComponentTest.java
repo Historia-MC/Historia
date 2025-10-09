@@ -19,20 +19,20 @@ public class EnchantComponentTest extends BaseTest {
     YamlConfiguration configuration = FileIO.findYamlConfiguration("bronze_leggings.yml");
     ConfigurationSection item_root = configuration.getConfigurationSection("Light_Bronze_Leggings");
     ConfigurationSection component_root = item_root.getConfigurationSection("enchant");
-    EnchantComponent component = EnchantComponent.fromConfig(component_root);
+    EnchantComponent component = EnchantComponent.Companion.fromConfig(component_root);
 
     @Test
     void testData() {
         EnchantData data = component.data();
 
-        Assertions.assertEquals(data.enchantments(), component.enchantments());
+        Assertions.assertEquals(data.enchantments(), component.getEnchantments());
     }
 
     @Test
     void testData2() {
-        EnchantData data = component.data(1f);
+        EnchantData data = component.data();
 
-        Assertions.assertEquals(data.enchantments(), component.enchantments());
+        Assertions.assertEquals(data.enchantments(), component.getEnchantments());
     }
 
     @Test
@@ -40,8 +40,8 @@ public class EnchantComponentTest extends BaseTest {
         for (String key : component_root.getKeys(false)) {
             Enchantment enchantment = Enchantment.getByName(key);
 
-            Assertions.assertNotNull(component.enchantments().get(enchantment));
-            Assertions.assertEquals(component_root.getInt(key), component.enchantments().get(enchantment));
+            Assertions.assertNotNull(component.getEnchantments().get(enchantment));
+            Assertions.assertEquals(component_root.getInt(key), component.getEnchantments().get(enchantment));
         }
     }
 
@@ -60,7 +60,7 @@ public class EnchantComponentTest extends BaseTest {
         sb.append("\"enchantments\":");
         sb.append("{");
 
-        for (Entry<Enchantment, Integer> enchants : component.enchantments().entrySet()) {
+        for (Entry<Enchantment, Integer> enchants : component.getEnchantments().entrySet()) {
 
             sb.append("\"" + enchants.getKey().getKey().getKey() + "\":" + enchants.getValue() + ", ");
 
@@ -83,7 +83,7 @@ public class EnchantComponentTest extends BaseTest {
         sb.append("\"enchantments\":");
         sb.append("{");
 
-        for (Entry<Enchantment, Integer> enchants : component.enchantments().entrySet()) {
+        for (Entry<Enchantment, Integer> enchants : component.getEnchantments().entrySet()) {
 
             sb.append("\"" + enchants.getKey().getKey().getKey() + "\":" + enchants.getValue() + ", ");
 
