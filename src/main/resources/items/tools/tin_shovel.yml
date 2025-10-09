@@ -1,7 +1,7 @@
 Light_Tin_Shovel:
   material: IRON_SHOVEL
   amount: 1
-  display-name: §7Tin Shovel
+  display-name: Tin Shovel
   loc-name: Light_Tin_Shovel
   type: light
   weight: 25

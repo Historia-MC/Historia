@@ -1,7 +1,7 @@
 Light_Iron_Pickaxe:
   material: IRON_PICKAXE
   amount: 1
-  display-name: §7Iron Pickaxe
+  display-name: Iron Pickaxe
   loc-name: Light_Iron_Pickaxe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Iron_Pickaxe:
 Moderate_Iron_Pickaxe:
   material: IRON_PICKAXE
   amount: 1
-  display-name: §7Iron Pickaxe
+  display-name: Iron Pickaxe
   loc-name: Moderate_Iron_Pickaxe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Iron_Pickaxe:
 Heavy_Iron_Pickaxe:
   material: IRON_PICKAXE
   amount: 1
-  display-name: §7Iron Greatsword
+  display-name: Iron Greatsword
   loc-name: Heavy_Iron_Pickaxe
   type: heavy
   weight: 35

@@ -1,7 +1,7 @@
 Light_Steel_Leggings:
   material: NETHERITE_LEGGINGS
   amount: 1
-  display-name: §7Steel Leggings
+  display-name: Steel Leggings
   loc-name: Light_Steel_Leggings
   type: light
   weight: 25
@@ -15,7 +15,7 @@ Light_Steel_Leggings:
 Moderate_Steel_Leggings:
   material: NETHERITE_LEGGINGS
   amount: 1
-  display-name: §7Steel Leggings
+  display-name: Steel Leggings
   loc-name: Moderate_Steel_Leggings
   type: moderate
   weight: 35
@@ -29,7 +29,7 @@ Moderate_Steel_Leggings:
 Heavy_Steel_Leggings:
   material: NETHERITE_LEGGINGS
   amount: 1
-  display-name: §7Steel Leggings
+  display-name: Steel Leggings
   loc-name: Heavy_Steel_Leggings
   type: heavy
   weight: 45

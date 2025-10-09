@@ -1,7 +1,7 @@
 Heavy_Stone_Hoe:
   material: STONE_HOE
   amount: 1
-  display-name: §7Heavy Stone Hoe
+  display-name: Heavy Stone Hoe
   loc-name: Heavy_Stone_Hoe
   type: heavy
   weight: 30

@@ -16,17 +16,17 @@ public class ArmorComponentTest extends BaseTest {
     YamlConfiguration configuration = FileIO.findYamlConfiguration("bronze_boots.yml");
     ConfigurationSection item_root = configuration.getConfigurationSection("Light_Bronze_Boots");
     ConfigurationSection component_root = item_root.getConfigurationSection("armor");
-    ArmorComponent component = ArmorComponent.fromConfig(component_root);
+    ArmorComponent component = ArmorComponent.Companion.fromConfig(component_root);
 
     @Test
     void testApply() {
         ArmorData data = component.data();
 
-        Float min = component.defenseRange().get(0);
-        Float max = component.defenseRange().get(1);
+        Float min = component.getDefenseRange().get(0);
+        Float max = component.getDefenseRange().get(1);
         float actual = data.defense();
 
-        CoreLogger.debugToConsole(component.defenseRange().toString(), "" + actual);
+        CoreLogger.debugToConsole(component.getDefenseRange().toString(), "" + actual);
 
         Assertions.assertTrue(actual >= min, "Actual value " + actual + " is not greater than min " + min);
         Assertions.assertTrue(actual <= max, "Actual value " + actual + " is not less than max " + max);
@@ -37,8 +37,8 @@ public class ArmorComponentTest extends BaseTest {
     void testApply2() {
         ArmorData data = component.data();
 
-        Float min = component.defenseRange().get(0);
-        Float max = component.defenseRange().get(1);
+        Float min = component.getDefenseRange().get(0);
+        Float max = component.getDefenseRange().get(1);
         float actual = data.defense();
 
         Assertions.assertTrue(actual >= min, "Actual value " + actual + " is not greater than min " + min);
@@ -47,12 +47,12 @@ public class ArmorComponentTest extends BaseTest {
 
     @Test
     void testDefenseRange() {
-        Assertions.assertEquals(component_root.getFloatList("defense"), component.defenseRange());
+        Assertions.assertEquals(component_root.getFloatList("defense"), component.getDefenseRange());
     }
 
     @Test
     void testDurabilityRange() {
-        Assertions.assertEquals(component_root.getIntegerList("durability"), component.durabilityRange());
+        Assertions.assertEquals(component_root.getIntegerList("durability"), component.getDefenseRange());
     }
 
     @Test
@@ -66,12 +66,12 @@ public class ArmorComponentTest extends BaseTest {
         String sb = "{" +
                 "\"defenseRange\":" +
                 "[" +
-                component.defenseRange().get(0) + ", " +
-                component.defenseRange().get(1) + "], " +
+                component.getDefenseRange().get(0) + ", " +
+                component.getDefenseRange().get(1) + "], " +
                 "\"durabilityRange\":" +
                 "[" +
-                component.durabilityRange().get(0) + ", " +
-                component.durabilityRange().get(1) + "]" +
+                component.getDefenseRange().get(0) + ", " +
+                component.getDefenseRange().get(1) + "]" +
                 "}";
 
         Assertions.assertEquals(sb, component.toJSON());
@@ -84,12 +84,12 @@ public class ArmorComponentTest extends BaseTest {
         String sb = "ArmorComponent{" +
                 "\"defenseRange\":" +
                 "[" +
-                component.defenseRange().get(0) + ", " +
-                component.defenseRange().get(1) + "], " +
+                component.getDefenseRange().get(0) + ", " +
+                component.getDefenseRange().get(1) + "], " +
                 "\"durabilityRange\":" +
                 "[" +
-                component.durabilityRange().get(0) + ", " +
-                component.durabilityRange().get(1) + "]" +
+                component.getDefenseRange().get(0) + ", " +
+                component.getDefenseRange().get(1) + "]" +
                 "}";
 
         Assertions.assertEquals(sb, component.toString());

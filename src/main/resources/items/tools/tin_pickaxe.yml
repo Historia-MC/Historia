@@ -1,7 +1,7 @@
 Light_Tin_Pickaxe:
   material: IRON_PICKAXE
   amount: 1
-  display-name: §7Tin Pickaxe
+  display-name: Tin Pickaxe
   loc-name: Light_Tin_Pickaxe
   type: light
   weight: 25

@@ -1,7 +1,7 @@
 Light_Bronze_Pickaxe:
   material: GOLDEN_PICKAXE
   amount: 1
-  display-name: §7Bronze Dagger
+  display-name: Bronze Dagger
   loc-name: Light_Bronze_Pickaxe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Bronze_Pickaxe:
 Moderate_Bronze_Pickaxe:
   material: GOLDEN_PICKAXE
   amount: 1
-  display-name: §7Bronze Pickaxe
+  display-name: Bronze Pickaxe
   loc-name: Moderate_Bronze_Pickaxe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Bronze_Pickaxe:
 Heavy_Bronze_Pickaxe:
   material: GOLDEN_PICKAXE
   amount: 1
-  display-name: §7Bronze Greatsword
+  display-name: Bronze Greatsword
   loc-name: Heavy_Bronze_Pickaxe
   type: heavy
   weight: 35

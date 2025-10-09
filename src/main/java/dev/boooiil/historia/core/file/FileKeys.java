@@ -18,8 +18,10 @@ public enum FileKeys {
      * skills.yml
      */
     SKILLS("skills.yml"),
-    
+
     TEMPERATURE("temperature.yml"),
+
+    RECIPE("recipe.yml"),
 
     EXPIRY("expiry.yml"),
 

@@ -2,6 +2,7 @@ package dev.boooiil.historia.core
 
 import dev.boooiil.historia.core.configuration.ConfigurationLoader
 import dev.boooiil.historia.core.configuration.ItemRegistryLoader
+import dev.boooiil.historia.core.configuration.RecipeLoader
 import dev.boooiil.historia.core.configuration.specific.ExpiryConfig
 import dev.boooiil.historia.core.configuration.specific.LoreConfiguration
 import dev.boooiil.historia.core.database.sql.DataSourceProvider
@@ -25,8 +26,10 @@ import dev.boooiil.historia.core.file.FileIO
 import dev.boooiil.historia.core.file.FileKeys
 import dev.boooiil.historia.core.items.ItemComponentType
 import dev.boooiil.historia.core.items.events.entity.*
+import dev.boooiil.historia.core.items.events.inventory.ResultSlotClickListener
 import dev.boooiil.historia.core.items.events.inventory.InventoryCloseListener
 import dev.boooiil.historia.core.items.events.inventory.InventoryOpenListener
+import dev.boooiil.historia.core.items.events.inventory.PrepareCraftListener
 import dev.boooiil.historia.core.items.events.player.PlayerItemConsumeListener
 import dev.boooiil.historia.core.items.events.player.PlayerSwapHandItemsListener
 import dev.boooiil.historia.core.items.events.player.PlayerToggleSneakListener
@@ -113,6 +116,8 @@ open class HistoriaCore : JavaPlugin() {
         registerEvent(ProjectileLaunchListener())
         registerEvent(InventoryCloseListener())
         registerEvent(InventoryOpenListener())
+        registerEvent(PrepareCraftListener)
+        registerEvent(ResultSlotClickListener)
         // registerEvent(new PlayerInteractListener());
         registerEvent(PlayerItemConsumeListener())
         registerEvent(PlayerSwapHandItemsListener())
@@ -150,7 +155,7 @@ open class HistoriaCore : JavaPlugin() {
         ItemComponentType.registerComponents()
         LoreConfiguration.initLoreMap()
         ItemRegistryLoader.load()
-        // RecipeLoader.load()
+        RecipeLoader.load()
         // end
 
         val updatePeriod = ExpiryConfig.CONSUMABLE_UPDATE_TICKS

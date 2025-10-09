@@ -1,7 +1,7 @@
 Light_Wooden_Pickaxe:
   material: WOODEN_PICKAXE
   amount: 1
-  display-name: §7Light Pickaxe
+  display-name: Light Pickaxe
   loc-name: Light_Wooden_Pickaxe
   type: light
   weight: 25

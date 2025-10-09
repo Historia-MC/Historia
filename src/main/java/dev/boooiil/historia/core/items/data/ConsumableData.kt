@@ -28,7 +28,7 @@ class ConsumableData(
 //    )
 
     override fun apply(stack: ItemStack) {
-        PDCUtils.setInComplexContainer<PersistentDataContainer, ConsumableData>(stack, COMPONENT_KEY, DataType, this)
+        PDCUtils.setInComplexContainer<PersistentDataContainer, ConsumableData>(stack, KEY, DataType, this)
         applyLore(stack)
     }
 
@@ -75,12 +75,11 @@ class ConsumableData(
     }
 
     companion object {
-        const val ID: String = "consumable"
-        val COMPONENT_KEY: NamespacedKey = HistoriaCore.getNamespacedKey(ID)
+        val KEY: NamespacedKey = HistoriaCore.getNamespacedKey("consumable")
 
         fun fromStack(stack: ItemStack): ConsumableData? {
             return PDCUtils
-                .getFromComplexContainer(stack, COMPONENT_KEY, DataType)
+                .getFromComplexContainer(stack, KEY, DataType)
                 .getOrNull()
         }
     }

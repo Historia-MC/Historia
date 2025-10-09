@@ -1,7 +1,7 @@
 Heavy_Stone_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Stone Trident
+  display-name: Stone Trident
   loc-name: Heavy_Stone_Trident
   type: heavy
   weight: 25

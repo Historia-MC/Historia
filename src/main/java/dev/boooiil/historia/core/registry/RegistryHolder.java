@@ -4,11 +4,14 @@ import dev.boooiil.historia.core.HistoriaCore;
 import dev.boooiil.historia.core.items.HistoriaItem;
 import dev.boooiil.historia.core.items.ItemComponent;
 import dev.boooiil.historia.core.items.ItemComponentType;
+import dev.boooiil.historia.core.items.recipe.CustomRecipe;
+import dev.boooiil.historia.core.items.recipe.RecipeType;
 import dev.boooiil.historia.core.proficiency.Proficiency;
 import dev.boooiil.historia.core.proficiency.skills.ISkill;
 import dev.boooiil.historia.core.proficiency.stats.StatModifiers;
 import dev.boooiil.historia.core.util.CoreLogger;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -49,6 +52,12 @@ public class RegistryHolder extends AbstractMap<NamespacedKey, Registry<?>> {
     public static final Registry<ItemComponentType<? extends ItemComponent>> COMPONENT_REGISTRY =
             RegistryHolder.register(
                     HistoriaCore.getNamespacedKey("component"),
+                    new TypeToken<>() {
+                    });
+
+    public static final Registry<CustomRecipe<? extends Inventory>> RECIPE_REGISTRY =
+            RegistryHolder.register(
+                    HistoriaCore.getNamespacedKey("recipe"),
                     new TypeToken<>() {
                     });
 

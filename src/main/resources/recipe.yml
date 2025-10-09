@@ -1,0 +1,275 @@
+stone:
+  type: SHAPED
+  pattern:
+    - "AA"
+    - "B "
+    - "AA"
+  key:
+    A: LIGHT_COPPER_INGOT
+    B: STICK
+  result:
+    id: STONE
+    amount: 1
+
+dirt:
+  type: SHAPED
+  pattern:
+    - "AA"
+    - "B "
+    - "AA"
+  key:
+    A: IRON_INGOT
+    B: STONE
+  result:
+    id: DIRT
+    amount: 1
+
+diamond:
+  type: SHAPELESS
+  ingredients:
+    - IRON_INGOT
+    - IRON_INGOT
+    - IRON_INGOT
+    - IRON_INGOT
+    - STONE
+  result:
+    id: DIAMOND
+    amount: 1
+
+light_iron_pickaxe:
+  type: SHAPED
+  pattern:
+    - "III"
+    - " S "
+    - " S "
+  key:
+    I: light_iron_ingot
+    S: STICK
+  result:
+    id: light_iron_pickaxe
+    amount: 1
+
+
+#version: 1
+#
+#bronze_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: BRONZE_INGOT
+#    B: STICK
+#  result:
+#    id:
+#
+#bronze_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: BRONZE_INGOT
+#    B: STICK
+#
+#iron_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: IRON_INGOT
+#    B: STICK
+#
+#iron_pitchfork:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: IRON_INGOT
+#    B: STICK
+#
+#iron_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: IRON_INGOT
+#    B: STICK
+#
+#iron_trident:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: IRON_INGOT
+#    B: STICK
+#
+#steel_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: STEEL_INGOT
+#    B: STICK
+#
+#steel_pitchfork:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: STEEL_INGOT
+#    B: STICK
+#
+#steel_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: STEEL_INGOT
+#    B: STICK
+#
+#steel_trident:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: STEEL_INGOT
+#    B: STICK
+#
+#stone_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: COBBLESTONE
+#    B: STICK
+#
+#stone_pitchfork:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: COBBLESTONE
+#    B: STICK
+#
+#stone_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: COBBLESTONE
+#    B: STICK
+#
+#stone_trident:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: COBBLESTONE
+#    B: STICK
+#
+#tin_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: TIN_INGOT
+#    B: STICK
+#
+#tin_pitchfork:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: TIN_INGOT
+#    B: STICK
+#
+#tin_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: TIN_INGOT
+#    B: STICK
+#
+#tin_trident:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: TIN_INGOT
+#    B: STICK
+#
+#wood_axe:
+#  type: SHAPED
+#  pattern:
+#    - "AA"
+#    - "AB"
+#    - " B"
+#  key:
+#    A: OAK_PLANKS
+#    B: STICK
+#
+#wood_pitchfork:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: OAK_PLANKS
+#    B: STICK
+#
+#wood_sword:
+#  type: SHAPED
+#  pattern:
+#    - "A"
+#    - "A"
+#    - "B"
+#  key:
+#    A: OAK_PLANKS
+#    B: STICK
+#
+#wood_trident:
+#  type: SHAPED
+#  pattern:
+#    - " AA"
+#    - " BA"
+#    - "B  "
+#  key:
+#    A: OAK_PLANKS
+#    B: STICK

@@ -1,7 +1,7 @@
 Heavy_Turtle_Helmet:
   material: TURTLE_HELMET
   amount: 1
-  display-name: §7Turtle Shell
+  display-name: Turtle Shell
   loc-name: Heavy_Turtle_Helmet
   type: heavy
   weight: 25

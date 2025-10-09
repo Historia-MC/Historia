@@ -1,7 +1,7 @@
 Heavy_Stone_Sword:
   material: STONE_SWORD
   amount: 1
-  display-name: §7Stone Club
+  display-name: Stone Club
   loc-name: Heavy_Stone_Sword
   type: heavy
   weight: 25

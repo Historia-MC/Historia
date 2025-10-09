@@ -1,7 +1,7 @@
 Light_Iron_Boots:
   material: CHAINMAIL_BOOTS
   amount: 1
-  display-name: §7Chainmail Boots
+  display-name: Chainmail Boots
   loc-name: Light_Iron_Boots
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Iron_Boots:
 Moderate_Iron_Boots:
   material: IRON_BOOTS
   amount: 1
-  display-name: §7Iron Boots
+  display-name: Iron Boots
   loc-name: Moderate_Iron_Boots
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Iron_Boots:
 Heavy_Iron_Boots:
   material: IRON_BOOTS
   amount: 1
-  display-name: §7Iron Boots
+  display-name: Iron Boots
   loc-name: Heavy_Iron_Boots
   type: heavy
   weight: 35

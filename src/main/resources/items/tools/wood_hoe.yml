@@ -1,7 +1,7 @@
 Light_Wooden_Hoe:
   material: WOODEN_HOE
   amount: 1
-  display-name: §7Light Wooden Hoe
+  display-name: Light Wooden Hoe
   loc-name: Light_Wooden_Hoe
   type: light
   weight: 25

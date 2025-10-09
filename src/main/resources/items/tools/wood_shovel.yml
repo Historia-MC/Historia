@@ -1,7 +1,7 @@
 Light_Wooden_Shovel:
   material: WOODEN_SHOVEL
   amount: 1
-  display-name: §7Light Shovel
+  display-name: Light Shovel
   loc-name: Light_Wooden_Shovel
   type: light
   weight: 25

@@ -1,7 +1,7 @@
 Light_Bronze_Boots:
   material: GOLDEN_BOOTS
   amount: 1
-  display-name: §7Bronze Boots
+  display-name: Bronze Boots
   loc-name: Light_Bronze_Boots
   type: light
   weight: 15
@@ -15,7 +15,7 @@ Light_Bronze_Boots:
 Moderate_Bronze_Boots:
   material: GOLDEN_BOOTS
   amount: 1
-  display-name: §7Bronze Boots
+  display-name: Bronze Boots
   loc-name: Moderate_Bronze_Boots
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Bronze_Boots:
 Heavy_Bronze_Boots:
   material: GOLDEN_BOOTS
   amount: 1
-  display-name: §7Bronze Boots
+  display-name: Bronze Boots
   loc-name: Heavy_Bronze_Boots
   type: heavy
   weight: 35

@@ -1,7 +1,7 @@
 Light_Steel_Pickaxe:
   material: NETHERITE_PICKAXE
   amount: 1
-  display-name: §7Steel Dagger
+  display-name: Steel Dagger
   loc-name: Light_Steel_Pickaxe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Steel_Pickaxe:
 Moderate_Steel_Pickaxe:
   material: NETHERITE_PICKAXE
   amount: 1
-  display-name: §7Steel Pickaxe
+  display-name: Steel Pickaxe
   loc-name: Moderate_Steel_Pickaxe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Steel_Pickaxe:
 Heavy_Steel_Pickaxe:
   material: NETHERITE_PICKAXE
   amount: 1
-  display-name: §7Steel Greatsword
+  display-name: Steel Greatsword
   loc-name: Heavy_Steel_Pickaxe
   type: heavy
   weight: 35

@@ -1,7 +1,7 @@
 Light_Tin_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Trident
+  display-name: Tin Trident
   loc-name: Light_Tin_Trident
   type: light
   weight: 30
@@ -20,7 +20,7 @@ Light_Tin_Trident:
 Moderate_Tin_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Trident
+  display-name: Tin Trident
   loc-name: Moderate_Tin_Trident
   type: moderate
   weight: 30
@@ -39,7 +39,7 @@ Moderate_Tin_Trident:
 Heavy_Tin_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Tin Trident
+  display-name: Tin Trident
   loc-name: Heavy_Tin_Trident
   type: heavy
   weight: 30

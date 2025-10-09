@@ -1,7 +1,7 @@
 Light_Wood_Axe:
   material: WOODEN_AXE
   amount: 1
-  display-name: §7Light Axe
+  display-name: Light Axe
   loc-name: Light_Wood_Axe
   type: light
   weight: 15

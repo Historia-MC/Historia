@@ -1,7 +1,7 @@
 Light_Bronze_Leggings:
   material: GOLDEN_LEGGINGS
   amount: 1
-  display-name: §7Bronze Leggings
+  display-name: Bronze Leggings
   loc-name: Light_Bronze_Leggings
   type: light
   weight: 25
@@ -15,7 +15,7 @@ Light_Bronze_Leggings:
 Moderate_Bronze_Leggings:
   material: GOLDEN_LEGGINGS
   amount: 1
-  display-name: §7Bronze Leggings
+  display-name: Bronze Leggings
   loc-name: Moderate_Bronze_Leggings
   type: moderate
   weight: 35
@@ -29,7 +29,7 @@ Moderate_Bronze_Leggings:
 Heavy_Bronze_Leggings:
   material: GOLDEN_LEGGINGS
   amount: 1
-  display-name: §7Bronze Leggings
+  display-name: Bronze Leggings
   loc-name: Heavy_Bronze_Leggings
   type: heavy
   weight: 45

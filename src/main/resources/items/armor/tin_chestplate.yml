@@ -1,7 +1,7 @@
 Light_Tin_Chestplate:
   material: IRON_CHESTPLATE
   amount: 1
-  display-name: §7Tin Chestplate
+  display-name: Tin Chestplate
   loc-name: Light_Tin_Chestplate
   type: light
   weight: 25

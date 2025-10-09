@@ -1,7 +1,7 @@
 Light_Wood_Trident:
   material: TRIDENT
   amount: 1
-  display-name: §7Wood Trident
+  display-name: Wood Trident
   loc-name: Light_Wood_Trident
   type: light
   weight: 25

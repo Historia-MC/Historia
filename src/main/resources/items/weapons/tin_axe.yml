@@ -1,7 +1,7 @@
 Light_Tin_Axe:
   material: IRON_AXE
   amount: 1
-  display-name: §7Tin Axe
+  display-name: Tin Axe
   loc-name: Light_Tin_Axe
   type: light
   weight: 15

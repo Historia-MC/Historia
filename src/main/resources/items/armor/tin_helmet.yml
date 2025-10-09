@@ -1,7 +1,7 @@
 Light_Tin_Helmet:
   material: IRON_HELMET
   amount: 1
-  display-name: §7Tin Helmet
+  display-name: Tin Helmet
   loc-name: Light_Tin_Helmet
   type: light
   weight: 15

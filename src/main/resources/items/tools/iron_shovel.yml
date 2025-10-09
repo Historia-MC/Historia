@@ -1,7 +1,7 @@
 Light_Iron_Shovel:
   material: IRON_SHOVEL
   amount: 1
-  display-name: §7Iron Hatchet
+  display-name: Iron Hatchet
   loc-name: Light_Iron_Shovel
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Iron_Shovel:
 Moderate_Iron_Shovel:
   material: IRON_SHOVEL
   amount: 1
-  display-name: §7Iron Shovel
+  display-name: Iron Shovel
   loc-name: Moderate_Iron_Shovel
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Iron_Shovel:
 Heavy_Iron_Shovel:
   material: IRON_SHOVEL
   amount: 1
-  display-name: §7Iron Bardiche
+  display-name: Iron Bardiche
   loc-name: Heavy_Iron_Shovel
   type: heavy
   weight: 35

@@ -1,7 +1,7 @@
 Light_Bronze_Shovel:
   material: GOLDEN_SHOVEL
   amount: 1
-  display-name: §7Bronze Hatchet
+  display-name: Bronze Hatchet
   loc-name: Light_Bronze_Shovel
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Bronze_Shovel:
 Moderate_Bronze_Shovel:
   material: GOLDEN_SHOVEL
   amount: 1
-  display-name: §7Bronze Shovel
+  display-name: Bronze Shovel
   loc-name: Moderate_Bronze_Shovel
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Bronze_Shovel:
 Heavy_Bronze_Shovel:
   material: GOLDEN_SHOVEL
   amount: 1
-  display-name: §7Bronze Bardiche
+  display-name: Bronze Bardiche
   loc-name: Heavy_Bronze_Shovel
   type: heavy
   weight: 35

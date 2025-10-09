@@ -1,7 +1,7 @@
 Light_Steel_Hoe:
   material: NETHERITE_HOE
   amount: 1
-  display-name: §7Light Steel Hoe
+  display-name: Light Steel Hoe
   loc-name: Light_Steel_Hoe
   type: light
   weight: 25
@@ -17,7 +17,7 @@ Light_Steel_Hoe:
 Moderate_Steel_Hoe:
   material: NETHERITE_HOE
   amount: 1
-  display-name: §7Moderate Steel Hoe
+  display-name: Moderate Steel Hoe
   loc-name: Moderate_Steel_Hoe
   type: moderate
   weight: 30
@@ -33,7 +33,7 @@ Moderate_Steel_Hoe:
 Heavy_Steel_Hoe:
   material: NETHERITE_HOE
   amount: 1
-  display-name: §7Heavy Steel Hoe
+  display-name: Heavy Steel Hoe
   loc-name: Heavy_Steel_Hoe
   type: heavy
   weight: 35

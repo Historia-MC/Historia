@@ -1,7 +1,7 @@
 Light_Bronze_Sword:
   material: GOLDEN_SWORD
   amount: 1
-  display-name: §7Bronze Dagger
+  display-name: Bronze Dagger
   loc-name: Light_Bronze_Sword
   type: light
   weight: 25
@@ -20,7 +20,7 @@ Light_Bronze_Sword:
 Moderate_Bronze_Sword:
   material: GOLDEN_SWORD
   amount: 1
-  display-name: §7Bronze Sword
+  display-name: Bronze Sword
   loc-name: Moderate_Bronze_Sword
   type: moderate
   weight: 30
@@ -39,7 +39,7 @@ Moderate_Bronze_Sword:
 Heavy_Bronze_Sword:
   material: GOLDEN_SWORD
   amount: 1
-  display-name: §7Bronze Greatsword
+  display-name: Bronze Greatsword
   loc-name: Heavy_Bronze_Sword
   type: heavy
   weight: 40

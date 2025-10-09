@@ -1,7 +1,7 @@
 Light_Tin_Sword:
   material: IRON_SWORD
   amount: 1
-  display-name: §7Tin Sword
+  display-name: Tin Sword
   loc-name: Light_Tin_Sword
   type: light
   weight: 15

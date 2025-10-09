@@ -1,7 +1,7 @@
 Light_Steel_Helmet:
   material: NETHERITE_HELMET
   amount: 1
-  display-name: §7Steel Helmet
+  display-name: Steel Helmet
   loc-name: Light_Steel_Helmet
   type: light
   weight: 20
@@ -15,7 +15,7 @@ Light_Steel_Helmet:
 Moderate_Steel_Helmet:
   material: NETHERITE_HELMET
   amount: 1
-  display-name: §7Steel Helmet
+  display-name: Steel Helmet
   loc-name: Moderate_Steel_Helmet
   type: moderate
   weight: 25
@@ -29,7 +29,7 @@ Moderate_Steel_Helmet:
 Heavy_Steel_Helmet:
   material: NETHERITE_HELMET
   amount: 1
-  display-name: §7Steel Helmet
+  display-name: Steel Helmet
   loc-name: Heavy_Steel_Helmet
   type: heavy
   weight: 35
